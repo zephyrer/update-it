@@ -120,11 +120,6 @@ SOURCE=.\Source\FilesPage.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Source\FolderDialog.cpp
-# ADD CPP /Yu"stdafx.h"
-# End Source File
-# Begin Source File
-
 SOURCE=.\Source\MainWizard.cpp
 # ADD CPP /Yu"stdafx.h"
 # End Source File
@@ -171,10 +166,6 @@ SOURCE=.\Source\CustomPropSheet.h
 # Begin Source File
 
 SOURCE=.\Source\FilesPage.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\Source\FolderDialog.h
 # End Source File
 # Begin Source File
 

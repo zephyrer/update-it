@@ -80,7 +80,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,2159,0
+ FILEVERSION 1,0,2169,0
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -99,7 +99,7 @@ BEGIN
             VALUE "Comments", "none\0"
             VALUE "CompanyName", "ICBANK\0"
             VALUE "FileDescription", "UpdateIt Application Executable\0"
-            VALUE "FileVersion", "1.0.2159\0"
+            VALUE "FileVersion", "1.0.2169\0"
             VALUE "InternalName", "UpdateIt\0"
             VALUE "LegalCopyright", "Copyright © 2002–2004 by Elijah Zarezky\0"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
@@ -129,24 +129,27 @@ STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
 FONT 8, "Tahoma"
 BEGIN
-    GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,44,WS_GROUP
-    EDITTEXT        IDC_EDIT_SOURCE,10,17,300,12,ES_AUTOHSCROLL | 
+    GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
+    EDITTEXT        IDC_EDIT_SOURCE,10,17,298,12,ES_AUTOHSCROLL | 
                     ES_READONLY | WS_GROUP
-    PUSHBUTTON      "...",IDC_BUTTON_SOURCE,312,17,12,12,WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_SOURCE,310,17,14,12,WS_GROUP
     CONTROL         "Include s&ubfolders",IDC_CHECK_RECURSE,"Button",
                     BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,34,76,10
-    GROUPBOX        "&Target folder",IDC_STATIC,4,57,326,58,WS_GROUP
-    EDITTEXT        IDC_EDIT_TARGET,10,70,300,12,ES_AUTOHSCROLL | 
+    LTEXT           "E&xclude mask(s):",IDC_STATIC,10,48,56,12,
+                    SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_EXCLUDE,68,48,256,12,ES_AUTOHSCROLL
+    GROUPBOX        "&Target folder",IDC_STATIC,4,74,326,58,WS_GROUP
+    EDITTEXT        IDC_EDIT_TARGET,10,87,298,12,ES_AUTOHSCROLL | 
                     ES_READONLY | WS_GROUP
-    PUSHBUTTON      "...",IDC_BUTTON_TARGET,312,70,12,12,WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_TARGET,310,87,14,12,WS_GROUP
     CONTROL         "&Cleanup this folder first",IDC_CHECK_CLEANUP,"Button",
-                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,87,90,10
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,103,90,10
     CONTROL         "Delete files to &Recycle Bin if possible",
                     IDC_CHECK_RECYCLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    10,101,132,10
-    GROUPBOX        "&Date and time",IDC_STATIC,4,123,326,33,WS_GROUP
+                    10,118,132,10
+    GROUPBOX        "&Date and time",IDC_STATIC,4,140,326,33,WS_GROUP
     CONTROL         "DateTimePicker1",IDC_DTP_WRITE,"SysDateTimePick32",
-                    WS_GROUP | WS_TABSTOP,10,137,94,12
+                    WS_GROUP | WS_TABSTOP,10,154,94,12
 END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 210
@@ -425,6 +428,7 @@ STRINGTABLE DISCARDABLE
 BEGIN
     IDC_EDIT_PASSWORD       "Provides the space to type the password assigned to you by the FTP server administrator. For security reasons, the actual characters don't appear in this space; instead each character is represented by an asterisk."
     IDC_EDIT_ROOT           "Specifies the initial subfolder to connect on the FTP server. If this field is left blank, the root folder will be used."
+    IDC_EDIT_EXCLUDE        "Specifies a mask or several masks (delimited with commas) of files to exclude from search."
 END
 
 STRINGTABLE DISCARDABLE 

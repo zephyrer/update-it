@@ -14,7 +14,6 @@
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
-#include "FolderDialog.h"
 
 #if defined(_DEBUG)
 #undef THIS_FILE
@@ -40,6 +39,7 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 	CWinApp* pApp = AfxGetApp();
 	m_strSource = pApp->GetProfileString(_T("Options"), _T("Source"));
 	m_nRecurse = pApp->GetProfileInt(_T("Options"), _T("Recurse"), BST_CHECKED);
+	m_strExclude = pApp->GetProfileString(_T("Options"), _T("Exclude"));
 	m_strTarget = pApp->GetProfileString(_T("Options"), _T("Target"));
 	m_nCleanup = pApp->GetProfileInt(_T("Options"), _T("Cleanup"), BST_CHECKED);
 	if (m_nCleanup == BST_CHECKED) {
@@ -71,6 +71,7 @@ BOOL COptionsPage::OnInitDialog(void)
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_SOURCE));
 	tipWnd.AddTool(GetDlgItem(IDC_BUTTON_SOURCE));
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_RECURSE));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_EXCLUDE));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_TARGET));
 	tipWnd.AddTool(GetDlgItem(IDC_BUTTON_TARGET));
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_CLEANUP));
@@ -101,6 +102,7 @@ BOOL COptionsPage::OnKillActive(void)
 		CWinApp* pApp = AfxGetApp();
 		pApp->WriteProfileString(_T("Options"), _T("Source"), m_strSource);
 		pApp->WriteProfileInt(_T("Options"), _T("Recurse"), m_nRecurse);
+		pApp->WriteProfileString(_T("Options"), _T("Exclude"), m_strExclude);
 		pApp->WriteProfileString(_T("Options"), _T("Target"), m_strTarget);
 		pApp->WriteProfileInt(_T("Options"), _T("Cleanup"), m_nCleanup);
 		pApp->WriteProfileInt(_T("Options"), _T("Recycle"), m_nRecycle);
@@ -135,6 +137,7 @@ void COptionsPage::DoDataExchange(CDataExchange* pDX)
 	CBetterPropPage::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT_SOURCE, m_strSource);
 	DDV_MaxChars(pDX, m_strSource, _MAX_PATH);
+	DDX_Text(pDX, IDC_EDIT_EXCLUDE, m_strExclude);
 	DDX_Check(pDX, IDC_CHECK_RECURSE, m_nRecurse);
 	DDX_Text(pDX, IDC_EDIT_TARGET, m_strTarget);
 	DDV_MaxChars(pDX, m_strTarget, _MAX_PATH);
@@ -165,25 +168,31 @@ HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)
 
 void COptionsPage::OnButtonSource(void)
 {
-	CFolderDialog dlgFolder(IDS_CHOOSE_SOURCE);
+	CString strPrompt;
+
+	strPrompt.LoadString(IDS_CHOOSE_SOURCE);
+	CFolderDialog dlgFolder(strPrompt, m_strSource, this);
 	if (dlgFolder.DoModal() == IDOK) {
-		CString strPath = dlgFolder.GetFolderPath();
-		GetDlgItem(IDC_EDIT_SOURCE)->SetWindowText(strPath);
+		m_strSource = dlgFolder.GetFolderPath();
+		SetDlgItemText(IDC_EDIT_SOURCE, m_strSource);
 		CWinApp* pApp = AfxGetApp();
-		if ((m_timeWrite = pApp->GetProfileInt(_T("Times"), strPath, -1)) != -1) {
+		if ((m_timeWrite = pApp->GetProfileInt(_T("Times"), m_strSource, -1)) != -1) {
 			m_dtpWrite.SetTime(&m_timeWrite);
 		}
-		strPath = pApp->GetProfileString(_T("Targets"), strPath, strPath + _T(".Update"));
-		GetDlgItem(IDC_EDIT_TARGET)->SetWindowText(strPath);
+		CString strDefTarget = m_strSource + _T(".Update");
+		SetDlgItemText(IDC_EDIT_TARGET, pApp->GetProfileString(_T("Targets"), m_strSource, strDefTarget));
 	}
 }
 
 void COptionsPage::OnButtonTarget(void)
 {
-	CFolderDialog dlgFolder(IDS_CHOOSE_TARGET);
+	CString strPrompt;
+
+	strPrompt.LoadString(IDS_CHOOSE_TARGET);
+	CFolderDialog dlgFolder(strPrompt, m_strTarget, this);
 	if (dlgFolder.DoModal() == IDOK) {
-		CString strPath = dlgFolder.GetFolderPath();
-		GetDlgItem(IDC_EDIT_TARGET)->SetWindowText(strPath);
+		m_strTarget = dlgFolder.GetFolderPath();
+		SetDlgItemText(IDC_EDIT_TARGET, m_strTarget);
 	}
 }
 
@@ -227,6 +236,7 @@ void COptionsPage::Dump(CDumpContext& dumpCtx) const
 		// ...and then dump own unique members
 		dumpCtx << "m_strSource = " << m_strSource;
 		dumpCtx << "\nm_nRecurse = " << m_nRecurse;
+		dumpCtx << "\nm_strExclude = " << m_strExclude;
 		dumpCtx << "\nm_strTarget = " << m_strTarget;
 		dumpCtx << "\nm_nCleanup = " << m_nCleanup;
 		dumpCtx << "\nm_nRecycle = " << m_nRecycle;

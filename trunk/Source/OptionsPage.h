@@ -37,6 +37,7 @@ protected:
 public:
 	CString m_strSource;
 	int m_nRecurse;
+	CString m_strExclude;
 	CString m_strTarget;
 	int m_nCleanup;
 	int m_nRecycle;
