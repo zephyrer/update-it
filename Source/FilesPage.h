@@ -49,9 +49,11 @@ public:
 	CListCtrl m_listFiles;
 	CButton m_buttonRemove;
 	DWORD m_cbFiles;
+	CStringList m_listExclude;
 
 // implementation helpers
 private:
+	BOOL IsFileMatchesExcludeList(LPCTSTR pszFilePath);
 	void SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin, int iRelative);
 	void CleanupFileList(void);
 	static int CALLBACK CompareProc(LPARAM lParam1, LPARAM lParam2, LPARAM nData);

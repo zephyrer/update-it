@@ -42,14 +42,15 @@ using std::max;
 #include <sys/utime.h>
 
 // additional headers
+#include "../../Repository/CodeProject/Source/HyperLink.h"
+#include "../../Repository/CodeProject/Source/FolderDlg.h"
 #pragma warning(push)
 #include "../../Repository/ZipArchive/Source/ZipArchive.h"
 #pragma warning(pop)
-#include "../../Repository/Naughter/Source/Smtp.h"
-#include "../../Repository/CodeProject/Source/HyperLink.h"
 #include "../../Repository/AfxGadgets/Source/WinCrypto.h"
 #include "../../Repository/AfxGadgets/Source/Win32Error.h"
 #include "../../Repository/AfxGadgets/Source/StringConv.h"
+#include "../../Repository/Naughter/Source/Smtp.h"
 
 #pragma hdrstop
 

@@ -101,8 +101,18 @@ void CFilesPage::OnBecameActive(void)
 		pWiz->GetDlgItem(ID_WIZNEXT)->EnableWindow(FALSE);
 		pWiz->GetDlgItem(IDCANCEL)->SetFocus();
 		// search for files
+		m_listExclude.RemoveAll();
 		COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
 		ASSERT(pOptionsPage != NULL);
+		BOOL fMemTrack = AfxEnableMemoryTracking(FALSE);
+		LPTSTR pszExcludes = _tcsdup(pOptionsPage->m_strExclude);
+		LPTSTR pszSpec = _tcstok(pszExcludes, _T(","));
+		while (pszSpec != NULL) {
+			m_listExclude.AddTail(pszSpec);
+			pszSpec = _tcstok(NULL, _T(","));
+		}
+		free(pszExcludes);
+		AfxEnableMemoryTracking(fMemTrack);
 		BOOL fRecurse = pOptionsPage->m_nRecurse == BST_CHECKED;
 		SearchForFiles(pOptionsPage->m_strSource, fRecurse, pOptionsPage->m_timeWrite, -1);
 		// setup and restore controls
@@ -269,6 +279,19 @@ void CFilesPage::OnButtonRemove(void)
 	m_textInfo.SetWindowText(strInfo);
 }
 
+BOOL CFilesPage::IsFileMatchesExcludeList(LPCTSTR pszFilePath)
+{
+	BOOL fMatch;
+	POSITION pos;
+
+	ASSERT(AfxIsValidString(pszFilePath));
+
+	for (fMatch = FALSE, pos = m_listExclude.GetHeadPosition(); !fMatch && pos != NULL;) {
+		fMatch = ::PathMatchSpec(pszFilePath, m_listExclude.GetNext(pos));
+	}
+	return (fMatch);
+}
+
 void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin, int iRelative)
 {
 	CFileFind finder;
@@ -296,9 +319,11 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 					SearchForFiles(finder.GetFilePath(), fRecurse, timeMin, iRelative);
 				}
 			}
-			else {
+			else if (!IsFileMatchesExcludeList(finder.GetFilePath())) {
+				// obtain and compare last write time
 				finder.GetLastWriteTime(timeWrite);
 				if (timeWrite >= timeMin) {
+					// file is required to be "updated"
 					FILE_DATA* pData = new FILE_DATA;
 					// name
 					CString strNameExt = finder.GetFileName();
@@ -399,6 +424,7 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_listFiles = " << m_listFiles;
 		dumpCtx << "\nm_buttonRemove = " << m_buttonRemove;
 		dumpCtx << "\nm_cbFiles = " << m_cbFiles;
+		dumpCtx << "\nm_listExclude = " << m_listExclude;
 	}
 	catch (CFileException* pXcpt) {
 		pXcpt->ReportError();
