@@ -15,6 +15,7 @@
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
+#include "UpdateItApp.h"
 
 #if defined(_DEBUG)
 #undef THIS_FILE
@@ -38,37 +39,18 @@ m_nFtpPort(21), m_nPort(25)
 {
 	BYTE* pbTemp;
 	UINT cbBody;
-	CArray<BYTE, BYTE> arrEncrPwd;
-	UINT cbPassword;
-	BSTR bstrDecrPwd;
 
 	m_psp.dwFlags |= PSP_PREMATURE;
 
-	CWinApp* pApp = AfxGetApp();
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
 	m_nAction = pApp->GetProfileInt(_T("Action"), _T("Action"), 0);
 	m_nUpload = pApp->GetProfileInt(_T("Action"), _T("Upload"), BST_UNCHECKED);
 	if (m_nUpload == BST_CHECKED) {
 		m_strServer = pApp->GetProfileString(_T("FTP"), _T("Server"));
 		m_nFtpPort = LOWORD(pApp->GetProfileInt(_T("FTP"), _T("Port"), 21));
 		m_strLogin = pApp->GetProfileString(_T("FTP"), _T("Login"));
-		try {
-			BeginWaitCursor();
-			if (pApp->GetProfileBinary(_T("FTP"), _T("Password"), &pbTemp, &cbPassword)) {
-				// password was previously saved
-				arrEncrPwd.SetSize(cbPassword);
-				memcpy(arrEncrPwd.GetData(), pbTemp, cbPassword);
-				delete[] pbTemp;
-				CWinCrypto winCrypto(AfxGetAppName());
-				winCrypto.DecryptString(arrEncrPwd, &bstrDecrPwd);
-				m_strPassword = _W2T(bstrDecrPwd);
-			}
-			EndWaitCursor();
-		}
-		catch (CWin32Error* pXcpt) {
-			EndWaitCursor();
-			pXcpt->ReportError(MB_ICONSTOP | MB_OK);
-			pXcpt->Delete();
-		}
+		m_strPassword = pApp->GetProfilePassword(_T("FTP"), _T("Password"));
 		m_strRoot = pApp->GetProfileString(_T("FTP"), _T("Root"));
 	}
 	m_nZip = pApp->GetProfileInt(_T("Action"), _T("Zip"), BST_UNCHECKED);
@@ -144,8 +126,6 @@ BOOL CActionPage::OnSetActive(void)
 
 BOOL CActionPage::OnKillActive(void)
 {
-	CArray<BYTE, BYTE> arrEncPwd;
-
 	// validate mail settings (if needed)
 	if (m_fCanSend && m_nSend == BST_CHECKED) {
 	}
@@ -172,29 +152,15 @@ BOOL CActionPage::OnKillActive(void)
 	BOOL fSuccess = CBetterPropPage::OnKillActive();
 
 	if (fSuccess) {
-		CWinApp* pApp = AfxGetApp();
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
 		pApp->WriteProfileInt(_T("Action"), _T("Action"), m_nAction);
 		pApp->WriteProfileInt(_T("Action"), _T("Upload"), m_nUpload);
 		if (m_nUpload == BST_CHECKED) {
 			pApp->WriteProfileString(_T("FTP"), _T("Server"), m_strServer);
 			pApp->WriteProfileInt(_T("FTP"), _T("Port"), m_nFtpPort);
 			pApp->WriteProfileString(_T("FTP"), _T("Login"), m_strLogin);
-			try {
-				BeginWaitCursor();
-				CWinCrypto winCrypto(AfxGetAppName());
-				BSTR bstrTemp = ::SysAllocString(_T2W(m_strPassword));
-				winCrypto.EncryptString(bstrTemp, arrEncPwd);
-				BYTE* pbData = arrEncPwd.GetData();
-				UINT cbLength = arrEncPwd.GetSize();
-				pApp->WriteProfileBinary(_T("FTP"), _T("Password"), pbData, cbLength);
-				::SysFreeString(bstrTemp);
-				EndWaitCursor();
-			}
-			catch (CWin32Error* pXcpt) {
-				EndWaitCursor();
-				pXcpt->ReportError(MB_ICONSTOP | MB_OK);
-				pXcpt->Delete();
-			}
+			pApp->WriteProfilePassword(_T("FTP"), _T("Password"), m_strPassword);
 			pApp->WriteProfileString(_T("FTP"), _T("Root"), m_strRoot);
 		}
 		pApp->WriteProfileInt(_T("Action"), _T("Zip"), m_nZip);
@@ -254,12 +220,13 @@ void CActionPage::OnCheckUpload(void)
 {
 	BOOL fEnable = IsDlgButtonChecked(IDC_CHECK_UPLOAD) == BST_CHECKED;
 	if (fEnable) {
-		CWinApp* pApp = AfxGetApp();
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
 		// restore the most recently saved settings
 		SetDlgItemText(IDC_EDIT_SERVER, pApp->GetProfileString(_T("FTP"), _T("Server")));
 		SetDlgItemInt(IDC_EDIT_FTP_PORT, pApp->GetProfileInt(_T("FTP"), _T("Port"), 21), FALSE);
 		SetDlgItemText(IDC_EDIT_LOGIN, pApp->GetProfileString(_T("FTP"), _T("Login")));
-		SetDlgItemText(IDC_EDIT_PASSWORD, pApp->GetProfileString(_T("FTP"), _T("Password")));
+		SetDlgItemText(IDC_EDIT_PASSWORD, pApp->GetProfilePassword(_T("FTP"), _T("Password")));
 		SetDlgItemText(IDC_EDIT_ROOT, pApp->GetProfileString(_T("FTP"), _T("Root")));
 	}
 	EnableFtpControls(fEnable);
