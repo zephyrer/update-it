@@ -50,6 +50,7 @@ private:
 	BOOL IsFileMatchesExcludeList(LPCTSTR pszFilePath);
 	void SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin, int iRelative);
 	void CleanupFileList(void);
+	BOOL CompareContents(LPCTSTR pszRelativeName);
 
 // diagnostic services
 #if defined(_DEBUG)

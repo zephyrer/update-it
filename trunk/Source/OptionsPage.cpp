@@ -50,6 +50,7 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 		m_nRecycle = BST_UNCHECKED;
 	}
 	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(_T("Times"), m_strSource, -1);
+	m_fCompare = pApp->GetProfileInt(_T("Options"), _T("Compare"), BST_UNCHECKED);
 }
 
 BOOL COptionsPage::OnInitDialog(void)
@@ -78,6 +79,7 @@ BOOL COptionsPage::OnInitDialog(void)
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_CLEANUP));
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_RECYCLE));
 	tipWnd.AddTool(GetDlgItem(IDC_DTP_WRITE));
+	tipWnd.AddTool(GetDlgItem(IDC_CHECK_COMPARE));
 	tipWnd.Activate(TRUE);
 
 	// initialized
@@ -107,6 +109,7 @@ BOOL COptionsPage::OnKillActive(void)
 		pApp->WriteProfileString(_T("Options"), _T("Target"), m_strTarget);
 		pApp->WriteProfileInt(_T("Options"), _T("Cleanup"), m_nCleanup);
 		pApp->WriteProfileInt(_T("Options"), _T("Recycle"), m_nRecycle);
+		pApp->WriteProfileInt(_T("Options"), _T("Compare"), m_fCompare);
 	}
 	return (fSuccess);
 }
@@ -145,6 +148,7 @@ void COptionsPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_CLEANUP, m_nCleanup);
 	DDX_Check(pDX, IDC_CHECK_RECYCLE, m_nRecycle);
 	DDX_Control(pDX, IDC_DTP_WRITE, m_dtpWrite);
+	DDX_Check(pDX, IDC_CHECK_COMPARE, m_fCompare);
 }
 
 HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)

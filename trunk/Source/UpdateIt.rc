@@ -130,26 +130,30 @@ CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
 FONT 8, "Tahoma"
 BEGIN
     GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
-    EDITTEXT        IDC_EDIT_SOURCE,10,17,298,12,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | 
                     ES_READONLY | WS_GROUP
-    PUSHBUTTON      "...",IDC_BUTTON_SOURCE,310,17,14,12,WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_SOURCE,310,16,14,12,WS_GROUP
     CONTROL         "Include s&ubfolders",IDC_CHECK_RECURSE,"Button",
-                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,34,76,10
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,32,76,10
     LTEXT           "E&xclude mask(s):",IDC_STATIC,10,48,56,12,
                     SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_EXCLUDE,68,48,256,12,ES_AUTOHSCROLL
     GROUPBOX        "&Target folder",IDC_STATIC,4,74,326,58,WS_GROUP
-    EDITTEXT        IDC_EDIT_TARGET,10,87,298,12,ES_AUTOHSCROLL | 
+    EDITTEXT        IDC_EDIT_TARGET,10,86,298,12,ES_AUTOHSCROLL | 
                     ES_READONLY | WS_GROUP
-    PUSHBUTTON      "...",IDC_BUTTON_TARGET,310,87,14,12,WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_TARGET,310,86,14,12,WS_GROUP
     CONTROL         "&Cleanup this folder first",IDC_CHECK_CLEANUP,"Button",
                     BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,103,90,10
     CONTROL         "Delete files to &Recycle Bin if possible",
                     IDC_CHECK_RECYCLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    10,118,132,10
-    GROUPBOX        "&Date and time",IDC_STATIC,4,140,326,33,WS_GROUP
+                    10,116,132,10
+    GROUPBOX        "&Date and time",IDC_STATIC,4,140,106,30,WS_GROUP
     CONTROL         "DateTimePicker1",IDC_DTP_WRITE,"SysDateTimePick32",
-                    WS_GROUP | WS_TABSTOP,10,154,94,12
+                    WS_GROUP | WS_TABSTOP,10,152,94,12
+    GROUPBOX        "Advanced",IDC_STATIC,122,140,208,30,WS_GROUP
+    CONTROL         "Compare contents of the newer and existing older files",
+                    IDC_CHECK_COMPARE,"Button",BS_AUTOCHECKBOX | BS_TOP | 
+                    WS_GROUP | WS_TABSTOP,128,152,190,10
 END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 210
