@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2004 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // stdafx.h - include file for standard system include files
@@ -59,6 +59,14 @@ using std::max;
 #include "../../Repository/Naughter/Source/Smtp.h"
 
 #pragma hdrstop
+
+#if defined(CSMTPConnection)
+#undef CSMTPConnection
+#endif	// CSMTPConnection
+typedef CPJNSMTPConnection CSmtpConnection;
+typedef CPJNSMTPMessage CSmtpMessage;
+typedef CPJNSMTPBodyPart CSmtpBodyPart;
+typedef CPJNSMTPAddress CSmtpAddress;
 
 // file data
 struct FILE_DATA {
