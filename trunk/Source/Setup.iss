@@ -6,21 +6,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.0.2172
-AppID={78461E4F-C4AD-4488-97F7-773CCA325839}
+AppVerName=UpdateIt! 1.0.2259
+AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://home.peterstar.ru/zarezky
 AppSupportURL=http://home.peterstar.ru/zarezky/projects/update_it.html
 AppUpdatesURL=http://home.peterstar.ru/zarezky/projects/update_it.html
-AppVersion=1.0.2172
+AppVersion=1.0.2259
 DefaultDirName={pf}\PowerGadgets
 DefaultGroupName=PowerGadgets
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.0.2172-setup
-VersionInfoVersion=1.0.2172
+OutputBaseFilename=UpdateIt-1.0.2259-setup
+VersionInfoVersion=1.0.2259
 MinVersion=4.1.2222,5.0.2195
 
 [LangOptions]
