@@ -13,9 +13,10 @@ class CFilesPage: public CBetterPropPage
 	DECLARE_DYNAMIC(CFilesPage)
 	DECLARE_MESSAGE_MAP()
 
-// construction
+// construction/destruction
 public:
 	CFilesPage(void);
+	virtual ~CFilesPage(void);
 
 // overridables
 public:
@@ -30,34 +31,25 @@ protected:
 protected:
 	afx_msg void OnDestroy(void);
 	afx_msg void OnItemChanged(NMHDR* pHdr, LRESULT* pnResult);
-	afx_msg void OnGetDispInfo(NMHDR* pHdr, LRESULT* pnResult);
-	afx_msg void OnColumnClick(NMHDR* pHdr, LRESULT* pnResult);
 	afx_msg void OnButtonRemove(void);
 
 // attributes
 public:
+	BOOL m_fShowGrid;
 	CStatic m_textInfo;
-	enum {
-		// column indices
-		I_NAME,
-		I_EXTENSION,
-		I_PATH,
-		I_DATE,
-		I_TIME,
-		I_SIZE,
-		NUM_COLUMNS		// should be the LAST enumerator!
-	};
-	CListCtrl m_listFiles;
+	CFilesList m_listFiles;
 	CButton m_buttonRemove;
 	DWORD m_cbFiles;
 	CStringList m_listExclude;
+	CImageList m_imageList;
+	CMap<CString, LPCTSTR, int, int> m_mapIcons;
+	int m_iDefIcon;
 
 // implementation helpers
 private:
 	BOOL IsFileMatchesExcludeList(LPCTSTR pszFilePath);
 	void SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin, int iRelative);
 	void CleanupFileList(void);
-	static int CALLBACK CompareProc(LPARAM lParam1, LPARAM lParam2, LPARAM nData);
 
 // diagnostic services
 #if defined(_DEBUG)

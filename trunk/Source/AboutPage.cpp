@@ -9,6 +9,7 @@
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
+#include "FilesList.h"
 #include "FilesPage.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
@@ -54,11 +55,6 @@ BOOL CAboutPage::OnInitDialog(void)
 	CString strVersion;
 
 	CBetterPropPage::OnInitDialog();
-
-	// assign icons
-	HICON hIcon = AfxGetApp()->LoadIcon(IDI_APPICON);
-	GetParent()->SetIcon(hIcon, TRUE);
-	GetParent()->SetIcon(hIcon, FALSE);
 
 	// obtain and show version info
 	::GetModuleFileName(AfxGetInstanceHandle(), szExeName, _MAX_PATH);

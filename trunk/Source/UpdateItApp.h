@@ -17,6 +17,10 @@ public:
 	CUpdateItApp(void);
 	virtual ~CUpdateItApp(void);
 
+// operations
+public:
+	HICON LoadSmIcon(LPCTSTR pszResName);
+
 // overridables
 public:
 	virtual BOOL InitInstance(void);

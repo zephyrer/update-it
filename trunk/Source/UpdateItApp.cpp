@@ -9,6 +9,7 @@
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
+#include "FilesList.h"
 #include "FilesPage.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
@@ -36,6 +37,15 @@ CUpdateItApp::CUpdateItApp(void)
 
 CUpdateItApp::~CUpdateItApp(void)
 {
+}
+
+HICON CUpdateItApp::LoadSmIcon(LPCTSTR pszResName)
+{
+	HINSTANCE hInstRes = AfxGetResourceHandle();
+	int cxSmIcon = ::GetSystemMetrics(SM_CXSMICON);
+	int cySmIcon = ::GetSystemMetrics(SM_CYSMICON);
+	HANDLE hSmIcon = ::LoadImage(hInstRes, pszResName, IMAGE_ICON, cxSmIcon, cySmIcon, 0);
+	return (static_cast<HICON>(hSmIcon));
 }
 
 BOOL CUpdateItApp::InitInstance(void)

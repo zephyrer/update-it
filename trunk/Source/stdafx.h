@@ -40,6 +40,7 @@ using std::max;
 
 // CRT headers
 #include <sys/utime.h>
+#include <locale.h>
 
 // additional headers
 #include "../../Repository/CodeProject/Source/HyperLink.h"
@@ -47,6 +48,7 @@ using std::max;
 #pragma warning(push)
 #include "../../Repository/ZipArchive/Source/ZipArchive.h"
 #pragma warning(pop)
+#include "../../Repository/AfxGadgets/Source/SortingListCtrl.h"
 #include "../../Repository/AfxGadgets/Source/WinCrypto.h"
 #include "../../Repository/AfxGadgets/Source/Win32Error.h"
 #include "../../Repository/AfxGadgets/Source/StringConv.h"

@@ -12,9 +12,10 @@ class CMainWizard: public CCustomPropSheet
 	DECLARE_DYNAMIC(CMainWizard)
 	DECLARE_MESSAGE_MAP()
 
-// construction
+// construction/destruction
 public:
 	CMainWizard(void);
+	virtual ~CMainWizard(void);
 
 // overridables
 public:
@@ -22,6 +23,8 @@ public:
 
 // attributes
 private:
+	HICON m_hIcon;
+	HICON m_hSmIcon;
 	enum {
 		// page indices
 		I_ABOUT,

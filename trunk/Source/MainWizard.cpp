@@ -9,11 +9,13 @@
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
+#include "FilesList.h"
 #include "FilesPage.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
+#include "UpdateItApp.h"
 
 #if defined(_DEBUG)
 #undef THIS_FILE
@@ -31,6 +33,16 @@ END_MESSAGE_MAP()
 CMainWizard::CMainWizard(void):
 CCustomPropSheet(AFX_IDS_APP_TITLE)
 {
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	// assign CRT locale
+	_tsetlocale(LC_ALL, pApp->GetProfileString(_T("Locale"), _T("LC_ALL"), _T("English_USA.1252")));
+
+	// load dialog's icons
+	m_hIcon = pApp->LoadIcon(IDI_APP_ICON);
+	m_hSmIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_APP_ICON));
+
 	static HYPERLINKCOLORS linkColors = {
 		RGB(0, 0, 255),	// default
 		RGB(0, 0, 255),	// active
@@ -47,6 +59,12 @@ CCustomPropSheet(AFX_IDS_APP_TITLE)
 	SetWizardMode();
 }
 
+CMainWizard::~CMainWizard(void)
+{
+	::DestroyIcon(m_hSmIcon);
+	::DestroyIcon(m_hIcon);
+}
+
 BOOL CMainWizard::OnInitDialog(void)
 {
 	int nInitialDelay, nAutoPopDelay;
@@ -55,6 +73,10 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	// invoke inherited handler
 	BOOL fResult = CCustomPropSheet::OnInitDialog();
+
+	// set wizard's icons
+	SetIcon(m_hIcon, TRUE);
+	SetIcon(m_hSmIcon, FALSE);
 
 	// customize tool tips
 	CWinApp* pApp = AfxGetApp();
@@ -107,7 +129,9 @@ void CMainWizard::Dump(CDumpContext& dumpCtx) const
 		// first invoke inherited dumper...
 		CCustomPropSheet::Dump(dumpCtx);
 		// ...and then dump own unique members
-		dumpCtx << "m_pageAbout = " << m_pageAbout;
+		dumpCtx << "m_hIcon = " << m_hIcon;
+		dumpCtx << "\nm_hSmIcon = " << m_hSmIcon;
+		dumpCtx << "\nm_pageAbout = " << m_pageAbout;
 		dumpCtx << "\nm_pageOptions = " << m_pageOptions;
 		dumpCtx << "\nm_pageFiles = " << m_pageFiles;
 		dumpCtx << "\nm_pageAction = " << m_pageAction;
