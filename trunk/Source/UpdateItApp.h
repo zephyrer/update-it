@@ -20,6 +20,8 @@ public:
 // operations
 public:
 	HICON LoadSmIcon(LPCTSTR pszResName);
+	CString GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
+	BOOL WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue);
 
 // overridables
 public:

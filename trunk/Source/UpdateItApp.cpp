@@ -48,6 +48,73 @@ HICON CUpdateItApp::LoadSmIcon(LPCTSTR pszResName)
 	return (static_cast<HICON>(hSmIcon));
 }
 
+CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
+{
+	BYTE* pbTemp;
+	UINT cbPassword;
+	CArray<BYTE, BYTE> arrEncrPwd;
+	BSTR bstrDecrPwd;
+	CString strResult;
+
+	// precondition
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	try {
+		BeginWaitCursor();
+		if (GetProfileBinary(pszSection, pszEntry, &pbTemp, &cbPassword)) {
+			// password was previously saved
+			arrEncrPwd.SetSize(cbPassword);
+			memcpy(arrEncrPwd.GetData(), pbTemp, cbPassword);
+			delete[] pbTemp;
+			CWinCrypto winCrypto(AfxGetAppName());
+			winCrypto.DecryptString(arrEncrPwd, &bstrDecrPwd);
+			strResult = _W2T(bstrDecrPwd);
+		}
+		else {
+			// wasn't saved - use default value
+			strResult = pszDefault;
+		}
+		EndWaitCursor();
+	}
+	catch (CWin32Error* pXcpt) {
+		EndWaitCursor();
+		pXcpt->ReportError(MB_ICONSTOP | MB_OK);
+		pXcpt->Delete();
+		strResult.Empty();
+	}
+	return (strResult);
+}
+
+BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue)
+{
+	CArray<BYTE, BYTE> arrEncPwd;
+	BOOL fSuccess;
+
+	// precondition
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+	ASSERT(AfxIsValidString(pszValue));
+
+	try {
+		BeginWaitCursor();
+		CWinCrypto winCrypto(AfxGetAppName());
+		BSTR bstrTemp = ::SysAllocString(_T2W(pszValue));
+		winCrypto.EncryptString(bstrTemp, arrEncPwd);
+		WriteProfileBinary(pszSection, pszEntry, arrEncPwd.GetData(), arrEncPwd.GetSize());
+		::SysFreeString(bstrTemp);
+		EndWaitCursor();
+		fSuccess = TRUE;
+	}
+	catch (CWin32Error* pXcpt) {
+		EndWaitCursor();
+		pXcpt->ReportError(MB_ICONSTOP | MB_OK);
+		pXcpt->Delete();
+		fSuccess = FALSE;
+	}
+	return (fSuccess);
+}
+
 BOOL CUpdateItApp::InitInstance(void)
 {
 	::InitCommonControls();
