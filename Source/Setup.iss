@@ -6,21 +6,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.0.2297
+AppVerName=UpdateIt! 1.0.2461
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://home.peterstar.ru/zarezky
 AppSupportURL=http://home.peterstar.ru/zarezky/projects/update_it.html
 AppUpdatesURL=http://home.peterstar.ru/zarezky/projects/update_it.html
-AppVersion=1.0.2297
-DefaultDirName={pf}\PowerGadgets
-DefaultGroupName=PowerGadgets
+AppVersion=1.0.2461
+DefaultDirName={pf}\PowerGadgets\UpdateIt
+DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.0.2297-setup
-VersionInfoVersion=1.0.2297
+OutputBaseFilename=UpdateIt-1.0.2461-setup
+VersionInfoVersion=1.0.2461
 MinVersion=4.1.2222,5.0.2195
 
 [LangOptions]
@@ -29,9 +29,11 @@ DialogFontSize=8
 
 [Files]
 Source: "..\ReleaseA\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
+Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon
