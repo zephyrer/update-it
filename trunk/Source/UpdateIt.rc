@@ -387,6 +387,7 @@ BEGIN
     IDS_SELECTED_FORMAT     "&Selected %i file(s):"
     IDS_NO_SELECTED         "No files selected."
     IDS_SIZE                "Size"
+    IDS_SC_MINIMIZE         "Mi&nimize"
 END
 
 STRINGTABLE DISCARDABLE 
