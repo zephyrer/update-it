@@ -174,9 +174,9 @@ void CMainWizard::OnScExportSettings(void)
 	CString strTitle;
 	CProcessPrivileges processPrivileges;
 
-	enum { fdwFlags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST };
+	enum { fdwFlags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY };
 	strFilter.LoadString(IDS_SETTINGS_FILTER);
-	CFileDialog dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
+	CFileDialogEx dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
 	strTitle.LoadString(IDS_TITLE_EXPORT);
 	dlgSaveAs.m_ofn.lpstrTitle = strTitle;
 	if (dlgSaveAs.DoModal() == IDOK) {
@@ -200,7 +200,7 @@ void CMainWizard::OnScImportSettings(void)
 
 	enum { fdwFlags = OFN_HIDEREADONLY | OFN_PATHMUSTEXIST };
 	strFilter.LoadString(IDS_SETTINGS_FILTER);
-	CFileDialog dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
+	CFileDialogEx dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
 	strTitle.LoadString(IDS_TITLE_IMPORT);
 	dlgOpen.m_ofn.lpstrTitle = strTitle;
 	if (dlgOpen.DoModal() == IDOK) {
