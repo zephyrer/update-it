@@ -7,25 +7,28 @@
 #if !defined(__stdafx_h)
 #define __stdafx_h
 
-#pragma warning(disable: 4514)	// unreferenced inline/local function has been removed
-#pragma warning(disable: 4710)	// function not inlined
-#pragma warning(disable: 4786)	// identifier was truncated in the debug information
+// unreferenced inline/local function has been removed
+#pragma warning(disable: 4514)
+// function not inlined
+#pragma warning(disable: 4710)
+// identifier was truncated in the debug information
+#pragma warning(disable: 4786)
 
 // use Win98/NT4 features
 #define _WIN32_WINNT 0x0400
 
 // MFC headers
-#include <afxwin.h>
-#include <afxdlgs.h>
-#include <afxdtctl.h>
-#include <afxcmn.h>
-#include <afxpriv.h>
-#include <afxsock.h>
-#include <afxinet.h>
+#include <afxwin.h>			// MFC core and standard components
+#include <afxdlgs.h>			// MFC standard dialogs
+#include <afxdtctl.h>		// MFC date/time control classes
+#include <afxcmn.h>			// MFC common control classes
+#include <afxpriv.h>			// MFC private classes
+#include <afxsock.h>			// MFC support for Windows Sockets
+#include <afxinet.h>			// MFC support for WinInet
 
 // PSDK headers
-#include <shlwapi.h>
-#include <wincrypt.h>
+#include <shlwapi.h>			// light-weight utility APIs
+#include <wincrypt.h>		// cryptographic API prototypes and definitions
 
 // STL headers
 #pragma warning(push, 3)
