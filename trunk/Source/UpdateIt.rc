@@ -246,7 +246,7 @@ BEGIN
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 2.4.0 (06-March-2004)",
+    LTEXT           "ZipArchive library\nversion 2.4.1 (19-June-2004)",
                     IDC_STATIC,16,96,314,16
     LTEXT           "Copyright © 2000-2004 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
