@@ -23,6 +23,10 @@ OutputBaseFilename=UpdateIt-1.0.2172-setup
 VersionInfoVersion=1.0.2172
 MinVersion=4.1.2222,5.0.2195
 
+[LangOptions]
+DialogFontName=Tahoma
+DialogFontSize=8
+
 [Files]
 Source: "..\ReleaseA\UpdateIt.exe"; DestDir: "{app}"
 
