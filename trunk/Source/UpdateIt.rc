@@ -244,7 +244,7 @@ BEGIN
                     IDC_STATIC,16,62,314,16
     LTEXT           "Copyright © 1995-2003 Jean-loup Gailly and Mark Adler",
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
-    RTEXT           "zlib Home Size",IDC_LINK_ZLIB,200,80,130,10,
+    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
     LTEXT           "ZipArchive library\nversion 2.4.0 (06-March-2004)",
                     IDC_STATIC,16,96,314,16
