@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2004 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // ProgressPage.cpp - implementation of the CProgressPage class
@@ -411,12 +411,12 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 void CProgressPage::SendZippedFolder(const CString& strZipPath)
 {
 	using CMainWizard::I_ACTION;
-	using CSMTPConnection::NoLoginMethod;
+	using CSmtpConnection::AUTH_NONE;
 
-	CSMTPConnection smtpConn;
-	CSMTPMessage smtpMsg;
-	CSMTPBodyPart smtpTextPart;
-	CSMTPBodyPart smtpZipPart;
+	CSmtpConnection smtpConn;
+	CSmtpMessage smtpMsg;
+	CSmtpBodyPart smtpTextPart;
+	CSmtpBodyPart smtpZipPart;
 
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
@@ -424,8 +424,8 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 	ASSERT(pActionPage != NULL);
 
 	smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
-	smtpMsg.m_From = CSMTPAddress(pActionPage->m_strFrom);
-	CSMTPAddress smtpAddr(pActionPage->m_strTo);
+	smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
+	CSmtpAddress smtpAddr(pActionPage->m_strTo);
 	smtpMsg.AddRecipient(smtpAddr);
 	smtpMsg.m_sSubject = pActionPage->m_strSubject;
 	smtpZipPart.SetFilename(strZipPath);
@@ -438,7 +438,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 	smtpTextPart.SetCharset(strCharSet);
 	smtpMsg.AddBodyPart(smtpTextPart);
 	smtpMsg.AddBodyPart(smtpZipPart);
-	smtpConn.Connect(pActionPage->m_strHost, NoLoginMethod, NULL, NULL, pActionPage->m_nPort);
+	smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nPort);
 	if (!smtpConn.SendMessage(smtpMsg)) {
 		AfxMessageBox(IDS_SEND_FAILED, MB_ICONSTOP | MB_OK);
 	}

@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2004 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // ActionPage.cpp - implementation of the CActionPage class
