@@ -397,7 +397,7 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
 		// ...and then dump own unique members
-		dumpCtx << "\nm_fShowGrid = " << m_fShowGrid;
+		dumpCtx << "m_fShowGrid = " << m_fShowGrid;
 		dumpCtx << "\nm_textInfo = " << m_textInfo;
 		dumpCtx << "\nm_listFiles = " << m_listFiles;
 		dumpCtx << "\nm_buttonRemove = " << m_buttonRemove;
