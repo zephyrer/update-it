@@ -44,6 +44,7 @@ public:
 		I_PATH,
 		I_DATE,
 		I_TIME,
+		I_SIZE,
 		NUM_COLUMNS		// should be the LAST enumerator!
 	};
 	CListCtrl m_listFiles;

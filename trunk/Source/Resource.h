@@ -37,6 +37,7 @@
 #define IDS_CHARSET_FORMAT              32
 #define IDS_SELECTED_FORMAT             33
 #define IDS_NO_SELECTED                 34
+#define IDS_SIZE                        35
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
