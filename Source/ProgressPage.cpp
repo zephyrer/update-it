@@ -42,6 +42,10 @@ BOOL CProgressPage::OnSetActive(void)
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
 		pWiz->SetWizardButtons(PSWIZB_DISABLEDFINISH);
+		pWiz->GetDlgItem(IDCANCEL)->EnableWindow(FALSE);
+		CMenu* pSysMenu = pWiz->GetSystemMenu(FALSE);
+		ASSERT_VALID(pSysMenu);
+		pSysMenu->EnableMenuItem(SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
 	}
 	return (fSuccess);
 }
@@ -76,6 +80,7 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.ShowWindow(SW_HIDE);
 		m_animateBanner.Stop();
 		m_animateBanner.Close();
+		PumpWaitingMessages();
 	}
 	// show needed controls
 	m_textFile.ShowWindow(SW_SHOW);
@@ -98,6 +103,7 @@ void CProgressPage::OnBecameActive(void)
 	m_animateBanner.ShowWindow(SW_HIDE);
 	m_animateBanner.Stop();
 	m_animateBanner.Close();
+	PumpWaitingMessages();
 	// upload files (if needed)
 	if (pActionPage->m_nUpload == BST_CHECKED) {
 		strWorking.LoadString(IDS_PREPARING_UPLOAD);
@@ -114,6 +120,7 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.ShowWindow(SW_HIDE);
 		m_animateBanner.Stop();
 		m_animateBanner.Close();
+		PumpWaitingMessages();
 	}
 	// hide unneeded controls
 	m_textFile.ShowWindow(SW_HIDE);
@@ -131,6 +138,7 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.ShowWindow(SW_HIDE);
 		m_animateBanner.Stop();
 		m_animateBanner.Close();
+		PumpWaitingMessages();
 	}
 	// hide unneeded controls
 	m_textTotal.ShowWindow(SW_HIDE);
@@ -146,6 +154,7 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.ShowWindow(SW_HIDE);
 		m_animateBanner.Stop();
 		m_animateBanner.Close();
+		PumpWaitingMessages();
 	}
 	// all done!!
 	strWorking.LoadString(IDS_ALL_DONE);
@@ -157,6 +166,10 @@ void CProgressPage::OnBecameActive(void)
 	pApp->WriteProfileString(_T("Targets"), pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
+	pWiz->GetDlgItem(IDCANCEL)->EnableWindow();
+	CMenu* pSysMenu = pWiz->GetSystemMenu(FALSE);
+	ASSERT_VALID(pSysMenu);
+	pSysMenu->EnableMenuItem(SC_CLOSE, MF_BYCOMMAND | MF_ENABLED);
 }
 
 BOOL CProgressPage::OnWizardFinish(void)
@@ -179,6 +192,7 @@ bool CProgressPage::Callback(int iProgress)
 {
 	m_textTotal.SetWindowText(m_szFileInZip);
 	m_progressTotal.OffsetPos(iProgress);
+	PumpWaitingMessages();
 	return (true);
 }
 
@@ -187,6 +201,7 @@ void CProgressPage::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
 	TCHAR szTemp[_MAX_PATH];
 
 	ASSERT(pszRoot != NULL && *pszRoot != 0);
+
 	::CreateDirectory(pszRoot, NULL);
 	if (pszFolder != NULL && *pszFolder != 0) {
 		CString strPath(pszRoot);
@@ -232,6 +247,7 @@ void CProgressPage::EraseFolder(LPCTSTR pszFolder, BOOL fCanUndo)
 			else {
 				DeleteFile(strPath, fCanUndo);
 			}
+			PumpWaitingMessages();
 		}
 	}
 	finder.Close();
@@ -273,6 +289,7 @@ BOOL CProgressPage::CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDele
 			fileOut.Write(pbBuf, cbRead);
 			m_progressFile.OffsetPos(cbRead);
 			m_progressTotal.OffsetPos(cbRead);
+			PumpWaitingMessages();
 		}
 		fSuccess = TRUE;
 	}
@@ -508,6 +525,7 @@ BOOL CProgressPage::UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpConne
 			pFileOut->Write(pbBuf, cbRead);
 			m_progressFile.OffsetPos(cbRead);
 			m_progressTotal.OffsetPos(cbRead);
+			PumpWaitingMessages();
 		}
 		fSuccess = TRUE;
 	}

@@ -276,7 +276,6 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 	CFileFind finder;
 	CTime timeWrite;
 	CString strFolder;
-	MSG msg;
 	SHFILEINFO shfi;
 
 	memset(&lvi, 0, sizeof(lvi));
@@ -349,10 +348,7 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 			}
 		}
 		// pump waiting messages (if any)
-		while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			::TranslateMessage(&msg);
-			::DispatchMessage(&msg);
-		}
+		PumpWaitingMessages();
 	}
 	finder.Close();
 }

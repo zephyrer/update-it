@@ -67,6 +67,8 @@ CMainWizard::~CMainWizard(void)
 
 BOOL CMainWizard::OnInitDialog(void)
 {
+	CString strMinimize;
+	CMenu menuTemp;
 	int nInitialDelay, nAutoPopDelay;
 	int cxMaxWidth;
 	DWORD crTipBk, crTipText;
@@ -77,6 +79,24 @@ BOOL CMainWizard::OnInitDialog(void)
 	// set wizard's icons
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hSmIcon, FALSE);
+
+	// try to obtain localized text for the "Minimize" system command
+	HMODULE hUser32 = ::GetModuleHandle(_T("user32"));
+	if (menuTemp.Attach(::LoadMenu(hUser32, MAKEINTRESOURCE(16)))) {
+		menuTemp.GetMenuString(SC_MINIMIZE, strMinimize, MF_BYCOMMAND);
+		::DestroyMenu(menuTemp.Detach());
+	}
+	if (strMinimize.IsEmpty()) {
+		// probably fuckin' Win9x
+		strMinimize.LoadString(IDS_SC_MINIMIZE);
+	}
+
+	// adjust system menu
+	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	ASSERT_VALID(pSysMenu);
+	pSysMenu->InsertMenu(SC_CLOSE, MF_BYCOMMAND, SC_MINIMIZE, strMinimize);
+	pSysMenu->InsertMenu(SC_CLOSE, MF_BYCOMMAND | MF_SEPARATOR);
+	ModifyStyle(0, WS_MINIMIZEBOX);
 
 	// customize tool tips
 	CWinApp* pApp = AfxGetApp();

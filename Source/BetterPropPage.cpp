@@ -107,6 +107,16 @@ UINT AFX_CDECL CBetterPropPage::ActivationWatcher(void* pvParam)
 	return (0);
 }
 
+void CBetterPropPage::PumpWaitingMessages(void)
+{
+	MSG msg;
+
+	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		::TranslateMessage(&msg);
+		::DispatchMessage(&msg);
+	}
+}
+
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its

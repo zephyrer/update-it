@@ -45,6 +45,7 @@ protected:
 // implementation helpers
 protected:
 	static UINT AFX_CDECL ActivationWatcher(void* pvParam);
+	void PumpWaitingMessages(void);
 
 // diagnostic services
 #if defined(_DEBUG)
