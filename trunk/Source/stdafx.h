@@ -33,13 +33,20 @@
 // STL headers
 #pragma warning(push, 3)
 #include <string>
+#include <algorithm>
+#pragma warning(pop)
+
 #if !defined(_STRING_)
 #define _STRING_			// for compatibility with Dinkumware STL
 #endif
-#include <algorithm>
+
+#if !defined(min)
 using std::min;
+#endif	// min
+
+#if !defined(max)
 using std::max;
-#pragma warning(pop)
+#endif	// max
 
 // CRT headers
 #include <sys/utime.h>
