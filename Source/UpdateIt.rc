@@ -386,6 +386,7 @@ BEGIN
     IDS_CHARSET_FORMAT      """windows-%u"""
     IDS_SELECTED_FORMAT     "&Selected %i file(s):"
     IDS_NO_SELECTED         "No files selected."
+    IDS_SIZE                "Size"
 END
 
 STRINGTABLE DISCARDABLE 

@@ -42,7 +42,7 @@ m_cbFiles(0)
 
 BOOL CFilesPage::OnInitDialog(void)
 {
-	RECT rcList;
+	CRect rectList;
 	CString strHeading;
 
 	// invoke inherited handler
@@ -51,8 +51,9 @@ BOOL CFilesPage::OnInitDialog(void)
 	// setup the file list...
 	m_listFiles.SetExtendedStyle(LVS_EX_FULLROWSELECT);
 	// ...and then insert columns in the list
-	m_listFiles.GetClientRect(&rcList);
-	int cxWidth = (rcList.right - rcList.left) / NUM_COLUMNS;
+	int cxVScroll = ::GetSystemMetrics(SM_CXVSCROLL);
+	m_listFiles.GetClientRect(rectList);
+	int cxWidth = ((rectList.Width() - cxVScroll) / NUM_COLUMNS);
 	strHeading.LoadString(IDS_NAME);
 	m_listFiles.InsertColumn(I_NAME, strHeading, LVCFMT_LEFT, cxWidth, I_NAME);
 	strHeading.LoadString(IDS_EXTENSION);
@@ -63,6 +64,8 @@ BOOL CFilesPage::OnInitDialog(void)
 	m_listFiles.InsertColumn(I_DATE, strHeading, LVCFMT_LEFT, cxWidth, I_DATE);
 	strHeading.LoadString(IDS_TIME);
 	m_listFiles.InsertColumn(I_TIME, strHeading, LVCFMT_LEFT, cxWidth, I_TIME);
+	strHeading.LoadString(IDS_SIZE);
+	m_listFiles.InsertColumn(I_SIZE, strHeading, LVCFMT_RIGHT, cxWidth, I_SIZE);
 
 	// assign tool tips
 	CToolTipCtrl& tipWnd = GetToolTipCtrl();
@@ -175,6 +178,7 @@ void CFilesPage::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 {
 	SYSTEMTIME st;
 	CString strFormat;
+	CString strSize;
 
 	LVITEM& lvi = reinterpret_cast<NMLVDISPINFO*>(pHdr)->item;
 	if ((lvi.mask & LVIF_TEXT) != 0) {
@@ -199,6 +203,11 @@ void CFilesPage::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 			pData->timeWrite.GetAsSystemTime(st);
 			strFormat.LoadString(IDS_TIME_FORMAT);
 			::GetTimeFormat(LOCALE_USER_DEFAULT, 0, &st, strFormat, lvi.pszText, lvi.cchTextMax);
+			break;
+		case I_SIZE:
+			_ultot(pData->cbLength, strSize.GetBuffer(32), 10);
+			strSize.ReleaseBuffer();
+			::lstrcpyn(lvi.pszText, strSize, lvi.cchTextMax);
 			break;
 		default:
 			*lvi.pszText = 0;
@@ -379,6 +388,8 @@ int CALLBACK CFilesPage::CompareProc(LPARAM lParam1, LPARAM lParam2, LPARAM nDat
 		return (::lstrcmpi(pData1->szExt, pData2->szExt));
 	case I_PATH:
 		return (::lstrcmpi(pData1->szFolder, pData2->szFolder));
+	case I_SIZE:
+		return (pData1->cbLength - pData2->cbLength);
 	case I_DATE:
 	case I_TIME:
 		if (pData1->timeWrite < pData2->timeWrite) {
