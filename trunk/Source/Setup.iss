@@ -1,26 +1,26 @@
 ;; UpdateIt! application.
-;; Copyright (c) 2002-2004 by Elijah Zarezky,
+;; Copyright (c) 2002-2005 by Elijah Zarezky,
 ;; All rights reserved.
 
 ;; Setup.iss - setup script for Inno Setup compiler
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.0.2461
+AppVerName=UpdateIt! 1.0.2598
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://home.peterstar.ru/zarezky
 AppSupportURL=http://home.peterstar.ru/zarezky/projects/update_it.html
 AppUpdatesURL=http://home.peterstar.ru/zarezky/projects/update_it.html
-AppVersion=1.0.2461
+AppVersion=1.0.2598
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.0.2461-setup
-VersionInfoVersion=1.0.2461
+OutputBaseFilename=UpdateIt-1.0.2598-setup
+VersionInfoVersion=1.0.2598
 MinVersion=4.1.2222,5.0.2195
 
 [LangOptions]
