@@ -63,6 +63,9 @@ Package=<4>
     Project_Dep_Name AfxGadgets
     End Project Dependency
     Begin Project Dependency
+    Project_Dep_Name atlmfc71
+    End Project Dependency
+    Begin Project Dependency
     Project_Dep_Name CodeProject
     End Project Dependency
     Begin Project Dependency
@@ -70,9 +73,6 @@ Package=<4>
     End Project Dependency
     Begin Project Dependency
     Project_Dep_Name ZipArchive
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name atlmfc71
     End Project Dependency
 }}}
 

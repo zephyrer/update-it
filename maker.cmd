@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo Compiling executable...
+echo Building executable...
 echo.
 msdev.com UpdateIt.dsw /MAKE "UpdateIt - Win32 Release" /REBUILD
 echo.
