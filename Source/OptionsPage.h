@@ -43,6 +43,7 @@ public:
 	int m_nRecycle;
 	CDateTimeCtrl m_dtpWrite;
 	CTime m_timeWrite;
+	BOOL m_fCompare;
 
 // diagnostic services
 #if defined(_DEBUG)

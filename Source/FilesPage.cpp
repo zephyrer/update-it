@@ -305,7 +305,7 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 			else if (!IsFileMatchesExcludeList(finder.GetFilePath())) {
 				// obtain and compare last write time
 				finder.GetLastWriteTime(timeWrite);
-				if (timeWrite >= timeMin) {
+				if (timeWrite >= timeMin && !CompareContents(finder.GetFilePath().Mid(iRelative))) {
 					// obtain system icon for that file
 					CString strExt(::PathFindExtension(finder.GetFilePath()));
 					if (!m_mapIcons.Lookup(strExt, lvi.iImage)) {
@@ -363,6 +363,67 @@ void CFilesPage::CleanupFileList(void)
 	}
 	m_listFiles.DeleteAllItems();
 	m_cbFiles = 0;
+}
+
+BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
+{
+	using CMainWizard::I_OPTIONS;
+
+	BOOL fResult;
+	CMemMapFile mmfPrev;
+	CMemMapFile mmfNew;
+
+	ASSERT(AfxIsValidString(pszRelativeName));
+
+	static COptionsPage* pOptionsPage = NULL;
+	if (pOptionsPage == NULL) {
+		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
+		ASSERT_VALID(pWiz);
+		pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
+		ASSERT_VALID(pOptionsPage);
+	}
+
+	if (pOptionsPage->m_fCompare) {
+		CString strPrevFile(pOptionsPage->m_strTarget);
+		strPrevFile += _T('\\');
+		strPrevFile += pszRelativeName;
+		if (::PathFileExists(strPrevFile)) {
+			CString strNewFile(pOptionsPage->m_strSource);
+			strNewFile += _T('\\');
+			strNewFile += pszRelativeName;
+			try {
+				void* pvPrevData = mmfPrev.Create(strPrevFile, FALSE);
+				void* pvNewData = mmfNew.Create(strNewFile, FALSE);
+				if (pvPrevData == NULL || pvNewData == NULL) {
+					// one or both files has zero length
+					fResult = FALSE;
+				}
+				else if (mmfPrev.GetLength() != mmfNew.GetLength()) {
+					// don't need to really compare contents
+					fResult = FALSE;
+				}
+				else {
+					fResult = memcmp(pvPrevData, pvNewData, mmfPrev.GetLength()) == 0;
+				}
+				mmfNew.Close();
+				mmfPrev.Close();
+			}
+			catch (CWin32Error* pXcpt) {
+				// unable to compare
+				delete pXcpt;
+				fResult = FALSE;
+			}
+		}
+		else {
+			// no previous verison
+			fResult = FALSE;
+		}
+	}
+	else {
+		// assume that files aren't equal
+		fResult = FALSE;
+	}
+	return (fResult);
 }
 
 #if defined(_DEBUG)
