@@ -21,6 +21,11 @@ public:
 public:
 	virtual BOOL OnInitDialog(void);
 
+// message map functions
+protected:
+	afx_msg void OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu);
+	afx_msg void OnSysCommand(UINT uID, LPARAM lParam);
+
 // attributes
 private:
 	HICON m_hIcon;
@@ -39,6 +44,11 @@ private:
 	CFilesPage m_pageFiles;
 	CActionPage m_pageAction;
 	CProgressPage m_pageProgress;
+
+// implementation helpers
+private:
+	void OnScExportSettings(void);
+	void OnScImportSettings(void);
 
 // diagnostic services
 #if defined(_DEBUG)

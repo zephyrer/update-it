@@ -19,7 +19,9 @@
 #define IDS_FOLDER_FORMAT               14
 #define IDS_NO_FILES                    15
 #define IDS_DISCARDING_SEARCH           16
+#define IDM_SC_EXPORT_SETTINGS          0x0010
 #define IDS_DELETING_FILES              17
+#define IDM_SC_IMPORT_SETTINGS          0x0020
 #define IDS_COPYING_FILES               18
 #define IDS_MOVING_FILES                19
 #define IDS_ALL_DONE                    20
@@ -39,6 +41,12 @@
 #define IDS_NO_SELECTED                 34
 #define IDS_SIZE                        35
 #define IDS_SC_MINIMIZE                 36
+#define IDS_SC_EXPORT_SETTINGS          37
+#define IDS_SC_IMPORT_SETTINGS          38
+#define IDS_SETTINGS_FILTER             39
+#define IDS_SC_RESTORE                  40
+#define IDS_TITLE_EXPORT                41
+#define IDS_TITLE_IMPORT                42
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
@@ -103,6 +111,6 @@
 #define _APS_NEXT_RESOURCE_VALUE        113
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1045
-#define _APS_NEXT_SYMED_VALUE           105
+#define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

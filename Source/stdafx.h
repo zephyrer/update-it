@@ -56,6 +56,7 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/Win32Error.h"
 #include "../../Repository/AfxGadgets/Source/StringConv.h"
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
+#include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
 #include "../../Repository/Naughter/Source/Smtp.h"
 
 #pragma hdrstop

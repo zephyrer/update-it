@@ -392,6 +392,12 @@ BEGIN
     IDS_NO_SELECTED         "No files selected."
     IDS_SIZE                "Size"
     IDS_SC_MINIMIZE         "Mi&nimize"
+    IDS_SC_EXPORT_SETTINGS  "Export Settings..."
+    IDS_SC_IMPORT_SETTINGS  "Import Settings..."
+    IDS_SETTINGS_FILTER     "Registry Hive Files (*.hive)|*.hive|All Files (*.*)|*.*||"
+    IDS_SC_RESTORE          "&Restore"
+    IDS_TITLE_EXPORT        "Export Settings to File"
+    IDS_TITLE_IMPORT        "Import Settings from File"
 END
 
 STRINGTABLE DISCARDABLE 
