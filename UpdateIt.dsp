@@ -115,6 +115,11 @@ SOURCE=.\Source\CustomPropSheet.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Source\FilesList.cpp
+# ADD CPP /Yu"stdafx.h"
+# End Source File
+# Begin Source File
+
 SOURCE=.\Source\FilesPage.cpp
 # ADD CPP /Yu"stdafx.h"
 # End Source File
@@ -162,6 +167,10 @@ SOURCE=.\Source\BetterPropPage.h
 # Begin Source File
 
 SOURCE=.\Source\CustomPropSheet.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Source\FilesList.h
 # End Source File
 # Begin Source File
 

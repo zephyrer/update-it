@@ -3,7 +3,7 @@
 // Used by UpdateIt.rc
 //
 #define IDS_REGKEY                      1
-#define IDI_APPICON                     1
+#define IDI_APP_ICON                    1
 #define IDS_NO_SOURCE                   2
 #define IDS_NO_TARGET                   3
 #define IDS_CHOOSE_SOURCE               4

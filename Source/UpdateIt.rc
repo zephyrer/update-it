@@ -80,7 +80,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,2169,0
+ FILEVERSION 1,0,2170,0
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -99,7 +99,7 @@ BEGIN
             VALUE "Comments", "none\0"
             VALUE "CompanyName", "ICBANK\0"
             VALUE "FileDescription", "UpdateIt Application Executable\0"
-            VALUE "FileVersion", "1.0.2169\0"
+            VALUE "FileVersion", "1.0.2170\0"
             VALUE "InternalName", "UpdateIt\0"
             VALUE "LegalCopyright", "Copyright © 2002–2004 by Elijah Zarezky\0"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
@@ -322,7 +322,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_APPICON             ICON    DISCARDABLE     "BinRes\\AppIcon.ico"
+IDI_APP_ICON            ICON    DISCARDABLE     "BinRes\\AppIcon.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

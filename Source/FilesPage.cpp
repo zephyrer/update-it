@@ -9,11 +9,13 @@
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
+#include "FilesList.h"
 #include "FilesPage.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
+#include "UpdateItApp.h"
 
 #if defined(_DEBUG)
 #undef THIS_FILE
@@ -28,16 +30,34 @@ IMPLEMENT_DYNAMIC(CFilesPage, CBetterPropPage)
 BEGIN_MESSAGE_MAP(CFilesPage, CBetterPropPage)
 	ON_WM_DESTROY()
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_FILES, OnItemChanged)
-	ON_NOTIFY(LVN_GETDISPINFO, IDC_LIST_FILES, OnGetDispInfo)
-	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST_FILES, OnColumnClick)
 	ON_BN_CLICKED(IDC_BUTTON_REMOVE, OnButtonRemove)
 END_MESSAGE_MAP()
 
 CFilesPage::CFilesPage(void):
 CBetterPropPage(IDD_PAGE_FILES),
-m_cbFiles(0)
+m_fShowGrid(FALSE),
+m_cbFiles(0),
+m_iDefIcon(-1)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
+
+	int cxSmIcon = ::GetSystemMetrics(SM_CXSMICON);
+	int cySmIcon = ::GetSystemMetrics(SM_CYSMICON);
+	m_imageList.Create(cxSmIcon, cySmIcon, ILC_COLOR16 | ILC_MASK, 8, 8);
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	m_fShowGrid = pApp->GetProfileInt(_T("Files"), _T("ShowGrid"), FALSE);
+
+	HICON hIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_APP_ICON));
+	m_iDefIcon = m_imageList.Add(hIcon);
+	::DestroyIcon(hIcon);
+}
+
+CFilesPage::~CFilesPage(void)
+{
+	m_imageList.DeleteImageList();
 }
 
 BOOL CFilesPage::OnInitDialog(void)
@@ -49,23 +69,10 @@ BOOL CFilesPage::OnInitDialog(void)
 	BOOL fResult = CBetterPropPage::OnInitDialog();
 
 	// setup the file list...
-	m_listFiles.SetExtendedStyle(LVS_EX_FULLROWSELECT);
+	m_listFiles.SetExtendedStyle(LVS_EX_FULLROWSELECT | (m_fShowGrid ? LVS_EX_GRIDLINES : 0));
+	m_listFiles.SetImageList(&m_imageList, LVSIL_SMALL);
 	// ...and then insert columns in the list
-	int cxVScroll = ::GetSystemMetrics(SM_CXVSCROLL);
-	m_listFiles.GetClientRect(rectList);
-	int cxWidth = ((rectList.Width() - cxVScroll) / NUM_COLUMNS);
-	strHeading.LoadString(IDS_NAME);
-	m_listFiles.InsertColumn(I_NAME, strHeading, LVCFMT_LEFT, cxWidth, I_NAME);
-	strHeading.LoadString(IDS_EXTENSION);
-	m_listFiles.InsertColumn(I_EXTENSION, strHeading, LVCFMT_LEFT, cxWidth, I_EXTENSION);
-	strHeading.LoadString(IDS_PATH);
-	m_listFiles.InsertColumn(I_PATH, strHeading, LVCFMT_LEFT, cxWidth, I_PATH);
-	strHeading.LoadString(IDS_DATE);
-	m_listFiles.InsertColumn(I_DATE, strHeading, LVCFMT_LEFT, cxWidth, I_DATE);
-	strHeading.LoadString(IDS_TIME);
-	m_listFiles.InsertColumn(I_TIME, strHeading, LVCFMT_LEFT, cxWidth, I_TIME);
-	strHeading.LoadString(IDS_SIZE);
-	m_listFiles.InsertColumn(I_SIZE, strHeading, LVCFMT_RIGHT, cxWidth, I_SIZE);
+	m_listFiles.InsertColumns();
 
 	// assign tool tips
 	CToolTipCtrl& tipWnd = GetToolTipCtrl();
@@ -92,6 +99,10 @@ BOOL CFilesPage::OnSetActive(void)
 void CFilesPage::OnBecameActive(void)
 {
 	using CMainWizard::I_OPTIONS;
+	using CFilesList::I_NAME;
+	using CFilesList::NUM_COLUMNS;
+	using CFilesList::I_DATE;
+	using CSortingListCtrl::SORT_ASCENDING;
 
 	CString strInfo;
 
@@ -116,6 +127,8 @@ void CFilesPage::OnBecameActive(void)
 		}
 		free(pszExcludes);
 		AfxEnableMemoryTracking(fMemTrack);
+		m_imageList.SetImageCount(0);
+		m_mapIcons.RemoveAll();
 		BOOL fRecurse = pOptionsPage->m_nRecurse == BST_CHECKED;
 		SearchForFiles(pOptionsPage->m_strSource, fRecurse, pOptionsPage->m_timeWrite, -1);
 		// setup and restore controls
@@ -126,7 +139,7 @@ void CFilesPage::OnBecameActive(void)
 			for (int iCol = I_NAME; iCol < NUM_COLUMNS; ++iCol) {
 				m_listFiles.SetColumnWidth(iCol, LVSCW_AUTOSIZE);
 			}
-			m_listFiles.SortItems(CompareProc, I_DATE);
+			m_listFiles.SortItems(I_DATE, SORT_ASCENDING);
 			m_listFiles.SetItemState(0, LVIS_FOCUSED | LVIS_SELECTED, (UINT)-1);
 			m_listFiles.EnableWindow();
 			m_buttonRemove.EnableWindow();
@@ -172,53 +185,6 @@ void CFilesPage::OnItemChanged(NMHDR* /*pHdr*/, LRESULT* pnResult)
 {
 	m_buttonRemove.EnableWindow(m_listFiles.GetSelectedCount() > 0);
 	*pnResult = 0;
-}
-
-void CFilesPage::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
-{
-	SYSTEMTIME st;
-	CString strFormat;
-	CString strSize;
-
-	LVITEM& lvi = reinterpret_cast<NMLVDISPINFO*>(pHdr)->item;
-	if ((lvi.mask & LVIF_TEXT) != 0) {
-		FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(m_listFiles.GetItemData(lvi.iItem));
-		switch (lvi.iSubItem)
-		{
-		case I_NAME:
-			::lstrcpyn(lvi.pszText, pData->szName, lvi.cchTextMax);
-			break;
-		case I_EXTENSION:
-			::lstrcpyn(lvi.pszText, pData->szExt, lvi.cchTextMax);
-			break;
-		case I_PATH:
-			::lstrcpyn(lvi.pszText, pData->szFolder, lvi.cchTextMax);
-			break;
-		case I_DATE:
-			pData->timeWrite.GetAsSystemTime(st);
-			strFormat.LoadString(IDS_DATE_FORMAT);
-			::GetDateFormat(LOCALE_USER_DEFAULT, 0, &st, strFormat, lvi.pszText, lvi.cchTextMax);
-			break;
-		case I_TIME:
-			pData->timeWrite.GetAsSystemTime(st);
-			strFormat.LoadString(IDS_TIME_FORMAT);
-			::GetTimeFormat(LOCALE_USER_DEFAULT, 0, &st, strFormat, lvi.pszText, lvi.cchTextMax);
-			break;
-		case I_SIZE:
-			_ultot(pData->cbLength, strSize.GetBuffer(32), 10);
-			strSize.ReleaseBuffer();
-			::lstrcpyn(lvi.pszText, strSize, lvi.cchTextMax);
-			break;
-		default:
-			*lvi.pszText = 0;
-			break;
-		}
-	}
-}
-
-void CFilesPage::OnColumnClick(NMHDR* pHdr, LRESULT* /*pnResult*/)
-{
-	m_listFiles.SortItems(CompareProc, reinterpret_cast<NMLISTVIEW*>(pHdr)->iSubItem);
 }
 
 void CFilesPage::OnButtonRemove(void)
@@ -303,10 +269,19 @@ BOOL CFilesPage::IsFileMatchesExcludeList(LPCTSTR pszFilePath)
 
 void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin, int iRelative)
 {
+	using CFilesList::I_EXTENSION;
+	using CFilesList::NUM_COLUMNS;
+
+	LVITEM lvi;
 	CFileFind finder;
 	CTime timeWrite;
 	CString strFolder;
 	MSG msg;
+	SHFILEINFO shfi;
+
+	memset(&lvi, 0, sizeof(lvi));
+	lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM;
+	lvi.pszText = LPSTR_TEXTCALLBACK;
 
 	strFolder.Format(IDS_FOLDER_FORMAT, pszFolder);
 	m_textInfo.SetWindowText(strFolder);
@@ -332,7 +307,21 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 				// obtain and compare last write time
 				finder.GetLastWriteTime(timeWrite);
 				if (timeWrite >= timeMin) {
-					// file is required to be "updated"
+					// obtain system icon for that file
+					CString strExt(::PathFindExtension(finder.GetFilePath()));
+					if (!m_mapIcons.Lookup(strExt, lvi.iImage)) {
+						memset(&shfi, 0, sizeof(shfi));
+						enum { fuFlags = SHGFI_USEFILEATTRIBUTES | SHGFI_ICON | SHGFI_SMALLICON };
+						::SHGetFileInfo(strExt, FILE_ATTRIBUTE_NORMAL, &shfi, sizeof(shfi), fuFlags);
+						if (shfi.hIcon != NULL) {
+							lvi.iImage = m_imageList.Add(shfi.hIcon);
+							::DestroyIcon(shfi.hIcon);
+							m_mapIcons.SetAt(strExt, lvi.iImage);
+						}
+						else {
+							lvi.iImage = m_iDefIcon;
+						}
+					}
 					FILE_DATA* pData = new FILE_DATA;
 					// name
 					CString strNameExt = finder.GetFileName();
@@ -349,9 +338,13 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 					// size
 					pData->cbLength = finder.GetLength();
 					m_cbFiles += pData->cbLength;
-					// insert item
-					int iItem = m_listFiles.InsertItem(0, LPSTR_TEXTCALLBACK);
-					m_listFiles.SetItemData(iItem, reinterpret_cast<DWORD>(pData));
+					// insert an item
+					lvi.lParam = reinterpret_cast<LPARAM>(pData);
+					VERIFY(m_listFiles.InsertItem(&lvi) == lvi.iItem);
+					for (int i = I_EXTENSION; i < NUM_COLUMNS; ++i) {
+						m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
+					}
+					++lvi.iItem;
 				}
 			}
 		}
@@ -376,34 +369,6 @@ void CFilesPage::CleanupFileList(void)
 	m_cbFiles = 0;
 }
 
-int CALLBACK CFilesPage::CompareProc(LPARAM lParam1, LPARAM lParam2, LPARAM nData)
-{
-	FILE_DATA* pData1 = reinterpret_cast<FILE_DATA*>(lParam1);
-	FILE_DATA* pData2 = reinterpret_cast<FILE_DATA*>(lParam2);
-	switch (nData)
-	{
-	case I_NAME:
-		return (::lstrcmpi(pData1->szName, pData2->szName));
-	case I_EXTENSION:
-		return (::lstrcmpi(pData1->szExt, pData2->szExt));
-	case I_PATH:
-		return (::lstrcmpi(pData1->szFolder, pData2->szFolder));
-	case I_SIZE:
-		return (pData1->cbLength - pData2->cbLength);
-	case I_DATE:
-	case I_TIME:
-		if (pData1->timeWrite < pData2->timeWrite) {
-			return (1);
-		}
-		else if (pData1->timeWrite > pData2->timeWrite) {
-			return (-1);
-		}
-		// fall through
-	default:
-		return (0);
-	}
-}
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -419,6 +384,7 @@ void CFilesPage::AssertValid(void) const
 	ASSERT_VALID(&m_textInfo);
 	ASSERT_VALID(&m_listFiles);
 	ASSERT_VALID(&m_buttonRemove);
+	ASSERT_VALID(&m_imageList);
 }
 
 //! This member function prints data members of this class (in the Debug version
@@ -431,11 +397,15 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
 		// ...and then dump own unique members
-		dumpCtx << "m_textInfo = " << m_textInfo;
+		dumpCtx << "\nm_fShowGrid = " << m_fShowGrid;
+		dumpCtx << "\nm_textInfo = " << m_textInfo;
 		dumpCtx << "\nm_listFiles = " << m_listFiles;
 		dumpCtx << "\nm_buttonRemove = " << m_buttonRemove;
 		dumpCtx << "\nm_cbFiles = " << m_cbFiles;
 		dumpCtx << "\nm_listExclude = " << m_listExclude;
+		dumpCtx << "\nm_imageList = " << m_imageList;
+		dumpCtx << "\nm_mapIcons = " << m_mapIcons;
+		dumpCtx << "\nm_iDefIcon = " << m_iDefIcon;
 	}
 	catch (CFileException* pXcpt) {
 		pXcpt->ReportError();
