@@ -17,6 +17,11 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 
+#if defined(__INTEL_COMPILER)
+// remark #171: invalid type conversion
+#pragma warning(disable: 171)
+#endif	// __INTEL_COMPILER
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;

@@ -16,6 +16,11 @@
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 
+#if defined(__INTEL_COMPILER)
+// remark #279: controlling expression is constant
+#pragma warning(disable: 279)
+#endif	// __INTEL_COMPILER
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
