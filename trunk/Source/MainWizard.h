@@ -7,6 +7,10 @@
 #if !defined(__MainWizard_h)
 #define __MainWizard_h
 
+#if defined(_MSC_VER) && (_MSC_VER > 1000)
+#pragma once
+#endif	// _MSC_VER
+
 class CMainWizard: public CCustomPropSheet
 {
 	DECLARE_DYNAMIC(CMainWizard)

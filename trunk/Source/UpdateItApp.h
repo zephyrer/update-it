@@ -7,6 +7,10 @@
 #if !defined(__UpdateItApp_h)
 #define __UpdateItApp_h
 
+#if defined(_MSC_VER) && (_MSC_VER > 1000)
+#pragma once
+#endif	// _MSC_VER
+
 class CUpdateItApp: public CWinApp
 {
 	DECLARE_DYNAMIC(CUpdateItApp)

@@ -7,6 +7,10 @@
 #if !defined(__stdafx_h)
 #define __stdafx_h
 
+#if defined(_MSC_VER) && (_MSC_VER > 1000)
+#pragma once
+#endif	// _MSC_VER
+
 // unreferenced inline/local function has been removed
 #pragma warning(disable: 4514)
 // function not inlined
@@ -14,8 +18,8 @@
 // identifier was truncated in the debug information
 #pragma warning(disable: 4786)
 
-// use Win98/NT4 features
-#define _WIN32_WINNT 0x0400
+// use Win2000 features
+#define _WIN32_WINNT 0x0500
 
 // MFC headers
 #include <afxwin.h>			// MFC core and standard components
@@ -65,6 +69,7 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
 #include "../../Repository/Naughter/Source/Smtp.h"
+#include "../../Repository/atlmfc71/Source/FileDialogEx.h"
 
 #pragma hdrstop
 

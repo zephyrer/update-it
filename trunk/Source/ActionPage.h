@@ -7,6 +7,10 @@
 #if !defined(__ActionPage_h)
 #define __ActionPage_h
 
+#if defined(_MSC_VER) && (_MSC_VER > 1000)
+#pragma once
+#endif	// _MSC_VER
+
 //! Encapsulates the "Choosing an action" step of the UpdateIt! wizard.
 class CActionPage: public CBetterPropPage
 {

@@ -7,6 +7,10 @@
 #if !defined(__ProgressPage_h)
 #define __ProgressPage_h
 
+#if defined(_MSC_VER) && (_MSC_VER > 1000)
+#pragma once
+#endif	// _MSC_VER
+
 //! Encapsulates the "Processing files" step of the UpdateIt! wizard.
 class CProgressPage: public CBetterPropPage, public CZipActionCallback
 {

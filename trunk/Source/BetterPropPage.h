@@ -7,6 +7,10 @@
 #if !defined(__BetterPropPage_h)
 #define __BetterPropPage_h
 
+#if defined(_MSC_VER) && (_MSC_VER > 1000)
+#pragma once
+#endif	// _MSC_VER
+
 #define BPP_BECAME_ACTIVE (WM_APP + 1)
 
 //! Encapsulates an extended property page with additional notification and tool tips support.
