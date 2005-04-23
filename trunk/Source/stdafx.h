@@ -33,6 +33,7 @@
 // PSDK headers
 #include <shlwapi.h>			// light-weight utility APIs
 #include <wincrypt.h>		// cryptographic API prototypes and definitions
+#include <windns.h>			// DNS definitions and DNS API
 
 // STL headers
 #pragma warning(push, 3)
@@ -80,6 +81,7 @@ typedef CPJNSMTPConnection CSmtpConnection;
 typedef CPJNSMTPMessage CSmtpMessage;
 typedef CPJNSMTPBodyPart CSmtpBodyPart;
 typedef CPJNSMTPAddress CSmtpAddress;
+typedef CSMTPException CSmtpException;
 
 // file data
 struct FILE_DATA {

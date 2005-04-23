@@ -436,26 +436,30 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
 	ASSERT(pActionPage != NULL);
 
-	smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
-	smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
-	CSmtpAddress smtpAddr(pActionPage->m_strTo);
-	smtpMsg.AddRecipient(smtpAddr);
-	smtpMsg.m_sSubject = pActionPage->m_strSubject;
-	smtpZipPart.SetFilename(strZipPath);
-	smtpTextPart.SetText(pActionPage->m_strBody);
-	CWinApp* pApp = AfxGetApp();
-	CString strCharSet = pApp->GetProfileString(_T("SMTP"), _T("charset"));
-	if (strCharSet.IsEmpty()) {
-		strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
+	try {
+		smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
+		smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
+		CSmtpAddress smtpAddr(pActionPage->m_strTo);
+		smtpMsg.AddRecipient(smtpAddr);
+		smtpMsg.m_sSubject = pActionPage->m_strSubject;
+		smtpZipPart.SetFilename(strZipPath);
+		smtpTextPart.SetText(pActionPage->m_strBody);
+		CWinApp* pApp = AfxGetApp();
+		CString strCharSet = pApp->GetProfileString(_T("SMTP"), _T("charset"));
+		if (strCharSet.IsEmpty()) {
+			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
+		}
+		smtpTextPart.SetCharset(strCharSet);
+		smtpMsg.AddBodyPart(smtpTextPart);
+		smtpMsg.AddBodyPart(smtpZipPart);
+		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nPort);
+		smtpConn.SendMessage(smtpMsg);
+		smtpConn.Disconnect();
 	}
-	smtpTextPart.SetCharset(strCharSet);
-	smtpMsg.AddBodyPart(smtpTextPart);
-	smtpMsg.AddBodyPart(smtpZipPart);
-	smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nPort);
-	if (!smtpConn.SendMessage(smtpMsg)) {
-		AfxMessageBox(IDS_SEND_FAILED, MB_ICONSTOP | MB_OK);
+	catch (CSmtpException* pErr) {
+		AfxMessageBox(pErr->GetErrorMessage(), MB_ICONSTOP | MB_OK);
+		delete pErr;
 	}
-	smtpConn.Disconnect();
 }
 
 void CProgressPage::CreateFtpFolder(CFtpConnection* pFtpConn, LPCTSTR pszFolder)

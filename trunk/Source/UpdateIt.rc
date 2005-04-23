@@ -55,7 +55,8 @@ BEGIN
     "#endif\r\n"
     "#include ""afxres.rc""\r\n"
     "#endif\r\n"
-    "\0"
+    "\r\n"
+    "#include ""../../Repository/Naughter/Source/Smtp.rc""\0"
 END
 
 #endif    // APSTUDIO_INVOKED
@@ -80,7 +81,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,2598,0
+ FILEVERSION 1,0,2711,0
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -99,7 +100,7 @@ BEGIN
             VALUE "Comments", "none\0"
             VALUE "CompanyName", "ICBANK\0"
             VALUE "FileDescription", "UpdateIt Application Executable\0"
-            VALUE "FileVersion", "1.0.2598\0"
+            VALUE "FileVersion", "1.0.2711\0"
             VALUE "InternalName", "UpdateIt\0"
             VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky\0"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
@@ -244,24 +245,24 @@ BEGIN
                     24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
     LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
-    LTEXT           "'zlib' general purpose compression library\nversion 1.2.1 (17 November 2003)",
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.2 (3 October 2004)",
                     IDC_STATIC,16,62,314,16
-    LTEXT           "Copyright © 1995-2003 Jean-loup Gailly and Mark Adler",
+    LTEXT           "Copyright © 1995-2004 Jean-loup Gailly and Mark Adler",
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 2.4.1 (19-June-2004)",
+    LTEXT           "ZipArchive library\nversion 2.4.4 (01-April-2005)",
                     IDC_STATIC,16,96,314,16
-    LTEXT           "Copyright © 2000-2004 by Tadeusz Dracz",IDC_STATIC,16,
+    LTEXT           "Copyright © 2000-2005 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ARTPOL,158,114,172,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,130,314,10
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
                     IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.46 (23 December 2004)",
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.50 (18 April 2005)",
                     IDC_STATIC,16,156,314,16
-    LTEXT           "Copyright © 1998-2004 by PJ Naughter",IDC_STATIC,16,174,
+    LTEXT           "Copyright © 1998-2005 by PJ Naughter",IDC_STATIC,16,174,
                     132,10,SS_CENTERIMAGE
     RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,174,180,10,
                     SS_CENTERIMAGE
@@ -474,6 +475,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #include "afxres.rc"
 #endif
 
+#include "../../Repository/Naughter/Source/Smtp.rc"
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 

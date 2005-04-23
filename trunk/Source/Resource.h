@@ -21,7 +21,6 @@
 #define IDS_DISCARDING_SEARCH           16
 #define IDM_SC_EXPORT_SETTINGS          0x0010
 #define IDS_DELETING_FILES              17
-#define IDM_SC_IMPORT_SETTINGS          0x0020
 #define IDS_COPYING_FILES               18
 #define IDS_MOVING_FILES                19
 #define IDS_ALL_DONE                    20
@@ -36,6 +35,7 @@
 #define IDS_DISCONNECTING_FTP           29
 #define IDS_FINISHING_FTP               30
 #define IDS_PREPARING_UPLOAD            31
+#define IDM_SC_IMPORT_SETTINGS          0x0020
 #define IDS_CHARSET_FORMAT              32
 #define IDS_SELECTED_FORMAT             33
 #define IDS_NO_SELECTED                 34
@@ -108,7 +108,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        113
+#define _APS_NEXT_RESOURCE_VALUE        114
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1045
 #define _APS_NEXT_SYMED_VALUE           107
