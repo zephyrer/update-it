@@ -81,7 +81,7 @@ typedef CPJNSMTPConnection CSmtpConnection;
 typedef CPJNSMTPMessage CSmtpMessage;
 typedef CPJNSMTPBodyPart CSmtpBodyPart;
 typedef CPJNSMTPAddress CSmtpAddress;
-typedef CSMTPException CSmtpException;
+typedef CPJNSMTPException CSmtpException;
 
 // file data
 struct FILE_DATA {
