@@ -74,7 +74,7 @@ BOOL CAboutPage::OnInitDialog(void)
 	delete[] pVerInfo;
 
 	// setup hyper-links
-	m_linkZarezky.SetURL(CString(_T("http://www.zarezky.spb.ru/")));
+	m_linkZarezky.SetURL(CString(_T("http://zarezky.spb.ru/")));
 	m_linkZarezky.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
 	m_linkZLib.SetURL(CString(_T("http://www.gzip.org/zlib/")));
 	m_linkZLib.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
