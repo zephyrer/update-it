@@ -6,21 +6,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.0.2711
+AppVerName=UpdateIt! 1.0.2777
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.0.2711
+AppVersion=1.0.2777
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.0.2711-setup
-VersionInfoVersion=1.0.2711
+OutputBaseFilename=UpdateIt-1.0.2777-setup
+VersionInfoVersion=1.0.2777
 MinVersion=4.1.2222,5.0.2195
 
 [LangOptions]
@@ -40,7 +40,7 @@ Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopi
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: quicklaunchicon
 
 [INI]
-Filename: "{app}\UpdateIt.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://home.peterstar.ru/zarezky/projects/update_it.html"
+Filename: "{app}\UpdateIt.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://zarezky.spb.ru/projects/update_it.html"
 
 [Registry]
 Root: HKCU; Subkey: "Software\Elijah Zarezky"; Flags: uninsdeletekeyifempty
