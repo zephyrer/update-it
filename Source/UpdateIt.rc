@@ -84,7 +84,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,2777,43
+ FILEVERSION 1,0,2800,44
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -103,7 +103,7 @@ BEGIN
             VALUE "Comments", "none\0"
             VALUE "CompanyName", "Spb Software House\0"
             VALUE "FileDescription", "UpdateIt Application Executable\0"
-            VALUE "FileVersion", "1.0.2777\0"
+            VALUE "FileVersion", "1.0.2800\0"
             VALUE "InternalName", "UpdateIt\0"
             VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky\0"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
@@ -254,7 +254,7 @@ BEGIN
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 2.4.4 (01-April-2005)",
+    LTEXT           "ZipArchive library\nversion 2.4.5 (21-June-2005)",
                     IDC_STATIC,16,96,314,16
     LTEXT           "Copyright © 2000-2005 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
@@ -263,7 +263,7 @@ BEGIN
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
                     IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.53 (3 May  2005)",
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.53 (3 May 2005)",
                     IDC_STATIC,16,156,314,16
     LTEXT           "Copyright © 1998-2005 by PJ Naughter",IDC_STATIC,16,174,
                     132,10,SS_CENTERIMAGE
