@@ -122,6 +122,29 @@ BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LP
 	return (fSuccess);
 }
 
+#if (_MFC_VER >= 0x0700)
+
+__time64_t CUpdateItApp::GetProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeDefault)
+{
+	__time64_t* pTimeValue;
+	UINT cbSize;
+
+	if (GetProfileBinary(pszSection, pszEntry, reinterpret_cast<BYTE**>(&pTimeValue), &cbSize))
+	{
+		ASSERT(cbSize == sizeof(timeDefault));
+		timeDefault = *pTimeValue;
+		delete[] reinterpret_cast<BYTE*>(pTimeValue);
+	}
+	return (timeDefault);
+}
+
+BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeValue)
+{
+	return (WriteProfileBinary(pszSection, pszEntry, reinterpret_cast<BYTE*>(&timeValue), sizeof(timeValue)));
+}
+
+#endif	// _MFC_VER
+
 BOOL CUpdateItApp::InitInstance(void)
 {
 	::InitCommonControls();

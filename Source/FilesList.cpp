@@ -64,6 +64,10 @@ void CFilesList::InsertColumns(void)
 
 int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 {
+#if (_MFC_VER >= 0x0700)
+	__int64 nDelta;
+#endif	// _MFC_VER
+
 	FILE_DATA* pDataLhs = reinterpret_cast<FILE_DATA*>(GetItemData(iItemLhs));
 	ASSERT(pDataLhs != NULL);
 	FILE_DATA* pDataRhs = reinterpret_cast<FILE_DATA*>(GetItemData(iItemRhs));
@@ -78,7 +82,12 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 	case I_PATH:
 		return (::lstrcmpi(pDataLhs->szFolder, pDataRhs->szFolder) * m_nSortOrder);
 	case I_SIZE:
+#if (_MFC_VER < 0x0700)
 		return ((pDataLhs->cbLength - pDataRhs->cbLength) * m_nSortOrder);
+#else
+		nDelta = pDataLhs->cbLength - pDataRhs->cbLength;
+		return (nDelta != 0 ? static_cast<int>(nDelta / _abs64(nDelta)) * m_nSortOrder : 0);
+#endif	// _MFC_VER
 	case I_DATE:
 	case I_TIME:
 		if (pDataLhs->timeWrite < pDataRhs->timeWrite) {
@@ -124,7 +133,11 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 			::GetTimeFormat(LOCALE_USER_DEFAULT, 0, &st, strFormat, lvi.pszText, lvi.cchTextMax);
 			break;
 		case I_SIZE:
+#if (_MFC_VER < 0x0700)
 			_ultot(pData->cbLength, strSize.GetBuffer(32), 10);
+#else
+			_ui64tot(pData->cbLength, strSize.GetBuffer(64), 10);
+#endif	// _MFC_VER
 			strSize.ReleaseBuffer();
 			SeparateThousands(strSize);
 			::lstrcpyn(lvi.pszText, strSize, lvi.cchTextMax);

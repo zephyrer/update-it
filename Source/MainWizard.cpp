@@ -181,7 +181,11 @@ void CMainWizard::OnScExportSettings(void)
 
 	enum { fdwFlags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY };
 	strFilter.LoadString(IDS_SETTINGS_FILTER);
+#if (_MFC_VER < 0x0700)
 	CFileDialogEx dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
+#else
+	CFileDialog dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
+#endif	// _MFC_VER
 	strTitle.LoadString(IDS_TITLE_EXPORT);
 	dlgSaveAs.m_ofn.lpstrTitle = strTitle;
 	if (dlgSaveAs.DoModal() == IDOK) {
@@ -205,7 +209,11 @@ void CMainWizard::OnScImportSettings(void)
 
 	enum { fdwFlags = OFN_HIDEREADONLY | OFN_PATHMUSTEXIST };
 	strFilter.LoadString(IDS_SETTINGS_FILTER);
+#if (_MFC_VER < 0x0700)
 	CFileDialogEx dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
+#else
+	CFileDialog dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
+#endif	// _MFC_VER
 	strTitle.LoadString(IDS_TITLE_IMPORT);
 	dlgOpen.m_ofn.lpstrTitle = strTitle;
 	if (dlgOpen.DoModal() == IDOK) {

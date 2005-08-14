@@ -70,7 +70,10 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
 #include "../../Repository/Naughter/Source/Smtp.h"
+
+#if (_MFC_VER < 0x0700)
 #include "../../Repository/atlmfc71/Source/FileDialogEx.h"
+#endif	// _MFC_VER
 
 #pragma hdrstop
 
@@ -89,7 +92,11 @@ struct FILE_DATA {
 	TCHAR szExt[_MAX_EXT];
 	TCHAR szFolder[_MAX_DIR];
 	CTime timeWrite;
+#if (_MFC_VER < 0x0700)
 	DWORD cbLength;
+#else
+	ULONGLONG cbLength;
+#endif	// _MFC_VER
 };
 
 // force ISO/IEC 14882 conformance in for loop scope

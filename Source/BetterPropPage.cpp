@@ -83,6 +83,8 @@ BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 	return (CPropertyPage::PreTranslateMessage(pMsg));
 }
 
+#if (_MFC_VER < 0x0700)
+
 void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMTTDISPINFO* pInfo, LRESULT* pnResult)
 {
 	if ((pInfo->uFlags & TTF_IDISHWND) != 0) {
@@ -98,6 +100,26 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMTTDISPINFO* pInfo, LRESULT* p
 	}
 	*pnResult = 0;
 }
+
+#else
+
+void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMHDR* pHdr, LRESULT* pnResult)
+{
+	if ((reinterpret_cast<NMTTDISPINFO*>(pHdr)->uFlags & TTF_IDISHWND) != 0) {
+		CWnd* pWnd = CWnd::FromHandle(reinterpret_cast<HWND>(reinterpret_cast<NMTTDISPINFO*>(pHdr)->hdr.idFrom));
+		if (pWnd != NULL) {
+			UINT idsTip = pWnd->GetDlgCtrlID();
+			CString strTemp;
+			if (strTemp.LoadString(idsTip)) {
+				::lstrcpyn(m_szTipText, strTemp, 256);
+				reinterpret_cast<NMTTDISPINFO*>(pHdr)->lpszText = m_szTipText;
+			}
+		}
+	}
+	*pnResult = 0;
+}
+
+#endif	// _MFC_VER
 
 CToolTipCtrl& CBetterPropPage::GetToolTipCtrl(void)
 {

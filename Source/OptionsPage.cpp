@@ -16,6 +16,10 @@
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 
+#if (_MFC_VER >= 0x0700)
+#include "UpdateItApp.h"
+#endif	// _MFC_VER
+
 #if defined(__INTEL_COMPILER)
 // warning #68: integer conversion resulted in a change of sign
 #pragma warning(disable: 68)
@@ -46,7 +50,12 @@ COptionsPage::COptionsPage(void):
 CBetterPropPage(IDD_PAGE_OPTIONS)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
+#if (_MFC_VER < 0x0700)
 	CWinApp* pApp = AfxGetApp();
+#else
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+#endif	// _MFC_VER
 	m_strSource = pApp->GetProfileString(_T("Options"), _T("Source"));
 	m_nRecurse = pApp->GetProfileInt(_T("Options"), _T("Recurse"), BST_CHECKED);
 	m_strExclude = pApp->GetProfileString(_T("Options"), _T("Exclude"));
@@ -58,7 +67,11 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 	else {
 		m_nRecycle = BST_UNCHECKED;
 	}
+#if (_MFC_VER < 0x0700)
 	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(_T("Times"), m_strSource, -1);
+#else
+	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(_T("Times"), m_strSource, -1);
+#endif	// _MFC_VER
 	m_fCompare = pApp->GetProfileInt(_T("Options"), _T("Compare"), BST_UNCHECKED);
 }
 
@@ -189,8 +202,15 @@ void COptionsPage::OnButtonSource(void)
 	if (dlgFolder.DoModal() == IDOK) {
 		m_strSource = dlgFolder.GetFolderPath();
 		SetDlgItemText(IDC_EDIT_SOURCE, m_strSource);
+#if (_MFC_VER < 0x0700)
 		CWinApp* pApp = AfxGetApp();
-		if ((m_timeWrite = pApp->GetProfileInt(_T("Times"), m_strSource, -1)) != -1) {
+		if ((m_timeWrite = pApp->GetProfileInt(_T("Times"), m_strSource, -1)) != -1)
+#else
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
+		if ((m_timeWrite = pApp->GetProfileTime(_T("Times"), m_strSource, -1)) != -1)
+#endif	// _MFC_VER
+		{
 			m_dtpWrite.SetTime(&m_timeWrite);
 		}
 		CString strDefTarget = m_strSource + _T(".Update");
