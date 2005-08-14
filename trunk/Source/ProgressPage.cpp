@@ -16,6 +16,10 @@
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 
+#if (_MFC_VER >= 0x0700)
+#include "UpdateItApp.h"
+#endif	// _MFC_VER
+
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
 #pragma warning(disable: 171)
@@ -174,8 +178,14 @@ void CProgressPage::OnBecameActive(void)
 	m_textWorking.SetWindowText(strWorking);
 	// remember options
 	CTime timeNow = CTime::GetCurrentTime();
+#if (_MFC_VER < 0x0700)
 	CWinApp* pApp = AfxGetApp();
 	pApp->WriteProfileInt(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
+#else
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+	pApp->WriteProfileTime(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
+#endif	// _MFC_VER
 	pApp->WriteProfileString(_T("Targets"), pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
@@ -381,8 +391,13 @@ void CProgressPage::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CListC
 		// now copy the file
 		CopyFile(strSrcPath, strTargPath, fDeleteSrc);
 		// adjust modification and access time of the copied file
+#if (_MFC_VER < 0x0700)
 		struct _utimbuf utmb = { CTime::GetCurrentTime().GetTime(), pData->timeWrite.GetTime() };
 		_tutime(strTargPath, &utmb);
+#else
+		struct __utimbuf64 utmb = { CTime::GetCurrentTime().GetTime(), pData->timeWrite.GetTime() };
+		_tutime64(strTargPath, &utmb);
+#endif	// _MFC_VER
 	}
 }
 

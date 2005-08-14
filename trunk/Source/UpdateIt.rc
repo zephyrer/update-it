@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "Resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "Resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "#include ""../../Repository/Naughter/Source/Smtp.rc""\r\n"
@@ -77,7 +77,6 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -100,18 +99,16 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "none\0"
-            VALUE "CompanyName", "Spb Software House\0"
-            VALUE "FileDescription", "UpdateIt Application Executable\0"
-            VALUE "FileVersion", "1.0.2800\0"
-            VALUE "InternalName", "UpdateIt\0"
-            VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky\0"
-            VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
-            VALUE "OriginalFilename", "UpdateIt.exe\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "Power Gadgets\0"
-            VALUE "ProductVersion", "1.0.0\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "Comments", "none"
+            VALUE "CompanyName", "Spb Software House"
+            VALUE "FileDescription", "UpdateIt Application Executable"
+            VALUE "FileVersion", "1.0.2800"
+            VALUE "InternalName", "UpdateIt"
+            VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky"
+            VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
+            VALUE "OriginalFilename", "UpdateIt.exe"
+            VALUE "ProductName", "Power Gadgets"
+            VALUE "ProductVersion", "1.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -120,16 +117,14 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
 
-IDD_PAGE_OPTIONS DIALOG DISCARDABLE  0, 0, 334, 210
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_OPTIONS DIALOG  0, 0, 334, 210
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
 FONT 8, "Tahoma"
 BEGIN
@@ -161,7 +156,7 @@ BEGIN
 END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 210
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
 FONT 8, "Tahoma", 0, 0, 0x1
 BEGIN
@@ -172,8 +167,8 @@ BEGIN
     PUSHBUTTON      "&Remove from list",IDC_BUTTON_REMOVE,260,192,70,16
 END
 
-IDD_PAGE_ACTION DIALOG DISCARDABLE  0, 0, 334, 210
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_ACTION DIALOG  0, 0, 334, 210
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
 FONT 8, "Tahoma"
 BEGIN
@@ -219,8 +214,8 @@ BEGIN
                     ES_AUTOVSCROLL | WS_VSCROLL
 END
 
-IDD_PAGE_PROGRESS DIALOG DISCARDABLE  0, 0, 334, 210
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_PROGRESS DIALOG  0, 0, 334, 210
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
 FONT 8, "Tahoma"
 BEGIN
@@ -230,31 +225,31 @@ BEGIN
                     38
     LTEXT           "",IDC_STATIC_FILE,4,64,326,10,SS_CENTERIMAGE | NOT 
                     WS_VISIBLE
-    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",
-                    PBS_SMOOTH | NOT WS_VISIBLE,4,74,326,12
+    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",NOT 
+                    WS_VISIBLE | 0x1,4,74,326,12
     LTEXT           "Total progress:",IDC_STATIC_TOTAL,4,96,326,10,
                     SS_CENTERIMAGE | NOT WS_VISIBLE
-    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",
-                    PBS_SMOOTH | NOT WS_VISIBLE,4,106,326,12
+    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",NOT 
+                    WS_VISIBLE | 0x1,4,106,326,12
 END
 
-IDD_PAGE_ABOUT DIALOG DISCARDABLE  0, 0, 334, 210
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 210
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
-FONT 8, "Tahoma"
+FONT 8, "Tahoma", 0, 0, 0x0
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
     LTEXT           "Copyright © 2002-2005 by Elijah Zarezky",IDC_STATIC,4,
                     24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
     LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
-    LTEXT           "'zlib' general purpose compression library\nversion 1.2.2 (3 October 2004)",
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",
                     IDC_STATIC,16,62,314,16
-    LTEXT           "Copyright © 1995-2004 Jean-loup Gailly and Mark Adler",
+    LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 2.4.5 (21-June-2005)",
+    LTEXT           "ZipArchive library\nversion 2.4.7 (05 Aug 2005)",
                     IDC_STATIC,16,96,314,16
     LTEXT           "Copyright © 2000-2005 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
@@ -263,7 +258,7 @@ BEGIN
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
                     IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.53 (3 May 2005)",
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.54 (24 July 2005)",
                     IDC_STATIC,16,156,314,16
     LTEXT           "Copyright © 1998-2005 by PJ Naughter",IDC_STATIC,16,174,
                     132,10,SS_CENTERIMAGE
@@ -278,7 +273,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_PAGE_OPTIONS, DIALOG
     BEGIN
@@ -330,27 +325,27 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_APP_ICON            ICON    DISCARDABLE     "BinRes\\AppIcon.ico"
+IDI_APP_ICON            ICON                    "BinRes\\AppIcon.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // AVI
 //
 
-IDR_FILECOPY            AVI     DISCARDABLE     "BinRes\\FileCopy.avi"
-IDR_FILEMOVE            AVI     DISCARDABLE     "BinRes\\FileMove.avi"
-IDR_FILEDELETE          AVI     DISCARDABLE     "BinRes\\FileDelete.avi"
-IDR_FILETRASH           AVI     DISCARDABLE     "BinRes\\FileTrash.avi"
-IDR_ZIPPING             AVI     DISCARDABLE     "BinRes\\ZIPPING.AVI"
-IDR_FILEUPLOAD          AVI     DISCARDABLE     "BinRes\\Move2.avi"
-IDR_FILESEND            AVI     DISCARDABLE     "BinRes\\FileSend.avi"
+IDR_FILECOPY            AVI                     "BinRes\\FileCopy.avi"
+IDR_FILEMOVE            AVI                     "BinRes\\FileMove.avi"
+IDR_FILEDELETE          AVI                     "BinRes\\FileDelete.avi"
+IDR_FILETRASH           AVI                     "BinRes\\FileTrash.avi"
+IDR_ZIPPING             AVI                     "BinRes\\ZIPPING.AVI"
+IDR_FILEUPLOAD          AVI                     "BinRes\\Move2.avi"
+IDR_FILESEND            AVI                     "BinRes\\FileSend.avi"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_REGKEY              "Elijah Zarezky"
     IDS_NO_SOURCE           "No source folder specified!"
@@ -369,7 +364,7 @@ BEGIN
     IDS_NO_FILES            "No files found."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_DISCARDING_SEARCH   "Discarding search results..."
     IDS_DELETING_FILES      "Deleting file(s) from the target folder..."
@@ -389,7 +384,7 @@ BEGIN
     IDS_PREPARING_UPLOAD    "Preparing for upload..."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_CHARSET_FORMAT      """windows-%u"""
     IDS_SELECTED_FORMAT     "&Selected %i file(s):"
@@ -404,7 +399,7 @@ BEGIN
     IDS_TITLE_IMPORT        "Import Settings from File"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDC_EDIT_SOURCE         "Shows the location to start the search for the updated files. You can change this location by clicking the [...] button on right. The most recently used source folder will be restored at the next run."
     IDC_BUTTON_SOURCE       "Click here to browse for the source folder."
@@ -414,7 +409,7 @@ BEGIN
     IDC_CHECK_CLEANUP       "If checked then the target folder will be completely erased before updated files will be copied/moved into."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDC_EDIT_MAILTO         "Specifies the mailing address of the desired message recipient."
     IDC_EDIT_HOST           "Specifies the name of the SMTP server through the wich your message should be sent. You can get this information from your Internet Service Provider or LAN administrator."
@@ -428,7 +423,7 @@ BEGIN
     IDC_EDIT_LOGIN          "Specifies the account name assigned to you by the FTP server administrator."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDC_LIST_FILES          "Shows the updated file(s) that was found in the source folder. If you don't want to process some of them just select all unneeded files and remove it from this list by clicking [Remove from list] button below."
     IDC_BUTTON_REMOVE       "Click here to remove selected file(s) from the list and thus exclude it from the future processing."
@@ -440,14 +435,14 @@ BEGIN
     IDC_EDIT_FROM           "Specifies the mailing address of the message sender."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDC_EDIT_PASSWORD       "Provides the space to type the password assigned to you by the FTP server administrator. For security reasons, the actual characters don't appear in this space; instead each character is represented by an asterisk."
     IDC_EDIT_ROOT           "Specifies the initial subfolder to connect on the FTP server. If this field is left blank, the root folder will be used."
     IDC_EDIT_EXCLUDE        "Specifies a mask or several masks (delimited with commas) of files to exclude from search."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "UpdateIt!"
 END

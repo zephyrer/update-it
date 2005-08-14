@@ -43,7 +43,11 @@ public:
 	CStatic m_textInfo;
 	CFilesList m_listFiles;
 	CButton m_buttonRemove;
+#if (_MFC_VER < 0x0700)
 	DWORD m_cbFiles;
+#else
+	ULONGLONG m_cbFiles;
+#endif	// _MFC_VER
 	CStringList m_listExclude;
 	CImageList m_imageList;
 	CMap<CString, LPCTSTR, int, int> m_mapIcons;

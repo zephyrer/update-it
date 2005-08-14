@@ -35,7 +35,11 @@ protected:
 
 // message map functions
 protected:
+#if (_MFC_VER < 0x0700)
 	afx_msg void OnGetTipText(UINT uID, NMTTDISPINFO* pInfo, LRESULT* pnResult);
+#else
+	afx_msg void OnGetTipText(UINT uID, NMHDR* pHdr, LRESULT* pnResult);
+#endif	// _MFC_VER
 
 // accessibility
 public:
