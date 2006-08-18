@@ -616,6 +616,13 @@
 				RelativePath="Source\BinRes\ZIPPING.AVI">
 			</File>
 		</Filter>
+		<Filter
+			Name="Setup Files"
+			Filter="iss">
+			<File
+				RelativePath="Source\Setup.iss">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
