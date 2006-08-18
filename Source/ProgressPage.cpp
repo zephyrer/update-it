@@ -518,7 +518,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpTextPart.SetCharset(strCharSet);
 		smtpMsg.AddBodyPart(smtpTextPart);
 		smtpMsg.AddBodyPart(smtpZipPart);
-		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nPort);
+		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nSmtpPort);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}
@@ -670,7 +670,8 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 		strWorking.LoadString(IDS_CONNECTING_FTP);
 		m_textWorking.SetWindowText(strWorking);
 		CFtpConnection* pFtpConn = ftpSession.GetFtpConnection(pActionPage->m_strServer,
-			pActionPage->m_strLogin, pActionPage->m_strPassword, pActionPage->m_nFtpPort);
+			pActionPage->m_strLogin, pActionPage->m_strPassword, pActionPage->m_nFtpPort,
+			pActionPage->m_fPassive);
 		ASSERT(pFtpConn != NULL);
 		pFtpConn->SetCurrentDirectory(_T("/"));
 		strWorking.LoadString(IDS_UPLOADING_FILES);

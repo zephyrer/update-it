@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by UpdateIt.rc
 //
 #define IDS_REGKEY                      1
@@ -102,15 +102,16 @@
 #define IDC_GROUP_MAIL                  1042
 #define IDC_EDIT_EXCLUDE                1043
 #define IDC_CHECK_COMPARE               1044
+#define IDC_CHECK_PASSIVE               1045
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        114
+#define _APS_NEXT_RESOURCE_VALUE        113
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1045
-#define _APS_NEXT_SYMED_VALUE           107
+#define _APS_NEXT_CONTROL_VALUE         1046
+#define _APS_NEXT_SYMED_VALUE           113
 #endif
 #endif
