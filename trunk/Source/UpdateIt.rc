@@ -83,7 +83,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,2800,44
+ FILEVERSION 1,0,3346,53
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -102,9 +102,9 @@ BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Spb Software House"
             VALUE "FileDescription", "UpdateIt Application Executable"
-            VALUE "FileVersion", "1.0.2800"
+            VALUE "FileVersion", "1.0.3346"
             VALUE "InternalName", "UpdateIt"
-            VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky"
+            VALUE "LegalCopyright", "Copyright © 2002–2006 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
             VALUE "OriginalFilename", "UpdateIt.exe"
             VALUE "ProductName", "Power Gadgets"
@@ -241,7 +241,7 @@ CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 0, 0, 0x0
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
-    LTEXT           "Copyright © 2002-2005 by Elijah Zarezky",IDC_STATIC,4,
+    LTEXT           "Copyright © 2002-2006 by Elijah Zarezky",IDC_STATIC,4,
                     24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
     LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
