@@ -7,14 +7,16 @@ echo.
 echo.
 echo Compiling documentation...
 echo.
-cd .\HTML
+chdir .\HTML
 if exist UpdateIt.chm del UpdateIt.chm
 hhc.exe UpdateIt.hhp
+chdir ..\
 echo.
 echo.
 echo Creating installer...
 echo.
-cd ..\Source
+if not exist .\Setup mkdir .\Setup
+chdir .\Source
 if exist ..\Setup\*.exe del ..\Setup\*.exe
 iscc.exe Setup.iss
-cd ..
+chdir ..

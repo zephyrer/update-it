@@ -99,6 +99,10 @@ struct FILE_DATA {
 #endif	// _MFC_VER
 };
 
+#if defined(ZIPSTRING_DOT_H) && defined(for)
+#undef for
+#endif	// ZIPSTRING_DOT_H && for
+
 // force ISO/IEC 14882 conformance in for loop scope
 #if (_MSC_VER < 1300)
 #define for if (false); else for
