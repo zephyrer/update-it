@@ -47,11 +47,12 @@ public:
 	CString m_strLogin;
 	CString m_strPassword;
 	CString m_strRoot;
+	BOOL m_fPassive;
 	CString m_strFrom;
 	CString m_strTo;
 	CString m_strSubject;
 	CString m_strHost;
-	int m_nPort;
+	int m_nSmtpPort;
 	CString m_strBody;
 
 // implementation helpers
