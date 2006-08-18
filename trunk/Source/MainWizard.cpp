@@ -50,7 +50,8 @@ CCustomPropSheet(AFX_IDS_APP_TITLE)
 	m_hIcon = pApp->LoadIcon(IDI_APP_ICON);
 	m_hSmIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_APP_ICON));
 
-	static HYPERLINKCOLORS linkColors = {
+	static HYPERLINKCOLORS linkColors =
+	{
 		RGB(0, 0, 255),	// default
 		RGB(0, 0, 255),	// active
 		RGB(0, 0, 255),	// visited
@@ -91,12 +92,14 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	// try to obtain localized text for the "Minimize" system command
 	HMODULE hUser32 = ::GetModuleHandle(_T("user32"));
-	if (menuTemp.Attach(::LoadMenu(hUser32, MAKEINTRESOURCE(16)))) {
+	if (menuTemp.Attach(::LoadMenu(hUser32, MAKEINTRESOURCE(16))))
+	{
 		menuTemp.GetMenuString(SC_RESTORE, strRestore, MF_BYCOMMAND);
 		menuTemp.GetMenuString(SC_MINIMIZE, strMinimize, MF_BYCOMMAND);
 		::DestroyMenu(menuTemp.Detach());
 	}
-	if (strMinimize.IsEmpty()) {
+	if (strMinimize.IsEmpty())
+	{
 		// probably fuckin' Win9x
 		strRestore.LoadString(IDS_SC_RESTORE);
 		strMinimize.LoadString(IDS_SC_MINIMIZE);
@@ -116,7 +119,8 @@ BOOL CMainWizard::OnInitDialog(void)
 	ModifyStyle(0, WS_MINIMIZEBOX);
 	OSVERSIONINFO osVerInfo = { sizeof(osVerInfo) };
 	GetVersionEx(&osVerInfo);
-	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5) {
+	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5)
+	{
 		// Windows 2000/XP
 		strNewItem.LoadString(IDS_SC_EXPORT_SETTINGS);
 		pSysMenu->InsertMenu(0, MF_BYPOSITION, IDM_SC_EXPORT_SETTINGS, strNewItem);
@@ -133,7 +137,8 @@ BOOL CMainWizard::OnInitDialog(void)
 	crTipBk = pApp->GetProfileInt(_T("Tips"), _T("BkColor"), ::GetSysColor(COLOR_INFOBK));
 	crTipText = pApp->GetProfileInt(_T("Tips"), _T("TextColor"), ::GetSysColor(COLOR_INFOTEXT));
 	int cPages = m_pages.GetSize();
-	for (int i = 0; i < cPages; ++i) {
+	for (int i = 0; i < cPages; ++i)
+	{
 		CBetterPropPage* pPage = reinterpret_cast<CBetterPropPage*>(m_pages[i]);
 		CToolTipCtrl& tipWnd = pPage->GetToolTipCtrl();
 		tipWnd.SetDelayTime(TTDT_INITIAL, nInitialDelay);
@@ -150,7 +155,8 @@ BOOL CMainWizard::OnInitDialog(void)
 void CMainWizard::OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu)
 {
 	CCustomPropSheet::OnInitMenuPopup(pPopupMenu, uIndex, fSysMenu);
-	if (fSysMenu) {
+	if (fSysMenu)
+	{
 		ASSERT_VALID(pPopupMenu);
 		UINT fuEnable = MF_BYCOMMAND | (GetActiveIndex() > 0 ? MF_GRAYED : MF_ENABLED);
 		pPopupMenu->EnableMenuItem(IDM_SC_IMPORT_SETTINGS, fuEnable); 
@@ -188,7 +194,8 @@ void CMainWizard::OnScExportSettings(void)
 #endif	// _MFC_VER
 	strTitle.LoadString(IDS_TITLE_EXPORT);
 	dlgSaveAs.m_ofn.lpstrTitle = strTitle;
-	if (dlgSaveAs.DoModal() == IDOK) {
+	if (dlgSaveAs.DoModal() == IDOK)
+	{
 		BeginWaitCursor();
 		CWinApp* pApp = AfxGetApp();
 		ASSERT_VALID(pApp);
@@ -216,7 +223,8 @@ void CMainWizard::OnScImportSettings(void)
 #endif	// _MFC_VER
 	strTitle.LoadString(IDS_TITLE_IMPORT);
 	dlgOpen.m_ofn.lpstrTitle = strTitle;
-	if (dlgOpen.DoModal() == IDOK) {
+	if (dlgOpen.DoModal() == IDOK)
+	{
 		BeginWaitCursor();
 		CWinApp* pApp = AfxGetApp();
 		ASSERT_VALID(pApp);
@@ -240,6 +248,7 @@ void CMainWizard::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CCustomPropSheet::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_pageAbout);
 	ASSERT_VALID(&m_pageOptions);
@@ -254,9 +263,11 @@ void CMainWizard::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CMainWizard::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CCustomPropSheet::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_hIcon = " << m_hIcon;
 		dumpCtx << "\nm_hSmIcon = " << m_hSmIcon;
@@ -266,7 +277,8 @@ void CMainWizard::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_pageAction = " << m_pageAction;
 		dumpCtx << "\nm_pageProgress = " << m_pageProgress;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

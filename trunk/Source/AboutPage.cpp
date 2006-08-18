@@ -96,7 +96,8 @@ BOOL CAboutPage::OnInitDialog(void)
 BOOL CAboutPage::OnSetActive(void)
 {
 	BOOL fSuccess = CBetterPropPage::OnSetActive();
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
 		pWiz->SetWizardButtons(PSWIZB_NEXT);
@@ -130,6 +131,7 @@ void CAboutPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CBetterPropPage::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_linkZarezky);
 	ASSERT_VALID(&m_linkZLib);
@@ -144,9 +146,11 @@ void CAboutPage::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CAboutPage::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_linkZarezky = " << m_linkZarezky;
 		dumpCtx << "\nm_linkZLib = " << m_linkZLib;
@@ -154,7 +158,8 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_linkRSA = " << m_linkRSA;
 		dumpCtx << "\nm_linkNaughter = " << m_linkNaughter;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

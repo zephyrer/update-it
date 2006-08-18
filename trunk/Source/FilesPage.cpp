@@ -102,8 +102,10 @@ BOOL CFilesPage::OnInitDialog(void)
 BOOL CFilesPage::OnSetActive(void)
 {
 	BOOL fSuccess = CBetterPropPage::OnSetActive();
-	if (fSuccess) {
-		if (m_listFiles.GetItemCount() == 0) {
+	if (fSuccess)
+	{
+		if (m_listFiles.GetItemCount() == 0)
+		{
 			m_listFiles.ShowWindow(SW_HIDE);
 			m_buttonRemove.ShowWindow(SW_HIDE);
 		}
@@ -122,13 +124,15 @@ void CFilesPage::OnBecameActive(void)
 	CString strInfo;
 
 	CBetterPropPage::OnBecameActive();
-	if (m_listFiles.GetItemCount() == 0) {
+	if (m_listFiles.GetItemCount() == 0)
+	{
 		// prepare controls
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
 		pWiz->SendMessage(DM_SETDEFID, IDCANCEL, 0);
 		pWiz->GetDlgItem(ID_WIZNEXT)->EnableWindow(FALSE);
 		pWiz->GetDlgItem(IDCANCEL)->SetFocus();
+
 		// search for files
 		m_listExclude.RemoveAll();
 		COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
@@ -136,7 +140,8 @@ void CFilesPage::OnBecameActive(void)
 		BOOL fMemTrack = AfxEnableMemoryTracking(FALSE);
 		LPTSTR pszExcludes = _tcsdup(pOptionsPage->m_strExclude);
 		LPTSTR pszSpec = _tcstok(pszExcludes, _T(","));
-		while (pszSpec != NULL) {
+		while (pszSpec != NULL)
+		{
 			m_listExclude.AddTail(pszSpec);
 			pszSpec = _tcstok(NULL, _T(","));
 		}
@@ -146,12 +151,15 @@ void CFilesPage::OnBecameActive(void)
 		m_mapIcons.RemoveAll();
 		BOOL fRecurse = pOptionsPage->m_nRecurse == BST_CHECKED;
 		SearchForFiles(pOptionsPage->m_strSource, fRecurse, pOptionsPage->m_timeWrite, -1);
+
 		// setup and restore controls
 		int cItems = m_listFiles.GetItemCount();
-		if (cItems > 0) {
+		if (cItems > 0)
+		{
 			pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 			strInfo.Format(IDS_FOUND_FORMAT, cItems);
-			for (int iCol = I_NAME; iCol < NUM_COLUMNS; ++iCol) {
+			for (int iCol = I_NAME; iCol < NUM_COLUMNS; ++iCol)
+			{
 				m_listFiles.SetColumnWidth(iCol, LVSCW_AUTOSIZE);
 			}
 			m_listFiles.SortItems(I_DATE, SORT_ASCENDING);
@@ -213,17 +221,21 @@ void CFilesPage::OnButtonRemove(void)
 	// search for the item that will be focused after
 	int cItems = m_listFiles.GetItemCount();
 #pragma warning(disable: 4018)
-	if (m_listFiles.GetSelectedCount() < cItems) {
+	if (m_listFiles.GetSelectedCount() < cItems)
 #pragma warning(default: 4018)
+	{
 		iFocus = m_listFiles.GetNextItem(-1, LVNI_FOCUSED);
 		// search forward
-		while (iFocus < cItems && (m_listFiles.GetItemState(iFocus, (UINT)-1) & LVIS_SELECTED) != 0) {
+		while (iFocus < cItems && (m_listFiles.GetItemState(iFocus, (UINT)-1) & LVIS_SELECTED) != 0)
+		{
 			++iFocus;
 		}
-		if (iFocus == cItems) {
+		if (iFocus == cItems)
+		{
 			iFocus = m_listFiles.GetNextItem(-1, LVNI_FOCUSED);
 			// search backward
-			while (iFocus > 0 && (m_listFiles.GetItemState(iFocus, (UINT)-1) & LVIS_SELECTED) != 0) {
+			while (iFocus > 0 && (m_listFiles.GetItemState(iFocus, (UINT)-1) & LVIS_SELECTED) != 0)
+			{
 				--iFocus;
 			}
 		}
@@ -235,7 +247,8 @@ void CFilesPage::OnButtonRemove(void)
 	}
 
 	// remove all selected items
-	while ((iItem = m_listFiles.GetNextItem(-1, LVNI_SELECTED)) != -1) {
+	while ((iItem = m_listFiles.GetNextItem(-1, LVNI_SELECTED)) != -1)
+	{
 		FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(m_listFiles.GetItemData(iItem));
 		ASSERT(pData != NULL);
 		m_cbFiles -= pData->cbLength;
@@ -245,7 +258,8 @@ void CFilesPage::OnButtonRemove(void)
 	}
 
 	// adjust controls
-	if (cItems > 0) {
+	if (cItems > 0)
+	{
 		// there is still some items
 		ASSERT(dwFocusData != NULL);
 		memset(&lvfi, 0, sizeof(lvfi));
@@ -276,7 +290,8 @@ BOOL CFilesPage::IsFileMatchesExcludeList(LPCTSTR pszFilePath)
 
 	ASSERT(AfxIsValidString(pszFilePath));
 
-	for (fMatch = FALSE, pos = m_listExclude.GetHeadPosition(); !fMatch && pos != NULL;) {
+	for (fMatch = FALSE, pos = m_listExclude.GetHeadPosition(); !fMatch && pos != NULL;)
+	{
 		fMatch = ::PathMatchSpec(pszFilePath, m_listExclude.GetNext(pos));
 	}
 	return (fMatch);
@@ -300,34 +315,45 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 	strFolder.Format(IDS_FOLDER_FORMAT, pszFolder);
 	m_textInfo.SetWindowText(strFolder);
 	CString strWildcard(pszFolder);
-	if (strWildcard[strWildcard.GetLength() - 1] != _T('\\')) {
+	if (strWildcard[strWildcard.GetLength() - 1] != _T('\\'))
+	{
 		strWildcard += _T('\\');
 	}
-	if (iRelative < 0) {
+	if (iRelative < 0)
+	{
 		iRelative = strWildcard.GetLength();
 	}
 	strWildcard += _T("*.*");
+
 	BOOL fStop = !finder.FindFile(strWildcard);
-	while (!fStop) {
+	while (!fStop)
+	{
 		fStop = !finder.FindNextFile();
-		if (!finder.IsDots()) {		// skip "." and ".."
-			if (finder.IsDirectory()) {
+		if (!finder.IsDots())	// skip "." and ".."
+		{
+			if (finder.IsDirectory())
+			{
 				// search recursively (if needed)
-				if (fRecurse) {
+				if (fRecurse)
+				{
 					SearchForFiles(finder.GetFilePath(), fRecurse, timeMin, iRelative);
 				}
 			}
-			else if (!IsFileMatchesExcludeList(finder.GetFilePath())) {
+			else if (!IsFileMatchesExcludeList(finder.GetFilePath()))
+			{
 				// obtain and compare last write time
 				finder.GetLastWriteTime(timeWrite);
-				if (timeWrite >= timeMin && !CompareContents(finder.GetFilePath().Mid(iRelative))) {
+				if (timeWrite >= timeMin && !CompareContents(finder.GetFilePath().Mid(iRelative)))
+				{
 					// obtain system icon for that file
 					CString strExt(::PathFindExtension(finder.GetFilePath()));
-					if (!m_mapIcons.Lookup(strExt, lvi.iImage)) {
+					if (!m_mapIcons.Lookup(strExt, lvi.iImage))
+					{
 						memset(&shfi, 0, sizeof(shfi));
 						enum { fuFlags = SHGFI_USEFILEATTRIBUTES | SHGFI_ICON | SHGFI_SMALLICON };
 						::SHGetFileInfo(strExt, FILE_ATTRIBUTE_NORMAL, &shfi, sizeof(shfi), fuFlags);
-						if (shfi.hIcon != NULL) {
+						if (shfi.hIcon != NULL)
+						{
 							lvi.iImage = m_imageList.Add(shfi.hIcon);
 							::DestroyIcon(shfi.hIcon);
 							m_mapIcons.SetAt(strExt, lvi.iImage);
@@ -336,32 +362,41 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 							lvi.iImage = m_iDefIcon;
 						}
 					}
+					
 					FILE_DATA* pData = new FILE_DATA;
+					
 					// name
 					CString strNameExt = finder.GetFileName();
 					int iLastDot = strNameExt.ReverseFind(_T('.'));
 					::lstrcpy(pData->szName, strNameExt.Left(iLastDot));
+					
 					// extension
 					::lstrcpy(pData->szExt, strNameExt.Mid(iLastDot + 1));
+					
 					// relative path
 					CString strPath = finder.GetFilePath();
 					int iLastSlash = strPath.ReverseFind(_T('\\'));
 					::lstrcpy(pData->szFolder, strPath.Mid(iRelative, iLastSlash - iRelative));
+					
 					// date/time
 					pData->timeWrite = timeWrite;
+					
 					// size
 					pData->cbLength = finder.GetLength();
 					m_cbFiles += pData->cbLength;
+					
 					// insert an item
 					lvi.lParam = reinterpret_cast<LPARAM>(pData);
 					VERIFY(m_listFiles.InsertItem(&lvi) == lvi.iItem);
-					for (int i = I_EXTENSION; i < NUM_COLUMNS; ++i) {
+					for (int i = I_EXTENSION; i < NUM_COLUMNS; ++i)
+					{
 						m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
 					}
 					++lvi.iItem;
 				}
 			}
 		}
+		
 		// pump waiting messages (if any)
 		PumpWaitingMessages();
 	}
@@ -371,7 +406,8 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 void CFilesPage::CleanupFileList(void)
 {
 	int cItems = m_listFiles.GetItemCount();
-	for (int i = 0; i < cItems; ++i) {
+	for (int i = 0; i < cItems; ++i)
+	{
 		FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(m_listFiles.GetItemData(i));
 		ASSERT(pData != NULL);
 		delete pData;
@@ -391,29 +427,35 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 	ASSERT(AfxIsValidString(pszRelativeName));
 
 	static COptionsPage* pOptionsPage = NULL;
-	if (pOptionsPage == NULL) {
+	if (pOptionsPage == NULL)
+	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT_VALID(pWiz);
 		pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
 		ASSERT_VALID(pOptionsPage);
 	}
 
-	if (pOptionsPage->m_fCompare) {
+	if (pOptionsPage->m_fCompare)
+	{
 		CString strPrevFile(pOptionsPage->m_strTarget);
 		strPrevFile += _T('\\');
 		strPrevFile += pszRelativeName;
-		if (::PathFileExists(strPrevFile)) {
+		if (::PathFileExists(strPrevFile))
+		{
 			CString strNewFile(pOptionsPage->m_strSource);
 			strNewFile += _T('\\');
 			strNewFile += pszRelativeName;
-			try {
+			try
+			{
 				void* pvPrevData = mmfPrev.Create(strPrevFile, FALSE);
 				void* pvNewData = mmfNew.Create(strNewFile, FALSE);
-				if (pvPrevData == NULL || pvNewData == NULL) {
+				if (pvPrevData == NULL || pvNewData == NULL)
+				{
 					// one or both files has zero length
 					fResult = FALSE;
 				}
-				else if (mmfPrev.GetLength() != mmfNew.GetLength()) {
+				else if (mmfPrev.GetLength() != mmfNew.GetLength())
+				{
 					// don't need to really compare contents
 					fResult = FALSE;
 				}
@@ -423,7 +465,8 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 				mmfNew.Close();
 				mmfPrev.Close();
 			}
-			catch (CWin32Error* pXcpt) {
+			catch (CWin32Error* pXcpt)
+			{
 				// unable to compare
 				delete pXcpt;
 				fResult = FALSE;
@@ -452,6 +495,7 @@ void CFilesPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CBetterPropPage::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_textInfo);
 	ASSERT_VALID(&m_listFiles);
@@ -465,9 +509,11 @@ void CFilesPage::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CFilesPage::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_fShowGrid = " << m_fShowGrid;
 		dumpCtx << "\nm_textInfo = " << m_textInfo;
@@ -479,7 +525,8 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_mapIcons = " << m_mapIcons;
 		dumpCtx << "\nm_iDefIcon = " << m_iDefIcon;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

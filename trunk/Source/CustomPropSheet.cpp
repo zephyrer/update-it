@@ -49,7 +49,8 @@ CPropertySheet(pszCaption, pParentWnd, iSelectPage)
 
 CCustomPropSheet::~CCustomPropSheet(void)
 {
-	if (m_fontPage.m_hObject != NULL) {
+	if (m_fontPage.m_hObject != NULL)
+	{
 		VERIFY(m_fontPage.DeleteObject());
 	}
 }
@@ -66,7 +67,8 @@ BOOL CCustomPropSheet::OnInitDialog(void)
 	ChangeDialogFont(this, &m_fontPage, CDF_CENTER);
 
 	// change the font for each page
-	for (int i = 0, cPages = GetPageCount(); i < cPages; ++i) {
+	for (int i = 0, cPages = GetPageCount(); i < cPages; ++i)
+	{
 		CPropertyPage* pPage = GetPage(i);
 		ASSERT(pPage != NULL);
 #if !defined(_BUGFIX_)
@@ -80,7 +82,8 @@ BOOL CCustomPropSheet::OnInitDialog(void)
 	CTabCtrl* pTab = GetTabControl();
 	ASSERT(pTab != NULL);
 
-	if ((m_psh.dwFlags & PSH_WIZARD) != 0) {
+	if ((m_psh.dwFlags & PSH_WIZARD) != 0)
+	{
 		pTab->ShowWindow(SW_HIDE);
 #if !defined(_BUGFIX_)
 		GetClientRect(&m_rcPage);
@@ -114,7 +117,8 @@ BOOL CCustomPropSheet::OnInitDialog(void)
 BOOL CCustomPropSheet::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pnResult)
 {
 	// the sheet resizes the page whenever it is activated
-	if (reinterpret_cast<NMHDR*>(lParam)->code == TCN_SELCHANGE) {
+	if (reinterpret_cast<NMHDR*>(lParam)->code == TCN_SELCHANGE)
+	{
 		PostMessage(PSM_RESIZE_PAGE);
 	}
 	return (CPropertySheet::OnNotify(wParam, lParam, pnResult));
@@ -123,7 +127,8 @@ BOOL CCustomPropSheet::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pnResult)
 BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
 {
 	// the sheet resizes the page whenever the Apply button is clicked
-	if (wParam == ID_APPLY_NOW || wParam == ID_WIZBACK || wParam == ID_WIZNEXT) {
+	if (wParam == ID_APPLY_NOW || wParam == ID_WIZBACK || wParam == ID_WIZNEXT)
+	{
 		PostMessage(PSM_RESIZE_PAGE);
 	}
 	return (CPropertySheet::OnCommand(wParam, lParam));
@@ -155,7 +160,8 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 	long nOldHeight = tmOld.tmHeight + tmOld.tmExternalLeading;
 	long nNewHeight = tmNew.tmHeight + tmNew.tmExternalLeading;
 
-	if (nFlag != CDF_NONE) {
+	if (nFlag != CDF_NONE)
+	{
 		// calculate new dialog window rectangle
 		CRect rectClient, rectNewClient, rectNewWindow;
 
@@ -188,7 +194,8 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 #if !defined(_BUGFIX_)
 		pWnd->MoveWindow(rectNewWindow);
 #else
-		if (pWnd->IsKindOf(RUNTIME_CLASS(CPropertyPage))) {
+		if (pWnd->IsKindOf(RUNTIME_CLASS(CPropertyPage)))
+		{
 			CRect rectParent;
 			CPropertySheet* pSheet = DYNAMIC_DOWNCAST(CPropertySheet, pWnd->GetParent());
 			ASSERT(pSheet != NULL);
@@ -200,7 +207,8 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 			rectNewWindow.bottom = min(rectNewWindow.bottom, rectParent.bottom - rectNewWindow.top);
 			pWnd->MoveWindow(rectNewWindow);
 			static BOOL fFirst = TRUE;
-			if (fFirst) {
+			if (fFirst)
+			{
 				::CopyRect(&m_rcPage, rectNewWindow);
 				fFirst = FALSE;
 			}
@@ -215,13 +223,15 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 
 	// iterate through and move all child windows and change their font
 	CWnd* pChildWnd = pWnd->GetWindow(GW_CHILD);
-	while (pChildWnd != NULL) {
+	while (pChildWnd != NULL)
+	{
 		pChildWnd->SetFont(pFont);
 		pChildWnd->GetWindowRect(rectWindow);
 
 		::GetClassName(*pChildWnd, strClassName.GetBufferSetLength(32), 31);
 		strClassName.MakeUpper();
-		if (strClassName == _T("COMBOBOX")) {
+		if (strClassName == _T("COMBOBOX"))
+		{
 			CRect rectDropped;
 			pChildWnd->SendMessage(CB_GETDROPPEDCONTROLRECT, 0, (LPARAM)&rectDropped);
 			rectWindow.right = rectDropped.right;
@@ -257,10 +267,12 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	CWinApp* pApp = AfxGetApp();
 	CString strFaceName = pApp->GetProfileString(_T("Font"), _T("FaceName"));
 	WORD wFontSize = LOWORD(pApp->GetProfileInt(_T("Font"), _T("Size"), 0));
-	if (strFaceName.IsEmpty() || wFontSize == 0) {
+	if (strFaceName.IsEmpty() || wFontSize == 0)
+	{
 		VERIFY(dlgTemp.GetFont(strFaceName, wFontSize));
 	}
-	if (m_fontPage.m_hObject != NULL) {
+	if (m_fontPage.m_hObject != NULL)
+	{
 		VERIFY(m_fontPage.DeleteObject());
 	}
 
@@ -291,6 +303,7 @@ void CCustomPropSheet::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CPropertySheet::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_fontPage);
 }
@@ -301,14 +314,17 @@ void CCustomPropSheet::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CCustomPropSheet::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CPropertySheet::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_rcPage = " << m_rcPage;
 		dumpCtx << "\nm_fontPage = " << m_fontPage;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

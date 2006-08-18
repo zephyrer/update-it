@@ -67,9 +67,11 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 	ASSERT(AfxIsValidString(pszSection));
 	ASSERT(AfxIsValidString(pszEntry));
 
-	try {
+	try
+	{
 		BeginWaitCursor();
-		if (GetProfileBinary(pszSection, pszEntry, &pbTemp, &cbPassword)) {
+		if (GetProfileBinary(pszSection, pszEntry, &pbTemp, &cbPassword))
+		{
 			// password was previously saved
 			arrEncrPwd.SetSize(cbPassword);
 			memcpy(arrEncrPwd.GetData(), pbTemp, cbPassword);
@@ -84,7 +86,8 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 		}
 		EndWaitCursor();
 	}
-	catch (CWin32Error* pXcpt) {
+	catch (CWin32Error* pXcpt)
+	{
 		EndWaitCursor();
 		pXcpt->ReportError(MB_ICONSTOP | MB_OK);
 		pXcpt->Delete();
@@ -103,7 +106,8 @@ BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LP
 	ASSERT(AfxIsValidString(pszEntry));
 	ASSERT(AfxIsValidString(pszValue));
 
-	try {
+	try
+	{
 		BeginWaitCursor();
 		CWinCrypto winCrypto(AfxGetAppName());
 		BSTR bstrTemp = ::SysAllocString(_T2W(pszValue));
@@ -113,7 +117,8 @@ BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LP
 		EndWaitCursor();
 		fSuccess = TRUE;
 	}
-	catch (CWin32Error* pXcpt) {
+	catch (CWin32Error* pXcpt)
+	{
 		EndWaitCursor();
 		pXcpt->ReportError(MB_ICONSTOP | MB_OK);
 		pXcpt->Delete();
@@ -174,6 +179,7 @@ void CUpdateItApp::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CWinApp::AssertValid();
+
 	// ...and then verify own state as well
 }
 
@@ -183,12 +189,15 @@ void CUpdateItApp::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CWinApp::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}
