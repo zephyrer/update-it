@@ -51,7 +51,8 @@ m_nFtpPort(21), m_nPort(25)
 	ASSERT_VALID(pApp);
 	m_nAction = pApp->GetProfileInt(_T("Action"), _T("Action"), 0);
 	m_nUpload = pApp->GetProfileInt(_T("Action"), _T("Upload"), BST_UNCHECKED);
-	if (m_nUpload == BST_CHECKED) {
+	if (m_nUpload == BST_CHECKED)
+	{
 		m_strServer = pApp->GetProfileString(_T("FTP"), _T("Server"));
 		m_nFtpPort = LOWORD(pApp->GetProfileInt(_T("FTP"), _T("Port"), 21));
 		m_strLogin = pApp->GetProfileString(_T("FTP"), _T("Login"));
@@ -60,8 +61,10 @@ m_nFtpPort(21), m_nPort(25)
 	}
 	m_nZip = pApp->GetProfileInt(_T("Action"), _T("Zip"), BST_UNCHECKED);
 	m_fCanSend = pApp->GetProfileInt(_T("SMTP"), _T("Enable"), FALSE);
-	if (m_fCanSend) {
-		if (m_nZip == BST_CHECKED) {
+	if (m_fCanSend)
+	{
+		if (m_nZip == BST_CHECKED)
+		{
 			m_nSend = pApp->GetProfileInt(_T("Action"), _T("Send"), BST_UNCHECKED);
 		}
 		else {
@@ -73,7 +76,8 @@ m_nFtpPort(21), m_nPort(25)
 		m_strHost = pApp->GetProfileString(_T("SMTP"), _T("host"));
 		m_nPort = pApp->GetProfileInt(_T("SMTP"), _T("port"), 25);
 		pApp->GetProfileBinary(_T("SMTP"), _T("body"), &pbTemp, &cbBody);
-		if (pbTemp != NULL && cbBody > 0) {
+		if (pbTemp != NULL && cbBody > 0)
+		{
 			memmove(m_strBody.GetBuffer(cbBody - 1), pbTemp, cbBody);
 			m_strBody.ReleaseBuffer();
 			delete[] pbTemp;
@@ -116,9 +120,11 @@ BOOL CActionPage::OnInitDialog(void)
 BOOL CActionPage::OnSetActive(void)
 {
 	BOOL fSuccess = CBetterPropPage::OnSetActive();
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		EnableFtpControls(m_nUpload == BST_CHECKED);
-		if (m_fCanSend) {
+		if (m_fCanSend)
+		{
 			GetDlgItem(IDC_CHECK_SEND)->EnableWindow(m_nZip == BST_CHECKED);
 			EnableMailControls(IsDlgButtonChecked(IDC_CHECK_SEND) == BST_CHECKED);
 		}
@@ -132,22 +138,27 @@ BOOL CActionPage::OnSetActive(void)
 BOOL CActionPage::OnKillActive(void)
 {
 	// validate mail settings (if needed)
-	if (m_fCanSend && m_nSend == BST_CHECKED) {
+	if (m_fCanSend && m_nSend == BST_CHECKED)
+	{
 	}
 
 	// adjust and validate FTP settings (if needed)
-	if (m_nUpload == BST_CHECKED) {
-		if (m_strRoot.IsEmpty()) {
+	if (m_nUpload == BST_CHECKED)
+	{
+		if (m_strRoot.IsEmpty())
+		{
 			// assume root directory
 			m_strRoot += _T('/');
 		}
 		else {
 			m_strRoot.Replace(_T('\\'), _T('/'));
-			if (m_strRoot[0] != _T('/')) {
+			if (m_strRoot[0] != _T('/'))
+			{
 				m_strRoot.Insert(0, _T('/'));
 			}
 			int cchRoot = m_strRoot.GetLength();
-			if (cchRoot > 1 && m_strRoot[cchRoot - 1] != _T('/')) {
+			if (cchRoot > 1 && m_strRoot[cchRoot - 1] != _T('/'))
+			{
 				m_strRoot += _T('/');
 			}
 		}
@@ -156,12 +167,14 @@ BOOL CActionPage::OnKillActive(void)
 	// invoke inherited handler
 	BOOL fSuccess = CBetterPropPage::OnKillActive();
 
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
 		pApp->WriteProfileInt(_T("Action"), _T("Action"), m_nAction);
 		pApp->WriteProfileInt(_T("Action"), _T("Upload"), m_nUpload);
-		if (m_nUpload == BST_CHECKED) {
+		if (m_nUpload == BST_CHECKED)
+		{
 			pApp->WriteProfileString(_T("FTP"), _T("Server"), m_strServer);
 			pApp->WriteProfileInt(_T("FTP"), _T("Port"), m_nFtpPort);
 			pApp->WriteProfileString(_T("FTP"), _T("Login"), m_strLogin);
@@ -169,9 +182,11 @@ BOOL CActionPage::OnKillActive(void)
 			pApp->WriteProfileString(_T("FTP"), _T("Root"), m_strRoot);
 		}
 		pApp->WriteProfileInt(_T("Action"), _T("Zip"), m_nZip);
-		if (m_fCanSend) {
+		if (m_fCanSend)
+		{
 			pApp->WriteProfileInt(_T("Action"), _T("Send"), m_nSend);
-			if (m_nSend == BST_CHECKED) {
+			if (m_nSend == BST_CHECKED)
+			{
 				pApp->WriteProfileString(_T("SMTP"), _T("from"), m_strFrom);
 				pApp->WriteProfileString(_T("SMTP"), _T("mailto"), m_strTo);
 				pApp->WriteProfileString(_T("SMTP"), _T("subj"), m_strSubject);
@@ -204,7 +219,9 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_ROOT, m_strRoot);
 	DDV_MaxChars(pDX, m_strRoot, _MAX_PATH);
 	DDX_Check(pDX, IDC_CHECK_ZIP, m_nZip);
-	if (m_fCanSend) {
+
+	if (m_fCanSend)
+	{
 		DDX_Check(pDX, IDC_CHECK_SEND, m_nSend);
 		DDX_Text(pDX, IDC_EDIT_FROM, m_strFrom);
 		DDV_MaxChars(pDX, m_strFrom, 255);
@@ -224,9 +241,11 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 void CActionPage::OnCheckUpload(void)
 {
 	BOOL fEnable = IsDlgButtonChecked(IDC_CHECK_UPLOAD) == BST_CHECKED;
-	if (fEnable) {
+	if (fEnable)
+	{
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
+
 		// restore the most recently saved settings
 		SetDlgItemText(IDC_EDIT_SERVER, pApp->GetProfileString(_T("FTP"), _T("Server")));
 		SetDlgItemInt(IDC_EDIT_FTP_PORT, pApp->GetProfileInt(_T("FTP"), _T("Port"), 21), FALSE);
@@ -239,14 +258,17 @@ void CActionPage::OnCheckUpload(void)
 
 void CActionPage::OnCheckZip(void)
 {
-	if (m_fCanSend) {
+	if (m_fCanSend)
+	{
 		CWnd* pCheckSend = GetDlgItem(IDC_CHECK_SEND);
 		ASSERT(pCheckSend != NULL);
-		if (IsDlgButtonChecked(IDC_CHECK_ZIP) == BST_CHECKED) {
+		if (IsDlgButtonChecked(IDC_CHECK_ZIP) == BST_CHECKED)
+		{
 			pCheckSend->EnableWindow();
 		}
 		else {
-			if (IsDlgButtonChecked(IDC_CHECK_SEND) != BST_UNCHECKED) {
+			if (IsDlgButtonChecked(IDC_CHECK_SEND) != BST_UNCHECKED)
+			{
 				CheckDlgButton(IDC_CHECK_SEND, BST_UNCHECKED);
 				EnableMailControls(FALSE);
 			}
@@ -258,8 +280,11 @@ void CActionPage::OnCheckZip(void)
 void CActionPage::OnCheckSend(void)
 {
 	BOOL fEnable = IsDlgButtonChecked(IDC_CHECK_SEND) == BST_CHECKED;
-	if (fEnable) {
+	if (fEnable)
+	{
 		CWinApp* pApp = AfxGetApp();
+		ASSERT_VALID(pApp);
+
 		// restore the most recently saved settings
 		SetDlgItemText(IDC_EDIT_FROM, pApp->GetProfileString(_T("SMTP"), _T("from")));
 		SetDlgItemText(IDC_EDIT_MAILTO, pApp->GetProfileString(_T("SMTP"), _T("mailto")));
@@ -273,19 +298,23 @@ void CActionPage::OnCheckSend(void)
 void CActionPage::EnableFtpControls(BOOL fEnable)
 {
 	CWnd* pWnd = GetDlgItem(IDC_GROUP_FTP);
-	do {
+	do
+	{
 		pWnd->EnableWindow(fEnable);
 		pWnd = pWnd->GetWindow(GW_HWNDNEXT);
-	} while (pWnd->GetDlgCtrlID() != IDC_GROUP_MAIL);
+	}
+	while (pWnd->GetDlgCtrlID() != IDC_GROUP_MAIL);
 }
 
 void CActionPage::EnableMailControls(BOOL fEnable)
 {
 	CWnd* pWnd = GetDlgItem(IDC_GROUP_MAIL);
 	ASSERT(pWnd != NULL);
-	do {
+	do
+	{
 		pWnd->EnableWindow(fEnable);
-	} while ((pWnd = pWnd->GetWindow(GW_HWNDNEXT)) != NULL);
+	}
+	while ((pWnd = pWnd->GetWindow(GW_HWNDNEXT)) != NULL);
 }
 
 void CActionPage::ShowMailControls(BOOL fShow)
@@ -293,9 +322,11 @@ void CActionPage::ShowMailControls(BOOL fShow)
 	GetDlgItem(IDC_CHECK_SEND)->ShowWindow(fShow ? SW_SHOW : SW_HIDE);
 	CWnd* pWnd = GetDlgItem(IDC_GROUP_MAIL);
 	ASSERT(pWnd != NULL);
-	do {
+	do
+	{
 		pWnd->ShowWindow(fShow ? SW_SHOW : SW_HIDE);
-	} while ((pWnd = pWnd->GetWindow(GW_HWNDNEXT)) != NULL);
+	}
+	while ((pWnd = pWnd->GetWindow(GW_HWNDNEXT)) != NULL);
 }
 
 #if defined(_DEBUG)
@@ -309,6 +340,7 @@ void CActionPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CBetterPropPage::AssertValid();
+
 	// ...and then verify own state as well
 }
 
@@ -318,9 +350,11 @@ void CActionPage::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CActionPage::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_nAction = " << m_nAction;
 		dumpCtx << "\nm_nUpload = " << m_nUpload;
@@ -339,7 +373,8 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_nPort = " << m_nPort;
 		dumpCtx << "\nm_strBody = " << m_strBody;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

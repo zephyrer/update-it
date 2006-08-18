@@ -55,7 +55,8 @@ CBetterPropPage(IDD_PAGE_PROGRESS)
 BOOL CProgressPage::OnSetActive(void)
 {
 	BOOL fSuccess = CBetterPropPage::OnSetActive();
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
 		pWiz->SetWizardButtons(PSWIZB_DISABLEDFINISH);
@@ -85,8 +86,10 @@ void CProgressPage::OnBecameActive(void)
 	ASSERT(pFilesPage != NULL);
 	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
 	ASSERT(pActionPage != NULL);
+
 	// erase target folder (if needed)
-	if (pOptionsPage->m_nCleanup == BST_CHECKED) {
+	if (pOptionsPage->m_nCleanup == BST_CHECKED)
+	{
 		strWorking.LoadString(IDS_DELETING_FILES);
 		m_textWorking.SetWindowText(strWorking);
 		BOOL fCanUndo = pOptionsPage->m_nRecycle == BST_CHECKED;
@@ -99,11 +102,13 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.Close();
 		PumpWaitingMessages();
 	}
+
 	// show needed controls
 	m_textFile.ShowWindow(SW_SHOW);
 	m_progressFile.ShowWindow(SW_SHOW);
 	m_textTotal.ShowWindow(SW_SHOW);
 	m_progressTotal.ShowWindow(SW_SHOW);
+
 	// process files
 	BOOL fDeleteSrc = pActionPage->m_nAction == 1;
 	strWorking.LoadString(fDeleteSrc ? IDS_MOVING_FILES : IDS_COPYING_FILES);
@@ -121,8 +126,10 @@ void CProgressPage::OnBecameActive(void)
 	m_animateBanner.Stop();
 	m_animateBanner.Close();
 	PumpWaitingMessages();
+
 	// upload files (if needed)
-	if (pActionPage->m_nUpload == BST_CHECKED) {
+	if (pActionPage->m_nUpload == BST_CHECKED)
+	{
 		strWorking.LoadString(IDS_PREPARING_UPLOAD);
 		m_textWorking.SetWindowText(strWorking);
 		m_animateBanner.Open(IDR_FILEUPLOAD);
@@ -139,11 +146,14 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.Close();
 		PumpWaitingMessages();
 	}
+
 	// hide unneeded controls
 	m_textFile.ShowWindow(SW_HIDE);
 	m_progressFile.ShowWindow(SW_HIDE);
+
 	// pack targer folder (if needed)
-	if (pActionPage->m_nZip == BST_CHECKED) {
+	if (pActionPage->m_nZip == BST_CHECKED)
+	{
 		strWorking.LoadString(IDS_ZIPPING_FOLDER);
 		m_textWorking.SetWindowText(strWorking);
 		m_animateBanner.Open(IDR_ZIPPING);
@@ -157,11 +167,14 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.Close();
 		PumpWaitingMessages();
 	}
+
 	// hide unneeded controls
 	m_textTotal.ShowWindow(SW_HIDE);
 	m_progressTotal.ShowWindow(SW_HIDE);
+
 	// send previously packed folder (if needed)
-	if (pActionPage->m_nSend == BST_CHECKED) {
+	if (pActionPage->m_nSend == BST_CHECKED)
+	{
 		strWorking.LoadString(IDS_SENDING_MAIL);
 		m_textWorking.SetWindowText(strWorking);
 		m_animateBanner.Open(IDR_FILESEND);
@@ -173,13 +186,16 @@ void CProgressPage::OnBecameActive(void)
 		m_animateBanner.Close();
 		PumpWaitingMessages();
 	}
+
 	// all done!!
 	strWorking.LoadString(IDS_ALL_DONE);
 	m_textWorking.SetWindowText(strWorking);
+
 	// remember options
 	CTime timeNow = CTime::GetCurrentTime();
 #if (_MFC_VER < 0x0700)
 	CWinApp* pApp = AfxGetApp();
+	ASSERT_VALID(pApp);
 	pApp->WriteProfileInt(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
@@ -187,6 +203,7 @@ void CProgressPage::OnBecameActive(void)
 	pApp->WriteProfileTime(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
 #endif	// _MFC_VER
 	pApp->WriteProfileString(_T("Targets"), pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
+
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
 	pWiz->GetDlgItem(IDCANCEL)->EnableWindow();
@@ -226,19 +243,24 @@ void CProgressPage::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
 	ASSERT(pszRoot != NULL && *pszRoot != 0);
 
 	::CreateDirectory(pszRoot, NULL);
-	if (pszFolder != NULL && *pszFolder != 0) {
+	if (pszFolder != NULL && *pszFolder != 0)
+	{
 		CString strPath(pszRoot);
-		if (strPath[strPath.GetLength() - 1] != _T('\\')) {
+		if (strPath[strPath.GetLength() - 1] != _T('\\'))
+		{
 			strPath += _T('\\');
 		}
-		if (_tcschr(pszFolder, _T('\\')) != NULL) {
+		if (_tcschr(pszFolder, _T('\\')) != NULL)
+		{
 			::lstrcpy(szTemp, pszFolder);
 			LPTSTR pszSub = _tcstok(szTemp, _T("\\"));
-			do {
+			do
+			{
 				strPath += pszSub;
 				::CreateDirectory(strPath, NULL);
 				strPath += _T('\\');
-			} while ((pszSub = _tcstok(NULL, _T("\\"))) != NULL);
+			}
+			while ((pszSub = _tcstok(NULL, _T("\\"))) != NULL);
 		}
 		else {
 			strPath += pszFolder;
@@ -253,16 +275,21 @@ void CProgressPage::EraseFolder(LPCTSTR pszFolder, BOOL fCanUndo)
 
 	ASSERT(pszFolder != NULL && *pszFolder != 0);
 	CString strWildcard(pszFolder);
-	if (strWildcard[strWildcard.GetLength() - 1] != _T('\\')) {
+	if (strWildcard[strWildcard.GetLength() - 1] != _T('\\'))
+	{
 		strWildcard += _T('\\');
 	}
 	strWildcard += _T("*.*");
+
 	BOOL fStop = !finder.FindFile(strWildcard);
-	while (!fStop) {
+	while (!fStop)
+	{
 		fStop = !finder.FindNextFile();
-		if (!finder.IsDots()) {		// skip "." and ".."
+		if (!finder.IsDots())	// skip "." and ".."
+		{
 			CString strPath = finder.GetFilePath();
-			if (finder.IsDirectory()) {
+			if (finder.IsDirectory())
+			{
 				// search recursively
 				EraseFolder(strPath, fCanUndo);
 				::RemoveDirectory(strPath);
@@ -289,7 +316,8 @@ BOOL CProgressPage::CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDele
 
 	// open source file for reading
 	enum { modeIn = CFile::modeRead | CFile::shareExclusive };
-	if (!fileIn.Open(pszSrcPath, modeIn, &err)) {
+	if (!fileIn.Open(pszSrcPath, modeIn, &err))
+	{
 		// unable to open source file
 		err.ReportError(MB_ICONSTOP | MB_OK);
 		return (FALSE);
@@ -297,7 +325,8 @@ BOOL CProgressPage::CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDele
 
 	// create target file for writing
 	enum { modeOut = CFile::modeCreate | CFile::modeWrite | CFile::shareExclusive };
-	if (!fileOut.Open(pszTargPath, modeOut, &err)) {
+	if (!fileOut.Open(pszTargPath, modeOut, &err))
+	{
 		// unable to create target file
 		err.ReportError(MB_ICONSTOP | MB_OK);
 		fileIn.Close();
@@ -307,8 +336,10 @@ BOOL CProgressPage::CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDele
 	// copy data
 	enum { BUF_SIZE = 4096 };
 	BYTE* pbBuf = new BYTE[BUF_SIZE];
-	try {
-		while ((cbRead = fileIn.Read(pbBuf, BUF_SIZE)) > 0) {
+	try
+	{
+		while ((cbRead = fileIn.Read(pbBuf, BUF_SIZE)) > 0)
+		{
 			fileOut.Write(pbBuf, cbRead);
 			m_progressFile.OffsetPos(cbRead);
 			m_progressTotal.OffsetPos(cbRead);
@@ -316,7 +347,8 @@ BOOL CProgressPage::CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDele
 		}
 		fSuccess = TRUE;
 	}
-	catch (CFileException* pErr) {
+	catch (CFileException* pErr)
+	{
 		pErr->ReportError(MB_ICONSTOP | MB_OK);
 		pErr->Delete();
 		fSuccess = FALSE;
@@ -328,7 +360,8 @@ BOOL CProgressPage::CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDele
 	fileIn.Close();
 
 	// delete source file (if needed)
-	if (fSuccess && fDeleteSrc) {
+	if (fSuccess && fDeleteSrc)
+	{
 		DeleteFile(pszSrcPath);
 	}
 
@@ -347,7 +380,8 @@ int CProgressPage::DeleteFile(LPCTSTR pszPath, BOOL fCanUndo)
 	::lstrcpy(const_cast<LPTSTR>(fos.pFrom), pszPath);
 	const_cast<LPTSTR>(fos.pFrom)[cchFrom - 1] = 0;
 	fos.fFlags = FOF_SILENT | FOF_NOERRORUI | FOF_NOCONFIRMATION;
-	if (fCanUndo) {
+	if (fCanUndo)
+	{
 		fos.fFlags |= FOF_ALLOWUNDO;
 	}
 	int nResult = ::SHFileOperation(&fos);
@@ -358,38 +392,48 @@ int CProgressPage::DeleteFile(LPCTSTR pszPath, BOOL fCanUndo)
 void CProgressPage::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CListCtrl& listFiles, BOOL fDeleteSrc)
 {
 	int cItems = listFiles.GetItemCount();
-	for (int i = 0; i < cItems; ++i) {
+	for (int i = 0; i < cItems; ++i)
+	{
 		FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(listFiles.GetItemData(i));
 		ASSERT(pData != NULL);
+
 		// construct the relative name
 		CString strRelativeName(pData->szFolder);
-		if (!strRelativeName.IsEmpty()) {
+		if (!strRelativeName.IsEmpty())
+		{
 			strRelativeName += _T('\\');
 		}
 		strRelativeName += pData->szName;
 		strRelativeName += _T('.');
 		strRelativeName += pData->szExt;
+
 		// prepare path names...
 		CString strSrcPath(pszSource);
-		if (strSrcPath[strSrcPath.GetLength() - 1] != _T('\\')) {
+		if (strSrcPath[strSrcPath.GetLength() - 1] != _T('\\'))
+		{
 			strSrcPath += _T('\\');
 		}
 		strSrcPath += strRelativeName;
 		CString strTargPath(pszTarget);
-		if (strTargPath[strTargPath.GetLength() - 1] != _T('\\')) {
+		if (strTargPath[strTargPath.GetLength() - 1] != _T('\\'))
+		{
 			strTargPath += _T('\\');
 		}
 		strTargPath += strRelativeName;
+
 		// ...and controls
 		m_textFile.SetWindowText(strRelativeName);
 		int nLower = min(0UL, INT_MAX - pData->cbLength);
 		int nUpper = nLower + pData->cbLength;
 		m_progressFile.SetRange32(nLower, nUpper);
 		m_progressFile.SetPos(nLower);
+
 		// create the target folder
 		CreateSubFolder(pszTarget, pData->szFolder);
+
 		// now copy the file
 		CopyFile(strSrcPath, strTargPath, fDeleteSrc);
+
 		// adjust modification and access time of the copied file
 #if (_MFC_VER < 0x0700)
 		struct _utimbuf utmb = { CTime::GetCurrentTime().GetTime(), pData->timeWrite.GetTime() };
@@ -405,20 +449,24 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 {
 	CZipArchive zipArch;
 
-	try {
+	try
+	{
 		zipArch.SetCallback(this, CZipArchive::cbAdd);
 		zipArch.Open(pszZipPath, CZipArchive::zipCreate);
 		CString strTemp(pszTarget);
 		zipArch.SetRootPath(strTemp.Left(strTemp.ReverseFind(_T('\\'))));
 		int cFiles = cFiles = listFiles.GetItemCount();
-		for (int i = 0; i < cFiles; ++i) {
+		for (int i = 0; i < cFiles; ++i)
+		{
 			CString strFilePath(pszTarget);
-			if (strFilePath[strFilePath.GetLength() - 1] != _T('\\')) {
+			if (strFilePath[strFilePath.GetLength() - 1] != _T('\\'))
+			{
 				strFilePath += _T('\\');
 			}
 			FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(listFiles.GetItemData(i));
 			ASSERT(pData != NULL);
-			if (pData->szFolder[0] != 0) {
+			if (pData->szFolder[0] != 0)
+			{
 				strFilePath += pData->szFolder;
 				strFilePath += _T('\\');
 			}
@@ -429,7 +477,8 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 		}
 		zipArch.Close();
 	}
-	catch (CZipException* pErr) {
+	catch (CZipException* pErr)
+	{
 		AfxMessageBox(pErr->GetErrorDescription(), MB_ICONSTOP | MB_OK);
 		delete pErr;
 		zipArch.Close();
@@ -451,7 +500,8 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
 	ASSERT(pActionPage != NULL);
 
-	try {
+	try
+	{
 		smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
 		smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
 		CSmtpAddress smtpAddr(pActionPage->m_strTo);
@@ -461,7 +511,8 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpTextPart.SetText(pActionPage->m_strBody);
 		CWinApp* pApp = AfxGetApp();
 		CString strCharSet = pApp->GetProfileString(_T("SMTP"), _T("charset"));
-		if (strCharSet.IsEmpty()) {
+		if (strCharSet.IsEmpty())
+		{
 			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
 		}
 		smtpTextPart.SetCharset(strCharSet);
@@ -471,7 +522,8 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}
-	catch (CSmtpException* pErr) {
+	catch (CSmtpException* pErr)
+	{
 		AfxMessageBox(pErr->GetErrorMessage(), MB_ICONSTOP | MB_OK);
 		delete pErr;
 	}
@@ -487,18 +539,22 @@ void CProgressPage::CreateFtpFolder(CFtpConnection* pFtpConn, LPCTSTR pszFolder)
 
 	::lstrcpy(szTemp, pszFolder);
 	LPTSTR pszPart = _tcstok(szTemp, _T("/"));
+
 	// phase one --
-	while (pszPart != NULL) {
+	while (pszPart != NULL)
+	{
 		CFtpFileFind ftpFinder(pFtpConn);
 		CString strTest(strExisting);
 		strTest += _T('/');
 		strTest += pszPart;
-		if (!ftpFinder.FindFile(strTest)) {
+		if (!ftpFinder.FindFile(strTest))
+		{
 			break;
 		}
 		else {
 			ftpFinder.FindNextFile();
-			if (!ftpFinder.IsDirectory()) {
+			if (!ftpFinder.IsDirectory())
+			{
 				pFtpConn->Remove(strTest);
 				break;
 			}
@@ -506,13 +562,17 @@ void CProgressPage::CreateFtpFolder(CFtpConnection* pFtpConn, LPCTSTR pszFolder)
 		strExisting = strTest;
 		pszPart = _tcstok(NULL, _T("/"));
 	}
+
 	// phase two --
-	if (pszPart != NULL) {
-		do {
+	if (pszPart != NULL)
+	{
+		do
+		{
 			strExisting += _T('/');
 			strExisting += pszPart;
 			pFtpConn->CreateDirectory(strExisting);
-		} while ((pszPart = _tcstok(NULL, _T("/"))) != NULL);
+		}
+		while ((pszPart = _tcstok(NULL, _T("/"))) != NULL);
 	}
 }
 
@@ -531,17 +591,20 @@ BOOL CProgressPage::UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpConne
 
 	// open source file for reading
 	enum { modeIn = CFile::modeRead | CFile::shareExclusive };
-	if (!fileIn.Open(pszSrcPath, modeIn, &err)) {
+	if (!fileIn.Open(pszSrcPath, modeIn, &err))
+	{
 		// unable to open source file
 		err.ReportError(MB_ICONSTOP | MB_OK);
 		return (FALSE);
 	}
 
 	// open target file for writing
-	try {
+	try
+	{
 		pFileOut = pFtpConn->OpenFile(pszFtpPath, GENERIC_WRITE);
 	}
-	catch (CInternetException* pErr) {
+	catch (CInternetException* pErr)
+	{
 		// unable to open target file
 		pErr->ReportError(MB_ICONSTOP | MB_OK);
 		pErr->Delete();
@@ -552,8 +615,10 @@ BOOL CProgressPage::UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpConne
 	// copy data
 	enum { BUF_SIZE = 4096 };
 	BYTE* pbBuf = new BYTE[BUF_SIZE];
-	try {
-		while ((cbRead = fileIn.Read(pbBuf, BUF_SIZE)) > 0) {
+	try
+	{
+		while ((cbRead = fileIn.Read(pbBuf, BUF_SIZE)) > 0)
+		{
 			pFileOut->Write(pbBuf, cbRead);
 			m_progressFile.OffsetPos(cbRead);
 			m_progressTotal.OffsetPos(cbRead);
@@ -561,12 +626,14 @@ BOOL CProgressPage::UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpConne
 		}
 		fSuccess = TRUE;
 	}
-	catch (CFileException* pErr) {
+	catch (CFileException* pErr)
+	{
 		pErr->ReportError(MB_ICONSTOP | MB_OK);
 		pErr->Delete();
 		fSuccess = FALSE;
 	}
-	catch (CInternetException* pErr) {
+	catch (CInternetException* pErr)
+	{
 		pErr->ReportError(MB_ICONSTOP | MB_OK);
 		pErr->Delete();
 		fSuccess = FALSE;
@@ -595,7 +662,8 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
 	ASSERT(pActionPage != NULL);
 
-	try {
+	try
+	{
 		strWorking.LoadString(IDS_STARTING_FTP);
 		m_textWorking.SetWindowText(strWorking);
 		CInternetSession ftpSession(_T("UpdateIt/1.0"));
@@ -608,40 +676,50 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 		strWorking.LoadString(IDS_UPLOADING_FILES);
 		m_textWorking.SetWindowText(strWorking);
 		int cFiles = listFiles.GetItemCount();
-		for (int i = 0; i < cFiles; ++i) {
+		for (int i = 0; i < cFiles; ++i)
+		{
 			FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(listFiles.GetItemData(i));
 			ASSERT(pData != NULL);
 			CString strNameExt(pData->szName);
 			strNameExt += _T('.');
 			strNameExt += pData->szExt;
+
 			// construct fully qualified source filename
 			CString strSrcPath(pszSource);
-			if (strSrcPath[strSrcPath.GetLength() - 1] != _T('\\')) {
+			if (strSrcPath[strSrcPath.GetLength() - 1] != _T('\\'))
+			{
 				strSrcPath += _T('\\');
 			}
 			CString strFolder(pData->szFolder);
-			if (!strFolder.IsEmpty()) {
+			if (!strFolder.IsEmpty())
+			{
 				strSrcPath += strFolder + _T('\\');
 			}
 			strSrcPath += strNameExt;
+
 			// construct fully qualified target filename
 			CString strFtpPath(pActionPage->m_strRoot);
-			if (!strFolder.IsEmpty()) {
+			if (!strFolder.IsEmpty())
+			{
 				strFolder.Replace(_T('\\'), _T('/'));
 				strFtpPath += strFolder + _T('/');
 			}
 			strFtpPath += strNameExt;
+
 			// prepare controls
 			m_textFile.SetWindowText(strFtpPath);
 			int nLower = min(0UL, INT_MAX - pData->cbLength);
 			int nUpper = nLower + pData->cbLength;
 			m_progressFile.SetRange32(nLower, nUpper);
 			m_progressFile.SetPos(nLower);
+
 			// ensure that the target folder exists
 			int cchFolder = strFtpPath.ReverseFind(_T('/'));
-			if (cchFolder > 0) {
+			if (cchFolder > 0)
+			{
 				CreateFtpFolder(pFtpConn, strFtpPath.Left(cchFolder));
 			}
+
 			// now upload the file
 			UploadFile(strSrcPath, strFtpPath, pFtpConn);
 		}
@@ -653,7 +731,8 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 		m_textWorking.SetWindowText(strWorking);
 		ftpSession.Close();
 	}
-	catch (CInternetException* pErr) {
+	catch (CInternetException* pErr)
+	{
 		pErr->ReportError(MB_ICONSTOP | MB_OK);
 		pErr->Delete();
 	}
@@ -670,6 +749,7 @@ void CProgressPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CBetterPropPage::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_textWorking);
 	ASSERT_VALID(&m_animateBanner);
@@ -685,9 +765,11 @@ void CProgressPage::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CProgressPage::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_textWorking = " << m_textWorking;
 		dumpCtx << "\nm_animateBanner = " << m_animateBanner;
@@ -696,7 +778,8 @@ void CProgressPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_textTotal = " << m_textTotal;
 		dumpCtx << "\nm_progressTotal = " << m_progressTotal;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

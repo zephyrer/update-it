@@ -50,18 +50,21 @@ COptionsPage::COptionsPage(void):
 CBetterPropPage(IDD_PAGE_OPTIONS)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
+
 #if (_MFC_VER < 0x0700)
 	CWinApp* pApp = AfxGetApp();
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
-	ASSERT_VALID(pApp);
 #endif	// _MFC_VER
+	ASSERT_VALID(pApp);
+
 	m_strSource = pApp->GetProfileString(_T("Options"), _T("Source"));
 	m_nRecurse = pApp->GetProfileInt(_T("Options"), _T("Recurse"), BST_CHECKED);
 	m_strExclude = pApp->GetProfileString(_T("Options"), _T("Exclude"));
 	m_strTarget = pApp->GetProfileString(_T("Options"), _T("Target"));
 	m_nCleanup = pApp->GetProfileInt(_T("Options"), _T("Cleanup"), BST_CHECKED);
-	if (m_nCleanup == BST_CHECKED) {
+	if (m_nCleanup == BST_CHECKED)
+	{
 		m_nRecycle = pApp->GetProfileInt(_T("Options"), _T("Recycle"), BST_UNCHECKED);
 	}
 	else {
@@ -86,7 +89,8 @@ BOOL COptionsPage::OnInitDialog(void)
 	CTime timeMin(1970, 1, 1, 0 - tz_delta, 0, 0);
 	CTime timeMax(2038, 1, 18, 0 - tz_delta, 0, 0);
 	m_dtpWrite.SetRange(&timeMin, &timeMax);
-	if (m_timeWrite != -1) {
+	if (m_timeWrite != -1)
+	{
 		m_dtpWrite.SetTime(&m_timeWrite);
 	}
 
@@ -111,7 +115,8 @@ BOOL COptionsPage::OnInitDialog(void)
 BOOL COptionsPage::OnSetActive(void)
 {
 	BOOL fSuccess = CBetterPropPage::OnSetActive();
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		GetDlgItem(IDC_CHECK_RECYCLE)->EnableWindow(m_nCleanup == BST_CHECKED);
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
@@ -123,7 +128,8 @@ BOOL COptionsPage::OnSetActive(void)
 BOOL COptionsPage::OnKillActive(void)
 {
 	BOOL fSuccess = CBetterPropPage::OnKillActive();
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		CWinApp* pApp = AfxGetApp();
 		pApp->WriteProfileString(_T("Options"), _T("Source"), m_strSource);
 		pApp->WriteProfileInt(_T("Options"), _T("Recurse"), m_nRecurse);
@@ -142,14 +148,16 @@ LRESULT COptionsPage::OnWizardNext(void)
 
 	pWnd = GetDlgItem(IDC_EDIT_SOURCE);
 	ASSERT(pWnd != NULL);
-	if (pWnd->GetWindowTextLength() == 0) {
+	if (pWnd->GetWindowTextLength() == 0)
+	{
 		AfxMessageBox(IDS_NO_SOURCE, MB_ICONSTOP | MB_OK);
 		pWnd->SetFocus();
 		return (-1);
 	}
 	pWnd = GetDlgItem(IDC_EDIT_TARGET);
 	ASSERT(pWnd != NULL);
-	if (pWnd->GetWindowTextLength() == 0) {
+	if (pWnd->GetWindowTextLength() == 0)
+	{
 		AfxMessageBox(IDS_NO_TARGET, MB_ICONSTOP | MB_OK);
 		pWnd->SetFocus();
 		return (-1);
@@ -181,7 +189,8 @@ HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)
 	{
 	case IDC_EDIT_SOURCE:
 	case IDC_EDIT_TARGET:
-		if (uCtlColor == CTLCOLOR_STATIC) {
+		if (uCtlColor == CTLCOLOR_STATIC)
+		{
 			pDC->SetBkColor(::GetSysColor(COLOR_WINDOW));
 			pDC->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
 			hbr = ::GetSysColorBrush(COLOR_WINDOW);
@@ -199,11 +208,13 @@ void COptionsPage::OnButtonSource(void)
 
 	strPrompt.LoadString(IDS_CHOOSE_SOURCE);
 	CFolderDialog dlgFolder(strPrompt, m_strSource, this);
-	if (dlgFolder.DoModal() == IDOK) {
+	if (dlgFolder.DoModal() == IDOK)
+	{
 		m_strSource = dlgFolder.GetFolderPath();
 		SetDlgItemText(IDC_EDIT_SOURCE, m_strSource);
 #if (_MFC_VER < 0x0700)
 		CWinApp* pApp = AfxGetApp();
+		ASSERT_VALID(pApp);
 		if ((m_timeWrite = pApp->GetProfileInt(_T("Times"), m_strSource, -1)) != -1)
 #else
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
@@ -224,7 +235,8 @@ void COptionsPage::OnButtonTarget(void)
 
 	strPrompt.LoadString(IDS_CHOOSE_TARGET);
 	CFolderDialog dlgFolder(strPrompt, m_strTarget, this);
-	if (dlgFolder.DoModal() == IDOK) {
+	if (dlgFolder.DoModal() == IDOK)
+	{
 		m_strTarget = dlgFolder.GetFolderPath();
 		SetDlgItemText(IDC_EDIT_TARGET, m_strTarget);
 	}
@@ -234,7 +246,8 @@ void COptionsPage::OnCheckCleanup(void)
 {
 	CWnd* pCheckRecycle = GetDlgItem(IDC_CHECK_RECYCLE);
 	ASSERT(pCheckRecycle != NULL);
-	if (IsDlgButtonChecked(IDC_CHECK_CLEANUP) == BST_CHECKED) {
+	if (IsDlgButtonChecked(IDC_CHECK_CLEANUP) == BST_CHECKED)
+	{
 		pCheckRecycle->EnableWindow();
 	}
 	else {
@@ -254,6 +267,7 @@ void COptionsPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CBetterPropPage::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_dtpWrite);
 }
@@ -264,9 +278,11 @@ void COptionsPage::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void COptionsPage::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CBetterPropPage::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_strSource = " << m_strSource;
 		dumpCtx << "\nm_nRecurse = " << m_nRecurse;
@@ -277,7 +293,8 @@ void COptionsPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_dtpWrite = " << m_dtpWrite;
 		dumpCtx << "\nm_timeWrite = " << m_timeWrite;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

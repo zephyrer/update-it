@@ -90,10 +90,12 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 #endif	// _MFC_VER
 	case I_DATE:
 	case I_TIME:
-		if (pDataLhs->timeWrite < pDataRhs->timeWrite) {
+		if (pDataLhs->timeWrite < pDataRhs->timeWrite)
+		{
 			return (m_nSortOrder);
 		}
-		else if (pDataLhs->timeWrite > pDataRhs->timeWrite) {
+		else if (pDataLhs->timeWrite > pDataRhs->timeWrite)
+		{
 			return (-m_nSortOrder);
 		}
 		// fall through
@@ -109,7 +111,8 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 	CString strSize;
 
 	LVITEM& lvi = reinterpret_cast<NMLVDISPINFO*>(pHdr)->item;
-	if ((lvi.mask & LVIF_TEXT) != 0) {
+	if ((lvi.mask & LVIF_TEXT) != 0)
+	{
 		FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(GetItemData(lvi.iItem));
 		switch (lvi.iSubItem)
 		{
@@ -151,17 +154,21 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 
 void CFilesList::SeparateThousands(CString& strNumber)
 {
-	if (!strNumber.IsEmpty()) {
+	if (!strNumber.IsEmpty())
+	{
 		struct lconv* pLConv = localeconv();
 		TCHAR chrSep = *_A2T(pLConv->thousands_sep);
-		if (chrSep != 0) {
+		if (chrSep != 0)
+		{
 			int iStart = strNumber.Find(*_A2T(pLConv->decimal_point));
-			if (iStart < 0) {
+			if (iStart < 0)
+			{
 				iStart = strNumber.GetLength();
 			}
 			int iStop = strNumber[0] == *_A2T(pLConv->negative_sign) ||
 				strNumber[0] == *_A2T(pLConv->positive_sign) ? 1 : 0;
-			while ((iStart -= *pLConv->grouping) > iStop) {
+			while ((iStart -= *pLConv->grouping) > iStop)
+			{
 				strNumber.Insert(iStart, chrSep);
 			}
 		}
@@ -174,17 +181,21 @@ void CFilesList::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CSortingListCtrl::AssertValid();
+
 	// ...and then verify our own state as well
 }
 
 void CFilesList::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CSortingListCtrl::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}

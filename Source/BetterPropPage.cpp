@@ -48,7 +48,8 @@ BOOL CBetterPropPage::OnInitDialog(void)
 BOOL CBetterPropPage::OnSetActive(void)
 {
 	BOOL fSuccess = CPropertyPage::OnSetActive();
-	if (fSuccess) {
+	if (fSuccess)
+	{
 		AfxBeginThread(ActivationWatcher, m_hWnd);
 	}
 	return (fSuccess);
@@ -58,7 +59,8 @@ void CBetterPropPage::OnBecameActive(void)
 {
 	MSG msg;
 
-	while (::PeekMessage(&msg, NULL, WM_PAINT, WM_PAINT, PM_REMOVE)) {
+	while (::PeekMessage(&msg, NULL, WM_PAINT, WM_PAINT, PM_REMOVE))
+	{
 		::DispatchMessage(&msg);
 	}
 }
@@ -77,7 +79,8 @@ LRESULT CBetterPropPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 {
-	if (WM_MOUSEFIRST <= pMsg->message && pMsg->message <= WM_MOUSELAST) {
+	if (WM_MOUSEFIRST <= pMsg->message && pMsg->message <= WM_MOUSELAST)
+	{
 		m_tipWnd.RelayEvent(pMsg);
 	}
 	return (CPropertyPage::PreTranslateMessage(pMsg));
@@ -87,12 +90,15 @@ BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 
 void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMTTDISPINFO* pInfo, LRESULT* pnResult)
 {
-	if ((pInfo->uFlags & TTF_IDISHWND) != 0) {
+	if ((pInfo->uFlags & TTF_IDISHWND) != 0)
+	{
 		CWnd* pWnd = CWnd::FromHandle(reinterpret_cast<HWND>(pInfo->hdr.idFrom));
-		if (pWnd != NULL) {
+		if (pWnd != NULL)
+		{
 			UINT idsTip = pWnd->GetDlgCtrlID();
 			CString strTemp;
-			if (strTemp.LoadString(idsTip)) {
+			if (strTemp.LoadString(idsTip))
+			{
 				::lstrcpyn(m_szTipText, strTemp, 256);
 				pInfo->lpszText = m_szTipText;
 			}
@@ -105,12 +111,15 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMTTDISPINFO* pInfo, LRESULT* p
 
 void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMHDR* pHdr, LRESULT* pnResult)
 {
-	if ((reinterpret_cast<NMTTDISPINFO*>(pHdr)->uFlags & TTF_IDISHWND) != 0) {
+	if ((reinterpret_cast<NMTTDISPINFO*>(pHdr)->uFlags & TTF_IDISHWND) != 0)
+	{
 		CWnd* pWnd = CWnd::FromHandle(reinterpret_cast<HWND>(reinterpret_cast<NMTTDISPINFO*>(pHdr)->hdr.idFrom));
-		if (pWnd != NULL) {
+		if (pWnd != NULL)
+		{
 			UINT idsTip = pWnd->GetDlgCtrlID();
 			CString strTemp;
-			if (strTemp.LoadString(idsTip)) {
+			if (strTemp.LoadString(idsTip))
+			{
 				::lstrcpyn(m_szTipText, strTemp, 256);
 				reinterpret_cast<NMTTDISPINFO*>(pHdr)->lpszText = m_szTipText;
 			}
@@ -138,11 +147,15 @@ UINT AFX_CDECL CBetterPropPage::ActivationWatcher(void* pvParam)
 
 void CBetterPropPage::PumpWaitingMessages(void)
 {
-	MSG msg;
+	MSG msg = { 0 };
 
-	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-		::TranslateMessage(&msg);
-		::DispatchMessage(&msg);
+	while (::PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE))
+	{
+#if (_MFC_VER < 0x0700)
+		AfxGetThread()->PumpMessage();
+#else
+		AfxPumpMessage();
+#endif	// _MFC_VER
 	}
 }
 
@@ -157,6 +170,7 @@ void CBetterPropPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	CPropertyPage::AssertValid();
+
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_tipWnd);
 }
@@ -167,14 +181,17 @@ void CBetterPropPage::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CBetterPropPage::Dump(CDumpContext& dumpCtx) const
 {
-	try {
+	try
+	{
 		// first invoke inherited dumper...
 		CPropertyPage::Dump(dumpCtx);
+
 		// ...and then dump own unique members
 		dumpCtx << "m_tipWnd = " << m_tipWnd;
 		dumpCtx << "\nm_szTipText = " << m_szTipText;
 	}
-	catch (CFileException* pXcpt) {
+	catch (CFileException* pXcpt)
+	{
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}
