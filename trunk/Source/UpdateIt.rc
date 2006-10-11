@@ -83,7 +83,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3346,53
+ FILEVERSION 1,0,3383,56
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -102,7 +102,7 @@ BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Spb Software House"
             VALUE "FileDescription", "UpdateIt Application Executable"
-            VALUE "FileVersion", "1.0.3346"
+            VALUE "FileVersion", "1.0.3383"
             VALUE "InternalName", "UpdateIt"
             VALUE "LegalCopyright", "Copyright © 2002–2006 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
@@ -126,7 +126,7 @@ END
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 226
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
-FONT 8, "Tahoma", 0, 0, 0x0
+FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
     EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | 
@@ -158,7 +158,7 @@ END
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 226
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
-FONT 8, "Tahoma", 0, 0, 0x1
+FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
     CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | 
@@ -170,7 +170,7 @@ END
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 226
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
-FONT 8, "Tahoma", 0, 0, 0x0
+FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
     CONTROL         "&Copy file(s) to the target folder",IDC_RADIO_COPY,
@@ -219,7 +219,7 @@ END
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 226
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
-FONT 8, "Tahoma", 0, 0, 0x0
+FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
     CONTROL         "Animate1",IDC_ANIMATE_BANNER,"SysAnimate32",ACS_CENTER | 
@@ -238,7 +238,7 @@ END
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 226
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
-FONT 8, "Tahoma", 0, 0, 0x0
+FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
     LTEXT           "Copyright © 2002-2006 by Elijah Zarezky",IDC_STATIC,4,
