@@ -61,6 +61,21 @@ static char THIS_FILE[] = __FILE__;
 #undef max
 #endif	// max
 
+inline DWORD LODWORD(ULONGLONG qwSrc)
+{
+	return (static_cast<DWORD>(qwSrc & 0xFFFFFFFF));
+}
+
+inline DWORD HIDWORD(ULONGLONG qwSrc)
+{
+	return (static_cast<DWORD>((qwSrc >> 32) & 0xFFFFFFFF));
+}
+
+inline ULONGLONG MAKEQWORD(DWORD dwLow, DWORD dwHigh)
+{
+	return ((static_cast<ULONGLONG>(dwHigh) << 32) | dwLow);
+}
+
 #endif	// _MFC_VER
 
 // object model
@@ -144,8 +159,8 @@ void CProgressPage::OnBecameActive(void)
 	int nLower = min(0L, static_cast<long>(INT_MAX - pFilesPage->m_cbFiles));
 	int nUpper = nLower + pFilesPage->m_cbFiles;
 #else
-	int nLower = std::min<long>(0L, INT_MAX - pFilesPage->m_cbFiles);
-	int nUpper = nLower + pFilesPage->m_cbFiles;
+	int nLower = std::min<long>(0L, INT_MAX - LODWORD(pFilesPage->m_cbFiles));
+	int nUpper = nLower + LODWORD(pFilesPage->m_cbFiles);
 #endif	// _MFC_VER
 	m_progressTotal.SetRange32(nLower, nUpper);
 	m_progressTotal.SetPos(nLower);
@@ -456,8 +471,8 @@ void CProgressPage::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CListC
 		int nLower = min(0L, static_cast<long>(INT_MAX - pData->cbLength));
 		int nUpper = nLower + pData->cbLength;
 #else
-		int nLower = std::min<long>(0L, INT_MAX - pData->cbLength);
-		int nUpper = nLower + pData->cbLength;
+		int nLower = std::min<long>(0L, INT_MAX - LODWORD(pData->cbLength));
+		int nUpper = nLower + LODWORD(pData->cbLength);
 #endif	// _MFC_VER
 		m_progressFile.SetRange32(nLower, nUpper);
 		m_progressFile.SetPos(nLower);
@@ -747,8 +762,8 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 			int nLower = min(0L, static_cast<long>(INT_MAX - pData->cbLength));
 			int nUpper = nLower + pData->cbLength;
 #else
-			int nLower = std::min<long>(0L, INT_MAX - pData->cbLength);
-			int nUpper = nLower + pData->cbLength;
+			int nLower = std::min<long>(0L, INT_MAX - LODWORD(pData->cbLength));
+			int nUpper = nLower + LODWORD(pData->cbLength);
 #endif	// _MFC_VER
 			m_progressFile.SetRange32(nLower, nUpper);
 			m_progressFile.SetPos(nLower);
