@@ -399,6 +399,7 @@ BEGIN
     IDS_SC_RESTORE          "&Restore"
     IDS_TITLE_EXPORT        "Export Settings to File"
     IDS_TITLE_IMPORT        "Import Settings from File"
+    IDS_TOTAL_SIZE_OVERFLOW "Total size of already found files exceeds the maximum\nsupported value and the search will now be stopped. After\nthese files will be processed You can repeat the search."
 END
 
 STRINGTABLE 
