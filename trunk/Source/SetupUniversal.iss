@@ -31,7 +31,7 @@ AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.0.3410-setup
+OutputBaseFilename=UpdateIt-1.0.3410-setup-universal
 VersionInfoVersion=1.0.3410
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
@@ -42,15 +42,51 @@ LicenseFile=ApacheLicense.rtf
 DialogFontName=Tahoma
 DialogFontSize=8
 
+[Types]
+Name: "typical"; Description: "Typical Installation"
+Name: "compact"; Description: "Compact Installation"
+Name: "full"; Description: "Full Installation"
+Name: "custom"; Description: "Custom Installation"; Flags: iscustom
+
+[Components]
+Name: "core"; Description: "UpdateIt! Core Files"; Types: compact typical full custom; Flags: fixed
+Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom
+Name: "sources"; Description: "Source Code"; Types: full custom
+
 [Files]
-Source: "..\ReleaseA\UpdateIt.exe"; DestDir: "{app}"
-Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\ApacheLicense.rtf"; DestDir: "{app}"
+Source: "..\70_ReleaseA\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core
+Source: "..\Redist\mfc70.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\msvcr70.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\msvcp70.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\..\Repository\AfxGadgets\AfxGadgets.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources
+Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources
+Source: "..\..\Repository\CodeProject\CodeProject.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources
+Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources
+Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources
+Source: "..\..\Repository\Naughter\Naughter.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources
+Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources
+Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources
+Source: "..\..\Repository\ZipArchive\ZipArchive.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources
+Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources
+Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources
+Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources
+Source: "..\..\Repository\zlib\zlib.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources
+Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources
+Source: "..\UpdateIt70.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources
+Source: "..\UpdateIt70.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources
+Source: "..\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources
+Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources
+Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources
+Source: "..\Source\BinRes\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\Source\BinRes"; Components: sources
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
 Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
+Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
+Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt70.sln"; Components: sources
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: quicklaunchicon
