@@ -47,6 +47,7 @@
 #define IDS_SC_RESTORE                  40
 #define IDS_TITLE_EXPORT                41
 #define IDS_TITLE_IMPORT                42
+#define IDS_TOTAL_SIZE_OVERFLOW         43
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103

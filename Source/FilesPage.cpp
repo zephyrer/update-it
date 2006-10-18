@@ -395,6 +395,7 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 					
 					// size
 					pData->cbLength = finder.GetLength();
+#if (_MFC_VER < 0x0700)
 					m_cbFiles += pData->cbLength;
 					
 					// insert an item
@@ -405,6 +406,26 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 						m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
 					}
 					++lvi.iItem;
+#else
+// in case to handle possible total size overflow
+					if (_UI64_MAX - pData->cbLength < m_cbFiles)
+					{
+						// overflow - stop the search and clean-up
+						fStop = TRUE;
+						delete pData;
+						AfxMessageBox(IDS_TOTAL_SIZE_OVERFLOW, MB_ICONWARNING | MB_OK);
+					}
+					else {
+						m_cbFiles += pData->cbLength;
+						// insert an item
+						lvi.lParam = reinterpret_cast<LPARAM>(pData);
+						VERIFY(m_listFiles.InsertItem(&lvi) == lvi.iItem);
+						for (int i = I_EXTENSION; i < NUM_COLUMNS; ++i) {
+							m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
+						}
+						++lvi.iItem;
+					}
+#endif	// _MFC_VER
 				}
 			}
 		}

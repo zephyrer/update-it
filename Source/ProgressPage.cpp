@@ -51,6 +51,18 @@ static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+#if (_MFC_VER >= 0x0700)
+
+#if defined(min)
+#undef min
+#endif	// min
+
+#if defined(max)
+#undef max
+#endif	// max
+
+#endif	// _MFC_VER
+
 // object model
 IMPLEMENT_DYNAMIC(CProgressPage, CBetterPropPage)
 
@@ -128,8 +140,13 @@ void CProgressPage::OnBecameActive(void)
 	m_animateBanner.Open(fDeleteSrc ? IDR_FILEMOVE : IDR_FILECOPY);
 	m_animateBanner.ShowWindow(SW_SHOW);
 	m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
-	int nLower = min(0UL, INT_MAX - pFilesPage->m_cbFiles);
+#if (_MFC_VER < 0x0700)
+	int nLower = min(0L, static_cast<long>(INT_MAX - pFilesPage->m_cbFiles));
 	int nUpper = nLower + pFilesPage->m_cbFiles;
+#else
+	int nLower = std::min<long>(0L, INT_MAX - pFilesPage->m_cbFiles);
+	int nUpper = nLower + pFilesPage->m_cbFiles;
+#endif	// _MFC_VER
 	m_progressTotal.SetRange32(nLower, nUpper);
 	m_progressTotal.SetPos(nLower);
 	CListCtrl& listFiles = pFilesPage->m_listFiles;
@@ -435,8 +452,13 @@ void CProgressPage::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CListC
 
 		// ...and controls
 		m_textFile.SetWindowText(strRelativeName);
-		int nLower = min(0UL, INT_MAX - pData->cbLength);
+#if (_MFC_VER < 0x0700)
+		int nLower = min(0L, static_cast<long>(INT_MAX - pData->cbLength));
 		int nUpper = nLower + pData->cbLength;
+#else
+		int nLower = std::min<long>(0L, INT_MAX - pData->cbLength);
+		int nUpper = nLower + pData->cbLength;
+#endif	// _MFC_VER
 		m_progressFile.SetRange32(nLower, nUpper);
 		m_progressFile.SetPos(nLower);
 
@@ -721,8 +743,13 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 
 			// prepare controls
 			m_textFile.SetWindowText(strFtpPath);
-			int nLower = min(0UL, INT_MAX - pData->cbLength);
+#if (_MFC_VER < 0x0700)
+			int nLower = min(0L, static_cast<long>(INT_MAX - pData->cbLength));
 			int nUpper = nLower + pData->cbLength;
+#else
+			int nLower = std::min<long>(0L, INT_MAX - pData->cbLength);
+			int nUpper = nLower + pData->cbLength;
+#endif	// _MFC_VER
 			m_progressFile.SetRange32(nLower, nUpper);
 			m_progressFile.SetPos(nLower);
 
