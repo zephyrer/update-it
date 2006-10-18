@@ -83,7 +83,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3383,56
+ FILEVERSION 1,0,3410,59
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -102,7 +102,7 @@ BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Spb Software House"
             VALUE "FileDescription", "UpdateIt Application Executable"
-            VALUE "FileVersion", "1.0.3383"
+            VALUE "FileVersion", "1.0.3410"
             VALUE "InternalName", "UpdateIt"
             VALUE "LegalCopyright", "Copyright © 2002–2006 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
