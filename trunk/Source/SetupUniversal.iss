@@ -60,19 +60,20 @@ Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core
 Source: "..\Redist\mfc70.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\msvcr70.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\msvcp70.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\..\Repository\AfxGadgets\AfxGadgets.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources
+Source: "..\..\Repository\AfxGadgets\AfxGadgets70.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources
-Source: "..\..\Repository\CodeProject\CodeProject.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources
+Source: "..\..\Repository\CodeProject\CodeProject70.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources
 Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources
 Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources
-Source: "..\..\Repository\Naughter\Naughter.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources
+Source: "..\..\Repository\Naughter\Naughter70.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources
 Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources
 Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources
-Source: "..\..\Repository\ZipArchive\ZipArchive.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources
+Source: "..\..\Repository\Naughter\Source\BinRes\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Source\BinRes"; Components: sources
+Source: "..\..\Repository\ZipArchive\ZipArchive70.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources
 Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources
 Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources
 Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources
-Source: "..\..\Repository\zlib\zlib.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources
+Source: "..\..\Repository\zlib\zlib70.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources
 Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources
 Source: "..\UpdateIt70.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources
 Source: "..\UpdateIt70.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources
