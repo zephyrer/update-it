@@ -14,7 +14,7 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-;; Setup.iss - setup script for Inno Setup compiler
+;; SetupUniversal.iss - setup script for Inno Setup compiler
 
 [Setup]
 AppName=UpdateIt!
@@ -54,40 +54,47 @@ Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custo
 Name: "sources"; Description: "Source Code"; Types: full custom
 
 [Files]
-Source: "..\70_ReleaseA\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\71_ReleaseA\UpdateIt.exe"; DestDir: "{app}"; Components: core
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
-Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core
-Source: "..\Redist\mfc70.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\Redist\msvcr70.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\Redist\msvcp70.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\..\Repository\AfxGadgets\AfxGadgets70.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources
-Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources
-Source: "..\..\Repository\CodeProject\CodeProject70.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources
-Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources
-Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources
-Source: "..\..\Repository\Naughter\Naughter70.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources
-Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources
-Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources
-Source: "..\..\Repository\Naughter\Source\BinRes\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Source\BinRes"; Components: sources
-Source: "..\..\Repository\ZipArchive\ZipArchive70.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources
-Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources
-Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources
-Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources
-Source: "..\..\Repository\zlib\zlib70.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources
-Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources
-Source: "..\UpdateIt70.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources
-Source: "..\UpdateIt70.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources
-Source: "..\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources
-Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources
-Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources
-Source: "..\Source\BinRes\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\Source\BinRes"; Components: sources
+Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
+Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\..\Repository\AfxGadgets\AfxGadgets71.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\CodeProject\CodeProject71.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Naughter\Naughter71.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Naughter\Source\BinRes\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Source\BinRes"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\include\openssl\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\OpenSSL\include\openssl"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\ssleay32MDd.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\ZipArchive\ZipArchive71.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\zlib71.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt71.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt71.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
+Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources; Flags: ignoreversion
+Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources; Flags: ignoreversion
+Source: "..\Source\BinRes\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\Source\BinRes"; Components: sources; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
 Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
-Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt70.sln"; Components: sources
+Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt71.sln"; Components: sources
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: quicklaunchicon

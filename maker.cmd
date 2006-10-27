@@ -1,20 +1,32 @@
 @echo off
+
 echo.
 echo Building executable...
 echo.
-devenv.com UpdateIt70.sln /rebuild MBCS_Release /project UpdateIt /nologo
+devenv.com UpdateIt71.sln /rebuild MBCS_Release /project UpdateIt /nologo
+
 echo Compiling documentation...
 echo.
 chdir .\HTML
 if exist UpdateIt.chm del UpdateIt.chm
 hhc.exe UpdateIt.hhp
 chdir ..\
-echo.
-echo.
-echo Creating installer...
-echo.
+
 if not exist .\Setup mkdir .\Setup
+if exist .\Setup\*.exe del .\Setup\*.exe
+
+echo.
+echo.
+echo Creating standard installer...
+echo.
 chdir .\Source
-if exist ..\Setup\*.exe del ..\Setup\*.exe
+iscc.exe Setup.iss
+chdir ..\
+
+echo.
+echo.
+echo Creating universal installer...
+echo.
+chdir .\Source
 iscc.exe SetupUniversal.iss
-chdir ..
+chdir ..\

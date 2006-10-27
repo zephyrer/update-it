@@ -45,7 +45,12 @@ DialogFontSize=8
 [Files]
 Source: "..\ReleaseA\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\ApacheLicense.rtf"; DestDir: "{app}"
+Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
+Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
