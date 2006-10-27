@@ -28,10 +28,20 @@ extern "C" __int64 __cdecl _abs64(__int64 num)
 #endif	// _MSC_VER
 
 // import libraries
+
 #pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "version.lib")
 
+#if defined(_DEBUG)
+#pragma comment(lib, "ssleay32MDd.lib")
+#pragma comment(lib, "libeay32MDd.lib")
+#else
+#pragma comment(lib, "ssleay32MD.lib")
+#pragma comment(lib, "libeay32MD.lib")
+#endif	// _DEBUG
+
 // linker options
+
 #if (_MSC_VER < 1300)
 #pragma comment(linker, "/osversion:4.1")
 #pragma comment(linker, "/subsystem:windows,4.10")
