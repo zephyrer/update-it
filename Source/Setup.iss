@@ -55,6 +55,7 @@ Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
 Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
+Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon
