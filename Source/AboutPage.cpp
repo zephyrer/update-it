@@ -96,6 +96,8 @@ BOOL CAboutPage::OnInitDialog(void)
 	m_linkRSA.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
 	m_linkNaughter.SetURL(CString(_T("http://www.naughter.com/")));
 	m_linkNaughter.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
+	m_linkOpenSSL.SetURL(CString(_T("http://www.slproweb.com/products/Win32OpenSSL.html")));
+	m_linkOpenSSL.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
 
 	return (TRUE);
 }
@@ -130,6 +132,7 @@ void CAboutPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LINK_ARTPOL, m_linkArtpol);
 	DDX_Control(pDX, IDC_LINK_RSA, m_linkRSA);
 	DDX_Control(pDX, IDC_LINK_NAUGHTER, m_linkNaughter);
+	DDX_Control(pDX, IDC_LINK_OPEN_SSL, m_linkOpenSSL);
 }
 
 #if defined(_DEBUG)
@@ -150,6 +153,7 @@ void CAboutPage::AssertValid(void) const
 	ASSERT_VALID(&m_linkArtpol);
 	ASSERT_VALID(&m_linkRSA);
 	ASSERT_VALID(&m_linkNaughter);
+	ASSERT_VALID(&m_linkOpenSSL);
 }
 
 //! This member function prints data members of this class (in the Debug version
@@ -169,6 +173,7 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_linkArtpol = " << m_linkArtpol;
 		dumpCtx << "\nm_linkRSA = " << m_linkRSA;
 		dumpCtx << "\nm_linkNaughter = " << m_linkNaughter;
+		dumpCtx << "\nm_linkOpenSSL = " << m_linkOpenSSL;
 	}
 	catch (CFileException* pXcpt)
 	{

@@ -66,6 +66,7 @@ public:
 	CString m_strHost;
 	int m_nSmtpPort;
 	CString m_strBody;
+	BOOL m_fUseSSL;
 
 // implementation helpers
 private:

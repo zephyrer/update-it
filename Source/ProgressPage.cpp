@@ -567,7 +567,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpTextPart.SetCharset(strCharSet);
 		smtpMsg.AddBodyPart(smtpTextPart);
 		smtpMsg.AddBodyPart(smtpZipPart);
-		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nSmtpPort);
+		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nSmtpPort, pActionPage->m_fUseSSL);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}
