@@ -104,6 +104,8 @@
 #define IDC_EDIT_EXCLUDE                1043
 #define IDC_CHECK_COMPARE               1044
 #define IDC_CHECK_PASSIVE               1045
+#define IDC_CHECK_USE_SSL               1046
+#define IDC_LINK_OPEN_SSL               1047
 
 // Next default values for new objects
 // 
@@ -112,7 +114,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        113
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1046
+#define _APS_NEXT_CONTROL_VALUE         1048
 #define _APS_NEXT_SYMED_VALUE           113
 #endif
 #endif

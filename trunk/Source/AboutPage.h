@@ -47,6 +47,7 @@ public:
 	CHyperLink m_linkArtpol;
 	CHyperLink m_linkRSA;
 	CHyperLink m_linkNaughter;
+	CHyperLink m_linkOpenSSL;
 
 // diagnostic services
 #if defined(_DEBUG)

@@ -53,7 +53,8 @@ END_MESSAGE_MAP()
 CActionPage::CActionPage(void):
 CBetterPropPage(IDD_PAGE_ACTION),
 m_nFtpPort(21),
-m_nSmtpPort(25)
+m_nSmtpPort(25),
+m_fUseSSL(FALSE)
 {
 	BYTE* pbTemp;
 	UINT cbBody;
@@ -97,6 +98,7 @@ m_nSmtpPort(25)
 			m_strBody.ReleaseBuffer();
 			delete[] pbTemp;
 		}
+		m_fUseSSL = pApp->GetProfileInt(_T("SMTP"), _T("UseSSL"), FALSE);
 	}
 }
 
@@ -127,6 +129,7 @@ BOOL CActionPage::OnInitDialog(void)
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_HOST));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_PORT));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_BODY));
+	tipWnd.AddTool(GetDlgItem(IDC_CHECK_USE_SSL));
 	tipWnd.Activate(TRUE);
 
 	// initialized
@@ -213,6 +216,7 @@ BOOL CActionPage::OnKillActive(void)
 				BYTE* pbTemp = reinterpret_cast<BYTE*>(m_strBody.GetBuffer(0));
 				pApp->WriteProfileBinary(_T("SMTP"), _T("body"), pbTemp, cbBody);
 				m_strBody.ReleaseBuffer();
+				pApp->WriteProfileInt(_T("SMTP"), _T("UseSSL"), m_fUseSSL);
 			}
 		}
 	}
@@ -258,9 +262,10 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 		DDX_Text(pDX, IDC_EDIT_HOST, m_strHost);
 		DDV_MaxChars(pDX, m_strHost, 255);
 		DDX_Text(pDX, IDC_EDIT_PORT, m_nSmtpPort);
-		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, 255);
+		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, 1024);
 		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
 		DDV_MaxChars(pDX, m_strBody, 1024);
+		DDX_Check(pDX, IDC_CHECK_USE_SSL, m_fUseSSL);
 	}
 }
 
@@ -319,6 +324,8 @@ void CActionPage::OnCheckSend(void)
 		SetDlgItemText(IDC_EDIT_SUBJECT, pApp->GetProfileString(_T("SMTP"), _T("subj")));
 		SetDlgItemText(IDC_EDIT_HOST, pApp->GetProfileString(_T("SMTP"), _T("host")));
 		SetDlgItemInt(IDC_EDIT_PORT, pApp->GetProfileInt(_T("SMTP"), _T("port"), 25), FALSE);
+		UINT fuCheck = pApp->GetProfileInt(_T("SMTP"), _T("UseSSL"), FALSE) ? BST_CHECKED : BST_UNCHECKED;
+		CheckDlgButton(IDC_CHECK_USE_SSL, fuCheck);
 	}
 	EnableMailControls(fEnable);
 }
