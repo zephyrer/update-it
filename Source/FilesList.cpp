@@ -17,6 +17,7 @@
 // FilesList.cpp - implementation of the CFilesList class
 
 #include "stdafx.h"
+
 #include "FilesList.h"
 #include "Resource.h"
 

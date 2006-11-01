@@ -17,12 +17,14 @@
 // MainWizard.cpp - implementation of the CMainWizard class
 
 #include "stdafx.h"
+
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
+#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"

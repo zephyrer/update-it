@@ -18,6 +18,7 @@
 // CustomPropSheet.cpp - implementation of the CCustomPropSheet class
 
 #include "stdafx.h"
+
 #include "CustomPropSheet.h"
 
 #if defined(__INTEL_COMPILER)
