@@ -17,12 +17,14 @@
 // ActionPage.cpp - implementation of the CActionPage class
 
 #include "stdafx.h"
+
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
+#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
@@ -48,13 +50,13 @@ BEGIN_MESSAGE_MAP(CActionPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_UPLOAD, OnCheckUpload)
 	ON_BN_CLICKED(IDC_CHECK_ZIP, OnCheckZip)
 	ON_BN_CLICKED(IDC_CHECK_SEND, OnCheckSend)
+	ON_BN_CLICKED(IDC_BUTTON_AUTH, OnButtonAuthentication)
 END_MESSAGE_MAP()
 
 CActionPage::CActionPage(void):
 CBetterPropPage(IDD_PAGE_ACTION),
 m_nFtpPort(21),
-m_nSmtpPort(25),
-m_fUseSSL(FALSE)
+m_nSmtpPort(25)
 {
 	BYTE* pbTemp;
 	UINT cbBody;
@@ -98,7 +100,6 @@ m_fUseSSL(FALSE)
 			m_strBody.ReleaseBuffer();
 			delete[] pbTemp;
 		}
-		m_fUseSSL = pApp->GetProfileInt(_T("SMTP"), _T("UseSSL"), FALSE);
 	}
 }
 
@@ -129,7 +130,6 @@ BOOL CActionPage::OnInitDialog(void)
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_HOST));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_PORT));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_BODY));
-	tipWnd.AddTool(GetDlgItem(IDC_CHECK_USE_SSL));
 	tipWnd.Activate(TRUE);
 
 	// initialized
@@ -216,7 +216,6 @@ BOOL CActionPage::OnKillActive(void)
 				BYTE* pbTemp = reinterpret_cast<BYTE*>(m_strBody.GetBuffer(0));
 				pApp->WriteProfileBinary(_T("SMTP"), _T("body"), pbTemp, cbBody);
 				m_strBody.ReleaseBuffer();
-				pApp->WriteProfileInt(_T("SMTP"), _T("UseSSL"), m_fUseSSL);
 			}
 		}
 	}
@@ -265,7 +264,6 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, 1024);
 		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
 		DDV_MaxChars(pDX, m_strBody, 1024);
-		DDX_Check(pDX, IDC_CHECK_USE_SSL, m_fUseSSL);
 	}
 }
 
@@ -324,10 +322,22 @@ void CActionPage::OnCheckSend(void)
 		SetDlgItemText(IDC_EDIT_SUBJECT, pApp->GetProfileString(_T("SMTP"), _T("subj")));
 		SetDlgItemText(IDC_EDIT_HOST, pApp->GetProfileString(_T("SMTP"), _T("host")));
 		SetDlgItemInt(IDC_EDIT_PORT, pApp->GetProfileInt(_T("SMTP"), _T("port"), 25), FALSE);
-		UINT fuCheck = pApp->GetProfileInt(_T("SMTP"), _T("UseSSL"), FALSE) ? BST_CHECKED : BST_UNCHECKED;
-		CheckDlgButton(IDC_CHECK_USE_SSL, fuCheck);
 	}
 	EnableMailControls(fEnable);
+}
+
+void CActionPage::OnButtonAuthentication(void)
+{
+	if (m_dlgAuth.DoModal() == IDOK)
+	{
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
+
+		pApp->WriteProfileInt(_T("SMTP"), _T("Authentication"), m_dlgAuth.m_eAuthMethod);
+		pApp->WriteProfileString(_T("SMTP"), _T("UserName"), m_dlgAuth.m_strUserName);
+		pApp->WriteProfilePassword(_T("SMTP"), _T("Password"), m_dlgAuth.m_strPassword);
+		pApp->WriteProfileInt(_T("SMTP"), _T("UseSSL"), m_dlgAuth.m_fUseSSL);
+	}
 }
 
 void CActionPage::EnableFtpControls(BOOL fEnable)
@@ -377,6 +387,7 @@ void CActionPage::AssertValid(void) const
 	CBetterPropPage::AssertValid();
 
 	// ...and then verify own state as well
+	ASSERT_VALID(&m_dlgAuth);
 }
 
 //! This member function prints data members of this class (in the Debug version
@@ -408,6 +419,7 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_strHost = " << m_strHost;
 		dumpCtx << "\nm_nSmtpPort = " << m_nSmtpPort;
 		dumpCtx << "\nm_strBody = " << m_strBody;
+		dumpCtx << "\nm_dlgAuth = " << m_dlgAuth;
 	}
 	catch (CFileException* pXcpt)
 	{

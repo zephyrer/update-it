@@ -17,12 +17,14 @@
 // ProgressPage.cpp - implementation of the CProgressPage class
 
 #include "stdafx.h"
+
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
+#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
@@ -548,6 +550,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 	ASSERT(pWiz != NULL);
 	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
 	ASSERT(pActionPage != NULL);
+	CAuthenticationDialog& dlgAuth = pActionPage->m_dlgAuth;
 
 	try
 	{
@@ -567,7 +570,10 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpTextPart.SetCharset(strCharSet);
 		smtpMsg.AddBodyPart(smtpTextPart);
 		smtpMsg.AddBodyPart(smtpZipPart);
-		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nSmtpPort, pActionPage->m_fUseSSL);
+		LPCTSTR pszUserName = dlgAuth.m_eAuthMethod != AUTH_NONE ? dlgAuth.m_strUserName : LPCTSTR(NULL);
+		LPCTSTR pszPassword = dlgAuth.m_eAuthMethod != AUTH_NONE ? dlgAuth.m_strPassword : LPCTSTR(NULL);
+		smtpConn.Connect(pActionPage->m_strHost, dlgAuth.m_eAuthMethod, pszUserName, pszPassword,
+			pActionPage->m_nSmtpPort, dlgAuth.m_fUseSSL);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}

@@ -17,6 +17,7 @@
 // BetterPropPage.cpp - implementation of the CBetterPropPage class
 
 #include "stdafx.h"
+
 #include "BetterPropPage.h"
 
 #if defined(__INTEL_COMPILER)
