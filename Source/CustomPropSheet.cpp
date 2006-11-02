@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2005 by Elijah Zarezky,
+// Copyright (c) 2002-2006 by Elijah Zarezky,
 // All rights reserved.
 // Portions copyright (c) 1996-1998 by Microsoft (KB Q142170).
 
@@ -20,6 +20,7 @@
 #include "stdafx.h"
 
 #include "CustomPropSheet.h"
+#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -48,6 +49,8 @@ BEGIN_MESSAGE_MAP(CCustomPropSheet, CPropertySheet)
 	ON_MESSAGE(PSM_RESIZE_PAGE, OnResizePage)
 END_MESSAGE_MAP()
 
+// construction/destruction
+
 CCustomPropSheet::CCustomPropSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage):
 CPropertySheet(nIDCaption, pParentWnd, iSelectPage)
 {
@@ -67,6 +70,8 @@ CCustomPropSheet::~CCustomPropSheet(void)
 		VERIFY(m_fontPage.DeleteObject());
 	}
 }
+
+// overridables
 
 BOOL CCustomPropSheet::OnInitDialog(void)
 {
@@ -147,6 +152,8 @@ BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
 	return (CPropertySheet::OnCommand(wParam, lParam));
 }
 
+// message map functions
+
 LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
 	CPropertyPage* pCurPage = GetActivePage();
@@ -154,6 +161,8 @@ LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 	pCurPage->MoveWindow(&m_rcPage);
 	return (0);
 }
+
+// implementation helpers
 
 void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 {
@@ -278,8 +287,8 @@ void CCustomPropSheet::BuildPropPageArray(void)
 
 	// get the font information
 	CWinApp* pApp = AfxGetApp();
-	CString strFaceName = pApp->GetProfileString(_T("Font"), _T("FaceName"));
-	WORD wFontSize = LOWORD(pApp->GetProfileInt(_T("Font"), _T("Size"), 0));
+	CString strFaceName = pApp->GetProfileString(SZ_REGK_FONT, SZ_REGV_FONT_FACENAME);
+	WORD wFontSize = LOWORD(pApp->GetProfileInt(SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
 	if (strFaceName.IsEmpty() || wFontSize == 0)
 	{
 		VERIFY(dlgTemp.GetFont(strFaceName, wFontSize));
@@ -304,6 +313,8 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	VERIFY(m_fontPage.CreateFontIndirect(&lf));
 	::ReleaseDC(NULL, hdcScreen);
 }
+
+// diagnostic services
 
 #if defined(_DEBUG)
 

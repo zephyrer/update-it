@@ -636,6 +636,9 @@
 				RelativePath="Source\ProgressPage.h">
 			</File>
 			<File
+				RelativePath=".\Source\Registry.h">
+			</File>
+			<File
 				RelativePath="Source\Resource.h">
 			</File>
 			<File
