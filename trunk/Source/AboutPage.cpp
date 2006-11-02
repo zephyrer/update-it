@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2005 by Elijah Zarezky,
+// Copyright (c) 2002-2006 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,6 +48,8 @@ IMPLEMENT_DYNAMIC(CAboutPage, CBetterPropPage)
 BEGIN_MESSAGE_MAP(CAboutPage, CBetterPropPage)
 END_MESSAGE_MAP()
 
+// construction
+
 //! Default ctor. Invokes inherited ctor first and then sets the PSP_PREMATURE
 //! flag, which causes the page to be created when the property sheet is created.
 //! @brief constructs a CAboutPage object
@@ -56,6 +58,8 @@ CBetterPropPage(IDD_PAGE_ABOUT)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 }
+
+// overridables
 
 //! This member function is called in by the framework response to the WM_INITDIALOG
 //! message. Its implementation first invokes the inherited method. Then it assigns
@@ -136,6 +140,8 @@ void CAboutPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LINK_NAUGHTER, m_linkNaughter);
 	DDX_Control(pDX, IDC_LINK_OPEN_SSL, m_linkOpenSSL);
 }
+
+// diagnostic services
 
 #if defined(_DEBUG)
 

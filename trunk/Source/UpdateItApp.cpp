@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2005 by Elijah Zarezky,
+// Copyright (c) 2002-2006 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,6 +51,8 @@ IMPLEMENT_DYNAMIC(CUpdateItApp, CWinApp)
 BEGIN_MESSAGE_MAP(CUpdateItApp, CWinApp)
 END_MESSAGE_MAP()
 
+// construction/destruction
+
 CUpdateItApp::CUpdateItApp(void)
 {
 	_tzset();
@@ -59,6 +61,8 @@ CUpdateItApp::CUpdateItApp(void)
 CUpdateItApp::~CUpdateItApp(void)
 {
 }
+
+// operations
 
 HICON CUpdateItApp::LoadSmIcon(LPCTSTR pszResName)
 {
@@ -164,6 +168,8 @@ BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time
 
 #endif	// _MFC_VER
 
+// overridables
+
 BOOL CUpdateItApp::InitInstance(void)
 {
 	::InitCommonControls();
@@ -181,6 +187,8 @@ int CUpdateItApp::ExitInstance(void)
 	::CoUninitialize();
 	return (CWinApp::ExitInstance());
 }
+
+// diagnostic services
 
 #if defined(_DEBUG)
 

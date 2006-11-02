@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2005 by Elijah Zarezky,
+// Copyright (c) 2002-2006 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,6 +41,8 @@ BEGIN_MESSAGE_MAP(CBetterPropPage, CPropertyPage)
 	ON_NOTIFY_RANGE(TTN_GETDISPINFO, 0, 0xFFFF, OnGetTipText)
 END_MESSAGE_MAP()
 
+// construction
+
 CBetterPropPage::CBetterPropPage(UINT idTemplate, UINT idCaption):
 CPropertyPage(idTemplate, idCaption)
 {
@@ -50,6 +52,8 @@ CBetterPropPage::CBetterPropPage(LPCTSTR pszTemplate, UINT idCaption):
 CPropertyPage(pszTemplate, idCaption)
 {
 }
+
+// overridables
 
 BOOL CBetterPropPage::OnInitDialog(void)
 {
@@ -99,6 +103,8 @@ BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 	return (CPropertyPage::PreTranslateMessage(pMsg));
 }
 
+// message map functions
+
 #if (_MFC_VER < 0x0700)
 
 void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMTTDISPINFO* pInfo, LRESULT* pnResult)
@@ -143,10 +149,14 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMHDR* pHdr, LRESULT* pnResult)
 
 #endif	// _MFC_VER
 
+// accessibility
+
 CToolTipCtrl& CBetterPropPage::GetToolTipCtrl(void)
 {
 	return (m_tipWnd);
 }
+
+// implementation helpers
 
 UINT AFX_CDECL CBetterPropPage::ActivationWatcher(void* pvParam)
 {
@@ -171,6 +181,8 @@ void CBetterPropPage::PumpWaitingMessages(void)
 #endif	// _MFC_VER
 	}
 }
+
+// diagnostic services
 
 #if defined(_DEBUG)
 

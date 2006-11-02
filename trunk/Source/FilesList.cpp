@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2005 by Elijah Zarezky,
+// Copyright (c) 2002-2006 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +44,8 @@ BEGIN_MESSAGE_MAP(CFilesList, CSortingListCtrl)
 	ON_NOTIFY_REFLECT(LVN_GETDISPINFO, OnGetDispInfo)
 END_MESSAGE_MAP()
 
+// construction/destruction
+
 CFilesList::CFilesList(void)
 {
 }
@@ -51,6 +53,8 @@ CFilesList::CFilesList(void)
 CFilesList::~CFilesList(void)
 {
 }
+
+// operations
 
 void CFilesList::InsertColumns(void)
 {
@@ -74,6 +78,8 @@ void CFilesList::InsertColumns(void)
 	strHeading.LoadString(IDS_SIZE);
 	InsertColumn(I_SIZE, strHeading, LVCFMT_RIGHT, cxWidth, I_SIZE);
 }
+
+// overridables
 
 int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 {
@@ -116,6 +122,8 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 		return (0);
 	}
 }
+
+// message map functions
 
 void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 {
@@ -165,6 +173,8 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 	}
 }
 
+// implementation helpers
+
 void CFilesList::SeparateThousands(CString& strNumber)
 {
 	if (!strNumber.IsEmpty())
@@ -187,6 +197,8 @@ void CFilesList::SeparateThousands(CString& strNumber)
 		}
 	}
 }
+
+// diagnostic services
 
 #if defined(_DEBUG)
 

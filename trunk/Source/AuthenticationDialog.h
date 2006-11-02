@@ -14,52 +14,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// OptionsPage.h - interface of the COptionsPage class
+// AuthenticationDialog.h - interface of the CAuthenticationDialog class
 
-#if !defined(__OptionsPage_h)
-#define __OptionsPage_h
+#if !defined(__AuthenticationDialog_h)
+#define __AuthenticationDialog_h
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif	// _MSC_VER
 
-//! Encapsulates the "Setting options" step of the UpdateIt! wizard.
-class COptionsPage: public CBetterPropPage
+class CAuthenticationDialog: public CDialog
 {
-	DECLARE_DYNAMIC(COptionsPage)
+	DECLARE_DYNAMIC(CAuthenticationDialog)
 	DECLARE_MESSAGE_MAP()
 
-// construction
+// construction/destruction
 public:
-	COptionsPage(void);
+	CAuthenticationDialog(CWnd* pParentWnd = NULL);
+	virtual ~CAuthenticationDialog(void);
 
 // overridables
-public:
-	virtual BOOL OnInitDialog(void);
-	virtual BOOL OnSetActive(void);
-	virtual BOOL OnKillActive(void);
-	virtual LRESULT OnWizardNext(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
 // message map functions
+public:
+	virtual BOOL OnInitDialog(void);
 protected:
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor);
-	afx_msg void OnButtonSource(void);
-	afx_msg void OnButtonTarget(void);
-	afx_msg void OnCheckCleanup(void);
+	afx_msg void OnComboAuthMethodSelChange(void);
 
 // attributes
 public:
-	CString m_strSource;
-	int m_nRecurse;
-	CString m_strExclude;
-	CString m_strTarget;
-	int m_nCleanup;
-	int m_nRecycle;
-	CDateTimeCtrl m_dtpWrite;
-	CTime m_timeWrite;
-	BOOL m_fCompare;
+	CComboBox m_comboAuthMethod;
+	CStatic m_textUserNamePrompt;
+	CEdit m_editUserName;
+	CStatic m_textPasswordPrompt;
+	CEdit m_editPassword;
+	CSmtpConnection::AuthenticationMethod m_eAuthMethod;
+	CString m_strUserName;
+	CString m_strPassword;
+	BOOL m_fUseSSL;
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -69,6 +63,6 @@ public:
 #endif
 };
 
-#endif	// __OptionsPage_h
+#endif	// __AuthenticationDialog_h
 
 // end of file

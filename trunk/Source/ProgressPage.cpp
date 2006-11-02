@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2005 by Elijah Zarezky,
+// Copyright (c) 2002-2006 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,10 +29,10 @@
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
-
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
+#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -52,6 +52,8 @@
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
+
+// private helpers
 
 #if (_MFC_VER >= 0x0700)
 
@@ -87,11 +89,15 @@ IMPLEMENT_DYNAMIC(CProgressPage, CBetterPropPage)
 BEGIN_MESSAGE_MAP(CProgressPage, CBetterPropPage)
 END_MESSAGE_MAP()
 
+// construction
+
 CProgressPage::CProgressPage(void):
 CBetterPropPage(IDD_PAGE_PROGRESS)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 }
+
+// overridables
 
 BOOL CProgressPage::OnSetActive(void)
 {
@@ -242,13 +248,13 @@ void CProgressPage::OnBecameActive(void)
 #if (_MFC_VER < 0x0700)
 	CWinApp* pApp = AfxGetApp();
 	ASSERT_VALID(pApp);
-	pApp->WriteProfileInt(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
+	pApp->WriteProfileInt(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-	pApp->WriteProfileTime(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
+	pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
 #endif	// _MFC_VER
-	pApp->WriteProfileString(_T("Targets"), pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
+	pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
@@ -274,6 +280,8 @@ void CProgressPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PROGRESS_TOTAL, m_progressTotal);
 }
 
+// CZipActionCallback overridables
+
 bool CProgressPage::Callback(int iProgress)
 {
 	m_textTotal.SetWindowText(m_szFileInZip);
@@ -281,6 +289,8 @@ bool CProgressPage::Callback(int iProgress)
 	PumpWaitingMessages();
 	return (true);
 }
+
+// implementation helpers
 
 void CProgressPage::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
 {
@@ -562,7 +572,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpZipPart.SetFilename(strZipPath);
 		smtpTextPart.SetText(pActionPage->m_strBody);
 		CWinApp* pApp = AfxGetApp();
-		CString strCharSet = pApp->GetProfileString(_T("SMTP"), _T("charset"));
+		CString strCharSet = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET);
 		if (strCharSet.IsEmpty())
 		{
 			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
@@ -798,6 +808,8 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 		pErr->Delete();
 	}
 }
+
+// diagnostic services
 
 #if defined(_DEBUG)
 
