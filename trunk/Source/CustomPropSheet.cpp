@@ -273,7 +273,7 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 
 void CCustomPropSheet::BuildPropPageArray(void)
 {
-	CDialogTemplate dlgTemp;
+	CDialogTemplate dlgtPageRes;
 	LOGFONT lf;
 
 	CPropertySheet::BuildPropPageArray();
@@ -283,7 +283,7 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	ASSERT(pPage != NULL);
 
 	// load the dialog template
-	VERIFY(dlgTemp.Load(pPage->m_psp.pszTemplate));
+	VERIFY(dlgtPageRes.Load(pPage->m_psp.pszTemplate));
 
 	// get the font information
 	CWinApp* pApp = AfxGetApp();
@@ -291,7 +291,7 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	WORD wFontSize = LOWORD(pApp->GetProfileInt(SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
 	if (strFaceName.IsEmpty() || wFontSize == 0)
 	{
-		VERIFY(dlgTemp.GetFont(strFaceName, wFontSize));
+		VERIFY(dlgtPageRes.GetFont(strFaceName, wFontSize));
 	}
 	if (m_fontPage.m_hObject != NULL)
 	{
