@@ -14,46 +14,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// AuthenticationDialog.h - interface of the CAuthenticationDialog class
+// CustomDialog.h - interface of the CCustomDialog class
 
-#if !defined(__AuthenticationDialog_h)
-#define __AuthenticationDialog_h
+#if !defined(__CustomDialog_h)
+#define __CustomDialog_h
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif	// _MSC_VER
 
-class CAuthenticationDialog: public CCustomDialog
+class CCustomDialog: public CDialog
 {
-	DECLARE_DYNAMIC(CAuthenticationDialog)
+	DECLARE_DYNAMIC(CCustomDialog)
 	DECLARE_MESSAGE_MAP()
 
 // construction/destruction
 public:
-	CAuthenticationDialog(CWnd* pParentWnd = NULL);
-	virtual ~CAuthenticationDialog(void);
+	explicit CCustomDialog(UINT uResID, CWnd* pParentWnd = NULL);
+	explicit CCustomDialog(LPCTSTR pszResName, CWnd* pParentWnd = NULL);
+	virtual ~CCustomDialog(void);
 
 // overridables
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
-
-// message map functions
 public:
-	virtual BOOL OnInitDialog(void);
-protected:
-	afx_msg void OnComboAuthMethodSelChange(void);
-
-// attributes
-public:
-	CComboBox m_comboAuthMethod;
-	CStatic m_textUserNamePrompt;
-	CEdit m_editUserName;
-	CStatic m_textPasswordPrompt;
-	CEdit m_editPassword;
-	CSmtpConnection::AuthenticationMethod m_eAuthMethod;
-	CString m_strUserName;
-	CString m_strPassword;
-	BOOL m_fUseSSL;
+	virtual INT_PTR DoModal(void);
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -63,6 +46,6 @@ public:
 #endif
 };
 
-#endif	// __AuthenticationDialog_h
+#endif	// __CustomDialog_h
 
 // end of file
