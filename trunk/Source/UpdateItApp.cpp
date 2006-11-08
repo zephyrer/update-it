@@ -24,6 +24,7 @@
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
+#include "CustomDialog.h"
 #include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"

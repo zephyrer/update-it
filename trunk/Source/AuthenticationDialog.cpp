@@ -19,6 +19,7 @@
 #include "stdafx.h"
 
 #include "Resource.h"
+#include "CustomDialog.h"
 #include "AuthenticationDialog.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
@@ -39,17 +40,17 @@ static char THIS_FILE[] = __FILE__;
 #endif	// _DEBUG
 
 // object model
-IMPLEMENT_DYNAMIC(CAuthenticationDialog, CDialog)
+IMPLEMENT_DYNAMIC(CAuthenticationDialog, CCustomDialog)
 
 // message map
-BEGIN_MESSAGE_MAP(CAuthenticationDialog, CDialog)
+BEGIN_MESSAGE_MAP(CAuthenticationDialog, CCustomDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_AUTH_METHOD, OnComboAuthMethodSelChange)
 END_MESSAGE_MAP()
 
 // construction/destruction
 
 CAuthenticationDialog::CAuthenticationDialog(CWnd* pParentWnd):
-CDialog(IDD_AUTHENTICATION, pParentWnd),
+CCustomDialog(IDD_AUTHENTICATION, pParentWnd),
 m_eAuthMethod(CSmtpConnection::AUTH_NONE),
 m_fUseSSL(FALSE)
 {

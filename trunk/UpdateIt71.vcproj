@@ -386,6 +386,33 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Source\CustomDialog.cpp">
+				<FileConfiguration
+					Name="MBCS_Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS_Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode_Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode_Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="Source\CustomPropSheet.cpp">
 				<FileConfiguration
 					Name="MBCS_Debug|Win32">
@@ -616,6 +643,9 @@
 			</File>
 			<File
 				RelativePath="Source\BetterPropPage.h">
+			</File>
+			<File
+				RelativePath=".\Source\CustomDialog.h">
 			</File>
 			<File
 				RelativePath="Source\CustomPropSheet.h">
