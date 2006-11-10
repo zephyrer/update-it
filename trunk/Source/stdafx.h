@@ -81,7 +81,7 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/StringConv.h"
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
-#include "../../Repository/Naughter/Source/Smtp.h"
+#include "../../Repository/Naughter/Source/PJNSMTP.h"
 
 #if (_MFC_VER < 0x0700)
 #include "../../Repository/atlmfc71/Source/FileDialogEx.h"
