@@ -83,7 +83,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3410,62
+ FILEVERSION 1,0,3696,76
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -102,9 +102,9 @@ BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Spb Software House"
             VALUE "FileDescription", "UpdateIt Application Executable"
-            VALUE "FileVersion", "1.0.3410"
+            VALUE "FileVersion", "1.0.3696"
             VALUE "InternalName", "UpdateIt"
-            VALUE "LegalCopyright", "Copyright © 2002–2006 by Elijah Zarezky"
+            VALUE "LegalCopyright", "Copyright © 2002–2007 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
             VALUE "OriginalFilename", "UpdateIt.exe"
             VALUE "ProductName", "Power Gadgets"
@@ -243,7 +243,7 @@ CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
-    LTEXT           "Copyright © 2002-2006 by Elijah Zarezky",IDC_STATIC,4,
+    LTEXT           "Copyright © 2002-2007 by Elijah Zarezky",IDC_STATIC,4,
                     24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
     LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
@@ -262,7 +262,7 @@ BEGIN
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
                     IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.64 (13 October 2006)",
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.65 (9 November 2006)",
                     IDC_STATIC,16,156,314,16
     LTEXT           "Copyright © 1998-2006 by PJ Naughter",IDC_STATIC,16,174,
                     132,10,SS_CENTERIMAGE
