@@ -42,6 +42,8 @@ public:
 	virtual BOOL OnInitDialog(void);
 protected:
 	afx_msg void OnComboAuthMethodSelChange(void);
+	afx_msg void OnEditUserNameChange(void);
+	afx_msg void OnEditPasswordChange(void);
 
 // attributes
 public:
@@ -50,10 +52,15 @@ public:
 	CEdit m_editUserName;
 	CStatic m_textPasswordPrompt;
 	CEdit m_editPassword;
+	CButton m_checkUseSSL;
 	CSmtpConnection::AuthenticationMethod m_eAuthMethod;
 	CString m_strUserName;
 	CString m_strPassword;
 	BOOL m_fUseSSL;
+
+// implementation helpers
+private:
+	void UpdateControls(void);
 
 // diagnostic services
 #if defined(_DEBUG)

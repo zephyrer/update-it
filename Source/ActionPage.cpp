@@ -342,9 +342,12 @@ void CActionPage::OnButtonAuthentication(void)
 		ASSERT_VALID(pApp);
 
 		pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, m_dlgAuth.m_eAuthMethod);
-		pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME, m_dlgAuth.m_strUserName);
-		pApp->WriteProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD, m_dlgAuth.m_strPassword);
-		pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, m_dlgAuth.m_fUseSSL);
+		if (m_dlgAuth.m_eAuthMethod != CSmtpConnection::AUTH_NONE)
+		{
+			pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME, m_dlgAuth.m_strUserName);
+			pApp->WriteProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD, m_dlgAuth.m_strPassword);
+			pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, m_dlgAuth.m_fUseSSL);
+		}
 	}
 }
 
