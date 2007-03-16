@@ -45,6 +45,8 @@ IMPLEMENT_DYNAMIC(CAuthenticationDialog, CCustomDialog)
 // message map
 BEGIN_MESSAGE_MAP(CAuthenticationDialog, CCustomDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_AUTH_METHOD, OnComboAuthMethodSelChange)
+	ON_EN_CHANGE(IDC_EDIT_USERNAME, OnEditUserNameChange)
+	ON_EN_CHANGE(IDC_EDIT_PASSWORD, OnEditPasswordChange)
 END_MESSAGE_MAP()
 
 // construction/destruction
@@ -59,9 +61,12 @@ m_fUseSSL(FALSE)
 
 	m_eAuthMethod = static_cast<CSmtpConnection::AuthenticationMethod>(pApp->GetProfileInt(SZ_REGK_SMTP,
 		SZ_REGV_SMTP_AUTHENTICATION, CSmtpConnection::AUTH_NONE));
-	m_strUserName = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
-	m_strPassword = pApp->GetProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
-	m_fUseSSL = pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
+	if (m_eAuthMethod != CSmtpConnection::AUTH_NONE)
+	{
+		m_strUserName = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
+		m_strPassword = pApp->GetProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
+		m_fUseSSL = pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
+	}
 }
 
 CAuthenticationDialog::~CAuthenticationDialog(void)
@@ -74,7 +79,7 @@ BOOL CAuthenticationDialog::OnInitDialog(void)
 {
 	CDialog::OnInitDialog();
 
-	OnComboAuthMethodSelChange();
+	UpdateControls();
 
 	return (TRUE);
 }
@@ -88,6 +93,7 @@ void CAuthenticationDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_USERNAME, m_editUserName);
 	DDX_Control(pDX, IDC_STATIC_PASSWORD_PROMPT, m_textPasswordPrompt);
 	DDX_Control(pDX, IDC_EDIT_PASSWORD, m_editPassword);
+	DDX_Control(pDX, IDC_CHECK_USE_SSL, m_checkUseSSL);
 
 	DDX_CBIndex(pDX, IDC_COMBO_AUTH_METHOD, *reinterpret_cast<int*>(&m_eAuthMethod));
 	DDX_Text(pDX, IDC_EDIT_USERNAME, m_strUserName);
@@ -99,13 +105,58 @@ void CAuthenticationDialog::DoDataExchange(CDataExchange* pDX)
 
 void CAuthenticationDialog::OnComboAuthMethodSelChange(void)
 {
-	using CSmtpConnection::AUTH_NONE;
+	UpdateControls();
+}
 
-	int iCurSel = m_comboAuthMethod.GetCurSel();
-	m_textUserNamePrompt.EnableWindow(iCurSel != AUTH_NONE);
-	m_editUserName.EnableWindow(iCurSel != AUTH_NONE);
-	m_textPasswordPrompt.EnableWindow(iCurSel != AUTH_NONE);
-	m_editPassword.EnableWindow(iCurSel != AUTH_NONE);
+void CAuthenticationDialog::OnEditUserNameChange(void)
+{
+	if (m_comboAuthMethod.GetCurSel() != CSmtpConnection::AUTH_NONE)
+	{
+		bool fHasUserName = m_editUserName.GetWindowTextLength() > 0;
+		bool fHasPassword = m_editPassword.GetWindowTextLength() > 0;
+		GetDlgItem(IDOK)->EnableWindow(fHasUserName && fHasPassword);
+	}
+}
+
+void CAuthenticationDialog::OnEditPasswordChange(void)
+{
+	if (m_comboAuthMethod.GetCurSel() != CSmtpConnection::AUTH_NONE)
+	{
+		bool fHasUserName = m_editUserName.GetWindowTextLength() > 0;
+		bool fHasPassword = m_editPassword.GetWindowTextLength() > 0;
+		GetDlgItem(IDOK)->EnableWindow(fHasUserName && fHasPassword);
+	}
+}
+
+// implementation helpers
+
+void CAuthenticationDialog::UpdateControls(void)
+{
+	// precondition
+	ASSERT(::IsWindow(m_hWnd));
+
+	if (m_comboAuthMethod.GetCurSel() != CSmtpConnection::AUTH_NONE)
+	{
+		m_textUserNamePrompt.EnableWindow(TRUE);
+		m_editUserName.EnableWindow(TRUE);
+		m_textPasswordPrompt.EnableWindow(TRUE);
+		m_editPassword.EnableWindow(TRUE);
+		m_checkUseSSL.EnableWindow(TRUE);
+		bool fHasUserName = m_editUserName.GetWindowTextLength() > 0;
+		bool fHasPassword = m_editPassword.GetWindowTextLength() > 0;
+		GetDlgItem(IDOK)->EnableWindow(fHasUserName && fHasPassword);
+	}
+	else {
+		m_textUserNamePrompt.EnableWindow(FALSE);
+		m_editUserName.SetWindowText(NULL);
+		m_editUserName.EnableWindow(FALSE);
+		m_textPasswordPrompt.EnableWindow(FALSE);
+		m_editPassword.SetWindowText(NULL);
+		m_editPassword.EnableWindow(FALSE);
+		m_checkUseSSL.SetCheck(BST_UNCHECKED);
+		m_checkUseSSL.EnableWindow(FALSE);
+		GetDlgItem(IDOK)->EnableWindow(TRUE);
+	}
 }
 
 // diagnostic services
@@ -123,6 +174,7 @@ void CAuthenticationDialog::AssertValid(void) const
 	ASSERT_VALID(&m_editUserName);
 	ASSERT_VALID(&m_textPasswordPrompt);
 	ASSERT_VALID(&m_editPassword);
+	ASSERT_VALID(&m_checkUseSSL);
 }
 
 void CAuthenticationDialog::Dump(CDumpContext& dumpCtx) const
@@ -138,6 +190,7 @@ void CAuthenticationDialog::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_editUserName = " << m_editUserName;
 		dumpCtx << "\nm_textPasswordPrompt = " << m_textPasswordPrompt;
 		dumpCtx << "\nm_editPassword = " << m_editPassword;
+		dumpCtx << "\nm_checkUseSSL = " << m_checkUseSSL;
 		dumpCtx << "\nm_eAuthMethod = " << m_eAuthMethod;
 		dumpCtx << "\nm_strUserName = " << m_strUserName;
 		dumpCtx << "\nm_strPassword = " << m_strPassword;
