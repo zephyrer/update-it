@@ -75,7 +75,7 @@ CCustomPropSheet::~CCustomPropSheet(void)
 
 BOOL CCustomPropSheet::OnInitDialog(void)
 {
-	CPropertySheet::OnInitDialog();
+	__super::OnInitDialog();
 
 	// get the font for the first active page
 	CPropertyPage* pCurPage = GetActivePage();
@@ -139,7 +139,7 @@ BOOL CCustomPropSheet::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pnResult)
 	{
 		PostMessage(PSM_RESIZE_PAGE);
 	}
-	return (CPropertySheet::OnNotify(wParam, lParam, pnResult));
+	return (__super::OnNotify(wParam, lParam, pnResult));
 }
 
 BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
@@ -149,7 +149,7 @@ BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
 	{
 		PostMessage(PSM_RESIZE_PAGE);
 	}
-	return (CPropertySheet::OnCommand(wParam, lParam));
+	return (__super::OnCommand(wParam, lParam));
 }
 
 // message map functions
@@ -276,7 +276,7 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	CDialogTemplate dlgtPageRes;
 	LOGFONT lf;
 
-	CPropertySheet::BuildPropPageArray();
+	__super::BuildPropPageArray();
 
 	// get first page
 	CPropertyPage* pPage = GetPage(0);
@@ -326,7 +326,7 @@ void CCustomPropSheet::BuildPropPageArray(void)
 void CCustomPropSheet::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CPropertySheet::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_fontPage);
@@ -341,7 +341,7 @@ void CCustomPropSheet::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CPropertySheet::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_rcPage = " << m_rcPage;

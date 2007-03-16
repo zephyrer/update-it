@@ -205,7 +205,7 @@ void CFilesList::SeparateThousands(CString& strNumber)
 void CFilesList::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CSortingListCtrl::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify our own state as well
 }
@@ -215,7 +215,7 @@ void CFilesList::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CSortingListCtrl::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 	}

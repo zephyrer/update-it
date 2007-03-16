@@ -105,7 +105,7 @@ BOOL CMainWizard::OnInitDialog(void)
 	DWORD crTipBk, crTipText;
 
 	// invoke inherited handler
-	BOOL fResult = CCustomPropSheet::OnInitDialog();
+	BOOL fResult = __super::OnInitDialog();
 
 	// set wizard's icons
 	SetIcon(m_hIcon, TRUE);
@@ -177,7 +177,7 @@ BOOL CMainWizard::OnInitDialog(void)
 
 void CMainWizard::OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu)
 {
-	CCustomPropSheet::OnInitMenuPopup(pPopupMenu, uIndex, fSysMenu);
+	__super::OnInitMenuPopup(pPopupMenu, uIndex, fSysMenu);
 	if (fSysMenu)
 	{
 		ASSERT_VALID(pPopupMenu);
@@ -197,7 +197,7 @@ void CMainWizard::OnSysCommand(UINT uID, LPARAM lParam)
 		OnScImportSettings();
 		break;
 	default:
-		CCustomPropSheet::OnSysCommand(uID, lParam);
+		__super::OnSysCommand(uID, lParam);
 		break;
 	}
 }
@@ -274,7 +274,7 @@ void CMainWizard::OnScImportSettings(void)
 void CMainWizard::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CCustomPropSheet::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_pageAbout);
@@ -293,7 +293,7 @@ void CMainWizard::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CCustomPropSheet::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_hIcon = " << m_hIcon;

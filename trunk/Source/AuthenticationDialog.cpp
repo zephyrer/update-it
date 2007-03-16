@@ -77,7 +77,7 @@ CAuthenticationDialog::~CAuthenticationDialog(void)
 
 BOOL CAuthenticationDialog::OnInitDialog(void)
 {
-	CDialog::OnInitDialog();
+	__super::OnInitDialog();
 
 	UpdateControls();
 
@@ -86,7 +86,7 @@ BOOL CAuthenticationDialog::OnInitDialog(void)
 
 void CAuthenticationDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_COMBO_AUTH_METHOD, m_comboAuthMethod);
 	DDX_Control(pDX, IDC_STATIC_USERNAME_PROMPT, m_textUserNamePrompt);
@@ -166,7 +166,7 @@ void CAuthenticationDialog::UpdateControls(void)
 void CAuthenticationDialog::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CDialog::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify our own state as well
 	ASSERT_VALID(&m_comboAuthMethod);
@@ -182,7 +182,7 @@ void CAuthenticationDialog::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CDialog::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_comboAuthMethod = " << m_comboAuthMethod;

@@ -101,7 +101,7 @@ BOOL CFilesPage::OnInitDialog(void)
 	CString strHeading;
 
 	// invoke inherited handler
-	BOOL fResult = CBetterPropPage::OnInitDialog();
+	BOOL fResult = __super::OnInitDialog();
 
 	// setup the file list...
 	m_listFiles.SetExtendedStyle(LVS_EX_FULLROWSELECT | (m_fShowGrid ? LVS_EX_GRIDLINES : 0));
@@ -121,7 +121,7 @@ BOOL CFilesPage::OnInitDialog(void)
 
 BOOL CFilesPage::OnSetActive(void)
 {
-	BOOL fSuccess = CBetterPropPage::OnSetActive();
+	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
 		if (m_listFiles.GetItemCount() == 0)
@@ -143,7 +143,7 @@ void CFilesPage::OnBecameActive(void)
 
 	CString strInfo;
 
-	CBetterPropPage::OnBecameActive();
+	__super::OnBecameActive();
 	if (m_listFiles.GetItemCount() == 0)
 	{
 		// prepare controls
@@ -207,12 +207,12 @@ LRESULT CFilesPage::OnWizardBack(void)
 	strInfo.LoadString(IDS_DISCARDING_SEARCH);
 	m_textInfo.SetWindowText(strInfo);
 	CleanupFileList();
-	return (CBetterPropPage::OnWizardBack());
+	return (__super::OnWizardBack());
 }
 
 void CFilesPage::DoDataExchange(CDataExchange* pDX)
 {
-	CBetterPropPage::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STATIC_INFO, m_textInfo);
 	DDX_Control(pDX, IDC_LIST_FILES, m_listFiles);
 	DDX_Control(pDX, IDC_BUTTON_REMOVE, m_buttonRemove);
@@ -223,7 +223,7 @@ void CFilesPage::DoDataExchange(CDataExchange* pDX)
 void CFilesPage::OnDestroy(void)
 {
 	CleanupFileList();
-	CBetterPropPage::OnDestroy();
+	__super::OnDestroy();
 }
 
 void CFilesPage::OnItemChanged(NMHDR* /*pHdr*/, LRESULT* pnResult)
@@ -541,7 +541,7 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 void CFilesPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CBetterPropPage::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_textInfo);
@@ -559,7 +559,7 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CBetterPropPage::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_fShowGrid = " << m_fShowGrid;

@@ -93,7 +93,7 @@ INT_PTR CCustomDialog::DoModal(void)
 		InitModalIndirect(pTemplate, NULL, pvDlgInit);
 
 		// display dialog box
-		INT_PTR nResult = CDialog::DoModal();
+		INT_PTR nResult = __super::DoModal();
 
 		if (hResData != NULL)
 		{
@@ -111,7 +111,7 @@ INT_PTR CCustomDialog::DoModal(void)
 	}
 	else {
 		// no custom font is specified
-		return (CDialog::DoModal());
+		return (__super::DoModal());
 	}
 }
 
@@ -122,7 +122,7 @@ INT_PTR CCustomDialog::DoModal(void)
 void CCustomDialog::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CDialog::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify our own state as well
 }
@@ -132,7 +132,7 @@ void CCustomDialog::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CDialog::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 	}

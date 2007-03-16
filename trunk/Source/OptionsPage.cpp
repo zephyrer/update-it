@@ -100,7 +100,7 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 BOOL COptionsPage::OnInitDialog(void)
 {
 	// invoke inherited handler
-	BOOL fResult = CBetterPropPage::OnInitDialog();
+	BOOL fResult = __super::OnInitDialog();
 
 	// setup controls as needed
 	m_dtpWrite.SetFormat(_T("dd.MM.yyyy   HH:mm:ss"));
@@ -133,7 +133,7 @@ BOOL COptionsPage::OnInitDialog(void)
 
 BOOL COptionsPage::OnSetActive(void)
 {
-	BOOL fSuccess = CBetterPropPage::OnSetActive();
+	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
 		GetDlgItem(IDC_CHECK_RECYCLE)->EnableWindow(m_nCleanup == BST_CHECKED);
@@ -146,7 +146,7 @@ BOOL COptionsPage::OnSetActive(void)
 
 BOOL COptionsPage::OnKillActive(void)
 {
-	BOOL fSuccess = CBetterPropPage::OnKillActive();
+	BOOL fSuccess = __super::OnKillActive();
 	if (fSuccess)
 	{
 		CWinApp* pApp = AfxGetApp();
@@ -182,12 +182,12 @@ LRESULT COptionsPage::OnWizardNext(void)
 		return (-1);
 	}
 	m_dtpWrite.GetTime(m_timeWrite);
-	return (CBetterPropPage::OnWizardNext());
+	return (__super::OnWizardNext());
 }
 
 void COptionsPage::DoDataExchange(CDataExchange* pDX)
 {
-	CBetterPropPage::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT_SOURCE, m_strSource);
 	DDV_MaxChars(pDX, m_strSource, _MAX_PATH);
 	DDX_Text(pDX, IDC_EDIT_EXCLUDE, m_strExclude);
@@ -218,7 +218,7 @@ HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)
 			break;
 		}
 	default:
-		hbr = CBetterPropPage::OnCtlColor(pDC, pWnd, uCtlColor);
+		hbr = __super::OnCtlColor(pDC, pWnd, uCtlColor);
 	}
 	return (hbr);
 }
@@ -289,7 +289,7 @@ void COptionsPage::OnCheckCleanup(void)
 void COptionsPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CBetterPropPage::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_dtpWrite);
@@ -304,7 +304,7 @@ void COptionsPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CBetterPropPage::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_strSource = " << m_strSource;
