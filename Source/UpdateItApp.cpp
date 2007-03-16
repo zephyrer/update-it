@@ -186,7 +186,7 @@ BOOL CUpdateItApp::InitInstance(void)
 int CUpdateItApp::ExitInstance(void)
 {
 	::CoUninitialize();
-	return (CWinApp::ExitInstance());
+	return (__super::ExitInstance());
 }
 
 // diagnostic services
@@ -201,7 +201,7 @@ int CUpdateItApp::ExitInstance(void)
 void CUpdateItApp::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CWinApp::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 }
@@ -215,7 +215,7 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CWinApp::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 	}

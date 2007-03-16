@@ -112,7 +112,7 @@ m_nSmtpPort(25)
 BOOL CActionPage::OnInitDialog(void)
 {
 	// invoke inherited handler
-	BOOL fResult = CBetterPropPage::OnInitDialog();
+	BOOL fResult = __super::OnInitDialog();
 
 	// adjust page as needed
 	ShowMailControls(m_fCanSend);
@@ -144,7 +144,7 @@ BOOL CActionPage::OnInitDialog(void)
 
 BOOL CActionPage::OnSetActive(void)
 {
-	BOOL fSuccess = CBetterPropPage::OnSetActive();
+	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
 		EnableFtpControls(m_nUpload == BST_CHECKED);
@@ -190,7 +190,7 @@ BOOL CActionPage::OnKillActive(void)
 	}
 
 	// invoke inherited handler
-	BOOL fSuccess = CBetterPropPage::OnKillActive();
+	BOOL fSuccess = __super::OnKillActive();
 
 	if (fSuccess)
 	{
@@ -231,7 +231,7 @@ BOOL CActionPage::OnKillActive(void)
 
 void CActionPage::DoDataExchange(CDataExchange* pDX)
 {
-	CBetterPropPage::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
 
 	// general actions
 	DDX_Radio(pDX, IDC_RADIO_COPY, m_nAction);
@@ -399,7 +399,7 @@ void CActionPage::ShowMailControls(BOOL fShow)
 void CActionPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CBetterPropPage::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_dlgAuth);
@@ -414,7 +414,7 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CBetterPropPage::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_nAction = " << m_nAction;

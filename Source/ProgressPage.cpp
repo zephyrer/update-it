@@ -102,7 +102,7 @@ CBetterPropPage(IDD_PAGE_PROGRESS)
 
 BOOL CProgressPage::OnSetActive(void)
 {
-	BOOL fSuccess = CBetterPropPage::OnSetActive();
+	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
@@ -125,7 +125,7 @@ void CProgressPage::OnBecameActive(void)
 	CString strWorking;
 	CString strZipPath;
 
-	CBetterPropPage::OnBecameActive();
+	__super::OnBecameActive();
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
 	COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
@@ -267,12 +267,12 @@ void CProgressPage::OnBecameActive(void)
 
 BOOL CProgressPage::OnWizardFinish(void)
 {
-	return (CBetterPropPage::OnWizardFinish());
+	return (__super::OnWizardFinish());
 }
 
 void CProgressPage::DoDataExchange(CDataExchange* pDX)
 {
-	CBetterPropPage::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STATIC_WORKING, m_textWorking);
 	DDX_Control(pDX, IDC_ANIMATE_BANNER, m_animateBanner);
 	DDX_Control(pDX, IDC_STATIC_FILE, m_textFile);
@@ -822,7 +822,7 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 void CProgressPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CBetterPropPage::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_textWorking);
@@ -842,7 +842,7 @@ void CProgressPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CBetterPropPage::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_textWorking = " << m_textWorking;

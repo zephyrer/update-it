@@ -78,7 +78,7 @@ BOOL CAboutPage::OnInitDialog(void)
 	UINT cchFileVer;
 	CString strVersion;
 
-	CBetterPropPage::OnInitDialog();
+	__super::OnInitDialog();
 
 	// obtain and show version info
 	::GetModuleFileName(AfxGetInstanceHandle(), szExeName, _MAX_PATH);
@@ -116,7 +116,7 @@ BOOL CAboutPage::OnInitDialog(void)
 //! @return nonzero if the page was successfully set active; otherwise 0.
 BOOL CAboutPage::OnSetActive(void)
 {
-	BOOL fSuccess = CBetterPropPage::OnSetActive();
+	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
@@ -133,7 +133,8 @@ BOOL CAboutPage::OnSetActive(void)
 //! @param pDX a pointer to a CDataExchange object.
 void CAboutPage::DoDataExchange(CDataExchange* pDX)
 {
-	CBetterPropPage::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
+
 	DDX_Control(pDX, IDC_LINK_ZAREZKY, m_linkZarezky);
 	DDX_Control(pDX, IDC_LINK_ZLIB, m_linkZLib);
 	DDX_Control(pDX, IDC_LINK_ARTPOL, m_linkArtpol);
@@ -154,7 +155,7 @@ void CAboutPage::DoDataExchange(CDataExchange* pDX)
 void CAboutPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CBetterPropPage::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_linkZarezky);
@@ -174,7 +175,7 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CBetterPropPage::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_linkZarezky = " << m_linkZarezky;

@@ -57,14 +57,14 @@ CPropertyPage(pszTemplate, idCaption)
 
 BOOL CBetterPropPage::OnInitDialog(void)
 {
-	BOOL fResult = CPropertyPage::OnInitDialog();
+	BOOL fResult = __super::OnInitDialog();
 	m_tipWnd.Create(this);
 	return (fResult);
 }
 
 BOOL CBetterPropPage::OnSetActive(void)
 {
-	BOOL fSuccess = CPropertyPage::OnSetActive();
+	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
 		AfxBeginThread(ActivationWatcher, m_hWnd);
@@ -90,7 +90,7 @@ LRESULT CBetterPropPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		OnBecameActive();
 		return (0);
 	default:
-		return (CPropertyPage::WindowProc(uMsg, wParam, lParam));
+		return (__super::WindowProc(uMsg, wParam, lParam));
 	}
 }
 
@@ -100,7 +100,7 @@ BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 	{
 		m_tipWnd.RelayEvent(pMsg);
 	}
-	return (CPropertyPage::PreTranslateMessage(pMsg));
+	return (__super::PreTranslateMessage(pMsg));
 }
 
 // message map functions
@@ -194,7 +194,7 @@ void CBetterPropPage::PumpWaitingMessages(void)
 void CBetterPropPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	CPropertyPage::AssertValid();
+	__super::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_tipWnd);
@@ -209,7 +209,7 @@ void CBetterPropPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		CPropertyPage::Dump(dumpCtx);
+		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_tipWnd = " << m_tipWnd;
