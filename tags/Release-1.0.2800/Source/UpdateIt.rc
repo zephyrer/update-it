@@ -1,0 +1,487 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "Resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "Resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "#include ""../../Repository/Naughter/Source/Smtp.rc""\r\n"
+    "\r\n"
+    "// English (U.S.) resources\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "\r\n"
+    "#if defined(_WIN32)\r\n"
+    "LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "#if !defined(RT_MANIFEST)\r\n"
+    "#define RT_MANIFEST 24\r\n"
+    "#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1\r\n"
+    "#endif\r\n"
+    "CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST ""UpdateIt.manifest""\r\n"
+    "\r\n"
+    "#endif    // English (U.S.) resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,2800,44
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "none\0"
+            VALUE "CompanyName", "Spb Software House\0"
+            VALUE "FileDescription", "UpdateIt Application Executable\0"
+            VALUE "FileVersion", "1.0.2800\0"
+            VALUE "InternalName", "UpdateIt\0"
+            VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky\0"
+            VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
+            VALUE "OriginalFilename", "UpdateIt.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Power Gadgets\0"
+            VALUE "ProductVersion", "1.0.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PAGE_OPTIONS DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
+FONT 8, "Tahoma"
+BEGIN
+    GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
+    EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_SOURCE,310,16,14,12,WS_GROUP
+    CONTROL         "Include s&ubfolders",IDC_CHECK_RECURSE,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,32,76,10
+    LTEXT           "E&xclude mask(s):",IDC_STATIC,10,48,56,12,
+                    SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_EXCLUDE,68,48,256,12,ES_AUTOHSCROLL
+    GROUPBOX        "&Target folder",IDC_STATIC,4,74,326,58,WS_GROUP
+    EDITTEXT        IDC_EDIT_TARGET,10,86,298,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_TARGET,310,86,14,12,WS_GROUP
+    CONTROL         "&Cleanup this folder first",IDC_CHECK_CLEANUP,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,103,90,10
+    CONTROL         "Delete files to &Recycle Bin if possible",
+                    IDC_CHECK_RECYCLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,116,132,10
+    GROUPBOX        "&Date and time",IDC_STATIC,4,140,106,30,WS_GROUP
+    CONTROL         "DateTimePicker1",IDC_DTP_WRITE,"SysDateTimePick32",
+                    WS_GROUP | WS_TABSTOP,10,152,94,12
+    GROUPBOX        "Advanced",IDC_STATIC,122,140,208,30,WS_GROUP
+    CONTROL         "Compare contents of the newer and existing older files",
+                    IDC_CHECK_COMPARE,"Button",BS_AUTOCHECKBOX | BS_TOP | 
+                    WS_GROUP | WS_TABSTOP,128,152,190,10
+END
+
+IDD_PAGE_FILES DIALOGEX 0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
+FONT 8, "Tahoma", 0, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
+    CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | WS_BORDER | 
+                    WS_TABSTOP,4,14,326,174,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "&Remove from list",IDC_BUTTON_REMOVE,260,192,70,16
+END
+
+IDD_PAGE_ACTION DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
+FONT 8, "Tahoma"
+BEGIN
+    GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
+    CONTROL         "&Copy file(s) to the target folder",IDC_RADIO_COPY,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,10,18,118,10
+    CONTROL         "&Move file(s) to the target folder",IDC_RADIO_MOVE,
+                    "Button",BS_AUTORADIOBUTTON,10,32,118,10
+    CONTROL         "Also uplo&ad file(s) to the FTP server",
+                    IDC_CHECK_UPLOAD,"Button",BS_AUTOCHECKBOX | WS_GROUP | 
+                    WS_TABSTOP,4,54,130,10
+    CONTROL         "Also &ZIP folder with the copied/moved file(s)",
+                    IDC_CHECK_ZIP,"Button",BS_AUTOCHECKBOX | WS_GROUP | 
+                    WS_TABSTOP,4,70,158,10
+    CONTROL         "Also &send ZIPped folder via e-mail",IDC_CHECK_SEND,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,4,86,
+                    124,10
+    GROUPBOX        "FTP Settings",IDC_GROUP_FTP,180,4,150,96,WS_GROUP
+    RTEXT           "S&erver:",IDC_STATIC,186,18,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_SERVER,224,18,100,12,ES_AUTOHSCROLL
+    RTEXT           "P&ort:",IDC_STATIC,186,34,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PORT,224,34,100,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    RTEXT           "&Login:",IDC_STATIC,186,50,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_LOGIN,224,50,100,12,ES_AUTOHSCROLL
+    RTEXT           "P&assword:",IDC_STATIC,186,66,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_PASSWORD,224,66,100,12,ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    RTEXT           "&Root:",IDC_STATIC,186,82,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_ROOT,224,82,100,12,ES_AUTOHSCROLL
+    GROUPBOX        "Mail settings",IDC_GROUP_MAIL,4,110,326,96,WS_GROUP
+    RTEXT           "&From:",IDC_STATIC,10,124,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FROM,42,124,100,12,ES_AUTOHSCROLL
+    RTEXT           "&To:",IDC_STATIC,10,140,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_MAILTO,42,140,100,12,ES_AUTOHSCROLL
+    RTEXT           "S&ubject:",IDC_STATIC,10,156,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_SUBJECT,42,156,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Host:",IDC_STATIC,10,172,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_HOST,42,172,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Port:",IDC_STATIC,10,188,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_PORT,42,188,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_BODY,146,124,178,76,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | WS_VSCROLL
+END
+
+IDD_PAGE_PROGRESS DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
+FONT 8, "Tahoma"
+BEGIN
+    LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
+    CONTROL         "Animate1",IDC_ANIMATE_BANNER,"SysAnimate32",ACS_CENTER | 
+                    ACS_TRANSPARENT | NOT WS_VISIBLE | WS_TABSTOP,4,18,326,
+                    38
+    LTEXT           "",IDC_STATIC_FILE,4,64,326,10,SS_CENTERIMAGE | NOT 
+                    WS_VISIBLE
+    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",
+                    PBS_SMOOTH | NOT WS_VISIBLE,4,74,326,12
+    LTEXT           "Total progress:",IDC_STATIC_TOTAL,4,96,326,10,
+                    SS_CENTERIMAGE | NOT WS_VISIBLE
+    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",
+                    PBS_SMOOTH | NOT WS_VISIBLE,4,106,326,12
+END
+
+IDD_PAGE_ABOUT DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
+FONT 8, "Tahoma"
+BEGIN
+    LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
+    LTEXT           "Copyright © 2002-2005 by Elijah Zarezky",IDC_STATIC,4,
+                    24,136,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
+    LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.2 (3 October 2004)",
+                    IDC_STATIC,16,62,314,16
+    LTEXT           "Copyright © 1995-2004 Jean-loup Gailly and Mark Adler",
+                    IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
+    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
+                    SS_CENTERIMAGE
+    LTEXT           "ZipArchive library\nversion 2.4.5 (21-June-2005)",
+                    IDC_STATIC,16,96,314,16
+    LTEXT           "Copyright © 2000-2005 by Tadeusz Dracz",IDC_STATIC,16,
+                    114,140,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_ARTPOL,158,114,172,10,SS_CENTERIMAGE
+    LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,130,314,10
+    LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
+                    IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.53 (3 May 2005)",
+                    IDC_STATIC,16,156,314,16
+    LTEXT           "Copyright © 1998-2005 by PJ Naughter",IDC_STATIC,16,174,
+                    132,10,SS_CENTERIMAGE
+    RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,174,180,10,
+                    SS_CENTERIMAGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PAGE_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_PAGE_FILES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_PAGE_ACTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_PAGE_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_PAGE_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APP_ICON            ICON    DISCARDABLE     "BinRes\\AppIcon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AVI
+//
+
+IDR_FILECOPY            AVI     DISCARDABLE     "BinRes\\FileCopy.avi"
+IDR_FILEMOVE            AVI     DISCARDABLE     "BinRes\\FileMove.avi"
+IDR_FILEDELETE          AVI     DISCARDABLE     "BinRes\\FileDelete.avi"
+IDR_FILETRASH           AVI     DISCARDABLE     "BinRes\\FileTrash.avi"
+IDR_ZIPPING             AVI     DISCARDABLE     "BinRes\\ZIPPING.AVI"
+IDR_FILEUPLOAD          AVI     DISCARDABLE     "BinRes\\Move2.avi"
+IDR_FILESEND            AVI     DISCARDABLE     "BinRes\\FileSend.avi"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_REGKEY              "Elijah Zarezky"
+    IDS_NO_SOURCE           "No source folder specified!"
+    IDS_NO_TARGET           "No target folder specified!"
+    IDS_CHOOSE_SOURCE       "Choose the source folder:"
+    IDS_CHOOSE_TARGET       "Choose the target folder:"
+    IDS_NAME                "Name"
+    IDS_EXTENSION           "Extension"
+    IDS_PATH                "Path"
+    IDS_DATE                "Date"
+    IDS_TIME                "Time"
+    IDS_DATE_FORMAT         "dd.MM.yyyy"
+    IDS_TIME_FORMAT         "HH:mm:ss"
+    IDS_FOUND_FORMAT        "&Found %i file(s):"
+    IDS_FOLDER_FORMAT       "Searching folder: %s"
+    IDS_NO_FILES            "No files found."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DISCARDING_SEARCH   "Discarding search results..."
+    IDS_DELETING_FILES      "Deleting file(s) from the target folder..."
+    IDS_COPYING_FILES       "Copying file(s) to the target folder..."
+    IDS_MOVING_FILES        "Moving file(s) to the target folder..."
+    IDS_ALL_DONE            "All done. Click Finish to exit the wizard."
+    IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
+    IDS_VERSION_FORMAT      "UpdateIt! Wizard – Version %s\nThis application is a part of the PowerGadgets collection"
+    IDS_ZIPPING_FOLDER      "Zipping target folder..."
+    IDS_SENDING_MAIL        "Sending zipped folder..."
+    IDS_SEND_FAILED         "Failed to send e-mail message!"
+    IDS_UPLOADING_FILES     "Uploading file(s) to the FTP server..."
+    IDS_STARTING_FTP        "Starting FTP session..."
+    IDS_CONNECTING_FTP      "Connecting to the FTP server..."
+    IDS_DISCONNECTING_FTP   "Disconnecting from the FTP server..."
+    IDS_FINISHING_FTP       "Finishing FTP session..."
+    IDS_PREPARING_UPLOAD    "Preparing for upload..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHARSET_FORMAT      """windows-%u"""
+    IDS_SELECTED_FORMAT     "&Selected %i file(s):"
+    IDS_NO_SELECTED         "No files selected."
+    IDS_SIZE                "Size"
+    IDS_SC_MINIMIZE         "Mi&nimize"
+    IDS_SC_EXPORT_SETTINGS  "Export Settings..."
+    IDS_SC_IMPORT_SETTINGS  "Import Settings..."
+    IDS_SETTINGS_FILTER     "Registry Hive Files (*.hive)|*.hive|All Files (*.*)|*.*||"
+    IDS_SC_RESTORE          "&Restore"
+    IDS_TITLE_EXPORT        "Export Settings to File"
+    IDS_TITLE_IMPORT        "Import Settings from File"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_SOURCE         "Shows the location to start the search for the updated files. You can change this location by clicking the [...] button on right. The most recently used source folder will be restored at the next run."
+    IDC_BUTTON_SOURCE       "Click here to browse for the source folder."
+    IDC_EDIT_TARGET         "Shows the location which the updated files will be copied/moved to. You can change this location by clicking the [...] button on right. The most recently used target folder will be restored at the next run."
+    IDC_BUTTON_TARGET       "Click here to browse for the target folder."
+    IDC_DTP_WRITE           "Specifies the modification date/time starting with which files will be treat as updated."
+    IDC_CHECK_CLEANUP       "If checked then the target folder will be completely erased before updated files will be copied/moved into."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_MAILTO         "Specifies the mailing address of the desired message recipient."
+    IDC_EDIT_HOST           "Specifies the name of the SMTP server through the wich your message should be sent. You can get this information from your Internet Service Provider or LAN administrator."
+    IDC_EDIT_PORT           "Specifies the port number you connect to on your outgouing e-mail (SMTP) server. This port number is usually 25."
+    IDC_EDIT_BODY           "Provides the space to type your message text. You can completely describe here the updated files you sent."
+    IDC_EDIT_SUBJECT        "Specifies the subject of your e-mail message. You can briefly describe here the updated files you sent."
+    IDC_CHECK_RECURSE       "If checked then all the folders within your source folder will be searched as well."
+    IDC_CHECK_UPLOAD        "If checked then all the updated file(s) will be uploaded onto the specified FTP server. Don't forget to specify the FTP settings properly."
+    IDC_EDIT_SERVER         "Specifies the name of the FTP server onto the updated files should be uploaded."
+    IDC_EDIT_FTP_PORT       "Specifies the port number you connect to on your FTP server. This port number is usually 21."
+    IDC_EDIT_LOGIN          "Specifies the account name assigned to you by the FTP server administrator."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_LIST_FILES          "Shows the updated file(s) that was found in the source folder. If you don't want to process some of them just select all unneeded files and remove it from this list by clicking [Remove from list] button below."
+    IDC_BUTTON_REMOVE       "Click here to remove selected file(s) from the list and thus exclude it from the future processing."
+    IDC_RADIO_COPY          "If selected then the updated files will be exactly duplicated in the target folder."
+    IDC_RADIO_MOVE          "If selected then the updated files will be copied into the target folder and then deleted from the source folder."
+    IDC_CHECK_RECYCLE       "If checked then the any files deleted from the target folder will not be actually removed from your hard disk until you empty the Recycle Bin. Note that this setting has no effect when the Recycle Bin is turned off."
+    IDC_CHECK_ZIP           "If checked then all the updated files will be packed into the single archive using ZIP compression. This archive then can be send via e-mail."
+    IDC_CHECK_SEND          "If checked then the archive containing the target folder will be sent via e-mail to the specified recipient. Don't forget to specify the mail settings properly."
+    IDC_EDIT_FROM           "Specifies the mailing address of the message sender."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_PASSWORD       "Provides the space to type the password assigned to you by the FTP server administrator. For security reasons, the actual characters don't appear in this space; instead each character is represented by an asterisk."
+    IDC_EDIT_ROOT           "Specifies the initial subfolder to connect on the FTP server. If this field is left blank, the root folder will be used."
+    IDC_EDIT_EXCLUDE        "Specifies a mask or several masks (delimited with commas) of files to exclude from search."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "UpdateIt!"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#include "../../Repository/Naughter/Source/Smtp.rc"
+
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+
+#if defined(_WIN32)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif
+
+#if !defined(RT_MANIFEST)
+#define RT_MANIFEST 24
+#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
+#endif
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "UpdateIt.manifest"
+
+#endif    // English (U.S.) resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
