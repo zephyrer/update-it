@@ -1,27 +1,11 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // ActionPage.h - interface of the CActionPage class
 
 #if !defined(__ActionPage_h)
 #define __ActionPage_h
-
-#if defined(_MSC_VER) && (_MSC_VER > 1000)
-#pragma once
-#endif	// _MSC_VER
 
 //! Encapsulates the "Choosing an action" step of the UpdateIt! wizard.
 class CActionPage: public CBetterPropPage
@@ -46,7 +30,6 @@ protected:
 	afx_msg void OnCheckUpload(void);
 	afx_msg void OnCheckZip(void);
 	afx_msg void OnCheckSend(void);
-	afx_msg void OnButtonAuthentication(void);
 
 // attributes
 public:
@@ -60,14 +43,12 @@ public:
 	CString m_strLogin;
 	CString m_strPassword;
 	CString m_strRoot;
-	BOOL m_fPassive;
 	CString m_strFrom;
 	CString m_strTo;
 	CString m_strSubject;
 	CString m_strHost;
-	int m_nSmtpPort;
+	int m_nPort;
 	CString m_strBody;
-	CAuthenticationDialog m_dlgAuth;
 
 // implementation helpers
 private:

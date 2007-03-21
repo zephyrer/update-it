@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "AfxGadgets"=..\Repository\AfxGadgets\AfxGadgets.dsp - Package Owner=<4>
+Project: "AfxGadgets"="..\Repository\AfxGadgets\AfxGadgets.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -15,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "CodeProject"=..\Repository\CodeProject\CodeProject.dsp - Package Owner=<4>
+Project: "CodeProject"="..\Repository\CodeProject\CodeProject.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -27,7 +27,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "atlmfc71"=..\Repository\atlmfc71\atlmfc71.dsp - Package Owner=<4>
+Project: "Naughter"="..\Repository\Naughter\Naughter.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -39,19 +39,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "Naughter"=..\Repository\Naughter\Naughter.dsp - Package Owner=<4>
-
-Package=<5>
-{{{
-}}}
-
-Package=<4>
-{{{
-}}}
-
-###############################################################################
-
-Project: "UpdateIt"=.\UpdateIt.dsp - Package Owner=<4>
+Project: "UpdateIt"=".\UpdateIt.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -61,9 +49,6 @@ Package=<4>
 {{{
     Begin Project Dependency
     Project_Dep_Name AfxGadgets
-    End Project Dependency
-    Begin Project Dependency
-    Project_Dep_Name atlmfc71
     End Project Dependency
     Begin Project Dependency
     Project_Dep_Name CodeProject
@@ -78,7 +63,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "ZipArchive"=..\Repository\ZipArchive\ZipArchive.dsp - Package Owner=<4>
+Project: "ZipArchive"="..\Repository\ZipArchive\ZipArchive.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -93,7 +78,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "zlib"=..\Repository\zlib\zlib.dsp - Package Owner=<4>
+Project: "zlib"="..\Repository\zlib\zlib.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{

@@ -1,42 +1,21 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // MainWizard.cpp - implementation of the CMainWizard class
 
 #include "stdafx.h"
-
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
-#include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 #include "UpdateItApp.h"
-#include "Registry.h"
-
-#if defined(__INTEL_COMPILER)
-// remark #171: invalid type conversion
-#pragma warning(disable: 171)
-#endif	// __INTEL_COMPILER
 
 #if defined(_DEBUG)
 #undef THIS_FILE
@@ -53,8 +32,6 @@ BEGIN_MESSAGE_MAP(CMainWizard, CCustomPropSheet)
 	ON_WM_SYSCOMMAND()
 END_MESSAGE_MAP()
 
-// construction/destruction
-
 CMainWizard::CMainWizard(void):
 CCustomPropSheet(AFX_IDS_APP_TITLE)
 {
@@ -62,15 +39,13 @@ CCustomPropSheet(AFX_IDS_APP_TITLE)
 	ASSERT_VALID(pApp);
 
 	// assign CRT locale
-	static const TCHAR szDefLocale[] = _T("English_USA.1252");
-	_tsetlocale(LC_ALL, pApp->GetProfileString(SZ_REGK_LOCALE, SZ_REGV_LOCALE_LC_ALL, szDefLocale));
+	_tsetlocale(LC_ALL, pApp->GetProfileString(_T("Locale"), _T("LC_ALL"), _T("English_USA.1252")));
 
 	// load dialog's icons
 	m_hIcon = pApp->LoadIcon(IDI_APP_ICON);
 	m_hSmIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_APP_ICON));
 
-	static HYPERLINKCOLORS linkColors =
-	{
+	static HYPERLINKCOLORS linkColors = {
 		RGB(0, 0, 255),	// default
 		RGB(0, 0, 255),	// active
 		RGB(0, 0, 255),	// visited
@@ -92,8 +67,6 @@ CMainWizard::~CMainWizard(void)
 	::DestroyIcon(m_hIcon);
 }
 
-// overridables
-
 BOOL CMainWizard::OnInitDialog(void)
 {
 	CString strRestore;
@@ -105,7 +78,7 @@ BOOL CMainWizard::OnInitDialog(void)
 	DWORD crTipBk, crTipText;
 
 	// invoke inherited handler
-	BOOL fResult = __super::OnInitDialog();
+	BOOL fResult = CCustomPropSheet::OnInitDialog();
 
 	// set wizard's icons
 	SetIcon(m_hIcon, TRUE);
@@ -113,14 +86,12 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	// try to obtain localized text for the "Minimize" system command
 	HMODULE hUser32 = ::GetModuleHandle(_T("user32"));
-	if (menuTemp.Attach(::LoadMenu(hUser32, MAKEINTRESOURCE(16))))
-	{
+	if (menuTemp.Attach(::LoadMenu(hUser32, MAKEINTRESOURCE(16)))) {
 		menuTemp.GetMenuString(SC_RESTORE, strRestore, MF_BYCOMMAND);
 		menuTemp.GetMenuString(SC_MINIMIZE, strMinimize, MF_BYCOMMAND);
 		::DestroyMenu(menuTemp.Detach());
 	}
-	if (strMinimize.IsEmpty())
-	{
+	if (strMinimize.IsEmpty()) {
 		// probably fuckin' Win9x
 		strRestore.LoadString(IDS_SC_RESTORE);
 		strMinimize.LoadString(IDS_SC_MINIMIZE);
@@ -140,8 +111,7 @@ BOOL CMainWizard::OnInitDialog(void)
 	ModifyStyle(0, WS_MINIMIZEBOX);
 	OSVERSIONINFO osVerInfo = { sizeof(osVerInfo) };
 	GetVersionEx(&osVerInfo);
-	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5)
-	{
+	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5) {
 		// Windows 2000/XP
 		strNewItem.LoadString(IDS_SC_EXPORT_SETTINGS);
 		pSysMenu->InsertMenu(0, MF_BYPOSITION, IDM_SC_EXPORT_SETTINGS, strNewItem);
@@ -152,14 +122,13 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	// customize tool tips
 	CWinApp* pApp = AfxGetApp();
-	nInitialDelay = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_INITIAL_DELAY, 900);
-	nAutoPopDelay = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_AUTO_POP_DELAY, 5000);
-	cxMaxWidth = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_MAX_WIDTH, 300);
-	crTipBk = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_BK_COLOR, ::GetSysColor(COLOR_INFOBK));
-	crTipText = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_TEXT_COLOR, ::GetSysColor(COLOR_INFOTEXT));
+	nInitialDelay = pApp->GetProfileInt(_T("Tips"), _T("InitialDelay"), 900);
+	nAutoPopDelay = pApp->GetProfileInt(_T("Tips"), _T("AutoPopDelay"), 5000);
+	cxMaxWidth = pApp->GetProfileInt(_T("Tips"), _T("MaxWidth"), 300);
+	crTipBk = pApp->GetProfileInt(_T("Tips"), _T("BkColor"), ::GetSysColor(COLOR_INFOBK));
+	crTipText = pApp->GetProfileInt(_T("Tips"), _T("TextColor"), ::GetSysColor(COLOR_INFOTEXT));
 	int cPages = m_pages.GetSize();
-	for (int i = 0; i < cPages; ++i)
-	{
+	for (int i = 0; i < cPages; ++i) {
 		CBetterPropPage* pPage = reinterpret_cast<CBetterPropPage*>(m_pages[i]);
 		CToolTipCtrl& tipWnd = pPage->GetToolTipCtrl();
 		tipWnd.SetDelayTime(TTDT_INITIAL, nInitialDelay);
@@ -173,13 +142,10 @@ BOOL CMainWizard::OnInitDialog(void)
 	return (fResult);
 }
 
-// message map functions
-
 void CMainWizard::OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu)
 {
-	__super::OnInitMenuPopup(pPopupMenu, uIndex, fSysMenu);
-	if (fSysMenu)
-	{
+	CCustomPropSheet::OnInitMenuPopup(pPopupMenu, uIndex, fSysMenu);
+	if (fSysMenu) {
 		ASSERT_VALID(pPopupMenu);
 		UINT fuEnable = MF_BYCOMMAND | (GetActiveIndex() > 0 ? MF_GRAYED : MF_ENABLED);
 		pPopupMenu->EnableMenuItem(IDM_SC_IMPORT_SETTINGS, fuEnable); 
@@ -197,12 +163,10 @@ void CMainWizard::OnSysCommand(UINT uID, LPARAM lParam)
 		OnScImportSettings();
 		break;
 	default:
-		__super::OnSysCommand(uID, lParam);
+		CCustomPropSheet::OnSysCommand(uID, lParam);
 		break;
 	}
 }
-
-// implementation helpers
 
 void CMainWizard::OnScExportSettings(void)
 {
@@ -210,17 +174,12 @@ void CMainWizard::OnScExportSettings(void)
 	CString strTitle;
 	CProcessPrivileges processPrivileges;
 
-	enum { fdwFlags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY };
+	enum { fdwFlags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST };
 	strFilter.LoadString(IDS_SETTINGS_FILTER);
-#if (_MFC_VER < 0x0700)
-	CFileDialogEx dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
-#else
 	CFileDialog dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
-#endif	// _MFC_VER
 	strTitle.LoadString(IDS_TITLE_EXPORT);
 	dlgSaveAs.m_ofn.lpstrTitle = strTitle;
-	if (dlgSaveAs.DoModal() == IDOK)
-	{
+	if (dlgSaveAs.DoModal() == IDOK) {
 		BeginWaitCursor();
 		CWinApp* pApp = AfxGetApp();
 		ASSERT_VALID(pApp);
@@ -241,15 +200,10 @@ void CMainWizard::OnScImportSettings(void)
 
 	enum { fdwFlags = OFN_HIDEREADONLY | OFN_PATHMUSTEXIST };
 	strFilter.LoadString(IDS_SETTINGS_FILTER);
-#if (_MFC_VER < 0x0700)
-	CFileDialogEx dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
-#else
 	CFileDialog dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
-#endif	// _MFC_VER
 	strTitle.LoadString(IDS_TITLE_IMPORT);
 	dlgOpen.m_ofn.lpstrTitle = strTitle;
-	if (dlgOpen.DoModal() == IDOK)
-	{
+	if (dlgOpen.DoModal() == IDOK) {
 		BeginWaitCursor();
 		CWinApp* pApp = AfxGetApp();
 		ASSERT_VALID(pApp);
@@ -262,8 +216,6 @@ void CMainWizard::OnScImportSettings(void)
 	}
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -274,8 +226,7 @@ void CMainWizard::OnScImportSettings(void)
 void CMainWizard::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
-
+	CCustomPropSheet::AssertValid();
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_pageAbout);
 	ASSERT_VALID(&m_pageOptions);
@@ -290,11 +241,9 @@ void CMainWizard::AssertValid(void) const
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
 void CMainWizard::Dump(CDumpContext& dumpCtx) const
 {
-	try
-	{
+	try {
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
-
+		CCustomPropSheet::Dump(dumpCtx);
 		// ...and then dump own unique members
 		dumpCtx << "m_hIcon = " << m_hIcon;
 		dumpCtx << "\nm_hSmIcon = " << m_hSmIcon;
@@ -304,8 +253,7 @@ void CMainWizard::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_pageAction = " << m_pageAction;
 		dumpCtx << "\nm_pageProgress = " << m_pageProgress;
 	}
-	catch (CFileException* pXcpt)
-	{
+	catch (CFileException* pXcpt) {
 		pXcpt->ReportError();
 		pXcpt->Delete();
 	}
