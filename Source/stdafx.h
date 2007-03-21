@@ -1,18 +1,6 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // stdafx.h - include file for standard system include files
 
@@ -81,11 +69,8 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/StringConv.h"
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
-#include "../../Repository/Naughter/Source/PJNSMTP.h"
-
-#if (_MFC_VER < 0x0700)
+#include "../../Repository/Naughter/Source/Smtp.h"
 #include "../../Repository/atlmfc71/Source/FileDialogEx.h"
-#endif	// _MFC_VER
 
 #pragma hdrstop
 
@@ -96,7 +81,7 @@ typedef CPJNSMTPConnection CSmtpConnection;
 typedef CPJNSMTPMessage CSmtpMessage;
 typedef CPJNSMTPBodyPart CSmtpBodyPart;
 typedef CPJNSMTPAddress CSmtpAddress;
-typedef CPJNSMTPException CSmtpException;
+typedef CSMTPException CSmtpException;
 
 // file data
 struct FILE_DATA {
@@ -104,23 +89,8 @@ struct FILE_DATA {
 	TCHAR szExt[_MAX_EXT];
 	TCHAR szFolder[_MAX_DIR];
 	CTime timeWrite;
-#if (_MFC_VER < 0x0700)
 	DWORD cbLength;
-#else
-	ULONGLONG cbLength;
-#endif	// _MFC_VER
 };
-
-#if defined(ZIPSTRING_DOT_H) && defined(for)
-#undef for
-#endif	// ZIPSTRING_DOT_H && for
-
-// force ISO/IEC 14882 conformance in for loop scope
-#if (_MSC_VER < 1300)
-#define for if (false); else for
-#else
-#pragma conform(forScope, on)
-#endif	// _MSC_VER
 
 #endif	// __stdafx_h
 
