@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,23 +17,20 @@
 // ProgressPage.cpp - implementation of the CProgressPage class
 
 #include "stdafx.h"
-
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
-#include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
+
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
-#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -53,8 +50,6 @@
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
-
-// private helpers
 
 #if (_MFC_VER >= 0x0700)
 
@@ -90,19 +85,15 @@ IMPLEMENT_DYNAMIC(CProgressPage, CBetterPropPage)
 BEGIN_MESSAGE_MAP(CProgressPage, CBetterPropPage)
 END_MESSAGE_MAP()
 
-// construction
-
 CProgressPage::CProgressPage(void):
 CBetterPropPage(IDD_PAGE_PROGRESS)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 }
 
-// overridables
-
 BOOL CProgressPage::OnSetActive(void)
 {
-	BOOL fSuccess = __super::OnSetActive();
+	BOOL fSuccess = CBetterPropPage::OnSetActive();
 	if (fSuccess)
 	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
@@ -125,7 +116,7 @@ void CProgressPage::OnBecameActive(void)
 	CString strWorking;
 	CString strZipPath;
 
-	__super::OnBecameActive();
+	CBetterPropPage::OnBecameActive();
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
 	COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
@@ -249,13 +240,13 @@ void CProgressPage::OnBecameActive(void)
 #if (_MFC_VER < 0x0700)
 	CWinApp* pApp = AfxGetApp();
 	ASSERT_VALID(pApp);
-	pApp->WriteProfileInt(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
+	pApp->WriteProfileInt(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-	pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
+	pApp->WriteProfileTime(_T("Times"), pOptionsPage->m_strSource, timeNow.GetTime());
 #endif	// _MFC_VER
-	pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
+	pApp->WriteProfileString(_T("Targets"), pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
@@ -267,12 +258,12 @@ void CProgressPage::OnBecameActive(void)
 
 BOOL CProgressPage::OnWizardFinish(void)
 {
-	return (__super::OnWizardFinish());
+	return (CBetterPropPage::OnWizardFinish());
 }
 
 void CProgressPage::DoDataExchange(CDataExchange* pDX)
 {
-	__super::DoDataExchange(pDX);
+	CBetterPropPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STATIC_WORKING, m_textWorking);
 	DDX_Control(pDX, IDC_ANIMATE_BANNER, m_animateBanner);
 	DDX_Control(pDX, IDC_STATIC_FILE, m_textFile);
@@ -281,8 +272,6 @@ void CProgressPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PROGRESS_TOTAL, m_progressTotal);
 }
 
-// CZipActionCallback overridables
-
 bool CProgressPage::Callback(int iProgress)
 {
 	m_textTotal.SetWindowText(m_szFileInZip);
@@ -290,8 +279,6 @@ bool CProgressPage::Callback(int iProgress)
 	PumpWaitingMessages();
 	return (true);
 }
-
-// implementation helpers
 
 void CProgressPage::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
 {
@@ -550,6 +537,7 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 void CProgressPage::SendZippedFolder(const CString& strZipPath)
 {
 	using CMainWizard::I_ACTION;
+	using CSmtpConnection::AUTH_NONE;
 
 	CSmtpConnection smtpConn;
 	CSmtpMessage smtpMsg;
@@ -560,7 +548,6 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 	ASSERT(pWiz != NULL);
 	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
 	ASSERT(pActionPage != NULL);
-	CAuthenticationDialog& dlgAuth = pActionPage->m_dlgAuth;
 
 	try
 	{
@@ -572,7 +559,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpZipPart.SetFilename(strZipPath);
 		smtpTextPart.SetText(pActionPage->m_strBody);
 		CWinApp* pApp = AfxGetApp();
-		CString strCharSet = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET);
+		CString strCharSet = pApp->GetProfileString(_T("SMTP"), _T("charset"));
 		if (strCharSet.IsEmpty())
 		{
 			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
@@ -580,11 +567,7 @@ void CProgressPage::SendZippedFolder(const CString& strZipPath)
 		smtpTextPart.SetCharset(strCharSet);
 		smtpMsg.AddBodyPart(smtpTextPart);
 		smtpMsg.AddBodyPart(smtpZipPart);
-		bool fHasAuth = dlgAuth.m_eAuthMethod != CSmtpConnection::AUTH_NONE;
-		LPCTSTR pszUserName = fHasAuth ? dlgAuth.m_strUserName : LPCTSTR(NULL);
-		LPCTSTR pszPassword = fHasAuth ? dlgAuth.m_strPassword : LPCTSTR(NULL);
-		smtpConn.Connect(pActionPage->m_strHost, dlgAuth.m_eAuthMethod, pszUserName, pszPassword,
-			pActionPage->m_nSmtpPort, dlgAuth.m_fUseSSL);
+		smtpConn.Connect(pActionPage->m_strHost, AUTH_NONE, NULL, NULL, pActionPage->m_nSmtpPort);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}
@@ -810,8 +793,6 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 	}
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -822,7 +803,7 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 void CProgressPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CBetterPropPage::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_textWorking);
@@ -842,7 +823,7 @@ void CProgressPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CBetterPropPage::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_textWorking = " << m_textWorking;

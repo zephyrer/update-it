@@ -18,21 +18,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.0.3696
+AppVerName=UpdateIt! 1.0.3410
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.0.3696
+AppVersion=1.0.3410
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.0.3696-setup
-VersionInfoVersion=1.0.3696
+OutputBaseFilename=UpdateIt-1.0.3410-setup
+VersionInfoVersion=1.0.3410
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -43,19 +43,13 @@ DialogFontName=Tahoma
 DialogFontSize=8
 
 [Files]
-Source: "..\71_ReleaseA\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\ReleaseA\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
-Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
-Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
-Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
-Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
+Source: ".\ApacheLicense.rtf"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
 Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
-Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon

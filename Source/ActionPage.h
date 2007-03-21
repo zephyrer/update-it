@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,6 @@ protected:
 	afx_msg void OnCheckUpload(void);
 	afx_msg void OnCheckZip(void);
 	afx_msg void OnCheckSend(void);
-	afx_msg void OnButtonAuthentication(void);
 
 // attributes
 public:
@@ -67,7 +66,6 @@ public:
 	CString m_strHost;
 	int m_nSmtpPort;
 	CString m_strBody;
-	CAuthenticationDialog m_dlgAuth;
 
 // implementation helpers
 private:

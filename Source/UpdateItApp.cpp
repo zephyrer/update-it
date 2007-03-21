@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,15 +17,12 @@
 // UpdateItApp.cpp - implementation of the CUpdateItApp class
 
 #include "stdafx.h"
-
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
-#include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
@@ -52,8 +49,6 @@ IMPLEMENT_DYNAMIC(CUpdateItApp, CWinApp)
 BEGIN_MESSAGE_MAP(CUpdateItApp, CWinApp)
 END_MESSAGE_MAP()
 
-// construction/destruction
-
 CUpdateItApp::CUpdateItApp(void)
 {
 	_tzset();
@@ -62,8 +57,6 @@ CUpdateItApp::CUpdateItApp(void)
 CUpdateItApp::~CUpdateItApp(void)
 {
 }
-
-// operations
 
 HICON CUpdateItApp::LoadSmIcon(LPCTSTR pszResName)
 {
@@ -169,8 +162,6 @@ BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time
 
 #endif	// _MFC_VER
 
-// overridables
-
 BOOL CUpdateItApp::InitInstance(void)
 {
 	::InitCommonControls();
@@ -186,10 +177,8 @@ BOOL CUpdateItApp::InitInstance(void)
 int CUpdateItApp::ExitInstance(void)
 {
 	::CoUninitialize();
-	return (__super::ExitInstance());
+	return (CWinApp::ExitInstance());
 }
-
-// diagnostic services
 
 #if defined(_DEBUG)
 
@@ -201,7 +190,7 @@ int CUpdateItApp::ExitInstance(void)
 void CUpdateItApp::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CWinApp::AssertValid();
 
 	// ...and then verify own state as well
 }
@@ -215,7 +204,7 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CWinApp::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 	}

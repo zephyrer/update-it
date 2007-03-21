@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,21 +17,17 @@
 // FilesPage.cpp - implementation of the CFilesPage class
 
 #include "stdafx.h"
-
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
-#include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 #include "UpdateItApp.h"
-#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -64,8 +60,6 @@ BEGIN_MESSAGE_MAP(CFilesPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_BUTTON_REMOVE, OnButtonRemove)
 END_MESSAGE_MAP()
 
-// construction/destruction
-
 CFilesPage::CFilesPage(void):
 CBetterPropPage(IDD_PAGE_FILES),
 m_fShowGrid(FALSE),
@@ -81,7 +75,7 @@ m_iDefIcon(-1)
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
-	m_fShowGrid = pApp->GetProfileInt(SZ_REGK_FILES, SZ_REGV_FILES_SHOW_GRID, FALSE);
+	m_fShowGrid = pApp->GetProfileInt(_T("Files"), _T("ShowGrid"), FALSE);
 
 	HICON hIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_APP_ICON));
 	m_iDefIcon = m_imageList.Add(hIcon);
@@ -93,15 +87,13 @@ CFilesPage::~CFilesPage(void)
 	m_imageList.DeleteImageList();
 }
 
-// overridables
-
 BOOL CFilesPage::OnInitDialog(void)
 {
 	CRect rectList;
 	CString strHeading;
 
 	// invoke inherited handler
-	BOOL fResult = __super::OnInitDialog();
+	BOOL fResult = CBetterPropPage::OnInitDialog();
 
 	// setup the file list...
 	m_listFiles.SetExtendedStyle(LVS_EX_FULLROWSELECT | (m_fShowGrid ? LVS_EX_GRIDLINES : 0));
@@ -121,7 +113,7 @@ BOOL CFilesPage::OnInitDialog(void)
 
 BOOL CFilesPage::OnSetActive(void)
 {
-	BOOL fSuccess = __super::OnSetActive();
+	BOOL fSuccess = CBetterPropPage::OnSetActive();
 	if (fSuccess)
 	{
 		if (m_listFiles.GetItemCount() == 0)
@@ -143,7 +135,7 @@ void CFilesPage::OnBecameActive(void)
 
 	CString strInfo;
 
-	__super::OnBecameActive();
+	CBetterPropPage::OnBecameActive();
 	if (m_listFiles.GetItemCount() == 0)
 	{
 		// prepare controls
@@ -207,23 +199,21 @@ LRESULT CFilesPage::OnWizardBack(void)
 	strInfo.LoadString(IDS_DISCARDING_SEARCH);
 	m_textInfo.SetWindowText(strInfo);
 	CleanupFileList();
-	return (__super::OnWizardBack());
+	return (CBetterPropPage::OnWizardBack());
 }
 
 void CFilesPage::DoDataExchange(CDataExchange* pDX)
 {
-	__super::DoDataExchange(pDX);
+	CBetterPropPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STATIC_INFO, m_textInfo);
 	DDX_Control(pDX, IDC_LIST_FILES, m_listFiles);
 	DDX_Control(pDX, IDC_BUTTON_REMOVE, m_buttonRemove);
 }
 
-// message map functions
-
 void CFilesPage::OnDestroy(void)
 {
 	CleanupFileList();
-	__super::OnDestroy();
+	CBetterPropPage::OnDestroy();
 }
 
 void CFilesPage::OnItemChanged(NMHDR* /*pHdr*/, LRESULT* pnResult)
@@ -304,8 +294,6 @@ void CFilesPage::OnButtonRemove(void)
 	}
 	m_textInfo.SetWindowText(strInfo);
 }
-
-// implementation helpers
 
 BOOL CFilesPage::IsFileMatchesExcludeList(LPCTSTR pszFilePath)
 {
@@ -529,8 +517,6 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 	return (fResult);
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -541,7 +527,7 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 void CFilesPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CBetterPropPage::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_textInfo);
@@ -559,7 +545,7 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CBetterPropPage::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_fShowGrid = " << m_fShowGrid;

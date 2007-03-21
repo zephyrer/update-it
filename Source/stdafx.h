@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -81,7 +81,7 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/StringConv.h"
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
-#include "../../Repository/Naughter/Source/PJNSMTP.h"
+#include "../../Repository/Naughter/Source/Smtp.h"
 
 #if (_MFC_VER < 0x0700)
 #include "../../Repository/atlmfc71/Source/FileDialogEx.h"

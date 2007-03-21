@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@
 // BetterPropPage.cpp - implementation of the CBetterPropPage class
 
 #include "stdafx.h"
-
 #include "BetterPropPage.h"
 
 #if defined(__INTEL_COMPILER)
@@ -41,8 +40,6 @@ BEGIN_MESSAGE_MAP(CBetterPropPage, CPropertyPage)
 	ON_NOTIFY_RANGE(TTN_GETDISPINFO, 0, 0xFFFF, OnGetTipText)
 END_MESSAGE_MAP()
 
-// construction
-
 CBetterPropPage::CBetterPropPage(UINT idTemplate, UINT idCaption):
 CPropertyPage(idTemplate, idCaption)
 {
@@ -53,18 +50,16 @@ CPropertyPage(pszTemplate, idCaption)
 {
 }
 
-// overridables
-
 BOOL CBetterPropPage::OnInitDialog(void)
 {
-	BOOL fResult = __super::OnInitDialog();
+	BOOL fResult = CPropertyPage::OnInitDialog();
 	m_tipWnd.Create(this);
 	return (fResult);
 }
 
 BOOL CBetterPropPage::OnSetActive(void)
 {
-	BOOL fSuccess = __super::OnSetActive();
+	BOOL fSuccess = CPropertyPage::OnSetActive();
 	if (fSuccess)
 	{
 		AfxBeginThread(ActivationWatcher, m_hWnd);
@@ -90,7 +85,7 @@ LRESULT CBetterPropPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		OnBecameActive();
 		return (0);
 	default:
-		return (__super::WindowProc(uMsg, wParam, lParam));
+		return (CPropertyPage::WindowProc(uMsg, wParam, lParam));
 	}
 }
 
@@ -100,10 +95,8 @@ BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 	{
 		m_tipWnd.RelayEvent(pMsg);
 	}
-	return (__super::PreTranslateMessage(pMsg));
+	return (CPropertyPage::PreTranslateMessage(pMsg));
 }
-
-// message map functions
 
 #if (_MFC_VER < 0x0700)
 
@@ -149,14 +142,10 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMHDR* pHdr, LRESULT* pnResult)
 
 #endif	// _MFC_VER
 
-// accessibility
-
 CToolTipCtrl& CBetterPropPage::GetToolTipCtrl(void)
 {
 	return (m_tipWnd);
 }
-
-// implementation helpers
 
 UINT AFX_CDECL CBetterPropPage::ActivationWatcher(void* pvParam)
 {
@@ -182,8 +171,6 @@ void CBetterPropPage::PumpWaitingMessages(void)
 	}
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -194,7 +181,7 @@ void CBetterPropPage::PumpWaitingMessages(void)
 void CBetterPropPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CPropertyPage::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_tipWnd);
@@ -209,7 +196,7 @@ void CBetterPropPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CPropertyPage::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_tipWnd = " << m_tipWnd;

@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,6 @@ public:
 	CHyperLink m_linkArtpol;
 	CHyperLink m_linkRSA;
 	CHyperLink m_linkNaughter;
-	CHyperLink m_linkOpenSSL;
 
 // diagnostic services
 #if defined(_DEBUG)
