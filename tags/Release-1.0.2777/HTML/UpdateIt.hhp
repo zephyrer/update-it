@@ -1,0 +1,20 @@
+[OPTIONS]
+Binary Index=No
+Compatibility=1.1 or later
+Compiled file=UpdateIt.chm
+Default Window=MainWindow
+Default topic=update_it.html
+Display compile progress=Yes
+Language=0x419 Russian
+Title=UpdateIt! Documentation
+
+[WINDOWS]
+MainWindow="UpdateIt! Documentation",,,"update_it.html","update_it.html",,,,,0x42000,,0x3000,,,,,,,,0
+
+
+[FILES]
+update_it.html
+images\texture.jpg
+
+[INFOTYPES]
+
