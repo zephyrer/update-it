@@ -1,39 +1,24 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // OptionsPage.cpp - implementation of the COptionsPage class
 
 #include "stdafx.h"
-
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
-#include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
+
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
-#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // warning #68: integer conversion resulted in a change of sign
@@ -61,8 +46,6 @@ BEGIN_MESSAGE_MAP(COptionsPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_CLEANUP, OnCheckCleanup)
 END_MESSAGE_MAP()
 
-// construction
-
 COptionsPage::COptionsPage(void):
 CBetterPropPage(IDD_PAGE_OPTIONS)
 {
@@ -75,32 +58,30 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 #endif	// _MFC_VER
 	ASSERT_VALID(pApp);
 
-	m_strSource = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
-	m_nRecurse = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
-	m_strExclude = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
-	m_strTarget = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
-	m_nCleanup = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
+	m_strSource = pApp->GetProfileString(_T("Options"), _T("Source"));
+	m_nRecurse = pApp->GetProfileInt(_T("Options"), _T("Recurse"), BST_CHECKED);
+	m_strExclude = pApp->GetProfileString(_T("Options"), _T("Exclude"));
+	m_strTarget = pApp->GetProfileString(_T("Options"), _T("Target"));
+	m_nCleanup = pApp->GetProfileInt(_T("Options"), _T("Cleanup"), BST_CHECKED);
 	if (m_nCleanup == BST_CHECKED)
 	{
-		m_nRecycle = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_UNCHECKED);
+		m_nRecycle = pApp->GetProfileInt(_T("Options"), _T("Recycle"), BST_UNCHECKED);
 	}
 	else {
 		m_nRecycle = BST_UNCHECKED;
 	}
 #if (_MFC_VER < 0x0700)
-	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(SZ_REGK_TIMES, m_strSource, -1);
+	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(_T("Times"), m_strSource, -1);
 #else
-	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1);
+	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(_T("Times"), m_strSource, -1);
 #endif	// _MFC_VER
-	m_fCompare = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
+	m_fCompare = pApp->GetProfileInt(_T("Options"), _T("Compare"), BST_UNCHECKED);
 }
-
-// overridables
 
 BOOL COptionsPage::OnInitDialog(void)
 {
 	// invoke inherited handler
-	BOOL fResult = __super::OnInitDialog();
+	BOOL fResult = CBetterPropPage::OnInitDialog();
 
 	// setup controls as needed
 	m_dtpWrite.SetFormat(_T("dd.MM.yyyy   HH:mm:ss"));
@@ -133,7 +114,7 @@ BOOL COptionsPage::OnInitDialog(void)
 
 BOOL COptionsPage::OnSetActive(void)
 {
-	BOOL fSuccess = __super::OnSetActive();
+	BOOL fSuccess = CBetterPropPage::OnSetActive();
 	if (fSuccess)
 	{
 		GetDlgItem(IDC_CHECK_RECYCLE)->EnableWindow(m_nCleanup == BST_CHECKED);
@@ -146,17 +127,17 @@ BOOL COptionsPage::OnSetActive(void)
 
 BOOL COptionsPage::OnKillActive(void)
 {
-	BOOL fSuccess = __super::OnKillActive();
+	BOOL fSuccess = CBetterPropPage::OnKillActive();
 	if (fSuccess)
 	{
 		CWinApp* pApp = AfxGetApp();
-		pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE, m_strSource);
-		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, m_nRecurse);
-		pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE, m_strExclude);
-		pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET, m_strTarget);
-		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, m_nCleanup);
-		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, m_nRecycle);
-		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, m_fCompare);
+		pApp->WriteProfileString(_T("Options"), _T("Source"), m_strSource);
+		pApp->WriteProfileInt(_T("Options"), _T("Recurse"), m_nRecurse);
+		pApp->WriteProfileString(_T("Options"), _T("Exclude"), m_strExclude);
+		pApp->WriteProfileString(_T("Options"), _T("Target"), m_strTarget);
+		pApp->WriteProfileInt(_T("Options"), _T("Cleanup"), m_nCleanup);
+		pApp->WriteProfileInt(_T("Options"), _T("Recycle"), m_nRecycle);
+		pApp->WriteProfileInt(_T("Options"), _T("Compare"), m_fCompare);
 	}
 	return (fSuccess);
 }
@@ -182,12 +163,12 @@ LRESULT COptionsPage::OnWizardNext(void)
 		return (-1);
 	}
 	m_dtpWrite.GetTime(m_timeWrite);
-	return (__super::OnWizardNext());
+	return (CBetterPropPage::OnWizardNext());
 }
 
 void COptionsPage::DoDataExchange(CDataExchange* pDX)
 {
-	__super::DoDataExchange(pDX);
+	CBetterPropPage::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT_SOURCE, m_strSource);
 	DDV_MaxChars(pDX, m_strSource, _MAX_PATH);
 	DDX_Text(pDX, IDC_EDIT_EXCLUDE, m_strExclude);
@@ -199,8 +180,6 @@ void COptionsPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_DTP_WRITE, m_dtpWrite);
 	DDX_Check(pDX, IDC_CHECK_COMPARE, m_fCompare);
 }
-
-// message map functions
 
 HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)
 {
@@ -218,7 +197,7 @@ HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)
 			break;
 		}
 	default:
-		hbr = __super::OnCtlColor(pDC, pWnd, uCtlColor);
+		hbr = CBetterPropPage::OnCtlColor(pDC, pWnd, uCtlColor);
 	}
 	return (hbr);
 }
@@ -236,17 +215,17 @@ void COptionsPage::OnButtonSource(void)
 #if (_MFC_VER < 0x0700)
 		CWinApp* pApp = AfxGetApp();
 		ASSERT_VALID(pApp);
-		if ((m_timeWrite = pApp->GetProfileInt(SZ_REGK_TIMES, m_strSource, -1)) != -1)
+		if ((m_timeWrite = pApp->GetProfileInt(_T("Times"), m_strSource, -1)) != -1)
 #else
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
-		if ((m_timeWrite = pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1)) != -1)
+		if ((m_timeWrite = pApp->GetProfileTime(_T("Times"), m_strSource, -1)) != -1)
 #endif	// _MFC_VER
 		{
 			m_dtpWrite.SetTime(&m_timeWrite);
 		}
 		CString strDefTarget = m_strSource + _T(".Update");
-		SetDlgItemText(IDC_EDIT_TARGET, pApp->GetProfileString(SZ_REGK_TARGETS, m_strSource, strDefTarget));
+		SetDlgItemText(IDC_EDIT_TARGET, pApp->GetProfileString(_T("Targets"), m_strSource, strDefTarget));
 	}
 }
 
@@ -277,8 +256,6 @@ void COptionsPage::OnCheckCleanup(void)
 	}
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -289,7 +266,7 @@ void COptionsPage::OnCheckCleanup(void)
 void COptionsPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CBetterPropPage::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_dtpWrite);
@@ -304,7 +281,7 @@ void COptionsPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CBetterPropPage::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_strSource = " << m_strSource;

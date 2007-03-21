@@ -47,7 +47,6 @@
 #define IDS_SC_RESTORE                  40
 #define IDS_TITLE_EXPORT                41
 #define IDS_TITLE_IMPORT                42
-#define IDS_TOTAL_SIZE_OVERFLOW         43
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
@@ -60,7 +59,6 @@
 #define IDR_ZIPPING                     110
 #define IDR_FILEUPLOAD                  111
 #define IDR_FILESEND                    112
-#define IDD_AUTHENTICATION              113
 #define IDC_EDIT_SOURCE                 1001
 #define IDC_BUTTON_SOURCE               1002
 #define IDC_EDIT_TARGET                 1003
@@ -105,22 +103,15 @@
 #define IDC_EDIT_EXCLUDE                1043
 #define IDC_CHECK_COMPARE               1044
 #define IDC_CHECK_PASSIVE               1045
-#define IDC_CHECK_USE_SSL               1046
-#define IDC_LINK_OPEN_SSL               1047
-#define IDC_COMBO_AUTH_METHOD           1048
-#define IDC_STATIC_USERNAME_PROMPT      1049
-#define IDC_EDIT_USERNAME               1050
-#define IDC_STATIC_PASSWORD_PROMPT      1051
-#define IDC_BUTTON1                     1054
-#define IDC_BUTTON_AUTH                 1054
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        114
+#define _APS_NO_MFC                     1
+#define _APS_NEXT_RESOURCE_VALUE        113
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1055
+#define _APS_NEXT_CONTROL_VALUE         1046
 #define _APS_NEXT_SYMED_VALUE           113
 #endif
 #endif

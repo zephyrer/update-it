@@ -1,31 +1,16 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // AboutPage.cpp - implementation of the CAboutPage class
 
 #include "stdafx.h"
-
 #include "Resource.h"
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
-#include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
@@ -49,8 +34,6 @@ IMPLEMENT_DYNAMIC(CAboutPage, CBetterPropPage)
 BEGIN_MESSAGE_MAP(CAboutPage, CBetterPropPage)
 END_MESSAGE_MAP()
 
-// construction
-
 //! Default ctor. Invokes inherited ctor first and then sets the PSP_PREMATURE
 //! flag, which causes the page to be created when the property sheet is created.
 //! @brief constructs a CAboutPage object
@@ -59,8 +42,6 @@ CBetterPropPage(IDD_PAGE_ABOUT)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 }
-
-// overridables
 
 //! This member function is called in by the framework response to the WM_INITDIALOG
 //! message. Its implementation first invokes the inherited method. Then it assigns
@@ -78,7 +59,7 @@ BOOL CAboutPage::OnInitDialog(void)
 	UINT cchFileVer;
 	CString strVersion;
 
-	__super::OnInitDialog();
+	CBetterPropPage::OnInitDialog();
 
 	// obtain and show version info
 	::GetModuleFileName(AfxGetInstanceHandle(), szExeName, _MAX_PATH);
@@ -103,8 +84,6 @@ BOOL CAboutPage::OnInitDialog(void)
 	m_linkRSA.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
 	m_linkNaughter.SetURL(CString(_T("http://www.naughter.com/")));
 	m_linkNaughter.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
-	m_linkOpenSSL.SetURL(CString(_T("http://www.slproweb.com/products/Win32OpenSSL.html")));
-	m_linkOpenSSL.ModifyLinkStyle(0, CHyperLink::StyleUseHover);
 
 	return (TRUE);
 }
@@ -116,7 +95,7 @@ BOOL CAboutPage::OnInitDialog(void)
 //! @return nonzero if the page was successfully set active; otherwise 0.
 BOOL CAboutPage::OnSetActive(void)
 {
-	BOOL fSuccess = __super::OnSetActive();
+	BOOL fSuccess = CBetterPropPage::OnSetActive();
 	if (fSuccess)
 	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
@@ -133,17 +112,13 @@ BOOL CAboutPage::OnSetActive(void)
 //! @param pDX a pointer to a CDataExchange object.
 void CAboutPage::DoDataExchange(CDataExchange* pDX)
 {
-	__super::DoDataExchange(pDX);
-
+	CBetterPropPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LINK_ZAREZKY, m_linkZarezky);
 	DDX_Control(pDX, IDC_LINK_ZLIB, m_linkZLib);
 	DDX_Control(pDX, IDC_LINK_ARTPOL, m_linkArtpol);
 	DDX_Control(pDX, IDC_LINK_RSA, m_linkRSA);
 	DDX_Control(pDX, IDC_LINK_NAUGHTER, m_linkNaughter);
-	DDX_Control(pDX, IDC_LINK_OPEN_SSL, m_linkOpenSSL);
 }
-
-// diagnostic services
 
 #if defined(_DEBUG)
 
@@ -155,7 +130,7 @@ void CAboutPage::DoDataExchange(CDataExchange* pDX)
 void CAboutPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CBetterPropPage::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_linkZarezky);
@@ -163,7 +138,6 @@ void CAboutPage::AssertValid(void) const
 	ASSERT_VALID(&m_linkArtpol);
 	ASSERT_VALID(&m_linkRSA);
 	ASSERT_VALID(&m_linkNaughter);
-	ASSERT_VALID(&m_linkOpenSSL);
 }
 
 //! This member function prints data members of this class (in the Debug version
@@ -175,7 +149,7 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CBetterPropPage::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_linkZarezky = " << m_linkZarezky;
@@ -183,7 +157,6 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_linkArtpol = " << m_linkArtpol;
 		dumpCtx << "\nm_linkRSA = " << m_linkRSA;
 		dumpCtx << "\nm_linkNaughter = " << m_linkNaughter;
-		dumpCtx << "\nm_linkOpenSSL = " << m_linkOpenSSL;
 	}
 	catch (CFileException* pXcpt)
 	{

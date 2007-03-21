@@ -1,23 +1,10 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // FilesList.cpp - implementation of the CFilesList class
 
 #include "stdafx.h"
-
 #include "FilesList.h"
 #include "Resource.h"
 
@@ -44,8 +31,6 @@ BEGIN_MESSAGE_MAP(CFilesList, CSortingListCtrl)
 	ON_NOTIFY_REFLECT(LVN_GETDISPINFO, OnGetDispInfo)
 END_MESSAGE_MAP()
 
-// construction/destruction
-
 CFilesList::CFilesList(void)
 {
 }
@@ -53,8 +38,6 @@ CFilesList::CFilesList(void)
 CFilesList::~CFilesList(void)
 {
 }
-
-// operations
 
 void CFilesList::InsertColumns(void)
 {
@@ -78,8 +61,6 @@ void CFilesList::InsertColumns(void)
 	strHeading.LoadString(IDS_SIZE);
 	InsertColumn(I_SIZE, strHeading, LVCFMT_RIGHT, cxWidth, I_SIZE);
 }
-
-// overridables
 
 int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 {
@@ -122,8 +103,6 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 		return (0);
 	}
 }
-
-// message map functions
 
 void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 {
@@ -173,8 +152,6 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 	}
 }
 
-// implementation helpers
-
 void CFilesList::SeparateThousands(CString& strNumber)
 {
 	if (!strNumber.IsEmpty())
@@ -198,14 +175,12 @@ void CFilesList::SeparateThousands(CString& strNumber)
 	}
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 void CFilesList::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CSortingListCtrl::AssertValid();
 
 	// ...and then verify our own state as well
 }
@@ -215,7 +190,7 @@ void CFilesList::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CSortingListCtrl::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 	}

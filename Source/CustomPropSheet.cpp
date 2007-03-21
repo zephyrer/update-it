@@ -1,26 +1,12 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2006 by Elijah Zarezky,
+// Copyright (c) 2002-2005 by Elijah Zarezky,
 // All rights reserved.
 // Portions copyright (c) 1996-1998 by Microsoft (KB Q142170).
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 // CustomPropSheet.cpp - implementation of the CCustomPropSheet class
 
 #include "stdafx.h"
-
 #include "CustomPropSheet.h"
-#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -49,8 +35,6 @@ BEGIN_MESSAGE_MAP(CCustomPropSheet, CPropertySheet)
 	ON_MESSAGE(PSM_RESIZE_PAGE, OnResizePage)
 END_MESSAGE_MAP()
 
-// construction/destruction
-
 CCustomPropSheet::CCustomPropSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage):
 CPropertySheet(nIDCaption, pParentWnd, iSelectPage)
 {
@@ -71,11 +55,9 @@ CCustomPropSheet::~CCustomPropSheet(void)
 	}
 }
 
-// overridables
-
 BOOL CCustomPropSheet::OnInitDialog(void)
 {
-	__super::OnInitDialog();
+	CPropertySheet::OnInitDialog();
 
 	// get the font for the first active page
 	CPropertyPage* pCurPage = GetActivePage();
@@ -139,7 +121,7 @@ BOOL CCustomPropSheet::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pnResult)
 	{
 		PostMessage(PSM_RESIZE_PAGE);
 	}
-	return (__super::OnNotify(wParam, lParam, pnResult));
+	return (CPropertySheet::OnNotify(wParam, lParam, pnResult));
 }
 
 BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
@@ -149,10 +131,8 @@ BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
 	{
 		PostMessage(PSM_RESIZE_PAGE);
 	}
-	return (__super::OnCommand(wParam, lParam));
+	return (CPropertySheet::OnCommand(wParam, lParam));
 }
-
-// message map functions
 
 LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
@@ -161,8 +141,6 @@ LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 	pCurPage->MoveWindow(&m_rcPage);
 	return (0);
 }
-
-// implementation helpers
 
 void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 {
@@ -273,25 +251,25 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 
 void CCustomPropSheet::BuildPropPageArray(void)
 {
-	CDialogTemplate dlgtPageRes;
+	CDialogTemplate dlgTemp;
 	LOGFONT lf;
 
-	__super::BuildPropPageArray();
+	CPropertySheet::BuildPropPageArray();
 
 	// get first page
 	CPropertyPage* pPage = GetPage(0);
 	ASSERT(pPage != NULL);
 
 	// load the dialog template
-	VERIFY(dlgtPageRes.Load(pPage->m_psp.pszTemplate));
+	VERIFY(dlgTemp.Load(pPage->m_psp.pszTemplate));
 
 	// get the font information
 	CWinApp* pApp = AfxGetApp();
-	CString strFaceName = pApp->GetProfileString(SZ_REGK_FONT, SZ_REGV_FONT_FACENAME);
-	WORD wFontSize = LOWORD(pApp->GetProfileInt(SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
+	CString strFaceName = pApp->GetProfileString(_T("Font"), _T("FaceName"));
+	WORD wFontSize = LOWORD(pApp->GetProfileInt(_T("Font"), _T("Size"), 0));
 	if (strFaceName.IsEmpty() || wFontSize == 0)
 	{
-		VERIFY(dlgtPageRes.GetFont(strFaceName, wFontSize));
+		VERIFY(dlgTemp.GetFont(strFaceName, wFontSize));
 	}
 	if (m_fontPage.m_hObject != NULL)
 	{
@@ -314,8 +292,6 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	::ReleaseDC(NULL, hdcScreen);
 }
 
-// diagnostic services
-
 #if defined(_DEBUG)
 
 //! This member function performs a validity check on this object by checking its
@@ -326,7 +302,7 @@ void CCustomPropSheet::BuildPropPageArray(void)
 void CCustomPropSheet::AssertValid(void) const
 {
 	// first perform inherited validity check...
-	__super::AssertValid();
+	CPropertySheet::AssertValid();
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_fontPage);
@@ -341,7 +317,7 @@ void CCustomPropSheet::Dump(CDumpContext& dumpCtx) const
 	try
 	{
 		// first invoke inherited dumper...
-		__super::Dump(dumpCtx);
+		CPropertySheet::Dump(dumpCtx);
 
 		// ...and then dump own unique members
 		dumpCtx << "m_rcPage = " << m_rcPage;
