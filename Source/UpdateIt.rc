@@ -1,4 +1,4 @@
-// Microsoft Visual C++ generated resource script.
+//Microsoft Developer Studio generated resource script.
 //
 #include "Resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE 
+1 TEXTINCLUDE DISCARDABLE 
 BEGIN
     "Resource.h\0"
 END
 
-2 TEXTINCLUDE 
+2 TEXTINCLUDE DISCARDABLE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE 
+3 TEXTINCLUDE DISCARDABLE 
 BEGIN
     "\r\n"
     "#include ""../../Repository/Naughter/Source/Smtp.rc""\r\n"
@@ -77,13 +77,14 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
+#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3696,76
+ FILEVERSION 1,0,2800,44
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -99,16 +100,18 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "none"
-            VALUE "CompanyName", "Spb Software House"
-            VALUE "FileDescription", "UpdateIt Application Executable"
-            VALUE "FileVersion", "1.0.3696"
-            VALUE "InternalName", "UpdateIt"
-            VALUE "LegalCopyright", "Copyright © 2002–2007 by Elijah Zarezky"
-            VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
-            VALUE "OriginalFilename", "UpdateIt.exe"
-            VALUE "ProductName", "Power Gadgets"
-            VALUE "ProductVersion", "1.0.0"
+            VALUE "Comments", "none\0"
+            VALUE "CompanyName", "Spb Software House\0"
+            VALUE "FileDescription", "UpdateIt Application Executable\0"
+            VALUE "FileVersion", "1.0.2800\0"
+            VALUE "InternalName", "UpdateIt\0"
+            VALUE "LegalCopyright", "Copyright © 2002–2005 by Elijah Zarezky\0"
+            VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation\0"
+            VALUE "OriginalFilename", "UpdateIt.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Power Gadgets\0"
+            VALUE "ProductVersion", "1.0.0\0"
+            VALUE "SpecialBuild", "\0"
         END
     END
     BLOCK "VarFileInfo"
@@ -117,16 +120,18 @@ BEGIN
     END
 END
 
+#endif    // !_MAC
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
 
-IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
-STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_OPTIONS DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
-FONT 8, "Tahoma", 400, 0, 0xCC
+FONT 8, "Tahoma"
 BEGIN
     GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
     EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | 
@@ -155,22 +160,22 @@ BEGIN
                     WS_GROUP | WS_TABSTOP,128,152,190,10
 END
 
-IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
-STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_FILES DIALOGEX 0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
-FONT 8, "Tahoma", 400, 0, 0xCC
+FONT 8, "Tahoma", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
     CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | 
                     LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | WS_BORDER | 
-                    WS_TABSTOP,4,14,326,210,WS_EX_CLIENTEDGE
-    PUSHBUTTON      "&Remove from list",IDC_BUTTON_REMOVE,260,228,70,16
+                    WS_TABSTOP,4,14,326,174,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "&Remove from list",IDC_BUTTON_REMOVE,260,192,70,16
 END
 
-IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
-STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_ACTION DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
-FONT 8, "Tahoma", 400, 0, 0xCC
+FONT 8, "Tahoma"
 BEGIN
     GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
     CONTROL         "&Copy file(s) to the target folder",IDC_RADIO_COPY,
@@ -186,7 +191,7 @@ BEGIN
     CONTROL         "Also &send ZIPped folder via e-mail",IDC_CHECK_SEND,
                     "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,4,86,
                     124,10
-    GROUPBOX        "FTP Settings",IDC_GROUP_FTP,180,4,150,112,WS_GROUP
+    GROUPBOX        "FTP Settings",IDC_GROUP_FTP,180,4,150,96,WS_GROUP
     RTEXT           "S&erver:",IDC_STATIC,186,18,36,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_SERVER,224,18,100,12,ES_AUTOHSCROLL
     RTEXT           "P&ort:",IDC_STATIC,186,34,36,12,SS_CENTERIMAGE
@@ -198,30 +203,26 @@ BEGIN
     EDITTEXT        IDC_EDIT_PASSWORD,224,66,100,12,ES_PASSWORD | 
                     ES_AUTOHSCROLL
     RTEXT           "&Root:",IDC_STATIC,186,82,36,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_ROOT,224,82,100,12,ES_AUTOHSCROLL | WS_GROUP
-    CONTROL         "Use passive mo&de",IDC_CHECK_PASSIVE,"Button",
-                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,186,102,72,10
-    GROUPBOX        "Mail settings",IDC_GROUP_MAIL,4,126,326,118,WS_GROUP
-    RTEXT           "&From:",IDC_STATIC,10,140,30,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FROM,42,140,100,12,ES_AUTOHSCROLL
-    RTEXT           "&To:",IDC_STATIC,10,156,30,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_MAILTO,42,156,100,12,ES_AUTOHSCROLL
-    RTEXT           "S&ubject:",IDC_STATIC,10,172,30,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_SUBJECT,42,172,100,12,ES_AUTOHSCROLL
-    RTEXT           "&Host:",IDC_STATIC,10,188,30,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_HOST,42,188,100,12,ES_AUTOHSCROLL
-    RTEXT           "&Port:",IDC_STATIC,10,204,30,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_PORT,42,204,100,12,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT_BODY,146,140,178,98,ES_MULTILINE | 
-                    ES_AUTOVSCROLL | WS_VSCROLL | WS_GROUP
-    PUSHBUTTON      "Authentication and security...",IDC_BUTTON_AUTH,10,222,
-                    132,16,WS_GROUP
+    EDITTEXT        IDC_EDIT_ROOT,224,82,100,12,ES_AUTOHSCROLL
+    GROUPBOX        "Mail settings",IDC_GROUP_MAIL,4,110,326,96,WS_GROUP
+    RTEXT           "&From:",IDC_STATIC,10,124,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FROM,42,124,100,12,ES_AUTOHSCROLL
+    RTEXT           "&To:",IDC_STATIC,10,140,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_MAILTO,42,140,100,12,ES_AUTOHSCROLL
+    RTEXT           "S&ubject:",IDC_STATIC,10,156,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_SUBJECT,42,156,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Host:",IDC_STATIC,10,172,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_HOST,42,172,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Port:",IDC_STATIC,10,188,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_PORT,42,188,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EDIT_BODY,146,124,178,76,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | WS_VSCROLL
 END
 
-IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
-STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_PROGRESS DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
-FONT 8, "Tahoma", 400, 0, 0xCC
+FONT 8, "Tahoma"
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
     CONTROL         "Animate1",IDC_ANIMATE_BANNER,"SysAnimate32",ACS_CENTER | 
@@ -229,72 +230,45 @@ BEGIN
                     38
     LTEXT           "",IDC_STATIC_FILE,4,64,326,10,SS_CENTERIMAGE | NOT 
                     WS_VISIBLE
-    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",NOT 
-                    WS_VISIBLE | 0x1,4,74,326,12
+    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",
+                    PBS_SMOOTH | NOT WS_VISIBLE,4,74,326,12
     LTEXT           "Total progress:",IDC_STATIC_TOTAL,4,96,326,10,
                     SS_CENTERIMAGE | NOT WS_VISIBLE
-    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",NOT 
-                    WS_VISIBLE | 0x1,4,106,326,12
+    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",
+                    PBS_SMOOTH | NOT WS_VISIBLE,4,106,326,12
 END
 
-IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
-STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PAGE_ABOUT DIALOG DISCARDABLE  0, 0, 334, 210
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
-FONT 8, "Tahoma", 400, 0, 0xCC
+FONT 8, "Tahoma"
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
-    LTEXT           "Copyright © 2002-2007 by Elijah Zarezky",IDC_STATIC,4,
+    LTEXT           "Copyright © 2002-2005 by Elijah Zarezky",IDC_STATIC,4,
                     24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
     LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
-    LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.2 (3 October 2004)",
                     IDC_STATIC,16,62,314,16
-    LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",
+    LTEXT           "Copyright © 1995-2004 Jean-loup Gailly and Mark Adler",
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 2.4.11 (31 Jul 2006)",
+    LTEXT           "ZipArchive library\nversion 2.4.5 (21-June-2005)",
                     IDC_STATIC,16,96,314,16
-    LTEXT           "Copyright © 2000-2006 by Tadeusz Dracz",IDC_STATIC,16,
+    LTEXT           "Copyright © 2000-2005 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ARTPOL,158,114,172,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,130,314,10
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
                     IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.65 (9 November 2006)",
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.53 (3 May 2005)",
                     IDC_STATIC,16,156,314,16
-    LTEXT           "Copyright © 1998-2006 by PJ Naughter",IDC_STATIC,16,174,
+    LTEXT           "Copyright © 1998-2005 by PJ Naughter",IDC_STATIC,16,174,
                     132,10,SS_CENTERIMAGE
     RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,174,180,10,
                     SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8d",
-                    IDC_STATIC,16,190,216,16
-    RTEXT           "Web Page",IDC_LINK_OPEN_SSL,236,196,94,10,
-                    SS_CENTERIMAGE
-END
-
-IDD_AUTHENTICATION DIALOGEX 0, 0, 168, 146
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Authentication and security"
-FONT 8, "Tahoma", 400, 0, 0xCC
-BEGIN
-    GROUPBOX        "Authentication",IDC_STATIC,8,6,152,68,WS_GROUP
-    RTEXT           "&Method:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
-    COMBOBOX        IDC_COMBO_AUTH_METHOD,54,20,100,58,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
-    RTEXT           "&Username:",IDC_STATIC_USERNAME_PROMPT,14,38,38,12,
-                    SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_USERNAME,54,38,100,12,ES_AUTOHSCROLL | WS_GROUP
-    RTEXT           "&Password:",IDC_STATIC_PASSWORD_PROMPT,14,56,38,12,
-                    SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_PASSWORD,54,56,100,12,ES_PASSWORD | 
-                    ES_AUTOHSCROLL | WS_GROUP
-    GROUPBOX        "Security",IDC_STATIC,8,82,152,28,WS_GROUP
-    CONTROL         "Use &SSL connection",IDC_CHECK_USE_SSL,"Button",
-                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,96,78,10
-    DEFPUSHBUTTON   "OK",IDOK,54,122,46,16,WS_GROUP
-    PUSHBUTTON      "Cancel",IDCANCEL,114,122,46,16
 END
 
 
@@ -304,14 +278,14 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO DISCARDABLE 
 BEGIN
     IDD_PAGE_OPTIONS, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 327
         TOPMARGIN, 7
-        BOTTOMMARGIN, 241
+        BOTTOMMARGIN, 203
     END
 
     IDD_PAGE_FILES, DIALOG
@@ -319,7 +293,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 327
         TOPMARGIN, 7
-        BOTTOMMARGIN, 241
+        BOTTOMMARGIN, 203
     END
 
     IDD_PAGE_ACTION, DIALOG
@@ -327,7 +301,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 327
         TOPMARGIN, 7
-        BOTTOMMARGIN, 241
+        BOTTOMMARGIN, 203
     END
 
     IDD_PAGE_PROGRESS, DIALOG
@@ -335,7 +309,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 327
         TOPMARGIN, 7
-        BOTTOMMARGIN, 241
+        BOTTOMMARGIN, 203
     END
 
     IDD_PAGE_ABOUT, DIALOG
@@ -343,15 +317,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 327
         TOPMARGIN, 7
-        BOTTOMMARGIN, 241
-    END
-
-    IDD_AUTHENTICATION, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 161
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 139
+        BOTTOMMARGIN, 203
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -364,48 +330,27 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_APP_ICON            ICON                    "BinRes\\AppIcon.ico"
+IDI_APP_ICON            ICON    DISCARDABLE     "BinRes\\AppIcon.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // AVI
 //
 
-IDR_FILECOPY            AVI                     "BinRes\\FileCopy.avi"
-IDR_FILEMOVE            AVI                     "BinRes\\FileMove.avi"
-IDR_FILEDELETE          AVI                     "BinRes\\FileDelete.avi"
-IDR_FILETRASH           AVI                     "BinRes\\FileTrash.avi"
-IDR_ZIPPING             AVI                     "BinRes\\ZIPPING.AVI"
-IDR_FILEUPLOAD          AVI                     "BinRes\\Move2.avi"
-IDR_FILESEND            AVI                     "BinRes\\FileSend.avi"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog Info
-//
-
-IDD_AUTHENTICATION DLGINIT
-BEGIN
-    IDC_COMBO_AUTH_METHOD, 0x403, 5, 0
-0x6f4e, 0x656e, "\000" 
-    IDC_COMBO_AUTH_METHOD, 0x403, 9, 0
-0x5243, 0x4d41, 0x4d2d, 0x3544, "\000" 
-    IDC_COMBO_AUTH_METHOD, 0x403, 6, 0
-0x6f4c, 0x6967, 0x006e, 
-    IDC_COMBO_AUTH_METHOD, 0x403, 6, 0
-0x6c50, 0x6961, 0x006e, 
-    IDC_COMBO_AUTH_METHOD, 0x403, 5, 0
-0x544e, 0x4d4c, "\000" 
-    0
-END
-
+IDR_FILECOPY            AVI     DISCARDABLE     "BinRes\\FileCopy.avi"
+IDR_FILEMOVE            AVI     DISCARDABLE     "BinRes\\FileMove.avi"
+IDR_FILEDELETE          AVI     DISCARDABLE     "BinRes\\FileDelete.avi"
+IDR_FILETRASH           AVI     DISCARDABLE     "BinRes\\FileTrash.avi"
+IDR_ZIPPING             AVI     DISCARDABLE     "BinRes\\ZIPPING.AVI"
+IDR_FILEUPLOAD          AVI     DISCARDABLE     "BinRes\\Move2.avi"
+IDR_FILESEND            AVI     DISCARDABLE     "BinRes\\FileSend.avi"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_REGKEY              "Elijah Zarezky"
     IDS_NO_SOURCE           "No source folder specified!"
@@ -424,7 +369,7 @@ BEGIN
     IDS_NO_FILES            "No files found."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_DISCARDING_SEARCH   "Discarding search results..."
     IDS_DELETING_FILES      "Deleting file(s) from the target folder..."
@@ -444,7 +389,7 @@ BEGIN
     IDS_PREPARING_UPLOAD    "Preparing for upload..."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_CHARSET_FORMAT      """windows-%u"""
     IDS_SELECTED_FORMAT     "&Selected %i file(s):"
@@ -457,10 +402,9 @@ BEGIN
     IDS_SC_RESTORE          "&Restore"
     IDS_TITLE_EXPORT        "Export Settings to File"
     IDS_TITLE_IMPORT        "Import Settings from File"
-    IDS_TOTAL_SIZE_OVERFLOW "Total size of already found files exceeds the maximum\nsupported value and the search will now be stopped. After\nthese files will be processed You can repeat the search."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDC_EDIT_SOURCE         "Shows the location to start the search for the updated files. You can change this location by clicking the [...] button on right. The most recently used source folder will be restored at the next run."
     IDC_BUTTON_SOURCE       "Click here to browse for the source folder."
@@ -470,7 +414,7 @@ BEGIN
     IDC_CHECK_CLEANUP       "If checked then the target folder will be completely erased before updated files will be copied/moved into."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDC_EDIT_MAILTO         "Specifies the mailing address of the desired message recipient."
     IDC_EDIT_HOST           "Specifies the name of the SMTP server through the wich your message should be sent. You can get this information from your Internet Service Provider or LAN administrator."
@@ -484,7 +428,7 @@ BEGIN
     IDC_EDIT_LOGIN          "Specifies the account name assigned to you by the FTP server administrator."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDC_LIST_FILES          "Shows the updated file(s) that was found in the source folder. If you don't want to process some of them just select all unneeded files and remove it from this list by clicking [Remove from list] button below."
     IDC_BUTTON_REMOVE       "Click here to remove selected file(s) from the list and thus exclude it from the future processing."
@@ -496,16 +440,14 @@ BEGIN
     IDC_EDIT_FROM           "Specifies the mailing address of the message sender."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     IDC_EDIT_PASSWORD       "Provides the space to type the password assigned to you by the FTP server administrator. For security reasons, the actual characters don't appear in this space; instead each character is represented by an asterisk."
     IDC_EDIT_ROOT           "Specifies the initial subfolder to connect on the FTP server. If this field is left blank, the root folder will be used."
     IDC_EDIT_EXCLUDE        "Specifies a mask or several masks (delimited with commas) of files to exclude from search."
-    IDC_CHECK_PASSIVE       "If unchecked then the FTP server will establish inbound connection to Your computer. Otherwise the outbound connection to the FTP server will be established (use it when inbound connections are disabled by a firewall)."
-    IDC_CHECK_USE_SSL       "If checked then Secure Socket Layer connection with the SMTP server will be used."
 END
 
-STRINGTABLE 
+STRINGTABLE DISCARDABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "UpdateIt!"
 END

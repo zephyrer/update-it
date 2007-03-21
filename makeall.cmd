@@ -1,9 +1,10 @@
 @echo off
 echo.
-echo Building executable - "Win32 MBCS Debug"...
+echo Building executable - "Win32 Debug"...
 echo.
-devenv.com UpdateIt71.sln /rebuild MBCS_Debug /project UpdateIt /nologo
-echo Building executable - "Win32 MBCS Release"...
+msdev.com UpdateIt.dsw /MAKE "UpdateIt - Win32 Debug" /REBUILD
 echo.
-devenv.com UpdateIt71.sln /rebuild MBCS_Release /project UpdateIt /nologo
+echo Building executable - "Win32 Release"...
+echo.
+msdev.com UpdateIt.dsw /MAKE "UpdateIt - Win32 Release" /REBUILD
 echo.
