@@ -3,7 +3,7 @@
 echo.
 echo Building executable...
 echo.
-devenv.com UpdateIt71.sln /rebuild MBCS_Release /project UpdateIt /nologo
+devenv.com UpdateIt71.sln /rebuild "MBCS Release" /project UpdateIt /nologo
 
 echo Compiling documentation...
 echo.
