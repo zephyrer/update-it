@@ -11,7 +11,7 @@
 	</Platforms>
 	<Configurations>
 		<Configuration
-			Name="MBCS_Debug|Win32"
+			Name="MBCS Debug|Win32"
 			OutputDirectory="71_DebugA"
 			IntermediateDirectory="71_DebugA"
 			ConfigurationType="1"
@@ -78,7 +78,7 @@
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
-			Name="MBCS_Release|Win32"
+			Name="MBCS Release|Win32"
 			OutputDirectory="71_ReleaseA"
 			IntermediateDirectory="71_ReleaseA"
 			ConfigurationType="1"
@@ -143,7 +143,7 @@
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
-			Name="Unicode_Debug|Win32"
+			Name="Unicode Debug|Win32"
 			OutputDirectory="71_DebugW"
 			IntermediateDirectory="71_DebugW"
 			ConfigurationType="1"
@@ -208,7 +208,7 @@
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
-			Name="Unicode_Release|Win32"
+			Name="Unicode Release|Win32"
 			OutputDirectory="71_ReleaseW"
 			IntermediateDirectory="71_ReleaseW"
 			ConfigurationType="1"
@@ -280,25 +280,25 @@
 			<File
 				RelativePath="Source\AboutPage.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -307,25 +307,25 @@
 			<File
 				RelativePath="Source\ActionPage.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -334,25 +334,25 @@
 			<File
 				RelativePath=".\Source\AuthenticationDialog.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -361,25 +361,25 @@
 			<File
 				RelativePath="Source\BetterPropPage.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -388,25 +388,25 @@
 			<File
 				RelativePath=".\Source\CustomDialog.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -415,25 +415,25 @@
 			<File
 				RelativePath="Source\CustomPropSheet.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -442,25 +442,25 @@
 			<File
 				RelativePath="Source\FilesList.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -469,25 +469,25 @@
 			<File
 				RelativePath="Source\FilesPage.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -496,25 +496,25 @@
 			<File
 				RelativePath="Source\MainWizard.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -523,25 +523,25 @@
 			<File
 				RelativePath="Source\OptionsPage.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -550,25 +550,25 @@
 			<File
 				RelativePath="Source\ProgressPage.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -577,25 +577,25 @@
 			<File
 				RelativePath="Source\stdafx.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
@@ -604,25 +604,25 @@
 			<File
 				RelativePath="Source\UpdateItApp.cpp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32">
+					Name="MBCS Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32">
+					Name="MBCS Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32">
+					Name="Unicode Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32">
+					Name="Unicode Release|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="3"/>
@@ -705,25 +705,25 @@
 			<File
 				RelativePath="Source\UpdateIt.manifest">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32"
+					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32"
+					Name="MBCS Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32"
+					Name="Unicode Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32"
+					Name="Unicode Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
@@ -749,25 +749,25 @@
 			<File
 				RelativePath="Source\ApacheLicense.rtf">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32"
+					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32"
+					Name="MBCS Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32"
+					Name="Unicode Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32"
+					Name="Unicode Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
@@ -780,25 +780,25 @@
 			<File
 				RelativePath="HTML\styles.css">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32"
+					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32"
+					Name="MBCS Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32"
+					Name="Unicode Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32"
+					Name="Unicode Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
@@ -807,25 +807,25 @@
 			<File
 				RelativePath="HTML\update_it.html">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32"
+					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32"
+					Name="MBCS Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32"
+					Name="Unicode Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32"
+					Name="Unicode Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
@@ -834,25 +834,25 @@
 			<File
 				RelativePath="HTML\UpdateIt.hhp">
 				<FileConfiguration
-					Name="MBCS_Debug|Win32"
+					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="MBCS_Release|Win32"
+					Name="MBCS Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Debug|Win32"
+					Name="Unicode Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Unicode_Release|Win32"
+					Name="Unicode Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCustomBuildTool"/>
@@ -864,25 +864,25 @@
 				<File
 					RelativePath="HTML\images\step_0.gif">
 					<FileConfiguration
-						Name="MBCS_Debug|Win32"
+						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="MBCS_Release|Win32"
+						Name="MBCS Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Debug|Win32"
+						Name="Unicode Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Release|Win32"
+						Name="Unicode Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
@@ -891,25 +891,25 @@
 				<File
 					RelativePath="HTML\images\step_1.gif">
 					<FileConfiguration
-						Name="MBCS_Debug|Win32"
+						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="MBCS_Release|Win32"
+						Name="MBCS Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Debug|Win32"
+						Name="Unicode Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Release|Win32"
+						Name="Unicode Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
@@ -918,25 +918,25 @@
 				<File
 					RelativePath="HTML\images\step_2.gif">
 					<FileConfiguration
-						Name="MBCS_Debug|Win32"
+						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="MBCS_Release|Win32"
+						Name="MBCS Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Debug|Win32"
+						Name="Unicode Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Release|Win32"
+						Name="Unicode Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
@@ -945,25 +945,25 @@
 				<File
 					RelativePath="HTML\images\step_3.gif">
 					<FileConfiguration
-						Name="MBCS_Debug|Win32"
+						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="MBCS_Release|Win32"
+						Name="MBCS Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Debug|Win32"
+						Name="Unicode Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Release|Win32"
+						Name="Unicode Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
@@ -972,25 +972,25 @@
 				<File
 					RelativePath="HTML\images\texture.jpg">
 					<FileConfiguration
-						Name="MBCS_Debug|Win32"
+						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="MBCS_Release|Win32"
+						Name="MBCS Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Debug|Win32"
+						Name="Unicode Debug|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Unicode_Release|Win32"
+						Name="Unicode Release|Win32"
 						ExcludedFromBuild="TRUE">
 						<Tool
 							Name="VCCustomBuildTool"/>
