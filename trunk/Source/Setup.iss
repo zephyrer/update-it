@@ -43,7 +43,7 @@ DialogFontName=Tahoma
 DialogFontSize=8
 
 [Files]
-Source: "..\71_ReleaseA\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
