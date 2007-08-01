@@ -48,7 +48,7 @@ protected:
 
 // CZipActionCallback overridables
 public:
-	virtual bool Callback(int iProgress);
+	virtual bool Callback(ZIP_SIZE_TYPE uProgress);
 
 // attributes
 public:
