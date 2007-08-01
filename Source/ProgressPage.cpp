@@ -283,10 +283,10 @@ void CProgressPage::DoDataExchange(CDataExchange* pDX)
 
 // CZipActionCallback overridables
 
-bool CProgressPage::Callback(int iProgress)
+bool CProgressPage::Callback(ZIP_SIZE_TYPE uProgress)
 {
 	m_textTotal.SetWindowText(m_szFileInZip);
-	m_progressTotal.OffsetPos(iProgress);
+	m_progressTotal.OffsetPos(uProgress);
 	PumpWaitingMessages();
 	return (true);
 }
@@ -513,7 +513,7 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 
 	try
 	{
-		zipArch.SetCallback(this, CZipArchive::cbAdd);
+		zipArch.SetCallback(this, CZipActionCallback::cbAdd);
 		zipArch.Open(pszZipPath, CZipArchive::zipCreate);
 		CString strTemp(pszTarget);
 		zipArch.SetRootPath(strTemp.Left(strTemp.ReverseFind(_T('\\'))));
@@ -535,7 +535,7 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 			strFilePath += pData->szName;
 			strFilePath += _T('.');
 			strFilePath += pData->szExt;
-			zipArch.AddNewFile(strFilePath, Z_BEST_COMPRESSION, false);
+			zipArch.AddNewFile(strFilePath, CZipCompressor::levelBest, false);
 		}
 		zipArch.Close();
 	}

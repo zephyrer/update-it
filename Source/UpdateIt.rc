@@ -83,7 +83,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3696,76
+ FILEVERSION 1,0,3841,97
  PRODUCTVERSION 1,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -102,7 +102,7 @@ BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Spb Software House"
             VALUE "FileDescription", "UpdateIt Application Executable"
-            VALUE "FileVersion", "1.0.3696"
+            VALUE "FileVersion", "1.0.3841"
             VALUE "InternalName", "UpdateIt"
             VALUE "LegalCopyright", "Copyright © 2002–2007 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
@@ -253,9 +253,9 @@ BEGIN
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 2.4.11 (31 Jul 2006)",
+    LTEXT           "ZipArchive library\nversion 3.0.2 (14 May 2007)",
                     IDC_STATIC,16,96,314,16
-    LTEXT           "Copyright © 2000-2006 by Tadeusz Dracz",IDC_STATIC,16,
+    LTEXT           "Copyright © 2000-2007 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ARTPOL,158,114,172,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,130,314,10
