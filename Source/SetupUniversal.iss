@@ -54,7 +54,7 @@ Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custo
 Name: "sources"; Description: "Source Code"; Types: full custom
 
 [Files]
-Source: "..\71_ReleaseA\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
