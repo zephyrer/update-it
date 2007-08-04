@@ -37,20 +37,61 @@ MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
 LicenseFile=ApacheLicense.rtf
+LanguageDetectionMethod=none
+ShowLanguageDialog=yes
+
+[Languages]
+; English
+Name: "en"; MessagesFile: "compiler:Default.isl"
+; Russian
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"; LicenseFile: ".\ApacheLicense.rtf"
 
 [LangOptions]
+LanguageCodePage=0
 DialogFontName=Tahoma
 DialogFontSize=8
+en.LanguageName=English
+ru.LanguageName=Russian
+
+[Messages]
+SelectLanguageTitle=Language Selection
+SelectLanguageLabel=Please select UpdateIt! language:
+
+[Code]
+function NextButtonClick(CurPageID: Integer): Boolean;
+var
+	hRootHive: Integer;
+	LangsKeyName: String;
+begin
+	if CurPageID = wpFinished then
+	begin
+		hRootHive := HKEY_CURRENT_USER;
+		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
+		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
+		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
+	end;
+	Result := True;
+end;
 
 [Files]
 Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
 Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
 Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
 Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
+
+Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"
+Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"

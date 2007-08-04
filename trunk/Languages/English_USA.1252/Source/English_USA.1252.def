@@ -8,7 +8,7 @@
 ; visit http://zarezky.spb.ru/projects/afx_scratch.html for more info
 
 
-LIBRARY      "English_USA.1252"
+LIBRARY      "English_USA.1252.dll"
 
 EXPORTS
     ; explicit exports can go here

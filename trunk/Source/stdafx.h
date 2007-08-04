@@ -47,6 +47,9 @@
 #include <wincrypt.h>		// cryptographic API prototypes and definitions
 #include <windns.h>			// DNS definitions and DNS API
 
+// ATL headers
+#include <atlbase.h>
+
 // STL headers
 #pragma warning(push, 3)
 #include <string>
@@ -110,6 +113,13 @@ struct FILE_DATA {
 	ULONGLONG cbLength;
 #endif	// _MFC_VER
 };
+
+// shared globals
+extern bool g_fChangeLanguage;
+
+#if !defined(_countof)
+#define _countof(array) (sizeof(array) / sizeof(array[0]))
+#endif	// _countof
 
 #if defined(ZIPSTRING_DOT_H) && defined(for)
 #undef for

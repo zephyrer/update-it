@@ -46,7 +46,8 @@ protected:
 private:
 	HICON m_hIcon;
 	HICON m_hSmIcon;
-	enum {
+	enum
+	{
 		// page indices
 		I_ABOUT,
 		I_OPTIONS,
@@ -60,11 +61,13 @@ private:
 	CFilesPage m_pageFiles;
 	CActionPage m_pageAction;
 	CProgressPage m_pageProgress;
+	CArray<CString> m_arrLangNames;
 
 // implementation helpers
 private:
 	void OnScExportSettings(void);
 	void OnScImportSettings(void);
+	void OnLanguageChange(UINT uMenuID);
 
 // diagnostic services
 #if defined(_DEBUG)
