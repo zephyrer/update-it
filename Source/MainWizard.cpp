@@ -33,6 +33,20 @@
 #include "UpdateItApp.h"
 #include "Registry.h"
 
+#if !defined(_AFX_NO_OCC_SUPPORT)
+#include <afxole.h>
+#include <ocdb.h>
+#include <../src/mfc/occimpl.h>
+#include <afxocc.h>
+#endif	// _AFX_NO_OCC_SUPPORT
+
+#pragma warning(disable:4706)
+#define COMPILE_MULTIMON_STUBS
+#include <multimon.h>
+#pragma warning(default:4706)
+
+#include <atlacc.h>
+
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
 #pragma warning(disable: 171)
@@ -51,6 +65,7 @@ IMPLEMENT_DYNAMIC(CMainWizard, CCustomPropSheet)
 BEGIN_MESSAGE_MAP(CMainWizard, CCustomPropSheet)
 	ON_WM_INITMENUPOPUP()
 	ON_WM_SYSCOMMAND()
+	ON_WM_NCDESTROY()
 END_MESSAGE_MAP()
 
 // construction/destruction
@@ -258,6 +273,82 @@ void CMainWizard::OnSysCommand(UINT uID, LPARAM lParam)
 	default:
 		__super::OnSysCommand(uID, lParam);
 		break;
+	}
+}
+
+void CMainWizard::OnNcDestroy(void)
+{
+	if (g_fChangeLanguage)
+	{
+		// cleanup main and active windows
+		CWinThread* pThread = AfxGetThread();
+		if (pThread != NULL)
+		{
+			if (pThread->m_pMainWnd == this)
+			{
+				/*if (!afxContextIsDLL)
+				{
+					// shut down current thread if possible
+					if (pThread != AfxGetApp() || AfxOleCanExitApp())
+						AfxPostQuitMessage(0);
+				}*/
+				pThread->m_pMainWnd = NULL;
+			}
+			if (pThread->m_pActiveWnd == this)
+			{
+				pThread->m_pActiveWnd = NULL;
+			}
+		}
+
+#ifndef _AFX_NO_OLE_SUPPORT
+		// cleanup OLE drop target interface
+		if (m_pDropTarget != NULL)
+		{
+			m_pDropTarget->Revoke();
+			m_pDropTarget = NULL;
+		}
+#endif
+
+#ifndef _AFX_NO_OCC_SUPPORT
+		// cleanup control container
+		delete m_pCtrlCont;
+		m_pCtrlCont = NULL;
+#endif
+
+		// cleanup tooltip support
+		if (m_nFlags & WF_TOOLTIPS)
+		{
+			CToolTipCtrl* pToolTip = AfxGetModuleThreadState()->m_pToolTip;
+			if (pToolTip->GetSafeHwnd() != NULL)
+			{
+				TOOLINFO ti; memset(&ti, 0, sizeof(TOOLINFO));
+				ti.cbSize = sizeof(AFX_OLDTOOLINFO);
+				ti.uFlags = TTF_IDISHWND;
+				ti.hwnd = m_hWnd;
+				ti.uId = (UINT_PTR)m_hWnd;
+				pToolTip->SendMessage(TTM_DELTOOL, 0, (LPARAM)&ti);
+			}
+		}
+
+		// call default, unsubclass, and detach from the map
+		WNDPROC pfnWndProc = WNDPROC(GetWindowLongPtr(m_hWnd, GWLP_WNDPROC));
+		Default();
+		if (WNDPROC(GetWindowLongPtr(m_hWnd, GWLP_WNDPROC)) == pfnWndProc)
+		{
+			WNDPROC pfnSuper = *GetSuperWndProcAddr();
+			if (pfnSuper != NULL)
+			{
+				SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, INT_PTR(pfnSuper));
+			}
+		}
+		Detach();
+		ASSERT(m_hWnd == NULL);
+
+		// call special post-cleanup routine
+		PostNcDestroy();
+	}
+	else {
+		__super::OnNcDestroy();
 	}
 }
 

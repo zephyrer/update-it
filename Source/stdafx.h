@@ -42,6 +42,8 @@
 #include <afxsock.h>			// MFC support for Windows Sockets
 #include <afxinet.h>			// MFC support for WinInet
 
+#include <../src/mfc/afximpl.h>
+
 // PSDK headers
 #include <shlwapi.h>			// light-weight utility APIs
 #include <wincrypt.h>		// cryptographic API prototypes and definitions

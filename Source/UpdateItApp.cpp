@@ -182,15 +182,13 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	SetRegistryKey(_T("Elijah Zarezky"));
 
-	INT_PTR nResult = 0;
-
 	do
 	{
 		m_fIsMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
 
-		CMainWizard m_wizMain;
-		m_pMainWnd = &m_wizMain;
-		nResult = m_wizMain.DoModal();
+		CMainWizard wizMain;
+		m_pMainWnd = &wizMain;
+		wizMain.DoModal();
 	}
 	while (g_fChangeLanguage);
 
