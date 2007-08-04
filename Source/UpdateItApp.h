@@ -48,6 +48,20 @@ public:
 	virtual BOOL InitInstance(void);
 	virtual int ExitInstance(void);
 
+// attributes
+public:
+	HINSTANCE m_hLangDLL;
+	bool m_fIsMUI;
+
+// implementation helpers
+private:
+	void GetAbsolutePath(LPTSTR pszDest, LPCTSTR pszRelativePath);
+	bool RegQueryLanguagePath(LPCTSTR pszValueName, LPTSTR pszDest, ULONG cchMaxLen = _MAX_PATH);
+	bool GetLanguagePath(LPTSTR pszDest);
+	bool GetAfxLanguagePath(LPTSTR pszDest);
+	bool SetCurrentLanguage(void);
+	bool SetCurrentAfxLanguage(void);
+
 // diagnostic services
 #if defined(_DEBUG)
 public:

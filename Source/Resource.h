@@ -61,6 +61,7 @@
 #define IDR_FILEUPLOAD                  111
 #define IDR_FILESEND                    112
 #define IDD_AUTHENTICATION              113
+#define IDR_MENU_LANGS                  114
 #define IDC_EDIT_SOURCE                 1001
 #define IDC_BUTTON_SOURCE               1002
 #define IDC_EDIT_TARGET                 1003
@@ -112,14 +113,16 @@
 #define IDC_EDIT_USERNAME               1050
 #define IDC_STATIC_PASSWORD_PROMPT      1051
 #define IDC_BUTTON_AUTH                 1054
+#define ID_LANGUAGE_ENGLISH             0x9C50
+#define ID_LANGUAGE_RUSSIAN             0x9C60
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        114
-#define _APS_NEXT_COMMAND_VALUE         40001
+#define _APS_NEXT_RESOURCE_VALUE        115
+#define _APS_NEXT_COMMAND_VALUE         40033
 #define _APS_NEXT_CONTROL_VALUE         1055
-#define _APS_NEXT_SYMED_VALUE           114
+#define _APS_NEXT_SYMED_VALUE           115
 #endif
 #endif

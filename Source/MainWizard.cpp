@@ -78,6 +78,34 @@ CCustomPropSheet(AFX_IDS_APP_TITLE)
 	};
 	CHyperLink::SetColors(linkColors);
 
+	if (pApp->m_fIsMUI)
+	{
+		ATL::CRegKey regKeyLangs;
+		regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
+
+		int nError = ERROR_SUCCESS;
+
+		if (static_cast<HKEY>(regKeyLangs) != NULL)
+		{
+			TCHAR szLangNames[128] = { 0 };
+			ULONG cchNamesMax = _countof(szLangNames);
+			nError = regKeyLangs.QueryStringValue(NULL, szLangNames, &cchNamesMax);
+			if (nError == ERROR_SUCCESS)
+			{
+				LPCTSTR pszSeps = _T(",;\x20");
+				LPTSTR pszCurLex = _tcstok(szLangNames, pszSeps);
+				while (pszCurLex != NULL)
+				{
+					m_arrLangNames.Add(pszCurLex);
+					pszCurLex = _tcstok(NULL, pszSeps);
+				}
+			}
+			::RegCloseKey(regKeyLangs.Detach());
+		}
+
+		g_fChangeLanguage = false;
+	}
+
 	AddPage(&m_pageAbout);
 	AddPage(&m_pageOptions);
 	AddPage(&m_pageFiles);
@@ -90,6 +118,14 @@ CMainWizard::~CMainWizard(void)
 {
 	::DestroyIcon(m_hSmIcon);
 	::DestroyIcon(m_hIcon);
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+	if (pApp->m_hLangDLL != NULL)
+	{
+		::FreeLibrary(pApp->m_hLangDLL);
+		pApp->m_hLangDLL = NULL;
+	}
 }
 
 // overridables
@@ -138,20 +174,38 @@ BOOL CMainWizard::OnInitDialog(void)
 	miInfo.hbmpItem = HBMMENU_POPUP_MINIMIZE;
 	::SetMenuItemInfo(pSysMenu->GetSafeHmenu(), SC_MINIMIZE, FALSE, &miInfo);
 	ModifyStyle(0, WS_MINIMIZEBOX);
+
+	int iInsertPos = 0;
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+	if (pApp->m_fIsMUI)
+	{
+		CMenu menuLangs;
+		menuLangs.LoadMenu(IDR_MENU_LANGS);
+		CMenu* pPopupMenu = menuLangs.GetSubMenu(0);
+		ASSERT_VALID(pPopupMenu);
+		UINT_PTR uID = reinterpret_cast<UINT_PTR>(pPopupMenu->Detach());
+		CString strText;
+		menuLangs.GetMenuString(0, strText, MF_BYPOSITION);
+		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION | MF_POPUP, uID, strText);
+		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION | MF_SEPARATOR);
+		menuLangs.Detach();
+	}
+
 	OSVERSIONINFO osVerInfo = { sizeof(osVerInfo) };
 	GetVersionEx(&osVerInfo);
 	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5)
 	{
 		// Windows 2000/XP
 		strNewItem.LoadString(IDS_SC_EXPORT_SETTINGS);
-		pSysMenu->InsertMenu(0, MF_BYPOSITION, IDM_SC_EXPORT_SETTINGS, strNewItem);
+		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION, IDM_SC_EXPORT_SETTINGS, strNewItem);
 		strNewItem.LoadString(IDS_SC_IMPORT_SETTINGS);
-		pSysMenu->InsertMenu(1, MF_BYPOSITION, IDM_SC_IMPORT_SETTINGS, strNewItem);
-		pSysMenu->InsertMenu(2, MF_BYPOSITION | MF_SEPARATOR);
+		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION, IDM_SC_IMPORT_SETTINGS, strNewItem);
+		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION | MF_SEPARATOR);
 	}
 
 	// customize tool tips
-	CWinApp* pApp = AfxGetApp();
 	nInitialDelay = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_INITIAL_DELAY, 900);
 	nAutoPopDelay = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_AUTO_POP_DELAY, 5000);
 	cxMaxWidth = pApp->GetProfileInt(SZ_REGK_TIPS, SZ_REGV_TIPS_MAX_WIDTH, 300);
@@ -178,6 +232,7 @@ BOOL CMainWizard::OnInitDialog(void)
 void CMainWizard::OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu)
 {
 	__super::OnInitMenuPopup(pPopupMenu, uIndex, fSysMenu);
+
 	if (fSysMenu)
 	{
 		ASSERT_VALID(pPopupMenu);
@@ -195,6 +250,10 @@ void CMainWizard::OnSysCommand(UINT uID, LPARAM lParam)
 		break;
 	case IDM_SC_IMPORT_SETTINGS:
 		OnScImportSettings();
+		break;
+	case ID_LANGUAGE_ENGLISH:
+	case ID_LANGUAGE_RUSSIAN:
+		OnLanguageChange((uID & 0x00F0) >> 4);
 		break;
 	default:
 		__super::OnSysCommand(uID, lParam);
@@ -259,6 +318,30 @@ void CMainWizard::OnScImportSettings(void)
 		::RegCloseKey(hAppKey);
 		processPrivileges[SE_RESTORE_NAME] = 0;
 		EndWaitCursor();
+	}
+}
+
+void CMainWizard::OnLanguageChange(UINT uMenuID)
+{
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	ATL::CRegKey regKeyLangs;
+	regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
+
+	int nError = ERROR_SUCCESS;
+
+	if (static_cast<HKEY>(regKeyLangs) != NULL)
+	{
+		int iLangName = uMenuID - ((ID_LANGUAGE_ENGLISH & 0x00F0) >> 4);
+		nError = regKeyLangs.SetStringValue(SZ_REGV_LANGUAGES_CURRENT, m_arrLangNames[iLangName]);
+		if (nError == ERROR_SUCCESS)
+		{
+			regKeyLangs.Flush();
+			g_fChangeLanguage = true;
+			PostMessage(PSM_PRESSBUTTON, PSBTN_CANCEL, 0);
+		}
+		::RegCloseKey(regKeyLangs.Detach());
 	}
 }
 

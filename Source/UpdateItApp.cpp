@@ -31,6 +31,7 @@
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 #include "UpdateItApp.h"
+#include "Registry.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant
@@ -54,7 +55,9 @@ END_MESSAGE_MAP()
 
 // construction/destruction
 
-CUpdateItApp::CUpdateItApp(void)
+CUpdateItApp::CUpdateItApp(void):
+m_hLangDLL(NULL),
+m_fIsMUI(false)
 {
 	_tzset();
 }
@@ -176,17 +179,177 @@ BOOL CUpdateItApp::InitInstance(void)
 	::InitCommonControls();
 	VERIFY(SUCCEEDED(::CoInitialize(NULL)));
 	VERIFY(AfxSocketInit());
-	SetRegistryKey(IDS_REGKEY);
-	CMainWizard m_wizMain;
-	m_pMainWnd = &m_wizMain;
-	m_wizMain.DoModal();
+
+	SetRegistryKey(_T("Elijah Zarezky"));
+
+	INT_PTR nResult = 0;
+
+	do
+	{
+		m_fIsMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
+
+		CMainWizard m_wizMain;
+		m_pMainWnd = &m_wizMain;
+		nResult = m_wizMain.DoModal();
+	}
+	while (g_fChangeLanguage);
+
 	return (FALSE);
 }
 
 int CUpdateItApp::ExitInstance(void)
 {
 	::CoUninitialize();
+
 	return (__super::ExitInstance());
+}
+
+// implementation helpers
+
+void CUpdateItApp::GetAbsolutePath(LPTSTR pszDest, LPCTSTR pszRelativePath)
+{
+	if (::PathIsRelative(pszRelativePath))
+	{
+		TCHAR szOurDir[_MAX_PATH] = { 0 };
+		::GetModuleFileName(AfxGetInstanceHandle(), szOurDir, _countof(szOurDir));
+		LPTSTR pszLastSlash = _tcsrchr(szOurDir, _T('\\'));
+		ASSERT(pszLastSlash != NULL);
+		*pszLastSlash = 0;
+		TCHAR szTmpPath[_MAX_PATH] = { 0 };
+		if (pszRelativePath[0] != _T('.'))
+		{
+			_tcscpy(szTmpPath, _T(".\\"));
+			_tcscat(szTmpPath, pszRelativePath);
+			pszRelativePath = szTmpPath;
+		}
+		::PathCombine(pszDest, szOurDir, pszRelativePath);
+	}
+	else {
+		_tcscpy(pszDest, pszRelativePath);
+	}
+}
+
+bool CUpdateItApp::RegQueryLanguagePath(LPCTSTR pszValueName, LPTSTR pszDest, ULONG cchMaxLen)
+{
+	// precondition
+	ASSERT(pszValueName == NULL || (AfxIsValidString(pszValueName) && *pszValueName != 0));
+	ASSERT(AfxIsValidString(pszDest));
+
+	*pszDest = 0;
+	LONG nError = ERROR_SUCCESS;
+
+	ATL::CRegKey regKeyLangs;
+	regKeyLangs.Attach(GetSectionKey(SZ_REGK_LANGUAGES));
+
+	if (static_cast<HKEY>(regKeyLangs) != NULL)
+	{
+		TCHAR szCurLang[4] = { 0 };
+		ULONG cchLangMax = _countof(szCurLang);
+		nError = regKeyLangs.QueryStringValue(SZ_REGV_LANGUAGES_CURRENT, szCurLang, &cchLangMax);
+		if (nError == ERROR_SUCCESS)
+		{
+			ATL::CRegKey regKeyCurLang;
+			nError = regKeyCurLang.Open(regKeyLangs, szCurLang);
+			if (nError == ERROR_SUCCESS)
+			{
+				nError = regKeyCurLang.QueryStringValue(pszValueName, pszDest, &cchMaxLen);
+				regKeyCurLang.Close();
+			}
+		}
+		::RegCloseKey(regKeyLangs.Detach());
+	}
+
+	return (nError == ERROR_SUCCESS && _tcslen(pszDest) > 0 && ::PathFileExists(pszDest));
+}
+
+bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszDest));
+
+	TCHAR szTempPath[_MAX_PATH] = { 0 };
+	if (RegQueryLanguagePath(SZ_REGV_LANG_DLL, szTempPath))
+	{
+		GetAbsolutePath(pszDest, szTempPath);
+		return (true);
+	}
+	else {
+		return (false);
+	}
+}
+
+bool CUpdateItApp::GetAfxLanguagePath(LPTSTR pszDest)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszDest));
+
+	TCHAR szTempPath[_MAX_PATH] = { 0 };
+	if (RegQueryLanguagePath(NULL, szTempPath))
+	{
+		GetAbsolutePath(pszDest, szTempPath);
+		return (true);
+	}
+	else {
+		return (false);
+	}
+}
+
+bool CUpdateItApp::SetCurrentLanguage(void)
+{
+	bool fSuccess = false;
+
+	if (m_hLangDLL != NULL)
+	{
+		::FreeLibrary(m_hLangDLL);
+		m_hLangDLL = NULL;
+	}
+
+	CString strLangPath;
+	if (GetLanguagePath(strLangPath.GetBuffer(_MAX_PATH)))
+	{
+		strLangPath.ReleaseBuffer();
+		m_hLangDLL = ::LoadLibrary(strLangPath);
+		if (m_hLangDLL != NULL)
+		{
+			int iNameStart = strLangPath.ReverseFind(_T('\\'));
+			ASSERT(iNameStart > 0);
+			++iNameStart;
+			int iExtStart = strLangPath.ReverseFind(_T('.'));
+			ASSERT(iExtStart > 0);
+			CString strLocName = strLangPath.Mid(iNameStart, iExtStart - iNameStart);
+			WriteProfileString(SZ_REGK_LOCALE, SZ_REGV_LOCALE_LC_ALL, strLocName);
+			fSuccess = true;
+		}
+	}
+	else {
+		strLangPath.ReleaseBuffer();
+	}
+
+	return (fSuccess);
+}
+
+bool CUpdateItApp::SetCurrentAfxLanguage(void)
+{
+	bool fSuccess = false;
+
+	TCHAR szAfxLangPath[_MAX_PATH] = { 0 };
+	if (GetAfxLanguagePath(szAfxLangPath))
+	{
+		HINSTANCE hAfxLangDLL = ::LoadLibrary(szAfxLangPath);
+		if (hAfxLangDLL != NULL)
+		{
+			AFX_MODULE_STATE* pState = AfxGetModuleState();
+			ASSERT(pState != NULL);
+			if (pState->m_appLangDLL != NULL)
+			{
+				::FreeLibrary(pState->m_appLangDLL);
+			}
+			pState->m_appLangDLL = hAfxLangDLL;
+			fSuccess = true;
+		}
+	}
+
+	return (fSuccess);
 }
 
 // diagnostic services
@@ -218,6 +381,8 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
+		dumpCtx << "m_hLangDLL = " << m_hLangDLL;
+		dumpCtx << "\nm_fIsMUI = " << m_fIsMUI;
 	}
 	catch (CFileException* pXcpt)
 	{

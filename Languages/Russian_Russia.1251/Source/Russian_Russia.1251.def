@@ -8,7 +8,7 @@
 ; visit http://zarezky.spb.ru/projects/afx_scratch.html for more info
 
 
-LIBRARY      "Russian_Russia.1251"
+LIBRARY      "Russian_Russia.1251.dll"
 
 EXPORTS
     ; explicit exports can go here

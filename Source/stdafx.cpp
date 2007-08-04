@@ -27,6 +27,10 @@ extern "C" __int64 __cdecl _abs64(__int64 num)
 
 #endif	// _MSC_VER
 
+// shared globals
+
+bool g_fChangeLanguage = false;
+
 // import libraries
 
 #pragma comment(lib, "shlwapi.lib")

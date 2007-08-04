@@ -30,6 +30,13 @@
 #define SZ_REGV_FONT_FACENAME _T("FaceName")
 #define SZ_REGV_FONT_SIZE _T("Size")
 
+// HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\Languages
+
+#define SZ_REGK_LANGUAGES _T("Languages")
+
+#define SZ_REGV_LANGUAGES_CURRENT _T("Current")
+#define SZ_REGV_LANG_DLL _T("LangDLL")
+
 // HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\Options
 
 #define SZ_REGK_OPTIONS _T("Options")
