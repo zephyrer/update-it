@@ -41,6 +41,7 @@ public:
 protected:
 	afx_msg void OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu);
 	afx_msg void OnSysCommand(UINT uID, LPARAM lParam);
+	afx_msg void OnNcDestroy(void);
 
 // attributes
 private:
