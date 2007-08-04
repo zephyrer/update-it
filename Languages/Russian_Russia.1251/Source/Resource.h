@@ -1,9 +1,8 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by UpdateIt.rc
+// Used by Russian_Russia.1251.rc
 //
 #define IDS_REGKEY                      1
-#define IDI_APP_ICON                    1
 #define IDS_NO_SOURCE                   2
 #define IDS_NO_TARGET                   3
 #define IDS_CHOOSE_SOURCE               4
@@ -19,7 +18,6 @@
 #define IDS_FOLDER_FORMAT               14
 #define IDS_NO_FILES                    15
 #define IDS_DISCARDING_SEARCH           16
-#define IDM_SC_EXPORT_SETTINGS          0x0010
 #define IDS_DELETING_FILES              17
 #define IDS_COPYING_FILES               18
 #define IDS_MOVING_FILES                19
@@ -35,7 +33,6 @@
 #define IDS_DISCONNECTING_FTP           29
 #define IDS_FINISHING_FTP               30
 #define IDS_PREPARING_UPLOAD            31
-#define IDM_SC_IMPORT_SETTINGS          0x0020
 #define IDS_CHARSET_FORMAT              32
 #define IDS_SELECTED_FORMAT             33
 #define IDS_NO_SELECTED                 34
@@ -53,13 +50,6 @@
 #define IDD_PAGE_ACTION                 103
 #define IDD_PAGE_PROGRESS               104
 #define IDD_PAGE_ABOUT                  105
-#define IDR_FILECOPY                    106
-#define IDR_FILEMOVE                    107
-#define IDR_FILEDELETE                  108
-#define IDR_FILETRASH                   109
-#define IDR_ZIPPING                     110
-#define IDR_FILEUPLOAD                  111
-#define IDR_FILESEND                    112
 #define IDD_AUTHENTICATION              113
 #define IDC_EDIT_SOURCE                 1001
 #define IDC_BUTTON_SOURCE               1002
