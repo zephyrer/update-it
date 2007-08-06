@@ -50,6 +50,7 @@ protected:
 
 // attributes
 protected:
+	static bool m_fIsFirstChangeFont;
 	RECT m_rcPage;
 	CFont m_fontPage;
 

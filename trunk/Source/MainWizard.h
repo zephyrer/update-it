@@ -30,7 +30,7 @@ class CMainWizard: public CCustomPropSheet
 
 // construction/destruction
 public:
-	CMainWizard(void);
+	CMainWizard(CWnd* pOwnerWnd = NULL);
 	virtual ~CMainWizard(void);
 
 // overridables
