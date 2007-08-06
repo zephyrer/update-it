@@ -182,15 +182,22 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	SetRegistryKey(_T("Elijah Zarezky"));
 
+	CWnd ownerWindow;
+	CString strClassName(AfxRegisterWndClass(CS_VREDRAW | CS_HREDRAW));
+	RECT rcOwner = { 0 };
+	ownerWindow.CreateEx(0, strClassName, NULL, WS_OVERLAPPEDWINDOW, rcOwner, NULL, 0);
+
 	do
 	{
 		m_fIsMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
 
-		CMainWizard wizMain;
-		m_pMainWnd = &wizMain;
+		CMainWizard wizMain(&ownerWindow);
+		m_pMainWnd = &ownerWindow;
 		wizMain.DoModal();
 	}
 	while (g_fChangeLanguage);
+
+	ownerWindow.DestroyWindow();
 
 	return (FALSE);
 }

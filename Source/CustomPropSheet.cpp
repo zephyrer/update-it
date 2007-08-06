@@ -69,6 +69,7 @@ CCustomPropSheet::~CCustomPropSheet(void)
 	{
 		VERIFY(m_fontPage.DeleteObject());
 	}
+	m_fIsFirstChangeFont = true;
 }
 
 // overridables
@@ -162,6 +163,10 @@ LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 	return (0);
 }
 
+// attributes
+
+bool CCustomPropSheet::m_fIsFirstChangeFont = true;
+
 // implementation helpers
 
 void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
@@ -228,11 +233,10 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 			rectNewWindow.right = min(rectNewWindow.right, rectParent.right - rectNewWindow.left);
 			rectNewWindow.bottom = min(rectNewWindow.bottom, rectParent.bottom - rectNewWindow.top);
 			pWnd->MoveWindow(rectNewWindow);
-			static BOOL fFirst = TRUE;
-			if (fFirst)
+			if (m_fIsFirstChangeFont)
 			{
 				::CopyRect(&m_rcPage, rectNewWindow);
-				fFirst = FALSE;
+				m_fIsFirstChangeFont = false;
 			}
 		}
 		else {
