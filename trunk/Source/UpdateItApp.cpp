@@ -184,8 +184,10 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	CWnd ownerWindow;
 	CString strClassName(AfxRegisterWndClass(CS_VREDRAW | CS_HREDRAW));
+	CString strCaption(MAKEINTRESOURCE(AFX_IDS_APP_TITLE));
 	RECT rcOwner = { 0 };
-	ownerWindow.CreateEx(0, strClassName, NULL, WS_OVERLAPPEDWINDOW, rcOwner, NULL, 0);
+	ownerWindow.CreateEx(0, strClassName, strCaption, WS_POPUP, rcOwner, NULL, 0);
+	ownerWindow.ShowWindow(SW_SHOWNORMAL);
 
 	do
 	{

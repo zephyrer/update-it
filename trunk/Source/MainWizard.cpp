@@ -143,6 +143,8 @@ BOOL CMainWizard::OnInitDialog(void)
 	// invoke inherited handler
 	BOOL fResult = __super::OnInitDialog();
 
+	CenterWindow(FromHandle(::GetDesktopWindow()));
+
 	// set wizard's icons
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hSmIcon, FALSE);
