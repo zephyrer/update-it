@@ -88,10 +88,10 @@ END
 
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Step 1 of 4 Ч Setting options"
+CAPTION "UpdateIt! Ч Ўаг 1 из 4 Ч Setting options"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
-    GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
+    GROUPBOX        "&»сходна€ папка",IDC_STATIC,4,4,326,62,WS_GROUP
     EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | 
                     ES_READONLY | WS_GROUP
     PUSHBUTTON      "...",IDC_BUTTON_SOURCE,310,16,14,12,WS_GROUP
@@ -100,7 +100,7 @@ BEGIN
     LTEXT           "E&xclude mask(s):",IDC_STATIC,10,48,56,12,
                     SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_EXCLUDE,68,48,256,12,ES_AUTOHSCROLL
-    GROUPBOX        "&Target folder",IDC_STATIC,4,74,326,58,WS_GROUP
+    GROUPBOX        "&÷елева€ папка",IDC_STATIC,4,74,326,58,WS_GROUP
     EDITTEXT        IDC_EDIT_TARGET,10,86,298,12,ES_AUTOHSCROLL | 
                     ES_READONLY | WS_GROUP
     PUSHBUTTON      "...",IDC_BUTTON_TARGET,310,86,14,12,WS_GROUP
@@ -109,7 +109,7 @@ BEGIN
     CONTROL         "Delete files to &Recycle Bin if possible",
                     IDC_CHECK_RECYCLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     10,116,132,10
-    GROUPBOX        "&Date and time",IDC_STATIC,4,140,106,30,WS_GROUP
+    GROUPBOX        "&ƒата и врем€",IDC_STATIC,4,140,106,30,WS_GROUP
     CONTROL         "DateTimePicker1",IDC_DTP_WRITE,"SysDateTimePick32",
                     WS_GROUP | WS_TABSTOP,10,152,94,12
     GROUPBOX        "Advanced",IDC_STATIC,122,140,208,30,WS_GROUP
@@ -120,19 +120,19 @@ END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Step 2 of 4 Ч Selecting files"
+CAPTION "UpdateIt! Ч Ўаг 2 из 4 Ч ¬ыбор файлов"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
     CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | 
                     LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | WS_BORDER | 
                     WS_TABSTOP,4,14,326,210,WS_EX_CLIENTEDGE
-    PUSHBUTTON      "&Remove from list",IDC_BUTTON_REMOVE,260,228,70,16
+    PUSHBUTTON      "&”далить из списка",IDC_BUTTON_REMOVE,252,228,78,16
 END
 
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Step 3 of 4 Ч Choosing an action"
+CAPTION "UpdateIt! Ч Ўаг 3 из 4 Ч ¬ыбор действи€"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
@@ -190,14 +190,15 @@ BEGIN
     LTEXT           "јвторские права © 2002-2007 »ль€ «арецкий",IDC_STATIC,4,
                     24,160,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,166,24,164,10,SS_CENTERIMAGE
-    LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
+    LTEXT           "»спользуемые библиотеки:",IDC_STATIC,4,48,326,10,
+                    SS_CENTERIMAGE
     LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",
                     IDC_STATIC,16,62,314,16
     LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",
                     IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,
                     SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 3.0.2 (14 May 2007)",
+    LTEXT           "ZipArchive library\nversion 3.1.0 (2007-08-10)",
                     IDC_STATIC,16,96,314,16
     LTEXT           "Copyright © 2000-2007 by Tadeusz Dracz",IDC_STATIC,16,
                     114,140,10,SS_CENTERIMAGE
@@ -224,21 +225,21 @@ CAPTION "Authentication and security"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Authentication",IDC_STATIC,8,6,152,68,WS_GROUP
-    RTEXT           "&Method:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
+    RTEXT           "&ћетод:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
     COMBOBOX        IDC_COMBO_AUTH_METHOD,54,20,100,58,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_GROUP | WS_TABSTOP
-    RTEXT           "&Username:",IDC_STATIC_USERNAME_PROMPT,14,38,38,12,
+    RTEXT           "&Ћогин:",IDC_STATIC_USERNAME_PROMPT,14,38,38,12,
                     SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_USERNAME,54,38,100,12,ES_AUTOHSCROLL | WS_GROUP
-    RTEXT           "&Password:",IDC_STATIC_PASSWORD_PROMPT,14,56,38,12,
+    RTEXT           "&ѕароль:",IDC_STATIC_PASSWORD_PROMPT,14,56,38,12,
                     SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_PASSWORD,54,56,100,12,ES_PASSWORD | 
                     ES_AUTOHSCROLL | WS_GROUP
     GROUPBOX        "Security",IDC_STATIC,8,82,152,28,WS_GROUP
     CONTROL         "Use &SSL connection",IDC_CHECK_USE_SSL,"Button",
                     BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,96,78,10
-    DEFPUSHBUTTON   "OK",IDOK,54,122,46,16,WS_GROUP
-    PUSHBUTTON      "Cancel",IDCANCEL,114,122,46,16
+    DEFPUSHBUTTON   "ќ ",IDOK,54,122,46,16,WS_GROUP
+    PUSHBUTTON      "ќтмена",IDCANCEL,114,122,46,16
 END
 
 
