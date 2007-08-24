@@ -19,6 +19,8 @@
 #include "stdafx.h"
 
 #include "Resource.h"
+#include "../Languages/English_USA.1252/Source/Resource.h"
+
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
