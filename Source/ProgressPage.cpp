@@ -19,6 +19,8 @@
 #include "stdafx.h"
 
 #include "Resource.h"
+#include "../Languages/English_USA.1252/Source/Resource.h"
+
 #include "BetterPropPage.h"
 #include "AboutPage.h"
 #include "OptionsPage.h"
@@ -112,6 +114,7 @@ BOOL CProgressPage::OnSetActive(void)
 		CMenu* pSysMenu = pWiz->GetSystemMenu(FALSE);
 		ASSERT_VALID(pSysMenu);
 		pSysMenu->EnableMenuItem(SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+		pSysMenu->EnableMenuItem(0, MF_BYPOSITION | MF_GRAYED);
 	}
 	return (fSuccess);
 }
@@ -263,6 +266,7 @@ void CProgressPage::OnBecameActive(void)
 	CMenu* pSysMenu = pWiz->GetSystemMenu(FALSE);
 	ASSERT_VALID(pSysMenu);
 	pSysMenu->EnableMenuItem(SC_CLOSE, MF_BYCOMMAND | MF_ENABLED);
+	pSysMenu->EnableMenuItem(0, MF_BYPOSITION | MF_ENABLED);
 }
 
 BOOL CProgressPage::OnWizardFinish(void)

@@ -19,6 +19,8 @@
 #include "stdafx.h"
 
 #include "Resource.h"
+#include "../Languages/English_USA.1252/Source/Resource.h"
+
 #include "CustomDialog.h"
 #include "AuthenticationDialog.h"
 #include "BetterPropPage.h"
