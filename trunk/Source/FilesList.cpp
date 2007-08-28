@@ -18,8 +18,10 @@
 
 #include "stdafx.h"
 
-#include "FilesList.h"
 #include "Resource.h"
+#include "../Languages/English_USA.1252/Source/Resource.h"
+
+#include "FilesList.h"
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
