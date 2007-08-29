@@ -189,12 +189,15 @@ BOOL CMainWizard::OnInitDialog(void)
 		menuLangs.LoadMenu(IDR_MENU_LANGS);
 		CMenu* pPopupMenu = menuLangs.GetSubMenu(0);
 		ASSERT_VALID(pPopupMenu);
+
 		UINT_PTR uID = reinterpret_cast<UINT_PTR>(pPopupMenu->Detach());
 		CString strText;
 		menuLangs.GetMenuString(0, strText, MF_BYPOSITION);
 		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION | MF_POPUP, uID, strText);
 		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION | MF_SEPARATOR);
 		menuLangs.Detach();
+
+		CheckCurLangMenuItem();
 	}
 
 	OSVERSIONINFO osVerInfo = { sizeof(osVerInfo) };
@@ -337,15 +340,63 @@ void CMainWizard::OnLanguageChange(UINT uMenuID)
 
 	if (static_cast<HKEY>(regKeyLangs) != NULL)
 	{
-		int iLangName = uMenuID - ((ID_LANGUAGE_ENGLISH & 0x00F0) >> 4);
+		UINT iLangName = uMenuID - ((ID_LANGUAGE_ENGLISH & 0x00F0) >> 4);
 		nError = regKeyLangs.SetStringValue(SZ_REGV_LANGUAGES_CURRENT, m_arrLangNames[iLangName]);
 		if (nError == ERROR_SUCCESS)
 		{
+			CheckLangMenuItem(iLangName);
 			regKeyLangs.Flush();
 			g_fChangeLanguage = true;
 			PostMessage(PSM_PRESSBUTTON, PSBTN_CANCEL, 0);
 		}
 		::RegCloseKey(regKeyLangs.Detach());
+	}
+}
+
+void CMainWizard::CheckCurLangMenuItem(void)
+{
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	ATL::CRegKey regKeyLangs;
+	regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
+
+	int nError = ERROR_SUCCESS;
+
+	if (static_cast<HKEY>(regKeyLangs) != NULL)
+	{
+		TCHAR szCurLang[4] = { 0 };
+		ULONG cchMaxLen = _countof(szCurLang);
+		nError = regKeyLangs.QueryStringValue(SZ_REGV_LANGUAGES_CURRENT, szCurLang, &cchMaxLen);
+		if (nError == ERROR_SUCCESS && _tcslen(szCurLang) > 0)
+		{
+			for (INT_PTR i = 0, cNumLangs = m_arrLangNames.GetCount(); i < cNumLangs; ++i)
+			{
+				if (m_arrLangNames[i] == szCurLang)
+				{
+					CheckLangMenuItem(i);
+					break;
+				}
+			}
+		}
+		::RegCloseKey(regKeyLangs.Detach());
+	}
+}
+
+void CMainWizard::CheckLangMenuItem(UINT iLangName)
+{
+	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	ASSERT_VALID(pSysMenu);
+	CMenu* pLangsMenu = pSysMenu->GetSubMenu(0);
+	ASSERT_VALID(pLangsMenu);
+	for (UINT i = 0, cNumItems = pLangsMenu->GetMenuItemCount(); i < cNumItems; ++i)
+	{
+		MENUITEMINFO mii = { 0 };
+		mii.cbSize = sizeof(mii);
+		mii.fMask = MIIM_FTYPE | MIIM_STATE;
+		mii.fType = MFT_RADIOCHECK;
+		mii.fState = i != iLangName ? MFS_UNCHECKED : MFS_CHECKED;
+		pLangsMenu->SetMenuItemInfo(i, &mii, TRUE);
 	}
 }
 

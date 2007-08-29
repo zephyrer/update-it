@@ -69,6 +69,8 @@ private:
 	void OnScExportSettings(void);
 	void OnScImportSettings(void);
 	void OnLanguageChange(UINT uMenuID);
+	void CheckCurLangMenuItem(void);
+	void CheckLangMenuItem(UINT iLangName);
 
 // diagnostic services
 #if defined(_DEBUG)
