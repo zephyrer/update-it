@@ -37,12 +37,14 @@ END_MESSAGE_MAP()
 // construction/destruction
 
 CCustomDialog::CCustomDialog(UINT uResID, CWnd* pParentWnd):
-CDialog(uResID, pParentWnd)
+CDialog(uResID, pParentWnd),
+m_lpszDlgInitName(MAKEINTRESOURCE(uResID))
 {
 }
 
 CCustomDialog::CCustomDialog(LPCTSTR pszResName, CWnd* pParentWnd):
-CDialog(pszResName, pParentWnd)
+CDialog(pszResName, pParentWnd),
+m_lpszDlgInitName(pszResName)
 {
 }
 
@@ -115,6 +117,44 @@ INT_PTR CCustomDialog::DoModal(void)
 	}
 }
 
+BOOL CCustomDialog::OnInitDialog(void)
+{
+	// try to execute dialog RT_DLGINIT resource
+	BOOL bDlgInit = FALSE;
+	if (m_lpDialogInit != NULL)
+	{
+		bDlgInit = ExecuteDlgInit(m_lpDialogInit);
+	}
+	else {
+		bDlgInit = ExecuteDlgInit(m_lpszDlgInitName);
+	}
+
+	if (!bDlgInit)
+	{
+		TRACE(traceAppMsg, 0, "Warning: ExecuteDlgInit failed during dialog init.\n");
+		EndDialog(-1);
+		return (FALSE);
+	}
+
+	// transfer data into the dialog from member variables
+	if (!UpdateData(FALSE))
+	{
+		TRACE(traceAppMsg, 0, "Warning: UpdateData failed during dialog init.\n");
+		EndDialog(-1);
+		return (FALSE);
+	}
+
+	// enable/disable help button automatically
+	CWnd* pHelpButton = GetDlgItem(ID_HELP);
+	if (pHelpButton != NULL)
+	{
+		pHelpButton->ShowWindow(AfxHelpEnabled() ? SW_SHOW : SW_HIDE);
+	}
+
+	// set focus to first one
+	return (TRUE);
+}
+
 // diagnostic services
 
 #if defined(_DEBUG)
@@ -135,6 +175,7 @@ void CCustomDialog::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
+		dumpCtx << "m_lpszDlgInitName = " << m_lpszDlgInitName;
 	}
 	catch (CFileException* pXcpt)
 	{
