@@ -521,7 +521,7 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 		zipArch.Open(pszZipPath, CZipArchive::zipCreate);
 		CString strTemp(pszTarget);
 		zipArch.SetRootPath(strTemp.Left(strTemp.ReverseFind(_T('\\'))));
-		int cFiles = cFiles = listFiles.GetItemCount();
+		int cFiles = listFiles.GetItemCount();
 		for (int i = 0; i < cFiles; ++i)
 		{
 			CString strFilePath(pszTarget);

@@ -37,6 +37,11 @@ public:
 // overridables
 public:
 	virtual INT_PTR DoModal(void);
+	virtual BOOL OnInitDialog(void);
+
+// attributes
+public:
+	LPCTSTR m_lpszDlgInitName;
 
 // diagnostic services
 #if defined(_DEBUG)
