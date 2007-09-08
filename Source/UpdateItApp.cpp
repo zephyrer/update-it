@@ -235,6 +235,8 @@ BOOL CUpdateItApp::InitInstance(void)
 	::DestroyIcon(hIcon);
 	::DestroyIcon(hSmIcon);
 
+	::CoUninitialize();
+
 	return (FALSE);
 }
 

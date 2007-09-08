@@ -48,6 +48,7 @@
 #include <afxpriv.h>       // MFC private classes
 #include <afxsock.h>       // MFC support for Windows Sockets
 #include <afxinet.h>       // MFC support for WinInet
+#include <afxdisp.h>       // MFC IDispatch & ClassFactory support
 
 #include <../src/mfc/afximpl.h>
 
