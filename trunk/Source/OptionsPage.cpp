@@ -252,7 +252,7 @@ void COptionsPage::OnButtonSource(void)
 	CString strPrompt;
 
 	strPrompt.LoadString(IDS_CHOOSE_SOURCE);
-	CFolderDialog dlgFolder(strPrompt, m_strSource, this);
+	CFolderDialog dlgFolder(strPrompt, m_strSource, this, BIF_NEWDIALOGSTYLE);
 	if (dlgFolder.DoModal() == IDOK)
 	{
 		m_strSource = dlgFolder.GetFolderPath();
@@ -279,7 +279,7 @@ void COptionsPage::OnButtonTarget(void)
 	CString strPrompt;
 
 	strPrompt.LoadString(IDS_CHOOSE_TARGET);
-	CFolderDialog dlgFolder(strPrompt, m_strTarget, this);
+	CFolderDialog dlgFolder(strPrompt, m_strTarget, this, BIF_NEWDIALOGSTYLE);
 	if (dlgFolder.DoModal() == IDOK)
 	{
 		m_strTarget = dlgFolder.GetFolderPath();
