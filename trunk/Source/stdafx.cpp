@@ -27,10 +27,12 @@ extern "C" __int64 __cdecl _abs64(__int64 num)
 
 #endif	// _MSC_VER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // shared globals
 
-bool g_fChangeLanguage = false;
+bool g_fRestartInterface = false;
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // import libraries
 
 #pragma comment(lib, "shlwapi.lib")
@@ -44,12 +46,14 @@ bool g_fChangeLanguage = false;
 #pragma comment(lib, "libeay32MD.lib")
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // linker options
 
 #if (_MSC_VER < 1300)
 #pragma comment(linker, "/osversion:4.1")
 #pragma comment(linker, "/subsystem:windows,4.10")
-#pragma comment(linker, "/ignore:4089")		// all references to DLL discarded by /opt:ref
+// all references to DLL discarded by /opt:ref
+#pragma comment(linker, "/ignore:4089")
 #endif	// _MSC_VER
 
 // end of file

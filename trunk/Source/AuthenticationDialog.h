@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 class CAuthenticationDialog: public CCustomDialog
 {
@@ -70,6 +70,6 @@ public:
 #endif
 };
 
-#endif	// __AuthenticationDialog_h
+#endif   // __AuthenticationDialog_h
 
 // end of file

@@ -16,9 +16,18 @@
 
 // BetterPropPage.cpp - implementation of the CBetterPropPage class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
+
 #include "BetterPropPage.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -27,20 +36,28 @@
 #pragma warning(disable: 279)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CBetterPropPage, CPropertyPage)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CBetterPropPage, CPropertyPage)
 	ON_NOTIFY_RANGE(TTN_GETDISPINFO, 0, 0xFFFF, OnGetTipText)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction
 
 CBetterPropPage::CBetterPropPage(UINT idTemplate, UINT idCaption):
@@ -53,6 +70,7 @@ CPropertyPage(pszTemplate, idCaption)
 {
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CBetterPropPage::OnInitDialog(void)
@@ -103,6 +121,7 @@ BOOL CBetterPropPage::PreTranslateMessage(MSG* pMsg)
 	return (__super::PreTranslateMessage(pMsg));
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 #if (_MFC_VER < 0x0700)
@@ -118,7 +137,7 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMTTDISPINFO* pInfo, LRESULT* p
 			CString strTemp;
 			if (strTemp.LoadString(idsTip))
 			{
-				::lstrcpyn(m_szTipText, strTemp, 256);
+				_tcsncpy(m_szTipText, strTemp, 256);
 				pInfo->lpszText = m_szTipText;
 			}
 		}
@@ -139,7 +158,7 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMHDR* pHdr, LRESULT* pnResult)
 			CString strTemp;
 			if (strTemp.LoadString(idsTip))
 			{
-				::lstrcpyn(m_szTipText, strTemp, 256);
+				_tcsncpy(m_szTipText, strTemp, 256);
 				reinterpret_cast<NMTTDISPINFO*>(pHdr)->lpszText = m_szTipText;
 			}
 		}
@@ -156,6 +175,7 @@ CToolTipCtrl& CBetterPropPage::GetToolTipCtrl(void)
 	return (m_tipWnd);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 UINT AFX_CDECL CBetterPropPage::ActivationWatcher(void* pvParam)
@@ -182,6 +202,7 @@ void CBetterPropPage::PumpWaitingMessages(void)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

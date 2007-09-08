@@ -22,7 +22,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 #define PSM_RESIZE_PAGE (WM_APP + 2)
 
@@ -59,6 +59,8 @@ protected:
 	enum { CDF_CENTER, CDF_TOPLEFT, CDF_NONE };
 	void ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag);
 	virtual void BuildPropPageArray(void);
+	bool GetFontSubstitute(LPCTSTR pszRegvName, CString& strDest);
+	bool GetFontMetrics(CString& strFaceName, WORD& wPointSize);
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -68,6 +70,6 @@ public:
 #endif
 };
 
-#endif	// __CustomPropSheet_h
+#endif   // __CustomPropSheet_h
 
 // end of file

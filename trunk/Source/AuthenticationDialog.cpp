@@ -16,10 +16,19 @@
 
 // AuthenticationDialog.cpp - implementation of the CAuthenticationDialog class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "CustomDialog.h"
 #include "AuthenticationDialog.h"
@@ -35,22 +44,30 @@
 #include "UpdateItApp.h"
 #include "Registry.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CAuthenticationDialog, CCustomDialog)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CAuthenticationDialog, CCustomDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_AUTH_METHOD, OnComboAuthMethodSelChange)
 	ON_EN_CHANGE(IDC_EDIT_USERNAME, OnEditUserNameChange)
 	ON_EN_CHANGE(IDC_EDIT_PASSWORD, OnEditPasswordChange)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CAuthenticationDialog::CAuthenticationDialog(CWnd* pParentWnd):
@@ -75,6 +92,7 @@ CAuthenticationDialog::~CAuthenticationDialog(void)
 {
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CAuthenticationDialog::OnInitDialog(void)
@@ -103,6 +121,7 @@ void CAuthenticationDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_USE_SSL, m_fUseSSL);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 void CAuthenticationDialog::OnComboAuthMethodSelChange(void)
@@ -130,6 +149,7 @@ void CAuthenticationDialog::OnEditPasswordChange(void)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CAuthenticationDialog::UpdateControls(void)
@@ -161,6 +181,7 @@ void CAuthenticationDialog::UpdateControls(void)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

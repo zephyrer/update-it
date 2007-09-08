@@ -16,10 +16,19 @@
 
 // OptionsPage.cpp - implementation of the COptionsPage class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
@@ -37,6 +46,9 @@
 #endif	// _MFC_VER
 #include "Registry.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
+
 #if defined(__INTEL_COMPILER)
 // warning #68: integer conversion resulted in a change of sign
 #pragma warning(disable: 68)
@@ -46,16 +58,23 @@
 #pragma warning(disable: 981)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(COptionsPage, CBetterPropPage)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(COptionsPage, CBetterPropPage)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_BUTTON_SOURCE, OnButtonSource)
@@ -63,6 +82,7 @@ BEGIN_MESSAGE_MAP(COptionsPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_CLEANUP, OnCheckCleanup)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction
 
 COptionsPage::COptionsPage(void):
@@ -97,6 +117,7 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 	m_fCompare = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL COptionsPage::OnInitDialog(void)
@@ -202,6 +223,7 @@ void COptionsPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_COMPARE, m_fCompare);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 HBRUSH COptionsPage::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor)
@@ -279,6 +301,7 @@ void COptionsPage::OnCheckCleanup(void)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

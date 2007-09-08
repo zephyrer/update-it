@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 //! Encapsulates the "Choosing an action" step of the UpdateIt! wizard.
 class CActionPage: public CBetterPropPage
@@ -83,6 +83,6 @@ public:
 #endif
 };
 
-#endif	// __ActionPage_h
+#endif   // __ActionPage_h
 
 // end of file

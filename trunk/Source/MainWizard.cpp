@@ -16,10 +16,19 @@
 
 // MainWizard.cpp - implementation of the CMainWizard class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
@@ -35,10 +44,16 @@
 #include "UpdateItApp.h"
 #include "Registry.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
+
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
 #pragma warning(disable: 171)
 #endif	// __INTEL_COMPILER
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
 
 #if defined(_DEBUG)
 #undef THIS_FILE
@@ -46,15 +61,20 @@ static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CMainWizard, CCustomPropSheet)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CMainWizard, CCustomPropSheet)
 	ON_WM_INITMENUPOPUP()
 	ON_WM_SYSCOMMAND()
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CMainWizard::CMainWizard(CWnd* pOwnerWnd):
@@ -80,7 +100,7 @@ CCustomPropSheet(AFX_IDS_APP_TITLE, pOwnerWnd)
 	};
 	CHyperLink::SetColors(linkColors);
 
-	if (pApp->m_fIsMUI)
+	if (pApp->m_fHasMUI)
 	{
 		ATL::CRegKey regKeyLangs;
 		regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
@@ -105,7 +125,7 @@ CCustomPropSheet(AFX_IDS_APP_TITLE, pOwnerWnd)
 			::RegCloseKey(regKeyLangs.Detach());
 		}
 
-		g_fChangeLanguage = false;
+		g_fRestartInterface = false;
 	}
 
 	AddPage(&m_pageAbout);
@@ -130,6 +150,7 @@ CMainWizard::~CMainWizard(void)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CMainWizard::OnInitDialog(void)
@@ -183,7 +204,7 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-	if (pApp->m_fIsMUI)
+	if (pApp->m_fHasMUI)
 	{
 		CMenu menuLangs;
 		menuLangs.LoadMenu(IDR_MENU_LANGS);
@@ -234,6 +255,7 @@ BOOL CMainWizard::OnInitDialog(void)
 	return (fResult);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 void CMainWizard::OnInitMenuPopup(CMenu* pPopupMenu, UINT uIndex, BOOL fSysMenu)
@@ -268,6 +290,7 @@ void CMainWizard::OnSysCommand(UINT uID, LPARAM lParam)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CMainWizard::OnScExportSettings(void)
@@ -346,7 +369,7 @@ void CMainWizard::OnLanguageChange(UINT uMenuID)
 		{
 			CheckLangMenuItem(iLangName);
 			regKeyLangs.Flush();
-			g_fChangeLanguage = true;
+			g_fRestartInterface = true;
 			PostMessage(PSM_PRESSBUTTON, PSBTN_CANCEL, 0);
 		}
 		::RegCloseKey(regKeyLangs.Detach());
@@ -400,6 +423,7 @@ void CMainWizard::CheckLangMenuItem(UINT iLangName)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

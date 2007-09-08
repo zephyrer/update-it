@@ -16,10 +16,19 @@
 
 // FilesPage.cpp - implementation of the CFilesPage class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
@@ -34,6 +43,9 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 #include "Registry.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -50,22 +62,30 @@
 #pragma warning(disable: 981)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CFilesPage, CBetterPropPage)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CFilesPage, CBetterPropPage)
 	ON_WM_DESTROY()
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_FILES, OnItemChanged)
 	ON_BN_CLICKED(IDC_BUTTON_REMOVE, OnButtonRemove)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CFilesPage::CFilesPage(void):
@@ -95,6 +115,7 @@ CFilesPage::~CFilesPage(void)
 	m_imageList.DeleteImageList();
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CFilesPage::OnInitDialog(void)
@@ -220,6 +241,7 @@ void CFilesPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_REMOVE, m_buttonRemove);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 void CFilesPage::OnDestroy(void)
@@ -307,6 +329,7 @@ void CFilesPage::OnButtonRemove(void)
 	m_textInfo.SetWindowText(strInfo);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 BOOL CFilesPage::IsFileMatchesExcludeList(LPCTSTR pszFilePath)
@@ -394,15 +417,15 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 					// name
 					CString strNameExt = finder.GetFileName();
 					int iLastDot = strNameExt.ReverseFind(_T('.'));
-					::lstrcpy(pData->szName, strNameExt.Left(iLastDot));
+					_tcscpy(pData->szName, strNameExt.Left(iLastDot));
 					
 					// extension
-					::lstrcpy(pData->szExt, strNameExt.Mid(iLastDot + 1));
+					_tcscpy(pData->szExt, strNameExt.Mid(iLastDot + 1));
 					
 					// relative path
 					CString strPath = finder.GetFilePath();
 					int iLastSlash = strPath.ReverseFind(_T('\\'));
-					::lstrcpy(pData->szFolder, strPath.Mid(iRelative, iLastSlash - iRelative));
+					_tcscpy(pData->szFolder, strPath.Mid(iRelative, iLastSlash - iRelative));
 					
 					// date/time
 					pData->timeWrite = timeWrite;
@@ -531,6 +554,7 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 	return (fResult);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

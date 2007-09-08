@@ -16,10 +16,19 @@
 
 // UpdateItApp.cpp - implementation of the CUpdateItApp class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
@@ -35,6 +44,9 @@
 #include "UpdateItApp.h"
 #include "Registry.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
+
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant
 #pragma warning(disable: 279)
@@ -42,32 +54,43 @@
 #pragma warning(disable: 981)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CUpdateItApp, CWinApp)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CUpdateItApp, CWinApp)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CUpdateItApp::CUpdateItApp(void):
 m_hLangDLL(NULL),
-m_fIsMUI(false)
+m_fHasMUI(false)
 {
 	_tzset();
+
+	m_argsParser.Parse(::GetCommandLine(), true);
 }
 
 CUpdateItApp::~CUpdateItApp(void)
 {
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // operations
 
 HICON CUpdateItApp::LoadSmIcon(LPCTSTR pszResName)
@@ -174,6 +197,7 @@ BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time
 
 #endif	// _MFC_VER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CUpdateItApp::InitInstance(void)
@@ -191,17 +215,25 @@ BOOL CUpdateItApp::InitInstance(void)
 	ownerWindow.CreateEx(0, strClassName, strCaption, WS_POPUP, rcOwner, NULL, 0);
 	ownerWindow.ShowWindow(SW_SHOWNORMAL);
 
+	HICON hIcon = LoadIcon(IDI_APP_ICON);
+	HICON hSmIcon = LoadSmIcon(MAKEINTRESOURCE(IDI_APP_ICON));
+	ownerWindow.SetIcon(hIcon, TRUE);
+	ownerWindow.SetIcon(hSmIcon, FALSE);
+
 	do
 	{
-		m_fIsMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
+		m_fHasMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
 
 		CMainWizard wizMain(&ownerWindow);
 		m_pMainWnd = &ownerWindow;
 		wizMain.DoModal();
 	}
-	while (g_fChangeLanguage);
+	while (g_fRestartInterface);
 
 	ownerWindow.DestroyWindow();
+
+	::DestroyIcon(hIcon);
+	::DestroyIcon(hSmIcon);
 
 	return (FALSE);
 }
@@ -213,6 +245,7 @@ int CUpdateItApp::ExitInstance(void)
 	return (__super::ExitInstance());
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CUpdateItApp::GetAbsolutePath(LPTSTR pszDest, LPCTSTR pszRelativePath)
@@ -361,6 +394,7 @@ bool CUpdateItApp::SetCurrentAfxLanguage(void)
 	return (fSuccess);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)
@@ -391,7 +425,8 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 		dumpCtx << "m_hLangDLL = " << m_hLangDLL;
-		dumpCtx << "\nm_fIsMUI = " << m_fIsMUI;
+		dumpCtx << "\nm_fHasMUI = " << m_fHasMUI;
+		dumpCtx << "\nm_argsParser = " << m_argsParser;
 	}
 	catch (CFileException* pXcpt)
 	{
@@ -402,7 +437,9 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // the one and only application object
+
 static CUpdateItApp g_appUpdateIt;
 
 // end of file
