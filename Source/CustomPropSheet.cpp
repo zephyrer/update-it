@@ -17,10 +17,20 @@
 
 // CustomPropSheet.cpp - implementation of the CCustomPropSheet class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "CustomPropSheet.h"
 #include "Registry.h"
+#include "UpdateItApp.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -33,6 +43,9 @@
 #pragma warning(disable: 981)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
@@ -41,14 +54,19 @@ static char THIS_FILE[] = __FILE__;
 
 #define _BUGFIX_
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CCustomPropSheet, CPropertySheet)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CCustomPropSheet, CPropertySheet)
 	ON_MESSAGE(PSM_RESIZE_PAGE, OnResizePage)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CCustomPropSheet::CCustomPropSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage):
@@ -72,6 +90,7 @@ CCustomPropSheet::~CCustomPropSheet(void)
 	m_fIsFirstChangeFont = true;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CCustomPropSheet::OnInitDialog(void)
@@ -153,6 +172,7 @@ BOOL CCustomPropSheet::OnCommand(WPARAM wParam, LPARAM lParam)
 	return (__super::OnCommand(wParam, lParam));
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
@@ -163,10 +183,12 @@ LRESULT CCustomPropSheet::OnResizePage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 	return (0);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // attributes
 
 bool CCustomPropSheet::m_fIsFirstChangeFont = true;
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
@@ -278,7 +300,6 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 void CCustomPropSheet::BuildPropPageArray(void)
 {
 	CDialogTemplate dlgtPageRes;
-	LOGFONT lf;
 
 	__super::BuildPropPageArray();
 
@@ -290,34 +311,99 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	VERIFY(dlgtPageRes.Load(pPage->m_psp.pszTemplate));
 
 	// get the font information
-	CWinApp* pApp = AfxGetApp();
-	CString strFaceName = pApp->GetProfileString(SZ_REGK_FONT, SZ_REGV_FONT_FACENAME);
-	WORD wFontSize = LOWORD(pApp->GetProfileInt(SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
-	if (strFaceName.IsEmpty() || wFontSize == 0)
+
+	// defaults
+	CString strFaceName(_T("Tahoma"));
+	WORD wPointSize = 8;
+
+	if (!GetFontMetrics(strFaceName, wPointSize))
 	{
-		VERIFY(dlgtPageRes.GetFont(strFaceName, wFontSize));
+		// obtain from resource template
+		VERIFY(dlgtPageRes.GetFont(strFaceName, wPointSize));
 	}
+
 	if (m_fontPage.m_hObject != NULL)
 	{
 		VERIFY(m_fontPage.DeleteObject());
 	}
 
 	// create a font using the info from first page
+	LOGFONT lf = { 0 };
 	HDC hdcScreen = ::GetDC(NULL);
 	ASSERT(hdcScreen != NULL);
-	memset(&lf, 0, sizeof(lf));
-	lf.lfHeight = ::MulDiv(-wFontSize, ::GetDeviceCaps(hdcScreen, LOGPIXELSY), 72);
+	lf.lfHeight = ::MulDiv(-wPointSize, ::GetDeviceCaps(hdcScreen, LOGPIXELSY), 72);
 	lf.lfWeight = FW_REGULAR;
 	lf.lfCharSet = DEFAULT_CHARSET;
 	lf.lfOutPrecision = OUT_DEFAULT_PRECIS;
 	lf.lfClipPrecision = CLIP_DEFAULT_PRECIS;
 	lf.lfQuality = PROOF_QUALITY;
 	lf.lfPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
-	::lstrcpy(lf.lfFaceName, strFaceName);
+	_tcsncpy(lf.lfFaceName, strFaceName, LF_FACESIZE - 1);
 	VERIFY(m_fontPage.CreateFontIndirect(&lf));
 	::ReleaseDC(NULL, hdcScreen);
 }
 
+bool CCustomPropSheet::GetFontSubstitute(LPCTSTR pszRegvName, CString& strDest)
+{
+	ATL::CRegKey regKeyFontSubst;
+	regKeyFontSubst.Create(HKEY_LOCAL_MACHINE, SZ_REGK_FONT_SUBSTITUTES);
+	int nError = ERROR_SUCCESS;
+	TCHAR szMsShellDlg[LF_FACESIZE] = { 0 };
+	ULONG cchMaxLen = _countof(szMsShellDlg);
+	nError = regKeyFontSubst.QueryStringValue(pszRegvName, szMsShellDlg, &cchMaxLen);
+	if (nError == ERROR_SUCCESS)
+	{
+		strDest = szMsShellDlg;
+		return (true);
+	}
+	else {
+		return (false);
+	}
+}
+
+bool CCustomPropSheet::GetFontMetrics(CString& strFaceName, WORD& wPointSize)
+{
+	bool fHasFont = false;
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	// examine command line
+	strFaceName = pApp->m_argsParser.GetStringValue(_T("Font-FaceName"));
+	if (!strFaceName.IsEmpty())
+	{
+		UINT uTemp = 0;
+		fHasFont = pApp->m_argsParser.GetUIntValue(_T("Font-PointSize"), uTemp);
+		wPointSize = LOWORD(uTemp);
+	}
+
+	// examine our registry key
+	if (!fHasFont)
+	{
+		strFaceName = pApp->GetProfileString(SZ_REGK_FONT, SZ_REGV_FONT_FACENAME);
+		wPointSize = LOWORD(pApp->GetProfileInt(SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
+		fHasFont = !strFaceName.IsEmpty() && wPointSize != 0;
+	}
+
+	// examine system registry keys
+	if (!fHasFont)
+	{
+		fHasFont = GetFontSubstitute(SZ_REGV_MS_SHELL_DLG_2, strFaceName);
+		if (!fHasFont)
+		{
+			fHasFont = GetFontSubstitute(SZ_REGV_MS_SHELL_DLG, strFaceName);
+		}
+		if (fHasFont)
+		{
+			// gotcha - use default point size
+			wPointSize = 8;
+		}
+	}
+
+	return (fHasFont);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

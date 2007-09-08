@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 //! Encapsulates the "Selecting files" step of the UpdateIt! wizard.
 class CFilesPage: public CBetterPropPage
@@ -59,7 +59,7 @@ public:
 	DWORD m_cbFiles;
 #else
 	ULONGLONG m_cbFiles;
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	CStringList m_listExclude;
 	CImageList m_imageList;
 	CMap<CString, LPCTSTR, int, int> m_mapIcons;
@@ -80,6 +80,6 @@ public:
 #endif
 };
 
-#endif	// __FilesPage_h
+#endif   // __FilesPage_h
 
 // end of file

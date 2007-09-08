@@ -21,12 +21,12 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 #if defined(__INTEL_COMPILER)
 // remark #444: destructor for base class is not virtual
 #pragma warning(disable: 444)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //! Encapsulates the "Processing files" step of the UpdateIt! wizard.
 class CProgressPage: public CBetterPropPage, public CZipActionCallback
@@ -82,8 +82,8 @@ public:
 
 #if defined(__INTEL_COMPILER)
 #pragma warning(default: 444)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
-#endif	// __ProgressPage_h
+#endif   // __ProgressPage_h
 
 // end of file

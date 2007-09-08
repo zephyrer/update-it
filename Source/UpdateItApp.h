@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 class CUpdateItApp: public CWinApp
 {
@@ -41,7 +41,7 @@ public:
 #if (_MFC_VER >= 0x0700)
 	__time64_t GetProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeDefault = -1);
 	BOOL WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeValue);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 // overridables
 public:
@@ -51,7 +51,8 @@ public:
 // attributes
 public:
 	HINSTANCE m_hLangDLL;
-	bool m_fIsMUI;
+	bool m_fHasMUI;
+	CArgsParser m_argsParser;
 
 // implementation helpers
 private:
@@ -70,6 +71,6 @@ public:
 #endif
 };
 
-#endif	// __UpdateItApp_h
+#endif   // __UpdateItApp_h
 
 // end of file

@@ -16,12 +16,24 @@
 
 // FilesList.cpp - implementation of the CFilesList class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
+
 #include "FilesList.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -32,20 +44,28 @@
 #pragma warning(disable: 981)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CFilesList, CSortingListCtrl)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CFilesList, CSortingListCtrl)
 	ON_NOTIFY_REFLECT(LVN_GETDISPINFO, OnGetDispInfo)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CFilesList::CFilesList(void)
@@ -56,6 +76,7 @@ CFilesList::~CFilesList(void)
 {
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // operations
 
 void CFilesList::InsertColumns(void)
@@ -81,6 +102,7 @@ void CFilesList::InsertColumns(void)
 	InsertColumn(I_SIZE, strHeading, LVCFMT_RIGHT, cxWidth, I_SIZE);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
@@ -97,11 +119,11 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 	switch (m_iSortColumn)
 	{
 	case I_NAME:
-		return (::lstrcmpi(pDataLhs->szName, pDataRhs->szName) * m_nSortOrder);
+		return (_tcsicmp(pDataLhs->szName, pDataRhs->szName) * m_nSortOrder);
 	case I_EXTENSION:
-		return (::lstrcmpi(pDataLhs->szExt, pDataRhs->szExt) * m_nSortOrder);
+		return (_tcsicmp(pDataLhs->szExt, pDataRhs->szExt) * m_nSortOrder);
 	case I_PATH:
-		return (::lstrcmpi(pDataLhs->szFolder, pDataRhs->szFolder) * m_nSortOrder);
+		return (_tcsicmp(pDataLhs->szFolder, pDataRhs->szFolder) * m_nSortOrder);
 	case I_SIZE:
 #if (_MFC_VER < 0x0700)
 		return ((pDataLhs->cbLength - pDataRhs->cbLength) * m_nSortOrder);
@@ -125,6 +147,7 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
 void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
@@ -140,13 +163,13 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 		switch (lvi.iSubItem)
 		{
 		case I_NAME:
-			::lstrcpyn(lvi.pszText, pData->szName, lvi.cchTextMax);
+			_tcsncpy(lvi.pszText, pData->szName, lvi.cchTextMax);
 			break;
 		case I_EXTENSION:
-			::lstrcpyn(lvi.pszText, pData->szExt, lvi.cchTextMax);
+			_tcsncpy(lvi.pszText, pData->szExt, lvi.cchTextMax);
 			break;
 		case I_PATH:
-			::lstrcpyn(lvi.pszText, pData->szFolder, lvi.cchTextMax);
+			_tcsncpy(lvi.pszText, pData->szFolder, lvi.cchTextMax);
 			break;
 		case I_DATE:
 			pData->timeWrite.GetAsSystemTime(st);
@@ -166,7 +189,7 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 #endif	// _MFC_VER
 			strSize.ReleaseBuffer();
 			SeparateThousands(strSize);
-			::lstrcpyn(lvi.pszText, strSize, lvi.cchTextMax);
+			_tcsncpy(lvi.pszText, strSize, lvi.cchTextMax);
 			break;
 		default:
 			*lvi.pszText = 0;
@@ -175,6 +198,7 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CFilesList::SeparateThousands(CString& strNumber)
@@ -200,6 +224,7 @@ void CFilesList::SeparateThousands(CString& strNumber)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

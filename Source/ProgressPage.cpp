@@ -16,10 +16,19 @@
 
 // ProgressPage.cpp - implementation of the CProgressPage class
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
 
 #include "Resource.h"
 #include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
@@ -37,6 +46,9 @@
 #endif	// _MFC_VER
 #include "Registry.h"
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted ICL warnings
+
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
 #pragma warning(disable: 171)
@@ -50,12 +62,16 @@
 #pragma warning(disable: 981)
 #endif	// __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// debugging support
+
 #if defined(_DEBUG)
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif	// _DEBUG
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // private helpers
 
 #if (_MFC_VER >= 0x0700)
@@ -85,13 +101,18 @@ inline ULONGLONG MAKEQWORD(DWORD dwLow, DWORD dwHigh)
 
 #endif	// _MFC_VER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // object model
+
 IMPLEMENT_DYNAMIC(CProgressPage, CBetterPropPage)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // message map
+
 BEGIN_MESSAGE_MAP(CProgressPage, CBetterPropPage)
 END_MESSAGE_MAP()
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // construction
 
 CProgressPage::CProgressPage(void):
@@ -100,6 +121,7 @@ CBetterPropPage(IDD_PAGE_PROGRESS)
 	m_psp.dwFlags |= PSP_PREMATURE;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
 BOOL CProgressPage::OnSetActive(void)
@@ -285,6 +307,7 @@ void CProgressPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PROGRESS_TOTAL, m_progressTotal);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // CZipActionCallback overridables
 
 bool CProgressPage::Callback(ZIP_SIZE_TYPE uProgress)
@@ -295,6 +318,7 @@ bool CProgressPage::Callback(ZIP_SIZE_TYPE uProgress)
 	return (true);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CProgressPage::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
@@ -313,7 +337,7 @@ void CProgressPage::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
 		}
 		if (_tcschr(pszFolder, _T('\\')) != NULL)
 		{
-			::lstrcpy(szTemp, pszFolder);
+			_tcscpy(szTemp, pszFolder);
 			LPTSTR pszSub = _tcstok(szTemp, _T("\\"));
 			do
 			{
@@ -436,9 +460,9 @@ int CProgressPage::DeleteFile(LPCTSTR pszPath, BOOL fCanUndo)
 
 	memset(&fos, 0, sizeof(fos));
 	fos.wFunc = FO_DELETE;
-	int cchFrom = ::lstrlen(pszPath) + 2;
+	int cchFrom = _tcslen(pszPath) + 2;
 	fos.pFrom = new TCHAR[cchFrom];
-	::lstrcpy(const_cast<LPTSTR>(fos.pFrom), pszPath);
+	_tcscpy(const_cast<LPTSTR>(fos.pFrom), pszPath);
 	const_cast<LPTSTR>(fos.pFrom)[cchFrom - 1] = 0;
 	fos.fFlags = FOF_SILENT | FOF_NOERRORUI | FOF_NOCONFIRMATION;
 	if (fCanUndo)
@@ -607,7 +631,7 @@ void CProgressPage::CreateFtpFolder(CFtpConnection* pFtpConn, LPCTSTR pszFolder)
 	TCHAR szTemp[_MAX_PATH];
 	CString strExisting;
 
-	::lstrcpy(szTemp, pszFolder);
+	_tcscpy(szTemp, pszFolder);
 	LPTSTR pszPart = _tcstok(szTemp, _T("/"));
 
 	// phase one --
@@ -814,6 +838,7 @@ void CProgressPage::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
 #if defined(_DEBUG)

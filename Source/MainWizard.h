@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 class CMainWizard: public CCustomPropSheet
 {
@@ -80,6 +80,6 @@ public:
 #endif
 };
 
-#endif	// __MainWizard_h
+#endif   // __MainWizard_h
 
 // end of file

@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 #define BPP_BECAME_ACTIVE (WM_APP + 1)
 
@@ -51,7 +51,7 @@ protected:
 	afx_msg void OnGetTipText(UINT uID, NMTTDISPINFO* pInfo, LRESULT* pnResult);
 #else
 	afx_msg void OnGetTipText(UINT uID, NMHDR* pHdr, LRESULT* pnResult);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 // accessibility
 public:
@@ -75,6 +75,6 @@ public:
 #endif
 };
 
-#endif	// __BetterPropPage_h
+#endif   // __BetterPropPage_h
 
 // end of file

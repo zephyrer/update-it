@@ -21,7 +21,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 //! Encapsulates the "Weclome!" step of the UpdateIt! wizard.
 class CAboutPage: public CBetterPropPage
@@ -57,6 +57,6 @@ public:
 #endif
 };
 
-#endif	// __AboutPage_h
+#endif   // __AboutPage_h
 
 // end of file
