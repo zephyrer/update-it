@@ -29,7 +29,7 @@
 #endif   // __INTEL_COMPILER
 
 //! Encapsulates the "Processing files" step of the UpdateIt! wizard.
-class CProgressPage: public CBetterPropPage, public CZipActionCallback
+class CProgressPage: public CProgressPageBase, public CZipActionCallback
 {
 	DECLARE_DYNAMIC(CProgressPage)
 	DECLARE_MESSAGE_MAP()
@@ -39,38 +39,12 @@ public:
 	CProgressPage(void);
 
 // overridables
-public:
-	virtual BOOL OnSetActive(void);
-	virtual void OnBecameActive(void);
-	virtual BOOL OnWizardFinish(void);
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFiles, LPCTSTR pszZipPath);
 
 // CZipActionCallback overridables
 public:
 	virtual bool Callback(ZIP_SIZE_TYPE uProgress);
-
-// attributes
-public:
-	CStatic m_textWorking;
-	CAnimateCtrl m_animateBanner;
-	CStatic m_textFile;
-	CProgressCtrl m_progressFile;
-	CStatic m_textTotal;
-	CProgressCtrl m_progressTotal;
-
-// implementation helpers
-private:
-	void CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder);
-	void EraseFolder(LPCTSTR pszFolder, BOOL fCanUndo);
-	BOOL CopyFile(LPCTSTR pszSrcPath, LPCTSTR pszTargPath, BOOL fDeleteSrc);
-	int DeleteFile(LPCTSTR pszPath, BOOL fCanUndo = FALSE);
-	void CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CListCtrl& listFiles, BOOL fDeleteSrc);
-	void ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFiles, LPCTSTR pszZipPath);
-	void SendZippedFolder(const CString& strZipPath);
-	void CreateFtpFolder(CFtpConnection* pFtpConn, LPCTSTR pszFolder);
-	BOOL UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpConnection* pFtpConn);
-	void UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles);
 
 // diagnostic services
 #if defined(_DEBUG)

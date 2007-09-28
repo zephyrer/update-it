@@ -575,6 +575,33 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Source\ProgressPageBase.cpp">
+				<FileConfiguration
+					Name="MBCS Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="Source\stdafx.cpp">
 				<FileConfiguration
 					Name="MBCS Debug|Win32">
@@ -664,6 +691,9 @@
 			</File>
 			<File
 				RelativePath="Source\ProgressPage.h">
+			</File>
+			<File
+				RelativePath=".\Source\ProgressPageBase.h">
 			</File>
 			<File
 				RelativePath=".\Source\Registry.h">

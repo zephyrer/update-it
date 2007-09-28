@@ -134,7 +134,8 @@ typedef CPJNSMTPException CSmtpException;
 //////////////////////////////////////////////////////////////////////////////////////////////
 // file data
 
-struct FILE_DATA {
+struct FILE_DATA
+{
 	TCHAR szName[_MAX_FNAME];
 	TCHAR szExt[_MAX_EXT];
 	TCHAR szFolder[_MAX_DIR];
