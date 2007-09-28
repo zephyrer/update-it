@@ -38,6 +38,7 @@
 #include "CustomDialog.h"
 #include "AuthenticationDialog.h"
 #include "ActionPage.h"
+#include "ProgressPageBase.h"
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
