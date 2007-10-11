@@ -205,6 +205,28 @@ BEGIN
     PUSHBUTTON      "Отмена",IDCANCEL,114,122,46,16
 END
 
+IDD_ZIP_OPTIONS DIALOGEX 0, 0, 168, 134
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Настройки ZIP"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Сжатие",IDC_STATIC,8,6,152,34,WS_GROUP
+    RTEXT           "Степень:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_ZIP_LEVEL,54,20,100,56,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Шифрование",IDC_STATIC,8,48,152,50,WS_GROUP
+    RTEXT           "Метод:",IDC_STATIC,14,62,38,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_ENC_METHOD,54,62,100,58,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Пароль:",IDC_TEXT_ZIP_PASSWORD,14,80,38,12,
+                    SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_ZIP_PASSWORD,54,80,100,12,ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "ОК",IDOK,54,110,46,16,WS_GROUP
+    PUSHBUTTON      "Отмена",IDCANCEL,114,110,46,16
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -223,6 +245,29 @@ BEGIN
 0x6c50, 0x6961, 0x006e, 
     IDC_COMBO_AUTH_METHOD, 0x403, 5, 0
 0x544e, 0x4d4c, "\000" 
+    0
+END
+
+IDD_ZIP_OPTIONS DLGINIT
+BEGIN
+    IDC_COMBO_ZIP_LEVEL, 0x403, 4, 0
+0xe5cd, 0x00f2, 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 11, 0
+0xfbc1, 0xf2f1, 0xe5f0, 0xf8e9, 0xffe0, "\000" 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 13, 0
+0xeecf, 0xf320, 0xeeec, 0xf7eb, 0xede0, 0xfee8, "\000" 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 13, 0
+0xe0cc, 0xf1ea, 0xece8, 0xebe0, 0xedfc, 0xffe0, "\000" 
+    IDC_COMBO_ENC_METHOD, 0x403, 4, 0
+0xe5cd, 0x00f2, 
+    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+0xf2d1, 0xede0, 0xe0e4, 0xf2f0, 0xfbed, 0x00e9, 
+    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+0x4541, 0x2053, 0x3231, 0x2d38, 0xe8e1, 0x00f2, 
+    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+0x4541, 0x2053, 0x3931, 0x2d32, 0xe8e1, 0x00f2, 
+    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+0x4541, 0x2053, 0x3532, 0x2d36, 0xe8e1, 0x00f2, 
     0
 END
 
@@ -281,6 +326,14 @@ BEGIN
         RIGHTMARGIN, 161
         TOPMARGIN, 7
         BOTTOMMARGIN, 139
+    END
+
+    IDD_ZIP_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 161
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 127
     END
 END
 #endif    // APSTUDIO_INVOKED
