@@ -97,7 +97,8 @@ FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Действие для выполнения",IDC_STATIC,4,4,164,42,WS_GROUP
     CONTROL         "Скопировать файл(ы) в целевую папку",IDC_RADIO_COPY,
-                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,10,18,150,10
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,10,
+                    18,150,10
     CONTROL         "Переместить файл(ы) в целевую папку",IDC_RADIO_MOVE,
                     "Button",BS_AUTORADIOBUTTON,10,32,150,10
     CONTROL         "Загрузить файл(ы) на FTP-сервер",IDC_CHECK_UPLOAD,
@@ -108,6 +109,8 @@ BEGIN
     CONTROL         "Послать ZIP-архив по электронной почте",IDC_CHECK_SEND,
                     "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,4,86,
                     157,10
+    PUSHBUTTON      "Настройки сжатия...",IDC_BUTTON_ZIP_OPTIONS,4,102,84,14,
+                    WS_GROUP
     GROUPBOX        "Настройки FTP",IDC_GROUP_FTP,180,4,150,112,WS_GROUP
     RTEXT           "Сервер:",IDC_STATIC,186,18,36,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_SERVER,224,18,100,12,ES_AUTOHSCROLL
@@ -135,10 +138,10 @@ BEGIN
     EDITTEXT        IDC_EDIT_HOST,42,188,100,12,ES_AUTOHSCROLL
     RTEXT           "Порт:",IDC_STATIC,10,204,30,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_PORT,42,204,100,12,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT_BODY,146,140,178,98,ES_MULTILINE | 
-                    ES_AUTOVSCROLL | WS_VSCROLL | WS_GROUP
     PUSHBUTTON      "Аутенификация и защита...",IDC_BUTTON_AUTH,10,222,132,
                     16,WS_GROUP
+    EDITTEXT        IDC_EDIT_BODY,146,140,178,98,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | WS_VSCROLL | WS_GROUP
 END
 
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
@@ -208,7 +211,7 @@ END
 IDD_ZIP_OPTIONS DIALOGEX 0, 0, 168, 134
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
     WS_SYSMENU
-CAPTION "Настройки ZIP"
+CAPTION "Настройки сжатия"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Сжатие",IDC_STATIC,8,6,152,34,WS_GROUP
@@ -217,7 +220,7 @@ BEGIN
                     WS_VSCROLL | WS_TABSTOP
     GROUPBOX        "Шифрование",IDC_STATIC,8,48,152,50,WS_GROUP
     RTEXT           "Метод:",IDC_STATIC,14,62,38,12,SS_CENTERIMAGE
-    COMBOBOX        IDC_COMBO_ENC_METHOD,54,62,100,58,CBS_DROPDOWNLIST | 
+    COMBOBOX        IDC_COMBO_ENCR_METHOD,54,62,100,58,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
     RTEXT           "Пароль:",IDC_TEXT_ZIP_PASSWORD,14,80,38,12,
                     SS_CENTERIMAGE
@@ -258,15 +261,15 @@ BEGIN
 0xeecf, 0xf320, 0xeeec, 0xf7eb, 0xede0, 0xfee8, "\000" 
     IDC_COMBO_ZIP_LEVEL, 0x403, 13, 0
 0xe0cc, 0xf1ea, 0xece8, 0xebe0, 0xedfc, 0xffe0, "\000" 
-    IDC_COMBO_ENC_METHOD, 0x403, 4, 0
+    IDC_COMBO_ENCR_METHOD, 0x403, 4, 0
 0xe5cd, 0x00f2, 
-    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
 0xf2d1, 0xede0, 0xe0e4, 0xf2f0, 0xfbed, 0x00e9, 
-    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
 0x4541, 0x2053, 0x3231, 0x2d38, 0xe8e1, 0x00f2, 
-    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
 0x4541, 0x2053, 0x3931, 0x2d32, 0xe8e1, 0x00f2, 
-    IDC_COMBO_ENC_METHOD, 0x403, 12, 0
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
 0x4541, 0x2053, 0x3532, 0x2d36, 0xe8e1, 0x00f2, 
     0
 END

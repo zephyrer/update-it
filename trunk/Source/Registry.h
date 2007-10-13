@@ -128,6 +128,15 @@
 #define SZ_REGV_TIPS_TEXT_COLOR _T("TextColor")
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\ZIP
+
+#define SZ_REGK_ZIP _T("ZIP")
+
+#define SZ_REGV_ZIP_COMPR_LEVEL _T("ComprLevel")
+#define SZ_REGV_ZIP_ENCR_METHOD _T("EncrMethod")
+#define SZ_REGV_ZIP_PASSWORD _T("Password")
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontSubstitutes
 
 #define SZ_REGK_FONT_SUBSTITUTES _T("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes")
