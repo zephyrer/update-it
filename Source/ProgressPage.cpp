@@ -104,7 +104,38 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 		zipArch.Open(pszZipPath, CZipArchive::zipCreate);
 		CString strTemp(pszTarget);
 		zipArch.SetRootPath(strTemp.Left(strTemp.ReverseFind(_T('\\'))));
+
+		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
+		ASSERT(pWiz != NULL);
+		CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(CMainWizard::I_ACTION));
+		ASSERT(pActionPage != NULL);
+		CZipOptionsDialog& dlgZipOpts = pActionPage->m_dlgZipOpts;
+
+		int iEcncrMethod = dlgZipOpts.m_iEncrMethod;
+		if (iEcncrMethod != CZipOptionsDialog::I_METHOD_NONE)
+		{
+			static CZipCryptograph::EncryptionMethod aeEncrMethods[] =
+			{
+				CZipCryptograph::encNone,
+				CZipCryptograph::encStandard,
+				CZipCryptograph::encWinZipAes128,
+				CZipCryptograph::encWinZipAes192,
+				CZipCryptograph::encWinZipAes256
+			};
+			zipArch.SetPassword(dlgZipOpts.m_strPassword);
+			zipArch.SetEncryptionMethod(aeEncrMethods[iEcncrMethod]);
+		}
+
+		static CZipCompressor::CompressionLevel aeComprLevels[] =
+		{
+			CZipCompressor::levelStore,
+			CZipCompressor::levelFastest,
+			CZipCompressor::levelDefault,
+			CZipCompressor::levelBest
+		};
+
 		int cFiles = listFiles.GetItemCount();
+
 		for (int i = 0; i < cFiles; ++i)
 		{
 			CString strFilePath(pszTarget);
@@ -122,7 +153,7 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 			strFilePath += pData->szName;
 			strFilePath += _T('.');
 			strFilePath += pData->szExt;
-			zipArch.AddNewFile(strFilePath, CZipCompressor::levelBest, false);
+			zipArch.AddNewFile(strFilePath, aeComprLevels[dlgZipOpts.m_iComprLevel], false);
 		}
 		zipArch.Close();
 	}
@@ -130,7 +161,7 @@ void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFile
 	{
 		AfxMessageBox(pErr->GetErrorDescription(), MB_ICONSTOP | MB_OK);
 		delete pErr;
-		zipArch.Close();
+		zipArch.Close(CZipArchive::afAfterException);
 	}
 }
 
