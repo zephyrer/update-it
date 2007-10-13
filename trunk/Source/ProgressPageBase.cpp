@@ -153,6 +153,7 @@ void CProgressPageBase::OnBecameActive(void)
 	CString strZipPath;
 
 	__super::OnBecameActive();
+
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
 	COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));

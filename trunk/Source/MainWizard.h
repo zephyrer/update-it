@@ -44,9 +44,7 @@ protected:
 	afx_msg void OnNcDestroy(void);
 
 // attributes
-private:
-	HICON m_hIcon;
-	HICON m_hSmIcon;
+public:
 	enum
 	{
 		// page indices
@@ -57,11 +55,16 @@ private:
 		I_PROGRESS,
 		NUM_PAGES		// should be the LAST enumerator!
 	};
+
+	HICON m_hIcon;
+	HICON m_hSmIcon;
+
 	CAboutPage m_pageAbout;
 	COptionsPage m_pageOptions;
 	CFilesPage m_pageFiles;
 	CActionPage m_pageAction;
 	CProgressPage m_pageProgress;
+
 	CArray<CString> m_arrLangNames;
 
 // implementation helpers
