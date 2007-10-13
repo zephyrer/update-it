@@ -105,9 +105,10 @@
 #define IDC_STATIC_PASSWORD_PROMPT      1051
 #define IDC_BUTTON_AUTH                 1054
 #define IDC_COMBO_ZIP_LEVEL             1055
-#define IDC_COMBO_ENC_METHOD            1056
+#define IDC_COMBO_ENCR_METHOD           1056
 #define IDC_TEXT_ZIP_PASSWORD           1057
 #define IDC_EDIT_ZIP_PASSWORD           1058
+#define IDC_BUTTON_ZIP_OPTIONS          1059
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 

@@ -46,6 +46,7 @@ protected:
 	afx_msg void OnCheckUpload(void);
 	afx_msg void OnCheckZip(void);
 	afx_msg void OnCheckSend(void);
+	afx_msg void OnButtonZipOptions(void);
 	afx_msg void OnButtonAuthentication(void);
 
 // attributes
@@ -68,6 +69,7 @@ public:
 	int m_nSmtpPort;
 	CString m_strBody;
 	CAuthenticationDialog m_dlgAuth;
+	CZipOptionsDialog m_dlgZipOpts;
 
 // implementation helpers
 private:

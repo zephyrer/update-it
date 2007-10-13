@@ -105,9 +105,11 @@
 #define IDC_STATIC_PASSWORD_PROMPT      1051
 #define IDC_BUTTON_AUTH                 1054
 #define IDC_COMBO_ZIP_LEVEL             1055
-#define IDC_COMBO_ENC_METHOD            1056
+#define IDC_COMBO_ENCR_METHOD           1056
 #define IDC_TEXT_ZIP_PASSWORD           1057
 #define IDC_EDIT_ZIP_PASSWORD           1058
+#define IDC_BUTTON1                     1059
+#define IDC_BUTTON_ZIP_OPTIONS          1059
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -117,7 +119,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        117
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1059
+#define _APS_NEXT_CONTROL_VALUE         1060
 #define _APS_NEXT_SYMED_VALUE           115
 #endif
 #endif

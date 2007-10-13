@@ -14,24 +14,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// AuthenticationDialog.h - interface of the CAuthenticationDialog class
+// ZipOptionsDialog.h - interface of the CZipOptionsDialog class
 
-#if !defined(__AuthenticationDialog_h)
-#define __AuthenticationDialog_h
+#if !defined(__ZipOptionsDialog_h)
+#define __ZipOptionsDialog_h
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
 
-class CAuthenticationDialog: public CCustomDialog
+class CZipOptionsDialog: public CCustomDialog
 {
-	DECLARE_DYNAMIC(CAuthenticationDialog)
+	DECLARE_DYNAMIC(CZipOptionsDialog)
 	DECLARE_MESSAGE_MAP()
 
 // construction/destruction
 public:
-	CAuthenticationDialog(CWnd* pParentWnd = NULL);
-	virtual ~CAuthenticationDialog(void);
+	CZipOptionsDialog(CWnd* pParentWnd = NULL);
+	virtual ~CZipOptionsDialog(void);
 
 // overridables
 public:
@@ -41,25 +41,38 @@ protected:
 
 // message map functions
 protected:
-	afx_msg void OnComboAuthMethodSelChange(void);
-	afx_msg void OnEditUserNameChange(void);
+	afx_msg void OnComboEncrMethodSelChange(void);
 	afx_msg void OnEditPasswordChange(void);
 
 // attributes
 public:
+	enum
+	{
+		// compression levels
+		I_LEVEL_STORE = 0,
+		I_LEVEL_FASTEST,
+		I_LEVEL_DEFAULT,
+		I_LEVEL_BEST,
+
+		// encryption methods
+		I_METHOD_NONE = 0,
+		I_METHOD_STANDARD,
+		I_FIRST_PRO_METHOD,
+		I_METHOD_AES_128 = I_FIRST_PRO_METHOD,
+		I_METHOD_AES_192,
+		I_METHOD_AES_256
+	};
+
 	// controls
-	CComboBox m_comboAuthMethod;
-	CStatic m_textUserNamePrompt;
-	CEdit m_editUserName;
-	CStatic m_textPasswordPrompt;
+	CComboBox m_comboComprLevel;
+	CComboBox m_comboEncrMethod;
+	CStatic m_textPassword;
 	CEdit m_editPassword;
-	CButton m_checkUseSSL;
 
 	// user's input
-	CSmtpConnection::AuthenticationMethod m_eAuthMethod;
-	CString m_strUserName;
+	int m_iComprLevel;
+	int m_iEncrMethod;
 	CString m_strPassword;
-	BOOL m_fUseSSL;
 
 // implementation helpers
 private:
@@ -73,6 +86,6 @@ public:
 #endif
 };
 
-#endif   // __AuthenticationDialog_h
+#endif   // __ZipOptionsDialog_h
 
 // end of file

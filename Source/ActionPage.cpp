@@ -37,6 +37,7 @@
 #include "FilesPage.h"
 #include "CustomDialog.h"
 #include "AuthenticationDialog.h"
+#include "ZipOptionsDialog.h"
 #include "ActionPage.h"
 #include "ProgressPageBase.h"
 #include "ProgressPage.h"
@@ -74,6 +75,7 @@ BEGIN_MESSAGE_MAP(CActionPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_UPLOAD, OnCheckUpload)
 	ON_BN_CLICKED(IDC_CHECK_ZIP, OnCheckZip)
 	ON_BN_CLICKED(IDC_CHECK_SEND, OnCheckSend)
+	ON_BN_CLICKED(IDC_BUTTON_ZIP_OPTIONS, OnButtonZipOptions)
 	ON_BN_CLICKED(IDC_BUTTON_AUTH, OnButtonAuthentication)
 END_MESSAGE_MAP()
 
@@ -325,10 +327,13 @@ void CActionPage::OnCheckZip(void)
 	if (m_fCanSend)
 	{
 		CWnd* pCheckSend = GetDlgItem(IDC_CHECK_SEND);
-		ASSERT(pCheckSend != NULL);
+		ASSERT_VALID(pCheckSend);
+		CWnd* pButtonZipOptions = GetDlgItem(IDC_BUTTON_ZIP_OPTIONS);
+		ASSERT_VALID(pButtonZipOptions);
 		if (IsDlgButtonChecked(IDC_CHECK_ZIP) == BST_CHECKED)
 		{
 			pCheckSend->EnableWindow();
+			pButtonZipOptions->EnableWindow();
 		}
 		else {
 			if (IsDlgButtonChecked(IDC_CHECK_SEND) != BST_UNCHECKED)
@@ -337,6 +342,7 @@ void CActionPage::OnCheckZip(void)
 				EnableMailControls(FALSE);
 			}
 			pCheckSend->EnableWindow(FALSE);
+			pButtonZipOptions->EnableWindow(FALSE);
 		}
 	}
 }
@@ -357,6 +363,22 @@ void CActionPage::OnCheckSend(void)
 		SetDlgItemInt(IDC_EDIT_PORT, pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, 25), FALSE);
 	}
 	EnableMailControls(fEnable);
+}
+
+void CActionPage::OnButtonZipOptions(void)
+{
+	if (m_dlgZipOpts.DoModal() == IDOK)
+	{
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
+
+		pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, m_dlgZipOpts.m_iComprLevel);
+		pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, m_dlgZipOpts.m_iEncrMethod);
+		if (m_dlgZipOpts.m_iEncrMethod != CZipOptionsDialog::I_METHOD_NONE)
+		{
+			pApp->WriteProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD, m_dlgZipOpts.m_strPassword);
+		}
+	}
 }
 
 void CActionPage::OnButtonAuthentication(void)

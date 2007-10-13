@@ -37,6 +37,7 @@
 #include "FilesPage.h"
 #include "CustomDialog.h"
 #include "AuthenticationDialog.h"
+#include "ZipOptionsDialog.h"
 #include "ActionPage.h"
 #include "ProgressPageBase.h"
 #include "ProgressPage.h"

@@ -655,6 +655,33 @@
 						UsePrecompiledHeader="3"/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\Source\ZipOptionsDialog.cpp">
+				<FileConfiguration
+					Name="MBCS Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -706,6 +733,9 @@
 			</File>
 			<File
 				RelativePath="Source\UpdateItApp.h">
+			</File>
+			<File
+				RelativePath=".\Source\ZipOptionsDialog.h">
 			</File>
 		</Filter>
 		<Filter
