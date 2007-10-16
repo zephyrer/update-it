@@ -141,6 +141,8 @@ BOOL CActionPage::OnInitDialog(void)
 	BOOL fResult = __super::OnInitDialog();
 
 	// adjust page as needed
+	BOOL fEnableZipOpts = IsDlgButtonChecked(IDC_CHECK_ZIP) == BST_CHECKED;
+	GetDlgItem(IDC_BUTTON_ZIP_OPTIONS)->EnableWindow(fEnableZipOpts);
 	ShowMailControls(m_fCanSend);
 
 	// assign tool tips
@@ -330,6 +332,7 @@ void CActionPage::OnCheckZip(void)
 		ASSERT_VALID(pCheckSend);
 		CWnd* pButtonZipOptions = GetDlgItem(IDC_BUTTON_ZIP_OPTIONS);
 		ASSERT_VALID(pButtonZipOptions);
+
 		if (IsDlgButtonChecked(IDC_CHECK_ZIP) == BST_CHECKED)
 		{
 			pCheckSend->EnableWindow();
