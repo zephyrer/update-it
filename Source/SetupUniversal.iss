@@ -59,6 +59,27 @@ SelectLanguageTitle=Language Selection
 SelectLanguageLabel=Please select UpdateIt! language:
 
 [Code]
+procedure CurPageChanged(CurPageID: Integer);
+var
+  OptionsPage: TWizardPage;
+  PageSurface: TNewNotebookPage;
+  SetupTypesCombo: TComboBox;
+begin
+  if (CurPageID = wpSelectComponents) and (ActiveLanguage() = 'ru') then
+  begin
+    OptionsPage := PageFromID(CurPageID);
+    PageSurface := OptionsPage.Surface;
+    SetupTypesCombo := TComboBox(PageSurface.Controls[2]);
+    if (SetupTypesCombo <> nil) then
+    begin
+      if (SetupTypesCombo.Items[3] <> 'Выборочная установка') then
+      begin
+        SetupTypesCombo.Items[3] := 'Выборочная установка';
+      end;
+    end;
+  end;
+end;
+
 function NextButtonClick(CurPageID: Integer): Boolean;
 var
 	hRootHive: Integer;
@@ -79,16 +100,23 @@ begin
 end;
 
 [Types]
-Name: "typical"; Description: "Typical Installation"
-Name: "compact"; Description: "Compact Installation"
-Name: "full"; Description: "Full Installation"
+Name: "typical"; Description: "Typical Installation"; Languages: en
+Name: "typical"; Description: "Стандартная установка"; Languages: ru
+Name: "compact"; Description: "Compact Installation"; Languages: en
+Name: "compact"; Description: "Компактная установка"; Languages: ru
+Name: "full"; Description: "Full Installation"; Languages: en
+Name: "full"; Description: "Полная установка"; Languages: ru
 Name: "custom"; Description: "Custom Installation"; Flags: iscustom
 
 [Components]
-Name: "core"; Description: "UpdateIt! Core Files"; Types: compact typical full custom; Flags: fixed
-Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom
-Name: "mui"; Description: "MUI Support"; Types: typical full custom
-Name: "sources"; Description: "Source Code"; Types: full custom
+Name: "core"; Description: "UpdateIt! Core Files"; Types: compact typical full custom; Flags: fixed; Languages: en
+Name: "core"; Description: "Исполняемые файлы UpdateIt!"; Types: compact typical full custom; Flags: fixed; Languages: ru
+Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom; Languages: en
+Name: "runtimes"; Description: "Библиотеки времени выполнения"; Types: typical full custom; Languages: ru
+Name: "mui"; Description: "MUI Support"; Types: typical full custom; Languages: en
+Name: "mui"; Description: "Поддержка многоязыковго интефейса"; Types: typical full custom; Languages: ru
+Name: "sources"; Description: "Source Code"; Types: full custom; Languages: en
+Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: ru
 
 [Files]
 Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
