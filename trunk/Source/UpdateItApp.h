@@ -51,7 +51,6 @@ public:
 // attributes
 public:
 	HINSTANCE m_hLangDLL;
-	bool m_fHasMUI;
 	CArgsParser m_argsParser;
 
 // implementation helpers

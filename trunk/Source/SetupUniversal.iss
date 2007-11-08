@@ -59,6 +59,16 @@ SelectLanguageTitle=Language Selection
 SelectLanguageLabel=Please select UpdateIt! language:
 
 [Code]
+function HasLangEn(): Boolean;
+begin
+	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'en');
+end;
+
+function HasLangRu(): Boolean;
+begin
+	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'ru');
+end;
+
 procedure CurPageChanged(CurPageID: Integer);
 var
   OptionsPage: TWizardPage;
@@ -85,16 +95,28 @@ var
 	hRootHive: Integer;
 	LangsKeyName: String;
 begin
-	if (CurPageID = wpFinished) and (IsComponentSelected('mui')) then
+	if (CurPageID = wpReady) then
 	begin
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
+		if (HasLangEn()) then
+		begin
+			RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
+			RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
+		end;
+		if (HasLangRu) then
+		begin
+			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
+			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
+		end;
+		if (not IsComponentSelected('mui')) then
+		begin
+			RegWriteStringValue(hRootHive, LangsKeyName, '', ActiveLanguage());
+		end
+		else begin
+			RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
+		end;
 		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
-		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
-		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
-		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
-		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
-		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
 	end;
 	Result := True;
 end;
@@ -123,17 +145,17 @@ Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components:
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
+Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangEn
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
+Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangRu
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu
+
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
 
 Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Components: runtimes
-
-Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: "mui"
-Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: "mui"
-Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: "mui"
-Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: "mui"
 
 Source: "..\..\Repository\AfxGadgets\AfxGadgets71.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
