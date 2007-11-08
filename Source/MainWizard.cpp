@@ -102,39 +102,37 @@ CCustomPropSheet(AFX_IDS_APP_TITLE, pOwnerWnd)
 	};
 	CHyperLink::SetColors(linkColors);
 
-	if (pApp->m_fHasMUI)
+	ATL::CRegKey regKeyLangs;
+	regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
+
+	int nError = ERROR_SUCCESS;
+
+	if (static_cast<HKEY>(regKeyLangs) != NULL)
 	{
-		ATL::CRegKey regKeyLangs;
-		regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
-
-		int nError = ERROR_SUCCESS;
-
-		if (static_cast<HKEY>(regKeyLangs) != NULL)
+		TCHAR szLangNames[128] = { 0 };
+		ULONG cchNamesMax = _countof(szLangNames);
+		nError = regKeyLangs.QueryStringValue(NULL, szLangNames, &cchNamesMax);
+		if (nError == ERROR_SUCCESS)
 		{
-			TCHAR szLangNames[128] = { 0 };
-			ULONG cchNamesMax = _countof(szLangNames);
-			nError = regKeyLangs.QueryStringValue(NULL, szLangNames, &cchNamesMax);
-			if (nError == ERROR_SUCCESS)
+			LPCTSTR pszSeps = _T(",;\x20");
+			LPTSTR pszCurLex = _tcstok(szLangNames, pszSeps);
+			while (pszCurLex != NULL)
 			{
-				LPCTSTR pszSeps = _T(",;\x20");
-				LPTSTR pszCurLex = _tcstok(szLangNames, pszSeps);
-				while (pszCurLex != NULL)
-				{
-					m_arrLangNames.Add(pszCurLex);
-					pszCurLex = _tcstok(NULL, pszSeps);
-				}
+				m_arrLangNames.Add(pszCurLex);
+				pszCurLex = _tcstok(NULL, pszSeps);
 			}
-			::RegCloseKey(regKeyLangs.Detach());
 		}
-
-		g_fRestartInterface = false;
+		::RegCloseKey(regKeyLangs.Detach());
 	}
+
+	g_fRestartInterface = false;
 
 	AddPage(&m_pageAbout);
 	AddPage(&m_pageOptions);
 	AddPage(&m_pageFiles);
 	AddPage(&m_pageAction);
 	AddPage(&m_pageProgress);
+
 	SetWizardMode();
 }
 
@@ -206,7 +204,8 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-	if (pApp->m_fHasMUI)
+
+	if (m_arrLangNames.GetCount() > 1)
 	{
 		CMenu menuLangs;
 		menuLangs.LoadMenu(IDR_MENU_LANGS);
@@ -227,7 +226,7 @@ BOOL CMainWizard::OnInitDialog(void)
 	GetVersionEx(&osVerInfo);
 	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5)
 	{
-		// Windows 2000/XP
+		// Windows 2000/XP/2003
 		strNewItem.LoadString(IDS_SC_EXPORT_SETTINGS);
 		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION, IDM_SC_EXPORT_SETTINGS, strNewItem);
 		strNewItem.LoadString(IDS_SC_IMPORT_SETTINGS);

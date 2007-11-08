@@ -81,8 +81,7 @@ END_MESSAGE_MAP()
 // construction/destruction
 
 CUpdateItApp::CUpdateItApp(void):
-m_hLangDLL(NULL),
-m_fHasMUI(false)
+m_hLangDLL(NULL)
 {
 	_tzset();
 
@@ -230,7 +229,8 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	do
 	{
-		m_fHasMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
+		SetCurrentAfxLanguage();
+		SetCurrentLanguage();
 
 		CMainWizard wizMain(&ownerWindow);
 		m_pMainWnd = &ownerWindow;
@@ -497,7 +497,6 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 		dumpCtx << "m_hLangDLL = " << m_hLangDLL;
-		dumpCtx << "\nm_fHasMUI = " << m_fHasMUI;
 		dumpCtx << "\nm_argsParser = " << m_argsParser;
 	}
 	catch (CFileException* pXcpt)

@@ -64,16 +64,16 @@ var
 	hRootHive: Integer;
 	LangsKeyName: String;
 begin
-	if CurPageID = wpFinished then
+	if (CurPageID = wpReady) then
 	begin
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
-		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
-		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
 		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
+		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
 	end;
 	Result := True;
 end;
