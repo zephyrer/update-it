@@ -51,6 +51,12 @@ protected:
 
 // attributes
 public:
+	enum
+	{
+		COPY_FILES = 0,
+		MOVE_FILES = 1
+	};
+
 	int m_nAction;
 	int m_nUpload;
 	int m_nZip;

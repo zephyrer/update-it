@@ -62,6 +62,7 @@ private:
 	bool GetAfxLanguagePath(LPTSTR pszDest);
 	bool SetCurrentLanguage(void);
 	bool SetCurrentAfxLanguage(void);
+	bool ParseArgumentsFile(void);
 
 // diagnostic services
 #if defined(_DEBUG)

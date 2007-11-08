@@ -693,6 +693,9 @@
 				RelativePath="Source\ActionPage.h">
 			</File>
 			<File
+				RelativePath=".\Source\Arguments.h">
+			</File>
+			<File
 				RelativePath=".\Source\AuthenticationDialog.h">
 			</File>
 			<File

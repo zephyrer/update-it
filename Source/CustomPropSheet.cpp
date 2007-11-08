@@ -28,6 +28,7 @@
 #include "CustomPropSheet.h"
 #include "Registry.h"
 #include "UpdateItApp.h"
+#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // unwanted ICL warnings
@@ -369,11 +370,11 @@ bool CCustomPropSheet::GetFontMetrics(CString& strFaceName, WORD& wPointSize)
 	ASSERT_VALID(pApp);
 
 	// examine command line
-	strFaceName = pApp->m_argsParser.GetStringValue(_T("Font-FaceName"));
+	strFaceName = pApp->m_argsParser.GetStringValue(SZ_ARG_FONT_FACENAME);
 	if (!strFaceName.IsEmpty())
 	{
 		UINT uTemp = 0;
-		fHasFont = pApp->m_argsParser.GetUIntValue(_T("Font-PointSize"), uTemp);
+		fHasFont = pApp->m_argsParser.GetUIntValue(SZ_ARG_FONT_POINTSIZE, uTemp);
 		wPointSize = LOWORD(uTemp);
 	}
 
