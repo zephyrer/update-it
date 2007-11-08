@@ -45,6 +45,7 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 #include "Registry.h"
+#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // unwanted ICL warnings
@@ -86,6 +87,11 @@ m_fHasMUI(false)
 	_tzset();
 
 	m_argsParser.Parse(::GetCommandLine(), true);
+
+	if (m_argsParser.HasKey(SZ_ARG_ARGUMENTS_FILE))
+	{
+		ParseArgumentsFile();
+	}
 }
 
 CUpdateItApp::~CUpdateItApp(void)
@@ -392,6 +398,68 @@ bool CUpdateItApp::SetCurrentAfxLanguage(void)
 			}
 			pState->m_appLangDLL = hAfxLangDLL;
 			fSuccess = true;
+		}
+	}
+
+	return (fSuccess);
+}
+
+bool CUpdateItApp::ParseArgumentsFile(void)
+{
+	bool fSuccess = false;
+
+	CString strArgsPath = m_argsParser.GetStringValue(SZ_ARG_ARGUMENTS_FILE);
+	if (!strArgsPath.IsEmpty())
+	{
+		if (::PathFindFileName(strArgsPath) == static_cast<LPCTSTR>(strArgsPath))
+		{
+			// only name is specified, e.g. -ArgumentsFile:OtherArguments.txt
+			// assume current directory in this case
+			strArgsPath.Insert(0, _T(".\\"));
+		}
+
+		if (::PathIsRelative(strArgsPath))
+		{
+			TCHAR szCurDir[_MAX_PATH] = { 0 };
+			::GetCurrentDirectory(_countof(szCurDir), szCurDir);
+			TCHAR szAbsArgsPath[_MAX_PATH] = { 0 };
+			::PathCombine(szAbsArgsPath, szCurDir, strArgsPath);
+			strArgsPath = szAbsArgsPath;
+		}
+
+		if (::PathFileExists(strArgsPath))
+		{
+			CStdioFile fileArgs;
+			CFileException err;
+
+			if (fileArgs.Open(strArgsPath, CFile::modeRead | CFile::shareExclusive, &err))
+			{
+				try
+				{
+					CString strArguments, strCurLine;
+					while (fileArgs.ReadString(strCurLine))
+					{
+						strCurLine.Trim();
+						if (!strCurLine.IsEmpty() && strCurLine[0] != _T('#'))
+						{
+							strArguments += strCurLine;
+							strArguments += _T('\x20');
+						}
+					}
+					fileArgs.Close();
+					strArguments.TrimRight();
+					m_argsParser.Parse(strArguments, true);
+					fSuccess = true;
+				}
+				catch (CFileException* pErr)
+				{
+					pErr->ReportError(MB_ICONSTOP | MB_OK);
+					pErr->Delete();
+				}
+			}
+			else {
+				err.ReportError(MB_ICONSTOP | MB_OK);
+			}
 		}
 	}
 

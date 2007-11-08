@@ -47,6 +47,7 @@
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
 #include "Registry.h"
+#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // unwanted ICL warnings
@@ -278,12 +279,17 @@ void CProgressPageBase::OnBecameActive(void)
 	CWinApp* pApp = AfxGetApp();
 	ASSERT_VALID(pApp);
 	pApp->WriteProfileInt(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
+	pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-	pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
+	
+	if (!pApp->m_argsParser.HasKey(SZ_ARGV_DONT_SAVE_INPUT))
+	{
+		pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
+		pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
+	}
 #endif	// _MFC_VER
-	pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
