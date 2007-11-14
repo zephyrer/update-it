@@ -45,6 +45,7 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 #include "Registry.h"
+#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -77,16 +78,34 @@ CCustomDialog(IDD_AUTHENTICATION, pParentWnd),
 m_eAuthMethod(CSmtpConnection::AUTH_NONE),
 m_fUseSSL(FALSE)
 {
+	using CSmtpConnection::AuthenticationMethod;
+	using CSmtpConnection::AUTH_NONE;
+	using CSmtpConnection::AUTH_NTLM;
+
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
-	m_eAuthMethod = static_cast<CSmtpConnection::AuthenticationMethod>(pApp->GetProfileInt(SZ_REGK_SMTP,
-		SZ_REGV_SMTP_AUTHENTICATION, CSmtpConnection::AUTH_NONE));
-	if (m_eAuthMethod != CSmtpConnection::AUTH_NONE)
+	CArgsParser& argsParser = pApp->m_argsParser;
+
+	m_eAuthMethod = static_cast<AuthenticationMethod>(argsParser.HasKey(SZ_ARG_SMTP_AUTHENTICATION) ?
+		argsParser.GetIntValue(SZ_ARG_SMTP_AUTHENTICATION):
+		pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, AUTH_NONE));
+	if (m_eAuthMethod < AUTH_NONE || m_eAuthMethod > AUTH_NTLM)
 	{
-		m_strUserName = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
-		m_strPassword = pApp->GetProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
-		m_fUseSSL = pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
+		m_eAuthMethod = AUTH_NONE;
+	}
+
+	if (m_eAuthMethod != AUTH_NONE)
+	{
+		m_strUserName = argsParser.HasKey(SZ_ARG_SMTP_USERNAME) ?
+			argsParser.GetStringValue(SZ_ARG_SMTP_USERNAME):
+			pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
+		m_strPassword = argsParser.HasKey(SZ_ARG_SMTP_PASSWORD) ?
+			argsParser.GetStringValue(SZ_ARG_SMTP_PASSWORD):
+			pApp->GetProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
+		m_fUseSSL = argsParser.HasKey(SZ_ARG_SMTP_USE_SSL) ?
+			TRUE:
+			pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
 	}
 }
 
