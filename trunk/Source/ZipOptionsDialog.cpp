@@ -45,6 +45,7 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 #include "Registry.h"
+#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -73,15 +74,42 @@ END_MESSAGE_MAP()
 
 CZipOptionsDialog::CZipOptionsDialog(CWnd* pParentWnd):
 CCustomDialog(IDD_ZIP_OPTIONS, pParentWnd),
-m_iComprLevel(I_LEVEL_BEST),
+m_iComprLevel(I_LEVEL_DEFAULT),
 m_iEncrMethod(I_METHOD_NONE)
 {
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
-	m_iComprLevel = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, I_LEVEL_BEST);
-	m_iEncrMethod = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
-	m_strPassword = pApp->GetProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD);
+	CArgsParser& argsParser = pApp->m_argsParser;
+
+	// obtain and validate initial compression level
+	if (!argsParser.GetIntValue(SZ_ARG_ZIP_COMPRESSION), m_iComprLevel)
+	{
+		m_iComprLevel = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, I_LEVEL_DEFAULT);
+	}
+	if (m_iComprLevel < I_LEVEL_STORE || m_iComprLevel > I_LEVEL_BEST)
+	{
+		m_iComprLevel = I_LEVEL_DEFAULT;
+	}
+
+	// obtain and validate encryption method
+	if (!argsParser.GetIntValue(SZ_ARG_ZIP_ENCRYPTION), m_iEncrMethod)
+	{
+		m_iEncrMethod = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
+	}
+	if (m_iEncrMethod < I_METHOD_NONE || m_iEncrMethod > I_METHOD_AES_256)
+	{
+		m_iEncrMethod = I_METHOD_NONE;
+	}
+
+	// obtain password for encrypted file
+	if (!argsParser.HasKey(SZ_ARG_ZIP_PASSWORD))
+	{
+		m_strPassword = pApp->GetProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD);
+	}
+	else {
+		m_strPassword = argsParser.GetStringValue(SZ_ARG_ZIP_PASSWORD);
+	}
 }
 
 CZipOptionsDialog::~CZipOptionsDialog(void)
@@ -99,6 +127,10 @@ BOOL CZipOptionsDialog::OnInitDialog(void)
 	while (m_comboEncrMethod.GetCount() > I_FIRST_PRO_METHOD)
 	{
 		m_comboEncrMethod.DeleteString(I_FIRST_PRO_METHOD);
+	}
+	if (m_iEncrMethod >= I_FIRST_PRO_METHOD)
+	{
+		m_iEncrMethod = I_METHOD_NONE;
 	}
 #endif   // _UPDATE_IT_PRO
 
