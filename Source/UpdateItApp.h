@@ -42,6 +42,8 @@ public:
 	__time64_t GetProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeDefault = -1);
 	BOOL WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeValue);
 #endif   // _MFC_VER
+	template <typename _Return_t>
+	_Return_t GetProfileData(LPCTSTR pszSection, LPCTSTR pszEntry, _Return_t retDefault);
 
 // overridables
 public:
@@ -70,6 +72,15 @@ public:
 	virtual void Dump(CDumpContext& dumpCtx) const;
 #endif
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// operations
+
+template <typename _Return_t>
+_Return_t CUpdateItApp::GetProfileData(LPCTSTR pszSection, LPCTSTR pszEntry, _Return_t retDefault)
+{
+	return (static_cast<_Return_t>(GetProfileInt(pszSection, pszEntry, retDefault)));
+}
 
 #endif   // __UpdateItApp_h
 
