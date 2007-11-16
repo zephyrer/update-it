@@ -85,10 +85,11 @@ m_fUseSSL(FALSE)
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
+	// initialize and validate initial input values
+
 	CArgsParser& argsParser = pApp->m_argsParser;
 
-	// obtaint and validate authentication method
-	if (!argsParser.GetIntValue(SZ_ARG_SMTP_AUTHENTICATION), *reinterpret_cast<UINT*>(&m_eAuthMethod))
+	if (!argsParser.GetUIntValue(SZ_ARG_SMTP_AUTHENTICATION, *reinterpret_cast<UINT*>(&m_eAuthMethod), 10))
 	{
 		m_eAuthMethod = pApp->GetProfileData(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, AUTH_NONE);
 	}

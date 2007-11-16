@@ -374,7 +374,7 @@ bool CCustomPropSheet::GetFontMetrics(CString& strFaceName, WORD& wPointSize)
 	if (!strFaceName.IsEmpty())
 	{
 		UINT uTemp = 0;
-		fHasFont = pApp->m_argsParser.GetUIntValue(SZ_ARG_FONT_POINTSIZE, uTemp);
+		fHasFont = pApp->m_argsParser.GetUIntValue(SZ_ARG_FONT_POINTSIZE, uTemp, 10);
 		wPointSize = LOWORD(uTemp);
 	}
 

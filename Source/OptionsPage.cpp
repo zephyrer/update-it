@@ -89,7 +89,11 @@ END_MESSAGE_MAP()
 // construction
 
 COptionsPage::COptionsPage(void):
-CBetterPropPage(IDD_PAGE_OPTIONS)
+CBetterPropPage(IDD_PAGE_OPTIONS),
+m_nRecurse(BST_CHECKED),
+m_nCleanup(BST_CHECKED),
+m_nRecycle(BST_CHECKED),
+m_fCompare(BST_UNCHECKED)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 
@@ -100,38 +104,69 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 #endif	// _MFC_VER
 	ASSERT_VALID(pApp);
 
+	// initialize and validate initial input values
+
 	CArgsParser& argsParser = pApp->m_argsParser;
 
-	m_strSource = argsParser.HasKey(SZ_ARG_OPTIONS_SOURCE) ?
-		argsParser.GetStringValue(SZ_ARG_OPTIONS_SOURCE):
-		pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
-
-	m_nRecurse = argsParser.HasKey(SZ_ARG_OPTIONS_RECURSE) ?
-		BST_CHECKED:
-		pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
-
-	m_strExclude = argsParser.HasKey(SZ_ARG_OPTIONS_EXCLUDE) ?
-		argsParser.GetStringValue(SZ_ARG_OPTIONS_EXCLUDE):
-		pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
-
-	m_strTarget = argsParser.HasKey(SZ_ARG_OPTIONS_TARGET) ?
-		argsParser.GetStringValue(SZ_ARG_OPTIONS_TARGET):
-		pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
-
-	m_nCleanup = argsParser.HasKey(SZ_ARG_OPTIONS_CLEANUP) ?
-		BST_CHECKED:
-		pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
-
-	if (m_nCleanup == BST_CHECKED)
+	// "Source folder"
+	if (!argsParser.HasKey(SZ_ARG_OPTIONS_SOURCE))
 	{
-		m_nRecycle = argsParser.HasKey(SZ_ARG_OPTIONS_RECYCLE) ?
-			BST_CHECKED:
-			pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_UNCHECKED);
+		m_strSource = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
 	}
 	else {
-		m_nRecycle = BST_UNCHECKED;
+		m_strSource = argsParser.GetStringValue(SZ_ARG_OPTIONS_SOURCE);
 	}
 
+	// "Include subfolders"
+	if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_RECURSE, m_nRecurse, 10))
+	{
+		m_nRecurse = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
+	}
+	if (m_nRecurse != BST_UNCHECKED && m_nRecurse != BST_CHECKED)
+	{
+		m_nRecurse = BST_CHECKED;
+	}
+
+	// "Exclude mask(s)"
+	if (!argsParser.HasKey(SZ_ARG_OPTIONS_EXCLUDE))
+	{
+		m_strExclude = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
+	}
+	else {
+		m_strExclude = argsParser.GetStringValue(SZ_ARG_OPTIONS_EXCLUDE);
+	}
+
+	// "Target folder"
+	if (!argsParser.HasKey(SZ_ARG_OPTIONS_TARGET))
+	{
+		m_strTarget = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
+	}
+	else {
+		m_strTarget = argsParser.GetStringValue(SZ_ARG_OPTIONS_TARGET);
+	}
+
+	// "Cleanup this folder first"
+	if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_CLEANUP, m_nCleanup, 10))
+	{
+		m_nCleanup = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
+	}
+	if (m_nCleanup == BST_CHECKED)
+	{
+		// "Delete files to Recycle Bin if possible"
+		if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_RECYCLE, m_nRecycle, 10))
+		{
+			m_nRecycle = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_CHECKED);
+		}
+		if (m_nRecycle != BST_UNCHECKED && m_nRecycle != BST_CHECKED)
+		{
+			m_nRecycle = BST_CHECKED;
+		}
+	}
+	else {
+		m_nCleanup = m_nRecycle = BST_UNCHECKED;
+	}
+
+	// "Date and time"
 #if (_MFC_VER < 0x0700)
 	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(SZ_REGK_TIMES, m_strSource, -1);
 #else
@@ -145,10 +180,24 @@ CBetterPropPage(IDD_PAGE_OPTIONS)
 		m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1);
 	}
 #endif	// _MFC_VER
-	
-	m_fCompare = argsParser.HasKey(SZ_ARG_OPTIONS_COMPARE) ?
-		BST_CHECKED:
-		pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
+
+	// "Compare contents of the newer and existing older files"
+	if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_COMPARE, m_fCompare, 10))
+	{
+		m_fCompare = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
+	}
+	if (m_fCompare != BST_UNCHECKED && m_fCompare != BST_CHECKED)
+	{
+		m_fCompare = BST_UNCHECKED;
+	}
+
+	// initial validation
+	if (!::PathFileExists(m_strSource))
+	{
+		::GetCurrentDirectory(_MAX_PATH, m_strSource.GetBuffer(_MAX_PATH));
+		m_strSource.ReleaseBuffer();
+		m_strTarget = m_strSource + _T(".Update");
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////

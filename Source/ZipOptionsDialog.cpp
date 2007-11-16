@@ -80,10 +80,12 @@ m_iEncrMethod(I_METHOD_NONE)
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
+	// initialize and validate initial input values
+
 	CArgsParser& argsParser = pApp->m_argsParser;
 
-	// obtain and validate initial compression level
-	if (!argsParser.GetIntValue(SZ_ARG_ZIP_COMPRESSION), m_iComprLevel)
+	// "Compression level"
+	if (!argsParser.GetIntValue(SZ_ARG_ZIP_COMPRESSION, m_iComprLevel, 10))
 	{
 		m_iComprLevel = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, I_LEVEL_DEFAULT);
 	}
@@ -92,8 +94,8 @@ m_iEncrMethod(I_METHOD_NONE)
 		m_iComprLevel = I_LEVEL_DEFAULT;
 	}
 
-	// obtain and validate encryption method
-	if (!argsParser.GetIntValue(SZ_ARG_ZIP_ENCRYPTION), m_iEncrMethod)
+	// "Encryption method"
+	if (!argsParser.GetIntValue(SZ_ARG_ZIP_ENCRYPTION, m_iEncrMethod, 10))
 	{
 		m_iEncrMethod = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
 	}
@@ -102,7 +104,7 @@ m_iEncrMethod(I_METHOD_NONE)
 		m_iEncrMethod = I_METHOD_NONE;
 	}
 
-	// obtain password for encrypted file
+	// "Password"
 	if (!argsParser.HasKey(SZ_ARG_ZIP_PASSWORD))
 	{
 		m_strPassword = pApp->GetProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD);
