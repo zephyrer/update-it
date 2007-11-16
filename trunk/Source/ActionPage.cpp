@@ -86,6 +86,7 @@ END_MESSAGE_MAP()
 CActionPage::CActionPage(void):
 CBetterPropPage(IDD_PAGE_ACTION),
 m_nAction(COPY_FILES),
+m_nUpload(BST_UNCHECKED),
 m_nFtpPort(21),
 m_nSmtpPort(25)
 {
@@ -97,25 +98,55 @@ m_nSmtpPort(25)
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
+	// initialize and validate initial input values
+
 	CArgsParser& argsParser = pApp->m_argsParser;
 
-	m_nAction = argsParser.HasKey(SZ_ARG_ACTION_MOVE) ?
-		argsParser.GetIntValue(SZ_ARG_ACTION_MOVE):
-		pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_ACTION, COPY_FILES);
+	// "Action to perform"
+	if (!argsParser.GetIntValue(SZ_ARG_ACTION_MOVE, m_nAction, 10))
+	{
+		m_nAction = pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_ACTION, COPY_FILES);
+	}
+	if (m_nAction != COPY_FILES && m_nAction != MOVE_FILES)
+	{
+		m_nAction = COPY_FILES;
+	}
 
-	m_nUpload = argsParser.HasKey(SZ_ARG_ACTION_UPLOAD) ?
-		BST_CHECKED:
-		pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_UPLOAD, BST_UNCHECKED);
+	// "Also upload file(s) to the FTP server"
+	if (!argsParser.HasKey(SZ_ARG_ACTION_UPLOAD))
+	{
+		m_nUpload = pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_UPLOAD, BST_UNCHECKED);
+	}
+	else {
+		m_nUpload = BST_CHECKED;
+	}
+	if (m_nUpload != BST_UNCHECKED && m_nUpload != BST_CHECKED)
+	{
+		m_nUpload = BST_UNCHECKED;
+	}
 
-	// FTP settings
+	// "FTP settings"
 	if (m_nUpload == BST_CHECKED)
 	{
-		m_strServer = argsParser.HasKey(SZ_ARG_FTP_SERVER) ?
-			argsParser.GetStringValue(SZ_ARG_FTP_SERVER):
-			pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
-		m_nFtpPort = argsParser.HasKey(SZ_ARG_FTP_PORT) ?
-			LOWORD(argsParser.GetIntValue(SZ_ARG_FTP_PORT)):
-			LOWORD(pApp->GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PORT, 21));
+		// "Server"
+		if (!argsParser.HasKey(SZ_ARG_FTP_SERVER))
+		{
+			m_strServer = pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
+		}
+		else {
+			m_strServer = argsParser.GetStringValue(SZ_ARG_FTP_SERVER);
+		}
+
+		// "Port"
+		if (!argsParser.GetShortValue(SZ_ARG_FTP_PORT, m_nFtpPort, 10))
+		{
+			m_nFtpPort = LOWORD(pApp->GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PORT, 21));
+		}
+		if (m_nFtpPort < 1 || m_nFtpPort > SHRT_MAX)
+		{
+			m_nFtpPort = 21;
+		}
+			
 		m_strLogin = argsParser.HasKey(SZ_ARG_FTP_LOGIN) ?
 			argsParser.GetStringValue(SZ_ARG_FTP_LOGIN):
 			pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
