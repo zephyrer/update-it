@@ -36,6 +36,7 @@ public:
 // operations
 public:
 	HICON LoadSmIcon(LPCTSTR pszResName);
+
 	CString GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
 	BOOL WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue);
 #if (_MFC_VER >= 0x0700)
@@ -44,6 +45,11 @@ public:
 #endif   // _MFC_VER
 	template <typename _Return_t>
 	_Return_t GetProfileData(LPCTSTR pszSection, LPCTSTR pszEntry, _Return_t retDefault);
+
+	CString GetConfigString(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
+	int GetConfigInt(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault = 0);
+	int GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault);
+	CString GetConfigPassword(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
 
 // overridables
 public:

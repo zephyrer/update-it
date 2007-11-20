@@ -82,36 +82,19 @@ m_iEncrMethod(I_METHOD_NONE)
 
 	// initialize and validate initial input values
 
-	CArgsParser& argsParser = pApp->m_argsParser;
-
-	// "Compression level"
-	if (!argsParser.GetIntValue(SZ_ARG_ZIP_COMPRESSION, m_iComprLevel, 10))
-	{
-		m_iComprLevel = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, I_LEVEL_DEFAULT);
-	}
+	m_iComprLevel = pApp->GetConfigInt(SZ_ARG_ZIP_COMPRESSION, SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, I_LEVEL_DEFAULT);
 	if (m_iComprLevel < I_LEVEL_STORE || m_iComprLevel > I_LEVEL_BEST)
 	{
 		m_iComprLevel = I_LEVEL_DEFAULT;
 	}
 
-	// "Encryption method"
-	if (!argsParser.GetIntValue(SZ_ARG_ZIP_ENCRYPTION, m_iEncrMethod, 10))
-	{
-		m_iEncrMethod = pApp->GetProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
-	}
+	m_iEncrMethod = pApp->GetConfigInt(SZ_ARG_ZIP_ENCRYPTION, SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
 	if (m_iEncrMethod < I_METHOD_NONE || m_iEncrMethod > I_METHOD_AES_256)
 	{
 		m_iEncrMethod = I_METHOD_NONE;
 	}
 
-	// "Password"
-	if (!argsParser.HasKey(SZ_ARG_ZIP_PASSWORD))
-	{
-		m_strPassword = pApp->GetProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD);
-	}
-	else {
-		m_strPassword = argsParser.GetStringValue(SZ_ARG_ZIP_PASSWORD);
-	}
+	m_strPassword = pApp->GetConfigPassword(SZ_ARG_ZIP_PASSWORD, SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD);
 }
 
 CZipOptionsDialog::~CZipOptionsDialog(void)

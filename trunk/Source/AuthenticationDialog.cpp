@@ -100,29 +100,9 @@ m_fUseSSL(FALSE)
 
 	if (m_eAuthMethod != AUTH_NONE)
 	{
-		if (!argsParser.HasKey(SZ_ARG_SMTP_USERNAME))
-		{
-			m_strUserName = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
-		}
-		else {
-			m_strUserName = argsParser.GetStringValue(SZ_ARG_SMTP_USERNAME);
-		}
-
-		if (!argsParser.HasKey(SZ_ARG_SMTP_PASSWORD))
-		{
-			m_strPassword = pApp->GetProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
-		}
-		else {
-			m_strPassword = argsParser.GetStringValue(SZ_ARG_SMTP_PASSWORD);
-		}
-
-		if (!argsParser.HasKey(SZ_ARG_SMTP_USE_SSL))
-		{
-			m_fUseSSL = pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
-		}
-		else {
-			m_fUseSSL = TRUE;
-		}
+		m_strUserName = pApp->GetConfigString(SZ_ARG_SMTP_USERNAME, SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
+		m_strPassword = pApp->GetConfigPassword(SZ_ARG_SMTP_PASSWORD, SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
+		m_fUseSSL = pApp->GetConfigCheck(SZ_ARG_SMTP_USE_SSL, SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
 	}
 }
 

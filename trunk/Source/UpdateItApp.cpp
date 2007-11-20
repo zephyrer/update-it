@@ -204,6 +204,79 @@ BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time
 
 #endif	// _MFC_VER
 
+CString CUpdateItApp::GetConfigString(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszArgName));
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	if (!m_argsParser.HasKey(pszArgName))
+	{
+		return (GetProfileString(pszSection, pszEntry, pszDefault));
+	}
+	else {
+		return (m_argsParser.GetStringValue(pszArgName));
+	}
+}
+
+int CUpdateItApp::GetConfigInt(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszArgName));
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	int nReturn = 0;
+
+	if (!m_argsParser.GetIntValue(pszArgName, nReturn, 10))
+	{
+		nReturn = GetProfileInt(pszSection, pszEntry, nDefault);
+	}
+
+	return (nReturn);
+}
+
+int CUpdateItApp::GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszArgName));
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	int nCheck = 0;
+
+	if (!m_argsParser.HasKey(pszArgName))
+	{
+		nCheck = GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, nDefault);
+	}
+	else {
+		nCheck = BST_CHECKED;
+	}
+	if (nCheck != BST_UNCHECKED && nCheck != BST_CHECKED)
+	{
+		nCheck = nDefault;
+	}
+
+	return (nCheck);
+}
+
+CString CUpdateItApp::GetConfigPassword(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszArgName));
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	if (!m_argsParser.HasKey(pszArgName))
+	{
+		return (GetProfilePassword(pszSection, pszEntry, pszDefault));
+	}
+	else {
+		return (m_argsParser.GetStringValue(pszArgName));
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 

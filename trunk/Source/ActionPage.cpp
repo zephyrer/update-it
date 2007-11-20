@@ -87,12 +87,11 @@ CActionPage::CActionPage(void):
 CBetterPropPage(IDD_PAGE_ACTION),
 m_nAction(COPY_FILES),
 m_nUpload(BST_UNCHECKED),
+m_nZip(BST_UNCHECKED),
+m_nSend(BST_UNCHECKED),
 m_nFtpPort(21),
 m_nSmtpPort(25)
 {
-	BYTE* pbTemp;
-	UINT cbBody;
-
 	m_psp.dwFlags |= PSP_PREMATURE;
 
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
@@ -100,110 +99,18 @@ m_nSmtpPort(25)
 
 	// initialize and validate initial input values
 
-	CArgsParser& argsParser = pApp->m_argsParser;
+	InitActionSettings(pApp);
 
-	// "Action to perform"
-	if (!argsParser.GetIntValue(SZ_ARG_ACTION_MOVE, m_nAction, 10))
-	{
-		m_nAction = pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_ACTION, COPY_FILES);
-	}
-	if (m_nAction != COPY_FILES && m_nAction != MOVE_FILES)
-	{
-		m_nAction = COPY_FILES;
-	}
-
-	// "Also upload file(s) to the FTP server"
-	if (!argsParser.HasKey(SZ_ARG_ACTION_UPLOAD))
-	{
-		m_nUpload = pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_UPLOAD, BST_UNCHECKED);
-	}
-	else {
-		m_nUpload = BST_CHECKED;
-	}
-	if (m_nUpload != BST_UNCHECKED && m_nUpload != BST_CHECKED)
-	{
-		m_nUpload = BST_UNCHECKED;
-	}
-
-	// "FTP settings"
+	// FTP settings
 	if (m_nUpload == BST_CHECKED)
 	{
-		// "Server"
-		if (!argsParser.HasKey(SZ_ARG_FTP_SERVER))
-		{
-			m_strServer = pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
-		}
-		else {
-			m_strServer = argsParser.GetStringValue(SZ_ARG_FTP_SERVER);
-		}
-
-		// "Port"
-		if (!argsParser.GetShortValue(SZ_ARG_FTP_PORT, m_nFtpPort, 10))
-		{
-			m_nFtpPort = LOWORD(pApp->GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PORT, 21));
-		}
-		if (m_nFtpPort < 1 || m_nFtpPort > SHRT_MAX)
-		{
-			m_nFtpPort = 21;
-		}
-			
-		m_strLogin = argsParser.HasKey(SZ_ARG_FTP_LOGIN) ?
-			argsParser.GetStringValue(SZ_ARG_FTP_LOGIN):
-			pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
-		m_strPassword = argsParser.HasKey(SZ_ARG_FTP_PASSWORD) ?
-			argsParser.GetStringValue(SZ_ARG_FTP_PASSWORD):
-			pApp->GetProfilePassword(SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD);
-		m_strRoot = argsParser.HasKey(SZ_ARG_FTP_ROOT) ?
-			argsParser.GetStringValue(SZ_ARG_FTP_ROOT):
-			pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_ROOT);
-		m_fPassive = argsParser.HasKey(SZ_ARG_FTP_PASSIVE) ?
-			BST_CHECKED:
-			pApp->GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, BST_UNCHECKED);
+		InitFtpSettings(pApp);
 	}
 
-	m_nZip = argsParser.HasKey(SZ_ARG_ACTION_ZIP) ?
-		BST_CHECKED:
-		pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_ZIP, BST_UNCHECKED);
-
-	m_fCanSend = argsParser.HasKey(SZ_ARG_SMTP_ENABLE) ?
-		TRUE:
-		pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_ENABLE, FALSE);
-
+	// SMTP Settings
 	if (m_fCanSend)
 	{
-		if (m_nZip == BST_CHECKED)
-		{
-			m_nSend = argsParser.HasKey(SZ_ARG_ACTION_SEND) ?
-				BST_CHECKED:
-				pApp->GetProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_SEND, BST_UNCHECKED);
-		}
-		else {
-			m_nSend = BST_UNCHECKED;
-		}
-
-		m_strFrom = argsParser.HasKey(SZ_ARG_SMTP_FROM) ?
-			argsParser.GetStringValue(SZ_ARG_SMTP_FROM):
-			pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM);
-		m_strTo = argsParser.HasKey(SZ_ARG_SMTP_MAILTO) ?
-			argsParser.GetStringValue(SZ_ARG_SMTP_MAILTO):
-			pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO);
-		m_strSubject = argsParser.HasKey(SZ_ARG_SMTP_SUBJ) ?
-			argsParser.GetStringValue(SZ_ARG_SMTP_SUBJ):
-			pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ);
-		m_strHost = argsParser.HasKey(SZ_ARG_SMTP_HOST) ?
-			argsParser.GetStringValue(SZ_ARG_SMTP_HOST):
-			pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST);
-		m_nSmtpPort = argsParser.HasKey(SZ_ARG_SMTP_PORT) ?
-			argsParser.GetIntValue(SZ_ARG_SMTP_PORT):
-			pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, 25);
-
-		pApp->GetProfileBinary(SZ_REGK_SMTP, SZ_REGV_SMTP_BODY, &pbTemp, &cbBody);
-		if (pbTemp != NULL && cbBody > 0)
-		{
-			memmove(m_strBody.GetBuffer(cbBody - 1), pbTemp, cbBody);
-			m_strBody.ReleaseBuffer();
-			delete[] pbTemp;
-		}
+		InitSmtpSettings(pApp);
 	}
 }
 
@@ -356,7 +263,7 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_SERVER, m_strServer);
 	DDV_MaxChars(pDX, m_strServer, 255);
 	DDX_Text(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort);
-	DDV_MinMaxInt(pDX, m_nFtpPort, 1, 255);
+	DDV_MinMaxInt(pDX, m_nFtpPort, 1, SHRT_MAX);
 	DDX_Text(pDX, IDC_EDIT_LOGIN, m_strLogin);
 	DDV_MaxChars(pDX, m_strLogin, 64);
 	DDX_Text(pDX, IDC_EDIT_PASSWORD, m_strPassword);
@@ -377,7 +284,7 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 		DDX_Text(pDX, IDC_EDIT_HOST, m_strHost);
 		DDV_MaxChars(pDX, m_strHost, 255);
 		DDX_Text(pDX, IDC_EDIT_PORT, m_nSmtpPort);
-		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, 1024);
+		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, USHRT_MAX);
 		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
 		DDV_MaxChars(pDX, m_strBody, 1024);
 	}
@@ -457,11 +364,14 @@ void CActionPage::OnButtonZipOptions(void)
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
 
-		pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, m_dlgZipOpts.m_iComprLevel);
-		pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, m_dlgZipOpts.m_iEncrMethod);
-		if (m_dlgZipOpts.m_iEncrMethod != CZipOptionsDialog::I_METHOD_NONE)
+		if (!pApp->m_argsParser.HasKey(SZ_ARGV_DONT_SAVE_INPUT))
 		{
-			pApp->WriteProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD, m_dlgZipOpts.m_strPassword);
+			pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, m_dlgZipOpts.m_iComprLevel);
+			pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, m_dlgZipOpts.m_iEncrMethod);
+			if (m_dlgZipOpts.m_iEncrMethod != CZipOptionsDialog::I_METHOD_NONE)
+			{
+				pApp->WriteProfilePassword(SZ_REGK_ZIP, SZ_REGV_ZIP_PASSWORD, m_dlgZipOpts.m_strPassword);
+			}
 		}
 	}
 }
@@ -473,18 +383,82 @@ void CActionPage::OnButtonAuthentication(void)
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
 
-		pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, m_dlgAuth.m_eAuthMethod);
-		if (m_dlgAuth.m_eAuthMethod != CSmtpConnection::AUTH_NONE)
+		if (!pApp->m_argsParser.HasKey(SZ_ARGV_DONT_SAVE_INPUT))
 		{
-			pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME, m_dlgAuth.m_strUserName);
-			pApp->WriteProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD, m_dlgAuth.m_strPassword);
-			pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, m_dlgAuth.m_fUseSSL);
+			pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, m_dlgAuth.m_eAuthMethod);
+			if (m_dlgAuth.m_eAuthMethod != CSmtpConnection::AUTH_NONE)
+			{
+				pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME, m_dlgAuth.m_strUserName);
+				pApp->WriteProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD, m_dlgAuth.m_strPassword);
+				pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, m_dlgAuth.m_fUseSSL);
+			}
 		}
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
+
+void CActionPage::InitActionSettings(class CUpdateItApp* pApp)
+{
+	m_nAction = pApp->GetConfigInt(SZ_ARG_ACTION_MOVE, SZ_REGK_ACTION, SZ_REGV_ACTION_ACTION, COPY_FILES);
+	if (m_nAction != COPY_FILES && m_nAction != MOVE_FILES)
+	{
+		m_nAction = COPY_FILES;
+	}
+
+	m_nUpload = pApp->GetConfigCheck(SZ_ARG_ACTION_UPLOAD, SZ_REGK_ACTION, SZ_REGV_ACTION_UPLOAD, BST_UNCHECKED);
+	m_nZip = pApp->GetConfigCheck(SZ_ARG_ACTION_ZIP, SZ_REGK_ACTION, SZ_REGV_ACTION_ZIP, BST_UNCHECKED);
+	m_fCanSend = pApp->GetConfigInt(SZ_ARG_SMTP_ENABLE, SZ_REGK_SMTP, SZ_REGV_SMTP_ENABLE, FALSE);
+
+	if (m_nZip != BST_CHECKED)
+	{
+		m_nSend = BST_UNCHECKED;
+	}
+	else {
+		m_nSend = pApp->GetConfigCheck(SZ_ARG_ACTION_SEND, SZ_REGK_ACTION, SZ_REGV_ACTION_SEND, BST_UNCHECKED);
+	}
+}
+
+void CActionPage::InitFtpSettings(class CUpdateItApp* pApp)
+{
+	m_strServer = pApp->GetConfigString(SZ_ARG_FTP_SERVER, SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
+
+	m_nFtpPort = LOWORD(pApp->GetConfigInt(SZ_ARG_FTP_PORT, SZ_REGK_FTP, SZ_REGV_FTP_PORT, 21));
+	if (m_nFtpPort < 1 || m_nFtpPort > SHRT_MAX)
+	{
+		m_nFtpPort = 21;
+	}
+
+	m_strLogin = pApp->GetConfigString(SZ_ARG_FTP_LOGIN, SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
+	m_strPassword = pApp->GetConfigPassword(SZ_ARG_FTP_PASSWORD, SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD);
+	m_strRoot = pApp->GetConfigString(SZ_ARG_FTP_ROOT, SZ_REGK_FTP, SZ_REGV_FTP_ROOT);
+	m_fPassive = pApp->GetConfigCheck(SZ_ARG_FTP_PASSIVE, SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, BST_UNCHECKED);
+}
+
+void CActionPage::InitSmtpSettings(class CUpdateItApp* pApp)
+{
+	m_strFrom = pApp->GetConfigString(SZ_ARG_SMTP_FROM, SZ_REGK_SMTP, SZ_REGV_SMTP_FROM);
+	m_strTo = pApp->GetConfigString(SZ_ARG_SMTP_MAILTO, SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO);
+	m_strSubject = pApp->GetConfigString(SZ_ARG_SMTP_SUBJ, SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ);
+	m_strHost = pApp->GetConfigString(SZ_ARG_SMTP_HOST, SZ_REGK_SMTP, SZ_REGV_SMTP_HOST);
+
+	m_nSmtpPort = pApp->GetConfigInt(SZ_ARG_SMTP_PORT, SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, 25);
+	if (m_nSmtpPort < 1 || m_nSmtpPort > USHRT_MAX)
+	{
+		m_nSmtpPort = 25;
+	}
+
+	BYTE* pbTemp = NULL;
+	UINT cbBody = 0;
+	pApp->GetProfileBinary(SZ_REGK_SMTP, SZ_REGV_SMTP_BODY, &pbTemp, &cbBody);
+	if (pbTemp != NULL && cbBody > 0)
+	{
+		memmove(m_strBody.GetBuffer(cbBody - 1), pbTemp, cbBody);
+		m_strBody.ReleaseBuffer();
+		delete[] pbTemp;
+	}
+}
 
 void CActionPage::EnableFtpControls(BOOL fEnable)
 {

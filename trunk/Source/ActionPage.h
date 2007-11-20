@@ -79,6 +79,9 @@ public:
 
 // implementation helpers
 private:
+	void InitActionSettings(class CUpdateItApp* pApp);
+	void InitFtpSettings(class CUpdateItApp* pApp);
+	void InitSmtpSettings(class CUpdateItApp* pApp);
 	void EnableFtpControls(BOOL fEnable);
 	void EnableMailControls(BOOL fEnable);
 	void ShowMailControls(BOOL fShow);
