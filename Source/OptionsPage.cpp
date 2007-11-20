@@ -106,70 +106,24 @@ m_fCompare(BST_UNCHECKED)
 
 	// initialize and validate initial input values
 
-	CArgsParser& argsParser = pApp->m_argsParser;
+	m_strSource = pApp->GetConfigString(SZ_ARG_OPTIONS_SOURCE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
+	m_nRecurse = pApp->GetConfigCheck(SZ_ARG_OPTIONS_RECURSE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
+	m_strExclude = pApp->GetConfigString(SZ_ARG_OPTIONS_EXCLUDE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
+	m_strTarget = pApp->GetConfigString(SZ_ARG_OPTIONS_TARGET, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
 
-	// "Source folder"
-	if (!argsParser.HasKey(SZ_ARG_OPTIONS_SOURCE))
-	{
-		m_strSource = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
-	}
-	else {
-		m_strSource = argsParser.GetStringValue(SZ_ARG_OPTIONS_SOURCE);
-	}
-
-	// "Include subfolders"
-	if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_RECURSE, m_nRecurse, 10))
-	{
-		m_nRecurse = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
-	}
-	if (m_nRecurse != BST_UNCHECKED && m_nRecurse != BST_CHECKED)
-	{
-		m_nRecurse = BST_CHECKED;
-	}
-
-	// "Exclude mask(s)"
-	if (!argsParser.HasKey(SZ_ARG_OPTIONS_EXCLUDE))
-	{
-		m_strExclude = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
-	}
-	else {
-		m_strExclude = argsParser.GetStringValue(SZ_ARG_OPTIONS_EXCLUDE);
-	}
-
-	// "Target folder"
-	if (!argsParser.HasKey(SZ_ARG_OPTIONS_TARGET))
-	{
-		m_strTarget = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
-	}
-	else {
-		m_strTarget = argsParser.GetStringValue(SZ_ARG_OPTIONS_TARGET);
-	}
-
-	// "Cleanup this folder first"
-	if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_CLEANUP, m_nCleanup, 10))
-	{
-		m_nCleanup = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
-	}
+	m_nCleanup = pApp->GetConfigCheck(SZ_ARG_OPTIONS_CLEANUP, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
 	if (m_nCleanup == BST_CHECKED)
 	{
-		// "Delete files to Recycle Bin if possible"
-		if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_RECYCLE, m_nRecycle, 10))
-		{
-			m_nRecycle = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_CHECKED);
-		}
-		if (m_nRecycle != BST_UNCHECKED && m_nRecycle != BST_CHECKED)
-		{
-			m_nRecycle = BST_CHECKED;
-		}
+		m_nRecycle = pApp->GetConfigCheck(SZ_ARG_OPTIONS_RECYCLE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_CHECKED);
 	}
 	else {
-		m_nCleanup = m_nRecycle = BST_UNCHECKED;
+		m_nRecycle = BST_UNCHECKED;
 	}
 
-	// "Date and time"
 #if (_MFC_VER < 0x0700)
 	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(SZ_REGK_TIMES, m_strSource, -1);
 #else
+	CArgsParser& argsParser = pApp->m_argsParser;
 	bool fHasWriteTime = false;
 	if (argsParser.HasKey(SZ_ARG_OPTIONS_WRITETIME))
 	{
@@ -181,15 +135,7 @@ m_fCompare(BST_UNCHECKED)
 	}
 #endif	// _MFC_VER
 
-	// "Compare contents of the newer and existing older files"
-	if (!argsParser.GetIntValue(SZ_ARG_OPTIONS_COMPARE, m_fCompare, 10))
-	{
-		m_fCompare = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
-	}
-	if (m_fCompare != BST_UNCHECKED && m_fCompare != BST_CHECKED)
-	{
-		m_fCompare = BST_UNCHECKED;
-	}
+	m_fCompare = pApp->GetConfigCheck(SZ_ARG_OPTIONS_COMPARE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
 
 	// initial validation
 	if (!::PathFileExists(m_strSource))
