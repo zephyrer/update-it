@@ -409,7 +409,7 @@ void CActionPage::InitActionSettings(class CUpdateItApp* pApp)
 
 	m_nUpload = pApp->GetConfigCheck(SZ_ARG_ACTION_UPLOAD, SZ_REGK_ACTION, SZ_REGV_ACTION_UPLOAD, BST_UNCHECKED);
 	m_nZip = pApp->GetConfigCheck(SZ_ARG_ACTION_ZIP, SZ_REGK_ACTION, SZ_REGV_ACTION_ZIP, BST_UNCHECKED);
-	m_fCanSend = pApp->GetConfigInt(SZ_ARG_SMTP_ENABLE, SZ_REGK_SMTP, SZ_REGV_SMTP_ENABLE, FALSE);
+	m_fCanSend = pApp->GetConfigBool(SZ_ARG_SMTP_ENABLE, SZ_REGK_SMTP, SZ_REGV_SMTP_ENABLE, FALSE);
 
 	if (m_nZip != BST_CHECKED)
 	{

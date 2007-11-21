@@ -248,7 +248,7 @@ int CUpdateItApp::GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 
 	if (!m_argsParser.HasKey(pszArgName))
 	{
-		nCheck = GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, nDefault);
+		nCheck = GetProfileInt(pszSection, pszEntry, nDefault);
 	}
 	else {
 		nCheck = BST_CHECKED;
@@ -274,6 +274,22 @@ CString CUpdateItApp::GetConfigPassword(LPCTSTR pszArgName, LPCTSTR pszSection, 
 	}
 	else {
 		return (m_argsParser.GetStringValue(pszArgName));
+	}
+}
+
+BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, BOOL fDefault)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszArgName));
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	if (!m_argsParser.HasKey(pszArgName))
+	{
+		return (GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, fDefault));
+	}
+	else {
+		return (TRUE);
 	}
 }
 
