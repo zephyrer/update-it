@@ -286,7 +286,7 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 
 	if (!m_argsParser.HasKey(pszArgName))
 	{
-		return (GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, fDefault));
+		return (GetProfileInt(pszSection, pszEntry, fDefault));
 	}
 	else {
 		return (TRUE);
