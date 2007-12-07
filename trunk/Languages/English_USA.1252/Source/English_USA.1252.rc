@@ -205,7 +205,7 @@ BEGIN
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",
                     IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.65 (9 November 2006)",
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.67 (1 August 2007)",
                     IDC_STATIC,16,156,314,16
     LTEXT           "Copyright © 1998-2006 by PJ Naughter",IDC_STATIC,16,174,
                     132,10,SS_CENTERIMAGE
