@@ -89,7 +89,7 @@
 
 // NOTE that if this argument is used and valid all other arguments will be ignored!
 
-#define SZ_ARG_ARGUMENTS_FILE _T("ArgumentsFile")
+#define SZ_ARG_RESPONSE_FILE _T("ResponseFile")
 
 // both relative or absolute pathes are accepted:
 // -ArgumentsFile:"..\..\My Settigs\SomeArgiments.txt"

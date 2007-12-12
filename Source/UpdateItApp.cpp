@@ -87,9 +87,9 @@ m_hLangDLL(NULL)
 
 	m_argsParser.Parse(::GetCommandLine(), true);
 
-	if (m_argsParser.HasKey(SZ_ARG_ARGUMENTS_FILE))
+	if (m_argsParser.HasKey(SZ_ARG_RESPONSE_FILE))
 	{
-		ParseArgumentsFile();
+		ParseResponseFile();
 	}
 }
 
@@ -493,11 +493,11 @@ bool CUpdateItApp::SetCurrentAfxLanguage(void)
 	return (fSuccess);
 }
 
-bool CUpdateItApp::ParseArgumentsFile(void)
+bool CUpdateItApp::ParseResponseFile(void)
 {
 	bool fSuccess = false;
 
-	CString strArgsPath = m_argsParser.GetStringValue(SZ_ARG_ARGUMENTS_FILE);
+	CString strArgsPath = m_argsParser.GetStringValue(SZ_ARG_RESPONSE_FILE);
 	if (!strArgsPath.IsEmpty())
 	{
 		if (::PathFindFileName(strArgsPath) == static_cast<LPCTSTR>(strArgsPath))
