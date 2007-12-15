@@ -85,14 +85,14 @@ Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
-Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
-Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
-Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
-Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
-Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
