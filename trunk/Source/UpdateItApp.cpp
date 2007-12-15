@@ -411,7 +411,26 @@ bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
 	TCHAR szTempPath[_MAX_PATH] = { 0 };
 	if (RegQueryLanguagePath(SZ_REGV_LANG_DLL, szTempPath))
 	{
+#if defined(_DEBUG)
+		TCHAR szExeDir[_MAX_PATH] = { 0 };
+		::GetModuleFileName(AfxGetInstanceHandle(), szExeDir, _countof(szExeDir));
+		::PathRemoveFileSpec(szExeDir);
+		CString strDebugPath(::PathFindFileName(szTempPath));
+		TCHAR szLangDir[_MAX_DIR] = { 0 };
+		_tcscpy(szLangDir, strDebugPath);
+		::PathRemoveExtension(szLangDir);
+		_tcscat(szLangDir, _T("\\Output\\x86\\Debug"));
+#if defined(_MBCS)
+		_tcscat(szLangDir, _T("\\MBCS\\"));
+#else
+		_tcscat(szLangDir, _T("\\Unicode\\"));
+#endif   // _MBCS
+		strDebugPath.Insert(0, szLangDir);
+		strDebugPath.Insert(0, _T("..\\..\\..\\..\\Languages\\"));
+		::PathCombine(pszDest, szExeDir, strDebugPath);
+#else
 		GetAbsolutePath(pszDest, szTempPath);
+#endif   // _DEBUG
 		return (true);
 	}
 	else {
@@ -427,7 +446,16 @@ bool CUpdateItApp::GetAfxLanguagePath(LPTSTR pszDest)
 	TCHAR szTempPath[_MAX_PATH] = { 0 };
 	if (RegQueryLanguagePath(NULL, szTempPath))
 	{
+#if defined(_DEBUG)
+		TCHAR szExeDir[_MAX_PATH] = { 0 };
+		::GetModuleFileName(AfxGetInstanceHandle(), szExeDir, _countof(szExeDir));
+		::PathRemoveFileSpec(szExeDir);
+		CString strRedistPath(::PathFindFileName(szTempPath));
+		strRedistPath.Insert(0, _T("..\\..\\..\\..\\Redist\\"));
+		::PathCombine(pszDest, szExeDir, strRedistPath);
+#else
 		GetAbsolutePath(pszDest, szTempPath);
+#endif   // _DEBUG
 		return (true);
 	}
 	else {
