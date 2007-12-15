@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+
+<!--
+
+UpdateIt! application.
+Copyright (c) 2002-2007 by Elijah Zarezky,
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+UpdateIt71.build - NAnt script to build release
+
+-->
+
+<project
+	name="UpdateIt"
+	default="rebuild-all"
+	basedir=".\">
+
+	<description>UpdateIt! application build script.</description>
+
+	<!-- GLOBAL PROJECT PROPERTIES -->
+
+	<!-- default build configuration -->
+
+	<property
+		name="CharacterSet"
+		value="MBCS"
+		overwrite="false"/>
+	<property
+		name="BuildType"
+		value="Release"
+		overwrite="false"/>
+	<property
+		name="SolutionConfig"
+		value="${CharacterSet} ${BuildType}"/>
+
+	<!-- version numbers -->
+
+	<property
+		name="VerMajor"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="VerMinor"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="VerBuild"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="SvnRev"
+		value="0"
+		overwrite="false"/>
+
+	<!-- TARGETS -->
+
+	<!-- 'verify-ver' target -->
+
+	<target
+		name="verify-ver"
+		description="Verify version numbers.">
+		<echo message="Verifying version numbers."/>
+		<if test="${VerMajor == '0'}">
+			<fail message="Major version number isn't specified."/>
+		</if>
+		<if test="${VerMinor == '0'}">
+			<fail message="Minor version number isn't specified."/>
+		</if>
+		<if test="${VerBuild == '0'}">
+			<fail message="Build number isn't specified."/>
+		</if>
+		<if test="${SvnRev == '0'}">
+			<fail message="Revision number isn't specified."/>
+		</if>
+		<echo message="Version is: ${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
+	</target>
+
+	<!-- 'stamp-ver' target -->
+
+	<target
+		name="stamp-ver"
+		description="Stamp version numbers."
+		depends="verify-ver">
+		<copy
+			file="Source\UpdateIt.manifest.nant"
+			tofile="Source\UpdateIt.manifest"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="SVN_REV" value="${SvnRev}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy
+			file="Source\VersionInfo.rc.nant"
+			tofile="Source\VersionInfo.rc"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="SVN_REV" value="${SvnRev}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy
+			file="Languages\English_USA.1252\Source\VersionInfo.rc.nant"
+			tofile="Languages\English_USA.1252\Source\VersionInfo.rc"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="SVN_REV" value="${SvnRev}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy
+			file="Languages\Russian_Russia.1251\Source\VersionInfo.rc.nant"
+			tofile="Languages\Russian_Russia.1251\Source\VersionInfo.rc"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="SVN_REV" value="${SvnRev}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy
+			file="Source\Setup.iss.nant"
+			tofile="Source\Setup.iss"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+		<copy
+			file="Source\SetupUniversal.iss.nant"
+			tofile="Source\SetupUniversal.iss"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<!-- 'build-sln' target -->
+
+	<target
+		name="build-sln"
+		description="Build UpdateIt solution."
+		depends="stamp-ver">
+		<solution
+			solutionfile="UpdateIt71.sln"
+			configuration="${SolutionConfig}">
+		</solution>
+	</target>
+
+	<!-- 'rebuild-sln' target -->
+
+	<target
+		name="rebuild-sln"
+		description="Rebuild UpdateIt solution."
+		depends="clean-sln,build-sln">
+	</target>
+
+	<!-- 'build-doc' target -->
+
+	<target
+		name ="build-doc"
+		description="Create CHM documentation."
+		depends="clean-doc">
+		<exec
+			program="hhc.exe"
+			commandline="UpdateIt.hhp"
+			workingdir="HTML"
+			resultproperty="HhcResult"
+			failonerror="false">
+		</exec>
+		<echo/>
+		<echo message="If return code was 1 it's not a failure but success!"/>
+		<if test="${HhcResult != '1'}">
+			<fail message="UpdateIt.chm compilation failed."/>
+		</if>
+	</target>
+
+	<!-- 'build-distr' target -->
+
+	<target
+		name="build-distr"
+		description="Create setup packages."
+		depends="build-sln,build-doc,clean-distr">
+		<mkdir
+			dir="Setup"
+			if="${not directory::exists('Setup')}"/>
+		<echo message="Creating standard installer."/>
+		<echo/>
+		<exec
+			program="iscc.exe"
+			commandline="Setup.iss"
+			workingdir="Source">
+		</exec>
+		<echo/>
+		<echo/>
+		<echo message="Creating universal installer."/>
+		<echo/>
+		<exec
+			program="iscc.exe"
+			commandline="SetupUniversal.iss"
+			workingdir="Source">
+		</exec>
+	</target>
+
+	<!-- 'build-all' target -->
+
+	<target
+		name="build-all"
+		description="Build entire UpdateIt project."
+		depends="build-sln,build-doc,build-distr">
+	</target>
+
+	<!-- 'rebuild-all' target -->
+
+	<target
+		name="rebuild-all"
+		description="Rebuild entire UpdateIt project."
+		depends="rebuild-sln,build-doc,build-distr">
+	</target>
+
+	<!-- 'clean-sln target -->
+
+	<target
+		name="clean-sln"
+		description="Clean UpdateIt solution.">
+		<exec
+			program="devenv.com"
+			commandline="UpdateIt71.sln /clean &quot;${SolutionConfig}&quot;">
+		</exec>
+	</target>
+
+	<!-- 'clean-doc' target -->
+
+	<target
+		name="clean-doc"
+		description="Delete CHM documentation.">
+		<delete
+			file="HTML\UpdateIt.chm"
+			if="${file::exists('HTML\UpdateIt.chm')}"/>
+	</target>
+
+	<!-- 'clean-distr' target -->
+
+	<target
+		name="clean-distr"
+		description="Delete setup packages.">
+		<delete
+			if="${directory::exists('Setup')}">
+			<fileset>
+				<include name="Setup\*.exe"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- 'clean-all' target -->
+
+	<target
+		name="clean-all"
+		description="Delete all built files."
+		depends="clean-sln,clean-doc,clean-distr">
+	</target>
+
+</project>
+
