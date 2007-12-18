@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.9.7
+AppVerName=UpdateIt! 1.3.3986
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.9.7
+AppVersion=1.3.3986
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.9.7-setup
-VersionInfoVersion=1.9.7
+OutputBaseFilename=UpdateIt-1.3.3986-setup
+VersionInfoVersion=1.3.3986
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -85,14 +85,14 @@ Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
-Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
-Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
-Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
-Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
-Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"

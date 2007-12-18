@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.9.7
+AppVerName=UpdateIt! 1.3.3986
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.9.7
+AppVersion=1.3.3986
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.9.7-setup-universal
-VersionInfoVersion=1.9.7
+OutputBaseFilename=UpdateIt-1.3.3986-setup-universal
+VersionInfoVersion=1.3.3986
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -146,16 +146,16 @@ Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignor
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
 Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangEn
-Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangRu
-Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu; Flags: ignoreversion
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
 
-Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Components: runtimes; Flags: ignoreversion
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Components: runtimes; Flags: ignoreversion
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Components: runtimes; Flags: ignoreversion
 
 Source: "..\..\Repository\AfxGadgets\AfxGadgets71.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
