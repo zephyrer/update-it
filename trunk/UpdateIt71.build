@@ -119,6 +119,9 @@ UpdateIt71.build - NAnt script to build release
 				</replacetokens>
 			</filterchain>
 		</copy>
+		<touch
+			file="Source\UpdateIt.rc"
+			datetime="${datetime::now()}"/>
 		<copy
 			file="Languages\English_USA.1252\Source\VersionInfo.rc.nant"
 			tofile="Languages\English_USA.1252\Source\VersionInfo.rc"
@@ -132,6 +135,9 @@ UpdateIt71.build - NAnt script to build release
 				</replacetokens>
 			</filterchain>
 		</copy>
+		<touch
+			file="Languages\English_USA.1252\Source\English_USA.1252.rc"
+			datetime="${datetime::now()}"/>
 		<copy
 			file="Languages\Russian_Russia.1251\Source\VersionInfo.rc.nant"
 			tofile="Languages\Russian_Russia.1251\Source\VersionInfo.rc"
@@ -145,6 +151,9 @@ UpdateIt71.build - NAnt script to build release
 				</replacetokens>
 			</filterchain>
 		</copy>
+		<touch
+			file="Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc"
+			datetime="${datetime::now()}"/>
 		<copy
 			file="Source\Setup.iss.nant"
 			tofile="Source\Setup.iss"
@@ -238,12 +247,47 @@ UpdateIt71.build - NAnt script to build release
 		</exec>
 	</target>
 
+	<!-- 'zip-distr' target -->
+
+	<target
+		name="zip-distr"
+		description="Create ZIPped setup packages."
+		depends="build-distr,clean-zip">
+		<exec
+			program="7z.exe"
+			workingdir="Setup">
+			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+			<arg value="update_it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup.exe"/>
+		</exec>
+		<exec
+			program="7z.exe"
+			workingdir="Setup">
+			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+			<arg value="update_it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.exe"/>
+		</exec>
+	</target>
+
+	<!-- 'commit-src' target -->
+
+	<target
+		name="commit-src"
+		description="Commit sources to the SVN repository.">
+		<if test="${property::exists('CommitMsg')}">
+			<exec
+				program="svn.exe"
+				commandline="commit --message &quot;${CommitMsg}&quot;">
+			</exec>
+		</if>
+	</target>
+
 	<!-- 'build-all' target -->
 
 	<target
 		name="build-all"
 		description="Build entire UpdateIt project."
-		depends="build-sln,build-doc,build-distr">
+		depends="build-sln,build-doc,build-distr,zip-distr">
 	</target>
 
 	<!-- 'rebuild-all' target -->
@@ -251,7 +295,7 @@ UpdateIt71.build - NAnt script to build release
 	<target
 		name="rebuild-all"
 		description="Rebuild entire UpdateIt project."
-		depends="rebuild-sln,build-doc,build-distr">
+		depends="rebuild-sln,build-doc,build-distr,zip-distr">
 	</target>
 
 	<!-- 'clean-sln target -->
@@ -284,6 +328,19 @@ UpdateIt71.build - NAnt script to build release
 			if="${directory::exists('Setup')}">
 			<fileset>
 				<include name="Setup\*.exe"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- 'clean-zip' target -->
+
+	<target
+		name="clean-zip"
+		description="Delete ZIPped setup packages.">
+		<delete
+			if="${directory::exists('Setup')}">
+			<fileset>
+				<include name="Setup\*.zip"/>
 			</fileset>
 		</delete>
 	</target>
