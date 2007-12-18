@@ -90,6 +90,7 @@ m_nUpload(BST_UNCHECKED),
 m_nZip(BST_UNCHECKED),
 m_nSend(BST_UNCHECKED),
 m_nFtpPort(21),
+m_fPassive(FALSE),
 m_nSmtpPort(25)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
