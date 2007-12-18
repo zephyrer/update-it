@@ -282,6 +282,27 @@ UpdateIt71.build - NAnt script to build release
 		</if>
 	</target>
 
+	<!-- 'export-src' target -->
+
+	<target
+		name="export-src"
+		description="Export sources from the working copy.">
+		<if test="${property::exists('ExportDir')}">
+			<exec
+				program="svn.exe"
+				commandline="export .\ &quot;${ExportDir}\UpdateIt&quot;">
+			</exec>
+			<exec
+				program="7z.exe"
+				workingdir="${ExportDir}">
+				<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+				<arg value="update_it.zip"/>
+				<arg value="UpdateIt"/>
+			</exec>
+			<delete dir="${ExportDir}\UpdateIt"/>
+		</if>
+	</target>
+
 	<!-- 'build-all' target -->
 
 	<target
