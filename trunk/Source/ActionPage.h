@@ -53,8 +53,21 @@ protected:
 public:
 	enum
 	{
+		// action to perform
 		COPY_FILES = 0,
-		MOVE_FILES = 1
+		MOVE_FILES = 1,
+
+		// length limits
+		MIN_FTP_SERVER_LENGTH = sizeof("ftp://") + 4 - 1,
+		MAX_FTP_SERVER_LENGTH = INTERNET_MAX_URL_LENGTH,
+		MAX_FTP_LOGIN_LENGTH = 64,
+		MAX_FTP_PASSWORD_LENGTH = 64,
+		MIN_EMAIL_ADDRESS_LENGTH = sizeof("a@a.aa") - 1,
+		MAX_EMAIL_ADDRESS_LENGTH = _MAX_PATH,
+		MAX_EMAIL_SUBJECT_LENGTH = 80,
+		MAX_EMAIL_BODY_LENGTH = 1024,
+		MIN_SMTP_HOST_LENGTH = sizeof("a.aa") - 1,
+		MAX_SMTP_HOST_LENGTH = _MAX_PATH
 	};
 
 	int m_nAction;

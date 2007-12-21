@@ -447,6 +447,7 @@ BEGIN
     IDS_TITLE_EXPORT        "Export Settings to File"
     IDS_TITLE_IMPORT        "Import Settings from File"
     IDS_TOTAL_SIZE_OVERFLOW "Total size of already found files exceeds the maximum\nsupported value and the search will now be stopped. After\nthese files will be processed You can repeat the search."
+    IDS_PARSE_MIN_STRING_SIZE "Please enter more than %1 characters."
 END
 
 STRINGTABLE 

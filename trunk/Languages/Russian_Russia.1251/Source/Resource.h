@@ -45,6 +45,7 @@
 #define IDS_TITLE_EXPORT                41
 #define IDS_TITLE_IMPORT                42
 #define IDS_TOTAL_SIZE_OVERFLOW         43
+#define IDS_PARSE_MIN_STRING_SIZE       44
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
