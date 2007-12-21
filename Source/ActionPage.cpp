@@ -262,13 +262,13 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 
 	// FTP settings
 	DDX_Text(pDX, IDC_EDIT_SERVER, m_strServer);
-	DDV_MaxChars(pDX, m_strServer, 255);
+	DDV_MinMaxChars(pDX, m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
 	DDX_Text(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort);
 	DDV_MinMaxInt(pDX, m_nFtpPort, 1, SHRT_MAX);
 	DDX_Text(pDX, IDC_EDIT_LOGIN, m_strLogin);
-	DDV_MaxChars(pDX, m_strLogin, 64);
+	DDV_MaxChars(pDX, m_strLogin, MAX_FTP_LOGIN_LENGTH);
 	DDX_Text(pDX, IDC_EDIT_PASSWORD, m_strPassword);
-	DDV_MaxChars(pDX, m_strPassword, 64);
+	DDV_MaxChars(pDX, m_strPassword, MAX_FTP_PASSWORD_LENGTH);
 	DDX_Text(pDX, IDC_EDIT_ROOT, m_strRoot);
 	DDV_MaxChars(pDX, m_strRoot, _MAX_PATH);
 	DDX_Check(pDX, IDC_CHECK_PASSIVE, m_fPassive);
@@ -277,17 +277,17 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 	if (m_fCanSend)
 	{
 		DDX_Text(pDX, IDC_EDIT_FROM, m_strFrom);
-		DDV_MaxChars(pDX, m_strFrom, 255);
+		DDV_MinMaxChars(pDX, m_strFrom, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_MAILTO, m_strTo);
-		DDV_MaxChars(pDX, m_strTo, 255);
+		DDV_MinMaxChars(pDX, m_strTo, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_SUBJECT, m_strSubject);
-		DDV_MaxChars(pDX, m_strSubject, 255);
+		DDV_MaxChars(pDX, m_strSubject, MAX_EMAIL_SUBJECT_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_HOST, m_strHost);
-		DDV_MaxChars(pDX, m_strHost, 255);
+		DDV_MinMaxChars(pDX, m_strHost, MIN_SMTP_HOST_LENGTH, MAX_SMTP_HOST_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_PORT, m_nSmtpPort);
 		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, USHRT_MAX);
 		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
-		DDV_MaxChars(pDX, m_strBody, 1024);
+		DDV_MaxChars(pDX, m_strBody, MAX_EMAIL_BODY_LENGTH);
 	}
 }
 

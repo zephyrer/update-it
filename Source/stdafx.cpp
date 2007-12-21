@@ -16,7 +16,24 @@
 
 // stdafx.cpp - source file that includes just the standard includes
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
+
+#include "Resource.h"
+#include "../Languages/English_USA.1252/Source/Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// shared globals
+
+bool g_fRestartInterface = false;
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// global helpers
 
 #if (_MSC_VER >= 1300) && defined(_DLL)
 
@@ -27,10 +44,22 @@ extern "C" __int64 __cdecl _abs64(__int64 num)
 
 #endif	// _MSC_VER
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-// shared globals
-
-bool g_fRestartInterface = false;
+void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars, int cMaxChars)
+{
+	if (pDX->m_bSaveAndValidate && strValue.GetLength() < cMinChars)
+	{
+		TCHAR szMinCHarsStr[32] = { 0 };
+		wsprintf(szMinCHarsStr, _T("%d"), cMinChars);
+		CString strPrompt;
+		AfxFormatString1(strPrompt, IDS_PARSE_MIN_STRING_SIZE, szMinCHarsStr);
+		AfxMessageBox(strPrompt, MB_ICONEXCLAMATION, AFX_IDP_PARSE_STRING_SIZE);
+		strPrompt.Empty();
+		pDX->Fail();
+	}
+	else {
+		DDV_MaxChars(pDX, strValue, cMaxChars);
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // import libraries
