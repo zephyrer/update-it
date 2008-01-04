@@ -150,7 +150,7 @@ CAPTION "UpdateIt! — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
-    LTEXT           "Авторские права © 2002-2007 Илья Зарецкий",IDC_STATIC,4,
+    LTEXT           "Авторские права © 2002-2008 Илья Зарецкий",IDC_STATIC,4,
                     24,160,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_ZAREZKY,166,24,164,10,
                     SS_CENTERIMAGE

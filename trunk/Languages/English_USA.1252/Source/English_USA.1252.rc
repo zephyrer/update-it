@@ -186,7 +186,7 @@ CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
-    LTEXT           "Copyright © 2002-2007 by Elijah Zarezky",IDC_STATIC,4,
+    LTEXT           "Copyright © 2002-2008 by Elijah Zarezky",IDC_STATIC,4,
                     24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
     LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
