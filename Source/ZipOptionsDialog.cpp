@@ -89,7 +89,11 @@ m_iEncrMethod(I_METHOD_NONE)
 	}
 
 	m_iEncrMethod = pApp->GetConfigInt(SZ_ARG_ZIP_ENCRYPTION, SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
+#if defined(_UPDATE_IT_PRO)
 	if (m_iEncrMethod < I_METHOD_NONE || m_iEncrMethod > I_METHOD_AES_256)
+#else
+	if (m_iEncrMethod < I_METHOD_NONE || m_iEncrMethod > I_METHOD_STANDARD)
+#endif   // _UPDATE_IT_PRO
 	{
 		m_iEncrMethod = I_METHOD_NONE;
 	}

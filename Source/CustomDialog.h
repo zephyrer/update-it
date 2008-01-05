@@ -16,12 +16,12 @@
 
 // CustomDialog.h - interface of the CCustomDialog class
 
-#if !defined(__CustomDialog_h)
-#define __CustomDialog_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__CustomDialog_h)
+#define __CustomDialog_h
 
 class CCustomDialog: public CDialog
 {

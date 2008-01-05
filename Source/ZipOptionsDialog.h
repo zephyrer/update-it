@@ -16,12 +16,12 @@
 
 // ZipOptionsDialog.h - interface of the CZipOptionsDialog class
 
-#if !defined(__ZipOptionsDialog_h)
-#define __ZipOptionsDialog_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__ZipOptionsDialog_h)
+#define __ZipOptionsDialog_h
 
 class CZipOptionsDialog: public CCustomDialog
 {

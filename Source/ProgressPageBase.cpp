@@ -50,7 +50,7 @@
 #include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// unwanted ICL warnings
+// avoid unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion

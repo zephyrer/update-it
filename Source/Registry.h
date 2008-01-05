@@ -16,12 +16,12 @@
 
 // Registry.h - registry key and value names
 
-#if !defined(__Registry_h)
-#define __Registry_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__Registry_h)
+#define __Registry_h
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\Font

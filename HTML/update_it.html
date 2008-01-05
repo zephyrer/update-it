@@ -21,6 +21,14 @@ IMG.updateItShot {
 	margin-top: 2pt;
 	margin-right: 8pt;
 }
+span.argName {
+	font-weight: bold;
+	color: #990000;
+}
+span.argValue {
+	font-weight: bold;
+	color: #990099;
+}
 </style>
 
 <title>UpdateIt!</title>
@@ -111,6 +119,26 @@ class="updateItShot"/><strong>Шаг 4:</strong> обработка файлов. На этом шаге мож
 <br clear="left"/></p>
 
 <p class="pageText">
+<strong>Системные требования:</strong>
+</p>
+
+<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<li>Windows 98/Me/2000/XP/2003;</li>
+<li>некоторое количество свободной памяти.</li>
+</ul>
+
+<p class="pageText">
+<strong>Планы на будущее:</strong>
+</p>
+
+<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<li>сохранение &#8222;истории&#8220; исходных и целевых папок;</li>
+<li>сохранение &#8222;истории&#8220; адресов отправителя и получателя письма.</li>
+</ul>
+
+<h1 class="subTopic">Экспорт/импорт настроек</h1>
+
+<p class="pageText">
 Начиная с версии 1.0.2598, в приложении появилась возможность экспорта/импорта настроек
 (только при работе под Windows 2000/XP), которая может быть полезна при переустановке
 операционной системы. Соответствующие команды находятся в системном меню главного окна.
@@ -118,20 +146,299 @@ class="updateItShot"/><strong>Шаг 4:</strong> обработка файлов. На этом шаге мож
 только на &#8222;нулевом&#8220; шаге (страница <span class="winText">Welcome!</span>).
 </p>
 
+<h1 class="subTopic">Ключи командной строки</h1>
+
 <p class="pageText">
-<strong>Системные требования:</strong>
+Первая группа ключей позволяет задать имя исходной папки и условия поиска в ней файлов,
+а также имя целевой папки и параметры работы с ней.
 </p>
 
-<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
-<li>Windows 98/Me/2000/XP/2003</li>
-<li>некоторое количество свободной памяти</li>
-</ul>
+<dl>
 
-<p class="pageText"><a name="version_history">
-<strong>История версий:</strong>
-</a></p>
+<dt><span class="argName">SourceDir-Name</span><strong>:</strong><span
+class="argValue">&lt;имя_папки&gt;</span></dt>
+<dd>Полное имя исходной папки, в которой должен производиться поиск обновленных файлов.
+Если это имя содержит пробелы, то оно должно быть заключено в кавычки; в противном
+случае, их использование является допустимым, но не обязательным.</dd>
 
-<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<dt><span class="argName">SourceDir-Recurce</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, поиск файлов будет
+производиться рекурсивно (в исходной папке и всех папках, находящихся внутри нее), а при
+равном <span class="argValue">0</span> &mdash; только в исходной. Любое другое значение
+будет интерпретировано как <span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">SourceDir-Exclude</span><strong>:</strong><span
+class="argValue">&lt;список_масок&gt;</span></dt>
+<dd>Одна или несколько (разделенных запятыми) масок файлов, которые следует исключить
+из поиска.</dd>
+
+<dt><span class="argName">TargetDir-Name</span><strong>:</strong><span
+class="argValue">&lt;имя_папки&gt;</span></dt>
+<dd>Полное имя целевой папки, в котороую будет производиться копирование или перемещение
+обновленных файлов. Если это имя содержит пробелы, то оно должно быть заключено в кавычки;
+в противном случае, их использование является допустимым, но не обязательным.</dd>
+
+<dt><span class="argName">TargetDir-CleanupFirst</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, целевая папка будет
+полностью очищена перед началом копирования или перемещения в нее файлов, а при равном
+<span class="argValue">0</span> &mdash; нет. Любое другое значение будет интерпретировано
+как <span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">UseRecycleBin</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, удаление файлов из
+целевой папки будет производиться в Корзину (если ее использование разрешено системными
+настройками), а при равном <span class="argValue">0</span> &mdash;
+&#8222;безвозвратно&#8220;. Любое другое значение будет интерпретировано как
+<span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">SourceDir-WriteTime</span><strong>:</strong><span
+class="argValue">&lt;дата_время&gt;</span></dt>
+<dd>Дата и время модификации файлов в исходной папке, начиная с которых они считаются
+обновленными.</dd>
+
+<dt><span class="argName">CompareContents</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, и наличии в целевой
+папке копии обновленного файла из исходной, копирование или перемещение будут выполняться
+только в том случае, когда бинарное содержимое этих файлов различно &mdash; это позволяет
+выполнять &#8222;разумное&#8220; инкрементальное обновление целевой папки. Значение, равное
+<span class="argValue">0</span>, приведет к &#8222;безусловному&#8220; выполнению файловых
+операций. Любое другое значение будет интерпретировано как <span class="argValue">0</span>.
+</dd>
+
+</dl>
+
+<p class="pageText">
+Вторая группа ключей определяет, какие именно действия нужно выполнить с найденными в
+исходной папке обновленными файлами.
+</p>
+
+<dl>
+
+<dt><span class="argName">MoveFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, обновленные
+файлы будут перемещены из исходной папки в целевую, а при равном
+<span class="argValue">0</span> &mdash; скопированы. Любое другое значение будет
+интерпретировано как <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">UploadFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, обновленные
+файлы будут загружены на заданный FTP-сервер, а при равном <span class="argValue">0</span>
+&mdash; нет. Любое другое значение будет интерпретировано как
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">ZipFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, из целевой папки
+будет создан архивный файл в формате ZIP, а при равном <span class="argValue">0</span>
+&mdash; нет. Любое другое значение будет интерпретировано как
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SendFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, архивный файл с
+целевой папкой будет отправлен на заданный адрес электронной почты, а при равном
+<span class="argValue">0</span> &mdash; нет. Любое другое значение будет интерпретировано
+как <span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+Третья группа ключей задает FTP-серевер, на который производится загрузка обновленных
+файлов, а также параметры взаимодействия с ним.
+</p>
+
+<dl>
+
+<dt><span class="argName">FTP-Server</span><strong>:</strong><span
+class="argValue">&lt;имя_сервера&gt;</span></dt>
+<dd>Имя FTP-сервера. Префикс; &#8222;ftp://&#8220; указывать не нужно.</dd>
+
+<dt><span class="argName">FTP-Port</span><strong>:</strong><span
+class="argValue">&lt;порт&gt;</span></dt>
+<dd>Порт, через который устанавливается соединение. Стандартным значением является
+<span class="argValue">21</span>.</dd>
+
+<dt><span class="argName">FTP-Login</span><strong>:</strong><span
+class="argValue">&lt;логин&gt;</span></dt>
+<dd>Логин (имя пользователя).</dd>
+
+<dt><span class="argName">FTP-Password</span><strong>:</strong><span
+class="argValue">&lt;пароль&gt;</span></dt>
+<dd>Пароль пользователя.</dd>
+
+<dt><span class="argName">FTP-Root</span><strong>:</strong><span
+class="argValue">&lt;имя_папки&gt;</span></dt>
+<dd>Корневая папка на сервере, в которую необходимо загрузить файлы из целевой папки
+на локальном компьютере (с сохранением ее структуры).</dd>
+
+<dt><span class="argName">FTP-UsePassiveMode</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, будет
+использован так называемый пассивный режим работы с сервером, а при равном
+<span class="argValue">0</span> &mdash; обычный. Любое другое значение будет
+интерпретировано как <span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+Четвертая группа ключей задает параметры SMTP-соединения, используемого для отправки
+ZIP-архива с целевой папкой на заданный адрес электронной почты.
+</p>
+
+<dl>
+
+<dt><span class="argName">SMTP-Enable</span></dt>
+<dd>Разрешить использование SMTP. Значение этого ключа игнорируется, поэтому указывать
+его не имеет смысла.</dd>
+
+<dt><span class="argName">SMTP-From</span><strong>:</strong><span
+class="argValue">&lt;адрес_отправителя&gt;</span></dt>
+<dd>Адрес электронной почты отправителя письма.</dd>
+
+<dt><span class="argName">SMTP-MailTo</span><strong>:</strong><span
+class="argValue">&lt;адрес_получателя&gt;</span></dt>
+<dd>Адрес электронной почты получателя письма.</dd>
+
+<dt><span class="argName">SMTP-Subject</span><strong>:</strong><span
+class="argValue">&lt;тема_письма&gt;</span></dt>
+<dd>Тема письма. Если в ней содержатся пробелы, то значение данного ключа необходимо
+заключить в кавычки; в противном случае, их использование является допустимым, но не
+обязательным.</dd>
+
+<dt><span class="argName">SMTP-Host</span><strong>:</strong><span
+class="argValue">&lt;имя_сервера&gt;</span></dt>
+<dd>Имя SMTP-сервра, который необходимо использовать для отправки письма.</dd>
+
+<dt><span class="argName">SMTP-Port</span><strong>:</strong><span
+class="argValue">&lt;порт&gt;</span></dt>
+<dd>Порт, через который устанавливается соединение. Стандартным значением является
+<span class="argValue">25</span>.</dd>
+
+<dt><span class="argName">SMTP-Authentication</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
+<dd>Значение данного ключа определяет метод аутентификации, используемый при доступе к
+серверу. <span class="argValue">0</span> соответствует отсутствию аутентификации;
+<span class="argValue">1</span> &mdash; методу CRAM-MD5;
+<span class="argValue">2</span> &mdash; методу Login;
+<span class="argValue">3</span> &mdash; методу Plain;
+<span class="argValue">4</span> &mdash; методу NTLM. Любое другое значение будет
+интерпретировано как <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SMTP-UserName</span><strong>:</strong><span
+class="argValue">&lt;пользователь&gt;</span></dt>
+<dd>Имя пользователя (при использовании аутентификации).</dd>
+
+<dt><span class="argName">SMTP-Password</span><strong>:</strong><span
+class="argValue">&lt;пароль&gt;</span></dt>
+<dd>Пароль пользователя (при использовании аутентификации).</dd>
+
+<dt><span class="argName">SMTP-UseSSL</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>При значении этого ключа, равном <span class="argValue">1</span>, для соединения с
+сервером будет использоваться так называемый &#8222;протокол защищенных сокетов&#8220;,
+который гарантирует безопасную передачу данных по сети, комбинируя криптографическую
+систему с открытым ключом и блочное шифрование данных. При значении, равном
+<span class="argValue">0</span>, будет использоваться обычный SMTP-протокол. Любое
+другое значение будет интерпретировано как <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SMTP-CharSet</span><strong>:</strong><span
+class="argValue">&lt;набор_символов&gt;</span></dt>
+<dd>Кодировка тела письма (например, <span class="argValue">&quot;windows-1251&quot;</span>),
+которая будет указана в соответствующем SMTP-заголовке.</dd>
+
+</dl>
+
+<p class="pageText">
+Пятая группа ключей задает параметры создания ZIP-архива с целевой папкой.
+</p>
+
+<dl>
+
+<dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3&gt;</span></dt>
+<dd>Степень сжатия архива. <span class="argValue">0</span> означает отсутствие сжатия;
+<span class="argValue">1</span> &mdash; быстрейшее сжатие;
+<span class="argValue">2</span> &mdash; сжатие по умолчанию (оптимальое по соотношению
+скорости и степени); <span class="argValue">3</span> &mdash; максимальное сжатие. Любое
+другое значение будет интерпретировано как <span class="argValue">2</span>.</dd>
+
+<dt><span class="argName">ZIP-Encryption</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>Метод шифрования архива. <span class="argValue">0</span> означает отсутствие
+шифрования, а <span class="argValue">1</span> &mdash; стандартное шифрование,
+предусмотренное алгоритмом ZIP. Любое другое значение будет интерпретировано как
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">ZIP-Password</span><strong>:</strong><span
+class="argValue">&lt;пароль&gt;</span></dt>
+<dd>Пароль на зашифрованный архив.</dd>
+
+</dl>
+
+<p class="pageText">
+Шестая и последняя группа ключей задает различные общие параметры.
+</p>
+
+<dl>
+
+<dt><span class="argName">Font-FaceName</span><strong>:</strong><span
+class="argValue">&lt;имя_шрифта&gt;</span></dt>
+<dd>Имя шрифта, который будет использоваться окнами приложения. Значение этого ключа
+используется только в том случае, если задан также и ключ
+<span class="argName">Font-PointSize</span>, имеющий при этом корректное числовое
+значение.</dd>
+
+<dt><span class="argName">Font-PointSize</span><strong>:</strong><span
+class="argValue">&lt;размер_щрифта&gt;</span></dt>
+<dd>Размер шрифта (в пунктах), который будет использоваться окнами приложения.
+Значение этого ключа используется только в том случае, если задан также и ключ
+<span class="argName">Font-FaceName</span>.</dd>
+
+<dt><span class="argName">ResponseFile</span><strong>:</strong><span
+class="argValue">&lt;имя_файла&gt;</span></dt>
+<dd>Имя текстового файла, содержащего остальные ключи командной строки для приложения.
+Если путь к файлу не указан вообще, то будет считаться, что он находится в текущей
+папке; если указан относительный путь, то будет считаться, что он указан относительно
+текущей папки. Каждая строка такого файла может содержать, как один, так и несколько
+ключей. Использование таких файлов позволяет создать неограниченное количество ярлыков,
+предоставляющих быстрый доступ к типовым сценариям использования приложения. Если
+в командной строке указан данный ключ, то все остальные ключи будут проигнорированы.</dd>
+
+<dt><span class="argName">DontSaveInput</span></dt>
+<dd>Не запоминать пользовательский ввод (как переданный через командную строку, так и
+заданный при помощи графического интерфейса). Значение этого ключа игнорируется, поэтому
+указывать его не имеет смысла.</dd>
+
+</dl>
+
+<p class="pageText">
+На данный момент использование ключей командной строки не автоматизирует полностью
+работу приложения, а только подставляет указанные параметры в соответствующие элементы
+управления, позволяя максимально ускорить работу пользователя при наличии типовых
+сценариев поиска и обработки обновленных файлов. Каждый из ключей может использоваться
+независимо, если это не было оговорено иначе (как в случае с ключами
+<span class="argName">Font-FaceName</span> и <span class="argName">Font-PointSize</span>).
+</p>
+
+<p class="pageText">
+Ключи командной строки в любом случае имеют больший приоритет, чем соответствующие
+настройки, хранящиеся в системном реестре. Например, если командная строка содержит
+ключ <span class="argName">SourceDir-Recurce</span>, имеющий некорректное для него
+значение <span class="argValue">4</span>, а соответствующий параметр в системном
+реестре имеет корректное значение <span class="argValue">0</span>, окончательным
+&#8222;результатом&#8220; будет <span class="argValue">1</span>, как интерпретация
+значения ключа командной строки.
+</p>
+
+<h1 class="subTopic">История версий</h1>
+
+<ul style="text-align: justify; margin-right: 2pt;">
 
 <li><strong>1.2.3920</strong> (16.10.2007)<br>
 Добавлена возможность задавать параметры архивации обновленных файлов: степень
@@ -248,19 +555,47 @@ Windows 2000/XP). Немного &#8222;улучшено&#8220; системное меню.
 
 </ul>
 
+<h1 class="subTopic">UpdateIt! на Google Code</h1>
+
 <p class="pageText">
-<strong>Планы на будущее:</strong>
+Начиная с декабря 2007 года, проект UpdateIt!, помимо &#8222;родного&#8220; сайта, размещен
+также и на <a href="http://code.google.com/">Google Code</a>; его главная страница доступна
+по адресу <a href="http://update-it.googlecode.com/">http://update-it.googlecode.com</a>.
+Там можно найти как последние &#8222;опытные сборки&#8220; (development builds), так и зеркало
+репозитория <a href="http://subversion.tigris.org/">Subversion</a> с последними ревизиями
+исходных текстов проекта. Для анонимного доступа на чтение к этому зеркалу и получения
+локальных копий всех файлов, необходимых для самостоятельной сборки, необходимо выполнить
+следующие действия:
 </p>
 
-<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
-<li>сохранение &#8222;истории&#8220; исходных и целевых папок;</li>
-<li>сохранение &#8222;истории&#8220; адресов отправителя и получателя письма.</li>
-</ul>
+<ol style="text-align: justify; margin-top: 0pt; margin-right: 2pt;">
+<li style="margin-top: 4pt;">Создать где-либо в файловой системе новую папку, назвав ее,
+например, <span class="winText">GoogleCode</span>.</li>
+<li style="margin-top: 4pt;">Перейти в эту папку в командной строке и последовательно выполнить
+команды
+<pre style="margin-left: 0pt; margin-right: 0pt;
+margin-top: 4pt;">svn checkout http://repositorium.googlecode.com/svn/trunk/ Repository
+svn checkout http://update-it.googlecode.com/svn/trunk/ UpdateIt</pre>
+</li>
+</ol>
+
+<p class="pageText">
+После этого, для сборки проекта достаточно открыть файл
+<span class="winText">UpdateIt71.sln</span> из папки
+<span class="winText">GoogleCode\UpdateIt</span> в среде Microsoft Visual Studio .NET 2003,
+сделать UpdateIt &#8222;стартовым проектом&#8220; и выполнить команду
+<span class="winText">Build Solution</span>. Полностью автоматизированную сборку проекта и
+его дистрибутива можно выполнить при помощи утилиты
+<a href="http://nant.sourceforge.net/">NAnt</a>, передав ей на вход файл
+<span class="winText">UpdateIt71.build</span> &mdash; выполнять соответствующую команду
+нужно из Visual Studio .NET 2003 Command Prompt, предварительно перейдя в папку
+<span class="winText">GoogleCode\UpdateIt</span>.
+</p>
 
 <hr width=100% size=1 noshade>
 
 <p class="copyrightNotice">
-Авторские&nbsp;права&nbsp;&copy;&nbsp;2002&mdash;2007&nbsp;И.Зарецкий
+Авторские&nbsp;права&nbsp;&copy;&nbsp;2002&mdash;2008&nbsp;И.Зарецкий
 </p>
 
 </body>

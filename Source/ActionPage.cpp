@@ -48,7 +48,7 @@
 #include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// unwanted ICL warnings
+// avoid unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant
@@ -89,9 +89,9 @@ m_nAction(COPY_FILES),
 m_nUpload(BST_UNCHECKED),
 m_nZip(BST_UNCHECKED),
 m_nSend(BST_UNCHECKED),
-m_nFtpPort(21),
+m_nFtpPort(INTERNET_DEFAULT_FTP_PORT),
 m_fPassive(FALSE),
-m_nSmtpPort(25)
+m_nSmtpPort(IPPORT_SMTP)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 
@@ -109,7 +109,7 @@ m_nSmtpPort(25)
 	}
 
 	// SMTP Settings
-	if (m_fCanSend)
+	if (m_nSend == BST_CHECKED)
 	{
 		InitSmtpSettings(pApp);
 	}
@@ -261,20 +261,23 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 	}
 
 	// FTP settings
-	DDX_Text(pDX, IDC_EDIT_SERVER, m_strServer);
-	DDV_MinMaxChars(pDX, m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
-	DDX_Text(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort);
-	DDV_MinMaxInt(pDX, m_nFtpPort, 1, SHRT_MAX);
-	DDX_Text(pDX, IDC_EDIT_LOGIN, m_strLogin);
-	DDV_MaxChars(pDX, m_strLogin, MAX_FTP_LOGIN_LENGTH);
-	DDX_Text(pDX, IDC_EDIT_PASSWORD, m_strPassword);
-	DDV_MaxChars(pDX, m_strPassword, MAX_FTP_PASSWORD_LENGTH);
-	DDX_Text(pDX, IDC_EDIT_ROOT, m_strRoot);
-	DDV_MaxChars(pDX, m_strRoot, _MAX_PATH);
-	DDX_Check(pDX, IDC_CHECK_PASSIVE, m_fPassive);
+	if (m_nUpload == BST_CHECKED)
+	{
+		DDX_Text(pDX, IDC_EDIT_SERVER, m_strServer);
+		DDV_MinMaxChars(pDX, m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort);
+		DDV_MinMaxInt(pDX, m_nFtpPort, INTERNET_INVALID_PORT_NUMBER + 1, INTERNET_MAX_PORT_NUMBER_VALUE);
+		DDX_Text(pDX, IDC_EDIT_LOGIN, m_strLogin);
+		DDV_MaxChars(pDX, m_strLogin, MAX_FTP_LOGIN_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_PASSWORD, m_strPassword);
+		DDV_MaxChars(pDX, m_strPassword, MAX_FTP_PASSWORD_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_ROOT, m_strRoot);
+		DDV_MaxChars(pDX, m_strRoot, _MAX_PATH);
+		DDX_Check(pDX, IDC_CHECK_PASSIVE, m_fPassive);
+	}
 
 	// SMTP settings
-	if (m_fCanSend)
+	if (m_nSend == BST_CHECKED)
 	{
 		DDX_Text(pDX, IDC_EDIT_FROM, m_strFrom);
 		DDV_MinMaxChars(pDX, m_strFrom, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
@@ -285,7 +288,7 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 		DDX_Text(pDX, IDC_EDIT_HOST, m_strHost);
 		DDV_MinMaxChars(pDX, m_strHost, MIN_SMTP_HOST_LENGTH, MAX_SMTP_HOST_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_PORT, m_nSmtpPort);
-		DDV_MinMaxInt(pDX, m_nSmtpPort, 1, USHRT_MAX);
+		DDV_MinMaxInt(pDX, m_nSmtpPort, INTERNET_INVALID_PORT_NUMBER + 1, INTERNET_MAX_PORT_NUMBER_VALUE);
 		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
 		DDV_MaxChars(pDX, m_strBody, MAX_EMAIL_BODY_LENGTH);
 	}
@@ -303,13 +306,13 @@ void CActionPage::OnCheckUpload(void)
 		ASSERT_VALID(pApp);
 
 		// restore the most recently saved settings
-		SetDlgItemText(IDC_EDIT_SERVER, pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_SERVER));
-		SetDlgItemInt(IDC_EDIT_FTP_PORT, pApp->GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PORT, 21), FALSE);
-		SetDlgItemText(IDC_EDIT_LOGIN, pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_LOGIN));
-		SetDlgItemText(IDC_EDIT_PASSWORD, pApp->GetProfilePassword(SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD));
-		SetDlgItemText(IDC_EDIT_ROOT, pApp->GetProfileString(SZ_REGK_FTP, SZ_REGV_FTP_ROOT));
-		UINT fuCheck = pApp->GetProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, FALSE) ? BST_CHECKED : BST_UNCHECKED;
-		CheckDlgButton(IDC_CHECK_PASSIVE, fuCheck);
+		InitFtpSettings(pApp);
+		SetDlgItemText(IDC_EDIT_SERVER, m_strServer);
+		SetDlgItemInt(IDC_EDIT_FTP_PORT, m_nFtpPort);
+		SetDlgItemText(IDC_EDIT_LOGIN, m_strLogin);
+		SetDlgItemText(IDC_EDIT_PASSWORD, m_strPassword);
+		SetDlgItemText(IDC_EDIT_ROOT, m_strRoot);
+		CheckDlgButton(IDC_CHECK_PASSIVE, m_fPassive);
 	}
 	EnableFtpControls(fEnable);
 }
@@ -345,15 +348,17 @@ void CActionPage::OnCheckSend(void)
 	BOOL fEnable = IsDlgButtonChecked(IDC_CHECK_SEND) == BST_CHECKED;
 	if (fEnable)
 	{
-		CWinApp* pApp = AfxGetApp();
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
 
 		// restore the most recently saved settings
-		SetDlgItemText(IDC_EDIT_FROM, pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM));
-		SetDlgItemText(IDC_EDIT_MAILTO, pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO));
-		SetDlgItemText(IDC_EDIT_SUBJECT, pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ));
-		SetDlgItemText(IDC_EDIT_HOST, pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST));
-		SetDlgItemInt(IDC_EDIT_PORT, pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, 25), FALSE);
+		InitSmtpSettings(pApp);
+		SetDlgItemText(IDC_EDIT_FROM, m_strFrom);
+		SetDlgItemText(IDC_EDIT_MAILTO, m_strTo);
+		SetDlgItemText(IDC_EDIT_SUBJECT, m_strSubject);
+		SetDlgItemText(IDC_EDIT_HOST, m_strHost);
+		SetDlgItemInt(IDC_EDIT_PORT, m_nSmtpPort);
+		SetDlgItemText(IDC_EDIT_BODY, m_strBody);
 	}
 	EnableMailControls(fEnable);
 }
@@ -412,12 +417,12 @@ void CActionPage::InitActionSettings(class CUpdateItApp* pApp)
 	m_nZip = pApp->GetConfigCheck(SZ_ARG_ACTION_ZIP, SZ_REGK_ACTION, SZ_REGV_ACTION_ZIP, BST_UNCHECKED);
 	m_fCanSend = pApp->GetConfigBool(SZ_ARG_SMTP_ENABLE, SZ_REGK_SMTP, SZ_REGV_SMTP_ENABLE, FALSE);
 
-	if (m_nZip != BST_CHECKED)
+	if (m_nZip == BST_CHECKED && m_fCanSend)
 	{
-		m_nSend = BST_UNCHECKED;
+		m_nSend = pApp->GetConfigCheck(SZ_ARG_ACTION_SEND, SZ_REGK_ACTION, SZ_REGV_ACTION_SEND, BST_UNCHECKED);
 	}
 	else {
-		m_nSend = pApp->GetConfigCheck(SZ_ARG_ACTION_SEND, SZ_REGK_ACTION, SZ_REGV_ACTION_SEND, BST_UNCHECKED);
+		m_nSend = BST_UNCHECKED;
 	}
 }
 
@@ -425,10 +430,10 @@ void CActionPage::InitFtpSettings(class CUpdateItApp* pApp)
 {
 	m_strServer = pApp->GetConfigString(SZ_ARG_FTP_SERVER, SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
 
-	m_nFtpPort = LOWORD(pApp->GetConfigInt(SZ_ARG_FTP_PORT, SZ_REGK_FTP, SZ_REGV_FTP_PORT, 21));
-	if (m_nFtpPort < 1 || m_nFtpPort > SHRT_MAX)
+	m_nFtpPort = LOWORD(pApp->GetConfigInt(SZ_ARG_FTP_PORT, SZ_REGK_FTP, SZ_REGV_FTP_PORT, INTERNET_DEFAULT_FTP_PORT));
+	if (m_nFtpPort == INTERNET_INVALID_PORT_NUMBER || m_nFtpPort > INTERNET_MAX_PORT_NUMBER_VALUE)
 	{
-		m_nFtpPort = 21;
+		m_nFtpPort = INTERNET_DEFAULT_FTP_PORT;
 	}
 
 	m_strLogin = pApp->GetConfigString(SZ_ARG_FTP_LOGIN, SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
@@ -444,10 +449,10 @@ void CActionPage::InitSmtpSettings(class CUpdateItApp* pApp)
 	m_strSubject = pApp->GetConfigString(SZ_ARG_SMTP_SUBJ, SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ);
 	m_strHost = pApp->GetConfigString(SZ_ARG_SMTP_HOST, SZ_REGK_SMTP, SZ_REGV_SMTP_HOST);
 
-	m_nSmtpPort = pApp->GetConfigInt(SZ_ARG_SMTP_PORT, SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, 25);
-	if (m_nSmtpPort < 1 || m_nSmtpPort > USHRT_MAX)
+	m_nSmtpPort = LOWORD(pApp->GetConfigInt(SZ_ARG_SMTP_PORT, SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, IPPORT_SMTP));
+	if (m_nSmtpPort == INTERNET_INVALID_PORT_NUMBER || m_nSmtpPort > INTERNET_MAX_PORT_NUMBER_VALUE)
 	{
-		m_nSmtpPort = 25;
+		m_nSmtpPort = IPPORT_SMTP;
 	}
 
 	BYTE* pbTemp = NULL;

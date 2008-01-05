@@ -16,12 +16,12 @@
 
 // stdafx.h - include file for standard system include files
 
-#if !defined(__stdafx_h)
-#define __stdafx_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__stdafx_h)
+#define __stdafx_h
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // unwanted warnings
@@ -154,6 +154,8 @@ extern bool g_fRestartInterface;
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // global helpers
+
+void DDX_Text(CDataExchange* pDX, int nIDC, WORD& value);
 
 void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars, int cMaxChars);
 

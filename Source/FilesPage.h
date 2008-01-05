@@ -16,12 +16,12 @@
 
 // FilesPage.h - interface of the CFilesPage class
 
-#if !defined(__FilesPage_h)
-#define __FilesPage_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__FilesPage_h)
+#define __FilesPage_h
 
 //! Encapsulates the "Selecting files" step of the UpdateIt! wizard.
 class CFilesPage: public CBetterPropPage
