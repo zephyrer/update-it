@@ -1,4 +1,4 @@
-/* Copyright (c) 2001-2005 by Elijah Zarezky */
+/* Copyright (c) 2001-2008 by Elijah Zarezky */
 
 BODY {
 	font-family: "Verdana", sans-serif;
@@ -48,6 +48,14 @@ P.copyrightNotice {
 	font-size: 8pt;
 	text-align: center;
 	margin-top: 0px;
+}
+
+h1.subTopic {
+	font-size: 12pt;
+	font-weight: bold;
+	margin-left: 2pt;
+	text-align: left;
+	padding-top: 4pt;
 }
 
 /* end of file */

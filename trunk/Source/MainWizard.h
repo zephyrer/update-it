@@ -16,12 +16,12 @@
 
 // MainWizard.h - interface of the CMainWizard class
 
-#if !defined(__MainWizard_h)
-#define __MainWizard_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__MainWizard_h)
+#define __MainWizard_h
 
 class CMainWizard: public CCustomPropSheet
 {

@@ -16,12 +16,12 @@
 
 // BetterPropPage.h - interface of the CBetterPropPage class
 
-#if !defined(__BetterPropPage_h)
-#define __BetterPropPage_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__BetterPropPage_h)
+#define __BetterPropPage_h
 
 #define BPP_BECAME_ACTIVE (WM_APP + 1)
 

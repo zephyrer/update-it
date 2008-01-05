@@ -16,12 +16,12 @@
 
 // AuthenticationDialog.h - interface of the CAuthenticationDialog class
 
-#if !defined(__AuthenticationDialog_h)
-#define __AuthenticationDialog_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__AuthenticationDialog_h)
+#define __AuthenticationDialog_h
 
 class CAuthenticationDialog: public CCustomDialog
 {

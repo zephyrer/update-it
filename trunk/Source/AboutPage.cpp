@@ -45,7 +45,7 @@
 #include "MainWizard.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// unwanted ICL warnings
+// avoid unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant

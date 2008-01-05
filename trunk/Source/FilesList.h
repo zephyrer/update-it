@@ -16,12 +16,12 @@
 
 // FilesList.h - interface of the CFilesList class
 
-#if !defined(__FilesList_h)
-#define __FilesList_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__FilesList_h)
+#define __FilesList_h
 
 class CFilesList: public CSortingListCtrl
 {

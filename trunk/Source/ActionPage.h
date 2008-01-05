@@ -16,12 +16,12 @@
 
 // ActionPage.h - interface of the CActionPage class
 
-#if !defined(__ActionPage_h)
-#define __ActionPage_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__ActionPage_h)
+#define __ActionPage_h
 
 //! Encapsulates the "Choosing an action" step of the UpdateIt! wizard.
 class CActionPage: public CBetterPropPage
@@ -58,7 +58,7 @@ public:
 		MOVE_FILES = 1,
 
 		// length limits
-		MIN_FTP_SERVER_LENGTH = sizeof("ftp://") + 4 - 1,
+		MIN_FTP_SERVER_LENGTH = sizeof("aa.aa") - 1,
 		MAX_FTP_SERVER_LENGTH = INTERNET_MAX_URL_LENGTH,
 		MAX_FTP_LOGIN_LENGTH = 64,
 		MAX_FTP_PASSWORD_LENGTH = 64,
@@ -66,8 +66,8 @@ public:
 		MAX_EMAIL_ADDRESS_LENGTH = _MAX_PATH,
 		MAX_EMAIL_SUBJECT_LENGTH = 80,
 		MAX_EMAIL_BODY_LENGTH = 1024,
-		MIN_SMTP_HOST_LENGTH = sizeof("a.aa") - 1,
-		MAX_SMTP_HOST_LENGTH = _MAX_PATH
+		MIN_SMTP_HOST_LENGTH = sizeof("aa.aa") - 1,
+		MAX_SMTP_HOST_LENGTH = INTERNET_MAX_HOST_NAME_LENGTH
 	};
 
 	int m_nAction;
@@ -76,7 +76,7 @@ public:
 	BOOL m_fCanSend;
 	int m_nSend;
 	CString m_strServer;
-	short m_nFtpPort;
+	INTERNET_PORT m_nFtpPort;
 	CString m_strLogin;
 	CString m_strPassword;
 	CString m_strRoot;
@@ -85,7 +85,7 @@ public:
 	CString m_strTo;
 	CString m_strSubject;
 	CString m_strHost;
-	int m_nSmtpPort;
+	INTERNET_PORT m_nSmtpPort;
 	CString m_strBody;
 	CAuthenticationDialog m_dlgAuth;
 	CZipOptionsDialog m_dlgZipOpts;

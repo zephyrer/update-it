@@ -16,12 +16,12 @@
 
 // ProgressPage.h - interface of the CProgressPage class
 
-#if !defined(__ProgressPage_h)
-#define __ProgressPage_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__ProgressPage_h)
+#define __ProgressPage_h
 
 #if defined(__INTEL_COMPILER)
 // remark #444: destructor for base class is not virtual

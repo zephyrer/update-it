@@ -16,12 +16,12 @@
 
 // OptionsPage.h - interface of the COptionsPage class
 
-#if !defined(__OptionsPage_h)
-#define __OptionsPage_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__OptionsPage_h)
+#define __OptionsPage_h
 
 //! Encapsulates the "Setting options" step of the UpdateIt! wizard.
 class COptionsPage: public CBetterPropPage

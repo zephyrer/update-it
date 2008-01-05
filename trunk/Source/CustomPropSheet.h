@@ -17,12 +17,12 @@
 
 // CustomPropSheet.h - interface of the CCustomPropSheet class
 
-#if !defined(__CustomPropSheet_h)
-#define __CustomPropSheet_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__CustomPropSheet_h)
+#define __CustomPropSheet_h
 
 #define PSM_RESIZE_PAGE (WM_APP + 2)
 

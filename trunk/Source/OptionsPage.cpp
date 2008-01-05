@@ -50,7 +50,7 @@
 #include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// unwanted ICL warnings
+// avoid unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // warning #68: integer conversion resulted in a change of sign

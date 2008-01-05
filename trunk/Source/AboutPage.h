@@ -16,12 +16,12 @@
 
 // AboutPage.h - interface of the CAboutPage class
 
-#if !defined(__AboutPage_h)
-#define __AboutPage_h
-
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
+
+#if !defined(__AboutPage_h)
+#define __AboutPage_h
 
 //! Encapsulates the "Weclome!" step of the UpdateIt! wizard.
 class CAboutPage: public CBetterPropPage
