@@ -100,6 +100,7 @@ using std::max;
 #pragma warning(push)
 #include "../../Repository/ZipArchive/Source/ZipArchive.h"
 #pragma warning(pop)
+#include "../../Repository/AfxGadgets/Source/ddxv.h"
 #include "../../Repository/AfxGadgets/Source/SortingListCtrl.h"
 #include "../../Repository/AfxGadgets/Source/WinCrypto.h"
 #include "../../Repository/AfxGadgets/Source/Win32Error.h"
@@ -154,8 +155,6 @@ extern bool g_fRestartInterface;
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // global helpers
-
-void DDX_Text(CDataExchange* pDX, int nIDC, WORD& value);
 
 void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars, int cMaxChars);
 
