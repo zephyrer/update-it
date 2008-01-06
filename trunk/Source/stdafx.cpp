@@ -44,57 +44,6 @@ extern "C" __int64 __cdecl _abs64(__int64 num)
 
 #endif	// _MSC_VER
 
-// ripped from %VCINSTALLDIR%\Vc7\atlmfc\src\mfc\dlgdata.cpp
-void AFX_CDECL DDX_TextWithFormat(CDataExchange* pDX, int nIDC, LPCTSTR pszFormat, UINT idsPrompt, ...)
-{
-	va_list argPtr;
-	va_start(argPtr, idsPrompt);
-
-	HWND hEditWnd = pDX->PrepareEditCtrl(nIDC);
-   ASSERT(hEditWnd != NULL);
-
-	TCHAR szText[64] = { 0 };
-
-	if (pDX->m_bSaveAndValidate)
-	{
-		void* pResult = va_arg(argPtr, void*);
-		::GetWindowText(hEditWnd, szText, _countof(szText));
-		if (_stscanf(szText, pszFormat, pResult) != 1)
-		{
-			AfxMessageBox(idsPrompt);
-			pDX->Fail();
-		}
-	}
-	else {
-		_vstprintf(szText, pszFormat, argPtr);
-		AfxSetWindowText(hEditWnd, szText);
-	}
-
-	va_end(argPtr);
-}
-
-void DDX_Text(CDataExchange* pDX, int nIDC, WORD& value)
-{
-	HWND hEditWnd = pDX->PrepareEditCtrl(nIDC);
-   ASSERT(hEditWnd != NULL);
-
-	TCHAR szText[64] = { 0 };
-
-	if (pDX->m_bSaveAndValidate)
-	{
-		::GetWindowText(hEditWnd, szText, _countof(szText));
-		if (_stscanf(szText, _T("%hu"), &value) != 1)
-		{
-			AfxMessageBox(AFX_IDP_PARSE_UINT);
-			pDX->Fail();
-		}
-	}
-	else {
-		_stprintf(szText, _T("%hu"), value);
-		AfxSetWindowText(hEditWnd, szText);
-	}
-}
-
 void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars, int cMaxChars)
 {
 	if (pDX->m_bSaveAndValidate && strValue.GetLength() < cMinChars)

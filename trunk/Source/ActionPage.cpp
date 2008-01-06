@@ -265,8 +265,7 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 	{
 		DDX_Text(pDX, IDC_EDIT_SERVER, m_strServer);
 		DDV_MinMaxChars(pDX, m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort);
-		DDV_MinMaxInt(pDX, m_nFtpPort, INTERNET_INVALID_PORT_NUMBER + 1, INTERNET_MAX_PORT_NUMBER_VALUE);
+		DDXV_Word(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
 		DDX_Text(pDX, IDC_EDIT_LOGIN, m_strLogin);
 		DDV_MaxChars(pDX, m_strLogin, MAX_FTP_LOGIN_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_PASSWORD, m_strPassword);
@@ -287,8 +286,7 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 		DDV_MaxChars(pDX, m_strSubject, MAX_EMAIL_SUBJECT_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_HOST, m_strHost);
 		DDV_MinMaxChars(pDX, m_strHost, MIN_SMTP_HOST_LENGTH, MAX_SMTP_HOST_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_PORT, m_nSmtpPort);
-		DDV_MinMaxInt(pDX, m_nSmtpPort, INTERNET_INVALID_PORT_NUMBER + 1, INTERNET_MAX_PORT_NUMBER_VALUE);
+		DDXV_Word(pDX, IDC_EDIT_PORT, m_nSmtpPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
 		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
 		DDV_MaxChars(pDX, m_strBody, MAX_EMAIL_BODY_LENGTH);
 	}
