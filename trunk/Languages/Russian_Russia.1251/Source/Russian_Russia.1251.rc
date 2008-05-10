@@ -173,9 +173,9 @@ BEGIN
                     IDC_STATIC,16,140,184,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_RSA,202,140,128,10,
                     SS_CENTERIMAGE
-    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.67 (1 августа 2007)",
+    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.76 (1 March 2008)",
                     IDC_STATIC,16,156,314,16
-    LTEXT           "Авторские права © 1998-2006 PJ Naughter",IDC_STATIC,16,
+    LTEXT           "Авторские права © 1998-2008 PJ Naughter",IDC_STATIC,16,
                     174,148,10,SS_CENTERIMAGE
     RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,174,164,10,
                     SS_CENTERIMAGE
