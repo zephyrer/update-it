@@ -18,7 +18,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-UpdateIt71.build - NAnt script to build release
+UpdateIt.2003.build - NAnt script to build release
 
 -->
 
@@ -187,7 +187,7 @@ UpdateIt71.build - NAnt script to build release
 		description="Build UpdateIt solution."
 		depends="stamp-ver">
 		<solution
-			solutionfile="UpdateIt71.sln"
+			solutionfile="UpdateIt.2003.sln"
 			configuration="${SolutionConfig}">
 		</solution>
 	</target>
@@ -319,14 +319,14 @@ UpdateIt71.build - NAnt script to build release
 		depends="rebuild-sln,build-doc,build-distr,zip-distr">
 	</target>
 
-	<!-- 'clean-sln target -->
+	<!-- 'clean-sln' target -->
 
 	<target
 		name="clean-sln"
 		description="Clean UpdateIt solution.">
 		<exec
 			program="devenv.com"
-			commandline="UpdateIt71.sln /clean &quot;${SolutionConfig}&quot;">
+			commandline="UpdateIt.2003.sln /clean &quot;${SolutionConfig}&quot;">
 		</exec>
 	</target>
 

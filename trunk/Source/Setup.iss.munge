@@ -79,7 +79,7 @@ begin
 end;
 
 [Files]
-Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
@@ -89,9 +89,9 @@ Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
 Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
 Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
 
-Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
+Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
 Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"
-Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
+Source: "..\Languages\Russian_Russia.1251\Output.2003\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
 Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"
 
 [Icons]
