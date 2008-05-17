@@ -31,7 +31,7 @@
 				TreatWChar_tAsBuiltInType="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				BrowseInformation="1"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="TRUE"
@@ -97,7 +97,7 @@
 				TreatWChar_tAsBuiltInType="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="0"/>
@@ -165,7 +165,7 @@
 				TreatWChar_tAsBuiltInType="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				BrowseInformation="1"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="TRUE"
@@ -231,7 +231,7 @@
 				TreatWChar_tAsBuiltInType="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="0"/>
@@ -287,13 +287,13 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="Source\English_USA.1252.def">
+				RelativePath=".\Source\English_USA.1252.def">
 			</File>
 			<File
-				RelativePath="Source\EntryPoint.cpp">
+				RelativePath=".\Source\EntryPoint.cpp">
 			</File>
 			<File
-				RelativePath="Source\stdafx.cpp">
+				RelativePath=".\Source\stdafx.cpp">
 				<FileConfiguration
 					Name="MBCS Debug|Win32">
 					<Tool
@@ -325,10 +325,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="Source\Resource.h">
+				RelativePath=".\Source\Resource.h">
 			</File>
 			<File
-				RelativePath="Source\stdafx.h">
+				RelativePath=".\Source\stdafx.h">
 			</File>
 		</Filter>
 		<Filter
@@ -336,7 +336,7 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
 			<File
-				RelativePath="Source\English_USA.1252.rc">
+				RelativePath=".\Source\English_USA.1252.rc">
 			</File>
 		</Filter>
 	</Files>
