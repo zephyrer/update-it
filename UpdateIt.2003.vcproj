@@ -31,7 +31,7 @@
 				EnableFunctionLevelLinking="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				BrowseInformation="1"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="FALSE"
@@ -97,7 +97,7 @@
 				EnableFunctionLevelLinking="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="FALSE"
 				DebugInformationFormat="0"/>
@@ -162,7 +162,7 @@
 				EnableFunctionLevelLinking="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				BrowseInformation="1"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="FALSE"
@@ -226,7 +226,7 @@
 				EnableFunctionLevelLinking="TRUE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="3"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="FALSE"
 				DebugInformationFormat="0"/>
@@ -278,331 +278,43 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm">
 			<File
-				RelativePath="Source\AboutPage.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\AboutPage.cpp">
 			</File>
 			<File
-				RelativePath="Source\ActionPage.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\ActionPage.cpp">
 			</File>
 			<File
 				RelativePath=".\Source\AuthenticationDialog.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="Source\BetterPropPage.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\BetterPropPage.cpp">
 			</File>
 			<File
 				RelativePath=".\Source\CustomDialog.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="Source\CustomPropSheet.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\CustomPropSheet.cpp">
 			</File>
 			<File
-				RelativePath="Source\FilesList.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\FilesList.cpp">
 			</File>
 			<File
-				RelativePath="Source\FilesPage.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\FilesPage.cpp">
 			</File>
 			<File
-				RelativePath="Source\MainWizard.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\MainWizard.cpp">
 			</File>
 			<File
-				RelativePath="Source\OptionsPage.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\OptionsPage.cpp">
 			</File>
 			<File
-				RelativePath="Source\ProgressPage.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\ProgressPage.cpp">
 			</File>
 			<File
 				RelativePath=".\Source\ProgressPageBase.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="Source\stdafx.cpp">
+				RelativePath=".\Source\stdafx.cpp">
 				<FileConfiguration
 					Name="MBCS Debug|Win32">
 					<Tool
@@ -629,68 +341,20 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="Source\UpdateItApp.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
+				RelativePath=".\Source\UpdateItApp.cpp">
 			</File>
 			<File
 				RelativePath=".\Source\ZipOptionsDialog.cpp">
-				<FileConfiguration
-					Name="MBCS Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="MBCS Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Unicode Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc">
 			<File
-				RelativePath="Source\AboutPage.h">
+				RelativePath=".\Source\AboutPage.h">
 			</File>
 			<File
-				RelativePath="Source\ActionPage.h">
+				RelativePath=".\Source\ActionPage.h">
 			</File>
 			<File
 				RelativePath=".\Source\Arguments.h">
@@ -699,28 +363,28 @@
 				RelativePath=".\Source\AuthenticationDialog.h">
 			</File>
 			<File
-				RelativePath="Source\BetterPropPage.h">
+				RelativePath=".\Source\BetterPropPage.h">
 			</File>
 			<File
 				RelativePath=".\Source\CustomDialog.h">
 			</File>
 			<File
-				RelativePath="Source\CustomPropSheet.h">
+				RelativePath=".\Source\CustomPropSheet.h">
 			</File>
 			<File
-				RelativePath="Source\FilesList.h">
+				RelativePath=".\Source\FilesList.h">
 			</File>
 			<File
-				RelativePath="Source\FilesPage.h">
+				RelativePath=".\Source\FilesPage.h">
 			</File>
 			<File
-				RelativePath="Source\MainWizard.h">
+				RelativePath=".\Source\MainWizard.h">
 			</File>
 			<File
-				RelativePath="Source\OptionsPage.h">
+				RelativePath=".\Source\OptionsPage.h">
 			</File>
 			<File
-				RelativePath="Source\ProgressPage.h">
+				RelativePath=".\Source\ProgressPage.h">
 			</File>
 			<File
 				RelativePath=".\Source\ProgressPageBase.h">
@@ -729,13 +393,13 @@
 				RelativePath=".\Source\Registry.h">
 			</File>
 			<File
-				RelativePath="Source\Resource.h">
+				RelativePath=".\Source\Resource.h">
 			</File>
 			<File
-				RelativePath="Source\stdafx.h">
+				RelativePath=".\Source\stdafx.h">
 			</File>
 			<File
-				RelativePath="Source\UpdateItApp.h">
+				RelativePath=".\Source\UpdateItApp.h">
 			</File>
 			<File
 				RelativePath=".\Source\ZipOptionsDialog.h">
@@ -745,28 +409,28 @@
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
 			<File
-				RelativePath="Source\BinRes\AppIcon.ico">
+				RelativePath=".\Source\BinRes\AppIcon.ico">
 			</File>
 			<File
-				RelativePath="Source\BinRes\FileCopy.avi">
+				RelativePath=".\Source\BinRes\FileCopy.avi">
 			</File>
 			<File
-				RelativePath="Source\BinRes\FileDelete.avi">
+				RelativePath=".\Source\BinRes\FileDelete.avi">
 			</File>
 			<File
-				RelativePath="Source\BinRes\FileMove.avi">
+				RelativePath=".\Source\BinRes\FileMove.avi">
 			</File>
 			<File
-				RelativePath="Source\BinRes\FileSend.avi">
+				RelativePath=".\Source\BinRes\FileSend.avi">
 			</File>
 			<File
-				RelativePath="Source\BinRes\FileTrash.avi">
+				RelativePath=".\Source\BinRes\FileTrash.avi">
 			</File>
 			<File
-				RelativePath="Source\BinRes\Move2.avi">
+				RelativePath=".\Source\BinRes\Move2.avi">
 			</File>
 			<File
-				RelativePath="Source\UpdateIt.manifest">
+				RelativePath=".\Source\UpdateIt.manifest">
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -793,24 +457,24 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="Source\UpdateIt.rc">
+				RelativePath=".\Source\UpdateIt.rc">
 			</File>
 			<File
-				RelativePath="Source\BinRes\ZIPPING.AVI">
+				RelativePath=".\Source\BinRes\ZIPPING.AVI">
 			</File>
 		</Filter>
 		<Filter
 			Name="Setup Files"
 			Filter="iss">
 			<File
-				RelativePath="Source\Setup.iss">
+				RelativePath=".\Source\Setup.iss">
 			</File>
 		</Filter>
 		<Filter
 			Name="License Files"
 			Filter="rtf">
 			<File
-				RelativePath="Source\ApacheLicense.rtf">
+				RelativePath=".\Source\ApacheLicense.rtf">
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -841,7 +505,7 @@
 			Name="Help Files"
 			Filter="html;css;hhp">
 			<File
-				RelativePath="HTML\styles.css">
+				RelativePath=".\HTML\styles.css">
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -868,7 +532,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="HTML\update_it.html">
+				RelativePath=".\HTML\update_it.html">
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -895,7 +559,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="HTML\UpdateIt.hhp">
+				RelativePath=".\HTML\UpdateIt.hhp">
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -925,7 +589,7 @@
 				Name="images"
 				Filter="gif;jpg">
 				<File
-					RelativePath="HTML\images\step_0.gif">
+					RelativePath=".\HTML\images\step_0.gif">
 					<FileConfiguration
 						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
@@ -952,7 +616,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="HTML\images\step_1.gif">
+					RelativePath=".\HTML\images\step_1.gif">
 					<FileConfiguration
 						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
@@ -979,7 +643,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="HTML\images\step_2.gif">
+					RelativePath=".\HTML\images\step_2.gif">
 					<FileConfiguration
 						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
@@ -1006,7 +670,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="HTML\images\step_3.gif">
+					RelativePath=".\HTML\images\step_3.gif">
 					<FileConfiguration
 						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
@@ -1033,7 +697,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="HTML\images\texture.jpg">
+					RelativePath=".\HTML\images\texture.jpg">
 					<FileConfiguration
 						Name="MBCS Debug|Win32"
 						ExcludedFromBuild="TRUE">
