@@ -110,6 +110,7 @@
 #define IDC_TEXT_ZIP_PASSWORD           1057
 #define IDC_EDIT_ZIP_PASSWORD           1058
 #define IDC_BUTTON_ZIP_OPTIONS          1059
+#define IDC_COMBO_ZIP_METHOD            1060
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
