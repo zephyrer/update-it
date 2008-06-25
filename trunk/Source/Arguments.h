@@ -80,6 +80,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // ZIPping related arguments
 
+#define SZ_ARG_ZIP_METHOD _T("ZIP-Method")
 #define SZ_ARG_ZIP_COMPRESSION _T("ZIP-Compression")
 #define SZ_ARG_ZIP_ENCRYPTION _T("ZIP-Encryption")
 #define SZ_ARG_ZIP_PASSWORD _T("ZIP-Password")

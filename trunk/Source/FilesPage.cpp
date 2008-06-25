@@ -416,13 +416,18 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 					
 					FILE_DATA* pData = new FILE_DATA;
 					
-					// name
+					// name and extension
 					CString strNameExt = finder.GetFileName();
 					int iLastDot = strNameExt.ReverseFind(_T('.'));
-					_tcscpy(pData->szName, strNameExt.Left(iLastDot));
-					
-					// extension
-					_tcscpy(pData->szExt, strNameExt.Mid(iLastDot + 1));
+					if (iLastDot > 0)
+					{
+						_tcscpy(pData->szName, strNameExt.Left(iLastDot));
+						_tcscpy(pData->szExt, strNameExt.Mid(iLastDot + 1));
+					}
+					else {
+						_tcscpy(pData->szName, strNameExt);
+						memset(pData->szExt, 0, sizeof(pData->szExt));
+					}
 					
 					// relative path
 					CString strPath = finder.GetFilePath();
