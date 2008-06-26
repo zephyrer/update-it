@@ -142,7 +142,7 @@ Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: 
 
 [Files]
 Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
-Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
 Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangEn
@@ -195,7 +195,7 @@ Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateI
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
+Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.0419.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt71.sln"; Components: sources

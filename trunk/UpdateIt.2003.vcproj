@@ -559,7 +559,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\HTML\UpdateIt.hhp">
+				RelativePath=".\HTML\update_it_eng.html">
+			</File>
+			<File
+				RelativePath=".\HTML\UpdateIt.0419.hhp">
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
 					ExcludedFromBuild="TRUE">
