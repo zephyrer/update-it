@@ -1,0 +1,366 @@
+<!doctype html public "-//w3c//dtd html 4.01 transitional//en">
+
+<html>
+
+<!-- page header -->
+
+<head>
+
+<meta name="autor" content="Elijah Zarezky">
+<meta name="description" content="UpdateIt! project">
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1252">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<link rel="StyleSheet" type="text/css" href="./styles.css">
+
+<style type="text/css">
+IMG.updateItShot {
+	margin-left: 0pt;
+	margin-top: 2pt;
+	margin-right: 8pt;
+}
+span.argName {
+	font-weight: bold;
+	color: #990000;
+}
+span.argValue {
+	font-weight: bold;
+	color: #990099;
+}
+</style>
+
+<title>UpdateIt!</title>
+
+</head>
+
+<!-- page body -->
+
+<body>
+
+<table width=100% border=1 cellspacing=0 class="pageCaption">
+<tr><td height=37 class="pageCaption">UpdateIt!</td></tr>
+</table>
+
+<p class="pageText">
+<img src="./images/step_0.gif" width=379 height=301 align="left" border=0
+class="updateItShot"><strong>UpdateIt!</strong> is the application designed for the
+synchronization of the source folder's content  with the content of other (target) folder on
+a local computer or (and) a remote FTP server. This is wizard that I wrote to fast and
+comfortable update of my own personal website. It searches (at request &mdash; recursively)
+all files in the source folder that are modified after specified date/time. It can copy found
+files (everyone or selected) to the target folder with preservation of an initial structure
+of the subfolders. This application allows to upload all files from the updated folder (with
+preservation of its structure) to the specified FTP server, to compress this folder in the same
+ named zip-archive, to send one to the given E-mail.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step_1.gif" width=379 height=301 align="left" border=0
+class="updateItShot"><strong>Step #1</strong> is the  selection of source and target folders.
+It is required to choose a name of the  folder for searching the updated files and a name of
+the  folder where these updated files will be copied or moved. Also, it is required to
+specify the date and time  since which  files in the source folder are considered updated.
+If <span class="winText">Include subfolders</span> option is  set , the files searching will
+be carried out recursively &mdash; in the source folder and in all folders inside  it. In the
+field <span class="winText">Exclude mask(s)</span> there is possibility to type one or
+several masks of files (separated from each other by commas) which should be excluded from
+search. To delete the content of the target folder as a preliminary one it is possible to set
+<span class="winText">Cleanup this folder first</span> option (if <span class="winText">Delete
+files to Recycle Bin if possible</span> option is set files will be removed to the
+<span class="winText">Recycle Bin</span> on conditions that its usage is enabled by system
+options). Setting <span class="winText">Compare contents of the newer and existing older
+files</span> option allows to exclude from results of search those files which binary contents
+do not differ from the existing copies in the target folder.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step_2.gif" width=379 height=301 align="left" border=0
+class="updateItShot"><strong>Step #2</strong> is reviewing the list of the updated files. On
+this step you can see the list of the updated files found in the source folder. The Name, the
+extension, the relative path in the source folder, and also the date and time of the last
+modification are shown for each file. In order to remove file(s) from this list (and thereby
+to exclude them from the further processing) it is required to mark corresponding line(s) and
+to click the <span class="winText">Remove from list</span> button. Note that in this case
+files leave only the list, but still stay in the source folder.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step_3.gif" width=379 height=301 align="left" border=0
+class="updateItShot"><strong>Step #3</strong> is actions selection. On this step it is required
+to choose,  what exactly should be done with the found files. Copying or moving files to the
+target folder are obligatory actions that are chosen by means of the group
+<span class="winText">Action to perform</span> switches. Besides this, it is possible to upload
+the target folder contents (with full structure preservation) to the specified folder on a
+FTP server. For this purpose set <span class="winText">Also upload file(s) to the
+FTP server</span> option and fill the fields of <span class="winText">FTP Settings</span>
+group, having specified the address and the port of a server, as well as the login and the
+password for the access. To compress a target folder in the same named zip-archive, set
+<span class="winText">Also ZIP folder with the copied/moved file(s)</span> option. This archive
+file can be sent as an attachment to the given E-mail address. For this, set
+<span class="winText">Also send ZIPped folder via e-mail</span> option and fill fields of
+<span class="winText">Mail Settings</span> group, having specified addresses of the sender and
+the recipient, and also the SMTP-server which will be used for sending the mail. Note that this
+feature is accessible only in the case when the key
+<span class="winText">HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\SMTP</span> in the
+system registry contains DWORD named <span class="winText">Enable</span> and its value is
+different from zero.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step_4.gif" width=379 height=301 align="left" border="0"
+class="updateItShot"/><strong>Step #4</strong> is processing the files. On this step it is
+possible to watch the progress of copying (or moving) the updated files from the source folder
+into the target folder, of uploading files from the target folder to the given FTP server,
+compression of the target folder and sending  the  given archive to the E-mail address that was
+specified earlier.
+<br clear="left"/></p>
+
+<p class="pageText">
+<strong>System requirements:</strong>
+</p>
+
+<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<li>Windows 98/Me/2000/XP/2003;</li>
+<li>some free memory.</li>
+</ul>
+
+<p class="pageText">
+<strong>Plans for the future:</strong>
+</p>
+
+<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<li>preservation of source and target folders' &#8222;history&#8220;</li>
+<li>preservation of &#8222;history&#8220; of the sender's and the recipient 's of the mail
+addresses.</li>
+</ul>
+
+<h1 class="subTopic">Export/import of options</h1>
+
+<p class="pageText">
+Since version 1.0.2598, in the application there is a feature of options export/import (only
+under Windows 2000/XP/2003) which can be useful at re-installation of the operating system.
+Corresponding commands are in the system menu of the main window. Note that the export of
+options is possible at any stage of work of the application, but the import of options is
+possible only on a &#8222;zero&#8220; step (on the <span class="winText">Welcome!</span> page).
+
+<h1 class="subTopic">Command-line keys</h1>
+
+<p class="pageText">
+The first group of keys allows to set the name of a source folder and the  condition of files
+search in it, as well as the name of a target folder and parameters of work with it.
+</p>
+
+<dl>
+
+<dt><span class="argName">SourceDir-Name</span><strong>:</strong><span
+class="argValue">&lt;folder_name&gt;</span></dt>
+<dd>Full name of the source folder in which search of the updated files should be  done. If
+this name contains spaces it should be quoted; otherwise quotes' usage is acceptable, but
+isn’t obligatory.</dd>
+
+<dt><span class="argName">SourceDir-Recurce</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, the search of files
+is carried out recursively (in the source folder and all folders inside  it), and if the value
+is equal to <span class="argValue">0</span>, search is carried out only in the source folder.
+Any other value will be interpreted as <span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">SourceDir-Exclude</span><strong>:</strong><span
+class="argValue">&lt;masks_list&gt;</span></dt>
+<dd>One or  several masks of files (separated from each other by commas)  which should be
+excluded from search
+.</dd>
+
+<dt><span class="argName">TargetDir-Name</span><strong>:</strong><span
+class="argValue">&lt;folder_name&gt;</span></dt>
+<dd>Full name of the target folder  where the updated files should be  copied or moved. If
+this name contains spaces it should be quoted; otherwise quotes' usage is acceptable, but
+isn’t obligatory.</dd>
+
+<dt><span class="argName">TargetDir-CleanupFirst</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, target folder will
+be completely cleared before the  files begin being copied or moved to it, and will not if
+the value is equal to <span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">UseRecycleBin</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, files from the
+target folder will be removed to the <span class="winText">Recycle Bin</span> (if its usage
+is enabled by system options), and if the value is equal to <span class="argValue">0</span>
+files will be removed permanently. Any other value will be interpreted as
+<span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">SourceDir-WriteTime</span><strong>:</strong><span
+class="argValue">&lt;date_time&gt;</span></dt>
+<dd>This is the date and time of files' modification in the source folder after which they
+are considered updated.</dd>
+
+<dt><span class="argName">CompareContents</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span> and if the copy of
+the updated file from the source folder is available in the target folder, copying or moving
+will be carried out only in the case when binary contents of these files are different. It
+allows to carry out smart incremental updating of the target folder. The value of
+<span class="argValue">0</span> results in &#8222;unconditional&#8220; execution of file
+operations. Any other value will be interpreted as <span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+The second group of keys determines the actions that need to be performed  with the updated
+files found in the source folder.
+</p>
+
+<dl>
+
+<dt><span class="argName">MoveFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, updated files will
+be moved from the source folder to the target folder, and if the value is equal to
+<span class="argValue">0</span>, these files will be copied. Any other value will be
+interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">UploadFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, updated files will
+be uploaded to the specified FTP server and will not if the value is equal to
+<span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">ZipFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>The archive file in ZIP format will be created from a target folder if the value of this
+key equals to <span class="argValue">1</span>, and such file will be not created if the value
+equals to <span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SendFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>Archive file with the target folder will be sent to the specified e-mail address if the
+value of this key is equal to <span class="argValue">1</span>, and will be not if the value
+is equal to <span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+The third group of keys specifies the FTP server for updated files and parameters of
+interaction with it.
+</p>
+
+<dl>
+
+<dt><span class="argName">FTP-Server</span><strong>:</strong><span
+class="argValue">&lt;server_name&gt;</span></dt>
+<dd>FTP server name. The prefix &#8222;ftp://&#8220; is not necessary to specify.</dd>
+
+<dt><span class="argName">FTP-Port</span><strong>:</strong><span
+class="argValue">&lt;port_number&gt;</span></dt>
+<dd>The port  through which connection is established. Standard value is
+<span class="argValue">21</span>.</dd>
+
+<dt><span class="argName">FTP-Login</span><strong>:</strong><span
+class="argValue">&lt;login&gt;</span></dt>
+<dd>Login (user’s name on this server).</dd>
+
+<dt><span class="argName">FTP-Password</span><strong>:</strong><span
+class="argValue">&lt;password&gt;</span></dt>
+<dd>The user’s password.</dd>
+
+<dt><span class="argName">FTP-Root</span><strong>:</strong><span
+class="argValue">&lt;folder_name&gt;</span></dt>
+<dd>Root folder on a server into which it is necessary to upload files from a target folder
+on a local computer (with preservation of its structure).</dd>
+
+<dt><span class="argName">FTP-UsePassiveMode</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, the so-called
+&#8222;passive operating mode&#8220; with a server will be used, and if the value of this key
+is equal to <span class="argValue">0</span> &mdash; the usual one. Any other value will be
+interpreted as <span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+The fourth group of keys sets parameters of the SMTP connection that is used for sending
+ZIP-archive with the target folder to the specified e-mail address.
+</p>
+
+<dl>
+
+<dt><span class="argName">SMTP-Enable</span></dt>
+<dd>To enable SMTP usage. Value of this key is ignored; therefore it is no use  to specify
+it.</dd>
+
+<dt><span class="argName">SMTP-From</span><strong>:</strong><span
+class="argValue">&lt;sender’s_address&gt;</span></dt>
+<dd>It is an E-mail address of the mail sender.</dd>
+
+<dt><span class="argName">SMTP-MailTo</span><strong>:</strong><span
+class="argValue">&lt;recipient’s_address&gt;</span></dt>
+<dd>It is an E-mail address of the recipient of the mail.</dd>
+
+<dt><span class="argName">SMTP-Subject</span><strong>:</strong><span
+class="argValue">&lt;letter_subject&gt;</span></dt>
+<dd>It is à subject of the mail. If the subject contains blanks, it is necessary to put in
+quotes the value of this key; otherwise, quotes' usage is acceptable, but not obligatory.</dd>
+
+<dt><span class="argName">SMTP-Host</span><strong>:</strong><span
+class="argValue">&lt;server_name&gt;</span></dt>
+<dd>It is the name of the SMTP server which  should be used for sending the mail.</dd>
+
+<dt><span class="argName">SMTP-Port</span><strong>:</strong><span
+class="argValue">&lt;port_number&gt;</span></dt>
+<dd>It is the port through which the connection is established. Standard value is
+<span class="argValue">25</span>.</dd>
+
+<dt><span class="argName">SMTP-Authentication</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
+<dd>The Value of the this key defines the method of the authentication, that is used at the
+access to a server. <span class="argValue">0</span> corresponds to the absence of the
+authentication; <span class="argValue">1</span> &mdash; to CRAM-MD5 method;
+<span class="argValue">2</span> &mdash; to Login method; <span class="argValue">3</span>
+&mdash; to Plain method; <span class="argValue">4</span> &mdash; to NTLM method. Any other
+value will be interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SMTP-UserName</span><strong>:</strong><span
+class="argValue">&lt;user_name&gt;</span></dt>
+<dd>It is the user name (at the usage of the authentication).</dd>
+
+<dt><span class="argName">SMTP-Password</span><strong>:</strong><span
+class="argValue">&lt;password&gt;</span></dt>
+<dd>It is the user password (at the usage of the authentication).</dd>
+
+<dt><span class="argName">SMTP-UseSSL</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, the so-called
+&#8222;Secure Sockets Layer&#8220; protocol will be used for the connection with the server.
+This protocol guarantees safe data transmission on the network by means of combining
+cryptographic system with the open key and block encrypting of data. If the value is equal
+to <span class="argValue">0</span>, the usual SMTP protocol will be used. Any other value
+will be interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SMTP-CharSet</span><strong>:</strong><span
+class="argValue">&lt;character_set&gt;</span></dt>
+<dd>It is the encoding of the mail body (for example,
+<span class="argValue">&quot;windows-1251&quot;</span>) which will be specified in
+corresponding SMTP header.</dd>
+
+</dl>
+
+<hr width=100% size=1 noshade>
+
+<p class="copyrightNotice">
+Copyright&nbsp;&copy;&nbsp;2002&mdash;2008&nbsp;<a href="mailto:elijah.zarezky@gmail.com">Elijah
+Zarezky</a>, english translation by <a href="mailto:Dmitrieva@altec.ru">Alla Dmitrieva</a>
+</p>
+
+</body>
+
+</html>
+
+<!-- end of page -->

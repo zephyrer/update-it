@@ -208,7 +208,7 @@ UpdateIt.2003.build - NAnt script to build release
 		depends="clean-doc">
 		<exec
 			program="hhc.exe"
-			commandline="UpdateIt.hhp"
+			commandline="UpdateIt.0419.hhp"
 			workingdir="HTML"
 			resultproperty="HhcResult"
 			failonerror="false">
@@ -216,7 +216,7 @@ UpdateIt.2003.build - NAnt script to build release
 		<echo/>
 		<echo message="If return code was 1 it's not a failure but success!"/>
 		<if test="${HhcResult != '1'}">
-			<fail message="UpdateIt.chm compilation failed."/>
+			<fail message="UpdateIt.0419.chm compilation failed."/>
 		</if>
 	</target>
 
@@ -336,8 +336,8 @@ UpdateIt.2003.build - NAnt script to build release
 		name="clean-doc"
 		description="Delete CHM documentation.">
 		<delete
-			file="HTML\UpdateIt.chm"
-			if="${file::exists('HTML\UpdateIt.chm')}"/>
+			file="HTML\UpdateIt.0419.chm"
+			if="${file::exists('HTML\UpdateIt.0419.chm')}"/>
 	</target>
 
 	<!-- 'clean-distr' target -->
