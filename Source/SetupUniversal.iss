@@ -142,6 +142,7 @@ Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: 
 
 [Files]
 Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
@@ -189,13 +190,14 @@ Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; De
 
 Source: "..\UpdateIt.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2003.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
+Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.0419.chm"
+Name: "{group}\UpdateIt! Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"
+Name: "{group}\UpdateIt! Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt71.sln"; Components: sources
