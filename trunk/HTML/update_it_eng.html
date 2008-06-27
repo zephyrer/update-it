@@ -15,22 +15,6 @@
 
 <link rel="StyleSheet" type="text/css" href="./styles.css">
 
-<style type="text/css">
-IMG.updateItShot {
-	margin-left: 0pt;
-	margin-top: 2pt;
-	margin-right: 8pt;
-}
-span.argName {
-	font-weight: bold;
-	color: #990000;
-}
-span.argValue {
-	font-weight: bold;
-	color: #990099;
-}
-</style>
-
 <title>UpdateIt!</title>
 
 </head>
@@ -351,6 +335,250 @@ class="argValue">&lt;character_set&gt;</span></dt>
 corresponding SMTP header.</dd>
 
 </dl>
+
+<p class="pageText">
+The fifth group of keys sets the parameters of creation of ZIP-archive with a target
+folder.
+</p>
+
+<dl>
+
+<dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3&gt;</span></dt>
+<dd>It is the compression level of archive. <span class="argValue">0</span> means absence of
+compression; <span class="argValue">1</span> &mdash; the fastest compression;
+<span class="argValue">2</span> &mdash; default compression (optimal on a ratio of speed and
+size); <span class="argValue">3</span> &mdash; the maximum compression. Any other value will
+be interpreted as <span class="argValue">2</span>.</dd>
+
+<dt><span class="argName">ZIP-Encryption</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>It is the method of archive encrypting. <span class="argValue">0</span> means absence of
+encrypting, and <span class="argValue">1</span> &mdash; the standard encrypting supported by
+ZIP algorithm. Any other value will be interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">ZIP-Password</span><strong>:</strong><span
+class="argValue">&lt;password&gt;</span></dt>
+<dd>It is the password on the encrypted archive.</dd>
+
+</dl>
+
+<p class="pageText">
+Sixth and last group of keys sets various general parameters.
+</p>
+
+<dl>
+
+<dt><span class="argName">Font-FaceName</span><strong>:</strong><span
+class="argValue">&lt;font_name&gt;</span></dt>
+<dd>It is the name of a font which will be used by windows of the application. The value of
+this key is used only if the key <span class="argName">Font-PointSize</span> is specified
+and this key has a correct numeric value.</dd>
+
+<dt><span class="argName">Font-PointSize</span><strong>:</strong><span
+class="argValue">&lt;font_size&gt;</span></dt>
+<dd>It is the size (in points) of a font which will be used by windows of the application.
+The value of this key is used only if the key <span class="argName">Font-FaceName</span>
+is specified.</dd>
+
+<dt><span class="argName">ResponseFile</span><strong>:</strong><span
+class="argValue">&lt;file_name&gt;</span></dt>
+<dd>It is the name of the text file that contains other keys of the command line for the
+application. If the path to a file is not specified at all it will be considered to be in
+the current folder; if the relative path is specified it will be considered to be specified
+regarding the current folder. Each line of such file can contain one or several keys. The
+Usage of such files allows to create unlimited number of the shortcuts that give fast access
+to the typical scripts of the application use. If this key is specified in the command line
+all other keys will be ignored.
+</dd>
+
+<dt><span class="argName">DontSaveInput</span></dt>
+<dd>Not to remember the user input (either transmitted by means of the command line or set
+by means of the graphic interface). The value of this key is ignored, therefore its
+indication is not important.
+</dd>
+
+</dl>
+
+<p class="pageText">
+At present the use of keys of the command line does not automate the work of the application
+completely, it only substitutes the specified parameters into corresponding controls. It
+allows to accelerate user’s work as much as possible if typical scripts of search and
+processing of the updated files are present. Each of the keys can be used independently if
+it has not been stipulated in a different way (as in case of the keys 
+<span class="argName">Font-FaceName</span> and <span class="argName">Font-PointSize</span>).
+</p>
+
+<p class="pageText">
+In any case, the keys of the command line have a priority over the corresponding options that
+are kept at the system registry. For example, if the command line contains the key
+<span class="argName">SourceDir-Recurce</span> that has the incorrect value of 4, and the
+corresponding parameter in the system registry has the correct value of 0, the final
+&#8222;result&#8220; will be 1 as the interpretation of key value from the command line.
+</p>
+
+<h1 class="subTopic">Version history</h1>
+
+<ul style="text-align: justify; margin-right: 2pt;">
+
+<li><strong>1.3.4134</strong> (06.01.2008)<br>
+The ability to use the keys of the command line is added. the Verification of the correctness
+of the user input is improved. Some noncritical errors  are fixed. Russian-language
+localization of installer is improved a bit.
+<a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a> library is
+updated to the version 3.2.0 from the 15th of December 2007.
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library is updated to
+the version 0.9.8g from the 19th of October 2007. <font color="#FF0000">Attention: it is
+required to use <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a>
+project of revision 110 or above to build  this version from sourcess.</font></li>
+
+<li style="margin-top: 4pt;"><strong>1.2.3920</strong> (16.10.2007)<br>
+The ability to set parameters of archiving of the updated files is added: the level of
+compression and the method of encrypting. The application is rebuilt with the version 3.1.1
+of <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a> library.
+</li>
+
+<li style="margin-top: 4pt;"><strong>1.1.3870</strong> (30.08.2007)<br>
+The support of the multilingual interface was added into the application and into its
+installer (at present English and Russian languages are supported). Initially the language
+is selected during the installation, but it can be changed at any moment by means of the
+command <span class="winText">Language</span> in the system menu.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3841</strong> (01.08.2007)<br>
+The application is rebuilt with the version 3.0.2 of ZipArchive library.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3696</strong> (16.03.2007)<br>
+The ability of authentication on the SMTP server that is used for sending the mail is added;
+methods SRAM-MD5, Login, Plain and NTLM are supported. The ability to use the SSL connection
+while working with SMTP is added. The development of the project is converted under MS Visual
+C++ 7.1 SP1; <font color="#FF0000">with  this version the compatibility of the source code
+with Visual C++ 7.0 SP1 compiler is not guaranteed</font>. It is necessary to use
+<a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> project of revision
+81 or above to build  this version from sources (it is possible to download the so-called
+&#8222;universal installer&#8222; alternatively &mdash; it contains absolutely all sources
+which are necessary for independent building of the application and its installers).</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3410</strong> (18.10.2006)<br>
+The license agreement is added to the application and its source code &mdash; Apache License,
+Version 2.0. the "Universal" installer is added, it allows to choose one of possible types of
+installation (for example, with all sources necessary for the independent building of the
+application). Development of the project is converted under MS Visual C ++ 7.0 SP1;
+<font color="#FF0000">with  this version, the compatibility of the source code with Visual
+C++ 6.0 SP6 compiler is not guaranteed</font>.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3346</strong> (18.08.2006)<br>
+The ability of interaction with FTP-servers in so-called &#8222;passive mode&#8220; is added
+&mdash; via Use passive mode option on the step Choosing an action (my gratitude to
+<a href="http://rsdn.ru/Users/Profile.aspx?uid=1879">Pavel Pimenov</a> for reporting this
+issue). Authors improved the realization of compression of files in
+<a href="http://www.artpol-software.com/index_zip.html">ZIP</a> format and message sending
+using <a href="http://www.naughter.com/smtp.html">SMTP</a> protocol.
+<font color="#FF0000">Attention: it is necessary to use Repository project of revision 71 or
+above to build  this version from sources.</font></li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2800</strong> (16.07.2005)<br>
+Support for visual styles on Windows XP/2003 is added. Authors improved the realization of
+compression of files in <a href="http://www.artpol-software.com/index_zip.html">ZIP</a>
+format and message sending using using <a href="http://www.naughter.com/smtp.html">SMTP</a>
+protocol.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2711</strong> (23.04.2005)<br>
+Authors improved the realization of
+compression of files in <a href="http://www.artpol-software.com/index_zip.html">ZIP</a>
+format and message sending using using <a href="http://www.naughter.com/smtp.html">SMTP</a>
+protocol.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2598</strong> (06.01.2005)<br>
+The ability of export/import of options of the application is added (works only under Windows
+2000/XP/2003). The system menu is &#8222;improved&#8220; a bit. The author corrected some
+errors in the code that realizes the support of SMTP protocol.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2461</strong> (29.12.2004)<br>
+The end-user documentation in HTML Help format is added. <font color=#ff0000>It is insistently
+recommended to un-install the previous version  in a regular way before the installation of
+the given version.</font></li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2297</strong> (25.07.2004)<br>
+The executable file of the application is compiled with the optimization of the size.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2283</strong> (11.07.2004)<br>
+The ability to compare the contents of the updated files with their existing old copies in
+a target folder is added.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2260</strong> (20.06.2004)<br>
+Some spelling mistakes on page <span class="winText">Welcome!</span> are corrected.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2259</strong> (19.06.2004)<br>
+<a href="http://www.naughter.com/">The author</a> corrected some errors in the code that
+realizes the support of SMTP protocol (this code is used at sending the archive of the
+updated files to the specified e-mail address).</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2172</strong> (28.03.2004)<br>
+Very stupid error is corrected: this error was the reason for non-responsiveness of the
+application to system inquiries while performing file operations. The error which led to the
+incorrect restoration of the password for the access to FTP server is corrected. The ability
+of minimization of the application window is added.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2171</strong> (27.03.2004)<br>
+The column <span class="winText">Size</span> is added to the list of the updated files on
+page <span class="winText">Selecting files</span>. This column displays file sizes in bytes.
+Now in the column <span class="winText">Name</span> of this list not only file names are
+shown but also the system icons which correspond their types. The ability to sort the list
+both in ascending and descending order is added. Now the setup writes into the system
+registry default the value for file masks which should be excluded from search.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2169</strong> (25.03.2004)<br>
+The ability to set one or several masks for files which should be excluded from search is
+added. Now in the tree the node corresponding to the folder, whose name is specified in the
+input field, is automatically marked out at the opening of the dialog box of folder
+choice.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2159</strong> (15.03.2004)<br>
+The Encrypting of the password for access to a FTP-server is implemented at its preservation
+in the system registry.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.xxxx</strong> (??.??.????)<br>
+The history was not kept. Most likely, the first stable version that was suitable for
+practical use was 1.0.1646&#8230;</li>
+
+</ul>
+
+<h1 class="subTopic">UpdateIt! On Google Code</h1>
+
+<p class="pageText">
+Since December, 2007, the UpdateIt! project, is placed on
+<a href="http://code.google.com/">Google Code</a> as well. Its main page is accessible at
+<a href="http://update-it.googlecode.com/">http://update-it.googlecode.com</a>. It is
+possible to find the latest development builds as well as the mirror of
+<a href="http://subversion.tigris.org/">Subversion</a> repository with all revisions of
+project sources there. For anonymous access to reading this mirror and receiving local copies
+of all files that are required for independent building, It is necessary to perform the
+following steps.
+</p>
+
+<ol style="text-align: justify; margin-top: 0pt; margin-right: 2pt;">
+<li style="margin-top: 6pt;">Create somewhere in file system a new folder with the name
+<span class="winText">GoogleCode</span> for example.</li>
+<li style="margin-top: 4pt;">Launch Command Prompt, go to this folder and sequentially
+execute these commands:
+<pre style="margin-left: 0pt; margin-right: 0pt;
+margin-top: 4pt;">svn checkout http://repositorium.googlecode.com/svn/trunk/ Repository
+svn checkout http://update-it.googlecode.com/svn/trunk/ UpdateIt</pre>
+</li>
+</ol>
+
+<p class="pageText">
+After that, to build the project, it is enough to open the file
+<span class="winText">UpdateIt.2003.sln</span> from the folder
+<span class="winText">GoogleCode\UpdateIt</span> in Microsoft Visual Studio .NET 2003
+environment, to set UpdateIt as the startup project and then to execute
+<span class="winText">Build Solution</span> command. Completely automated building of the
+project and its distribution kits can be executed by means of utility
+<span class="winText">NAnt</span> after its assignment on an input file
+<span class="winText">UpdateIt.2003.build</span> &mdash; it is necessary to go to the
+<span class="winText">GoogleCode\UpdateIt</span> folder and then  to execute a corresponding
+command from Visual Studio .NET 2003 Command Prompt.
+</p>
 
 <hr width=100% size=1 noshade>
 
