@@ -45,7 +45,7 @@ UpdateIt.2003.build - NAnt script to build release
 		name="SolutionConfig"
 		value="${CharacterSet} ${BuildType}"/>
 
-	<!-- version numbers -->
+	<!-- version numbers and names -->
 
 	<property
 		name="VerMajor"
@@ -63,6 +63,14 @@ UpdateIt.2003.build - NAnt script to build release
 		name="SvnRev"
 		value="0"
 		overwrite="false"/>
+	<property
+		name="AppName"
+		value="unknown"
+		overwrite="false"/>
+	<property
+		name="ExeName"
+		value="unknown"
+		overwrite="false"/>
 
 	<!-- TARGETS -->
 
@@ -70,8 +78,9 @@ UpdateIt.2003.build - NAnt script to build release
 
 	<target
 		name="verify-ver"
-		description="Verify version numbers.">
-		<echo message="Verifying version numbers."/>
+		description="Verify version numbers and names.">
+		<echo message="Verifying version numbers and names..."/>
+		<echo/>
 		<if test="${VerMajor == '0'}">
 			<fail message="Major version number isn't specified."/>
 		</if>
@@ -85,14 +94,24 @@ UpdateIt.2003.build - NAnt script to build release
 			<fail message="Revision number isn't specified."/>
 		</if>
 		<echo message="Version is: ${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
+		<if test="${AppName == 'unknown'}">
+			<fail message="Application name isn't specified."/>
+		</if>
+		<if test="${ExeName == 'unknown'}">
+			<fail message="Executable name isn't specified."/>
+		</if>
+		<echo message="Application name is: ${AppName}"/>
+		<echo message="Executable name is: ${ExeName}"/>
 	</target>
 
 	<!-- 'stamp-ver' target -->
 
 	<target
 		name="stamp-ver"
-		description="Stamp version numbers."
+		description="Stamp version numbers and names."
 		depends="verify-ver">
+		<echo message="Writing version numbers and names..."/>
+		<echo/>
 		<copy
 			file="Source\UpdateIt.manifest.nant"
 			tofile="Source\UpdateIt.manifest"
@@ -103,6 +122,8 @@ UpdateIt.2003.build - NAnt script to build release
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="APP_NAME" value="${AppName}"/>
+					<token key="EXE_NAME" value="${ExeName}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -116,6 +137,8 @@ UpdateIt.2003.build - NAnt script to build release
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="APP_NAME" value="${AppName}"/>
+					<token key="EXE_NAME" value="${ExeName}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>

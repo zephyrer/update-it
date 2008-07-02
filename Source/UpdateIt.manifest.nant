@@ -2,18 +2,18 @@
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
 <assemblyIdentity
     version="@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@.@SVN_REV@"
-    processorArchitecture="X86"
-    name="Microsoft.Windows.UpdateIt"
+    processorArchitecture="x86"
+    name="Microsoft.Windows.@EXE_NAME@"
     type="win32"
 /> 
-<description>UpdateIt Application (part of the Power Gadgets collection)</description>
+<description>@APP_NAME@ Application (part of the Power Gadgets collection)</description>
 <dependency>
     <dependentAssembly>
         <assemblyIdentity
             type="win32"
             name="Microsoft.Windows.Common-Controls"
             version="6.0.0.0"
-            processorArchitecture="X86"
+            processorArchitecture="x86"
             publicKeyToken="6595b64144ccf1df"
             language="*"
         />
