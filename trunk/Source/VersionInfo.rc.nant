@@ -38,12 +38,12 @@ VS_VERSION_INFO VERSIONINFO
          BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Elijah Zarezky"
-            VALUE "FileDescription", "UpdateIt! Application Executable"
+            VALUE "FileDescription", "@APP_NAME@ Application Executable"
             VALUE "FileVersion", "@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@"
-            VALUE "InternalName", "UpdateIt"
+            VALUE "InternalName", "@EXE_NAME@"
             VALUE "LegalCopyright", "Copyright © 2002–2008 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
-            VALUE "OriginalFilename", "UpdateIt.exe"
+            VALUE "OriginalFilename", "@EXE_NAME@.exe"
             VALUE "ProductName", "Power Gadgets"
             VALUE "ProductVersion", "@VER_MAJOR@.@VER_MINOR@.0"
          END
