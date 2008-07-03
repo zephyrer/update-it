@@ -370,6 +370,14 @@ class="argValue">&lt;набор_символов&gt;</span></dt>
 
 <dl>
 
+<dt><span class="argName">ZIP-Method</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>Метод (алгоритм) сжатия архива. <span class="argValue">0</span> означает алоритм
+&#8222;Deflate&#8220;, а <span class="argValue">1</span> &mdash; алгоритм
+&#8222;BZip2&#8220;. Любое другое значение будет интерпретировано как
+<span class="argValue">0</span>. <font color="#FF0000">Внимание: этот ключ распознается
+только <strong>UpdateIt! Pro</strong>.</font></dd>
+
 <dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
 class="argValue">&lt;0|1|2|3&gt;</span></dt>
 <dd>Степень сжатия архива. <span class="argValue">0</span> означает отсутствие сжатия;
@@ -379,11 +387,14 @@ class="argValue">&lt;0|1|2|3&gt;</span></dt>
 другое значение будет интерпретировано как <span class="argValue">2</span>.</dd>
 
 <dt><span class="argName">ZIP-Encryption</span><strong>:</strong><span
-class="argValue">&lt;0|1&gt;</span></dt>
+class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
 <dd>Метод шифрования архива. <span class="argValue">0</span> означает отсутствие
-шифрования, а <span class="argValue">1</span> &mdash; стандартное шифрование,
-предусмотренное алгоритмом ZIP. Любое другое значение будет интерпретировано как
-<span class="argValue">0</span>.</dd>
+шифрования, <span class="argValue">1</span> &mdash; стандартное шифрование,
+предусмотренное алгоритмом ZIP, а <span class="argValue">2</span>,
+<span class="argValue">3</span> и <span class="argValue">4</span> &mdash; шифрованием
+методами AES-128, AES-192 и AES-256 соответственно. Любое другое значение будет
+интерпретировано как <span class="argValue">0</span>. <font color="#FF0000">Внимание:
+значения 2, 3 и 4 распознаются только <strong>UpdateIt! Pro</strong>.</font></dd>
 
 <dt><span class="argName">ZIP-Password</span><strong>:</strong><span
 class="argValue">&lt;пароль&gt;</span></dt>
