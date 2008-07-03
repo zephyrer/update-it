@@ -190,6 +190,11 @@ Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; De
 
 Source: "..\UpdateIt.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2003.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt.2003.build"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\CleanDoc.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs

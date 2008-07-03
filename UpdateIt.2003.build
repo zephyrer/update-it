@@ -44,6 +44,10 @@ UpdateIt.2003.build - NAnt script to build release
 	<property
 		name="SolutionConfig"
 		value="${CharacterSet} ${BuildType}"/>
+	<property
+		name="UpdateItPath"
+		value="."
+		readonly="true"/>
 
 	<!-- version numbers and names -->
 
@@ -65,143 +69,22 @@ UpdateIt.2003.build - NAnt script to build release
 		overwrite="false"/>
 	<property
 		name="AppName"
-		value="unknown"
-		overwrite="false"/>
+		value="UpdateIt!"
+		readonly="true"/>
 	<property
 		name="ExeName"
-		value="unknown"
-		overwrite="false"/>
+		value="UpdateIt"
+		readonly="true"/>
 
 	<!-- TARGETS -->
 
 	<!-- 'verify-ver' target -->
 
-	<target
-		name="verify-ver"
-		description="Verify version numbers and names.">
-		<echo message="Verifying version numbers and names..."/>
-		<echo/>
-		<if test="${VerMajor == '0'}">
-			<fail message="Major version number isn't specified."/>
-		</if>
-		<if test="${VerMinor == '0'}">
-			<fail message="Minor version number isn't specified."/>
-		</if>
-		<if test="${VerBuild == '0'}">
-			<fail message="Build number isn't specified."/>
-		</if>
-		<if test="${SvnRev == '0'}">
-			<fail message="Revision number isn't specified."/>
-		</if>
-		<echo message="Version is: ${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
-		<if test="${AppName == 'unknown'}">
-			<fail message="Application name isn't specified."/>
-		</if>
-		<if test="${ExeName == 'unknown'}">
-			<fail message="Executable name isn't specified."/>
-		</if>
-		<echo message="Application name is: ${AppName}"/>
-		<echo message="Executable name is: ${ExeName}"/>
-	</target>
+	<include buildfile="${UpdateItPath}\VerifyVer.build.inc"/>
 
 	<!-- 'stamp-ver' target -->
 
-	<target
-		name="stamp-ver"
-		description="Stamp version numbers and names."
-		depends="verify-ver">
-		<echo message="Writing version numbers and names..."/>
-		<echo/>
-		<copy
-			file="Source\UpdateIt.manifest.nant"
-			tofile="Source\UpdateIt.manifest"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-					<token key="SVN_REV" value="${SvnRev}"/>
-					<token key="APP_NAME" value="${AppName}"/>
-					<token key="EXE_NAME" value="${ExeName}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
-		<copy
-			file="Source\VersionInfo.rc.nant"
-			tofile="Source\VersionInfo.rc"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-					<token key="SVN_REV" value="${SvnRev}"/>
-					<token key="APP_NAME" value="${AppName}"/>
-					<token key="EXE_NAME" value="${ExeName}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
-		<touch
-			file="Source\UpdateIt.rc"
-			datetime="${datetime::now()}"/>
-		<copy
-			file="Languages\English_USA.1252\Source\VersionInfo.rc.nant"
-			tofile="Languages\English_USA.1252\Source\VersionInfo.rc"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-					<token key="SVN_REV" value="${SvnRev}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
-		<touch
-			file="Languages\English_USA.1252\Source\English_USA.1252.rc"
-			datetime="${datetime::now()}"/>
-		<copy
-			file="Languages\Russian_Russia.1251\Source\VersionInfo.rc.nant"
-			tofile="Languages\Russian_Russia.1251\Source\VersionInfo.rc"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-					<token key="SVN_REV" value="${SvnRev}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
-		<touch
-			file="Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc"
-			datetime="${datetime::now()}"/>
-		<copy
-			file="Source\Setup.iss.nant"
-			tofile="Source\Setup.iss"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
-		<copy
-			file="Source\SetupUniversal.iss.nant"
-			tofile="Source\SetupUniversal.iss"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
-	</target>
+	<include buildfile="${UpdateItPath}\StampVer.build.inc"/>
 
 	<!-- 'build-sln' target -->
 
@@ -221,46 +104,19 @@ UpdateIt.2003.build - NAnt script to build release
 		name="rebuild-sln"
 		description="Rebuild UpdateIt solution."
 		depends="clean-sln,build-sln">
+		<echo message="UpdateIt solution rebuilt."/>
 	</target>
 
-	<!-- 'build-doc' target -->
+	<!-- 'create-doc' target -->
+
+	<include buildfile="${UpdateItPath}\CreateDoc.build.inc"/>
+
+	<!-- 'create-distr' target -->
 
 	<target
-		name ="build-doc"
-		description="Create CHM documentation."
-		depends="clean-doc">
-		<exec
-			program="hhc.exe"
-			commandline="UpdateIt.0409.hhp"
-			workingdir="HTML"
-			resultproperty="HhcResult"
-			failonerror="false">
-		</exec>
-		<echo/>
-		<echo message="If return code was 1 it's not a failure but success!"/>
-		<if test="${HhcResult != '1'}">
-			<fail message="UpdateIt.0409.chm compilation failed."/>
-		</if>
-		<exec
-			program="hhc.exe"
-			commandline="UpdateIt.0419.hhp"
-			workingdir="HTML"
-			resultproperty="HhcResult"
-			failonerror="false">
-		</exec>
-		<echo/>
-		<echo message="If return code was 1 it's not a failure but success!"/>
-		<if test="${HhcResult != '1'}">
-			<fail message="UpdateIt.0419.chm compilation failed."/>
-		</if>
-	</target>
-
-	<!-- 'build-distr' target -->
-
-	<target
-		name="build-distr"
+		name="create-distr"
 		description="Create setup packages."
-		depends="build-sln,build-doc,clean-distr">
+		depends="build-sln,create-doc,clean-distr">
 		<mkdir
 			dir="Setup"
 			if="${not directory::exists('Setup')}"/>
@@ -287,7 +143,7 @@ UpdateIt.2003.build - NAnt script to build release
 	<target
 		name="zip-distr"
 		description="Create ZIPped setup packages."
-		depends="build-distr,clean-zip">
+		depends="create-distr,clean-zip">
 		<exec
 			program="7z.exe"
 			workingdir="Setup">
@@ -343,7 +199,7 @@ UpdateIt.2003.build - NAnt script to build release
 	<target
 		name="build-all"
 		description="Build entire UpdateIt project."
-		depends="build-sln,build-doc,build-distr,zip-distr">
+		depends="build-sln,create-doc,create-distr,zip-distr">
 	</target>
 
 	<!-- 'rebuild-all' target -->
@@ -351,7 +207,7 @@ UpdateIt.2003.build - NAnt script to build release
 	<target
 		name="rebuild-all"
 		description="Rebuild entire UpdateIt project."
-		depends="rebuild-sln,build-doc,build-distr,zip-distr">
+		depends="rebuild-sln,create-doc,create-distr,zip-distr">
 	</target>
 
 	<!-- 'clean-sln' target -->
@@ -367,16 +223,7 @@ UpdateIt.2003.build - NAnt script to build release
 
 	<!-- 'clean-doc' target -->
 
-	<target
-		name="clean-doc"
-		description="Delete CHM documentation.">
-		<delete
-			file="HTML\UpdateIt.0409.chm"
-			if="${file::exists('HTML\UpdateIt.0409.chm')}"/>
-		<delete
-			file="HTML\UpdateIt.0419.chm"
-			if="${file::exists('HTML\UpdateIt.0419.chm')}"/>
-	</target>
+	<include buildfile="${UpdateItPath}\CleanDoc.build.inc"/>
 
 	<!-- 'clean-distr' target -->
 
@@ -413,4 +260,3 @@ UpdateIt.2003.build - NAnt script to build release
 	</target>
 
 </project>
-
