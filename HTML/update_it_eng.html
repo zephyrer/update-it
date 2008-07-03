@@ -373,6 +373,14 @@ folder.
 
 <dl>
 
+<dt><span class="argName">ZIP-Method</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>It is the method (algorithm) used for compression. <span class="argValue">0</span> means
+&#8222;Deflate&#8220; algorithm, and <span class="argValue">1</span> &mdash;
+&#8222;BZip2&#8220; algorithm. Any other value will be interpreted as
+<span class="argValue">0</span>. <font color="#FF0000">Attention: this key is recognized
+only by <strong>UpdateIt! Pro</strong> edition.</font></dd>
+
 <dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
 class="argValue">&lt;0|1|2|3&gt;</span></dt>
 <dd>It is the compression level of archive. <span class="argValue">0</span> means absence of
@@ -382,10 +390,14 @@ size); <span class="argValue">3</span> &mdash; the maximum compression. Any othe
 be interpreted as <span class="argValue">2</span>.</dd>
 
 <dt><span class="argName">ZIP-Encryption</span><strong>:</strong><span
-class="argValue">&lt;0|1&gt;</span></dt>
+class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
 <dd>It is the method of archive encrypting. <span class="argValue">0</span> means absence of
 encrypting, and <span class="argValue">1</span> &mdash; the standard encrypting supported by
-ZIP algorithm. Any other value will be interpreted as <span class="argValue">0</span>.</dd>
+ZIP algorithm. The values of <span class="argValue">2</span>, <span class="argValue">3</span>
+and <span class="argValue">4</span> corresponds to AES-128, AES-192 and AES-256 encryption
+respectively. <font color="#FF0000">Attention: these three values will be recognized only by
+<strong>UpdateIt! Pro</strong> edition.</font> Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
 
 <dt><span class="argName">ZIP-Password</span><strong>:</strong><span
 class="argValue">&lt;password&gt;</span></dt>
