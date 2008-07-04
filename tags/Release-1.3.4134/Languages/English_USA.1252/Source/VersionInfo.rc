@@ -1,0 +1,59 @@
+// English_USA.1252 MFC extension DLL.
+// Copyright (c) 2007-2008 by Elijah Zarezky,
+// All rights reserved.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// VersionInfo.rc - version information resource
+// NOTE that this file is generated automatically by NAnt.exe
+
+#include <winver.h>
+
+VS_VERSION_INFO VERSIONINFO
+   FILEVERSION 1,3,4134,149
+   PRODUCTVERSION 1,3,0,0
+   FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+#if defined(_DEBUG)
+   FILEFLAGS VS_FF_DEBUG
+#else
+   FILEFLAGS 0x0L
+#endif   // _DEBUG
+   FILEOS VOS_NT_WINDOWS32
+   FILETYPE VFT_DLL
+   FILESUBTYPE VFT2_UNKNOWN
+   BEGIN
+      BLOCK "StringFileInfo"
+      BEGIN
+         BLOCK "040904b0"
+         BEGIN
+            VALUE "Comments", "none"
+            VALUE "CompanyName", "Elijah Zarezky"
+            VALUE "FileDescription", "English_USA.1252 library module"
+            VALUE "FileVersion", "1.3.4134"
+            VALUE "InternalName", "English_USA.1252"
+            VALUE "LegalCopyright", "Copyright © 2007-2008 by Elijah Zarezky"
+            VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
+            VALUE "OriginalFilename", "English_USA.1252.dll"
+            VALUE "ProductName", "Power Gadgets"
+            VALUE "ProductVersion", "1.3.0"
+         END
+      END
+      BLOCK "VarFileInfo"
+      BEGIN
+         VALUE "Translation", 0x409, 1200
+      END
+   END
+
+// end of file
+
+

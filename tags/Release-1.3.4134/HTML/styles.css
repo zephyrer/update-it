@@ -1,0 +1,61 @@
+/* Copyright (c) 2001-2008 by Elijah Zarezky */
+
+BODY {
+	font-family: "Verdana", sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: normal;
+	text-align: justify;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+TABLE.pageCaption {
+	border-color: #000000;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+
+TD.pageCaption {
+	font-size: 18pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	background-image: url(./images/texture.jpg);
+	background-color: #F5F5F5;
+}
+
+P {
+	font-family: "Verdana", sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: normal;
+}
+
+P.pageText {
+	text-align: justify;
+	margin-left: 2pt;
+	margin-right: 2pt;
+	margin-bottom: 2pt;
+}
+
+SPAN.winText {
+	font-family: "Tahoma", sans-serif;
+	font-weight: bold;
+}
+
+P.copyrightNotice {
+	font-size: 8pt;
+	text-align: center;
+	margin-top: 0px;
+}
+
+h1.subTopic {
+	font-size: 12pt;
+	font-weight: bold;
+	margin-left: 2pt;
+	text-align: left;
+	padding-top: 4pt;
+}
+
+/* end of file */
