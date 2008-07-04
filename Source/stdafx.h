@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,12 @@
 
 // stdafx.h - include file for standard system include files
 
+#if !defined(__stdafx_h)
+#define __stdafx_h
+
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
-
-#if !defined(__stdafx_h)
-#define __stdafx_h
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // unwanted warnings
@@ -100,7 +100,6 @@ using std::max;
 #pragma warning(push)
 #include "../../Repository/ZipArchive/Source/ZipArchive.h"
 #pragma warning(pop)
-#include "../../Repository/AfxGadgets/Source/ddxv.h"
 #include "../../Repository/AfxGadgets/Source/SortingListCtrl.h"
 #include "../../Repository/AfxGadgets/Source/WinCrypto.h"
 #include "../../Repository/AfxGadgets/Source/Win32Error.h"
@@ -152,11 +151,6 @@ struct FILE_DATA
 // shared globals
 
 extern bool g_fRestartInterface;
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-// global helpers
-
-void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars, int cMaxChars);
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // some tricks

@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,12 @@
 
 // ActionPage.h - interface of the CActionPage class
 
+#if !defined(__ActionPage_h)
+#define __ActionPage_h
+
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
-
-#if !defined(__ActionPage_h)
-#define __ActionPage_h
 
 //! Encapsulates the "Choosing an action" step of the UpdateIt! wizard.
 class CActionPage: public CBetterPropPage
@@ -51,32 +51,13 @@ protected:
 
 // attributes
 public:
-	enum
-	{
-		// action to perform
-		COPY_FILES = 0,
-		MOVE_FILES = 1,
-
-		// length limits
-		MIN_FTP_SERVER_LENGTH = sizeof("aa.aa") - 1,
-		MAX_FTP_SERVER_LENGTH = INTERNET_MAX_URL_LENGTH,
-		MAX_FTP_LOGIN_LENGTH = 64,
-		MAX_FTP_PASSWORD_LENGTH = 64,
-		MIN_EMAIL_ADDRESS_LENGTH = sizeof("a@a.aa") - 1,
-		MAX_EMAIL_ADDRESS_LENGTH = _MAX_PATH,
-		MAX_EMAIL_SUBJECT_LENGTH = 80,
-		MAX_EMAIL_BODY_LENGTH = 1024,
-		MIN_SMTP_HOST_LENGTH = sizeof("aa.aa") - 1,
-		MAX_SMTP_HOST_LENGTH = INTERNET_MAX_HOST_NAME_LENGTH
-	};
-
 	int m_nAction;
 	int m_nUpload;
 	int m_nZip;
 	BOOL m_fCanSend;
 	int m_nSend;
 	CString m_strServer;
-	INTERNET_PORT m_nFtpPort;
+	short m_nFtpPort;
 	CString m_strLogin;
 	CString m_strPassword;
 	CString m_strRoot;
@@ -85,16 +66,13 @@ public:
 	CString m_strTo;
 	CString m_strSubject;
 	CString m_strHost;
-	INTERNET_PORT m_nSmtpPort;
+	int m_nSmtpPort;
 	CString m_strBody;
 	CAuthenticationDialog m_dlgAuth;
 	CZipOptionsDialog m_dlgZipOpts;
 
 // implementation helpers
 private:
-	void InitActionSettings(class CUpdateItApp* pApp);
-	void InitFtpSettings(class CUpdateItApp* pApp);
-	void InitSmtpSettings(class CUpdateItApp* pApp);
 	void EnableFtpControls(BOOL fEnable);
 	void EnableMailControls(BOOL fEnable);
 	void ShowMailControls(BOOL fShow);

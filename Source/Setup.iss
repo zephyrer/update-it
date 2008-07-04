@@ -1,5 +1,5 @@
 ;; UpdateIt! application.
-;; Copyright (c) 2002-2008 by Elijah Zarezky,
+;; Copyright (c) 2002-2007 by Elijah Zarezky,
 ;; All rights reserved.
 
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,25 +15,25 @@
 ;; limitations under the License.
 
 ;; Setup.iss - setup script for Inno Setup compiler
-;; NOTE that this file is generated automatically by NAnt.exe
+;; NOTE that this file is generated automatically by munge.exe
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4324
+AppVerName=UpdateIt! 1.2.3920
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4324
+AppVersion=1.2.3920
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4324-setup
-VersionInfoVersion=1.4.4324
+OutputBaseFilename=UpdateIt-1.2.3920-setup
+VersionInfoVersion=1.2.3920
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -64,41 +64,39 @@ var
 	hRootHive: Integer;
 	LangsKeyName: String;
 begin
-	if (CurPageID = wpReady) then
+	if CurPageID = wpFinished then
 	begin
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
+		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
+		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
 		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
-		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
-		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
 	end;
 	Result := True;
 end;
 
 [Files]
-Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
-Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
-Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"
 
-Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
-Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Output.2003\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
-Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"
+Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\UpdateIt! Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"
-Name: "{group}\UpdateIt! Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"
+Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"

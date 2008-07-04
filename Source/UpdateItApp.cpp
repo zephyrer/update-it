@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,10 +45,9 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 #include "Registry.h"
-#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// avoid unwanted ICL warnings
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant
@@ -81,16 +80,12 @@ END_MESSAGE_MAP()
 // construction/destruction
 
 CUpdateItApp::CUpdateItApp(void):
-m_hLangDLL(NULL)
+m_hLangDLL(NULL),
+m_fHasMUI(false)
 {
 	_tzset();
 
 	m_argsParser.Parse(::GetCommandLine(), true);
-
-	if (m_argsParser.HasKey(SZ_ARG_RESPONSE_FILE))
-	{
-		ParseResponseFile();
-	}
 }
 
 CUpdateItApp::~CUpdateItApp(void)
@@ -204,95 +199,6 @@ BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time
 
 #endif	// _MFC_VER
 
-CString CUpdateItApp::GetConfigString(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
-{
-	// precondition
-	ASSERT(AfxIsValidString(pszArgName));
-	ASSERT(AfxIsValidString(pszSection));
-	ASSERT(AfxIsValidString(pszEntry));
-
-	if (!m_argsParser.HasKey(pszArgName))
-	{
-		return (GetProfileString(pszSection, pszEntry, pszDefault));
-	}
-	else {
-		return (m_argsParser.GetStringValue(pszArgName));
-	}
-}
-
-int CUpdateItApp::GetConfigInt(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault)
-{
-	// precondition
-	ASSERT(AfxIsValidString(pszArgName));
-	ASSERT(AfxIsValidString(pszSection));
-	ASSERT(AfxIsValidString(pszEntry));
-
-	int nReturn = 0;
-
-	if (!m_argsParser.GetIntValue(pszArgName, nReturn, 10))
-	{
-		nReturn = GetProfileInt(pszSection, pszEntry, nDefault);
-	}
-
-	return (nReturn);
-}
-
-int CUpdateItApp::GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault)
-{
-	// precondition
-	ASSERT(AfxIsValidString(pszArgName));
-	ASSERT(AfxIsValidString(pszSection));
-	ASSERT(AfxIsValidString(pszEntry));
-
-	int nCheck = 0;
-
-	if (!m_argsParser.HasKey(pszArgName))
-	{
-		nCheck = GetProfileInt(pszSection, pszEntry, nDefault);
-	}
-	else {
-		nCheck = BST_CHECKED;
-	}
-	if (nCheck != BST_UNCHECKED && nCheck != BST_CHECKED)
-	{
-		nCheck = nDefault;
-	}
-
-	return (nCheck);
-}
-
-CString CUpdateItApp::GetConfigPassword(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
-{
-	// precondition
-	ASSERT(AfxIsValidString(pszArgName));
-	ASSERT(AfxIsValidString(pszSection));
-	ASSERT(AfxIsValidString(pszEntry));
-
-	if (!m_argsParser.HasKey(pszArgName))
-	{
-		return (GetProfilePassword(pszSection, pszEntry, pszDefault));
-	}
-	else {
-		return (m_argsParser.GetStringValue(pszArgName));
-	}
-}
-
-BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, BOOL fDefault)
-{
-	// precondition
-	ASSERT(AfxIsValidString(pszArgName));
-	ASSERT(AfxIsValidString(pszSection));
-	ASSERT(AfxIsValidString(pszEntry));
-
-	if (!m_argsParser.HasKey(pszArgName))
-	{
-		return (GetProfileInt(pszSection, pszEntry, fDefault));
-	}
-	else {
-		return (TRUE);
-	}
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
@@ -318,8 +224,7 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	do
 	{
-		SetCurrentAfxLanguage();
-		SetCurrentLanguage();
+		m_fHasMUI = SetCurrentAfxLanguage() && SetCurrentLanguage();
 
 		CMainWizard wizMain(&ownerWindow);
 		m_pMainWnd = &ownerWindow;
@@ -403,22 +308,6 @@ bool CUpdateItApp::RegQueryLanguagePath(LPCTSTR pszValueName, LPTSTR pszDest, UL
 	return (nError == ERROR_SUCCESS && _tcslen(pszDest) > 0 && ::PathFileExists(pszDest));
 }
 
-#if defined(_DEBUG)
-
-#if (_MSC_VER == 1300)
-#define SZ_DEVENV_VER "2002"
-#elif (_MSC_VER == 1310)
-#define SZ_DEVENV_VER "2003"
-#elif (_MSC_VER == 1400)
-#define SZ_DEVENV_VER "2005"
-#elif (_MSC_VER == 1500)
-#define SZ_DEVENV_VER "2008"
-#else
-#error Unrecognized Development Environment version!
-#endif   // _MSC_VER
-
-#endif   // _DEBUG
-
 bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
 {
 	// precondition
@@ -427,30 +316,7 @@ bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
 	TCHAR szTempPath[_MAX_PATH] = { 0 };
 	if (RegQueryLanguagePath(SZ_REGV_LANG_DLL, szTempPath))
 	{
-#if defined(_DEBUG)
-		TCHAR szExeDir[_MAX_PATH] = { 0 };
-		::GetModuleFileName(AfxGetInstanceHandle(), szExeDir, _countof(szExeDir));
-		::PathRemoveFileSpec(szExeDir);
-		CString strDebugPath(::PathFindFileName(szTempPath));
-		TCHAR szLangDir[_MAX_DIR] = { 0 };
-		_tcscpy(szLangDir, strDebugPath);
-		::PathRemoveExtension(szLangDir);
-		_tcscat(szLangDir, _T("\\Output." SZ_DEVENV_VER "\\x86\\Debug"));
-#if defined(_MBCS)
-		_tcscat(szLangDir, _T("\\MBCS\\"));
-#else
-		_tcscat(szLangDir, _T("\\Unicode\\"));
-#endif   // _MBCS
-		strDebugPath.Insert(0, szLangDir);
-#if defined(UPDATE_IT_PRO)
-		strDebugPath.Insert(0, _T("..\\..\\..\\..\\..\\..\\UpdateIt\\Languages\\"));
-#else
-		strDebugPath.Insert(0, _T("..\\..\\..\\..\\Languages\\"));
-#endif   // UPDATE_IT_PRO
-		::PathCombine(pszDest, szExeDir, strDebugPath);
-#else
 		GetAbsolutePath(pszDest, szTempPath);
-#endif   // _DEBUG
 		return (true);
 	}
 	else {
@@ -466,16 +332,7 @@ bool CUpdateItApp::GetAfxLanguagePath(LPTSTR pszDest)
 	TCHAR szTempPath[_MAX_PATH] = { 0 };
 	if (RegQueryLanguagePath(NULL, szTempPath))
 	{
-#if defined(_DEBUG)
-		TCHAR szExeDir[_MAX_PATH] = { 0 };
-		::GetModuleFileName(AfxGetInstanceHandle(), szExeDir, _countof(szExeDir));
-		::PathRemoveFileSpec(szExeDir);
-		CString strRedistPath(::PathFindFileName(szTempPath));
-		strRedistPath.Insert(0, _T("..\\..\\..\\..\\Redist\\"));
-		::PathCombine(pszDest, szExeDir, strRedistPath);
-#else
 		GetAbsolutePath(pszDest, szTempPath);
-#endif   // _DEBUG
 		return (true);
 	}
 	else {
@@ -541,68 +398,6 @@ bool CUpdateItApp::SetCurrentAfxLanguage(void)
 	return (fSuccess);
 }
 
-bool CUpdateItApp::ParseResponseFile(void)
-{
-	bool fSuccess = false;
-
-	CString strArgsPath = m_argsParser.GetStringValue(SZ_ARG_RESPONSE_FILE);
-	if (!strArgsPath.IsEmpty())
-	{
-		if (::PathFindFileName(strArgsPath) == static_cast<LPCTSTR>(strArgsPath))
-		{
-			// only name is specified, e.g. -ArgumentsFile:OtherArguments.txt
-			// assume current directory in this case
-			strArgsPath.Insert(0, _T(".\\"));
-		}
-
-		if (::PathIsRelative(strArgsPath))
-		{
-			TCHAR szCurDir[_MAX_PATH] = { 0 };
-			::GetCurrentDirectory(_countof(szCurDir), szCurDir);
-			TCHAR szAbsArgsPath[_MAX_PATH] = { 0 };
-			::PathCombine(szAbsArgsPath, szCurDir, strArgsPath);
-			strArgsPath = szAbsArgsPath;
-		}
-
-		if (::PathFileExists(strArgsPath))
-		{
-			CStdioFile fileArgs;
-			CFileException err;
-
-			if (fileArgs.Open(strArgsPath, CFile::modeRead | CFile::shareExclusive, &err))
-			{
-				try
-				{
-					CString strArguments, strCurLine;
-					while (fileArgs.ReadString(strCurLine))
-					{
-						strCurLine.Trim();
-						if (!strCurLine.IsEmpty() && strCurLine[0] != _T('#'))
-						{
-							strArguments += strCurLine;
-							strArguments += _T('\x20');
-						}
-					}
-					fileArgs.Close();
-					strArguments.TrimRight();
-					m_argsParser.Parse(strArguments, true);
-					fSuccess = true;
-				}
-				catch (CFileException* pErr)
-				{
-					pErr->ReportError(MB_ICONSTOP | MB_OK);
-					pErr->Delete();
-				}
-			}
-			else {
-				err.ReportError(MB_ICONSTOP | MB_OK);
-			}
-		}
-	}
-
-	return (fSuccess);
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
 
@@ -634,6 +429,7 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 		dumpCtx << "m_hLangDLL = " << m_hLangDLL;
+		dumpCtx << "\nm_fHasMUI = " << m_fHasMUI;
 		dumpCtx << "\nm_argsParser = " << m_argsParser;
 	}
 	catch (CFileException* pXcpt)

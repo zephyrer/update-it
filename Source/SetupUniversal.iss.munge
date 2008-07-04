@@ -1,5 +1,5 @@
 ;; UpdateIt! application.
-;; Copyright (c) 2002-2008 by Elijah Zarezky,
+;; Copyright (c) 2002-2007 by Elijah Zarezky,
 ;; All rights reserved.
 
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,97 +59,41 @@ SelectLanguageTitle=Language Selection
 SelectLanguageLabel=Please select UpdateIt! language:
 
 [Code]
-function HasLangEn(): Boolean;
-begin
-	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'en');
-end;
-
-function HasLangRu(): Boolean;
-begin
-	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'ru');
-end;
-
-procedure CurPageChanged(CurPageID: Integer);
-var
-  OptionsPage: TWizardPage;
-  PageSurface: TNewNotebookPage;
-  SetupTypesCombo: TComboBox;
-begin
-  if (CurPageID = wpSelectComponents) and (ActiveLanguage() = 'ru') then
-  begin
-    OptionsPage := PageFromID(CurPageID);
-    PageSurface := OptionsPage.Surface;
-    SetupTypesCombo := TComboBox(PageSurface.Controls[2]);
-    if (SetupTypesCombo <> nil) then
-    begin
-      if (SetupTypesCombo.Items[3] <> 'Выборочная установка') then
-      begin
-        SetupTypesCombo.Items[3] := 'Выборочная установка';
-      end;
-    end;
-  end;
-end;
-
 function NextButtonClick(CurPageID: Integer): Boolean;
 var
 	hRootHive: Integer;
 	LangsKeyName: String;
 begin
-	if (CurPageID = wpReady) then
+	if (CurPageID = wpFinished) and (IsComponentSelected('mui')) then
 	begin
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
-		if (HasLangEn()) then
-		begin
-			RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
-			RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
-		end;
-		if (HasLangRu) then
-		begin
-			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
-			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
-		end;
-		if (not IsComponentSelected('mui')) then
-		begin
-			RegWriteStringValue(hRootHive, LangsKeyName, '', ActiveLanguage());
-		end
-		else begin
-			RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
-		end;
 		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
+		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
 	end;
 	Result := True;
 end;
 
 [Types]
-Name: "typical"; Description: "Typical Installation"; Languages: en
-Name: "typical"; Description: "Стандартная установка"; Languages: ru
-Name: "compact"; Description: "Compact Installation"; Languages: en
-Name: "compact"; Description: "Компактная установка"; Languages: ru
-Name: "full"; Description: "Full Installation"; Languages: en
-Name: "full"; Description: "Полная установка"; Languages: ru
+Name: "typical"; Description: "Typical Installation"
+Name: "compact"; Description: "Compact Installation"
+Name: "full"; Description: "Full Installation"
 Name: "custom"; Description: "Custom Installation"; Flags: iscustom
 
 [Components]
-Name: "core"; Description: "UpdateIt! Core Files"; Types: compact typical full custom; Flags: fixed; Languages: en
-Name: "core"; Description: "Исполняемые файлы UpdateIt!"; Types: compact typical full custom; Flags: fixed; Languages: ru
-Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom; Languages: en
-Name: "runtimes"; Description: "Библиотеки времени выполнения"; Types: typical full custom; Languages: ru
-Name: "mui"; Description: "MUI Support"; Types: typical full custom; Languages: en
-Name: "mui"; Description: "Поддержка многоязыковго интефейса"; Types: typical full custom; Languages: ru
-Name: "sources"; Description: "Source Code"; Types: full custom; Languages: en
-Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: ru
+Name: "core"; Description: "UpdateIt! Core Files"; Types: compact typical full custom; Flags: fixed
+Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom
+Name: "mui"; Description: "MUI Support"; Types: typical full custom
+Name: "sources"; Description: "Source Code"; Types: full custom
 
 [Files]
-Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
-Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
-Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
-
-Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangEn
-Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
-Source: "..\Languages\Russian_Russia.1251\Output.2003\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangRu
-Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
@@ -158,14 +102,19 @@ Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Components: runtimes
 
-Source: "..\..\Repository\AfxGadgets\AfxGadgets.2003.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: "mui"
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: "mui"
+Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: "mui"
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: "mui"
+
+Source: "..\..\Repository\AfxGadgets\AfxGadgets71.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\CodeProject\CodeProject.2003.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\CodeProject\CodeProject71.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\Naughter\Naughter.2003.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Naughter\Naughter71.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
@@ -175,29 +124,28 @@ Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sourc
 Source: "..\..\Repository\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\ZipArchive\ZipArchive.2003.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\ZipArchive\ZipArchive71.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\zlib\zlib.2003.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\zlib71.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\Languages\English_USA.1252\English_USA.1252.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\English_USA.1252\English_USA.1252.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\UpdateIt.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\UpdateIt.2003.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt71.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt71.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\UpdateIt! Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"
-Name: "{group}\UpdateIt! Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"
+Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt71.sln"; Components: sources

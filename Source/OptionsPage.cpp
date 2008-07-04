@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,10 +47,9 @@
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
 #include "Registry.h"
-#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// avoid unwanted ICL warnings
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // warning #68: integer conversion resulted in a change of sign
@@ -89,11 +88,7 @@ END_MESSAGE_MAP()
 // construction
 
 COptionsPage::COptionsPage(void):
-CBetterPropPage(IDD_PAGE_OPTIONS),
-m_nRecurse(BST_CHECKED),
-m_nCleanup(BST_CHECKED),
-m_nRecycle(BST_CHECKED),
-m_fCompare(BST_UNCHECKED)
+CBetterPropPage(IDD_PAGE_OPTIONS)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 
@@ -104,46 +99,24 @@ m_fCompare(BST_UNCHECKED)
 #endif	// _MFC_VER
 	ASSERT_VALID(pApp);
 
-	// initialize and validate initial input values
-
-	m_strSource = pApp->GetConfigString(SZ_ARG_OPTIONS_SOURCE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
-	m_nRecurse = pApp->GetConfigCheck(SZ_ARG_OPTIONS_RECURSE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
-	m_strExclude = pApp->GetConfigString(SZ_ARG_OPTIONS_EXCLUDE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
-	m_strTarget = pApp->GetConfigString(SZ_ARG_OPTIONS_TARGET, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
-
-	m_nCleanup = pApp->GetConfigCheck(SZ_ARG_OPTIONS_CLEANUP, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
+	m_strSource = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE);
+	m_nRecurse = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, BST_CHECKED);
+	m_strExclude = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE);
+	m_strTarget = pApp->GetProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET);
+	m_nCleanup = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, BST_CHECKED);
 	if (m_nCleanup == BST_CHECKED)
 	{
-		m_nRecycle = pApp->GetConfigCheck(SZ_ARG_OPTIONS_RECYCLE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_CHECKED);
+		m_nRecycle = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_UNCHECKED);
 	}
 	else {
 		m_nRecycle = BST_UNCHECKED;
 	}
-
 #if (_MFC_VER < 0x0700)
 	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileInt(SZ_REGK_TIMES, m_strSource, -1);
 #else
-	CArgsParser& argsParser = pApp->m_argsParser;
-	bool fHasWriteTime = false;
-	if (argsParser.HasKey(SZ_ARG_OPTIONS_WRITETIME))
-	{
-		fHasWriteTime = argsParser.GetTimeValue(SZ_ARG_OPTIONS_WRITETIME, m_timeWrite);
-	}
-	if (!fHasWriteTime)
-	{
-		m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1);
-	}
+	m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1);
 #endif	// _MFC_VER
-
-	m_fCompare = pApp->GetConfigCheck(SZ_ARG_OPTIONS_COMPARE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
-
-	// initial validation
-	if (!::PathFileExists(m_strSource))
-	{
-		::GetCurrentDirectory(_MAX_PATH, m_strSource.GetBuffer(_MAX_PATH));
-		m_strSource.ReleaseBuffer();
-		m_strTarget = m_strSource + _T(".Update");
-	}
+	m_fCompare = pApp->GetProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -201,19 +174,14 @@ BOOL COptionsPage::OnKillActive(void)
 	BOOL fSuccess = __super::OnKillActive();
 	if (fSuccess)
 	{
-		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
-		ASSERT_VALID(pApp);
-
-		if (!pApp->m_argsParser.HasKey(SZ_ARGV_DONT_SAVE_INPUT))
-		{
-			pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE, m_strSource);
-			pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, m_nRecurse);
-			pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE, m_strExclude);
-			pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET, m_strTarget);
-			pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, m_nCleanup);
-			pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, m_nRecycle);
-			pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, m_fCompare);
-		}
+		CWinApp* pApp = AfxGetApp();
+		pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_SOURCE, m_strSource);
+		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECURSE, m_nRecurse);
+		pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_EXCLUDE, m_strExclude);
+		pApp->WriteProfileString(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_TARGET, m_strTarget);
+		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_CLEANUP, m_nCleanup);
+		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, m_nRecycle);
+		pApp->WriteProfileInt(SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, m_fCompare);
 	}
 	return (fSuccess);
 }

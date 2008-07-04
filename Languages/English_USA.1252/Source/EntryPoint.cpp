@@ -1,5 +1,5 @@
 // English_USA.1252 MFC extension DLL.
-// Copyright (c) 2007-2008 by Elijah Zarezky,
+// Copyright (c) 2007 by Elijah Zarezky,
 // All rights reserved.
 
 // EntryPoint.cpp - library entry point

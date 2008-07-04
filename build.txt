@@ -1,5 +1,0 @@
--t:net-1.1
--D:VerMajor=1
--D:VerMinor=4
--D:VerBuild=4324
--D:SvnRev=167

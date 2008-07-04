@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,12 @@
 
 // UpdateItApp.h - interface of the CUpdateItApp class
 
+#if !defined(__UpdateItApp_h)
+#define __UpdateItApp_h
+
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
-
-#if !defined(__UpdateItApp_h)
-#define __UpdateItApp_h
 
 class CUpdateItApp: public CWinApp
 {
@@ -36,21 +36,12 @@ public:
 // operations
 public:
 	HICON LoadSmIcon(LPCTSTR pszResName);
-
 	CString GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
 	BOOL WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue);
 #if (_MFC_VER >= 0x0700)
 	__time64_t GetProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeDefault = -1);
 	BOOL WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeValue);
 #endif   // _MFC_VER
-	template <typename _Return_t>
-	_Return_t GetProfileData(LPCTSTR pszSection, LPCTSTR pszEntry, _Return_t retDefault);
-
-	CString GetConfigString(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
-	int GetConfigInt(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault = 0);
-	int GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault);
-	CString GetConfigPassword(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
-	BOOL GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, BOOL fDefault);
 
 // overridables
 public:
@@ -60,6 +51,7 @@ public:
 // attributes
 public:
 	HINSTANCE m_hLangDLL;
+	bool m_fHasMUI;
 	CArgsParser m_argsParser;
 
 // implementation helpers
@@ -70,7 +62,6 @@ private:
 	bool GetAfxLanguagePath(LPTSTR pszDest);
 	bool SetCurrentLanguage(void);
 	bool SetCurrentAfxLanguage(void);
-	bool ParseResponseFile(void);
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -79,15 +70,6 @@ public:
 	virtual void Dump(CDumpContext& dumpCtx) const;
 #endif
 };
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-// operations
-
-template <typename _Return_t>
-_Return_t CUpdateItApp::GetProfileData(LPCTSTR pszSection, LPCTSTR pszEntry, _Return_t retDefault)
-{
-	return (static_cast<_Return_t>(GetProfileInt(pszSection, pszEntry, retDefault)));
-}
 
 #endif   // __UpdateItApp_h
 

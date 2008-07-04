@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 // Portions copyright (c) 1996-1998 by Microsoft (KB Q142170).
 
@@ -28,10 +28,9 @@
 #include "CustomPropSheet.h"
 #include "Registry.h"
 #include "UpdateItApp.h"
-#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// avoid unwanted ICL warnings
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -370,11 +369,11 @@ bool CCustomPropSheet::GetFontMetrics(CString& strFaceName, WORD& wPointSize)
 	ASSERT_VALID(pApp);
 
 	// examine command line
-	strFaceName = pApp->m_argsParser.GetStringValue(SZ_ARG_FONT_FACENAME);
+	strFaceName = pApp->m_argsParser.GetStringValue(_T("Font-FaceName"));
 	if (!strFaceName.IsEmpty())
 	{
 		UINT uTemp = 0;
-		fHasFont = pApp->m_argsParser.GetUIntValue(SZ_ARG_FONT_POINTSIZE, uTemp, 10);
+		fHasFont = pApp->m_argsParser.GetUIntValue(_T("Font-PointSize"), uTemp);
 		wPointSize = LOWORD(uTemp);
 	}
 

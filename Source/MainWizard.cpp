@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,7 @@
 #include "Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// avoid unwanted ICL warnings
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -102,37 +102,39 @@ CCustomPropSheet(AFX_IDS_APP_TITLE, pOwnerWnd)
 	};
 	CHyperLink::SetColors(linkColors);
 
-	ATL::CRegKey regKeyLangs;
-	regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
-
-	int nError = ERROR_SUCCESS;
-
-	if (static_cast<HKEY>(regKeyLangs) != NULL)
+	if (pApp->m_fHasMUI)
 	{
-		TCHAR szLangNames[128] = { 0 };
-		ULONG cchNamesMax = _countof(szLangNames);
-		nError = regKeyLangs.QueryStringValue(NULL, szLangNames, &cchNamesMax);
-		if (nError == ERROR_SUCCESS)
-		{
-			LPCTSTR pszSeps = _T(",;\x20");
-			LPTSTR pszCurLex = _tcstok(szLangNames, pszSeps);
-			while (pszCurLex != NULL)
-			{
-				m_arrLangNames.Add(pszCurLex);
-				pszCurLex = _tcstok(NULL, pszSeps);
-			}
-		}
-		::RegCloseKey(regKeyLangs.Detach());
-	}
+		ATL::CRegKey regKeyLangs;
+		regKeyLangs.Attach(pApp->GetSectionKey(SZ_REGK_LANGUAGES));
 
-	g_fRestartInterface = false;
+		int nError = ERROR_SUCCESS;
+
+		if (static_cast<HKEY>(regKeyLangs) != NULL)
+		{
+			TCHAR szLangNames[128] = { 0 };
+			ULONG cchNamesMax = _countof(szLangNames);
+			nError = regKeyLangs.QueryStringValue(NULL, szLangNames, &cchNamesMax);
+			if (nError == ERROR_SUCCESS)
+			{
+				LPCTSTR pszSeps = _T(",;\x20");
+				LPTSTR pszCurLex = _tcstok(szLangNames, pszSeps);
+				while (pszCurLex != NULL)
+				{
+					m_arrLangNames.Add(pszCurLex);
+					pszCurLex = _tcstok(NULL, pszSeps);
+				}
+			}
+			::RegCloseKey(regKeyLangs.Detach());
+		}
+
+		g_fRestartInterface = false;
+	}
 
 	AddPage(&m_pageAbout);
 	AddPage(&m_pageOptions);
 	AddPage(&m_pageFiles);
 	AddPage(&m_pageAction);
 	AddPage(&m_pageProgress);
-
 	SetWizardMode();
 }
 
@@ -204,8 +206,7 @@ BOOL CMainWizard::OnInitDialog(void)
 
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-
-	if (m_arrLangNames.GetCount() > 1)
+	if (pApp->m_fHasMUI)
 	{
 		CMenu menuLangs;
 		menuLangs.LoadMenu(IDR_MENU_LANGS);
@@ -226,7 +227,7 @@ BOOL CMainWizard::OnInitDialog(void)
 	GetVersionEx(&osVerInfo);
 	if (osVerInfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osVerInfo.dwMajorVersion >= 5)
 	{
-		// Windows 2000/XP/2003
+		// Windows 2000/XP
 		strNewItem.LoadString(IDS_SC_EXPORT_SETTINGS);
 		pSysMenu->InsertMenu(iInsertPos++, MF_BYPOSITION, IDM_SC_EXPORT_SETTINGS, strNewItem);
 		strNewItem.LoadString(IDS_SC_IMPORT_SETTINGS);

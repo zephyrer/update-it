@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,12 @@
 
 // CustomDialog.h - interface of the CCustomDialog class
 
+#if !defined(__CustomDialog_h)
+#define __CustomDialog_h
+
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
-
-#if !defined(__CustomDialog_h)
-#define __CustomDialog_h
 
 class CCustomDialog: public CDialog
 {

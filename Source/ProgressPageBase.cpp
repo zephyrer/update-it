@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,10 +47,9 @@
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
 #include "Registry.h"
-#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// avoid unwanted ICL warnings
+// unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
@@ -279,17 +278,12 @@ void CProgressPageBase::OnBecameActive(void)
 	CWinApp* pApp = AfxGetApp();
 	ASSERT_VALID(pApp);
 	pApp->WriteProfileInt(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
-	pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
-	
-	if (!pApp->m_argsParser.HasKey(SZ_ARGV_DONT_SAVE_INPUT))
-	{
-		pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
-		pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
-	}
+	pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
 #endif	// _MFC_VER
+	pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
@@ -552,7 +546,8 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 	{
 		smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
 		smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
-		smtpMsg.ParseMultipleRecipients(pActionPage->m_strTo, smtpMsg.m_To);
+		CSmtpAddress smtpAddr(pActionPage->m_strTo);
+		smtpMsg.AddRecipient(smtpAddr);
 		smtpMsg.m_sSubject = pActionPage->m_strSubject;
 		smtpZipPart.SetFilename(strZipPath);
 		smtpTextPart.SetText(pActionPage->m_strBody);

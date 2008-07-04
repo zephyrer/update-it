@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,7 +45,6 @@
 #include "MainWizard.h"
 #include "UpdateItApp.h"
 #include "Registry.h"
-#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -78,31 +77,16 @@ CCustomDialog(IDD_AUTHENTICATION, pParentWnd),
 m_eAuthMethod(CSmtpConnection::AUTH_NONE),
 m_fUseSSL(FALSE)
 {
-	using CSmtpConnection::AuthenticationMethod;
-	using CSmtpConnection::AUTH_NONE;
-	using CSmtpConnection::AUTH_NTLM;
-
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
-	// initialize and validate initial input values
-
-	CArgsParser& argsParser = pApp->m_argsParser;
-
-	if (!argsParser.GetUIntValue(SZ_ARG_SMTP_AUTHENTICATION, *reinterpret_cast<UINT*>(&m_eAuthMethod), 10))
+	m_eAuthMethod = static_cast<CSmtpConnection::AuthenticationMethod>(pApp->GetProfileInt(SZ_REGK_SMTP,
+		SZ_REGV_SMTP_AUTHENTICATION, CSmtpConnection::AUTH_NONE));
+	if (m_eAuthMethod != CSmtpConnection::AUTH_NONE)
 	{
-		m_eAuthMethod = pApp->GetProfileData(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, AUTH_NONE);
-	}
-	if (m_eAuthMethod < AUTH_NONE || m_eAuthMethod > AUTH_NTLM)
-	{
-		m_eAuthMethod = AUTH_NONE;
-	}
-
-	if (m_eAuthMethod != AUTH_NONE)
-	{
-		m_strUserName = pApp->GetConfigString(SZ_ARG_SMTP_USERNAME, SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
-		m_strPassword = pApp->GetConfigPassword(SZ_ARG_SMTP_PASSWORD, SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
-		m_fUseSSL = pApp->GetConfigCheck(SZ_ARG_SMTP_USE_SSL, SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
+		m_strUserName = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
+		m_strPassword = pApp->GetProfilePassword(SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);
+		m_fUseSSL = pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_USE_SSL, FALSE);
 	}
 }
 

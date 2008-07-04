@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,12 @@
 
 // ZipOptionsDialog.h - interface of the CZipOptionsDialog class
 
+#if !defined(__ZipOptionsDialog_h)
+#define __ZipOptionsDialog_h
+
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
-
-#if !defined(__ZipOptionsDialog_h)
-#define __ZipOptionsDialog_h
 
 class CZipOptionsDialog: public CCustomDialog
 {
@@ -48,10 +48,6 @@ protected:
 public:
 	enum
 	{
-		// compression methods
-		I_METHOD_DEFLATE = 0,
-		I_METHOD_BZIP2,
-
 		// compression levels
 		I_LEVEL_STORE = 0,
 		I_LEVEL_FASTEST,
@@ -68,14 +64,12 @@ public:
 	};
 
 	// controls
-	CComboBox m_comboComprMethod;
 	CComboBox m_comboComprLevel;
 	CComboBox m_comboEncrMethod;
 	CStatic m_textPassword;
 	CEdit m_editPassword;
 
 	// user's input
-	int m_iComprMethod;
 	int m_iComprLevel;
 	int m_iEncrMethod;
 	CString m_strPassword;

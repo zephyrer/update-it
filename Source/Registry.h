@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2007 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +16,12 @@
 
 // Registry.h - registry key and value names
 
+#if !defined(__Registry_h)
+#define __Registry_h
+
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
-
-#if !defined(__Registry_h)
-#define __Registry_h
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\Font
@@ -132,7 +132,6 @@
 
 #define SZ_REGK_ZIP _T("ZIP")
 
-#define SZ_REGV_ZIP_COMPR_METHOD _T("ComprMethod")
 #define SZ_REGV_ZIP_COMPR_LEVEL _T("ComprLevel")
 #define SZ_REGV_ZIP_ENCR_METHOD _T("EncrMethod")
 #define SZ_REGV_ZIP_PASSWORD _T("Password")
