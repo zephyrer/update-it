@@ -1,7 +1,7 @@
 @echo off
 
 REM UpdateIt! application.
-REM Copyright (c) 2002-2008 by Elijah Zarezky,
+REM Copyright (c) 2002-2007 by Elijah Zarezky,
 REM All rights reserved.
 
 REM Licensed under the Apache License, Version 2.0 (the "License");

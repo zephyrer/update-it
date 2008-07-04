@@ -15,6 +15,22 @@
 
 <link rel="StyleSheet" type="text/css" href="./styles.css">
 
+<style type="text/css">
+IMG.updateItShot {
+	margin-left: 0pt;
+	margin-top: 2pt;
+	margin-right: 8pt;
+}
+span.argName {
+	font-weight: bold;
+	color: #990000;
+}
+span.argValue {
+	font-weight: bold;
+	color: #990099;
+}
+</style>
+
 <title>UpdateIt!</title>
 
 </head>
@@ -119,32 +135,6 @@ class="updateItShot"/><strong>Шаг 4:</strong> обработка файлов. На этом шаге мож
 <li>сохранение &#8222;истории&#8220; исходных и целевых папок;</li>
 <li>сохранение &#8222;истории&#8220; адресов отправителя и получателя письма.</li>
 </ul>
-
-<h1 class="subTopic">UpdateIt! Pro</h1>
-
-<table border="0" cellpadding="0" style="font-size: 10pt;"><tr>
-<td valign="top"><img src="./images/zip_options.gif" width=300 height=275 align="left"
-border="0" class="updateItShot"/></td>
-<td valign="top"><p class="pageText">
-Этот &#8222;выпуск&#8220; (edition) <strong>UpdateIt!</strong> имеет следующие отличия от
-обычного:
-</p><ul style="text-align: justify;">
-<li>помимо стандартного Deflate, поддерживается метод сжатия BZip2, обеспечивающий более
-эффективное сжатие, но проигрывающий по скорости работы (для распаковки таких архивов
-необходимо использовать <a href="http://www.7-zip.com/">7-Zip</a> версии 4.5x и выше,
-<a href="http://www.pkware.com/software-pkzip/intro">PKZIP</a> версии 4.6 и выше либо
-<a href="http://www.winzip.com/">WinZip</a> версии 10.0 и выше);</li>
-<li style="margin-top: 1%;">поддерживается шифрование создаваемых ZIP-архивов методом AES
-(с размером ключа 128, 192 и 256 бит), что обеспечивает повышенную защищенность зашифрованных
-данных от несанкционнированного доступа;</li>
-<li style="margin-top: 1%;">если количество сжимаемых файлов больше чем 65&nbsp;535 или
-размер архива должен превысить 4 гигабайта, то будет автоматически использован формат Zip64,
-снимающий эти ограничения;</li>
-<li style="margin-top: 1%;">исходный код приложения является закрытым (по причине
-использования им полной коммерческой версии библиотеки
-<a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>).</li>
-</ul></td>
-</tr></table>
 
 <h1 class="subTopic">Экспорт/импорт настроек</h1>
 
@@ -370,14 +360,6 @@ class="argValue">&lt;набор_символов&gt;</span></dt>
 
 <dl>
 
-<dt><span class="argName">ZIP-Method</span><strong>:</strong><span
-class="argValue">&lt;0|1&gt;</span></dt>
-<dd>Метод (алгоритм) сжатия архива. <span class="argValue">0</span> означает алоритм
-&#8222;Deflate&#8220;, а <span class="argValue">1</span> &mdash; алгоритм
-&#8222;BZip2&#8220;. Любое другое значение будет интерпретировано как
-<span class="argValue">0</span>. <font color="#FF0000">Внимание: этот ключ распознается
-только выпуском <strong>UpdateIt! Pro</strong>.</font></dd>
-
 <dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
 class="argValue">&lt;0|1|2|3&gt;</span></dt>
 <dd>Степень сжатия архива. <span class="argValue">0</span> означает отсутствие сжатия;
@@ -387,14 +369,11 @@ class="argValue">&lt;0|1|2|3&gt;</span></dt>
 другое значение будет интерпретировано как <span class="argValue">2</span>.</dd>
 
 <dt><span class="argName">ZIP-Encryption</span><strong>:</strong><span
-class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
+class="argValue">&lt;0|1&gt;</span></dt>
 <dd>Метод шифрования архива. <span class="argValue">0</span> означает отсутствие
-шифрования, <span class="argValue">1</span> &mdash; стандартное шифрование,
-предусмотренное алгоритмом ZIP, а <span class="argValue">2</span>,
-<span class="argValue">3</span> и <span class="argValue">4</span> &mdash; шифрованием
-методами AES-128, AES-192 и AES-256 соответственно. Любое другое значение будет
-интерпретировано как <span class="argValue">0</span>. <font color="#FF0000">Внимание:
-значения 2, 3 и 4 распознаются только выпуском <strong>UpdateIt! Pro</strong>.</font></dd>
+шифрования, а <span class="argValue">1</span> &mdash; стандартное шифрование,
+предусмотренное алгоритмом ZIP. Любое другое значение будет интерпретировано как
+<span class="argValue">0</span>.</dd>
 
 <dt><span class="argName">ZIP-Password</span><strong>:</strong><span
 class="argValue">&lt;пароль&gt;</span></dt>
@@ -461,11 +440,7 @@ class="argValue">&lt;имя_файла&gt;</span></dt>
 
 <ul style="text-align: justify; margin-right: 2pt;">
 
-<li><strong>1.4.4324</strong> (04.07.2008)<br>
-Исправлено несколько ошибок. Добавлен &#8222;выпуск&#8220; (edition) <strong>UpdateIt!
-Pro</strong>. Добавлена англоязычная пользовательская документация.</li>
-
-<li style="margin-top: 4pt;"><strong>1.3.4134</strong> (06.01.2008)<br>
+<li><strong>1.3.4134</strong> (06.01.2008)<br>
 Добавлена возможность использования ключей командной строки. Улучшена проверка
 корректности пользовательского ввода. Исправлено несколько некритичных ошибок.
 Немного улучшена русскоязычная локализация инсталлятора. Библиотека
@@ -583,12 +558,11 @@ Windows 2000/XP). Немного &#8222;улучшено&#8220; системное меню.
 Добавлена возможность задавать одну или несколько масок файлов, которые следует
 исключать из поиска. При открытии диалога выбора папки в дереве теперь автоматически
 выделяется элемент, соответствующий папке, имя которой указано в поле ввода.
-
 <li style="margin-top: 4pt;"><strong>1.0.2159</strong> (15.03.2004)<br>
 Предусмотрено шифрование пароля для доступа к FTP-серверу при записи его в системный
 реестр.</li>
 
-<li style="margin-top: 4pt;"><strong>1.0.xxxx</strong> (??.??.????)<br>
+<li style="margin-top: 4pt;"><strong>1.0.xxxx</strong> (?)<br>
 История не сохранилась. По всей видимости, первой стабильной версией, годной к
 практическому использованию, была 1.0.1646&#8230;</li>
 
@@ -608,7 +582,7 @@ Windows 2000/XP). Немного &#8222;улучшено&#8220; системное меню.
 </p>
 
 <ol style="text-align: justify; margin-top: 0pt; margin-right: 2pt;">
-<li style="margin-top: 6pt;">Создать где-либо в файловой системе новую папку, назвав ее,
+<li style="margin-top: 4pt;">Создать где-либо в файловой системе новую папку, назвав ее,
 например, <span class="winText">GoogleCode</span>.</li>
 <li style="margin-top: 4pt;">Перейти в эту папку в командной строке и последовательно выполнить
 команды
@@ -620,13 +594,13 @@ svn checkout http://update-it.googlecode.com/svn/trunk/ UpdateIt</pre>
 
 <p class="pageText">
 После этого, для сборки проекта достаточно открыть файл
-<span class="winText">UpdateIt.2003.sln</span> из папки
+<span class="winText">UpdateIt71.sln</span> из папки
 <span class="winText">GoogleCode\UpdateIt</span> в среде Microsoft Visual Studio .NET 2003,
 сделать UpdateIt &#8222;стартовым проектом&#8220; и выполнить команду
 <span class="winText">Build Solution</span>. Полностью автоматизированную сборку проекта и
 его дистрибутива можно выполнить при помощи утилиты
 <a href="http://nant.sourceforge.net/">NAnt</a>, передав ей на вход файл
-<span class="winText">UpdateIt.2003.build</span> &mdash; выполнять соответствующую команду
+<span class="winText">UpdateIt71.build</span> &mdash; выполнять соответствующую команду
 нужно из Visual Studio .NET 2003 Command Prompt, предварительно перейдя в папку
 <span class="winText">GoogleCode\UpdateIt</span>.
 </p>
@@ -634,7 +608,7 @@ svn checkout http://update-it.googlecode.com/svn/trunk/ UpdateIt</pre>
 <hr width=100% size=1 noshade>
 
 <p class="copyrightNotice">
-Авторские&nbsp;права&nbsp;&copy;&nbsp;2002&mdash;2008&nbsp;<a href="mailto:elijah.zarezky@gmail.com">Илья Зарецкий</a>
+Авторские&nbsp;права&nbsp;&copy;&nbsp;2002&mdash;2008&nbsp;И.Зарецкий
 </p>
 
 </body>

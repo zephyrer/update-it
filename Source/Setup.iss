@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4324
+AppVerName=UpdateIt! 1.3.4134
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4324
+AppVersion=1.3.4134
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4324-setup
-VersionInfoVersion=1.4.4324
+OutputBaseFilename=UpdateIt-1.3.4134-setup
+VersionInfoVersion=1.3.4134
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -79,9 +79,8 @@ begin
 end;
 
 [Files]
-Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
-Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
@@ -90,15 +89,14 @@ Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
+Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
 Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Output.2003\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
+Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
 Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\UpdateIt! Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"
-Name: "{group}\UpdateIt! Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"
+Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"

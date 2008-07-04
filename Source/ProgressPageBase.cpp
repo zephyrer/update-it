@@ -552,7 +552,8 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 	{
 		smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
 		smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
-		smtpMsg.ParseMultipleRecipients(pActionPage->m_strTo, smtpMsg.m_To);
+		CSmtpAddress smtpAddr(pActionPage->m_strTo);
+		smtpMsg.AddRecipient(smtpAddr);
 		smtpMsg.m_sSubject = pActionPage->m_strSubject;
 		smtpZipPart.SetFilename(strZipPath);
 		smtpTextPart.SetText(pActionPage->m_strBody);

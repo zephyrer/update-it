@@ -141,14 +141,13 @@ Name: "sources"; Description: "Source Code"; Types: full custom; Languages: en
 Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: ru
 
 [Files]
-Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
-Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
-Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\Output\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\HTML\UpdateIt.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
-Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangEn
+Source: "..\Languages\English_USA.1252\Output\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangEn
 Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Output.2003\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangRu
+Source: "..\Languages\Russian_Russia.1251\Output\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"; Components: core; Check: HasLangRu
 Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu; Flags: ignoreversion
 
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
@@ -158,14 +157,14 @@ Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Components: runtimes; Flags: ig
 Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Components: runtimes; Flags: ignoreversion
 Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Components: runtimes; Flags: ignoreversion
 
-Source: "..\..\Repository\AfxGadgets\AfxGadgets.2003.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\AfxGadgets\AfxGadgets71.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\CodeProject\CodeProject.2003.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\CodeProject\CodeProject71.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\Naughter\Naughter.2003.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Naughter\Naughter71.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
@@ -175,34 +174,28 @@ Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sourc
 Source: "..\..\Repository\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\ZipArchive\ZipArchive.2003.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\ZipArchive\ZipArchive71.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\..\Repository\zlib\zlib.2003.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\zlib71.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\Languages\English_USA.1252\English_USA.1252.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\English_USA.1252\English_USA.1252.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.vcproj"; DestDir: "{app}\Sources\UpddateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\UpdateIt.2003.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\UpdateIt.2003.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\UpdateIt.2003.build"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\CleanDoc.build.inc"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
-Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt71.vcproj"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\UpdateIt71.sln"; DestDir: "{app}\Sources\UpddateIt"; Components: sources; Flags: ignoreversion
+Source: "..\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpddateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpddateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\UpdateIt! Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"
-Name: "{group}\UpdateIt! Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"
+Name: "{group}\UpdateIt! Documentation"; Filename: "{app}\UpdateIt.chm"
 Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
 Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
 Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpddateIt\UpdateIt71.sln"; Components: sources

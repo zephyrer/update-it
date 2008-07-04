@@ -1,5 +1,6 @@
 -t:net-1.1
+-f:UpdateIt71.build
 -D:VerMajor=1
--D:VerMinor=4
--D:VerBuild=4324
--D:SvnRev=167
+-D:VerMinor=3
+-D:VerBuild=4134
+-D:SvnRev=149

@@ -403,22 +403,6 @@ bool CUpdateItApp::RegQueryLanguagePath(LPCTSTR pszValueName, LPTSTR pszDest, UL
 	return (nError == ERROR_SUCCESS && _tcslen(pszDest) > 0 && ::PathFileExists(pszDest));
 }
 
-#if defined(_DEBUG)
-
-#if (_MSC_VER == 1300)
-#define SZ_DEVENV_VER "2002"
-#elif (_MSC_VER == 1310)
-#define SZ_DEVENV_VER "2003"
-#elif (_MSC_VER == 1400)
-#define SZ_DEVENV_VER "2005"
-#elif (_MSC_VER == 1500)
-#define SZ_DEVENV_VER "2008"
-#else
-#error Unrecognized Development Environment version!
-#endif   // _MSC_VER
-
-#endif   // _DEBUG
-
 bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
 {
 	// precondition
@@ -435,18 +419,14 @@ bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
 		TCHAR szLangDir[_MAX_DIR] = { 0 };
 		_tcscpy(szLangDir, strDebugPath);
 		::PathRemoveExtension(szLangDir);
-		_tcscat(szLangDir, _T("\\Output." SZ_DEVENV_VER "\\x86\\Debug"));
+		_tcscat(szLangDir, _T("\\Output\\x86\\Debug"));
 #if defined(_MBCS)
 		_tcscat(szLangDir, _T("\\MBCS\\"));
 #else
 		_tcscat(szLangDir, _T("\\Unicode\\"));
 #endif   // _MBCS
 		strDebugPath.Insert(0, szLangDir);
-#if defined(UPDATE_IT_PRO)
-		strDebugPath.Insert(0, _T("..\\..\\..\\..\\..\\..\\UpdateIt\\Languages\\"));
-#else
 		strDebugPath.Insert(0, _T("..\\..\\..\\..\\Languages\\"));
-#endif   // UPDATE_IT_PRO
 		::PathCombine(pszDest, szExeDir, strDebugPath);
 #else
 		GetAbsolutePath(pszDest, szTempPath);

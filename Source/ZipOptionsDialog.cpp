@@ -74,7 +74,6 @@ END_MESSAGE_MAP()
 
 CZipOptionsDialog::CZipOptionsDialog(CWnd* pParentWnd):
 CCustomDialog(IDD_ZIP_OPTIONS, pParentWnd),
-m_iComprMethod(I_METHOD_DEFLATE),
 m_iComprLevel(I_LEVEL_DEFAULT),
 m_iEncrMethod(I_METHOD_NONE)
 {
@@ -83,14 +82,6 @@ m_iEncrMethod(I_METHOD_NONE)
 
 	// initialize and validate initial input values
 
-#if defined(UPDATE_IT_PRO)
-	m_iComprMethod = pApp->GetConfigInt(SZ_ARG_ZIP_METHOD, SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_METHOD, I_METHOD_DEFLATE);
-	if (m_iComprMethod < I_METHOD_DEFLATE || m_iComprMethod > I_METHOD_BZIP2)
-	{
-		m_iComprMethod = I_METHOD_DEFLATE;
-	}
-#endif   // UPDATE_IT_PRO
-
 	m_iComprLevel = pApp->GetConfigInt(SZ_ARG_ZIP_COMPRESSION, SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, I_LEVEL_DEFAULT);
 	if (m_iComprLevel < I_LEVEL_STORE || m_iComprLevel > I_LEVEL_BEST)
 	{
@@ -98,11 +89,11 @@ m_iEncrMethod(I_METHOD_NONE)
 	}
 
 	m_iEncrMethod = pApp->GetConfigInt(SZ_ARG_ZIP_ENCRYPTION, SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, I_METHOD_NONE);
-#if defined(UPDATE_IT_PRO)
+#if defined(_UPDATE_IT_PRO)
 	if (m_iEncrMethod < I_METHOD_NONE || m_iEncrMethod > I_METHOD_AES_256)
 #else
 	if (m_iEncrMethod < I_METHOD_NONE || m_iEncrMethod > I_METHOD_STANDARD)
-#endif   // UPDATE_IT_PRO
+#endif   // _UPDATE_IT_PRO
 	{
 		m_iEncrMethod = I_METHOD_NONE;
 	}
@@ -121,9 +112,7 @@ BOOL CZipOptionsDialog::OnInitDialog(void)
 {
 	__super::OnInitDialog();
 
-#if !defined(UPDATE_IT_PRO)
-	m_comboComprMethod.EnableWindow(FALSE);
-
+#if !defined(_UPDATE_IT_PRO)
 	while (m_comboEncrMethod.GetCount() > I_FIRST_PRO_METHOD)
 	{
 		m_comboEncrMethod.DeleteString(I_FIRST_PRO_METHOD);
@@ -132,7 +121,7 @@ BOOL CZipOptionsDialog::OnInitDialog(void)
 	{
 		m_iEncrMethod = I_METHOD_NONE;
 	}
-#endif   // UPDATE_IT_PRO
+#endif   // _UPDATE_IT_PRO
 
 	UpdateControls();
 
@@ -143,13 +132,11 @@ void CZipOptionsDialog::DoDataExchange(CDataExchange* pDX)
 {
 	__super::DoDataExchange(pDX);
 
-	DDX_Control(pDX, IDC_COMBO_ZIP_METHOD, m_comboComprMethod);
 	DDX_Control(pDX, IDC_COMBO_ZIP_LEVEL, m_comboComprLevel);
 	DDX_Control(pDX, IDC_COMBO_ENCR_METHOD, m_comboEncrMethod);
 	DDX_Control(pDX, IDC_TEXT_ZIP_PASSWORD, m_textPassword);
 	DDX_Control(pDX, IDC_EDIT_ZIP_PASSWORD, m_editPassword);
 
-	DDX_CBIndex(pDX, IDC_COMBO_ZIP_METHOD, m_iComprMethod);
 	DDX_CBIndex(pDX, IDC_COMBO_ZIP_LEVEL, m_iComprLevel);
 	DDX_CBIndex(pDX, IDC_COMBO_ENCR_METHOD, m_iEncrMethod);
 	DDX_Text(pDX, IDC_EDIT_ZIP_PASSWORD, m_strPassword);
@@ -205,7 +192,6 @@ void CZipOptionsDialog::AssertValid(void) const
 	__super::AssertValid();
 
 	// ...and then verify our own state as well
-	ASSERT_VALID(&m_comboComprMethod);
 	ASSERT_VALID(&m_comboComprLevel);
 	ASSERT_VALID(&m_comboEncrMethod);
 	ASSERT_VALID(&m_textPassword);
@@ -220,12 +206,10 @@ void CZipOptionsDialog::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
-		dumpCtx << "m_comboComprMethod = " << m_comboComprMethod;
-		dumpCtx << "\nm_comboComprLevel = " << m_comboComprLevel;
+		dumpCtx << "m_comboComprLevel = " << m_comboComprLevel;
 		dumpCtx << "\nm_comboEncrMethod = " << m_comboEncrMethod;
 		dumpCtx << "\nm_textPassword" << m_textPassword;
 		dumpCtx << "\nm_editPassword" << m_editPassword;
-		dumpCtx << "\nm_iComprMethod" << m_iComprMethod;
 		dumpCtx << "\nm_iComprLevel" << m_iComprLevel;
 		dumpCtx << "\nm_iEncrMethod" << m_iEncrMethod;
 		dumpCtx << "\nm_strPassword" << m_strPassword;

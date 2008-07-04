@@ -132,7 +132,6 @@
 
 #define SZ_REGK_ZIP _T("ZIP")
 
-#define SZ_REGV_ZIP_COMPR_METHOD _T("ComprMethod")
 #define SZ_REGV_ZIP_COMPR_LEVEL _T("ComprLevel")
 #define SZ_REGV_ZIP_ENCR_METHOD _T("EncrMethod")
 #define SZ_REGV_ZIP_PASSWORD _T("Password")

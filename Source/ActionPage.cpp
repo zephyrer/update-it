@@ -370,7 +370,6 @@ void CActionPage::OnButtonZipOptions(void)
 
 		if (!pApp->m_argsParser.HasKey(SZ_ARGV_DONT_SAVE_INPUT))
 		{
-			pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_METHOD, m_dlgZipOpts.m_iComprMethod);
 			pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_COMPR_LEVEL, m_dlgZipOpts.m_iComprLevel);
 			pApp->WriteProfileInt(SZ_REGK_ZIP, SZ_REGV_ZIP_ENCR_METHOD, m_dlgZipOpts.m_iEncrMethod);
 			if (m_dlgZipOpts.m_iEncrMethod != CZipOptionsDialog::I_METHOD_NONE)
