@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
 <assemblyIdentity
-    version="@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@.@SVN_REV@"
+    version="1.4.4324.167"
     processorArchitecture="x86"
-    name="Microsoft.Windows.@EXE_NAME@"
+    name="Microsoft.Windows.UpdateIt"
     type="win32"
 /> 
-<description>@APP_NAME@ Application (part of the Power Gadgets collection)</description>
+<description>UpdateIt! Application (part of the Power Gadgets collection)</description>
 <dependency>
     <dependentAssembly>
         <assemblyIdentity
@@ -19,4 +19,11 @@
         />
     </dependentAssembly>
 </dependency>
+<trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+        <requestedPrivileges>
+            <requestedExecutionLevel level='asInvoker' uiAccess='false'/>
+        </requestedPrivileges>
+    </security>
+</trustInfo>
 </assembly>

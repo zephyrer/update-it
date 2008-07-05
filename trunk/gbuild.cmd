@@ -18,4 +18,4 @@ REM limitations under the License.
 
 REM gbuild.cmd - NT command script to perform deveopment build for Google Code
 
-nant.exe -f:UpdateIt.2003.build @build.txt -D:CommitMsg="Development build for Google Code." rebuild-all commit-src
+nant.exe -f:UpdateIt.2003.build @NAntSettings.txt -D:CommitMsg="Development build for Google Code." rebuild-all commit-src
