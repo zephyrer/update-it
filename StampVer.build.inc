@@ -35,8 +35,8 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- UpdateIt.exe manifest -->
 
 		<copy
-			file="${UpdateItPath}\Source\UpdateIt.manifest.nant"
-			tofile="${UpdateItPath}\Source\UpdateIt.manifest"
+			file="${UpdateItPath}\Source\Manifest.2003.xml.nant"
+			tofile="${UpdateItPath}\Source\Manifest.2003.xml"
 			overwrite="true">
 			<filterchain>
 				<replacetokens>

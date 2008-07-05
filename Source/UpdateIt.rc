@@ -52,13 +52,19 @@ BEGIN
     "#pragma code_page(1252)\r\n"
     "#endif\r\n"
     "\r\n"
+    "// version information\r\n"
+    "\r\n"
     "#include ""VersionInfo.rc""\r\n"
     "\r\n"
+    "// application manifest\r\n"
+    "\r\n"
+    "#if defined(EMBED_MANIFEST_BY_HANDS)\r\n"
     "#if !defined(RT_MANIFEST)\r\n"
     "#define RT_MANIFEST 24\r\n"
     "#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1\r\n"
-    "#endif\r\n"
-    "CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST ""UpdateIt.manifest""\r\n"
+    "#endif    // RT_MANIFEST\r\n"
+    "CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST ""Manifest.2003.xml""\r\n"
+    "#endif    // EMBED_MANIFEST_BY_HANDS\r\n"
     "\r\n"
     "#endif    // English (U.S.) resources\r\n"
     "\0"
@@ -133,13 +139,19 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif
 
+// version information
+
 #include "VersionInfo.rc"
 
+// application manifest
+
+#if defined(EMBED_MANIFEST_BY_HANDS)
 #if !defined(RT_MANIFEST)
 #define RT_MANIFEST 24
 #define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
-#endif
-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "UpdateIt.manifest"
+#endif    // RT_MANIFEST
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "Manifest.2003.xml"
+#endif    // EMBED_MANIFEST_BY_HANDS
 
 #endif    // English (U.S.) resources
 
