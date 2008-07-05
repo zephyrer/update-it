@@ -94,7 +94,18 @@ StampVer.build.inc - 'stamp-ver' target
 			datetime="${datetime::now()}"
 			if="${AppName == 'UpdateIt! Pro'}"/>
 		
-		<!-- English_USA.1252.exe VERSIONINFO -->
+		<!-- English_USA.1252.dll resources -->
+
+		<copy
+			file="${UpdateItPath}\Languages\English_USA.1252\Source\English_USA.1252.rc.nant"
+			tofile="${UpdateItPath}\Languages\English_USA.1252\Source\English_USA.1252.rc"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="APP_NAME" value="${AppName}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
 
 		<copy
 			file="${UpdateItPath}\Languages\English_USA.1252\Source\VersionInfo.rc.nant"
@@ -114,7 +125,18 @@ StampVer.build.inc - 'stamp-ver' target
 			file="${UpdateItPath}\Languages\English_USA.1252\Source\English_USA.1252.rc"
 			datetime="${datetime::now()}"/>
 		
-		<!-- Russian_Russia.1251.exe VERSIONINFO -->
+		<!-- Russian_Russia.1251.dll resources -->
+
+		<copy
+			file="${UpdateItPath}\Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc.nant"
+			tofile="${UpdateItPath}\Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="APP_NAME" value="${AppName}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
 
 		<copy
 			file="${UpdateItPath}\Languages\Russian_Russia.1251\Source\VersionInfo.rc.nant"
