@@ -160,15 +160,10 @@ BOOL CFilesPage::OnSetActive(void)
 
 void CFilesPage::OnBecameActive(void)
 {
-	using CMainWizard::I_OPTIONS;
-	using CFilesList::I_NAME;
-	using CFilesList::NUM_COLUMNS;
-	using CFilesList::I_DATE;
-	using CSortingListCtrl::SORT_ASCENDING;
-
 	CString strInfo;
 
 	__super::OnBecameActive();
+
 	if (m_listFiles.GetItemCount() == 0)
 	{
 		// prepare controls
@@ -180,7 +175,7 @@ void CFilesPage::OnBecameActive(void)
 
 		// search for files
 		m_listExclude.RemoveAll();
-		COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
+		COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(CMainWizard::I_OPTIONS));
 		ASSERT(pOptionsPage != NULL);
 		BOOL fMemTrack = AfxEnableMemoryTracking(FALSE);
 		LPTSTR pszExcludes = _tcsdup(pOptionsPage->m_strExclude);
@@ -203,11 +198,11 @@ void CFilesPage::OnBecameActive(void)
 		{
 			pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 			strInfo.Format(IDS_FOUND_FORMAT, cItems);
-			for (int iCol = I_NAME; iCol < NUM_COLUMNS; ++iCol)
+			for (int iCol = CFilesList::I_NAME; iCol < CFilesList::NUM_COLUMNS; ++iCol)
 			{
 				m_listFiles.SetColumnWidth(iCol, LVSCW_AUTOSIZE);
 			}
-			m_listFiles.SortItems(I_DATE, SORT_ASCENDING);
+			m_listFiles.SortItems(CFilesList::I_DATE, CSortingListCtrl::SORT_ASCENDING);
 			m_listFiles.SetItemState(0, LVIS_FOCUSED | LVIS_SELECTED, (UINT)-1);
 			m_listFiles.EnableWindow();
 			m_buttonRemove.EnableWindow();
@@ -350,9 +345,6 @@ BOOL CFilesPage::IsFileMatchesExcludeList(LPCTSTR pszFilePath)
 
 void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin, int iRelative)
 {
-	using CFilesList::I_EXTENSION;
-	using CFilesList::NUM_COLUMNS;
-
 	LVITEM lvi;
 	CFileFind finder;
 	CTime timeWrite;
@@ -445,7 +437,7 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 					// insert an item
 					lvi.lParam = reinterpret_cast<LPARAM>(pData);
 					VERIFY(m_listFiles.InsertItem(&lvi) == lvi.iItem);
-					for (int i = I_EXTENSION; i < NUM_COLUMNS; ++i)
+					for (int i = CFilesList::I_EXTENSION; i < CFilesList::NUM_COLUMNS; ++i)
 					{
 						m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
 					}
@@ -464,7 +456,7 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 						// insert an item
 						lvi.lParam = reinterpret_cast<LPARAM>(pData);
 						VERIFY(m_listFiles.InsertItem(&lvi) == lvi.iItem);
-						for (int i = I_EXTENSION; i < NUM_COLUMNS; ++i) {
+						for (int i = CFilesList::I_EXTENSION; i < CFilesList::NUM_COLUMNS; ++i) {
 							m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
 						}
 						++lvi.iItem;
@@ -495,8 +487,6 @@ void CFilesPage::CleanupFileList(void)
 
 BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 {
-	using CMainWizard::I_OPTIONS;
-
 	BOOL fResult;
 	CMemMapFile mmfPrev;
 	CMemMapFile mmfNew;
@@ -508,7 +498,7 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT_VALID(pWiz);
-		pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
+		pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(CMainWizard::I_OPTIONS));
 		ASSERT_VALID(pOptionsPage);
 	}
 
