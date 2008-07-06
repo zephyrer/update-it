@@ -78,10 +78,6 @@ CCustomDialog(IDD_AUTHENTICATION, pParentWnd),
 m_eAuthMethod(CSmtpConnection::AUTH_NONE),
 m_fUseSSL(FALSE)
 {
-	using CSmtpConnection::AuthenticationMethod;
-	using CSmtpConnection::AUTH_NONE;
-	using CSmtpConnection::AUTH_NTLM;
-
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
@@ -91,14 +87,14 @@ m_fUseSSL(FALSE)
 
 	if (!argsParser.GetUIntValue(SZ_ARG_SMTP_AUTHENTICATION, *reinterpret_cast<UINT*>(&m_eAuthMethod), 10))
 	{
-		m_eAuthMethod = pApp->GetProfileData(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, AUTH_NONE);
+		m_eAuthMethod = pApp->GetProfileData(SZ_REGK_SMTP, SZ_REGV_SMTP_AUTHENTICATION, CSmtpConnection::AUTH_NONE);
 	}
-	if (m_eAuthMethod < AUTH_NONE || m_eAuthMethod > AUTH_NTLM)
+	if (m_eAuthMethod < CSmtpConnection::AUTH_NONE || m_eAuthMethod > CSmtpConnection::AUTH_NTLM)
 	{
-		m_eAuthMethod = AUTH_NONE;
+		m_eAuthMethod = CSmtpConnection::AUTH_NONE;
 	}
 
-	if (m_eAuthMethod != AUTH_NONE)
+	if (m_eAuthMethod != CSmtpConnection::AUTH_NONE)
 	{
 		m_strUserName = pApp->GetConfigString(SZ_ARG_SMTP_USERNAME, SZ_REGK_SMTP, SZ_REGV_SMTP_USERNAME);
 		m_strPassword = pApp->GetConfigPassword(SZ_ARG_SMTP_PASSWORD, SZ_REGK_SMTP, SZ_REGV_SMTP_PASSWORD);

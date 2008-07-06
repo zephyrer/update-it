@@ -146,10 +146,6 @@ BOOL CProgressPageBase::OnSetActive(void)
 
 void CProgressPageBase::OnBecameActive(void)
 {
-	using CMainWizard::I_OPTIONS;
-	using CMainWizard::I_FILES;
-	using CMainWizard::I_ACTION;
-
 	CString strWorking;
 	CString strZipPath;
 
@@ -157,11 +153,11 @@ void CProgressPageBase::OnBecameActive(void)
 
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
-	COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(I_OPTIONS));
+	COptionsPage* pOptionsPage = DYNAMIC_DOWNCAST(COptionsPage, pWiz->GetPage(CMainWizard::I_OPTIONS));
 	ASSERT(pOptionsPage != NULL);
-	CFilesPage* pFilesPage = DYNAMIC_DOWNCAST(CFilesPage, pWiz->GetPage(I_FILES));
+	CFilesPage* pFilesPage = DYNAMIC_DOWNCAST(CFilesPage, pWiz->GetPage(CMainWizard::I_FILES));
 	ASSERT(pFilesPage != NULL);
-	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
+	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(CMainWizard::I_ACTION));
 	ASSERT(pActionPage != NULL);
 
 	// erase target folder (if needed)
@@ -535,8 +531,6 @@ void CProgressPageBase::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CL
 
 void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 {
-	using CMainWizard::I_ACTION;
-
 	CSmtpConnection smtpConn;
 	CSmtpMessage smtpMsg;
 	CSmtpBodyPart smtpTextPart;
@@ -544,7 +538,7 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
-	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
+	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(CMainWizard::I_ACTION));
 	ASSERT(pActionPage != NULL);
 	CAuthenticationDialog& dlgAuth = pActionPage->m_dlgAuth;
 
@@ -702,15 +696,13 @@ BOOL CProgressPageBase::UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpC
 
 void CProgressPageBase::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles)
 {
-	using CMainWizard::I_ACTION;
-
 	CString strWorking;
 
 	ASSERT(pszSource != NULL && *pszSource != 0);
 
 	CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 	ASSERT(pWiz != NULL);
-	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(I_ACTION));
+	CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(CMainWizard::I_ACTION));
 	ASSERT(pActionPage != NULL);
 
 	try

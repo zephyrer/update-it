@@ -14,6 +14,9 @@
 #pragma once
 #endif	// _MSC_VER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// unwanted warnings
+
 // unreferenced inline/local function has been removed
 #pragma warning(disable: 4514)
 // function not inlined
@@ -21,17 +24,25 @@
 // identifier was truncated in the debug information
 #pragma warning(disable: 4786)
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// use Win98/NT4 features
+
 #define WINVER 0x0400
 #define _WIN32_WINDOWS 0x0410
 #define _WIN32_IE 0x0400
 #define _WIN32_WINNT 0x0400
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// MFC headers
+
 #if (_MSC_VER >= 1300)
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
 #endif	// _MSC_VER
 
-// MFC headers
 #include <afxwin.h>			// MFC core and standard components
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// some tricks
 
 // force ISO/IEC 14882 conformance in for loop scope
 #if (_MSC_VER < 1300)
