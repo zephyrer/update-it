@@ -32,23 +32,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<echo message="Writing version numbers and names..."/>
 		<echo/>
 
-		<!-- UpdateIt.exe manifests -->
-
-		<copy
-			file="${UpdateItPath}\Source\Manifest.2003.xml.nant"
-			tofile="${UpdateItPath}\Source\Manifest.2003.xml"
-			overwrite="true">
-			<filterchain>
-				<replacetokens>
-					<token key="VER_MAJOR" value="${VerMajor}"/>
-					<token key="VER_MINOR" value="${VerMinor}"/>
-					<token key="VER_BUILD" value="${VerBuild}"/>
-					<token key="SVN_REV" value="${SvnRev}"/>
-					<token key="APP_NAME" value="${AppName}"/>
-					<token key="EXE_NAME" value="${ExeName}"/>
-				</replacetokens>
-			</filterchain>
-		</copy>
+		<!-- UpdateIt.exe manifest -->
 
 		<copy
 			file="${UpdateItPath}\Source\Manifest.2008.xml.nant"
