@@ -59,92 +59,49 @@ SelectLanguageTitle=Language Selection
 SelectLanguageLabel=Please select UpdateIt! language:
 
 [Code]
-function IsWinSxS(): Boolean;
-var
-	osVersion: TWindowsVersion;
-begin
-	GetWindowsVersionEx(osVersion);
-	Result := ((osVersion.Major = 5) and (osVersion.Minor >= 1)) or (osVersion.Major > 5);
-end;
-
 function NextButtonClick(CurPageID: Integer): Boolean;
 var
-	AfxLangPath: String;
 	hRootHive: Integer;
 	LangsKeyName: String;
 begin
 	if (CurPageID = wpReady) then
 	begin
-		if (IsWinSxS()) then
-		begin
-			AfxLangPath := ExpandConstant('{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC');
-		end
-		else begin
-			AfxLangPath := ExpandConstant('{app}');
-		end;
-
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
-
-		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', AfxLangPath + '\mfc90enu.dll');
-		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\English_USA.1252.dll'));
-		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', AfxLangPath + '\mfc90rus.dll');
-		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Russian_Russia.1251.dll'));
-		
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', ExpandConstant('{app}\mfc71enu.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\Languages\English_USA.1252.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', ExpandConstant('{app}\mfc71rus.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Languages\Russian_Russia.1251.dll'));
 		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
 		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
 	end;
-	
 	Result := True;
 end;
 
 [Files]
-Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\Output.2003\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
+Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
+Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
+Source: "..\Redist\mfc71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\msvcr71.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Redist\msvcp71.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC"; MinVersion: 0,5.01.2600
-
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC"; MinVersion: 0,5.01.2600
-
-Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC"; MinVersion: 0,5.01.2600
-
-Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-
-Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}\Microsoft.VC90.CRT"; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}\Microsoft.VC90.CRT"; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}\Microsoft.VC90.CRT"; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest"; DestDir: "{app}\Microsoft.VC90.CRT"; MinVersion: 0,5.01.2600
-
-Source: "..\Redist\Microsoft.VC90.MFC\mfc90.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}"; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-
-Source: "..\Redist\Microsoft.VC90.MFC\mfc90.dll"; DestDir: "{app}\Microsoft.VC90.MFC"; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}\Microsoft.VC90.MFC"; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest"; DestDir: "{app}\Microsoft.VC90.MFC"; MinVersion: 0,5.01.2600
+Source: "..\Languages\English_USA.1252\Output.2003\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}\Languages"
+Source: "..\Redist\mfc71enu.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Languages\Russian_Russia.1251\Output.2003\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}\Languages"
+Source: "..\Redist\mfc71rus.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
-Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: en
-Name: "{group}\Документация (на английском)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: ru
-Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: en
-Name: "{group}\Документация (на русском)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: ru
-Name: "{group}\License Agreement"; Filename: "{app}\ApacheLicense.rtf"; Languages: en
-Name: "{group}\Лицензионное соглашение"; Filename: "{app}\ApacheLicense.rtf"; Languages: ru
-Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"; Languages: en
-Name: "{group}\UpdateIt! в Интернет"; Filename: "{app}\UpdateIt.url"; Languages: ru
-Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"; Languages: en
-Name: "{group}\Удалить UpdateIt!"; Filename: "{uninstallexe}"; Languages: ru
+Name: "{group}\UpdateIt! Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"
+Name: "{group}\UpdateIt! Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"
+Name: "{group}\UpdateIt! License"; Filename: "{app}\ApacheLicense.rtf"
+Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"
+Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: quicklaunchicon
 
