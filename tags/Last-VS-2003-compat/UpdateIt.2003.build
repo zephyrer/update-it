@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+
+<!--
+
+UpdateIt! application.
+Copyright (c) 2002-2008 by Elijah Zarezky,
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+UpdateIt.2003.build - NAnt script to build release
+
+-->
+
+<project
+	name="UpdateIt"
+	default="rebuild-all"
+	basedir=".\">
+
+	<description>UpdateIt! application build script.</description>
+
+	<!-- GLOBAL PROJECT PROPERTIES -->
+
+	<!-- default build configuration -->
+
+	<property
+		name="CharacterSet"
+		value="MBCS"
+		overwrite="false"/>
+	<property
+		name="BuildType"
+		value="Release"
+		overwrite="false"/>
+	<property
+		name="SolutionConfig"
+		value="${CharacterSet} ${BuildType}"/>
+	<property
+		name="UpdateItPath"
+		value="."
+		readonly="true"/>
+
+	<!-- version numbers and names -->
+
+	<property
+		name="VerMajor"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="VerMinor"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="VerBuild"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="SvnRev"
+		value="0"
+		overwrite="false"/>
+	<property
+		name="AppName"
+		value="UpdateIt!"
+		readonly="true"/>
+	<property
+		name="ExeName"
+		value="UpdateIt"
+		readonly="true"/>
+
+	<!-- TARGETS -->
+
+	<!-- 'verify-ver' target -->
+
+	<include buildfile="${UpdateItPath}\VerifyVer.build.inc"/>
+
+	<!-- 'stamp-ver' target -->
+
+	<include buildfile="${UpdateItPath}\StampVer.build.inc"/>
+
+	<!-- 'build-sln' target -->
+
+	<target
+		name="build-sln"
+		description="Build UpdateIt solution."
+		depends="stamp-ver">
+		<solution
+			solutionfile="UpdateIt.2003.sln"
+			configuration="${SolutionConfig}">
+		</solution>
+	</target>
+
+	<!-- 'rebuild-sln' target -->
+
+	<target
+		name="rebuild-sln"
+		description="Rebuild UpdateIt solution."
+		depends="clean-sln,build-sln">
+		<echo message="UpdateIt solution rebuilt."/>
+	</target>
+
+	<!-- 'create-doc' target -->
+
+	<include buildfile="${UpdateItPath}\CreateDoc.build.inc"/>
+
+	<!-- 'create-distr' target -->
+
+	<target
+		name="create-distr"
+		description="Create setup packages."
+		depends="build-sln,create-doc,clean-distr">
+		<mkdir
+			dir="Setup"
+			if="${not directory::exists('Setup')}"/>
+		<echo message="Creating standard installer."/>
+		<echo/>
+		<exec
+			program="iscc.exe"
+			commandline="Setup.iss"
+			workingdir="Source">
+		</exec>
+		<echo/>
+		<echo/>
+		<echo message="Creating universal installer."/>
+		<echo/>
+		<exec
+			program="iscc.exe"
+			commandline="SetupUniversal.iss"
+			workingdir="Source">
+		</exec>
+	</target>
+
+	<!-- 'zip-distr' target -->
+
+	<target
+		name="zip-distr"
+		description="Create ZIPped setup packages."
+		depends="create-distr,clean-zip">
+		<exec
+			program="7z.exe"
+			workingdir="Setup">
+			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+			<arg value="update_it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup.exe"/>
+		</exec>
+		<exec
+			program="7z.exe"
+			workingdir="Setup">
+			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+			<arg value="update_it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.exe"/>
+		</exec>
+	</target>
+
+	<!-- 'commit-src' target -->
+
+	<target
+		name="commit-src"
+		description="Commit sources to the SVN repository.">
+		<if test="${property::exists('CommitMsg')}">
+			<exec
+				program="svn.exe"
+				commandline="commit --message &quot;${CommitMsg}&quot;">
+			</exec>
+		</if>
+	</target>
+
+	<!-- 'export-src' target -->
+
+	<target
+		name="export-src"
+		description="Export sources from the working copy.">
+		<if test="${property::exists('ExportDir')}">
+			<exec
+				program="svn.exe"
+				commandline="export .\ &quot;${ExportDir}\UpdateIt&quot;">
+			</exec>
+			<exec
+				program="7z.exe"
+				workingdir="${ExportDir}">
+				<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+				<arg value="update_it.zip"/>
+				<arg value="UpdateIt"/>
+			</exec>
+			<delete dir="${ExportDir}\UpdateIt"/>
+		</if>
+	</target>
+
+	<!-- 'build-all' target -->
+
+	<target
+		name="build-all"
+		description="Build entire UpdateIt project."
+		depends="build-sln,create-doc,create-distr,zip-distr">
+	</target>
+
+	<!-- 'rebuild-all' target -->
+
+	<target
+		name="rebuild-all"
+		description="Rebuild entire UpdateIt project."
+		depends="rebuild-sln,create-doc,create-distr,zip-distr">
+	</target>
+
+	<!-- 'clean-sln' target -->
+
+	<target
+		name="clean-sln"
+		description="Clean UpdateIt solution.">
+		<exec
+			program="devenv.com"
+			commandline="UpdateIt.2003.sln /clean &quot;${SolutionConfig}&quot;">
+		</exec>
+	</target>
+
+	<!-- 'clean-doc' target -->
+
+	<include buildfile="${UpdateItPath}\CleanDoc.build.inc"/>
+
+	<!-- 'clean-distr' target -->
+
+	<target
+		name="clean-distr"
+		description="Delete setup packages.">
+		<delete
+			if="${directory::exists('Setup')}">
+			<fileset>
+				<include name="Setup\*.exe"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- 'clean-zip' target -->
+
+	<target
+		name="clean-zip"
+		description="Delete ZIPped setup packages.">
+		<delete
+			if="${directory::exists('Setup')}">
+			<fileset>
+				<include name="Setup\*.zip"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- 'clean-all' target -->
+
+	<target
+		name="clean-all"
+		description="Delete all built files."
+		depends="clean-sln,clean-doc,clean-distr">
+	</target>
+
+</project>
