@@ -34,8 +34,7 @@ END
 
 2 TEXTINCLUDE 
 BEGIN
-    "#include ""afxres.h""\r\n"
-    "\0"
+    "#include ""afxres.h""\r\0"
 END
 
 3 TEXTINCLUDE 
@@ -56,18 +55,7 @@ BEGIN
     "\r\n"
     "#include ""VersionInfo.rc""\r\n"
     "\r\n"
-    "// application manifest\r\n"
-    "\r\n"
-    "#if defined(EMBED_MANIFEST_BY_HANDS)\r\n"
-    "#if !defined(RT_MANIFEST)\r\n"
-    "#define RT_MANIFEST 24\r\n"
-    "#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1\r\n"
-    "#endif    // RT_MANIFEST\r\n"
-    "CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST ""Manifest.2003.xml""\r\n"
-    "#endif    // EMBED_MANIFEST_BY_HANDS\r\n"
-    "\r\n"
-    "#endif    // English (U.S.) resources\r\n"
-    "\0"
+    "#endif    // English (U.S.) resources\r\0"
 END
 
 #endif    // APSTUDIO_INVOKED
@@ -142,16 +130,6 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // version information
 
 #include "VersionInfo.rc"
-
-// application manifest
-
-#if defined(EMBED_MANIFEST_BY_HANDS)
-#if !defined(RT_MANIFEST)
-#define RT_MANIFEST 24
-#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
-#endif    // RT_MANIFEST
-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "Manifest.2003.xml"
-#endif    // EMBED_MANIFEST_BY_HANDS
 
 #endif    // English (U.S.) resources
 
