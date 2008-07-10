@@ -259,7 +259,7 @@ UpdateIt.2008.build - NAnt script to build release
 	<target
 		name="clean-all"
 		description="Delete all built files."
-		depends="clean-sln,clean-doc,clean-distr">
+		depends="clean-sln,clean-doc,clean-distr,clean-zip">
 	</target>
 
 </project>
