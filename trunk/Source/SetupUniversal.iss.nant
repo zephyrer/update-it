@@ -229,6 +229,8 @@ Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestD
 Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
 
+Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist"; Components: sources; Flags: ignoreversion recursesubdirs
+
 Source: "..\UpdateIt.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2008.sln"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2008.build"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
