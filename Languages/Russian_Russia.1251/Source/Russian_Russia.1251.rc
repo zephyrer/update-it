@@ -28,7 +28,7 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Ўаг 4 из 4 Ч ќбработка файлов"
+CAPTION "UpdateIt! Pro Ч Ўаг 4 из 4 Ч ќбработка файлов"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
@@ -47,7 +47,7 @@ END
 
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Ўаг 1 из 4 Ч ¬ыбор опций"
+CAPTION "UpdateIt! Pro Ч Ўаг 1 из 4 Ч ¬ыбор опций"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "»сходна€ папка",IDC_STATIC,4,4,326,62,WS_GROUP
@@ -80,7 +80,7 @@ END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Ўаг 2 из 4 Ч ¬ыбор файлов"
+CAPTION "UpdateIt! Pro Ч Ўаг 2 из 4 Ч ¬ыбор файлов"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
@@ -92,7 +92,7 @@ END
 
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Ўаг 3 из 4 Ч ¬ыбор действи€"
+CAPTION "UpdateIt! Pro Ч Ўаг 3 из 4 Ч ¬ыбор действи€"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "ƒействие дл€ выполнени€",IDC_STATIC,4,4,164,42,WS_GROUP
@@ -146,7 +146,7 @@ END
 
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Ч Ўаг 0 из 4 Ч ƒобро пожаловать!"
+CAPTION "UpdateIt! Pro Ч Ўаг 0 из 4 Ч ƒобро пожаловать!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
@@ -396,7 +396,7 @@ BEGIN
     IDS_MOVING_FILES        "ѕеремещение файлов в целевую папку..."
     IDS_ALL_DONE            "√отово.  ликните «акончить дл€ завершени€ работы ""волшебника""."
     IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
-    IDS_VERSION_FORMAT      """¬олшебник"" UpdateIt! Ц верси€ %s\nЁто приложение €вл€етс€ частью коллекции PowerGadgets"
+    IDS_VERSION_FORMAT      """¬олшебник"" UpdateIt! Pro Ц верси€ %s\nЁто приложение €вл€етс€ частью коллекции PowerGadgets"
     IDS_ZIPPING_FOLDER      "—жатие целевой папки..."
     IDS_SENDING_MAIL        "ќтправка сжатой папки..."
     IDS_SEND_FAILED         "Ќе удалось отправить сообщение по электронной почте!"
@@ -472,7 +472,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "UpdateIt!"
+    AFX_IDS_APP_TITLE       "UpdateIt! Pro"
 END
 
 #endif    // Russian resources
