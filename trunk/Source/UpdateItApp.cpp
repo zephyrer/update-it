@@ -48,6 +48,11 @@
 #include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// misc defines
+
+#define SZ_MUTEX_APP_INST_NAME _T("UpdateIt.Instance.03E2CBEF-1504-45d8-8BD2-79719D32E29F")
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // avoid unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
@@ -81,7 +86,8 @@ END_MESSAGE_MAP()
 // construction/destruction
 
 CUpdateItApp::CUpdateItApp(void):
-m_hLangDLL(NULL)
+m_hLangDLL(NULL),
+m_hMutexAppInst(NULL)
 {
 	_tzset();
 
@@ -298,11 +304,28 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 
 BOOL CUpdateItApp::InitInstance(void)
 {
+	SetRegistryKey(_T("Elijah Zarezky"));
+
+	SetCurrentAfxLanguage();
+	SetCurrentLanguage();
+
+	m_hMutexAppInst = ::CreateMutex(NULL, TRUE, SZ_MUTEX_APP_INST_NAME);
+	if (m_hMutexAppInst == NULL)
+	{
+		AfxMessageBox(IDS_APP_INIT_FAILED, MB_OK | MB_ICONSTOP);
+		return (FALSE);
+	}
+	else if (::GetLastError() == ERROR_ALREADY_EXISTS)
+	{
+		if (AfxMessageBox(IDS_OTHER_APP_INSTANCE, MB_YESNO | MB_ICONWARNING) == IDNO)
+		{
+			return (FALSE);
+		}
+	}
+
 	::InitCommonControls();
 	VERIFY(SUCCEEDED(::CoInitialize(NULL)));
 	VERIFY(AfxSocketInit());
-
-	SetRegistryKey(_T("Elijah Zarezky"));
 
 	CWnd ownerWindow;
 	CString strClassName(AfxRegisterWndClass(CS_VREDRAW | CS_HREDRAW));
@@ -334,13 +357,14 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	::CoUninitialize();
 
+	::CloseHandle(m_hMutexAppInst);
+	m_hMutexAppInst = NULL;
+
 	return (FALSE);
 }
 
 int CUpdateItApp::ExitInstance(void)
 {
-	::CoUninitialize();
-
 	return (__super::ExitInstance());
 }
 
@@ -471,7 +495,7 @@ bool CUpdateItApp::GetAfxLanguagePath(LPTSTR pszDest)
 		::GetModuleFileName(AfxGetInstanceHandle(), szExeDir, _countof(szExeDir));
 		::PathRemoveFileSpec(szExeDir);
 		CString strRedistPath(::PathFindFileName(szTempPath));
-		strRedistPath.Insert(0, _T("..\\..\\..\\..\\Redist\\"));
+		strRedistPath.Insert(0, _T("..\\..\\..\\..\\Redist\\Microsoft.VC90.MFCLOC"));
 		::PathCombine(pszDest, szExeDir, strRedistPath);
 #else
 		GetAbsolutePath(pszDest, szTempPath);
@@ -635,6 +659,7 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 		// ...and then dump own unique members
 		dumpCtx << "m_hLangDLL = " << m_hLangDLL;
 		dumpCtx << "\nm_argsParser = " << m_argsParser;
+		dumpCtx << "\nm_hMutexAppInst = " << m_hMutexAppInst;
 	}
 	catch (CFileException* pXcpt)
 	{

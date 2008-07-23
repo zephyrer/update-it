@@ -61,6 +61,7 @@ public:
 public:
 	HINSTANCE m_hLangDLL;
 	CArgsParser m_argsParser;
+	HANDLE m_hMutexAppInst;
 
 // implementation helpers
 private:

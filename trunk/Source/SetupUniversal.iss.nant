@@ -40,6 +40,7 @@ WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
 LicenseFile=ApacheLicense.rtf
 LanguageDetectionMethod=none
 ShowLanguageDialog=yes
+AppMutex=UpdateIt.Instance.03E2CBEF-1504-45d8-8BD2-79719D32E29F
 
 [Languages]
 ; English
@@ -142,6 +143,15 @@ begin
 
 	Result := True;
 end;
+
+[InstallDelete]
+Type: files; Name: "{app}\msvcr71.dll"
+Type: files; Name: "{app}\msvcp71.dll"
+Type: files; Name: "{app}\mfc71.dll"
+Type: files; Name: "{app}\mfc71enu.dll"
+Type: files; Name: "{app}\mfc71rus.dll"
+Type: filesandordirs; Name: "{app}\Languages"
+Type: filesandordirs; Name: "{app}\Sources"
 
 [Types]
 Name: "typical"; Description: "Typical Installation"; Languages: en
