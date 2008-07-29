@@ -86,9 +86,14 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 #endif	// _MSC_VER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// manifest dependencies
+// entry-point symbol for the Unicode builds
 
-#if (_MSC_VER == 1500)
+#if defined(UNICODE) || defined(_UNICODE)
+#pragma comment(linker, "/entry:wmainCRTStartup")
+#endif	// UNICODE
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// manifest dependencies
 
 #if defined(_DEBUG)
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.VC90.DebugCRT' version='9.0.21022.8' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'\"")
@@ -98,7 +103,5 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.VC90.MFC' version='9.0.21022.8' processorArchitecture='x86' publicKeyToken='1fc8b3b9a1e18e3b'\"")
 #endif   // _DEBUG
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
-
-#endif   // _MSC_VER
 
 // end of file
