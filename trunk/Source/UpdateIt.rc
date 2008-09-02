@@ -8,7 +8,6 @@
 // Generated from the TEXTINCLUDE 2 resource.
 //
 #include "afxres.h"
-
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
@@ -34,7 +33,7 @@ END
 
 2 TEXTINCLUDE 
 BEGIN
-    "#include ""afxres.h""\r\0"
+    "#include ""afxres.h\0"
 END
 
 3 TEXTINCLUDE 
@@ -55,7 +54,7 @@ BEGIN
     "\r\n"
     "#include ""VersionInfo.rc""\r\n"
     "\r\n"
-    "#endif    // English (U.S.) resources\r\0"
+    "#endif    // English (U.S.) resources\0"
 END
 
 #endif    // APSTUDIO_INVOKED
@@ -131,8 +130,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 #include "VersionInfo.rc"
 
-#endif    // English (U.S.) resources
-
+#endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 
