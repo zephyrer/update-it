@@ -152,6 +152,7 @@ Type: files; Name: "{app}\mfc71enu.dll"
 Type: files; Name: "{app}\mfc71rus.dll"
 Type: filesandordirs; Name: "{app}\Languages"
 Type: filesandordirs; Name: "{app}\Sources"
+Type: files; Name: "{app}\UpdateIt.chm"
 
 [Types]
 Name: "typical"; Description: "Typical Installation"; Languages: en

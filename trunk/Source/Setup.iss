@@ -106,6 +106,7 @@ Type: files; Name: "{app}\mfc71.dll"
 Type: files; Name: "{app}\mfc71enu.dll"
 Type: files; Name: "{app}\mfc71rus.dll"
 Type: filesandordirs; Name: "{app}\Languages"
+Type: files; Name: "{app}\UpdateIt.chm"
 
 [Files]
 Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
