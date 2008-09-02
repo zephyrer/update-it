@@ -319,6 +319,7 @@ BOOL CUpdateItApp::InitInstance(void)
 	{
 		if (AfxMessageBox(IDS_OTHER_APP_INSTANCE, MB_YESNO | MB_ICONWARNING) == IDNO)
 		{
+			::CloseHandle(m_hMutexAppInst);
 			return (FALSE);
 		}
 	}
