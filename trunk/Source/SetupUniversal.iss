@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4386
+AppVerName=UpdateIt! 1.4.4387
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4386
+AppVersion=1.4.4387
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4386-setup-universal
-VersionInfoVersion=1.4.4386
+OutputBaseFilename=UpdateIt-1.4.4387-setup-universal
+VersionInfoVersion=1.4.4387
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp

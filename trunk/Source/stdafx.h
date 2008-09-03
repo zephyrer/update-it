@@ -118,7 +118,21 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
 #include "../../Repository/AfxGadgets/Source/ArgsParser.h"
+
+// Microsoft PSDK version 6.0A conflicts with OpenSSL version 0.9.8h:
+// <wincrypt.h> contains "#define OCSP_RESPONSE ((LPCSTR) 67)" and
+// <ossl_typ.h> contains "typedef struct ocsp_response_st OCSP_RESPONSE;"
+// hence we use the following trick to avoid compilation errors
+
+#if defined(OCSP_RESPONSE)
+#pragma push_macro("OCSP_RESPONSE")
+#undef OCSP_RESPONSE
+#define POP_MACRO_OCSP_RESPONSE
+#endif   // OCSP_RESPONSE
 #include "../../Repository/Naughter/Source/PJNSMTP.h"
+#if defined(POP_MACRO_OCSP_RESPONSE)
+#pragma pop_macro("OCSP_RESPONSE")
+#endif   // POP_MACRO_OCSP_RESPONSE
 
 #if (_MFC_VER < 0x0700)
 #include "../../Repository/atlmfc71/Source/FileDialogEx.h"

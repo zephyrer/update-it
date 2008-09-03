@@ -211,7 +211,7 @@ BEGIN
                     132,10,SS_CENTERIMAGE
     RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,174,180,10,
                     SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8g (19 Oct 2007)",
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8h (28 May 2008)",
                     IDC_STATIC,16,190,216,16
     RTEXT           "Web Page",IDC_LINK_OPEN_SSL,236,196,94,10,
                     SS_CENTERIMAGE
