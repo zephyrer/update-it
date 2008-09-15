@@ -38,12 +38,12 @@ VS_VERSION_INFO VERSIONINFO
          BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Elijah Zarezky"
-            VALUE "FileDescription", "UpdateIt! Pro Application Executable"
+            VALUE "FileDescription", "UpdateIt! Application Executable"
             VALUE "FileVersion", "1.4.4387"
-            VALUE "InternalName", "UpdateItPro"
+            VALUE "InternalName", "UpdateIt"
             VALUE "LegalCopyright", "Copyright © 2002–2008 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
-            VALUE "OriginalFilename", "UpdateItPro.exe"
+            VALUE "OriginalFilename", "UpdateIt.exe"
             VALUE "ProductName", "Power Gadgets"
             VALUE "ProductVersion", "1.4.0"
          END
