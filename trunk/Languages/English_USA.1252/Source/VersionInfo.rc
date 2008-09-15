@@ -20,7 +20,7 @@
 #include <winver.h>
 
 VS_VERSION_INFO VERSIONINFO
-   FILEVERSION 1,4,4387,197
+   FILEVERSION 1,4,4399,200
    PRODUCTVERSION 1,4,0,0
    FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
 #if defined(_DEBUG)
@@ -39,7 +39,7 @@ VS_VERSION_INFO VERSIONINFO
             VALUE "Comments", "none"
             VALUE "CompanyName", "Elijah Zarezky"
             VALUE "FileDescription", "English_USA.1252 library module"
-            VALUE "FileVersion", "1.4.4387"
+            VALUE "FileVersion", "1.4.4399"
             VALUE "InternalName", "English_USA.1252"
             VALUE "LegalCopyright", "Copyright © 2007-2008 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
