@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4399
+AppVerName=UpdateIt! 1.4.4402
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4399
+AppVersion=1.4.4402
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4399-setup
-VersionInfoVersion=1.4.4399
+OutputBaseFilename=UpdateIt-1.4.4402-setup
+VersionInfoVersion=1.4.4402
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -78,19 +78,19 @@ begin
 	begin
 		if (IsWinSxS()) then
 		begin
-			AfxLangPath := ExpandConstant('{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC');
+			AfxLangPath := '.\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC\';
 		end
 		else begin
-			AfxLangPath := ExpandConstant('{app}');
+			AfxLangPath := '.\';
 		end;
 
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
 
-		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', AfxLangPath + '\mfc90enu.dll');
-		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', ExpandConstant('{app}\English_USA.1252.dll'));
-		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', AfxLangPath + '\mfc90rus.dll');
-		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', ExpandConstant('{app}\Russian_Russia.1251.dll'));
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', AfxLangPath + 'mfc90enu.dll');
+		RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', '.\English_USA.1252.dll');
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', AfxLangPath + 'mfc90rus.dll');
+		RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', '.\Russian_Russia.1251.dll');
 		
 		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
 		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
@@ -144,7 +144,7 @@ Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}\Microsoft.VC9
 Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest"; DestDir: "{app}\Microsoft.VC90.MFC"; MinVersion: 0,5.01.2600
 
 [Icons]
-Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"
+Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
 Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: en
 Name: "{group}\Документация (на английском)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: ru
 Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: en
@@ -155,8 +155,8 @@ Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"; Languages:
 Name: "{group}\UpdateIt! в Интернет"; Filename: "{app}\UpdateIt.url"; Languages: ru
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"; Languages: en
 Name: "{group}\Удалить UpdateIt!"; Filename: "{uninstallexe}"; Languages: ru
-Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; Tasks: quicklaunchicon
+Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"; Tasks: quicklaunchicon
 
 [INI]
 Filename: "{app}\UpdateIt.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://zarezky.spb.ru/projects/update_it.html"
