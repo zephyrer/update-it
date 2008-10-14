@@ -179,7 +179,7 @@ BEGIN
                     174,148,10,SS_CENTERIMAGE
     RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,174,164,10,
                     SS_CENTERIMAGE
-    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v0.9.8h (28 May 2008)",
+    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v0.9.8i (15 сентября 2008)",
                     IDC_STATIC,16,190,216,16
     RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,236,196,94,10,
                     SS_CENTERIMAGE
