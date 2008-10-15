@@ -138,6 +138,8 @@ using std::max;
 #include "../../Repository/atlmfc71/Source/FileDialogEx.h"
 #endif   // _MFC_VER
 
+#include <FreeImagePlus.h>
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 // PCH generation finish
 

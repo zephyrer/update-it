@@ -12,12 +12,13 @@
 #define IDR_ZIPPING                     110
 #define IDR_FILEUPLOAD                  111
 #define IDR_FILESEND                    112
+#define IDR_SOFTPEDIA_AWARD             113
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        115
+#define _APS_NEXT_RESOURCE_VALUE        117
 #define _APS_NEXT_COMMAND_VALUE         40033
 #define _APS_NEXT_CONTROL_VALUE         1055
 #define _APS_NEXT_SYMED_VALUE           115

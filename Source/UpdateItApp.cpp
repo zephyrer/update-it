@@ -328,6 +328,8 @@ BOOL CUpdateItApp::InitInstance(void)
 	VERIFY(SUCCEEDED(::CoInitialize(NULL)));
 	VERIFY(AfxSocketInit());
 
+	FreeImage_Initialise(TRUE);
+
 	CWnd ownerWindow;
 	CString strClassName(AfxRegisterWndClass(CS_VREDRAW | CS_HREDRAW));
 	CString strCaption(MAKEINTRESOURCE(AFX_IDS_APP_TITLE));
@@ -355,6 +357,8 @@ BOOL CUpdateItApp::InitInstance(void)
 
 	::DestroyIcon(hIcon);
 	::DestroyIcon(hSmIcon);
+
+	FreeImage_DeInitialise();
 
 	::CoUninitialize();
 
@@ -425,7 +429,7 @@ bool CUpdateItApp::RegQueryLanguagePath(LPCTSTR pszValueName, LPTSTR pszDest, UL
 		::RegCloseKey(regKeyLangs.Detach());
 	}
 
-	return (nError == ERROR_SUCCESS && _tcslen(pszDest) > 0 && ::PathFileExists(pszDest));
+	return (nError == ERROR_SUCCESS && _tcslen(pszDest) > 0 /*&& ::PathFileExists(pszDest)*/);
 }
 
 #if defined(_DEBUG)

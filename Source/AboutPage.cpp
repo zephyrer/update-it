@@ -70,18 +70,24 @@ IMPLEMENT_DYNAMIC(CAboutPage, CBetterPropPage)
 // message map
 
 BEGIN_MESSAGE_MAP(CAboutPage, CBetterPropPage)
+	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// construction
+// construction/destruction
 
 //! Default ctor. Invokes inherited ctor first and then sets the PSP_PREMATURE
 //! flag, which causes the page to be created when the property sheet is created.
 //! @brief constructs a CAboutPage object
 CAboutPage::CAboutPage(void):
-CBetterPropPage(IDD_PAGE_ABOUT)
+CBetterPropPage(IDD_PAGE_ABOUT),
+m_resSoftpediaAward(AfxGetInstanceHandle(), _T("PNG_FILE"), IDR_SOFTPEDIA_AWARD)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
+}
+
+CAboutPage::~CAboutPage(void)
+{
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,6 +172,24 @@ void CAboutPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LINK_RSA, m_linkRSA);
 	DDX_Control(pDX, IDC_LINK_NAUGHTER, m_linkNaughter);
 	DDX_Control(pDX, IDC_LINK_OPEN_SSL, m_linkOpenSSL);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// message map functions
+
+void CAboutPage::OnPaint(void)
+{
+	__super::OnPaint();
+
+	CClientDC dcClient(this);
+
+	fipMemoryIO memIO(reinterpret_cast<BYTE*>(m_resSoftpediaAward.GetData()), m_resSoftpediaAward.GetSize());
+	fipWinImage imageSoftpedia;
+	imageSoftpedia.loadFromMemory(memIO);
+	RECT rcImage = { 10, 10, 10 + imageSoftpedia.getWidth(), 10 + imageSoftpedia.getHeight() };
+	COLORREF crBack = ::GetSysColor(COLOR_3DFACE);
+	RGBQUAD rgbq = { GetBValue(crBack), GetGValue(crBack), GetRValue(crBack), 0 };
+	imageSoftpedia.drawEx(dcClient, rcImage, FALSE, &rgbq);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
