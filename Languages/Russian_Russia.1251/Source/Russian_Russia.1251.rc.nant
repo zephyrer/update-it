@@ -149,12 +149,12 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "@APP_NAME@ — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
-    LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
+    LTEXT           "",IDC_STATIC_VERSION,4,4,194,16
     LTEXT           "Авторские права © 2002-2008 Илья Зарецкий",IDC_STATIC,4,
                     24,160,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_ZAREZKY,166,24,164,10,
                     SS_CENTERIMAGE
-    LTEXT           "Используемые библиотеки:",IDC_STATIC,4,48,326,10,
+    LTEXT           "Используемые библиотеки:",IDC_STATIC,4,48,194,10,
                     SS_CENTERIMAGE
     LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.3 (18 июля 2005)",
                     IDC_STATIC,16,62,314,16
