@@ -159,10 +159,10 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
-    LTEXT           "",IDC_STATIC_VERSION,4,4,326,16
+    LTEXT           "",IDC_STATIC_VERSION,4,4,194,16
     LTEXT           "Copyright © 2002-2008 by Elijah Zarezky",IDC_STATIC,4,24,136,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
-    LTEXT           "Other credits:",IDC_STATIC,4,48,326,10,SS_CENTERIMAGE
+    LTEXT           "Other credits:",IDC_STATIC,4,48,194,10,SS_CENTERIMAGE
     LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",IDC_STATIC,16,62,314,16
     LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,SS_CENTERIMAGE
