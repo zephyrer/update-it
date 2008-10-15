@@ -23,15 +23,98 @@
 #if !defined(__AboutPage_h)
 #define __AboutPage_h
 
+class CCustomResourceBase
+{
+
+// construction/destruction
+
+protected:
+
+	CCustomResourceBase(HINSTANCE hInstRes, LPCTSTR pszType, LPCTSTR pszName):
+	m_hInstRes(hInstRes),
+	m_strType(pszType),
+	m_pszName(IS_INTRESOURCE(pszName) ? pszName : _tcsdup(pszName)),
+	m_hrsrcInfo(NULL),
+	m_hMemBlock(NULL),
+	m_pvDataPtr(NULL)
+	{
+		ASSERT(m_pszName != NULL);
+		
+		m_hrsrcInfo = ::FindResource(m_hInstRes, m_pszName, m_strType);
+		m_hMemBlock = ::LoadResource(m_hInstRes, m_hrsrcInfo);
+		m_pvDataPtr = ::LockResource(m_hMemBlock);
+	}
+
+	virtual ~CCustomResourceBase(void)
+	{
+		if (m_hMemBlock != NULL)
+		{
+			UnlockResource(m_hMemBlock);
+			::FreeResource(m_hMemBlock);
+		}
+
+		if (!IS_INTRESOURCE(m_pszName))
+		{
+			free(const_cast<LPTSTR>(m_pszName));
+		}
+	}
+
+// operations
+
+public:
+
+	void* GetData(void) const
+	{
+		return (m_pvDataPtr);
+	}
+
+	DWORD GetSize(void) const
+	{
+		return (::SizeofResource(m_hInstRes, m_hrsrcInfo));
+	}
+
+// attributes
+
+protected:
+
+	HINSTANCE m_hInstRes;
+	CString m_strType;
+	LPCTSTR m_pszName;
+	HRSRC m_hrsrcInfo;
+	HGLOBAL m_hMemBlock;
+	void* m_pvDataPtr;
+
+};
+
+class CCustomResource: public CCustomResourceBase
+{
+
+// construction
+
+public:
+
+	CCustomResource(HINSTANCE hInstRes, LPCTSTR pszType, UINT uID):
+	CCustomResourceBase(hInstRes, pszType, MAKEINTRESOURCE(uID))
+	{
+	}
+
+	CCustomResource(HINSTANCE hInstRes, LPCTSTR pszType, LPCTSTR pszName):
+	CCustomResourceBase(hInstRes, pszType, pszName)
+	{
+	}
+
+};
+
 //! Encapsulates the "Weclome!" step of the UpdateIt! wizard.
 class CAboutPage: public CBetterPropPage
 {
 	DECLARE_DYNAMIC(CAboutPage)
 	DECLARE_MESSAGE_MAP()
 
-// construction
+// construction/destruction
 public:
 	CAboutPage(void);
+	virtual ~CAboutPage(void);
 
 // overridables
 public:
@@ -39,6 +122,10 @@ public:
 	virtual BOOL OnSetActive(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+
+// message map functions
+protected:
+	afx_msg void OnPaint(void);
 
 // attributes
 public:
@@ -48,6 +135,7 @@ public:
 	CHyperLink m_linkRSA;
 	CHyperLink m_linkNaughter;
 	CHyperLink m_linkOpenSSL;
+	CCustomResource m_resSoftpediaAward;
 
 // diagnostic services
 #if defined(_DEBUG)

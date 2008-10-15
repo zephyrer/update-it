@@ -45,8 +45,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories=".\OpenSSL\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories=".\OpenSSL\include;..\Repository\FreeImage\Include;..\Repository\FreeImagePlus\Source"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;FREEIMAGE_LIB"
 				StringPooling="true"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -142,8 +142,8 @@
 				Optimization="1"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="true"
-				AdditionalIncludeDirectories=".\OpenSSL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				AdditionalIncludeDirectories=".\OpenSSL\include;..\Repository\FreeImage\Include;..\Repository\FreeImagePlus\Source"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;FREEIMAGE_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				StructMemberAlignment="3"
@@ -235,8 +235,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories=".\OpenSSL\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories=".\OpenSSL\include;..\Repository\FreeImage\Include;..\Repository\FreeImagePlus\Source"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;FREEIMAGE_LIB"
 				StringPooling="true"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -332,8 +332,8 @@
 				Optimization="1"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="true"
-				AdditionalIncludeDirectories=".\OpenSSL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				AdditionalIncludeDirectories=".\OpenSSL\include;..\Repository\FreeImage\Include;..\Repository\FreeImagePlus\Source"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;FREEIMAGE_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				StructMemberAlignment="3"
@@ -640,6 +640,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\BinRes\Move2.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\SoftpediaCleanAward.png"
 				>
 			</File>
 			<File
