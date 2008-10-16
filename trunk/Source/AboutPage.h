@@ -129,6 +129,7 @@ protected:
 
 // attributes
 public:
+	CStatic m_textVersion;
 	CHyperLink m_linkZarezky;
 	CHyperLink m_linkZLib;
 	CHyperLink m_linkArtpol;
