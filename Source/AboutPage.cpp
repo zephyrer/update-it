@@ -166,6 +166,7 @@ void CAboutPage::DoDataExchange(CDataExchange* pDX)
 {
 	__super::DoDataExchange(pDX);
 
+	DDX_Control(pDX, IDC_STATIC_VERSION, m_textVersion);
 	DDX_Control(pDX, IDC_LINK_ZAREZKY, m_linkZarezky);
 	DDX_Control(pDX, IDC_LINK_ZLIB, m_linkZLib);
 	DDX_Control(pDX, IDC_LINK_ARTPOL, m_linkArtpol);
@@ -186,10 +187,22 @@ void CAboutPage::OnPaint(void)
 	fipMemoryIO memIO(reinterpret_cast<BYTE*>(m_resSoftpediaAward.GetData()), m_resSoftpediaAward.GetSize());
 	fipWinImage imageSoftpedia;
 	imageSoftpedia.loadFromMemory(memIO);
-	RECT rcImage = { 10, 10, 10 + imageSoftpedia.getWidth(), 10 + imageSoftpedia.getHeight() };
-	COLORREF crBack = ::GetSysColor(COLOR_3DFACE);
-	RGBQUAD rgbq = { GetBValue(crBack), GetGValue(crBack), GetRValue(crBack), 0 };
-	imageSoftpedia.drawEx(dcClient, rcImage, FALSE, &rgbq);
+	
+	RECT rcVersion = { 0 };
+	m_textVersion.GetWindowRect(&rcVersion);
+	ScreenToClient(&rcVersion);
+	
+	RECT rcImage = { 0 };
+	GetClientRect(&rcImage);
+	rcImage.right -= rcVersion.left;
+	rcImage.left = rcImage.right - imageSoftpedia.getWidth();
+	rcImage.top = rcVersion.top;
+	rcImage.bottom = rcImage.top + imageSoftpedia.getHeight();
+	
+	COLORREF cr3DFace = ::GetSysColor(COLOR_3DFACE);
+	RGBQUAD rgbqBack = { GetBValue(cr3DFace), GetGValue(cr3DFace), GetRValue(cr3DFace), 0 };
+	
+	imageSoftpedia.drawEx(dcClient, rcImage, FALSE, &rgbqBack);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,6 +221,7 @@ void CAboutPage::AssertValid(void) const
 	__super::AssertValid();
 
 	// ...and then verify own state as well
+	ASSERT_VALID(&m_textVersion);
 	ASSERT_VALID(&m_linkZarezky);
 	ASSERT_VALID(&m_linkZLib);
 	ASSERT_VALID(&m_linkArtpol);
@@ -228,7 +242,8 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
-		dumpCtx << "m_linkZarezky = " << m_linkZarezky;
+		dumpCtx << "m_textVersion = " << m_textVersion;
+		dumpCtx << "\nm_linkZarezky = " << m_linkZarezky;
 		dumpCtx << "\nm_linkZLib = " << m_linkZLib;
 		dumpCtx << "\nm_linkArtpol = " << m_linkArtpol;
 		dumpCtx << "\nm_linkRSA = " << m_linkRSA;

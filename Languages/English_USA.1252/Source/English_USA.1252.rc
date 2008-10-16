@@ -159,24 +159,24 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
-    LTEXT           "",IDC_STATIC_VERSION,4,4,194,16
-    LTEXT           "Copyright © 2002-2008 by Elijah Zarezky",IDC_STATIC,4,24,136,10,SS_CENTERIMAGE
-    RTEXT           "Web Page",IDC_LINK_ZAREZKY,142,24,188,10,SS_CENTERIMAGE
-    LTEXT           "Other credits:",IDC_STATIC,4,48,194,10,SS_CENTERIMAGE
-    LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",IDC_STATIC,16,62,314,16
-    LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,80,182,10,SS_CENTERIMAGE
-    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,80,130,10,SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 3.2.0 (2007-12-15)",IDC_STATIC,16,96,314,16
-    LTEXT           "Copyright © 2000-2007 by Tadeusz Dracz",IDC_STATIC,16,114,140,10,SS_CENTERIMAGE
-    RTEXT           "Web Page",IDC_LINK_ARTPOL,158,114,172,10,SS_CENTERIMAGE
-    LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,130,314,10
-    LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,140,158,10,SS_CENTERIMAGE
-    RTEXT           "Web Page",IDC_LINK_RSA,176,140,154,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.80 (16 August 2008)",IDC_STATIC,16,156,314,16
-    LTEXT           "Copyright © 1998-2008 by PJ Naughter",IDC_STATIC,16,174,132,10,SS_CENTERIMAGE
-    RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,174,180,10,SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8i (15 Sep 2008)",IDC_STATIC,16,190,216,16
-    RTEXT           "Web Page",IDC_LINK_OPEN_SSL,236,196,94,10,SS_CENTERIMAGE
+    LTEXT           "",IDC_STATIC_VERSION,4,4,202,16
+    LTEXT           "Copyright © 2002-2008 by Elijah Zarezky",IDC_STATIC,4,24,202,10,SS_CENTERIMAGE
+    LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,202,10,SS_CENTERIMAGE
+    LTEXT           "Other credits:",IDC_STATIC,4,74,194,10,SS_CENTERIMAGE
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",IDC_STATIC,16,88,314,16
+    LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,182,10,SS_CENTERIMAGE
+    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,106,130,10,SS_CENTERIMAGE
+    LTEXT           "ZipArchive library\nversion 3.2.0 (2007-12-15)",IDC_STATIC,16,122,314,16
+    LTEXT           "Copyright © 2000-2007 by Tadeusz Dracz",IDC_STATIC,16,140,140,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_ARTPOL,158,140,172,10,SS_CENTERIMAGE
+    LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,156,314,10
+    LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,158,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_RSA,176,166,154,10,SS_CENTERIMAGE
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.80 (16 August 2008)",IDC_STATIC,16,182,314,16
+    LTEXT           "Copyright © 1998-2008 by PJ Naughter",IDC_STATIC,16,200,132,10,SS_CENTERIMAGE
+    RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,200,180,10,SS_CENTERIMAGE
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8i (15 Sep 2008)",IDC_STATIC,16,216,216,16
+    RTEXT           "Web Page",IDC_LINK_OPEN_SSL,236,222,94,10,SS_CENTERIMAGE
 END
 
 IDD_AUTHENTICATION DIALOGEX 0, 0, 168, 146

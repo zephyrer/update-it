@@ -122,24 +122,24 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
-    LTEXT           "",IDC_STATIC_VERSION,4,4,194,16
-    LTEXT           "Авторские права © 2002-2008 Илья Зарецкий",IDC_STATIC,4,24,160,10,SS_CENTERIMAGE
-    RTEXT           "Веб-страница",IDC_LINK_ZAREZKY,166,24,164,10,SS_CENTERIMAGE
-    LTEXT           "Используемые библиотеки:",IDC_STATIC,4,48,194,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.3 (18 июля 2005)",IDC_STATIC,16,62,314,16
-    LTEXT           "Авторские права © 1995-2005 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,80,202,10,SS_CENTERIMAGE
-    RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,220,80,110,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека ZipArchive,\nверсия 3.2.0 (15 декабря 2007)",IDC_STATIC,16,96,314,16
-    LTEXT           "Авторские права © 2000-2007 Tadeusz Dracz",IDC_STATIC,16,114,156,10,SS_CENTERIMAGE
-    RTEXT           "Веб-страница",IDC_LINK_ARTPOL,174,114,156,10,SS_CENTERIMAGE
-    LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,130,314,10
-    LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,140,184,10,SS_CENTERIMAGE
-    RTEXT           "Веб-страница",IDC_LINK_RSA,202,140,128,10,SS_CENTERIMAGE
-    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.80 (16 августа 2008)",IDC_STATIC,16,156,314,16
-    LTEXT           "Авторские права © 1998-2008 PJ Naughter",IDC_STATIC,16,174,148,10,SS_CENTERIMAGE
-    RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,174,164,10,SS_CENTERIMAGE
-    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v0.9.8i (15 сентября 2008)",IDC_STATIC,16,190,216,16
-    RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,236,196,94,10,SS_CENTERIMAGE
+    LTEXT           "",IDC_STATIC_VERSION,4,4,202,16
+    LTEXT           "Авторские права © 2002-2008 Илья Зарецкий",IDC_STATIC,4,24,202,10,SS_CENTERIMAGE
+    LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,202,10,SS_CENTERIMAGE
+    LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,194,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.3 (18 июля 2005)",IDC_STATIC,16,88,314,16
+    LTEXT           "Авторские права © 1995-2005 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,202,10,SS_CENTERIMAGE
+    RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,220,106,110,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека ZipArchive,\nверсия 3.2.0 (15 декабря 2007)",IDC_STATIC,16,122,314,16
+    LTEXT           "Авторские права © 2000-2007 Tadeusz Dracz",IDC_STATIC,16,140,156,10,SS_CENTERIMAGE
+    RTEXT           "Веб-страница",IDC_LINK_ARTPOL,174,140,156,10,SS_CENTERIMAGE
+    LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,156,314,10
+    LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,184,10,SS_CENTERIMAGE
+    RTEXT           "Веб-страница",IDC_LINK_RSA,202,166,128,10,SS_CENTERIMAGE
+    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.80 (16 августа 2008)",IDC_STATIC,16,182,314,16
+    LTEXT           "Авторские права © 1998-2008 PJ Naughter",IDC_STATIC,16,200,148,10,SS_CENTERIMAGE
+    RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,200,164,10,SS_CENTERIMAGE
+    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v0.9.8i (15 сентября 2008)",IDC_STATIC,16,216,216,16
+    RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,236,222,94,10,SS_CENTERIMAGE
 END
 
 IDD_AUTHENTICATION DIALOGEX 0, 0, 168, 146
