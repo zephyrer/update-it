@@ -43,9 +43,9 @@ ShowLanguageDialog=yes
 AppMutex=UpdateIt.Instance.03E2CBEF-1504-45d8-8BD2-79719D32E29F
 
 [Languages]
-; English
+;; English
 Name: "en"; MessagesFile: "compiler:Default.isl"
-; Russian
+;; Russian
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"; LicenseFile: ".\ApacheLicense.rtf"
 
 [LangOptions]
