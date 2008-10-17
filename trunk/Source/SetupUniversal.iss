@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4402
+AppVerName=UpdateIt! 1.4.4433
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4402
+AppVersion=1.4.4433
 DefaultDirName={pf}\PowerGadgets\UpdateIt
 DefaultGroupName=PowerGadgets\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4402-setup-universal
-VersionInfoVersion=1.4.4402
+OutputBaseFilename=UpdateIt-1.4.4433-setup-universal
+VersionInfoVersion=1.4.4433
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
@@ -291,7 +291,7 @@ Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components:
 Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CleanDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
-Source: "..\FreeImage\FreeImage.2008.vcproj" DestDir: "{app}\Sources\UpdateIt\FreeImage"; Components: sources; Flags: ignoreversion
+Source: "..\FreeImage\FreeImage.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\FreeImage"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
