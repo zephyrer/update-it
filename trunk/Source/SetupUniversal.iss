@@ -43,9 +43,9 @@ ShowLanguageDialog=yes
 AppMutex=UpdateIt.Instance.03E2CBEF-1504-45d8-8BD2-79719D32E29F
 
 [Languages]
-; English
+;; English
 Name: "en"; MessagesFile: "compiler:Default.isl"
-; Russian
+;; Russian
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"; LicenseFile: ".\ApacheLicense.rtf"
 
 [LangOptions]
@@ -80,23 +80,23 @@ end;
 
 procedure CurPageChanged(CurPageID: Integer);
 var
-  OptionsPage: TWizardPage;
-  PageSurface: TNewNotebookPage;
-  SetupTypesCombo: TComboBox;
+	OptionsPage: TWizardPage;
+	PageSurface: TNewNotebookPage;
+	SetupTypesCombo: TComboBox;
 begin
-  if (CurPageID = wpSelectComponents) and (ActiveLanguage() = 'ru') then
-  begin
-    OptionsPage := PageFromID(CurPageID);
-    PageSurface := OptionsPage.Surface;
-    SetupTypesCombo := TComboBox(PageSurface.Controls[2]);
-    if (SetupTypesCombo <> nil) then
-    begin
-      if (SetupTypesCombo.Items[3] <> 'Выборочная установка') then
-      begin
-        SetupTypesCombo.Items[3] := 'Выборочная установка';
-      end;
-    end;
-  end;
+	if (CurPageID = wpSelectComponents) and (ActiveLanguage() = 'ru') then
+	begin
+		OptionsPage := PageFromID(CurPageID);
+		PageSurface := OptionsPage.Surface;
+		SetupTypesCombo := TComboBox(PageSurface.Controls[2]);
+		if (SetupTypesCombo <> nil) then
+		begin
+			if (SetupTypesCombo.Items[3] <> 'Выборочная установка') then
+			begin
+				SetupTypesCombo.Items[3] := 'Выборочная установка';
+			end;
+		end;
+	end;
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
@@ -219,14 +219,6 @@ Source: "..\..\Repository\Naughter\Naughter.2008.vcproj"; DestDir: "{app}\Source
 Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
-Source: "..\OpenSSL\include\openssl\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\include\openssl"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\ssleay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
-
 Source: "..\..\Repository\ZipArchive\ZipArchive.2008.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources; Flags: ignoreversion
@@ -235,10 +227,60 @@ Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir
 Source: "..\..\Repository\zlib\zlib.2008.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources; Flags: ignoreversion
 
-Source: "..\Languages\English_USA.1252\English_USA.1252.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
-Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
-Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\libjpeg.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg\Source"; Components: sources; Flags: ignoreversion
+
+Source: "..\..\Repository\Graphics\libmng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libmng\libmng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libmng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libmng\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libmng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libmng\Source"; Components: sources; Flags: ignoreversion
+
+Source: "..\..\Repository\Graphics\libpng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libpng\libpng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libpng\libpng.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libpng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libpng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libpng\Source"; Components: sources; Flags: ignoreversion
+
+Source: "..\..\Repository\Graphics\libtiff\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libtiff\libtiff.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libtiff\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libtiff\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libtiff\HTML"; Components: sources; Flags: ignoreversion recursesubdirs
+Source: "..\..\Repository\Graphics\libtiff\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libtiff\Source"; Components: sources; Flags: ignoreversion
+
+Source: "..\..\Repository\Graphics\OpenEXR\authors.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenEXR\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenEXR\copying.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenEXR\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenEXR\OpenEXR.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenEXR\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR\Source"; Components: sources; Flags: ignoreversion recursesubdirs
+
+Source: "..\..\Repository\Graphics\OpenJPEG\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenJPEG\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenJPEG\OpenJPEG.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\OpenJPEG\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG\Source"; Components: sources; Flags: ignoreversion
+
+Source: "..\..\Repository\FreeImage\FreeImage.2008.vcproj"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImage\license-fi.txt"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImage\license-gpl.txt"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImage\whatsnew.txt"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImage\Include\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImage\Include"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImage\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImage\Source"; Components: sources; Flags: ignoreversion recursesubdirs
+Source: "..\..\Repository\FreeImage\Toolkit\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImage\Toolkit"; Components: sources; Flags: ignoreversion
+
+Source: "..\..\Repository\FreeImagePlus\FreeImagePlus.2008.vcproj"; DestDir: "{app}\Sources\Repository\FreeImagePlus"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImagePlus\WhatsNew.txt"; DestDir: "{app}\Sources\Repository\FreeImagePlus"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\FreeImagePlus\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImagePlus\Source"; Components: sources; Flags: ignoreversion
+
+Source: "..\OpenSSL\include\openssl\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\include\openssl"; Components: sources; Flags: ignoreversion
+Source: "..\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\OpenSSL\lib\VC\ssleay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
+Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
 
 Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist"; Components: sources; Flags: ignoreversion recursesubdirs
 
@@ -249,9 +291,15 @@ Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components:
 Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CleanDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\FreeImage\FreeImage.2008.vcproj" DestDir: "{app}\Sources\UpdateIt\FreeImage"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
+
+Source: "..\Languages\English_USA.1252\English_USA.1252.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
