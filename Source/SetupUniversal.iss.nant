@@ -291,7 +291,7 @@ Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components:
 Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CleanDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
-Source: "..\FreeImage\FreeImage.2008.vcproj" DestDir: "{app}\Sources\UpdateIt\FreeImage"; Components: sources; Flags: ignoreversion
+Source: "..\FreeImage\FreeImage.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\FreeImage"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
