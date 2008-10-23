@@ -37,6 +37,11 @@
 #endif	// __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// misc defines
+
+#define AWM_BECAME_ACTIVE (WM_APP + 1)
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
 
 #if defined(_DEBUG)
@@ -104,7 +109,7 @@ LRESULT CBetterPropPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
-	case BPP_BECAME_ACTIVE:
+	case AWM_BECAME_ACTIVE:
 		OnBecameActive();
 		return (0);
 	default:
@@ -183,7 +188,7 @@ UINT AFX_CDECL CBetterPropPage::ActivationWatcher(void* pvParam)
 	HWND hPageWnd = reinterpret_cast<HWND>(pvParam);
 	ASSERT(::IsWindow(hPageWnd));
 	while (!::IsWindowVisible(hPageWnd));
-	::PostMessage(hPageWnd, BPP_BECAME_ACTIVE, 0, 0);
+	::PostMessage(hPageWnd, AWM_BECAME_ACTIVE, 0, 0);
 	AfxEndThread(0);
 	return (0);
 }

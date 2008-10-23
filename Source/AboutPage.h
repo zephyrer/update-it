@@ -39,6 +39,7 @@ public:
 	virtual BOOL OnInitDialog(void);
 	virtual BOOL OnSetActive(void);
 protected:
+	virtual LRESULT WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
 	virtual void DoDataExchange(CDataExchange* pDX);
 
 // message map functions
@@ -55,6 +56,10 @@ public:
 	CHyperLink m_linkNaughter;
 	CHyperLink m_linkOpenSSL;
 	CCustomResource m_resSoftpediaAward;
+
+// implementation helpers
+private:
+	void OnPaintAward(void);
 
 // diagnostic services
 #if defined(_DEBUG)
