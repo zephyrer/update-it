@@ -23,8 +23,6 @@
 #if !defined(__BetterPropPage_h)
 #define __BetterPropPage_h
 
-#define BPP_BECAME_ACTIVE (WM_APP + 1)
-
 //! Encapsulates an extended property page with additional notification and tool tips support.
 class CBetterPropPage : public CPropertyPage
 {

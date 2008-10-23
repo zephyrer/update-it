@@ -53,6 +53,11 @@
 #endif	// __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// misc defines
+
+#define AWM_PAINT_AWARD (WM_APP + 2)
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
 
 #if defined(_DEBUG)
@@ -102,11 +107,11 @@ CAboutPage::~CAboutPage(void)
 //! in the page.
 BOOL CAboutPage::OnInitDialog(void)
 {
-	TCHAR szExeName[_MAX_PATH];
-	DWORD dwHandle;
+	TCHAR szExeName[_MAX_PATH] = { 0 };
+	DWORD dwHandle = 0;
 	CString strValueName;
-	void* pFileVer;
-	UINT cchFileVer;
+	void* pFileVer = NULL;
+	UINT cchFileVer = 0;
 	CString strVersion;
 
 	__super::OnInitDialog();
@@ -157,6 +162,18 @@ BOOL CAboutPage::OnSetActive(void)
 	return (fSuccess);
 }
 
+LRESULT CAboutPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case AWM_PAINT_AWARD:
+		OnPaintAward();
+		return (0);
+	default:
+		return (__super::WindowProc(uMsg, wParam, lParam));
+	}
+}
+
 //! This member function is called by the framework to exchange and validate page
 //! data. Its implementation first invokes the inherited method. Then it associates
 //! each of dialog box control with a corresponding member variable (via DDX calls).
@@ -182,6 +199,14 @@ void CAboutPage::OnPaint(void)
 {
 	__super::OnPaint();
 
+	PostMessage(AWM_PAINT_AWARD);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// implementation helpers
+
+void CAboutPage::OnPaintAward(void)
+{
 	CClientDC dcClient(this);
 
 	fipMemoryIO memIO(reinterpret_cast<BYTE*>(m_resSoftpediaAward.GetData()), m_resSoftpediaAward.GetSize());
@@ -194,9 +219,9 @@ void CAboutPage::OnPaint(void)
 	
 	RECT rcImage = { 0 };
 	GetClientRect(&rcImage);
-	rcImage.right -= rcVersion.left;
+	rcImage.right -= rcVersion.left - 4;
 	rcImage.left = rcImage.right - imageSoftpedia.getWidth();
-	rcImage.top = rcVersion.top;
+	rcImage.top = rcVersion.top - 4;
 	rcImage.bottom = rcImage.top + imageSoftpedia.getHeight();
 	
 	COLORREF cr3DFace = ::GetSysColor(COLOR_3DFACE);
