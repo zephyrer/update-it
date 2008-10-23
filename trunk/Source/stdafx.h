@@ -118,6 +118,7 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/MemMapFile.h"
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
 #include "../../Repository/AfxGadgets/Source/ArgsParser.h"
+#include "../../Repository/AfxGadgets/Source/CustomResource.h"
 
 // Microsoft PSDK version 6.0A conflicts with OpenSSL version 0.9.8h:
 // <wincrypt.h> contains "#define OCSP_RESPONSE ((LPCSTR) 67)" and
