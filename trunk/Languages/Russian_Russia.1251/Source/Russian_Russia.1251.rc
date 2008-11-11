@@ -135,7 +135,7 @@ BEGIN
     LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,156,314,10
     LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,184,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_RSA,202,166,128,10,SS_CENTERIMAGE
-    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.80 (16 августа 2008)",IDC_STATIC,16,182,314,16
+    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.82 (6 ноября 2008)",IDC_STATIC,16,182,314,16
     LTEXT           "Авторские права © 1998-2008 PJ Naughter",IDC_STATIC,16,200,148,10,SS_CENTERIMAGE
     RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,200,164,10,SS_CENTERIMAGE
     LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v0.9.8i (15 сентября 2008)",IDC_STATIC,16,216,216,16
