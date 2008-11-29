@@ -87,16 +87,10 @@ END_MESSAGE_MAP()
 
 CUpdateItApp::CUpdateItApp(void):
 m_hLangDLL(NULL),
+m_argsParser(NULL),
 m_hMutexAppInst(NULL)
 {
 	_tzset();
-
-	m_argsParser.Parse(::GetCommandLine(), true);
-
-	if (m_argsParser.HasKey(SZ_ARG_RESPONSE_FILE))
-	{
-		ParseResponseFile();
-	}
 }
 
 CUpdateItApp::~CUpdateItApp(void)
@@ -237,10 +231,27 @@ int CUpdateItApp::GetConfigInt(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR p
 
 	if (!m_argsParser.GetIntValue(pszArgName, nReturn, 10))
 	{
-		nReturn = GetProfileInt(pszSection, pszEntry, nDefault);
+		nReturn = static_cast<int>(GetProfileInt(pszSection, pszEntry, nDefault));
 	}
 
 	return (nReturn);
+}
+
+UINT CUpdateItApp::GetConfigUInt(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, UINT uDefault)
+{
+	// precondition
+	ASSERT(AfxIsValidString(pszArgName));
+	ASSERT(AfxIsValidString(pszSection));
+	ASSERT(AfxIsValidString(pszEntry));
+
+	UINT uReturn = 0;
+
+	if (!m_argsParser.GetUIntValue(pszArgName, uReturn, 10))
+	{
+		uReturn = GetProfileInt(pszSection, pszEntry, uDefault);
+	}
+
+	return (uReturn);
 }
 
 int CUpdateItApp::GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, int nDefault)
@@ -304,6 +315,13 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 
 BOOL CUpdateItApp::InitInstance(void)
 {
+	m_argsParser.Parse(m_lpCmdLine, true);
+
+	if (m_argsParser.HasKey(SZ_ARG_RESPONSE_FILE))
+	{
+		ParseResponseFile();
+	}
+
 	SetRegistryKey(_T("Elijah Zarezky"));
 
 	SetCurrentAfxLanguage();

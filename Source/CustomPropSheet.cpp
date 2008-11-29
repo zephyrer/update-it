@@ -370,14 +370,17 @@ bool CCustomPropSheet::GetFontMetrics(CString& strFaceName, WORD& wPointSize)
 	ASSERT_VALID(pApp);
 
 	// examine command line
-	strFaceName = pApp->m_argsParser.GetStringValue(SZ_ARG_FONT_FACENAME);
-	if (!strFaceName.IsEmpty())
+	if (pApp->m_argsParser.HasKey(SZ_ARG_FONT_FACENAME))
 	{
-		UINT uTemp = 0;
-		fHasFont = pApp->m_argsParser.GetUIntValue(SZ_ARG_FONT_POINTSIZE, uTemp, 10);
-		wPointSize = LOWORD(uTemp);
+		strFaceName = pApp->m_argsParser.GetStringValue(SZ_ARG_FONT_FACENAME);
+		if (pApp->m_argsParser.HasKey(SZ_ARG_FONT_FACENAME))
+		{
+			UINT uTemp = 0;
+			fHasFont = pApp->m_argsParser.GetUIntValue(SZ_ARG_FONT_POINTSIZE, uTemp, 10);
+			wPointSize = LOWORD(uTemp);
+		}
 	}
-
+	
 	// examine our registry key
 	if (!fHasFont)
 	{
