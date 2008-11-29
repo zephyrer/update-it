@@ -24,8 +24,22 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // other includes
 
+#include "BetterPropPage.h"
+#include "AboutPage.h"
+#include "OptionsPage.h"
+#include "FilesList.h"
+#include "FilesPage.h"
 #include "CustomDialog.h"
+#include "AuthenticationDialog.h"
+#include "ZipOptionsDialog.h"
+#include "ActionPage.h"
+#include "ProgressPageBase.h"
+#include "ProgressPage.h"
+#include "CustomPropSheet.h"
+#include "MainWizard.h"
+#include "UpdateItApp.h"
 #include "Registry.h"
+#include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -72,9 +86,9 @@ CCustomDialog::~CCustomDialog(void)
 INT_PTR CCustomDialog::DoModal(void)
 {
 	// get the custom font information
-	CWinApp* pApp = AfxGetApp();
-	CString strFaceName = pApp->GetProfileString(SZ_REGK_FONT, SZ_REGV_FONT_FACENAME);
-	WORD wFontSize = LOWORD(pApp->GetProfileInt(SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	CString strFaceName = pApp->GetConfigString(SZ_ARG_FONT_FACENAME, SZ_REGK_FONT, SZ_REGV_FONT_FACENAME);
+	WORD wFontSize = LOWORD(pApp->GetConfigUInt(SZ_ARG_FONT_POINTSIZE, SZ_REGK_FONT, SZ_REGV_FONT_SIZE, 0));
 
 	if (!strFaceName.IsEmpty() && wFontSize > 0)
 	{
