@@ -28,7 +28,7 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Шаг 4 из 4 — Обработка файлов"
+CAPTION "UpdateIt! Pro — Шаг 4 из 4 — Обработка файлов"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
@@ -41,7 +41,7 @@ END
 
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Шаг 1 из 4 — Выбор опций"
+CAPTION "UpdateIt! Pro — Шаг 1 из 4 — Выбор опций"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Исходная папка",IDC_STATIC,4,4,326,62,WS_GROUP
@@ -66,7 +66,7 @@ END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Шаг 2 из 4 — Выбор файлов"
+CAPTION "UpdateIt! Pro — Шаг 2 из 4 — Выбор файлов"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
@@ -76,7 +76,7 @@ END
 
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Шаг 3 из 4 — Выбор действия"
+CAPTION "UpdateIt! Pro — Шаг 3 из 4 — Выбор действия"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Действие для выполнения",IDC_STATIC,4,4,164,42,WS_GROUP
@@ -119,13 +119,14 @@ END
 
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Шаг 0 из 4 — Добро пожаловать!"
+CAPTION "UpdateIt! Pro — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Авторские права © 2002-2008 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,194,10,SS_CENTERIMAGE
+    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.11.0 (28 июля 2008).",IDC_STATIC,4,52,214,18
+    LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.3 (18 июля 2005)",IDC_STATIC,16,88,314,16
     LTEXT           "Авторские права © 1995-2005 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,202,10,SS_CENTERIMAGE
     RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,220,106,110,10,SS_CENTERIMAGE
@@ -342,7 +343,7 @@ BEGIN
     IDS_MOVING_FILES        "Перемещение файлов в целевую папку..."
     IDS_ALL_DONE            "Готово. Кликните Закончить для завершения работы ""волшебника""."
     IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
-    IDS_VERSION_FORMAT      """Волшебник"" UpdateIt! – версия %s\nЭто приложение является частью коллекции PowerGadgets"
+    IDS_VERSION_FORMAT      """Волшебник"" UpdateIt! Pro – версия %s\nЭто приложение является частью коллекции PowerGadgets"
     IDS_ZIPPING_FOLDER      "Сжатие целевой папки..."
     IDS_SENDING_MAIL        "Отправка сжатой папки..."
     IDS_SEND_FAILED         "Не удалось отправить сообщение по электронной почте!"
@@ -420,7 +421,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "UpdateIt!"
+    AFX_IDS_APP_TITLE       "UpdateIt! Pro"
 END
 
 #endif    // Russian resources
