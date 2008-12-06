@@ -65,7 +65,7 @@ END
 
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
+CAPTION "UpdateIt! Pro — Step 4 of 4 — Processing files"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
@@ -78,7 +78,7 @@ END
 
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
+CAPTION "UpdateIt! Pro — Step 1 of 4 — Setting options"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
@@ -102,7 +102,7 @@ END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
+CAPTION "UpdateIt! Pro — Step 2 of 4 — Selecting files"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
@@ -112,7 +112,7 @@ END
 
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
+CAPTION "UpdateIt! Pro — Step 3 of 4 — Choosing an action"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
@@ -156,13 +156,14 @@ END
 
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
+CAPTION "UpdateIt! Pro — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Copyright © 2002-2008 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Other credits:",IDC_STATIC,4,74,194,10,SS_CENTERIMAGE
+    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.11.0 (July 28th, 2008).",IDC_STATIC,4,52,214,18
+    LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",IDC_STATIC,16,88,314,16
     LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,106,130,10,SS_CENTERIMAGE
@@ -379,7 +380,7 @@ BEGIN
     IDS_MOVING_FILES        "Moving file(s) to the target folder..."
     IDS_ALL_DONE            "All done. Click Finish to exit the wizard."
     IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
-    IDS_VERSION_FORMAT      "UpdateIt! Wizard – Version %s\nThis application is a part of the PowerGadgets collection"
+    IDS_VERSION_FORMAT      "UpdateIt! Pro Wizard – Version %s\nThis application is a part of the PowerGadgets collection"
     IDS_ZIPPING_FOLDER      "Zipping target folder..."
     IDS_SENDING_MAIL        "Sending zipped folder..."
     IDS_SEND_FAILED         "Failed to send e-mail message!"
@@ -457,7 +458,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "UpdateIt!"
+    AFX_IDS_APP_TITLE       "UpdateIt! Pro"
 END
 
 #endif    // English (U.S.) resources
