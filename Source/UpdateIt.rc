@@ -101,7 +101,7 @@ IDR_FILESEND            AVI                     "BinRes\\FileSend.avi"
 // PNG_FILE
 //
 
-IDR_SOFTPEDIA_AWARD     PNG_FILE                "BinRes\\SoftpediaCleanAward.png"
+IDR_SOFTPEDIA_AWARD     GIF_FILE                "BinRes\\SoftpediaCleanAward.gif"
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -86,7 +86,7 @@ END_MESSAGE_MAP()
 //! @brief constructs a CAboutPage object
 CAboutPage::CAboutPage(void):
 CBetterPropPage(IDD_PAGE_ABOUT),
-m_resSoftpediaAward(AfxGetInstanceHandle(), _T("PNG_FILE"), IDR_SOFTPEDIA_AWARD)
+m_resSoftpediaAward(AfxGetInstanceHandle(), _T("GIF_FILE"), IDR_SOFTPEDIA_AWARD)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
 }
