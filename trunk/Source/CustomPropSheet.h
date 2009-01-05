@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2008 by Elijah Zarezky,
+// Copyright (c) 2002-2009 by Elijah Zarezky,
 // All rights reserved.
 // Portions copyright (c) 1996-1998 by Microsoft (KB Q142170).
 
