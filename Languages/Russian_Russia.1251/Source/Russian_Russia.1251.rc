@@ -123,7 +123,7 @@ CAPTION "UpdateIt! — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
-    LTEXT           "Авторские права © 2002-2008 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
+    LTEXT           "Авторские права © 2002-2009 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
     LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.11.0 (28 июля 2008).",IDC_STATIC,4,52,214,18
     LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE

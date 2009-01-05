@@ -160,7 +160,7 @@ CAPTION "@APP_NAME@ — Step 0 of 4 — Welcome!"
 FONT 8, "Tahoma", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
-    LTEXT           "Copyright © 2002-2008 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
+    LTEXT           "Copyright © 2002-2009 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
     LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.11.0 (July 28th, 2008).",IDC_STATIC,4,52,214,18
     LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
