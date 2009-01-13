@@ -29,11 +29,8 @@ VerifyVer.build.inc - 'verify-ver' target
 		description="Verify version numbers and names.">
 		<echo message="Verifying version numbers and names..."/>
 		<echo/>
-		<if test="${VerMajor == '0'}">
-			<fail message="Major version number isn't specified."/>
-		</if>
-		<if test="${VerMinor == '0'}">
-			<fail message="Minor version number isn't specified."/>
+		<if test="${VerMajor == '0' and VerMinor == '0'}">
+			<fail message="Both major and minor version numbers aren't specified."/>
 		</if>
 		<if test="${VerBuild == '0'}">
 			<fail message="Build number isn't specified."/>
@@ -41,6 +38,8 @@ VerifyVer.build.inc - 'verify-ver' target
 		<if test="${SvnRev == '0'}">
 			<fail message="Revision number isn't specified."/>
 		</if>
+		<property name="VersionStr" value="${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
+		<property name="Version" value="${version::parse(VersionStr)}"/>
 		<echo message="Version is: ${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
 	</target>
 
