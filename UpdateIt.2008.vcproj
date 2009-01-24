@@ -75,12 +75,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/OSVERSION:4.1 /IGNORE:4089"
-				OutputFile="$(OutDir)/UpdateIt.exe"
+				OutputFile="$(OutDir)\UpdateIt.exe"
 				Version="1.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\OpenSSL\lib\VC"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(OutDir)/UpdateIt.pdb"
+				ProgramDatabaseFile="$(OutDir)\UpdateIt.pdb"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -169,7 +169,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/OSVERSION:4.1 /IGNORE:4089"
-				OutputFile="$(OutDir)/UpdateIt.exe"
+				OutputFile="$(OutDir)\UpdateIt.exe"
 				Version="1.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\OpenSSL\lib\VC"
@@ -265,12 +265,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/OSVERSION:4.1 /IGNORE:4089"
-				OutputFile="$(OutDir)/UpdateIt.exe"
+				OutputFile="$(OutDir)\UpdateIt.exe"
 				Version="1.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\OpenSSL\lib\VC"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(OutDir)/UpdateIt.pdb"
+				ProgramDatabaseFile="$(OutDir)\UpdateIt.pdb"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -359,7 +359,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/OSVERSION:4.1 /IGNORE:4089"
-				OutputFile="$(OutDir)/UpdateIt.exe"
+				OutputFile="$(OutDir)\UpdateIt.exe"
 				Version="1.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\OpenSSL\lib\VC"
@@ -403,6 +403,7 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
 				RelativePath=".\Source\AboutPage.cpp"
@@ -500,6 +501,7 @@
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
 				RelativePath=".\Source\AboutPage.h"
@@ -577,6 +579,7 @@
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
 				RelativePath=".\Source\BinRes\AppIcon.ico"
@@ -662,6 +665,74 @@
 			<File
 				RelativePath=".\Source\Setup.iss"
 				>
+				<FileConfiguration
+					Name="MBCS Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Source\SetupUniversal.iss"
+				>
+				<FileConfiguration
+					Name="MBCS Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -1081,6 +1152,7 @@
 		</Filter>
 		<Filter
 			Name="Build Files"
+			Filter="cmd;build;txt;inc"
 			>
 			<File
 				RelativePath=".\CleanDoc.build.inc"
@@ -1299,7 +1371,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UpdateIt.2003.build"
+				RelativePath=".\UpdateIt.2008.build"
 				>
 				<FileConfiguration
 					Name="MBCS Debug|Win32"
