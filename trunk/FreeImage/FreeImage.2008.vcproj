@@ -75,7 +75,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/FreeImage.lib"
+				OutputFile="$(OutDir)\FreeImage.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -150,7 +150,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/FreeImage.lib"
+				OutputFile="$(OutDir)\FreeImage.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -227,7 +227,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/FreeImage.lib"
+				OutputFile="$(OutDir)\FreeImage.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -302,7 +302,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/FreeImage.lib"
+				OutputFile="$(OutDir)\FreeImage.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -327,6 +327,7 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
 				RelativePath="..\..\Repository\FreeImage\Source\BitmapAccess.cpp"
@@ -608,6 +609,7 @@
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
 				RelativePath="..\..\Repository\FreeImage\Include\CacheFile.h"

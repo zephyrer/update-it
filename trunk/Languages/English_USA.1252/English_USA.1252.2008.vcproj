@@ -75,7 +75,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/IGNORE:4089"
-				OutputFile="$(OutDir)/English_USA.1252.dll"
+				OutputFile="$(OutDir)\English_USA.1252.dll"
 				Version="1.0"
 				LinkIncremental="1"
 				ModuleDefinitionFile=".\Source\English_USA.1252.def"
@@ -86,7 +86,7 @@
 				OptimizeForWindows98="0"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="$(OutDir)/English_USA.1252.lib"
+				ImportLibrary="$(OutDir)\English_USA.1252.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -109,6 +109,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Removing unnecessary files..."
+				CommandLine="del $(OutDir)\$(TargetName).exp"
 			/>
 		</Configuration>
 		<Configuration
@@ -168,7 +170,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/IGNORE:4089"
-				OutputFile="$(OutDir)/English_USA.1252.dll"
+				OutputFile="$(OutDir)\English_USA.1252.dll"
 				Version="1.0"
 				LinkIncremental="1"
 				ModuleDefinitionFile=".\Source\English_USA.1252.def"
@@ -180,7 +182,7 @@
 				SetChecksum="true"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="$(OutDir)/English_USA.1252.lib"
+				ImportLibrary="$(OutDir)\English_USA.1252.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -203,6 +205,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Removing unnecessary files..."
+				CommandLine="del $(OutDir)\$(TargetName).exp"
 			/>
 		</Configuration>
 		<Configuration
@@ -265,7 +269,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/IGNORE:4089"
-				OutputFile="$(OutDir)/English_USA.1252.dll"
+				OutputFile="$(OutDir)\English_USA.1252.dll"
 				Version="1.0"
 				LinkIncremental="1"
 				ModuleDefinitionFile=".\Source\English_USA.1252.def"
@@ -276,7 +280,7 @@
 				OptimizeForWindows98="0"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="$(OutDir)/English_USA.1252.lib"
+				ImportLibrary="$(OutDir)\English_USA.1252.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -299,6 +303,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Removing unnecessary files..."
+				CommandLine="del $(OutDir)\$(TargetName).exp"
 			/>
 		</Configuration>
 		<Configuration
@@ -358,7 +364,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/IGNORE:4089"
-				OutputFile="$(OutDir)/English_USA.1252.dll"
+				OutputFile="$(OutDir)\English_USA.1252.dll"
 				Version="1.0"
 				LinkIncremental="1"
 				ModuleDefinitionFile=".\Source\English_USA.1252.def"
@@ -370,7 +376,7 @@
 				SetChecksum="true"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="$(OutDir)/English_USA.1252.lib"
+				ImportLibrary="$(OutDir)\English_USA.1252.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -393,6 +399,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Removing unnecessary files..."
+				CommandLine="del $(OutDir)\$(TargetName).exp"
 			/>
 		</Configuration>
 	</Configurations>
