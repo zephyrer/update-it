@@ -70,14 +70,6 @@ begin
 	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'ru');
 end;
 
-function IsWinSxS(): Boolean;
-var
-	osVersion: TWindowsVersion;
-begin
-	GetWindowsVersionEx(osVersion);
-	Result := ((osVersion.Major = 5) and (osVersion.Minor >= 1)) or (osVersion.Major > 5);
-end;
-
 procedure CurPageChanged(CurPageID: Integer);
 var
 	OptionsPage: TWizardPage;
@@ -101,32 +93,23 @@ end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
 var
-	AfxLangPath: String;
 	hRootHive: Integer;
 	LangsKeyName: String;
 begin
 	if (CurPageID = wpReady) then
 	begin
-		if (IsWinSxS()) then
-		begin
-			AfxLangPath := '.\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC\';
-		end
-		else begin
-			AfxLangPath := '.\';
-		end;
-
 		hRootHive := HKEY_CURRENT_USER;
 		LangsKeyName := 'Software\Elijah Zarezky\UpdateIt!\Languages';
 
 		if (HasLangEn()) then
 		begin
-			RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', AfxLangPath + 'mfc90enu.dll');
+			RegWriteStringValue(hRootHive, LangsKeyName + '\en', '', '.\mfc90enu.dll');
 			RegWriteStringValue(hRootHive, LangsKeyName + '\en', 'LangDLL', '.\English_USA.1252.dll');
 		end;
 
 		if (HasLangRu) then
 		begin
-			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', AfxLangPath + 'mfc90rus.dll');
+			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', '', '.\mfc90rus.dll');
 			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', '.\Russian_Russia.1251.dll');
 		end;
 
@@ -145,14 +128,17 @@ begin
 end;
 
 [InstallDelete]
+;; from 1.4 release
 Type: files; Name: "{app}\msvcr71.dll"
 Type: files; Name: "{app}\msvcp71.dll"
 Type: files; Name: "{app}\mfc71.dll"
 Type: files; Name: "{app}\mfc71enu.dll"
 Type: files; Name: "{app}\mfc71rus.dll"
 Type: filesandordirs; Name: "{app}\Languages"
-Type: filesandordirs; Name: "{app}\Sources"
 Type: files; Name: "{app}\UpdateIt.chm"
+;; from 1.5 pre-release
+Type: filesandordirs; Name: "{app}\Microsoft.VC90.CRT"
+Type: filesandordirs; Name: "{app}\Microsoft.VC90.MFC"
 
 [Types]
 Name: "typical"; Description: "Typical Installation"; Languages: en
@@ -169,87 +155,93 @@ Name: "core"; Description: "Исполняемые файлы UpdateIt!"; Types: compact typical
 Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom; Languages: en
 Name: "runtimes"; Description: "Библиотеки времени выполнения"; Types: typical full custom; Languages: ru
 Name: "mui"; Description: "MUI Support"; Types: typical full custom; Languages: en
-Name: "mui"; Description: "Поддержка многоязыкового интефейса"; Types: typical full custom; Languages: ru
+Name: "mui"; Description: "Поддержка многоязыкового интерфейса"; Types: typical full custom; Languages: ru
 Name: "sources"; Description: "Source Code"; Types: full custom; Languages: en
 Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: ru
 
 [Files]
-Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
-Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
-Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
-Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+;; core application files
+Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
+;; application localizations
+Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu
+
+;; CRT redistributables
+Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"; Components: runtimes;
+Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}"; Components: runtimes;
+Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}"; Components: runtimes;
+Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
+
+;; MFC library redistributables
+Source: "..\Redist\Microsoft.VC90.MFC\mfc90.dll"; DestDir: "{app}"; Components: runtimes;
+Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}"; Components: runtimes;
+Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
+
+;; MFC library localizations
+Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; Components: runtimes; Check: HasLangEn
+Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Components: runtimes; Check: HasLangRu
+Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
+
+;; OpenSSL redistributables
 Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
 
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC"; Components: core; Check: HasLangEn; MinVersion: 0,5.01.2600
-
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC"; Components: core; Check: HasLangEn; MinVersion: 0,5.01.2600
-
-Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}\Microsoft.VC90.MFC\Microsoft.VC90.MFCLOC"; Components: core; MinVersion: 0,5.01.2600
-
-Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"; Components: runtimes; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}"; Components: runtimes; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}"; Components: runtimes; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-
-Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}\Microsoft.VC90.CRT"; Components: runtimes; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}\Microsoft.VC90.CRT"; Components: runtimes; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}\Microsoft.VC90.CRT"; Components: runtimes; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest"; DestDir: "{app}\Microsoft.VC90.CRT"; Components: runtimes; MinVersion: 0,5.01.2600
-
-Source: "..\Redist\Microsoft.VC90.MFC\mfc90.dll"; DestDir: "{app}"; Components: runtimes; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}"; Components: runtimes; OnlyBelowVersion: 0,5.01.2600; Flags: ignoreversion
-
-Source: "..\Redist\Microsoft.VC90.MFC\mfc90.dll"; DestDir: "{app}\Microsoft.VC90.MFC"; Components: runtimes; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}\Microsoft.VC90.MFC"; Components: runtimes; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest"; DestDir: "{app}\Microsoft.VC90.MFC"; Components: runtimes; MinVersion: 0,5.01.2600
-
+;; AfxGadgets library sources
 Source: "..\..\Repository\AfxGadgets\AfxGadgets.2008.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
 
+;; CodeProject library sources
 Source: "..\..\Repository\CodeProject\CodeProject.2008.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources; Flags: ignoreversion
 
+;; Naughter library sources
 Source: "..\..\Repository\Naughter\Naughter.2008.vcproj"; DestDir: "{app}\Sources\Repository\Naughter"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Naughter\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Naughter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\Naughter\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
+;; ZipArchive library sources
 Source: "..\..\Repository\ZipArchive\ZipArchive.2008.vcproj"; DestDir: "{app}\Sources\Repository\ZipArchive"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\MiscText\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\ZipArchive\MiscText"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\ZipArchive\Source"; Components: sources; Flags: ignoreversion
 
+;; zlib library sources
 Source: "..\..\Repository\zlib\zlib.2008.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources; Flags: ignoreversion
 
+;; libjpeg library sources
 Source: "..\..\Repository\Graphics\libjpeg\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\libjpeg.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg\Source"; Components: sources; Flags: ignoreversion
 
+;; libmng library sources
 Source: "..\..\Repository\Graphics\libmng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\libmng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libmng\Source"; Components: sources; Flags: ignoreversion
 
+;; libpng library sources
 Source: "..\..\Repository\Graphics\libpng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\libpng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\libpng.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libpng\Source"; Components: sources; Flags: ignoreversion
 
+;; libtiff library sources
 Source: "..\..\Repository\Graphics\libtiff\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libtiff\libtiff.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libtiff\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libtiff\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libtiff\HTML"; Components: sources; Flags: ignoreversion recursesubdirs
 Source: "..\..\Repository\Graphics\libtiff\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libtiff\Source"; Components: sources; Flags: ignoreversion
 
+;; OpenEXR library sources
 Source: "..\..\Repository\Graphics\OpenEXR\authors.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\copying.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
@@ -257,11 +249,13 @@ Source: "..\..\Repository\Graphics\OpenEXR\license.txt"; DestDir: "{app}\Sources
 Source: "..\..\Repository\Graphics\OpenEXR\OpenEXR.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
+;; OpenJPEG library sources
 Source: "..\..\Repository\Graphics\OpenJPEG\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenJPEG\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenJPEG\OpenJPEG.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenJPEG\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG\Source"; Components: sources; Flags: ignoreversion
 
+;; FreeImage library sources
 Source: "..\..\Repository\FreeImage\FreeImage.2008.vcproj"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\FreeImage\license-fi.txt"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\FreeImage\license-gpl.txt"; DestDir: "{app}\Sources\Repository\FreeImage"; Components: sources; Flags: ignoreversion
@@ -270,10 +264,12 @@ Source: "..\..\Repository\FreeImage\Include\*"; Excludes: ".svn"; DestDir: "{app
 Source: "..\..\Repository\FreeImage\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImage\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 Source: "..\..\Repository\FreeImage\Toolkit\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImage\Toolkit"; Components: sources; Flags: ignoreversion
 
+;; FreeImagePlus library sources
 Source: "..\..\Repository\FreeImagePlus\FreeImagePlus.2008.vcproj"; DestDir: "{app}\Sources\Repository\FreeImagePlus"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\FreeImagePlus\WhatsNew.txt"; DestDir: "{app}\Sources\Repository\FreeImagePlus"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\FreeImagePlus\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImagePlus\Source"; Components: sources; Flags: ignoreversion
 
+;; OpenSSL headers and import libraries
 Source: "..\OpenSSL\include\openssl\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\include\openssl"; Components: sources; Flags: ignoreversion
 Source: "..\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
 Source: "..\OpenSSL\lib\VC\ssleay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
@@ -282,8 +278,10 @@ Source: "..\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\Op
 Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
 Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
 
-Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist"; Components: sources; Flags: ignoreversion recursesubdirs
+;; CRT/MFC redistributables
+Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist"; Components: sources; Flags: recursesubdirs
 
+;; UpdateIt! application sources
 Source: "..\UpdateIt.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2008.sln"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2008.build"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
@@ -296,6 +294,7 @@ Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\H
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
+;; UpdateIt! localizations sources
 Source: "..\Languages\English_USA.1252\English_USA.1252.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
@@ -325,11 +324,13 @@ Filename: "{app}\UpdateIt.url"; Section: "InternetShortcut"; Key: "URL"; String:
 Root: HKCU; Subkey: "Software\Elijah Zarezky"; Flags: uninsdeletekeyifempty
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; ValueType: string; ValueName: "LC_ALL"; ValueData: "Russian_Russia.1251"; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; ValueType: string; ValueName: "LC_ALL"; ValueData: "English_USA.1252"; Flags: createvalueifdoesntexist; Languages: en
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; ValueType: string; ValueName: "LC_ALL"; ValueData: "Russian_Russia.1251"; Flags: createvalueifdoesntexist; Languages: ru
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Options"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Options"; ValueType: string; ValueName: "Exclude"; ValueData: "*\.svn\*.*,*.obj,*.pch,*.sbr,*.res,*.tlb,*.bsc,*.idb,*.pdb,*.plg,*.aps,*.opt,*.ncb,*.exe,*.dll,*.ocx,*.lib"; Flags: createvalueifdoesntexist
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: string; ValueName: "charset"; ValueData: """windows-1251"""; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: string; ValueName: "charset"; ValueData: """windows-1252"""; Flags: createvalueifdoesntexist; Languages: en
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: string; ValueName: "charset"; ValueData: """windows-1251"""; Flags: createvalueifdoesntexist; Languages: ru
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: dword; ValueName: "Enable"; ValueData: "1"; Flags: createvalueifdoesntexist
 
 [Tasks]
