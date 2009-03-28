@@ -55,7 +55,7 @@
 				TreatWChar_tAsBuiltInType="true"
 				ForceConformanceInForLoopScope="true"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				BrowseInformation="1"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
@@ -131,7 +131,7 @@
 				TreatWChar_tAsBuiltInType="true"
 				ForceConformanceInForLoopScope="true"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="0"
@@ -207,7 +207,7 @@
 				TreatWChar_tAsBuiltInType="true"
 				ForceConformanceInForLoopScope="true"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				BrowseInformation="1"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
@@ -283,7 +283,7 @@
 				TreatWChar_tAsBuiltInType="true"
 				ForceConformanceInForLoopScope="true"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="0"
@@ -360,6 +360,42 @@
 			<File
 				RelativePath="..\..\Repository\FreeImage\Source\PixelAccess.cpp"
 				>
+			</File>
+			<File
+				RelativePath="..\..\Repository\FreeImage\Source\stdafx.cpp"
+				>
+				<FileConfiguration
+					Name="MBCS Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 			<Filter
 				Name="Conversion"
@@ -549,6 +585,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Repository\FreeImage\Source\PluginPFM.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Repository\FreeImage\Source\PluginPNG.cpp"
 					>
 				</File>
@@ -641,6 +681,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Repository\FreeImage\Include\Quantizers.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Repository\FreeImage\Source\stdafx.h"
 				>
 			</File>
 			<File
