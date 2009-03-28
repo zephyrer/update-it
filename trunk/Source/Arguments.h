@@ -95,7 +95,7 @@
 // both relative or absolute pathes are accepted:
 // -ArgumentsFile:"..\..\My Settigs\SomeArgiments.txt"
 // -ArgumentsFile:OtherArguments.txt
-// -ArgumentsFile:"C:\Program Files\PowerGadgets\UpdateIt\MyArguments.txt"
+// -ArgumentsFile:"C:\Program Files\Elijah Zarezky\UpdateIt\MyArguments.txt"
 
 // you can use separate lines for each argument or merge several arguments into the
 // one line as shown below:
