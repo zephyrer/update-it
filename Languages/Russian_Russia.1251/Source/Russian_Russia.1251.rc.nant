@@ -130,8 +130,8 @@ BEGIN
     LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.3 (18 июля 2005)",IDC_STATIC,16,88,314,16
     LTEXT           "Авторские права © 1995-2005 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,202,10,SS_CENTERIMAGE
     RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,220,106,110,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека ZipArchive,\nверсия 3.2.0 (15 декабря 2007)",IDC_STATIC,16,122,314,16
-    LTEXT           "Авторские права © 2000-2007 Tadeusz Dracz",IDC_STATIC,16,140,156,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека ZipArchive,\nверсия 4.0.0 (24 марта 2009)",IDC_STATIC,16,122,314,16
+    LTEXT           "Авторские права © 2000-2009 Tadeusz Dracz",IDC_STATIC,16,140,156,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_ARTPOL,174,140,156,10,SS_CENTERIMAGE
     LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,156,314,10
     LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,184,10,SS_CENTERIMAGE
