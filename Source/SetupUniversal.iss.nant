@@ -26,8 +26,8 @@ AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
 AppVersion=@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@
-DefaultDirName={pf}\PowerGadgets\UpdateIt
-DefaultGroupName=PowerGadgets\UpdateIt
+DefaultDirName={pf}\Elijah Zarezky\UpdateIt
+DefaultGroupName=Elijah Zarezky\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
@@ -62,12 +62,12 @@ SelectLanguageLabel=Please select UpdateIt! language:
 [Code]
 function HasLangEn(): Boolean;
 begin
-	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'en');
+	Result := (IsComponentSelected('muien')) or (ActiveLanguage() = 'en');
 end;
 
 function HasLangRu(): Boolean;
 begin
-	Result := (IsComponentSelected('mui')) or (ActiveLanguage() = 'ru');
+	Result := (IsComponentSelected('muiru')) or (ActiveLanguage() = 'ru');
 end;
 
 procedure CurPageChanged(CurPageID: Integer);
@@ -113,12 +113,12 @@ begin
 			RegWriteStringValue(hRootHive, LangsKeyName + '\ru', 'LangDLL', '.\Russian_Russia.1251.dll');
 		end;
 
-		if (not IsComponentSelected('mui')) then
+		if (IsComponentSelected('muien') or IsComponentSelected('muiru')) then
 		begin
-			RegWriteStringValue(hRootHive, LangsKeyName, '', ActiveLanguage());
+			RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
 		end
 		else begin
-			RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
+			RegWriteStringValue(hRootHive, LangsKeyName, '', ActiveLanguage());
 		end;
 
 		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
@@ -154,8 +154,8 @@ Name: "core"; Description: "UpdateIt! Core Files"; Types: compact typical full c
 Name: "core"; Description: "Исполняемые файлы UpdateIt!"; Types: compact typical full custom; Flags: fixed; Languages: ru
 Name: "runtimes"; Description: "Application Runtimes"; Types: typical full custom; Languages: en
 Name: "runtimes"; Description: "Библиотеки времени выполнения"; Types: typical full custom; Languages: ru
-Name: "mui"; Description: "MUI Support"; Types: typical full custom; Languages: en
-Name: "mui"; Description: "Поддержка многоязыкового интерфейса"; Types: typical full custom; Languages: ru
+Name: "muiru"; Description: "Russian Interface Support"; Types: typical full custom; Languages: en
+Name: "muien"; Description: "Поддержка английского интерфейса"; Types: typical full custom; Languages: ru
 Name: "sources"; Description: "Source Code"; Types: full custom; Languages: en
 Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: ru
 
@@ -167,8 +167,10 @@ Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
 ;; application localizations
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Check: HasLangEn
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Check: HasLangRu
+Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Languages: en
+Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: muien; Languages: ru
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Languages: ru
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: muiru; Languages: en
 
 ;; CRT redistributables
 Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"; Components: runtimes;
@@ -182,9 +184,11 @@ Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}"; Components:
 Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
 
 ;; MFC library localizations
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; Components: runtimes; Check: HasLangEn
-Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Components: runtimes; Check: HasLangRu
-Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
+Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; Components: core; Languages: en
+Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; Components: muien; Languages: ru
+Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Components: core; Languages: ru
+Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Components: muiru; Languages: en
+Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; Components: core; MinVersion: 0,5.01.2600
 
 ;; OpenSSL redistributables
 Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
