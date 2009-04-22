@@ -162,12 +162,12 @@ BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Copyright © 2002-2009 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.12.0 (from CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.12.1 (from CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",IDC_STATIC,16,88,314,16
     LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,106,130,10,SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 4.0.0 (2009-03-24)",IDC_STATIC,16,122,314,16
+    LTEXT           "ZipArchive library\nversion 4.0.1 (2009-04-20)",IDC_STATIC,16,122,314,16
     LTEXT           "Copyright © 2000-2009 by Tadeusz Dracz",IDC_STATIC,16,140,140,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ARTPOL,158,140,172,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,156,314,10
@@ -176,7 +176,7 @@ BEGIN
     LTEXT           "MFC classes to support the SMTP protocol\nversion 2.82 (6 November 2008)",IDC_STATIC,16,182,314,16
     LTEXT           "Copyright © 1998-2008 by PJ Naughter",IDC_STATIC,16,200,132,10,SS_CENTERIMAGE
     RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,200,180,10,SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8j (07 Jan 2009)",IDC_STATIC,16,216,216,16
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v0.9.8k (25 Mar 2009)",IDC_STATIC,16,216,216,16
     RTEXT           "Web Page",IDC_LINK_OPEN_SSL,236,222,94,10,SS_CENTERIMAGE
 END
 
