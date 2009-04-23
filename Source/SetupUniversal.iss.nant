@@ -191,8 +191,8 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Compon
 Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; Components: core; MinVersion: 0,5.01.2600
 
 ;; OpenSSL redistributables
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
+Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
+Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
 
 ;; AfxGadgets library sources
 Source: "..\..\Repository\AfxGadgets\AfxGadgets.2008.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
@@ -274,13 +274,13 @@ Source: "..\..\Repository\FreeImagePlus\WhatsNew.txt"; DestDir: "{app}\Sources\R
 Source: "..\..\Repository\FreeImagePlus\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\FreeImagePlus\Source"; Components: sources; Flags: ignoreversion
 
 ;; OpenSSL headers and import libraries
-Source: "..\OpenSSL\include\openssl\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\include\openssl"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\ssleay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}\Sources\UpdateIt\OpenSSL\redist"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\include\openssl\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\OpenSSL\include\openssl"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\ssleay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\ssleay32MDd.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MD.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sources\Repository\OpenSSL\lib\VC"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}\Sources\Repository\OpenSSL\redist"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}\Sources\Repository\OpenSSL\redist"; Components: sources; Flags: ignoreversion
 
 ;; CRT/MFC redistributables
 Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist"; Components: sources; Flags: recursesubdirs

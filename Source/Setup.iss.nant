@@ -123,8 +123,8 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}";
 Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
 
 ;; OpenSSL redistributables
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
+Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
+Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
