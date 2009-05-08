@@ -50,7 +50,7 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"; LicenseFile: ".\Apac
 
 [LangOptions]
 LanguageCodePage=0
-DialogFontName=Tahoma
+DialogFontName=Verdana
 DialogFontSize=8
 en.LanguageName=English
 ru.LanguageName=Russian
