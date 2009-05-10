@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
 <assemblyIdentity
-    version="1.4.4759.244"
+    version="1.4.4778.251"
     processorArchitecture="x86"
-    name="Elijah.Zarezky.UpdateIt"
+    name="Elijah.Zarezky.UpdateItPro"
     type="win32"
 /> 
-<description>UpdateIt! Application (part of the Power Gadgets collection)</description>
+<description>UpdateIt! Pro Application (part of the Power Gadgets collection)</description>
 </assembly>
