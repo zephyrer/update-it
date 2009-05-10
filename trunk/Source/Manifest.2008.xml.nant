@@ -3,7 +3,7 @@
 <assemblyIdentity
     version="@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@.@SVN_REV@"
     processorArchitecture="x86"
-    name="Microsoft.Windows.@EXE_NAME@"
+    name="Elijah.Zarezky.@EXE_NAME@"
     type="win32"
 /> 
 <description>@APP_NAME@ Application (part of the Power Gadgets collection)</description>
