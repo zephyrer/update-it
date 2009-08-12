@@ -97,7 +97,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- English_USA.1252.dll resources -->
 
 		<copy
-			file="${UpdateItPath}\Languages\English_USA.1252\Source\English_USA.1252.rc.nant"
+			file="${UpdateItPath}\Languages\English_USA.1252\Templates\English_USA.1252.rc"
 			tofile="${UpdateItPath}\Languages\English_USA.1252\Source\English_USA.1252.rc"
 			overwrite="true">
 			<filterchain>
@@ -108,7 +108,7 @@ StampVer.build.inc - 'stamp-ver' target
 		</copy>
 
 		<copy
-			file="${UpdateItPath}\Languages\English_USA.1252\Source\VersionInfo.rc.nant"
+			file="${UpdateItPath}\Languages\English_USA.1252\Templates\VersionInfo.rc"
 			tofile="${UpdateItPath}\Languages\English_USA.1252\Source\VersionInfo.rc"
 			overwrite="true">
 			<filterchain>
@@ -128,7 +128,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- Russian_Russia.1251.dll resources -->
 
 		<copy
-			file="${UpdateItPath}\Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc.nant"
+			file="${UpdateItPath}\Languages\Russian_Russia.1251\Templates\Russian_Russia.1251.rc"
 			tofile="${UpdateItPath}\Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc"
 			overwrite="true">
 			<filterchain>
@@ -139,7 +139,7 @@ StampVer.build.inc - 'stamp-ver' target
 		</copy>
 
 		<copy
-			file="${UpdateItPath}\Languages\Russian_Russia.1251\Source\VersionInfo.rc.nant"
+			file="${UpdateItPath}\Languages\Russian_Russia.1251\Templates\VersionInfo.rc"
 			tofile="${UpdateItPath}\Languages\Russian_Russia.1251\Source\VersionInfo.rc"
 			overwrite="true">
 			<filterchain>
