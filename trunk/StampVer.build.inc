@@ -159,7 +159,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- Inno Setup scripts -->
 
 		<copy
-			file="${UpdateItPath}\Source\Setup.iss.nant"
+			file="${UpdateItPath}\Templates\Setup.iss"
 			tofile="${UpdateItPath}\Source\Setup.iss"
 			overwrite="true"
 			if="${AppName == 'UpdateIt!'}">
@@ -173,7 +173,7 @@ StampVer.build.inc - 'stamp-ver' target
 		</copy>
 		
 		<copy
-			file="${UpdateItPath}\Source\SetupUniversal.iss.nant"
+			file="${UpdateItPath}\Templates\SetupUniversal.iss"
 			tofile="${UpdateItPath}\Source\SetupUniversal.iss"
 			overwrite="true"
 			if="${AppName == 'UpdateIt!'}">
