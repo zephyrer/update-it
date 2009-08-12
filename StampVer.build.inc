@@ -35,7 +35,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- UpdateIt.exe manifest -->
 
 		<copy
-			file="${UpdateItPath}\Source\Manifest.2008.xml.nant"
+			file="${UpdateItPath}\Templates\Manifest.2008.xml"
 			tofile="${UpdateItPath}\Source\Manifest.2008.xml"
 			overwrite="true">
 			<filterchain>
@@ -53,7 +53,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- UpdateIt.exe VERSIONINFO -->
 
 		<copy
-			file="${UpdateItPath}\Source\VersionInfo.rc.nant"
+			file="${UpdateItPath}\Templates\VersionInfo.rc"
 			tofile="${UpdateItPath}\Source\VersionInfo.rc"
 			overwrite="true">
 			<filterchain>
