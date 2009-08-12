@@ -75,7 +75,7 @@ StampVer.build.inc - 'stamp-ver' target
 		<!-- ZipArchiver.dll VERSIONINFO -->
 
 		<copy
-			file="ZipArchiver\Source\VersionInfo.rc.nant"
+			file="ZipArchiver\Templates\VersionInfo.rc"
 			tofile="ZipArchiver\Source\VersionInfo.rc"
 			overwrite="true"
 			if="${AppName == 'UpdateIt! Pro'}">
@@ -187,7 +187,7 @@ StampVer.build.inc - 'stamp-ver' target
 		</copy>
 		
 		<copy
-			file="UpdateItPro\Source\SetupPro.iss.nant"
+			file="UpdateItPro\Templates\SetupPro.iss"
 			tofile="UpdateItPro\Source\SetupPro.iss"
 			overwrite="true"
 			if="${AppName == 'UpdateIt! Pro'}">
