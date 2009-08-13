@@ -69,6 +69,8 @@
 #include <wincrypt.h>      // cryptographic API prototypes and definitions
 #include <windns.h>        // DNS definitions and DNS API
 
+#include <dbghelp.h>       // debugging support routines that are redistributable
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 // ATL headers
 

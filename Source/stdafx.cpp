@@ -75,6 +75,8 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 #pragma comment(lib, "libeay32MD.lib")
 #endif	// _DEBUG
 
+#pragma comment(lib, "dbghelp.lib")
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 // linker options
 
