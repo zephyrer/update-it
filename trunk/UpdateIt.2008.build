@@ -203,6 +203,7 @@ UpdateIt.2008.build - NAnt script to build release
 		name="build-all"
 		description="Build entire UpdateIt project."
 		depends="build-sln,create-doc,create-distr,zip-distr">
+		<echo message="UpdateIt! all built."/>
 	</target>
 
 	<!-- 'rebuild-all' target -->
@@ -211,6 +212,7 @@ UpdateIt.2008.build - NAnt script to build release
 		name="rebuild-all"
 		description="Rebuild entire UpdateIt project."
 		depends="rebuild-sln,create-doc,create-distr,zip-distr">
+		<echo message="UpdateIt! all rebuilt."/>
 	</target>
 
 	<!-- 'clean-sln' target -->
