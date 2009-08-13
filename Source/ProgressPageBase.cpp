@@ -550,8 +550,8 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 		smtpMsg.m_sSubject = pActionPage->m_strSubject;
 		smtpZipPart.SetFilename(strZipPath);
 		smtpTextPart.SetText(pActionPage->m_strBody);
-		CWinApp* pApp = AfxGetApp();
-		CString strCharSet = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET);
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		CString strCharSet = pApp->GetConfigString(SZ_ARG_SMTP_CHARSET, SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET);
 		if (strCharSet.IsEmpty())
 		{
 			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
