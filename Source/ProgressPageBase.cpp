@@ -550,6 +550,9 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 		smtpMsg.m_sSubject = pActionPage->m_strSubject;
 		smtpZipPart.SetFilename(strZipPath);
 		smtpTextPart.SetText(pActionPage->m_strBody);
+#if defined(UNICODE) || defined(_UNICODE)
+		smtpTextPart.SetCharset(_T("UTF-8"));
+#else
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		CString strCharSet = pApp->GetConfigString(SZ_ARG_SMTP_CHARSET, SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET);
 		if (strCharSet.IsEmpty())
@@ -557,6 +560,7 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
 		}
 		smtpTextPart.SetCharset(strCharSet);
+#endif   // UNICODE
 		smtpMsg.AddBodyPart(smtpTextPart);
 		smtpMsg.AddBodyPart(smtpZipPart);
 		bool fHasAuth = dlgAuth.m_eAuthMethod != CSmtpConnection::AUTH_NONE;
