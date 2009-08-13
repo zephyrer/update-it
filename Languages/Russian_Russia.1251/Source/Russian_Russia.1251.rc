@@ -357,7 +357,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_CHARSET_FORMAT      """windows-%u"""
+    IDS_CHARSET_FORMAT      "windows-%u"
     IDS_SELECTED_FORMAT     "Выбрано %i файлов:"
     IDS_NO_SELECTED         "Не выбран ни один файл."
     IDS_SIZE                "Размер"
