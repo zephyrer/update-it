@@ -162,6 +162,7 @@ Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: 
 [Files]
 ;; core application files
 Source: "..\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\CrashReporter\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\CrashReporter.exe"; DestDir: "{app}"; Components: core
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
@@ -300,12 +301,19 @@ Source: "..\FreeImage\FreeImage.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\F
 Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
+Source: "..\Templates\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Templates"; Components: sources; Flags: ignoreversion recursesubdirs
+
+;; CrashReporter sources
+Source: "..\CrashReporter\CrashReporter.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\CrashReporter"; Components: sources; Flags: ignoreversion
+Source: "..\CrashReporter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\CrashReporter\Source"; Components: sources; Flags: ignoreversion
 
 ;; UpdateIt! localizations sources
 Source: "..\Languages\English_USA.1252\English_USA.1252.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\English_USA.1252\Templates\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252\Templates"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
+Source: "..\Languages\Russian_Russia.1251\Templates\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251\Templates"; Components: sources; Flags: ignoreversion
 
 ;; DbgHelp headers and import libraries
 Source: "..\Include\dbghelp.h"; DestDir: "{app}\Sources\UpdateIt\Include"; Components: sources; Flags: ignoreversion

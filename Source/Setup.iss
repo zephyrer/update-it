@@ -98,6 +98,7 @@ Type: filesandordirs; Name: "{app}\Microsoft.VC90.MFC"
 [Files]
 ;; core application files
 Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\CrashReporter\Output.2008\x86\Release\MBCS\CrashReporter.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
