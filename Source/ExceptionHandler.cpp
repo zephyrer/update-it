@@ -614,10 +614,22 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs,
 	if (lastperiod)
 		lastperiod[0] = 0;
 
-	// Replace the executable filename with our error log file name
-	_tcscpy(pszFilePart, XCRASHREPORT_ERROR_LOG_FILE);
+	// Store our file(s) in the common repository for application-specific data
+	// instead of executable directory which may not be accessible under Vista
+	TCHAR szAppDataPath[_MAX_PATH] = { 0 };
+	::SHGetSpecialFolderPath(NULL, szAppDataPath, CSIDL_APPDATA, TRUE);
+#if defined(UPDATE_IT_PRO)
+	_tcscat(szAppDataPath, _T("\\Elijah Zarezky\\UpdateItPro\\"));
+#else
+	_tcscat(szAppDataPath, _T("\\Elijah Zarezky\\UpdateIt\\"));
+#endif   // UPDATE_IT_PRO
+	LPTSTR pszAppDataName = GetFilePart(szAppDataPath);
+	::SHCreateDirectoryEx(NULL, szAppDataPath, NULL);
 
-	HANDLE hLogFile = CreateFile(szModuleName, GENERIC_WRITE, 0, 0,
+	// Replace the executable filename with our error log file name
+	_tcscpy(pszAppDataName, XCRASHREPORT_ERROR_LOG_FILE);
+
+	HANDLE hLogFile = CreateFile(szAppDataPath, GENERIC_WRITE, 0, 0,
 				CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_WRITE_THROUGH, 0);
 
 	if (hLogFile == INVALID_HANDLE_VALUE)
@@ -734,11 +746,11 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs,
 #ifdef XCRASHREPORT_WRITE_MINIDUMP
 
 	// Replace the filename with our minidump file name
-	_tcscpy(pszFilePart, XCRASHREPORT_MINI_DUMP_FILE);
+	_tcscpy(pszAppDataName, XCRASHREPORT_MINI_DUMP_FILE);
 
 	// Create the file
 	HANDLE hMiniDumpFile = CreateFile(
-		szModuleName,
+		szAppDataPath,
 		GENERIC_WRITE,
 		0,
 		NULL,
