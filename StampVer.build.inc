@@ -168,6 +168,8 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MAJOR" value="${VerMajor}"/>
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="CHARACTER_SET" value="${CharacterSet}"/>
+					<token key="BUILD_TYPE" value="${BuildType}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -182,6 +184,8 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MAJOR" value="${VerMajor}"/>
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="CHARACTER_SET" value="${CharacterSet}"/>
+					<token key="BUILD_TYPE" value="${BuildType}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -196,6 +200,8 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MAJOR" value="${VerMajor}"/>
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="CHARACTER_SET" value="${CharacterSet}"/>
+					<token key="BUILD_TYPE" value="${BuildType}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>

@@ -161,16 +161,16 @@ Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: 
 
 [Files]
 ;; core application files
-Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\UpdateIt.exe"; DestDir: "{app}"; Components: core
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
 ;; application localizations
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Languages: en
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: muien; Languages: ru
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Languages: ru
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: muiru; Languages: en
+Source: "..\Languages\English_USA.1252\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Languages: en
+Source: "..\Languages\English_USA.1252\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\English_USA.1252.dll"; DestDir: "{app}"; Components: muien; Languages: ru
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Languages: ru
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: muiru; Languages: en
 
 ;; CRT redistributables
 Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"; Components: runtimes

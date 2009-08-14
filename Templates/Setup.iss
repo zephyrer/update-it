@@ -97,14 +97,14 @@ Type: filesandordirs; Name: "{app}\Microsoft.VC90.MFC"
 
 [Files]
 ;; core application files
-Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"
+Source: "..\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
 
 ;; application localizations
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"
+Source: "..\Languages\English_USA.1252\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\English_USA.1252.dll"; DestDir: "{app}"
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\@BUILD_TYPE@\@CHARACTER_SET@\Russian_Russia.1251.dll"; DestDir: "{app}"
 
 ;; CRT redistributables
 Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}";
