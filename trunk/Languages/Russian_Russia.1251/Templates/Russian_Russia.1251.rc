@@ -180,6 +180,57 @@ BEGIN
     PUSHBUTTON      "Отмена",IDCANCEL,114,128,46,16
 END
 
+IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "XCrashReport v1.0"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_BANNER,0,0,240,35
+    LTEXT           "",IDC_APP_ICON,240,0,50,35,SS_NOTIFY
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,35,295,1
+    LTEXT           "If you were in the middle of something, the information you were working on might be lost.",IDC_STATIC,8,43,274,16
+    LTEXT           "Please tell us about this problem.",IDC_PLEASE_TELL_US,8,65,274,8
+    LTEXT           "We have created an error report that you can send to us.  We will treat this report as confidential and anonymous.",IDC_STATIC,8,77,274,16
+    LTEXT           "To help us diagnose the cause of this error and improve this software, please describe what you were doing when this error occurred, and send this report to us.",IDC_STATIC,8,99,274,16
+    LTEXT           "Describe what you were doing when the error occurred  (optional):",IDC_STATIC,8,120,274,8
+    EDITTEXT        IDC_WHAT,8,130,274,86,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "To see what this report contains,",IDC_STATIC,8,222,104,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,236,294,1
+    LTEXT           "click here.",IDC_CLICK_HERE,114,222,38,8
+    DEFPUSHBUTTON   "Don't Send",IDC_DO_NOT_SEND_ERROR,232,244,50,16
+    PUSHBUTTON      "Send Error Report",IDC_SEND_ERROR,148,244,70,16
+END
+
+IDD_XCRASHREPORT_DETAILS DIALOGEX 0, 0, 350, 308
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Error Report Contents"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "",IDC_STATIC_DETAILS_BANNER,0,0,351,16
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_TABSTOP,0,16,350,85,WS_EX_CLIENTEDGE
+    LTEXT           "Double-click a file to view its contents.",IDC_STATIC,2,102,130,8
+    RTEXT           "Name:",IDC_STATIC,4,116,24,8
+    LTEXT           "",IDC_STATIC_NAME,30,116,103,8
+    RTEXT           "Description:",IDC_STATIC,138,116,40,8
+    LTEXT           "",IDC_STATIC_DESC,182,116,166,8
+    EDITTEXT        IDC_CONTENTS,0,128,350,152,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL,WS_EX_CLIENTEDGE
+    DEFPUSHBUTTON   "Close",IDOK,296,288,50,16
+END
+
+IDD_XCRASHREPORT_ABOUT DIALOGEX 0, 0, 270, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About XCrashReport"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    ICON            "",IDC_STATIC_ICON,8,12,20,20,SS_CENTERIMAGE
+    LTEXT           "XCrashReport Version 1.0",IDC_STATIC,40,12,164,8,SS_NOPREFIX
+    LTEXT           "Copyright © 2003 Hans Dietrich",IDC_STATIC,40,26,164,8
+    LTEXT           "This software is released into the public domain.  You are free to use it in any way you like, except that you may not sell this source code.",IDC_STATIC,40,42,164,24
+    LTEXT           "This software is provided ""as is"" with no expressed or implied warranty.  I accept no liability for any damage or loss of business that this software may cause. ",IDC_STATIC,40,74,164,34
+    LTEXT           "Send email to Hans Dietrich",IDC_ABOUT_EMAIL,40,120,90,8,SS_CENTERIMAGE
+    DEFPUSHBUTTON   "OK",IDOK,214,10,50,16,WS_GROUP
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
