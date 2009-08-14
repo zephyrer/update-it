@@ -153,7 +153,7 @@
 				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="0"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -173,7 +173,8 @@
 				Version="1.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\Lib;..\Repository\OpenSSL\lib\VC"
-				GenerateDebugInformation="false"
+				GenerateDebugInformation="true"
+				GenerateMapFile="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -343,7 +344,7 @@
 				UsePrecompiledHeader="2"
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="0"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -363,7 +364,8 @@
 				Version="1.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\Lib;..\Repository\OpenSSL\lib\VC"
-				GenerateDebugInformation="false"
+				GenerateDebugInformation="true"
+				GenerateMapFile="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -414,6 +416,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\AfxWinMain.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\AuthenticationDialog.cpp"
 				>
 			</File>
@@ -430,6 +436,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\ExceptionHandler.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\FilesList.cpp"
 				>
 			</File>
@@ -438,7 +448,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\GetWinVer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\MainWizard.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\MiniVersion.cpp"
 				>
 			</File>
 			<File
@@ -524,11 +542,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\CrashFileNames.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\CustomDialog.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Source\CustomPropSheet.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\ExceptionHandler.h"
 				>
 			</File>
 			<File
@@ -540,7 +566,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\GetWinVer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\MainWizard.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\MiniVersion.h"
 				>
 			</File>
 			<File
