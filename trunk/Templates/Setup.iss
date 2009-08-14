@@ -126,6 +126,9 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDi
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
 
+;; DbgHelp redistributables
+Source: "..\Redist\dbghelp.dll"; DestDir: "{app}";
+
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
 Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: en

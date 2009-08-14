@@ -194,6 +194,9 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDi
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
 
+;; DbgHelp redistributables
+Source: "..\Redist\dbghelp.dll"; DestDir: "{app}";
+
 ;; AfxGadgets library sources
 Source: "..\..\Repository\AfxGadgets\AfxGadgets.2008.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\AfxGadgets\Source"; Components: sources; Flags: ignoreversion
@@ -282,7 +285,7 @@ Source: "..\..\Repository\OpenSSL\lib\VC\libeay32MDd.lib"; DestDir: "{app}\Sourc
 Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}\Sources\Repository\OpenSSL\redist"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}\Sources\Repository\OpenSSL\redist"; Components: sources; Flags: ignoreversion
 
-;; CRT/MFC redistributables
+;; CRT/MFC/DbgHelp redistributables
 Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist"; Components: sources; Flags: recursesubdirs
 
 ;; UpdateIt! application sources
@@ -303,6 +306,10 @@ Source: "..\Languages\English_USA.1252\English_USA.1252.2008.vcproj"; DestDir: "
 Source: "..\Languages\English_USA.1252\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252\Source"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Russian_Russia.1251.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251"; Components: sources; Flags: ignoreversion
 Source: "..\Languages\Russian_Russia.1251\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Languages\Russian_Russia.1251\Source"; Components: sources; Flags: ignoreversion
+
+;; DbgHelp headers and import libraries
+Source: "..\Include\dbghelp.h"; DestDir: "{app}\Sources\UpdateIt\Include"; Components: sources; Flags: ignoreversion
+Source: "..\Lib\dbghelp.lib"; DestDir: "{app}\Sources\UpdateIt\Lib"; Components: sources; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
