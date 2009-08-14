@@ -56,6 +56,9 @@
 #define IDD_AUTHENTICATION              113
 #define IDR_MENU_LANGS                  114
 #define IDD_ZIP_OPTIONS                 115
+#define IDD_XCRASHREPORT_MAIN           116
+#define IDD_XCRASHREPORT_DETAILS        117
+#define IDD_XCRASHREPORT_ABOUT          118
 #define IDC_EDIT_SOURCE                 1001
 #define IDC_BUTTON_SOURCE               1002
 #define IDC_EDIT_TARGET                 1003
@@ -113,6 +116,20 @@
 #define IDC_EDIT_ZIP_PASSWORD           1058
 #define IDC_BUTTON_ZIP_OPTIONS          1059
 #define IDC_COMBO_ZIP_METHOD            1060
+#define IDC_BANNER                      1061
+#define IDC_APP_ICON                    1062
+#define IDC_PLEASE_TELL_US              1063
+#define IDC_WHAT                        1064
+#define IDC_CLICK_HERE                  1065
+#define IDC_DO_NOT_SEND_ERROR           1066
+#define IDC_SEND_ERROR                  1067
+#define IDC_STATIC_DETAILS_BANNER       1068
+#define IDC_LIST                        1069
+#define IDC_STATIC_NAME                 1070
+#define IDC_STATIC_DESC                 1071
+#define IDC_CONTENTS                    1072
+#define IDC_STATIC_ICON                 1073
+#define IDC_ABOUT_EMAIL                 1074
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -120,9 +137,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        117
+#define _APS_NEXT_RESOURCE_VALUE        119
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1061
-#define _APS_NEXT_SYMED_VALUE           115
+#define _APS_NEXT_CONTROL_VALUE         1073
+#define _APS_NEXT_SYMED_VALUE           119
 #endif
 #endif
