@@ -791,11 +791,16 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs,
 		TCHAR szCommandLine[MAX_PATH];
 		_tcscpy(szCommandLine, szModuleName);
 
-		lstrcat(szCommandLine, _T(" \""));	// surround app name with quotes
+		_tcscat(szCommandLine, _T("\x20\""));	// surround app name with quotes
 		ZeroMemory(szModuleName, sizeof(szModuleName));
 		GetModuleFileName(0, szModuleName, _countof(szModuleName)-2);
-		lstrcat(szCommandLine, 	GetFilePart(szModuleName));
-		lstrcat(szCommandLine, _T("\""));
+		_tcscat(szCommandLine, 	GetFilePart(szModuleName));
+		_tcscat(szCommandLine, _T("\""));
+
+		pszAppDataName = 0;
+		_tcscat(szCommandLine, _T("\x20\""));
+		_tcscat(szCommandLine, szAppDataPath);
+		_tcscat(szCommandLine, _T("\""));
 
 		STARTUPINFO si;
 		ZeroMemory(&si, sizeof(si));
