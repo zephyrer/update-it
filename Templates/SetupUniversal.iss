@@ -306,6 +306,7 @@ Source: "..\Templates\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Updat
 ;; CrashReporter sources
 Source: "..\CrashReporter\CrashReporter.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\CrashReporter"; Components: sources; Flags: ignoreversion
 Source: "..\CrashReporter\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\CrashReporter\Source"; Components: sources; Flags: ignoreversion
+Source: "..\CrashReporter\Templates\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\CrashReporter\Templates"; Components: sources; Flags: ignoreversion
 
 ;; UpdateIt! localizations sources
 Source: "..\Languages\English_USA.1252\English_USA.1252.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\Languages\English_USA.1252"; Components: sources; Flags: ignoreversion
