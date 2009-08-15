@@ -426,6 +426,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Source\MiniVersion.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\ROEdit.cpp"
 				>
 			</File>
@@ -466,6 +470,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Source\strcvt.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\WriteRegistry.cpp"
 				>
 			</File>
@@ -480,7 +488,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Source\CrashFileNames.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\CrashReporterApp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\EmailDefines.h"
 				>
 			</File>
 			<File
@@ -500,11 +516,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\IniDefines.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\IsAsciiFile.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Source\MainDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\MemDC.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Source\MiniVersion.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\RegistryDefines.h"
 				>
 			</File>
 			<File
@@ -517,6 +549,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\strcvt.h"
 				>
 			</File>
 			<File
