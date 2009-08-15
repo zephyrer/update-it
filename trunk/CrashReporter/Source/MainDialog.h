@@ -47,7 +47,11 @@ protected:
 
 // message map functions
 protected:
+	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+	afx_msg void OnAppIcon(void);
 	afx_msg void OnDoNotSend(void);
+	afx_msg void OnSend(void);
 	afx_msg LRESULT OnClickHere(WPARAM wParam, LPARAM lParam);
 
 // attributes
@@ -64,6 +68,8 @@ public:
 	HCURSOR m_hLinkCursor;
 	CString m_strZipFile;
 	int m_nFilesInZip;
+	BOOL m_bOverIcon;
+	HCURSOR m_hPrevCursor;
 
 // implementation helpers
 private:

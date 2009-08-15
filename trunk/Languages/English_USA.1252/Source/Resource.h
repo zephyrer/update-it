@@ -48,6 +48,7 @@
 #define IDS_PARSE_MIN_STRING_SIZE       44
 #define IDS_OTHER_APP_INSTANCE          45
 #define IDS_APP_INIT_FAILED             46
+#define IDS_NO_ZIP_AND_MESSAGE          47
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103

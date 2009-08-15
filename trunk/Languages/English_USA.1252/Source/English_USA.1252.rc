@@ -460,6 +460,7 @@ BEGIN
     IDS_PARSE_MIN_STRING_SIZE "Please enter more than %1 characters."
     IDS_OTHER_APP_INSTANCE  "One or more instances of this application is already running.\nTheir simultaneous execution may produce conflicts.\nAre you sure you want to proceed?"
     IDS_APP_INIT_FAILED     "Failed to initialize application.\nPlease contact to the developer."
+    IDS_NO_ZIP_AND_MESSAGE  "Please select a file to send or enter\na message describing the problem."
 END
 
 STRINGTABLE 
