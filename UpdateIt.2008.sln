@@ -69,6 +69,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibRawLite", "..\Repository\Graphics\LibRawLite\LibRawLite.2008.vcproj", "{AC3B609B-D001-4954-AEFD-431F50C9EB3A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CrashReporter", "CrashReporter\CrashReporter.2008.vcproj", "{2BD0D633-D417-479B-9A4F-102AB33D3C53}"
+	ProjectSection(ProjectDependencies) = postProject
+		{55F49127-D37F-4C01-861A-55ACC3A71242} = {55F49127-D37F-4C01-861A-55ACC3A71242}
+		{8722964D-A650-440C-8341-0BD8CFFA9A68} = {8722964D-A650-440C-8341-0BD8CFFA9A68}
+		{FC22C277-3720-4FB6-9466-CC5FF04BDBC5} = {FC22C277-3720-4FB6-9466-CC5FF04BDBC5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
