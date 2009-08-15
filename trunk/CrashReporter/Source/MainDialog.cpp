@@ -61,6 +61,10 @@ IMPLEMENT_DYNAMIC(CMainDialog, CDialog)
 // message map
 
 BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
+	ON_BN_CLICKED(IDC_DO_NOT_SEND_ERROR, OnDoNotSend)
+
+	// this message is sent by XHyperLink
+	ON_REGISTERED_MESSAGE(WM_XHYPERLINK_CLICKED, OnClickHere)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,6 +128,8 @@ BOOL CMainDialog::OnInitDialog(void)
 
 	m_nFilesInZip = ZipFiles();
 
+	LoadHandCursor();
+
 	// initialized
 	return (TRUE);
 }
@@ -137,11 +143,36 @@ void CMainDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PLEASE_TELL_US, m_PleaseTellUs);
 	DDX_Control(pDX, IDC_BANNER, m_Banner);
 	DDX_Control(pDX, IDC_APP_ICON, m_Icon);
+}
 
+void CMainDialog::OnOK(void) 
+{
+	// no-op: do not let Enter close the dialog	
+}
+
+void CMainDialog::OnCancel() 
+{
+	// no-op: do not let Cancel close the dialog	
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
+
+void CMainDialog::OnDoNotSend(void) 
+{
+	__super::OnCancel();
+}
+
+LRESULT CMainDialog::OnClickHere(WPARAM /*wParam*/, LPARAM /*lParam*/)
+{
+	if (m_aFileDetails.GetSize() > 0)
+	{
+		CDetailsDialog dlgDetails(&m_aFileDetails);
+		dlgDetails.DoModal();
+	}
+
+	return 0;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers

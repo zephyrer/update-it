@@ -42,9 +42,13 @@ public:
 	virtual BOOL OnInitDialog(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void OnOK(void);
+	virtual void OnCancel(void);
 
 // message map functions
 protected:
+	afx_msg void OnDoNotSend(void);
+	afx_msg LRESULT OnClickHere(WPARAM wParam, LPARAM lParam);
 
 // attributes
 public:
