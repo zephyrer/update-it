@@ -25,10 +25,17 @@
 #include "stdafx.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// resource includes
+
+#include "../../Languages/English_USA.1252/Source/Resource.h"
+#include "Resource.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // other includes
 
-#include "CrashReporterApp.h"
+#include "DetailsDialog.h"
 #include "MainDialog.h"
+#include "CrashReporterApp.h"
 #include "../../Source/Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +104,13 @@ BOOL CCrashReporterApp::InitInstance(void)
 		m_strUpdateItExe = __targv[1];
 		m_strAppDataPath = __targv[2];
 	}
+
+	SetRegistryKey(_T("Elijah Zarezky"));
+
+	SetCurrentAfxLanguage();
+	SetCurrentLanguage();
+
+	::InitCommonControls();
 
 	CMainDialog dlgMain;
 	m_pMainWnd = &dlgMain;
