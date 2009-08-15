@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+<assemblyIdentity
+    version="1.4.4877.270"
+    processorArchitecture="x86"
+    name="Elijah.Zarezky.CrashReporter"
+    type="win32"
+/> 
+<description>CrashReporter Application (part of the Power Gadgets collection)</description>
+</assembly>

@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				AdditionalManifestFiles="$(InputDir)Source\Manifest.xml"
+				AdditionalManifestFiles="$(InputDir)Source\Manifest.2008.xml"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -182,7 +182,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				AdditionalManifestFiles="$(InputDir)Source\Manifest.xml"
+				AdditionalManifestFiles="$(InputDir)Source\Manifest.2008.xml"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -275,7 +275,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				AdditionalManifestFiles="$(InputDir)Source\Manifest.xml"
+				AdditionalManifestFiles="$(InputDir)Source\Manifest.2008.xml"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -366,7 +366,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				AdditionalManifestFiles="$(InputDir)Source\Manifest.xml"
+				AdditionalManifestFiles="$(InputDir)Source\Manifest.2008.xml"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"

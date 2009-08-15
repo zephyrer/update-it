@@ -28,11 +28,11 @@ StampVer.build.inc - 'stamp-ver' target
 		name="stamp-ver"
 		description="Stamp version numbers and names."
 		depends="verify-ver">
-		
+
 		<echo message="Writing version numbers and names..."/>
 		<echo/>
 
-		<!-- UpdateIt.exe manifest -->
+		<!-- UpdateIt.exe resources -->
 
 		<copy
 			file="${UpdateItPath}\Templates\Manifest.2008.xml"
@@ -50,8 +50,6 @@ StampVer.build.inc - 'stamp-ver' target
 			</filterchain>
 		</copy>
 
-		<!-- UpdateIt.exe VERSIONINFO -->
-
 		<copy
 			file="${UpdateItPath}\Templates\VersionInfo.rc"
 			tofile="${UpdateItPath}\Source\VersionInfo.rc"
@@ -67,12 +65,46 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<touch
 			file="${UpdateItPath}\Source\UpdateIt.rc"
 			datetime="${datetime::now()}"/>
-		
-		<!-- ZipArchiver.dll VERSIONINFO -->
+
+		<!-- CrashReporter.exe resources -->
+
+		<copy
+			file="${UpdateItPath}\CrashReporter\Templates\Manifest.2008.xml"
+			tofile="${UpdateItPath}\CrashReporter\Source\Manifest.2008.xml"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="SVN_REV" value="${SvnRev}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+
+		<copy
+			file="${UpdateItPath}\CrashReporter\Templates\VersionInfo.rc"
+			tofile="${UpdateItPath}\CrashReporter\Source\VersionInfo.rc"
+			overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="VER_MAJOR" value="${VerMajor}"/>
+					<token key="VER_MINOR" value="${VerMinor}"/>
+					<token key="VER_BUILD" value="${VerBuild}"/>
+					<token key="SVN_REV" value="${SvnRev}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+
+		<touch
+			file="${UpdateItPath}\CrashReporter\Source\CrashReporter.rc"
+			datetime="${datetime::now()}"/>
+
+		<!-- ZipArchiver.dll resources -->
 
 		<copy
 			file="ZipArchiver\Templates\VersionInfo.rc"
@@ -88,12 +120,12 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<touch
 			file="ZipArchiver\Source\ZipArchiver.rc"
 			datetime="${datetime::now()}"
 			if="${AppName == 'UpdateIt! Pro'}"/>
-		
+
 		<!-- English_USA.1252.dll resources -->
 
 		<copy
@@ -120,11 +152,11 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<touch
 			file="${UpdateItPath}\Languages\English_USA.1252\Source\English_USA.1252.rc"
 			datetime="${datetime::now()}"/>
-		
+
 		<!-- Russian_Russia.1251.dll resources -->
 
 		<copy
@@ -151,11 +183,11 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<touch
 			file="${UpdateItPath}\Languages\Russian_Russia.1251\Source\Russian_Russia.1251.rc"
 			datetime="${datetime::now()}"/>
-		
+
 		<!-- Inno Setup scripts -->
 
 		<copy
@@ -173,7 +205,7 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<copy
 			file="${UpdateItPath}\Templates\SetupUniversal.iss"
 			tofile="${UpdateItPath}\Source\SetupUniversal.iss"
@@ -189,7 +221,7 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-		
+
 		<copy
 			file="UpdateItPro\Templates\SetupPro.iss"
 			tofile="UpdateItPro\Source\SetupPro.iss"
@@ -205,7 +237,7 @@ StampVer.build.inc - 'stamp-ver' target
 				</replacetokens>
 			</filterchain>
 		</copy>
-	
+
 	</target>
 
 </project>
