@@ -34,6 +34,20 @@ static char THIS_FILE[] = __FILE__;
 #endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// import libraries
+
+#pragma comment(lib, "shlwapi.lib")
+#pragma comment(lib, "version.lib")
+
+#if defined(_DEBUG)
+#pragma comment(lib, "ssleay32MDd.lib")
+#pragma comment(lib, "libeay32MDd.lib")
+#else
+#pragma comment(lib, "ssleay32MD.lib")
+#pragma comment(lib, "libeay32MD.lib")
+#endif	// _DEBUG
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // linker options
 
 #if defined(_MSC_VER) && (_MSC_VER < 1300)

@@ -42,6 +42,13 @@
 #include "GetFileSizeAsString.h"
 #include "../../Source/MiniVersion.h"
 #include "BackupFile.h"
+#include "../../Source/Registry.h"
+
+#ifndef IDC_HAND
+#define IDC_HAND MAKEINTRESOURCE(32649)   // From WINUSER.H
+#endif
+
+#define MAX_USER_COMMENTS_SIZE (64 * 1024)
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -61,8 +68,11 @@ IMPLEMENT_DYNAMIC(CMainDialog, CDialog)
 // message map
 
 BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
+	ON_WM_TIMER()
+	ON_WM_SETCURSOR()
+	ON_BN_CLICKED(IDC_APP_ICON, OnAppIcon)
 	ON_BN_CLICKED(IDC_DO_NOT_SEND_ERROR, OnDoNotSend)
-
+	ON_BN_CLICKED(IDC_SEND_ERROR, OnSend)
 	// this message is sent by XHyperLink
 	ON_REGISTERED_MESSAGE(WM_XHYPERLINK_CLICKED, OnClickHere)
 END_MESSAGE_MAP()
@@ -75,7 +85,9 @@ CDialog(IDD_XCRASHREPORT_MAIN, pParentWnd),
 m_hIcon(NULL),
 m_hSmIcon(NULL),
 m_hLinkCursor(NULL),
-m_nFilesInZip(0)
+m_nFilesInZip(0),
+m_bOverIcon(FALSE),
+m_hPrevCursor(NULL)
 {
 	CCrashReporterApp* pApp = DYNAMIC_DOWNCAST(CCrashReporterApp, AfxGetApp());
 	ASSERT_VALID(pApp);
@@ -129,6 +141,7 @@ BOOL CMainDialog::OnInitDialog(void)
 	m_nFilesInZip = ZipFiles();
 
 	LoadHandCursor();
+	SetTimer(1, 80, NULL);
 
 	// initialized
 	return (TRUE);
@@ -158,6 +171,62 @@ void CMainDialog::OnCancel()
 //////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
+void CMainDialog::OnTimer(UINT /*nIDEvent*/) 
+{
+	CPoint point(GetMessagePos());
+	ScreenToClient(&point);
+
+	CRect rect;
+	m_Icon.GetWindowRect(&rect);
+	ScreenToClient(&rect);
+
+	// check if cursor is over icon
+	if (!m_bOverIcon && rect.PtInRect(point))
+	{
+		m_bOverIcon = TRUE;
+		if (m_hLinkCursor)
+			m_hPrevCursor = ::SetCursor(m_hLinkCursor);
+	}
+	else if (m_bOverIcon && !rect.PtInRect(point))
+	{
+		m_bOverIcon = FALSE;
+		if (m_hPrevCursor)
+			::SetCursor(m_hPrevCursor);
+	}
+}
+
+BOOL CMainDialog::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message) 
+{
+	if (m_bOverIcon && m_hLinkCursor)
+	{
+		::SetCursor(m_hLinkCursor);
+		return TRUE;
+	}
+	else {
+		return __super::OnSetCursor(pWnd, nHitTest, message);
+	}
+}
+
+void CMainDialog::OnAppIcon(void) 
+{
+	CCrashReporterApp* pApp = DYNAMIC_DOWNCAST(CCrashReporterApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	CString strExe = m_szModulePath;
+	strExe += pApp->m_strUpdateItExe;
+
+	SHELLEXECUTEINFO sei = { 0 };
+
+	ZeroMemory(&sei,sizeof(sei));
+	sei.cbSize = sizeof(sei);
+	sei.lpFile = strExe;
+	sei.lpVerb = _T("properties");
+	sei.fMask  = SEE_MASK_INVOKEIDLIST;
+	sei.nShow  = SW_SHOWNORMAL;
+
+	::ShellExecuteEx(&sei); 
+}
+
 void CMainDialog::OnDoNotSend(void) 
 {
 	__super::OnCancel();
@@ -172,6 +241,81 @@ LRESULT CMainDialog::OnClickHere(WPARAM /*wParam*/, LPARAM /*lParam*/)
 	}
 
 	return 0;
+}
+
+void CMainDialog::OnSend(void)
+{
+	CCrashReporterApp* pApp = DYNAMIC_DOWNCAST(CCrashReporterApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	TCHAR szSubject[256] = { 0 };
+	_sntprintf(szSubject, _countof(szSubject) - 2, _T("Error report for %s"), pApp->m_strUpdateItExe);
+
+	TCHAR szMessage[MAX_USER_COMMENTS_SIZE] = { 0 };
+	m_What.GetWindowText(szMessage, _countof(szMessage) - 2);
+
+	TCHAR szAttachmentPath[MAX_PATH * 2] = { 0 };
+
+	// create new zip file, in case user unchecked some files
+	m_nFilesInZip = ZipFiles();
+
+	if (m_nFilesInZip > 0)
+	{
+		_tcsncpy(szAttachmentPath, m_strZipFile, _countof(szAttachmentPath) - 2);
+	}
+	else if (szMessage[0] == _T('\0'))
+	{
+		// no files in zip - check if there is a message
+		AfxMessageBox(IDS_NO_ZIP_AND_MESSAGE, MB_ICONSTOP | MB_OK);
+		return;
+	}
+
+	try
+	{
+		CSmtpConnection smtpConn;
+		CSmtpMessage smtpMsg;
+		CSmtpBodyPart smtpTextPart;
+		CSmtpBodyPart smtpZipPart;
+
+		smtpConn.SendMessage(smtpMsg);
+		smtpConn.Disconnect();
+	}
+	catch (CSmtpException* pErr)
+	{
+		AfxMessageBox(pErr->GetErrorMessage(), MB_ICONSTOP | MB_OK);
+		delete pErr;
+	}
+	/*BOOL bRet = TRUE;
+
+	__try
+	{
+		bRet = SendEmail(m_hWnd,
+						 XCRASHREPORT_SEND_TO_ADDRESS, 
+						 XCRASHREPORT_SEND_TO_NAME, 
+						 szSubject, 
+						 szMessage, 
+						 szAttachmentPath);
+	}
+	__except(EXCEPTION_EXECUTE_HANDLER)
+	{
+		TRACE(_T("ERROR: exception in SendEmail()\n"));
+		bRet = FALSE;
+	}
+
+	if (!bRet)
+	{
+		// error - tell user to send file
+		TCHAR szMsg[2000];
+		memset(szMsg, 0, sizeof(szMsg));
+		_sntprintf(szMsg, _countof(szMsg)-2, 
+					_T("The error report was not sent.  Please send the file\r\n")
+					_T("    '%s'\r\n")
+					_T("to %s."),
+					szAttachmentPath, XCRASHREPORT_SEND_TO_ADDRESS);
+		AfxMessageBox(szMsg);
+	}*/
+
+	__super::OnOK();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -695,6 +839,7 @@ void CMainDialog::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_hLinkCursor = " << m_hLinkCursor;
 		dumpCtx << "\nm_strZipFile = " << m_strZipFile;
 		dumpCtx << "\nm_nFilesInZip = " << m_nFilesInZip;
+		dumpCtx << "\nm_bOverIcon = " << m_bOverIcon;
 	}
 	catch (CFileException* pXcpt)
 	{

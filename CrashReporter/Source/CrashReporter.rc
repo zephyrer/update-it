@@ -41,6 +41,8 @@ END
 3 TEXTINCLUDE 
 BEGIN
     "\r\n"
+    "#include ""../../../Repository/Naughter/Source/Smtp.rc""\r\n"
+    "\r\n"
     "// English (U.S.) resources\r\n"
     "\r\n"
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
@@ -85,6 +87,8 @@ IDB_XLISTCTRL_CHECKBOXES BITMAP                  "..\\..\\..\\Repository\\CodePr
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
+
+#include "../../../Repository/Naughter/Source/Smtp.rc"
 
 // English (U.S.) resources
 
