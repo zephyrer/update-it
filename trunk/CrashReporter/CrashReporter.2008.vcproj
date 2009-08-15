@@ -394,7 +394,27 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Source\BackupFile.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\CrashReporterApp.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FontSize.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FormatNumberForLocale.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\GetFileSizeAsString.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\IsAsciiFile.cpp"
 				>
 			</File>
 			<File
@@ -437,6 +457,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\Source\WriteRegistry.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -444,7 +468,27 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Source\BackupFile.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\CrashReporterApp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FontSize.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FormatNumberForLocale.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\GetFileSizeAsString.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\IsAsciiFile.h"
 				>
 			</File>
 			<File
@@ -459,6 +503,10 @@
 				RelativePath=".\Source\stdafx.h"
 				>
 			</File>
+			<File
+				RelativePath=".\Source\WriteRegistry.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -466,11 +514,11 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\Source\CrashReporter.rc"
+				RelativePath=".\Source\BinRes\AppIcon.ico"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\AppIcon.ico"
+				RelativePath=".\Source\CrashReporter.rc"
 				>
 			</File>
 		</Filter>
