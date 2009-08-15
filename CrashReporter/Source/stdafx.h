@@ -57,6 +57,21 @@
 #endif   // _MSC_VER
 
 #include <afxwin.h>        // MFC core and standard components
+#include <afxcmn.h>        // MFC common control classes
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CodeProject library headers
+
+#define XLISTCTRLLIB_STATIC
+#define XLISTCTRLLIB_NOAUTOLIB
+
+#include "../../../Repository/CodeProject/Source/XTrace.h"
+#include "../../../Repository/CodeProject/Source/XZip.h"
+#include "../../../Repository/CodeProject/Source/XHeaderCtrl.h"
+#include "../../../Repository/CodeProject/Source/XListCtrl.h"
+#include "../../../Repository/CodeProject/Source/XColorStatic.h"
+#include "../../../Repository/CodeProject/Source/XHyperLink.h"
+//#include "../../../Repository/CodeProject/Source/"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // some tricks
