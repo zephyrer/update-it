@@ -43,6 +43,7 @@
 #include "../../Source/MiniVersion.h"
 #include "BackupFile.h"
 #include "../../Source/Registry.h"
+#include "EmailDefines.h"
 
 #ifndef IDC_HAND
 #define IDC_HAND MAKEINTRESOURCE(32649)   // From WINUSER.H
@@ -248,6 +249,10 @@ void CMainDialog::OnSend(void)
 	CCrashReporterApp* pApp = DYNAMIC_DOWNCAST(CCrashReporterApp, AfxGetApp());
 	ASSERT_VALID(pApp);
 
+	CString strIniPath = pApp->m_strAppDataPath;
+	strIniPath += INI_FILE_NAME;
+	CIniAppSettings iniFile(strIniPath);
+
 	TCHAR szSubject[256] = { 0 };
 	_sntprintf(szSubject, _countof(szSubject) - 2, _T("Error report for %s"), pApp->m_strUpdateItExe);
 
@@ -277,6 +282,50 @@ void CMainDialog::OnSend(void)
 		CSmtpBodyPart smtpTextPart;
 		CSmtpBodyPart smtpZipPart;
 
+		CString strFrom = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM);
+		if (strFrom.IsEmpty())
+		{
+			static const TCHAR szDefFrom[] = _T("anonymous@unknown.org");
+			::GetPrivateProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM, szDefFrom, strFrom.GetBuffer(256), 256, strIniPath);
+			strFrom.ReleaseBuffer();
+		}
+
+		CString strTo(XCRASHREPORT_SEND_TO_ADDRESS);
+
+		CString strHost = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST);
+		if (strHost.IsEmpty())
+		{
+			static const TCHAR szDefHost[] = _T("mail.unknown.org");
+			::GetPrivateProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST, szDefHost, strHost.GetBuffer(256), 256, strIniPath);
+			strHost.ReleaseBuffer();
+		}
+
+		INTERNET_PORT nPort = LOWORD(pApp->GetProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, IPPORT_SMTP));
+		if (nPort == INTERNET_INVALID_PORT_NUMBER || nPort > INTERNET_MAX_PORT_NUMBER_VALUE)
+		{
+			nPort = IPPORT_SMTP;
+		}
+
+		smtpMsg.m_sXMailer = _T("CrashReporter/1.0");
+		smtpMsg.m_From = CSmtpAddress(strFrom);
+		smtpMsg.ParseMultipleRecipients(strTo, smtpMsg.m_To);
+		smtpMsg.m_sSubject = szSubject;
+		smtpZipPart.SetFilename(szAttachmentPath);
+		smtpTextPart.SetText(szMessage);
+#if defined(UNICODE) || defined(_UNICODE)
+		smtpTextPart.SetCharset(_T("UTF-8"));
+#else
+		CString strCharSet = pApp->GetProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET);
+		if (strCharSet.IsEmpty())
+		{
+			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
+		}
+		smtpTextPart.SetCharset(strCharSet);
+#endif   // UNICODE
+		smtpMsg.AddBodyPart(smtpTextPart);
+		smtpMsg.AddBodyPart(smtpZipPart);
+
+		smtpConn.Connect(strHost, CSmtpConnection::AUTH_NONE, NULL, NULL, nPort);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}
@@ -285,35 +334,11 @@ void CMainDialog::OnSend(void)
 		AfxMessageBox(pErr->GetErrorMessage(), MB_ICONSTOP | MB_OK);
 		delete pErr;
 	}
-	/*BOOL bRet = TRUE;
-
-	__try
+	catch (CAppSettingsException* pErr)
 	{
-		bRet = SendEmail(m_hWnd,
-						 XCRASHREPORT_SEND_TO_ADDRESS, 
-						 XCRASHREPORT_SEND_TO_NAME, 
-						 szSubject, 
-						 szMessage, 
-						 szAttachmentPath);
+		AfxMessageBox(pErr->GetErrorMessage(), MB_ICONSTOP | MB_OK);
+		delete pErr;
 	}
-	__except(EXCEPTION_EXECUTE_HANDLER)
-	{
-		TRACE(_T("ERROR: exception in SendEmail()\n"));
-		bRet = FALSE;
-	}
-
-	if (!bRet)
-	{
-		// error - tell user to send file
-		TCHAR szMsg[2000];
-		memset(szMsg, 0, sizeof(szMsg));
-		_sntprintf(szMsg, _countof(szMsg)-2, 
-					_T("The error report was not sent.  Please send the file\r\n")
-					_T("    '%s'\r\n")
-					_T("to %s."),
-					szAttachmentPath, XCRASHREPORT_SEND_TO_ADDRESS);
-		AfxMessageBox(szMsg);
-	}*/
 
 	__super::OnOK();
 }

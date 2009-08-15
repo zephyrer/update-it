@@ -65,6 +65,8 @@
 
 #include <shlwapi.h>       // light-weight utility APIs
 #include <windns.h>        // DNS definitions and DNS API
+#include <shlobj.h>
+#include <wininet.h>       // Microsoft Windows Internet Extensions
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // ATL headers
@@ -116,6 +118,8 @@ typedef CPJNSMTPMessage CSmtpMessage;
 typedef CPJNSMTPBodyPart CSmtpBodyPart;
 typedef CPJNSMTPAddress CSmtpAddress;
 typedef CPJNSMTPException CSmtpException;
+
+#include "../../../Repository/Naughter/Source/AppSettings.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // some tricks
