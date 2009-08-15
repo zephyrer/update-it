@@ -410,6 +410,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\GetFilePart.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\GetFileSizeAsString.cpp"
 				>
 			</File>
@@ -419,6 +423,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\MainDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\ROEdit.cpp"
 				>
 			</File>
 			<File
@@ -484,6 +492,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\GetFilePart.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\GetFileSizeAsString.h"
 				>
 			</File>
@@ -497,6 +509,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\ROEdit.h"
 				>
 			</File>
 			<File
