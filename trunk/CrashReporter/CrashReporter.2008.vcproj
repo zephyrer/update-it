@@ -402,6 +402,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\DetailsDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\FontSize.cpp"
 				>
 			</File>
@@ -496,6 +500,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\DetailsDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\EmailDefines.h"
 				>
 			</File>
@@ -567,6 +575,10 @@
 			>
 			<File
 				RelativePath=".\Source\BinRes\AppIcon.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Repository\CodeProject\Source\BinRes\checkboxes.bmp"
 				>
 			</File>
 			<File
