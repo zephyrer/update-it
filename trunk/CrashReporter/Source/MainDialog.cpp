@@ -27,6 +27,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // resource includes
 
+#include "../../Languages/English_USA.1252/Source/Resource.h"
 #include "Resource.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +60,7 @@ END_MESSAGE_MAP()
 // construction/destruction
 
 CMainDialog::CMainDialog(CWnd* pParentWnd):
-CDialog(IDD_MAIN, pParentWnd),
+CDialog(IDD_XCRASHREPORT_MAIN, pParentWnd),
 m_hIcon(NULL),
 m_hSmIcon(NULL)
 {
