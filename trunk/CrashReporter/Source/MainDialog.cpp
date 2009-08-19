@@ -319,6 +319,12 @@ void CMainDialog::OnSend(void)
 		if (strCharSet.IsEmpty())
 		{
 			strCharSet.Format(IDS_CHARSET_FORMAT, ::GetACP());
+			TCHAR szIniCharSet[256] = { 0 };
+			::GetPrivateProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_CHARSET, strCharSet, szIniCharSet, _countof(szIniCharSet), strIniPath);
+			if (strCharSet.CompareNoCase(szIniCharSet) != 0)
+			{
+				strCharSet = szIniCharSet;
+			}
 		}
 		smtpTextPart.SetCharset(strCharSet);
 #endif   // UNICODE
