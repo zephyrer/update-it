@@ -32,6 +32,7 @@
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
+#include "FirstLaunchPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
@@ -43,6 +44,8 @@
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
+#include "UpdateItApp.h"
+#include "../Common/Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // avoid unwanted ICL warnings
@@ -160,6 +163,24 @@ BOOL CAboutPage::OnSetActive(void)
 		pWiz->SetWizardButtons(PSWIZB_NEXT);
 	}
 	return (fSuccess);
+}
+
+LRESULT CAboutPage::OnWizardNext(void)
+{
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	ATL::CRegKey regKeyApp(pApp->GetAppRegistryKey());
+	ASSERT(regKeyApp != NULL);
+	
+	DWORD dwFirstLaunch = 0;
+	LONG nError = regKeyApp.QueryDWORDValue(SZ_REGV_FIRST_LAUNCH, dwFirstLaunch);
+	if (nError == ERROR_SUCCESS && dwFirstLaunch != 0)
+	{
+		regKeyApp.SetDWORDValue(SZ_REGV_FIRST_LAUNCH, FALSE);
+	}
+
+	return (__super::OnWizardNext());
 }
 
 LRESULT CAboutPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)

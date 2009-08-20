@@ -54,6 +54,7 @@
 #define IDD_PAGE_ACTION                 103
 #define IDD_PAGE_PROGRESS               104
 #define IDD_PAGE_ABOUT                  105
+#define IDD_PAGE_FIRST_LAUNCH           106
 #define IDD_AUTHENTICATION              113
 #define IDR_MENU_LANGS                  114
 #define IDD_ZIP_OPTIONS                 115

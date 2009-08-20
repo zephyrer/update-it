@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// ProgressPage.cpp - implementation of the CProgressPage class
+// FirstLaunchPage.cpp - implementation of the CFirstLaunchPage class
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // PCH includes
@@ -44,26 +44,8 @@
 #include "ProgressPage.h"
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
-#if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
-#endif	// _MFC_VER
 #include "../Common/Registry.h"
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-// avoid unwanted ICL warnings
-
-#if defined(__INTEL_COMPILER)
-// remark #171: invalid type conversion
-#pragma warning(disable: 171)
-// remark #279: controlling expression is constant
-#pragma warning(disable: 279)
-// remark #383: value copied to temporary, reference to temporary used
-#pragma warning(disable: 383)
-// remark #797: a class-qualified name is not allowed
-#pragma warning(disable: 797)
-// remark #981: operands are evaluated in unspecified order
-#pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -77,104 +59,72 @@ static char THIS_FILE[] = __FILE__;
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
 
-IMPLEMENT_DYNAMIC(CProgressPage, CProgressPageBase)
+IMPLEMENT_DYNAMIC(CFirstLaunchPage, CBetterPropPage)
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // message map
 
-BEGIN_MESSAGE_MAP(CProgressPage, CProgressPageBase)
+BEGIN_MESSAGE_MAP(CFirstLaunchPage, CBetterPropPage)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// construction
+// construction/destruction
 
-CProgressPage::CProgressPage(void)
+//! Default ctor. Invokes inherited ctor first and then sets the PSP_PREMATURE
+//! flag, which causes the page to be created when the property sheet is created.
+//! @brief constructs a CFirstLaunchPage object
+CFirstLaunchPage::CFirstLaunchPage(void):
+CBetterPropPage(IDD_PAGE_FIRST_LAUNCH)
+{
+	m_psp.dwFlags |= PSP_PREMATURE;
+}
+
+CFirstLaunchPage::~CFirstLaunchPage(void)
 {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
-void CProgressPage::ZipTargetFolder(LPCTSTR pszTarget, const CListCtrl& listFiles, LPCTSTR pszZipPath)
+//! This member function is called in by the framework response to the WM_INITDIALOG
+//! message. Its implementation first invokes the inherited method. Then it assigns
+//! the big and small icons to the wizard's main window; obtains and shows version
+//! info; and finally setups hyper-links.
+//! @brief responses to the WM_INITDIALOG message
+//! @return TRUE to direct the system to set the keyboard focus to the first control
+//! in the page.
+BOOL CFirstLaunchPage::OnInitDialog(void)
 {
-	CZipArchive zipArch;
+	__super::OnInitDialog();
 
-	try
-	{
-		zipArch.SetCallback(this, CZipActionCallback::cbAdd);
-		zipArch.Open(pszZipPath, CZipArchive::zipCreate);
-		CString strTemp(pszTarget);
-		zipArch.SetRootPath(strTemp.Left(strTemp.ReverseFind(_T('\\'))));
-
-		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
-		ASSERT(pWiz != NULL);
-		CActionPage* pActionPage = DYNAMIC_DOWNCAST(CActionPage, pWiz->GetPage(CMainWizard::I_ACTION));
-		ASSERT(pActionPage != NULL);
-		CZipOptionsDialog& dlgZipOpts = pActionPage->m_dlgZipOpts;
-
-		int iEcncrMethod = dlgZipOpts.m_iEncrMethod;
-		if (iEcncrMethod != CZipOptionsDialog::I_METHOD_NONE)
-		{
-			static CZipCryptograph::EncryptionMethod aeEncrMethods[] =
-			{
-				CZipCryptograph::encNone,
-				CZipCryptograph::encStandard,
-				CZipCryptograph::encWinZipAes128,
-				CZipCryptograph::encWinZipAes192,
-				CZipCryptograph::encWinZipAes256
-			};
-			zipArch.SetPassword(dlgZipOpts.m_strPassword);
-			zipArch.SetEncryptionMethod(aeEncrMethods[iEcncrMethod]);
-		}
-
-		static CZipCompressor::CompressionLevel aeComprLevels[] =
-		{
-			CZipCompressor::levelStore,
-			CZipCompressor::levelFastest,
-			CZipCompressor::levelDefault,
-			CZipCompressor::levelBest
-		};
-
-		int cFiles = listFiles.GetItemCount();
-
-		for (int i = 0; i < cFiles; ++i)
-		{
-			CString strFilePath(pszTarget);
-			if (strFilePath[strFilePath.GetLength() - 1] != _T('\\'))
-			{
-				strFilePath += _T('\\');
-			}
-			FILE_DATA* pData = reinterpret_cast<FILE_DATA*>(listFiles.GetItemData(i));
-			ASSERT(pData != NULL);
-			if (pData->szFolder[0] != 0)
-			{
-				strFilePath += pData->szFolder;
-				strFilePath += _T('\\');
-			}
-			strFilePath += pData->szName;
-			strFilePath += _T('.');
-			strFilePath += pData->szExt;
-			zipArch.AddNewFile(strFilePath, aeComprLevels[dlgZipOpts.m_iComprLevel], false);
-		}
-		zipArch.Close();
-	}
-	catch (CZipException* pErr)
-	{
-		AfxMessageBox(pErr->GetErrorDescription(), MB_ICONSTOP | MB_OK);
-		delete pErr;
-		zipArch.Close(CZipArchive::afAfterException);
-	}
+	return (TRUE);
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-// CZipActionCallback overridables
-
-bool CProgressPage::Callback(ZIP_SIZE_TYPE uProgress)
+//! This member function is called by the framework when the page is chosen by the
+//! user and becomes the active page. Its implementation first invokes the inherited
+//! method and then configures the wizard's buttons (via SetWizardButtons call).
+//! @brief called when the page becomes the active page
+//! @return nonzero if the page was successfully set active; otherwise 0.
+BOOL CFirstLaunchPage::OnSetActive(void)
 {
-	m_textTotal.SetWindowText(m_szFileInZip);
-	m_progressTotal.OffsetPos(uProgress);
-	PumpWaitingMessages();
-	return (true);
+	BOOL fSuccess = __super::OnSetActive();
+	if (fSuccess)
+	{
+		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
+		ASSERT(pWiz != NULL);
+		pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+	}
+	return (fSuccess);
+}
+
+//! This member function is called by the framework to exchange and validate page
+//! data. Its implementation first invokes the inherited method. Then it associates
+//! each of dialog box control with a corresponding member variable (via DDX calls).
+//! @brief exchanges and validates page data
+//! @param pDX a pointer to a CDataExchange object.
+void CFirstLaunchPage::DoDataExchange(CDataExchange* pDX)
+{
+	__super::DoDataExchange(pDX);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,7 +137,7 @@ bool CProgressPage::Callback(ZIP_SIZE_TYPE uProgress)
 //! terminate the program with a message that lists the line number and filename
 //! where the assertion failed.
 //! @brief performs a validity check on the object
-void CProgressPage::AssertValid(void) const
+void CFirstLaunchPage::AssertValid(void) const
 {
 	// first perform inherited validity check...
 	__super::AssertValid();
@@ -199,7 +149,7 @@ void CProgressPage::AssertValid(void) const
 //! of the application).
 //! @brief dumps the contents of the object to a CDumpContext object
 //! @param dumpCtx the diagnostic dump context for dumping, usually afxDump.
-void CProgressPage::Dump(CDumpContext& dumpCtx) const
+void CFirstLaunchPage::Dump(CDumpContext& dumpCtx) const
 {
 	try
 	{

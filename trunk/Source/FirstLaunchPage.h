@@ -14,53 +14,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// AboutPage.h - interface of the CAboutPage class
+// FirstLaunchPage.h - interface of the CFirstLaunchPage class
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
 
-#if !defined(__AboutPage_h)
-#define __AboutPage_h
+#if !defined(__FirstLaunchPage_h)
+#define __FirstLaunchPage_h
 
-//! Encapsulates the "Weclome!" step of the UpdateIt! wizard.
-class CAboutPage: public CBetterPropPage
+//! Encapsulates the "First Launch" page of the UpdateIt! wizard.
+class CFirstLaunchPage: public CBetterPropPage
 {
-	DECLARE_DYNAMIC(CAboutPage)
+	DECLARE_DYNAMIC(CFirstLaunchPage)
 	DECLARE_MESSAGE_MAP()
 
 // construction/destruction
 public:
-	CAboutPage(void);
-	virtual ~CAboutPage(void);
+	CFirstLaunchPage(void);
+	virtual ~CFirstLaunchPage(void);
 
 // overridables
 public:
 	virtual BOOL OnInitDialog(void);
 	virtual BOOL OnSetActive(void);
-	virtual LRESULT OnWizardNext(void);
 protected:
-	virtual LRESULT WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
 	virtual void DoDataExchange(CDataExchange* pDX);
-
-// message map functions
-protected:
-	afx_msg void OnPaint(void);
 
 // attributes
 public:
-	CStatic m_textVersion;
-	CHyperLink m_linkZarezky;
-	CHyperLink m_linkZLib;
-	CHyperLink m_linkArtpol;
-	CHyperLink m_linkRSA;
-	CHyperLink m_linkNaughter;
-	CHyperLink m_linkOpenSSL;
-	CCustomResource m_resSoftpediaAward;
-
-// implementation helpers
-private:
-	void OnPaintAward(void);
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -70,6 +52,6 @@ public:
 #endif
 };
 
-#endif   // __AboutPage_h
+#endif   // __FirstLaunchPage_h
 
 // end of file
