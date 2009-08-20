@@ -44,6 +44,15 @@ protected:
 
 // attributes
 public:
+	CString m_strAppDataPath;
+
+	CStatic m_iconInfo;
+	CXColorStatic m_textEmailGuarantee;
+	CStatic m_textEmailInfo;
+
+	CString m_strEmailAddress;
+	CString m_strSmtpServer;
+	INTERNET_PORT m_nSmtpPort;
 
 // diagnostic services
 #if defined(_DEBUG)

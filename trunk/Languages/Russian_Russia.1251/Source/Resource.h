@@ -49,6 +49,8 @@
 #define IDS_OTHER_APP_INSTANCE          45
 #define IDS_APP_INIT_FAILED             46
 #define IDS_NO_ZIP_AND_MESSAGE          47
+#define IDS_EMAIL_GUARANTEE_FORMAT      48
+#define IDS_EMAIL_INFO                  49
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
@@ -132,6 +134,12 @@
 #define IDC_CONTENTS                    1072
 #define IDC_STATIC_ICON                 1073
 #define IDC_ABOUT_EMAIL                 1074
+#define IDC_EDIT_CRASH_FROM             1075
+#define IDC_EDIT_CRASH_SMTP             1076
+#define IDC_EDIT_CRASH_PORT             1077
+#define IDC_TEXT_EMAIL_GUARANTEE        1078
+#define IDC_ICON_INFO                   1079
+#define IDC_TEXT_EMAIL_INFO             1080
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -141,7 +149,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        119
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1073
+#define _APS_NEXT_CONTROL_VALUE         1081
 #define _APS_NEXT_SYMED_VALUE           119
 #endif
 #endif

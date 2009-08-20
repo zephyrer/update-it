@@ -45,6 +45,7 @@
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 #include "UpdateItApp.h"
+#include "../Common/IniDefines.h"
 #include "../Common/Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,9 +75,18 @@ END_MESSAGE_MAP()
 //! flag, which causes the page to be created when the property sheet is created.
 //! @brief constructs a CFirstLaunchPage object
 CFirstLaunchPage::CFirstLaunchPage(void):
-CBetterPropPage(IDD_PAGE_FIRST_LAUNCH)
+CBetterPropPage(IDD_PAGE_FIRST_LAUNCH),
+m_nSmtpPort(IPPORT_SMTP)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
+
+	::SHGetSpecialFolderPath(NULL, m_strAppDataPath.GetBuffer(_MAX_PATH), CSIDL_APPDATA, TRUE);
+	m_strAppDataPath.ReleaseBuffer();
+#if defined(UPDATE_IT_PRO)
+	m_strAppDataPath += _T("\\Elijah Zarezky\\UpdateItPro\\");
+#else
+	m_strAppDataPath += _T("\\Elijah Zarezky\\UpdateIt\\");
+#endif   // UPDATE_IT_PRO
 }
 
 CFirstLaunchPage::~CFirstLaunchPage(void)
@@ -97,6 +107,21 @@ BOOL CFirstLaunchPage::OnInitDialog(void)
 {
 	__super::OnInitDialog();
 
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	HICON hInfoIcon = pApp->LoadStandardIcon(IDI_INFORMATION);
+	m_iconInfo.SetIcon(hInfoIcon);
+
+	CString strIniPath(m_strAppDataPath);
+	strIniPath += INI_FILE_NAME;
+	CString strGuarantee;
+	strGuarantee.Format(IDS_EMAIL_GUARANTEE_FORMAT, static_cast<LPCTSTR>(strIniPath));
+	m_textEmailGuarantee.SetWindowText(strGuarantee);
+	m_textEmailGuarantee.SetTextColor(RGB(0, 128, 0));
+
+	// warning RC4206: title string too long; truncated at 256
+	CString strEmailInfo(MAKEINTRESOURCE(IDS_EMAIL_INFO));
+	m_textEmailInfo.SetWindowText(strEmailInfo);
+
 	return (TRUE);
 }
 
@@ -112,7 +137,7 @@ BOOL CFirstLaunchPage::OnSetActive(void)
 	{
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
-		pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+		pWiz->SetWizardButtons(PSWIZB_NEXT);
 	}
 	return (fSuccess);
 }
@@ -122,6 +147,23 @@ BOOL CFirstLaunchPage::OnKillActive(void)
 	BOOL fSuccess = __super::OnKillActive();
 	if (fSuccess)
 	{
+		CString strIniPath(m_strAppDataPath);
+		strIniPath += INI_FILE_NAME;
+		CIniAppSettings iniSettings(strIniPath);
+
+		if (!m_strEmailAddress.IsEmpty())
+		{
+			iniSettings.WriteString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM, m_strEmailAddress);
+		}
+		
+		if (!m_strSmtpServer.IsEmpty())
+		{
+			iniSettings.WriteString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST, m_strSmtpServer);
+		}
+		else {
+		}
+
+		iniSettings.WriteInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, m_nSmtpPort);
 	}
 	return (fSuccess);
 }
@@ -134,6 +176,14 @@ BOOL CFirstLaunchPage::OnKillActive(void)
 void CFirstLaunchPage::DoDataExchange(CDataExchange* pDX)
 {
 	__super::DoDataExchange(pDX);
+
+	DDX_Control(pDX, IDC_ICON_INFO, m_iconInfo);
+	DDX_Control(pDX, IDC_TEXT_EMAIL_GUARANTEE, m_textEmailGuarantee);
+	DDX_Control(pDX, IDC_TEXT_EMAIL_INFO, m_textEmailInfo);
+
+	DDX_Text(pDX, IDC_EDIT_CRASH_FROM, m_strEmailAddress);
+	DDX_Text(pDX, IDC_EDIT_CRASH_SMTP, m_strSmtpServer);
+	DDXV_Word(pDX, IDC_EDIT_CRASH_PORT, m_nSmtpPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,6 +202,9 @@ void CFirstLaunchPage::AssertValid(void) const
 	__super::AssertValid();
 
 	// ...and then verify own state as well
+	ASSERT_VALID(&m_iconInfo);
+	ASSERT_VALID(&m_textEmailGuarantee);
+	ASSERT_VALID(&m_textEmailInfo);
 }
 
 //! This member function prints data members of this class (in the Debug version
@@ -166,6 +219,13 @@ void CFirstLaunchPage::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
+		dumpCtx << "m_strAppDataPath = " << m_strAppDataPath;
+		dumpCtx << "\nm_iconInfo = " << m_iconInfo;
+		dumpCtx << "\nm_textEmailGuarantee = " << m_textEmailGuarantee;
+		dumpCtx << "\nm_textEmailInfo = " << m_textEmailInfo;
+		dumpCtx << "\nm_strEmailAddress = " << m_strEmailAddress;
+		dumpCtx << "\nm_strSmtpServer = " << m_strSmtpServer;
+		dumpCtx << "\nm_nSmtpPort = " << m_nSmtpPort;
 	}
 	catch (CFileException* pXcpt)
 	{

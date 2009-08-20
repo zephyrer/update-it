@@ -38,6 +38,7 @@ public:
 	virtual BOOL OnInitDialog(void);
 	virtual BOOL OnSetActive(void);
 	virtual BOOL OnKillActive(void);
+	virtual LRESULT OnWizardBack(void);
 	virtual LRESULT OnWizardNext(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);

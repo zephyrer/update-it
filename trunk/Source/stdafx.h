@@ -109,9 +109,12 @@ using std::max;
 
 #include "../../Repository/CodeProject/Source/HyperLink.h"
 #include "../../Repository/CodeProject/Source/FolderDlg.h"
+#include "../../Repository/CodeProject/Source/XColorStatic.h"
+
 #pragma warning(push)
 #include "../../Repository/ZipArchive/Source/ZipArchive.h"
 #pragma warning(pop)
+
 #include "../../Repository/AfxGadgets/Source/ddxv.h"
 #include "../../Repository/AfxGadgets/Source/SortingListCtrl.h"
 #include "../../Repository/AfxGadgets/Source/WinCrypto.h"
@@ -121,6 +124,8 @@ using std::max;
 #include "../../Repository/AfxGadgets/Source/ProcessPrivileges.h"
 #include "../../Repository/AfxGadgets/Source/ArgsParser.h"
 #include "../../Repository/AfxGadgets/Source/CustomResource.h"
+
+#include "../../Repository/Naughter/Source/AppSettings.h"
 
 // Microsoft PSDK version 6.0A conflicts with OpenSSL version 0.9.8h:
 // <wincrypt.h> contains "#define OCSP_RESPONSE ((LPCSTR) 67)" and
