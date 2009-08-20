@@ -237,23 +237,23 @@ END
 IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE WS_EX_APPWINDOW
-CAPTION """Волшебник""@APP_NAME@"
+CAPTION """Волшебник"" @APP_NAME@"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_BANNER,0,0,240,35
     LTEXT           "",IDC_APP_ICON,240,0,50,35,SS_NOTIFY
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,35,295,1
-    LTEXT           "If you were in the middle of something, the information you were working on might be lost.",IDC_STATIC,8,43,274,16
-    LTEXT           "Пожалуйста скажите нам об этой проблеме.",IDC_PLEASE_TELL_US,8,65,274,8
-    LTEXT           "Создан отчет об ошибке, который вы можете послать автору. Отчет будет трактоваться как конфиденциальный и анонимный.",IDC_STATIC,8,77,274,16
-    LTEXT           "To help us diagnose the cause of this error and improve this software, please describe what you were doing when this error occurred, and send this report to us.",IDC_STATIC,8,99,274,16
-    LTEXT           "Опишите, что именно вы делали, когда произошла ошибка (не обязательно):",IDC_STATIC,8,120,274,8
-    EDITTEXT        IDC_WHAT,8,130,274,86,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    LTEXT           "Чтобы увидеть, что содержит данный отчет,",IDC_STATIC,8,222,104,8
+    LTEXT           "Если сейчас обрабатывались ваши данные, то содержащаяся в них информация могла быть утрачена.",IDC_STATIC,8,42,274,18
+    LTEXT           "Пожалуйста сообщите нам об этой проблеме.",IDC_PLEASE_TELL_US,8,64,274,10
+    LTEXT           "Создан отчет об ошибке, который вы можете послать автору. Отчет будет трактоваться как конфиденциальный и анонимный.",IDC_STATIC,8,76,274,18
+    LTEXT           "Чтобы помочь автору понять причину этой ошибки и усовершенствовать данное ПО, опишите пожалуйста, что вы делали когда эта ошибка произошла, а затем отправьте автору этот отчет.",IDC_STATIC,8,98,274,26
+    LTEXT           "Опишите, что именно вы делали, когда произошла ошибка (не обязательно):",IDC_STATIC,8,128,274,10
+    EDITTEXT        IDC_WHAT,8,140,274,76,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "Чтобы увидеть, что содержит данный отчет,",IDC_STATIC,8,220,162,10
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,236,294,1
-    LTEXT           "кликните здесь.",IDC_CLICK_HERE,114,222,38,8
-    DEFPUSHBUTTON   "Не посылать",IDC_DO_NOT_SEND_ERROR,232,244,50,16
-    PUSHBUTTON      "Послать отчет об ошибке",IDC_SEND_ERROR,148,244,70,16
+    LTEXT           "кликните здесь.",IDC_CLICK_HERE,172,220,60,10
+    DEFPUSHBUTTON   "Не посылать",IDC_DO_NOT_SEND_ERROR,224,244,58,16
+    PUSHBUTTON      "Послать отчет об ошибке",IDC_SEND_ERROR,108,244,102,16
 END
 
 IDD_XCRASHREPORT_DETAILS DIALOGEX 0, 0, 350, 308
@@ -533,8 +533,8 @@ END
 STRINGTABLE 
 BEGIN
     IDS_EMAIL_GUARANTEE_FORMAT 
-                            "Notice that the specified address will only be stored locally in the %s file and never will be published or sent anywhere else."
-    IDS_EMAIL_INFO          "This address is needed to fill ""From"" and ""Reply-To"" fields in the generated crash reporting E-mails. But if you still worry about a spam feel free to use some fake address such as ""anonymous@unknown.org"" and provide a real one in the error description typed by yourself."
+                            "Указанный адрес будет сохранен только локально в файле %s и никогда не будет никуда отправлен или опубликован где-либо."
+    IDS_EMAIL_INFO          "Этот адрес нужен для заполнения полей ""From"" и ""Reply-To"" в электронном письме, содержащем отчет об ошибке. Но если вы все еще опасаетесь спама воспользуйтесь адресом-фальшивкой типа ""anonymous@unknown.org"" и указывайте настоящий адрес в тексте набираемого вами описания ошибки."
 END
 
 #endif    // Russian resources
