@@ -219,6 +219,11 @@ BOOL COptionsPage::OnKillActive(void)
 	return (fSuccess);
 }
 
+LRESULT COptionsPage::OnWizardBack(void)
+{
+	return (IDD_PAGE_ABOUT);
+}
+
 LRESULT COptionsPage::OnWizardNext(void)
 {
 	CWnd* pWnd;
