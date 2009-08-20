@@ -26,6 +26,7 @@
 
 #include "BetterPropPage.h"
 #include "AboutPage.h"
+#include "FirstLaunchPage.h"
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"

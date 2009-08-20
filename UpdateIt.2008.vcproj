@@ -448,6 +448,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\FirstLaunchPage.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\GetWinVer.cpp"
 				>
 			</File>
@@ -563,6 +567,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\FilesPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FirstLaunchPage.h"
 				>
 			</File>
 			<File
