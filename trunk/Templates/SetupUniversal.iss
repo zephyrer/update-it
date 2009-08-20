@@ -339,10 +339,16 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filena
 
 [INI]
 Filename: "{app}\UpdateIt.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://zarezky.spb.ru/projects/update_it.html"
+Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "from"; String: "anonymous@unknown.org"; Flags: createkeyifdoesntexist
+Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "host"; String: "mail.unknown.org"; Flags: createkeyifdoesntexist
+Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "port"; String: "25"; Flags: createkeyifdoesntexist
+Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "charset"; String: "windows-1252"; Flags: createkeyifdoesntexist; Languages: en
+Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "charset"; String: "windows-1251"; Flags: createkeyifdoesntexist; Languages: ru
 
 [Registry]
 Root: HKCU; Subkey: "Software\Elijah Zarezky"; Flags: uninsdeletekeyifempty
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!"; ValueType: dword; ValueName: "FirstLaunch"; ValueData: "1"; Flags: createvalueifdoesntexist
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; ValueType: string; ValueName: "LC_ALL"; ValueData: "English_USA.1252"; Flags: createvalueifdoesntexist; Languages: en
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Locale"; ValueType: string; ValueName: "LC_ALL"; ValueData: "Russian_Russia.1251"; Flags: createvalueifdoesntexist; Languages: ru
@@ -362,5 +368,6 @@ Filename: "{app}\UpdateIt.exe"; Description: "Launch UpdateIt!"; Flags: nowait p
 
 [UninstallDelete]
 Type: files; Name: "{app}\UpdateIt.url"
+Type: files; Name: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"
 
 ;; end of file
