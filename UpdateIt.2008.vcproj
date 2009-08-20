@@ -456,7 +456,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\MiniVersion.cpp"
+				RelativePath=".\Common\MiniVersion.cpp"
 				>
 			</File>
 			<File
@@ -542,7 +542,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\CrashFileNames.h"
+				RelativePath=".\Common\CrashFileNames.h"
 				>
 			</File>
 			<File
@@ -574,7 +574,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\MiniVersion.h"
+				RelativePath=".\Common\MiniVersion.h"
 				>
 			</File>
 			<File
@@ -590,7 +590,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\Registry.h"
+				RelativePath=".\Common\Registry.h"
 				>
 			</File>
 			<File

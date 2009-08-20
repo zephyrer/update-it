@@ -224,8 +224,14 @@ Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{ap
 
 ;; libjpeg library sources
 Source: "..\..\Repository\Graphics\libjpeg\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\coderules.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\filelist.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\install.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\jconfig.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\libjpeg.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\libjpeg.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libjpeg\structure.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg\Source"; Components: sources; Flags: ignoreversion
 
 ;; libmng library sources
@@ -302,6 +308,7 @@ Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\H
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
 Source: "..\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 Source: "..\Templates\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Templates"; Components: sources; Flags: ignoreversion recursesubdirs
+Source: "..\Common\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\UpdateIt\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
 ;; CrashReporter sources
 Source: "..\CrashReporter\CrashReporter.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\CrashReporter"; Components: sources; Flags: ignoreversion

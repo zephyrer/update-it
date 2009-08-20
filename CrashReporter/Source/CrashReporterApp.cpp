@@ -36,7 +36,7 @@
 #include "DetailsDialog.h"
 #include "MainDialog.h"
 #include "CrashReporterApp.h"
-#include "../../Source/Registry.h"
+#include "../../Common/Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support

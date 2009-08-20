@@ -37,13 +37,13 @@
 #include "DetailsDialog.h"
 #include "MainDialog.h"
 #include "CrashReporterApp.h"
-#include "../../Source/CrashFileNames.h"
-#include "IniDefines.h"
+#include "../../Common/CrashFileNames.h"
+#include "../../Common/IniDefines.h"
 #include "GetFileSizeAsString.h"
-#include "../../Source/MiniVersion.h"
+#include "../../Common/MiniVersion.h"
 #include "BackupFile.h"
-#include "../../Source/Registry.h"
-#include "EmailDefines.h"
+#include "../../Common/Registry.h"
+#include "../../Common/EmailDefines.h"
 
 #ifndef IDC_HAND
 #define IDC_HAND MAKEINTRESOURCE(32649)   // From WINUSER.H

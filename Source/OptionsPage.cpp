@@ -46,7 +46,7 @@
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
 #endif	// _MFC_VER
-#include "Registry.h"
+#include "../Common/Registry.h"
 #include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////

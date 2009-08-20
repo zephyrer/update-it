@@ -44,7 +44,7 @@
 #include "CustomPropSheet.h"
 #include "MainWizard.h"
 #include "UpdateItApp.h"
-#include "Registry.h"
+#include "../Common/Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // avoid unwanted ICL warnings

@@ -47,8 +47,8 @@
 #define XCRASHREPORT_WRITE_MINIDUMP
 
 #include "GetWinVer.h"
-#include "MiniVersion.h"
-#include "CrashFileNames.h"
+#include "../Common/MiniVersion.h"
+#include "../Common/CrashFileNames.h"
 
 #ifndef _countof
 #define _countof(array) (sizeof(array)/sizeof(array[0]))
