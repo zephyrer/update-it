@@ -178,9 +178,11 @@ LRESULT CAboutPage::OnWizardNext(void)
 	if (nError == ERROR_SUCCESS && dwFirstLaunch != 0)
 	{
 		regKeyApp.SetDWORDValue(SZ_REGV_FIRST_LAUNCH, FALSE);
+		return (IDD_PAGE_FIRST_LAUNCH);
 	}
-
-	return (__super::OnWizardNext());
+	else {
+		return (__super::OnWizardNext());
+	}
 }
 
 LRESULT CAboutPage::WindowProc(UINT uMsg, WPARAM wParam, LPARAM lParam)

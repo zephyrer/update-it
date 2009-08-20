@@ -117,6 +117,15 @@ BOOL CFirstLaunchPage::OnSetActive(void)
 	return (fSuccess);
 }
 
+BOOL CFirstLaunchPage::OnKillActive(void)
+{
+	BOOL fSuccess = __super::OnKillActive();
+	if (fSuccess)
+	{
+	}
+	return (fSuccess);
+}
+
 //! This member function is called by the framework to exchange and validate page
 //! data. Its implementation first invokes the inherited method. Then it associates
 //! each of dialog box control with a corresponding member variable (via DDX calls).

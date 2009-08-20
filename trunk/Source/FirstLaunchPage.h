@@ -38,6 +38,7 @@ public:
 public:
 	virtual BOOL OnInitDialog(void);
 	virtual BOOL OnSetActive(void);
+	virtual BOOL OnKillActive(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
