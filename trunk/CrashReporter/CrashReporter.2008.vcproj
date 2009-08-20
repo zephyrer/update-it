@@ -438,7 +438,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Source\MiniVersion.cpp"
+				RelativePath="..\Common\MiniVersion.cpp"
 				>
 			</File>
 			<File
@@ -500,7 +500,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Source\CrashFileNames.h"
+				RelativePath="..\Common\CrashFileNames.h"
 				>
 			</File>
 			<File
@@ -512,7 +512,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\EmailDefines.h"
+				RelativePath="..\Common\EmailDefines.h"
 				>
 			</File>
 			<File
@@ -532,7 +532,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\IniDefines.h"
+				RelativePath="..\Common\IniDefines.h"
 				>
 			</File>
 			<File
@@ -548,11 +548,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Source\MiniVersion.h"
+				RelativePath="..\Common\MiniVersion.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\RegistryDefines.h"
+				RelativePath="..\Common\RegistryDefines.h"
 				>
 			</File>
 			<File
