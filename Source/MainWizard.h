@@ -49,6 +49,7 @@ public:
 	{
 		// page indices
 		I_ABOUT,
+		I_FIRST_LAUNCH,
 		I_OPTIONS,
 		I_FILES,
 		I_ACTION,
@@ -60,6 +61,7 @@ public:
 	HICON m_hSmIcon;
 
 	CAboutPage m_pageAbout;
+	CFirstLaunchPage m_pageFirstLaunch;
 	COptionsPage m_pageOptions;
 	CFilesPage m_pageFiles;
 	CActionPage m_pageAction;

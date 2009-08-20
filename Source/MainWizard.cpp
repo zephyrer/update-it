@@ -129,6 +129,7 @@ CCustomPropSheet(AFX_IDS_APP_TITLE, pOwnerWnd)
 	g_fRestartInterface = false;
 
 	AddPage(&m_pageAbout);
+	AddPage(&m_pageFirstLaunch);
 	AddPage(&m_pageOptions);
 	AddPage(&m_pageFiles);
 	AddPage(&m_pageAction);
@@ -442,6 +443,7 @@ void CMainWizard::AssertValid(void) const
 
 	// ...and then verify own state as well
 	ASSERT_VALID(&m_pageAbout);
+	ASSERT_VALID(&m_pageFirstLaunch);
 	ASSERT_VALID(&m_pageOptions);
 	ASSERT_VALID(&m_pageFiles);
 	ASSERT_VALID(&m_pageAction);
@@ -463,6 +465,7 @@ void CMainWizard::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "m_hIcon = " << m_hIcon;
 		dumpCtx << "\nm_hSmIcon = " << m_hSmIcon;
 		dumpCtx << "\nm_pageAbout = " << m_pageAbout;
+		dumpCtx << "\nm_pageFirstLaunch = " << m_pageFirstLaunch;
 		dumpCtx << "\nm_pageOptions = " << m_pageOptions;
 		dumpCtx << "\nm_pageFiles = " << m_pageFiles;
 		dumpCtx << "\nm_pageAction = " << m_pageAction;
