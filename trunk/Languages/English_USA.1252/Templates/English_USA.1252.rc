@@ -244,15 +244,15 @@ BEGIN
     LTEXT           "",IDC_BANNER,0,0,240,35
     LTEXT           "",IDC_APP_ICON,240,0,50,35,SS_NOTIFY
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,35,295,1
-    LTEXT           "If you were in the middle of something, the information you were working on might be lost.",IDC_STATIC,8,43,274,16
-    LTEXT           "Please tell us about this problem.",IDC_PLEASE_TELL_US,8,65,274,8
-    LTEXT           "We have created an error report that you can send to us. We will treat this report as confidential and anonymous.",IDC_STATIC,8,77,274,16
-    LTEXT           "To help us diagnose the cause of this error and improve this software, please describe what you were doing when this error occurred, and send this report to us.",IDC_STATIC,8,99,274,16
-    LTEXT           "Describe what you were doing when the error occurred (optional):",IDC_STATIC,8,120,274,8
+    LTEXT           "If you were in the middle of something, the information you were working on might be lost.",IDC_STATIC,8,42,274,18
+    LTEXT           "Please tell us about this problem.",IDC_PLEASE_TELL_US,8,64,274,10
+    LTEXT           "We have created an error report that you can send to us. We will treat this report as confidential and anonymous.",IDC_STATIC,8,76,274,18
+    LTEXT           "To help us diagnose the cause of this error and improve this software, please describe what you were doing when this error occurred, and send this report to us.",IDC_STATIC,8,98,274,18
+    LTEXT           "Describe what you were doing when the error occurred (optional):",IDC_STATIC,8,120,274,10
     EDITTEXT        IDC_WHAT,8,130,274,86,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    LTEXT           "To see what this report contains,",IDC_STATIC,8,222,104,8
+    LTEXT           "To see what this report contains,",IDC_STATIC,8,222,104,10
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,236,294,1
-    LTEXT           "click here.",IDC_CLICK_HERE,114,222,38,8
+    LTEXT           "click here.",IDC_CLICK_HERE,114,222,38,10
     DEFPUSHBUTTON   "Don't Send",IDC_DO_NOT_SEND_ERROR,232,244,50,16
     PUSHBUTTON      "Send Error Report",IDC_SEND_ERROR,148,244,70,16
 END
@@ -283,7 +283,7 @@ BEGIN
     LTEXT           "Copyright © 2003 Hans Dietrich",IDC_STATIC,40,26,164,8
     LTEXT           "This software is released into the public domain.  You are free to use it in any way you like, except that you may not sell this source code.",IDC_STATIC,40,42,164,24
     LTEXT           "This software is provided ""as is"" with no expressed or implied warranty.  I accept no liability for any damage or loss of business that this software may cause. ",IDC_STATIC,40,74,164,34
-    LTEXT           "Send email to Hans Dietrich",IDC_ABOUT_EMAIL,40,120,90,8,SS_CENTERIMAGE
+    LTEXT           "Send email to Hans Dietrich",IDC_ABOUT_EMAIL,40,120,90,10,SS_CENTERIMAGE
     DEFPUSHBUTTON   "OK",IDOK,214,10,50,16,WS_GROUP
 END
 
