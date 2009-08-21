@@ -803,7 +803,7 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs,
 		*pszAppDataName = 0;
 		_tcscat(szCommandLine, _T("\x20\""));
 		_tcscat(szCommandLine, szAppDataPath);
-		_tcscat(szCommandLine, _T("\""));
+		_tcscat(szCommandLine, _T("\\\""));
 
 		SHELLEXECUTEINFO shExecInfo = { 0 };
 		shExecInfo.cbSize = sizeof(shExecInfo);

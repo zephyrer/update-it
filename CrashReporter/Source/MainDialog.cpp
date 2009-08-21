@@ -43,6 +43,8 @@
 #include "../../Common/MiniVersion.h"
 #include "BackupFile.h"
 #include "../../Common/Registry.h"
+#include "../../Common/RegistryDefines.h"
+#include "WriteRegistry.h"
 #include "../../Common/EmailDefines.h"
 
 #ifndef IDC_HAND
@@ -237,8 +239,6 @@ LRESULT CMainDialog::OnClickHere(WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
 	if (m_aFileDetails.GetSize() > 0)
 	{
-		::MessageBox(NULL, _T("m_aFileDetails.GetSize() > 0"), NULL, MB_OK | MB_SETFOREGROUND);
-
 		CDetailsDialog dlgDetails(&m_aFileDetails);
 		dlgDetails.DoModal();
 	}
