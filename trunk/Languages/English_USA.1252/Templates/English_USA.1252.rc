@@ -250,9 +250,9 @@ BEGIN
     LTEXT           "To help us diagnose the cause of this error and improve this software, please describe what you were doing when this error occurred, and send this report to us.",IDC_STATIC,8,98,274,18
     LTEXT           "Describe what you were doing when the error occurred (optional):",IDC_STATIC,8,120,274,10
     EDITTEXT        IDC_WHAT,8,130,274,86,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    LTEXT           "To see what this report contains,",IDC_STATIC,8,222,78,10
+    LTEXT           "Click here",IDC_CLICK_HERE,8,222,34,10
+    LTEXT           "to see what this report contains.",IDC_STATIC,44,222,108,10
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,236,294,1
-    LTEXT           "click here.",IDC_CLICK_HERE,86,222,38,10
     DEFPUSHBUTTON   "Don't Send",IDC_DO_NOT_SEND_ERROR,232,244,50,16
     PUSHBUTTON      "Send Error Report",IDC_SEND_ERROR,148,244,70,16
 END
