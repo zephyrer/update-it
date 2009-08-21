@@ -44,6 +44,11 @@ public:
 public:
 	virtual BOOL InitInstance(void);
 
+// helpers for registration
+public:
+	HKEY GetAppRegistryKey(void);
+	HKEY GetSectionKey(LPCTSTR lpszSection);
+
 // attributes
 public:
 	HINSTANCE m_hLangDLL;

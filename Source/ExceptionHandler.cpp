@@ -787,51 +787,41 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs,
 
 		// Replace the filename with our crash report exe file name
 		_tcscpy(pszFilePart, XCRASHREPORT_CRASH_REPORT_APP);
+		TCHAR szCrashReporterExe[_MAX_PATH] = { 0 };
+		szCrashReporterExe[0] = _T('\"');
+		_tcscat(szCrashReporterExe, szModuleName);
+		_tcscat(szCrashReporterExe, _T("\""));
 
-		TCHAR szCommandLine[MAX_PATH];
-		_tcscpy(szCommandLine, szModuleName);
+		TCHAR szCommandLine[_MAX_PATH] = { 0 };
 
-		_tcscat(szCommandLine, _T("\x20\""));	// surround app name with quotes
+		szCommandLine[0] = _T('\"');   // surround app name with quotes
 		ZeroMemory(szModuleName, sizeof(szModuleName));
 		GetModuleFileName(0, szModuleName, _countof(szModuleName)-2);
 		_tcscat(szCommandLine, 	GetFilePart(szModuleName));
 		_tcscat(szCommandLine, _T("\""));
 
-		pszAppDataName = 0;
+		*pszAppDataName = 0;
 		_tcscat(szCommandLine, _T("\x20\""));
 		_tcscat(szCommandLine, szAppDataPath);
 		_tcscat(szCommandLine, _T("\""));
 
-		STARTUPINFO si;
-		ZeroMemory(&si, sizeof(si));
-		si.cb = sizeof(si);
-		si.dwFlags = STARTF_USESHOWWINDOW;
-		si.wShowWindow = SW_SHOW;
+		SHELLEXECUTEINFO shExecInfo = { 0 };
+		shExecInfo.cbSize = sizeof(shExecInfo);
+		shExecInfo.lpVerb = _T("open");
+		shExecInfo.lpFile = szCrashReporterExe;
+		shExecInfo.lpParameters = szCommandLine;
+		shExecInfo.nShow = SW_SHOWNORMAL;
 
-		PROCESS_INFORMATION pi;
-		ZeroMemory(&pi, sizeof(pi));
-
-		if (CreateProcess(
-			NULL,					// name of executable module
-			szCommandLine,			// command line string
-			NULL,					// process attributes
-			NULL,					// thread attributes
-			FALSE,					// handle inheritance option
-			0,						// creation flags
-			NULL,					// new environment block
-			NULL,					// current directory name
-			&si,					// startup information
-			&pi))					// process information
+		if (ShellExecuteEx(&shExecInfo) != 0)
 		{
 			// XCrashReport.exe was successfully started, so
 			// suppress the standard crash dialog
-			return EXCEPTION_EXECUTE_HANDLER;
+			return (EXCEPTION_EXECUTE_HANDLER);
 		}
-		else
-		{
+		else {
 			// XCrashReport.exe was not started - let
 			// the standard crash dialog appear
-			return EXCEPTION_CONTINUE_SEARCH;
+			return (EXCEPTION_CONTINUE_SEARCH);
 		}
 	}
 }

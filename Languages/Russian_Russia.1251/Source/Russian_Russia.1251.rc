@@ -249,9 +249,9 @@ BEGIN
     LTEXT           "Чтобы помочь автору понять причину этой ошибки и усовершенствовать данное ПО, опишите пожалуйста, что вы делали когда эта ошибка произошла, а затем отправьте автору этот отчет.",IDC_STATIC,8,98,274,26
     LTEXT           "Опишите, что именно вы делали, когда произошла ошибка (не обязательно):",IDC_STATIC,8,128,274,10
     EDITTEXT        IDC_WHAT,8,140,274,76,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    LTEXT           "Чтобы увидеть, что содержит данный отчет,",IDC_STATIC,8,220,162,10
+    LTEXT           "Чтобы увидеть, что содержит данный отчет,",IDC_STATIC,8,220,160,10
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,236,294,1
-    LTEXT           "кликните здесь.",IDC_CLICK_HERE,172,220,60,10
+    LTEXT           "кликните здесь.",IDC_CLICK_HERE,168,220,58,10
     DEFPUSHBUTTON   "Не посылать",IDC_DO_NOT_SEND_ERROR,224,244,58,16
     PUSHBUTTON      "Послать отчет об ошибке",IDC_SEND_ERROR,108,244,102,16
 END
