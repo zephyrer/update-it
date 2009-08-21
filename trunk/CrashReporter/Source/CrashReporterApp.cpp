@@ -120,6 +120,57 @@ BOOL CCrashReporterApp::InitInstance(void)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// helpers for registration
+
+HKEY CCrashReporterApp::GetAppRegistryKey(void)
+{
+	ASSERT(m_pszRegistryKey != NULL);
+	ASSERT(m_pszProfileName != NULL);
+
+	HKEY hAppKey = NULL;
+	HKEY hSoftKey = NULL;
+	HKEY hCompanyKey = NULL;
+
+	if (::RegOpenKeyEx(HKEY_CURRENT_USER, _T("software"), 0, KEY_WRITE|KEY_READ,
+		&hSoftKey) == ERROR_SUCCESS)
+	{
+		DWORD dwDisposition = 0;
+		if (::RegCreateKeyEx(hSoftKey, m_pszRegistryKey, 0, REG_NONE,
+			REG_OPTION_NON_VOLATILE, KEY_WRITE|KEY_READ, NULL,
+			&hCompanyKey, &dwDisposition) == ERROR_SUCCESS)
+		{
+			RegCreateKeyEx(hCompanyKey, _T("UpdateIt!"), 0, REG_NONE,
+				REG_OPTION_NON_VOLATILE, KEY_WRITE|KEY_READ, NULL,
+				&hAppKey, &dwDisposition);
+		}
+	}
+	if (hSoftKey != NULL)
+		RegCloseKey(hSoftKey);
+	if (hCompanyKey != NULL)
+		RegCloseKey(hCompanyKey);
+
+	return hAppKey;
+}
+
+HKEY CCrashReporterApp::GetSectionKey(LPCTSTR lpszSection)
+{
+	ASSERT(lpszSection != NULL);
+
+	HKEY hSectionKey = NULL;
+	HKEY hAppKey = GetAppRegistryKey();
+	if (hAppKey == NULL)
+		return NULL;
+
+	DWORD dwDisposition = 0;
+	RegCreateKeyEx(hAppKey, lpszSection, 0, REG_NONE,
+		REG_OPTION_NON_VOLATILE, KEY_WRITE|KEY_READ, NULL,
+		&hSectionKey, &dwDisposition);
+	RegCloseKey(hAppKey);
+	
+	return hSectionKey;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
 void CCrashReporterApp::GetAbsolutePath(LPTSTR pszDest, LPCTSTR pszRelativePath)

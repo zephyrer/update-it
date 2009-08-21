@@ -237,6 +237,8 @@ LRESULT CMainDialog::OnClickHere(WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
 	if (m_aFileDetails.GetSize() > 0)
 	{
+		::MessageBox(NULL, _T("m_aFileDetails.GetSize() > 0"), NULL, MB_OK | MB_SETFOREGROUND);
+
 		CDetailsDialog dlgDetails(&m_aFileDetails);
 		dlgDetails.DoModal();
 	}
@@ -458,7 +460,10 @@ void CMainDialog::GetFileDetails(void)
 	{
 		TRACE(_T("no files added from ini, using defaults\n"));
 
-		CString strFilePath = m_szModulePath;
+		CCrashReporterApp* pApp = DYNAMIC_DOWNCAST(CCrashReporterApp, AfxGetApp());
+		ASSERT_VALID(pApp);
+
+		CString strFilePath = pApp->m_strAppDataPath;
 		strFilePath += XCRASHREPORT_ERROR_LOG_FILE;
 		if (_taccess(strFilePath, 00) == 0)
 		{
@@ -476,7 +481,7 @@ void CMainDialog::GetFileDetails(void)
 			}
 		}
 
-		strFilePath = m_szModulePath;
+		strFilePath = pApp->m_strAppDataPath;
 		strFilePath += XCRASHREPORT_MINI_DUMP_FILE;
 		if (_taccess(strFilePath, 00) == 0)
 		{
