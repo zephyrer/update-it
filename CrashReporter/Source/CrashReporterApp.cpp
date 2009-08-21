@@ -111,6 +111,7 @@ BOOL CCrashReporterApp::InitInstance(void)
 	SetCurrentLanguage();
 
 	::InitCommonControls();
+	VERIFY(AfxSocketInit());
 
 	CMainDialog dlgMain;
 	m_pMainWnd = &dlgMain;

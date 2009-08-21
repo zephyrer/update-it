@@ -59,6 +59,7 @@
 #include <afxwin.h>        // MFC core and standard components
 #include <afxcmn.h>        // MFC common control classes
 #include <afxtempl.h>      // MFC collection template classes
+#include <afxsock.h>       // MFC support for Windows Sockets
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // PSDK headers
