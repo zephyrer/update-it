@@ -594,7 +594,14 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs,
 {
 	static bool bFirstTime = true;
 	if (!bFirstTime)	// Going recursive! That must mean this routine crashed!
+	{
+#if defined(_DEBUG)
 		return EXCEPTION_CONTINUE_SEARCH;
+#else
+		::TerminateProcess(::GetCurrentProcess(), 0xDEADBEEF);
+		return (EXCEPTION_CONTINUE_EXECUTION);
+#endif   // _DEBUG
+	}
 	bFirstTime = false;
 
 	// Create a filename to record the error information to.
