@@ -169,27 +169,7 @@ UpdateIt.2008.build - NAnt script to build release
 
 	<!-- save-symbols farget  -->
 
-	<target
-		name="save-symbols"
-		description="Save symbol files.">
-		<property name="VersionStr" value="${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
-		<property name="SymbolsDir" value="Symbols\${VersionStr}"/>
-		<mkdir
-			dir="${SymbolsDir}"
-			if="${not directory::exists(SymbolsDir)}"/>
-		<echo message="Saving symbol files."/>
-		<echo/>
-		<copy
-			file="${OutputRootPath}\x86\${BuildType}\${CharacterSet}\${ExeName}.map"
-			tofile="${SymbolsDir}\${ExeName}.map"
-			overwrite="true">
-		</copy>
-		<copy
-			file="${OutputRootPath}\x86\${BuildType}\${CharacterSet}\${ExeName}.pdb"
-			tofile="${SymbolsDir}\${ExeName}.pdb"
-			overwrite="true">
-		</copy>
-	</target>
+	<include buildfile="${UpdateItPath}\SaveSymbols.build.inc"/>
 
 	<!-- 'commit-src' target -->
 
