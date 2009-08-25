@@ -29,21 +29,40 @@ SaveSymbols.build.inc - 'save-symbols' target
 		description="Save symbol files.">
 		<property name="VersionStr" value="${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
 		<property name="SymbolsDir" value="Symbols\${VersionStr}"/>
+		
 		<mkdir
 			dir="${SymbolsDir}"
 			if="${not directory::exists(SymbolsDir)}"/>
+		
 		<echo message="Saving symbol files."/>
 		<echo/>
+		
 		<copy
 			file="${OutputRootPath}\x86\${BuildType}\${CharacterSet}\${ExeName}.map"
 			tofile="${SymbolsDir}\${ExeName}.map"
 			overwrite="true">
 		</copy>
+		
 		<copy
 			file="${OutputRootPath}\x86\${BuildType}\${CharacterSet}\${ExeName}.pdb"
 			tofile="${SymbolsDir}\${ExeName}.pdb"
 			overwrite="true">
 		</copy>
+
+		<copy
+			file="ZipArchiver\Output.2008\x86\${BuildType}\${CharacterSet}\ZipArchiver.map"
+			tofile="${SymbolsDir}\ZipArchiver.map"
+			overwrite="true"
+			if="${AppName == 'UpdateIt! Pro'}">
+		</copy>
+
+		<copy
+			file="ZipArchiver\Output.2008\x86\${BuildType}\${CharacterSet}\ZipArchiver.pdb"
+			tofile="${SymbolsDir}\ZipArchiver.pdb"
+			overwrite="true"
+			if="${AppName == 'UpdateIt! Pro'}">
+		</copy>
+
 	</target>
 
 </project>
