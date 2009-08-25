@@ -51,6 +51,10 @@ UpdateIt.2008.build - NAnt script to build release
 		name="UpdateItPath"
 		value="."
 		readonly="true"/>
+	<property
+		name="OutputRootPath"
+		value="Output.2008"
+		readonly="true"/>
 
 	<!-- version numbers and names -->
 
@@ -163,6 +167,30 @@ UpdateIt.2008.build - NAnt script to build release
 		</exec>
 	</target>
 
+	<!-- save-symbols farget  -->
+
+	<target
+		name="save-symbols"
+		description="Save symbol files.">
+		<property name="VersionStr" value="${VerMajor}.${VerMinor}.${VerBuild}.${SvnRev}"/>
+		<property name="SymbolsDir" value="Symbols\${VersionStr}"/>
+		<mkdir
+			dir="${SymbolsDir}"
+			if="${not directory::exists(SymbolsDir)}"/>
+		<echo message="Saving symbol files."/>
+		<echo/>
+		<copy
+			file="${OutputRootPath}\x86\${BuildType}\${CharacterSet}\${ExeName}.map"
+			tofile="${SymbolsDir}\${ExeName}.map"
+			overwrite="true">
+		</copy>
+		<copy
+			file="${OutputRootPath}\x86\${BuildType}\${CharacterSet}\${ExeName}.pdb"
+			tofile="${SymbolsDir}\${ExeName}.pdb"
+			overwrite="true">
+		</copy>
+	</target>
+
 	<!-- 'commit-src' target -->
 
 	<target
@@ -202,7 +230,7 @@ UpdateIt.2008.build - NAnt script to build release
 	<target
 		name="build-all"
 		description="Build entire UpdateIt project."
-		depends="build-sln,create-doc,create-distr,zip-distr">
+		depends="build-sln,create-doc,create-distr,zip-distr,save-symbols">
 		<echo message="UpdateIt! all built."/>
 	</target>
 
@@ -211,7 +239,7 @@ UpdateIt.2008.build - NAnt script to build release
 	<target
 		name="rebuild-all"
 		description="Rebuild entire UpdateIt project."
-		depends="rebuild-sln,create-doc,create-distr,zip-distr">
+		depends="rebuild-sln,create-doc,create-distr,zip-distr,save-symbols">
 		<echo message="UpdateIt! all rebuilt."/>
 	</target>
 
