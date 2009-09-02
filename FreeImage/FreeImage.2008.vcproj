@@ -342,6 +342,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Repository\FreeImage\Source\Deprecated.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Repository\FreeImage\Source\DeprecationMgr.cpp"
 				>
 			</File>
