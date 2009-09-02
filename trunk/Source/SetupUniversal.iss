@@ -19,21 +19,21 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4885
+AppVerName=UpdateIt! 1.4.4898
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4885
+AppVersion=1.4.4898
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4885-setup-universal
-VersionInfoVersion=1.4.4885
+OutputBaseFilename=UpdateIt-1.4.4898-setup-universal
+VersionInfoVersion=1.4.4898
 MinVersion=4.1.2222,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
