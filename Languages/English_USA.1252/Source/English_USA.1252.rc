@@ -65,7 +65,7 @@ END
 
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Step 4 of 4 — Processing files"
+CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
@@ -78,7 +78,7 @@ END
 
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Step 1 of 4 — Setting options"
+CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
@@ -102,7 +102,7 @@ END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Step 2 of 4 — Selecting files"
+CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
@@ -112,7 +112,7 @@ END
 
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Step 3 of 4 — Choosing an action"
+CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
@@ -156,7 +156,7 @@ END
 
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Step 0 of 4 — Welcome!"
+CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
@@ -182,10 +182,10 @@ END
 
 IDD_PAGE_FIRST_LAUNCH DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — First Launch"
+CAPTION "UpdateIt! — First Launch"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
-    LTEXT           "In case of the first UpdateIt! Pro wizard launch you may need to configure crash reporting settings. If you are not sure which outgoing SMTP server to specify look at your default E-mail client settings.",IDC_STATIC,4,4,326,18
+    LTEXT           "In case of the first UpdateIt! wizard launch you may need to configure crash reporting settings. If you are not sure which outgoing SMTP server to specify look at your default E-mail client settings.",IDC_STATIC,4,4,326,18
     GROUPBOX        "&Crash Reporting Settings",IDC_STATIC,4,32,326,134,WS_GROUP
     RTEXT           "Your E-mail &Address:",IDC_STATIC,10,44,78,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_CRASH_FROM,90,44,234,12,ES_AUTOHSCROLL | NOT WS_BORDER | WS_GROUP,WS_EX_CLIENTEDGE
@@ -238,7 +238,7 @@ END
 IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "UpdateIt! Pro Wizard"
+CAPTION "UpdateIt! Wizard"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_BANNER,0,0,240,35
@@ -450,7 +450,7 @@ BEGIN
     IDS_MOVING_FILES        "Moving file(s) to the target folder..."
     IDS_ALL_DONE            "All done. Click Finish to exit the wizard."
     IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
-    IDS_VERSION_FORMAT      "UpdateIt! Pro Wizard – Version %s\nThis application is a part of the PowerGadgets collection"
+    IDS_VERSION_FORMAT      "UpdateIt! Wizard – Version %s\nThis application is a part of the PowerGadgets collection"
     IDS_ZIPPING_FOLDER      "Zipping target folder..."
     IDS_SENDING_MAIL        "Sending zipped folder..."
     IDS_SEND_FAILED         "Failed to send e-mail message!"
@@ -529,7 +529,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "UpdateIt! Pro"
+    AFX_IDS_APP_TITLE       "UpdateIt!"
 END
 
 STRINGTABLE 

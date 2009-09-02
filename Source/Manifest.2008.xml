@@ -3,8 +3,8 @@
 <assemblyIdentity
     version="1.4.4898.319"
     processorArchitecture="x86"
-    name="Elijah.Zarezky.UpdateItPro"
+    name="Elijah.Zarezky.UpdateIt"
     type="win32"
 /> 
-<description>UpdateIt! Pro Application (part of the Power Gadgets collection)</description>
+<description>UpdateIt! Application (part of the Power Gadgets collection)</description>
 </assembly>
