@@ -80,14 +80,14 @@ BOOL CMiniVersion::Init()
 	DWORD dwSize;
 	BOOL rc;
 
-	dwSize = ::GetFileVersionInfoSize((LPSTR)(LPCTSTR)m_szPath, &dwHandle);
+	dwSize = ::GetFileVersionInfoSize(m_szPath, &dwHandle);
 	if (dwSize == 0)
 		return FALSE;
 		
 	m_pData = new BYTE [dwSize + 1];	
 	ZeroMemory(m_pData, dwSize+1);
 
-	rc = ::GetFileVersionInfo((LPSTR)(LPCTSTR)m_szPath, dwHandle, dwSize, m_pData);
+	rc = ::GetFileVersionInfo(m_szPath, dwHandle, dwSize, m_pData);
 	if (!rc)
 		return FALSE;
 
@@ -254,7 +254,7 @@ BOOL CMiniVersion::GetFixedInfo(VS_FIXEDFILEINFO& rFixedInfo)
 
 ///////////////////////////////////////////////////////////////////////////////
 // GetStringInfo
-BOOL CMiniVersion::GetStringInfo(LPCSTR lpszKey, LPTSTR lpszReturnValue)
+BOOL CMiniVersion::GetStringInfo(LPCTSTR lpszKey, LPTSTR lpszReturnValue)
 {
 	BOOL rc;
 	DWORD *pdwTranslation;
@@ -277,7 +277,7 @@ BOOL CMiniVersion::GetStringInfo(LPCSTR lpszKey, LPTSTR lpszReturnValue)
 	if (!rc)
 		return FALSE;
 
-	char szKey[2000];
+	TCHAR szKey[2048] = { 0 };
 	wsprintf(szKey, _T("\\StringFileInfo\\%04x%04x\\%s"),
 				 LOWORD (*pdwTranslation), HIWORD (*pdwTranslation),
 				 lpszKey);

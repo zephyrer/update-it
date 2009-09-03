@@ -589,8 +589,7 @@ static void DumpRegisters(HANDLE LogFile, PCONTEXT Context)
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, 
-								LPCTSTR lpszMessage)
+int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, LPCTSTR lpszMessage)
 {
 	static bool bFirstTime = true;
 	if (!bFirstTime)	// Going recursive! That must mean this routine crashed!
