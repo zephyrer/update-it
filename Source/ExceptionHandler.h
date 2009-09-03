@@ -33,7 +33,7 @@
 #ifndef	__EXCEPTIONHANDLER_H
 #define	__EXCEPTIONHANDLER_H
 
-int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, const char *lpszMessage);
+int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, LPCTSTR lpszMessage);
 
 /*
 // Sample usage - put the code that used to be in main into HandledMain.
