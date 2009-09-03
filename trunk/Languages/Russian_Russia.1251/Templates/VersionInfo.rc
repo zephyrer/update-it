@@ -39,13 +39,13 @@ VS_VERSION_INFO VERSIONINFO
             VALUE "Comments", "none"
             VALUE "CompanyName", "Илья Зарецкий"
             VALUE "FileDescription", "Библиотечный модуль Russian_Russia.1251"
-            VALUE "FileVersion", "@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@"
+            VALUE "FileVersion", "@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@.@SVN_REV@"
             VALUE "InternalName", "Russian_Russia.1251"
             VALUE "LegalCopyright", "Авторские права © 2007-2009 Илья Зарецкий"
             VALUE "LegalTrademarks", "Windows™ является зарегистрированной торговой маркой Корпорации Microsoft"
             VALUE "OriginalFilename", "Russian_Russia.1251.dll"
             VALUE "ProductName", "Power Gadgets"
-            VALUE "ProductVersion", "@VER_MAJOR@.@VER_MINOR@.0"
+            VALUE "ProductVersion", "@VER_MAJOR@.@VER_MINOR@"
          END
       END
       BLOCK "VarFileInfo"
