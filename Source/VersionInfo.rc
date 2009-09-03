@@ -39,13 +39,13 @@ VS_VERSION_INFO VERSIONINFO
             VALUE "Comments", "none"
             VALUE "CompanyName", "Elijah Zarezky"
             VALUE "FileDescription", "UpdateIt! Application Executable"
-            VALUE "FileVersion", "1.4.4898"
+            VALUE "FileVersion", "1.4.4898.319"
             VALUE "InternalName", "UpdateIt"
             VALUE "LegalCopyright", "Copyright © 2002–2009 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
             VALUE "OriginalFilename", "UpdateIt.exe"
             VALUE "ProductName", "Power Gadgets"
-            VALUE "ProductVersion", "1.4.0"
+            VALUE "ProductVersion", "1.4"
          END
       END
       BLOCK "VarFileInfo"
