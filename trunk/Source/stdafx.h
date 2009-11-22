@@ -105,6 +105,7 @@ __declspec(selectany) int _forceMFCManifestCUR;
 // ATL headers
 
 #include <atlbase.h>       // basic ATL classes
+#include <atlfile.h>       // CAtlFile implementation
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // STL headers
