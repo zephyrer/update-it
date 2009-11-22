@@ -233,13 +233,13 @@ bool CCrashReporterApp::RegQueryLanguagePath(LPCTSTR pszValueName, LPTSTR pszDes
 #if defined(_DEBUG)
 
 #if (_MSC_VER == 1300)
-#define SZ_DEVENV_VER "2002"
+#define SZ_DEVENV_VER _T("2002")
 #elif (_MSC_VER == 1310)
-#define SZ_DEVENV_VER "2003"
+#define SZ_DEVENV_VER _T("2003")
 #elif (_MSC_VER == 1400)
-#define SZ_DEVENV_VER "2005"
+#define SZ_DEVENV_VER _T("2005")
 #elif (_MSC_VER == 1500)
-#define SZ_DEVENV_VER "2008"
+#define SZ_DEVENV_VER _T("2008")
 #else
 #error Unrecognized Development Environment version!
 #endif   // _MSC_VER
@@ -262,7 +262,7 @@ bool CCrashReporterApp::GetLanguagePath(LPTSTR pszDest)
 		TCHAR szLangDir[_MAX_DIR] = { 0 };
 		_tcscpy(szLangDir, strDebugPath);
 		::PathRemoveExtension(szLangDir);
-		_tcscat(szLangDir, _T("\\Output." SZ_DEVENV_VER "\\x86\\Debug"));
+		_tcscat(szLangDir, _T("\\Output.") SZ_DEVENV_VER _T("\\x86\\Debug"));
 #if defined(_MBCS)
 		_tcscat(szLangDir, _T("\\MBCS\\"));
 #else
