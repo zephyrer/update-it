@@ -296,7 +296,7 @@ Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
 
 ;; DbgHelp redistributables
-Source: "..\Redist\dbghelp.dll"; DestDir: "{app}";
+Source: "..\Redist\dbghelp.dll"; DestDir: "{app}"
 
 ;; AfxGadgets library sources
 Source: "..\..\Repository\AfxGadgets\AfxGadgets.2008.vcproj"; DestDir: "{app}\Sources\Repository\AfxGadgets"; Components: sources; Flags: ignoreversion
