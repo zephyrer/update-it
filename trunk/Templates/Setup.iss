@@ -52,7 +52,8 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"; LicenseFile: ".\ApacheLicense.rtf"
 
 [LangOptions]
-LanguageCodePage=0
+en.LanguageCodePage=1252
+ru.LanguageCodePage=1251
 DialogFontName=MS Shell Dlg 2
 DialogFontSize=8
 en.LanguageName=English
@@ -127,8 +128,8 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}";
 Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
 
 ;; OpenSSL redistributables
-Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
-Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
+Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
+Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
 
 ;; DbgHelp redistributables
 Source: "..\Redist\dbghelp.dll"; DestDir: "{app}";
