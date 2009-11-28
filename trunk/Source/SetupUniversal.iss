@@ -37,7 +37,7 @@ OutputBaseFilename=UpdateIt-1.4.4988-setup-universal
 VersionInfoVersion=1.4.4988.319
 VersionInfoProductName=Power Gadgets
 VersionInfoProductVersion=1.4
-MinVersion=4.1.2222,5.0.2195
+MinVersion=0,5.0.2195
 WizardImageFile=compiler:WizModernImage-IS.bmp
 WizardSmallImageFile=compiler:WizModernSmallImage-IS.bmp
 LicenseFile=ApacheLicense.rtf
@@ -64,6 +64,97 @@ SelectLanguageTitle=Language Selection
 SelectLanguageLabel=Please select UpdateIt! language:
 
 [Code]
+//  Code Page default values
+const
+	CP_ACP = 0;
+	CP_OEMCP = 1;
+	CP_MACCP = 2;
+	CP_THREAD_ACP = 3;
+	CP_SYMBOL = 42;
+	CP_UTF7 = 65000;
+	CP_UTF8 = 65001;
+
+// MBCS and Unicode translation flags
+const
+	MB_PRECOMPOSED = $0001;
+	MB_COMPOSITE = $0002;
+	MB_USEGLYPHCHARS = $0004;
+	MB_ERR_INVALID_CHARS = $0008;
+
+	WC_COMPOSITECHECK = $0200;
+	WC_DISCARDNS = $0010;
+	WC_SEPCHARS = $0020;
+	WC_DEFAULTCHAR = $0040;
+	WC_ERR_INVALID_CHARS = $0080;
+	WC_NO_BEST_FIT_CHARS = $0400;
+
+	DefFlagsMB = MB_PRECOMPOSED;
+	DefFlagsWC = WC_COMPOSITECHECK or WC_DISCARDNS or WC_SEPCHARS or WC_DEFAULTCHAR;
+
+function MultiByteToWideChar(CodePage, Flags: Integer; SrcStr: AnsiString; SrcLen: Integer; DestStr: String; DestLen: Integer): Integer;
+external 'MultiByteToWideChar@kernel32.dll stdcall';
+function WideCharToMultiByte(CodePage, Flags: Integer; SrcStr: String; SrcLen: Integer; DestStr: AnsiString; DestLen: Integer; DefChar: Integer; DefCharUsed: Integer): Integer;
+external 'WideCharToMultiByte@kernel32.dll stdcall';
+
+function AnsiStringToString(const SrcStr: AnsiString; CodePage: Integer): String;
+var
+	WideLen: Integer;
+begin
+	if (SrcStr <> '') then
+	begin
+		WideLen := MultiByteToWideChar(CodePage, DefFlagsMB, SrcStr, -1, Result, 0);
+		SetLength(Result, WideLen - 1);
+		MultiByteToWideChar(CodePage, DefFlagsMB, SrcStr, -1, Result, WideLen - 1);
+	end
+	else begin
+		Result := '';
+	end;
+end;
+
+function StringToAnsiString(const SrcStr: String; CodePage: Integer): AnsiString;
+var
+	AnsiLen: Integer;
+begin
+	if (SrcStr <> '') then
+	begin
+		AnsiLen := WideCharToMultiByte(CodePage, DefFlagsWC, SrcStr, -1, Result, 0, 0, 0);
+		SetLength(Result, AnsiLen - 1);
+		WideCharToMultiByte(CodePage, DefFlagsWC, SrcStr, -1, Result, AnsiLen - 1, 0, 0);
+	end
+	else begin
+		Result := '';
+	end;
+end;
+
+function IsWinSxS(): Boolean;
+var
+	osVersion: TWindowsVersion;
+begin
+	GetWindowsVersionEx(osVersion);
+	Result := ((osVersion.Major = 5) and (osVersion.Minor >= 1)) or (osVersion.Major > 5);
+end;
+
+const
+	MagicStr = '{6DF4C042-C237-46b2-A205-C41DAAA4A0F5}';
+
+procedure AdjustAfxConfig();
+var
+	AfxConfigPath: String;
+	AfxConfigXML: AnsiString;
+	WideXML: String;
+begin
+	if (IsWinSxS()) then
+	begin
+		AfxConfigPath := ExpandConstant(CurrentFileName());
+		if (LoadStringFromFile(AfxConfigPath, AfxConfigXML)) then
+		begin
+			WideXML := AnsiStringToString(AfxConfigXML, CP_ACP);
+			StringChangeEx(WideXML, MagicStr, ExpandConstant('{app}'), True);
+			SaveStringToFile(AfxConfigPath, StringToAnsiString(WideXML, CP_ACP), False);
+		end;
+	end;
+end;
+
 function HasLangEn(): Boolean;
 begin
 	Result := (IsComponentSelected('muien')) or (ActiveLanguage() = 'en');
@@ -143,6 +234,9 @@ Type: files; Name: "{app}\UpdateIt.chm"
 ;; from 1.5 pre-release
 Type: filesandordirs; Name: "{app}\Microsoft.VC90.CRT"
 Type: filesandordirs; Name: "{app}\Microsoft.VC90.MFC"
+Type: files; Name: "{app}\Microsoft.VC90.MFC.manifest"
+Type: files; Name: "{app}\mfc90.dll"
+Type: files; Name: "{app}\mfcm90.dll"
 
 [Types]
 Name: "typical"; Description: "Typical Installation"; Languages: en
@@ -165,28 +259,30 @@ Name: "sources"; Description: "Исходные тексты"; Types: full custom; Languages: 
 
 [Files]
 ;; core application files
-Source: "..\Output.2008\x86\Release\MBCS\UpdateIt.exe"; DestDir: "{app}"; Components: core
-Source: "..\CrashReporter\Output.2008\x86\Release\MBCS\CrashReporter.exe"; DestDir: "{app}"; Components: core
+Source: "..\Output.2008\x86\Release\Unicode\UpdateIt.exe"; DestDir: "{app}"; Components: core
+Source: "..\CrashReporter\Output.2008\x86\Release\Unicode\CrashReporter.exe"; DestDir: "{app}"; Components: core
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
 ;; application localizations
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Languages: en
-Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\MBCS\English_USA.1252.dll"; DestDir: "{app}"; Components: muien; Languages: ru
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Languages: ru
-Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\MBCS\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: muiru; Languages: en
+Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\Unicode\English_USA.1252.dll"; DestDir: "{app}"; Components: core; Languages: en
+Source: "..\Languages\English_USA.1252\Output.2008\x86\Release\Unicode\English_USA.1252.dll"; DestDir: "{app}"; Components: muien; Languages: ru
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\Unicode\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: core; Languages: ru
+Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\Release\Unicode\Russian_Russia.1251.dll"; DestDir: "{app}"; Components: muiru; Languages: en
 
 ;; CRT redistributables
 Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}"; Components: runtimes
 Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.PrivateCRT.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
 Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
 
 ;; MFC library redistributables
-Source: "..\Redist\Microsoft.VC90.MFC\mfc90.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\Redist\Microsoft.VC90.MFC\mfcm90.dll"; DestDir: "{app}"; Components: runtimes
-Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
+Source: "..\Redist\Microsoft.VC90.MFC\mfc90u.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\Microsoft.VC90.MFC\mfc90u.dll.1000.config"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600; AfterInstall: AdjustAfxConfig
+Source: "..\Redist\Microsoft.VC90.MFC\mfcm90u.dll"; DestDir: "{app}"; Components: runtimes
+Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.PrivateMFC.manifest"; DestDir: "{app}"; Components: runtimes; MinVersion: 0,5.01.2600
 
 ;; MFC library localizations
 Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"; Components: core; Languages: en
