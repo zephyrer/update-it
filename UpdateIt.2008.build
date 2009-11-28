@@ -35,7 +35,7 @@ UpdateIt.2008.build - NAnt script to build release
 
 	<property
 		name="CharacterSet"
-		value="MBCS"
+		value="Unicode"
 		overwrite="false"/>
 	<property
 		name="BuildType"
