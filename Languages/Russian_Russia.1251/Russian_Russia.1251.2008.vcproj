@@ -74,7 +74,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="/IGNORE:4089"
+				AdditionalOptions="/OSVERSION:5.0 /IGNORE:4089"
 				OutputFile="$(OutDir)\Russian_Russia.1251.dll"
 				Version="1.0"
 				LinkIncremental="1"
@@ -169,7 +169,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="/IGNORE:4089"
+				AdditionalOptions="/OSVERSION:5.0 /IGNORE:4089"
 				OutputFile="$(OutDir)\Russian_Russia.1251.dll"
 				Version="1.0"
 				LinkIncremental="1"
@@ -268,7 +268,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="/IGNORE:4089"
+				AdditionalOptions="/OSVERSION:5.0 /IGNORE:4089"
 				OutputFile="$(OutDir)\Russian_Russia.1251.dll"
 				Version="1.0"
 				LinkIncremental="1"
@@ -363,7 +363,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="/IGNORE:4089"
+				AdditionalOptions="/OSVERSION:5.0 /IGNORE:4089"
 				OutputFile="$(OutDir)\Russian_Russia.1251.dll"
 				Version="1.0"
 				LinkIncremental="1"

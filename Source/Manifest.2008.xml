@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
 <assemblyIdentity
-    version="1.4.4898.319"
+    version="1.4.4988.319"
     processorArchitecture="x86"
     name="Elijah.Zarezky.UpdateIt"
     type="win32"

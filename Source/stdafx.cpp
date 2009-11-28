@@ -67,13 +67,8 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 #pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "version.lib")
 
-#if defined(_DEBUG)
-#pragma comment(lib, "ssleay32MDd.lib")
-#pragma comment(lib, "libeay32MDd.lib")
-#else
-#pragma comment(lib, "ssleay32MD.lib")
-#pragma comment(lib, "libeay32MD.lib")
-#endif	// _DEBUG
+#pragma comment(lib, "ssleay32.lib")
+#pragma comment(lib, "libeay32.lib")
 
 #pragma comment(lib, "dbghelp.lib")
 

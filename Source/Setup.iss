@@ -19,13 +19,13 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4898
+AppVerName=UpdateIt! 1.4.4988
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4898
+AppVersion=1.4.4988
 AppCopyright=Copyright © 2002–2009 by Elijah Zarezky
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
@@ -33,8 +33,8 @@ AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4898-setup
-VersionInfoVersion=1.4.4898.319
+OutputBaseFilename=UpdateIt-1.4.4988-setup
+VersionInfoVersion=1.4.4988.319
 VersionInfoProductName=Power Gadgets
 VersionInfoProductVersion=1.4
 MinVersion=4.1.2222,5.0.2195
@@ -52,7 +52,8 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"; LicenseFile: ".\ApacheLicense.rtf"
 
 [LangOptions]
-LanguageCodePage=0
+en.LanguageCodePage=1252
+ru.LanguageCodePage=1251
 DialogFontName=MS Shell Dlg 2
 DialogFontSize=8
 en.LanguageName=English
@@ -127,8 +128,8 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}";
 Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
 
 ;; OpenSSL redistributables
-Source: "..\..\Repository\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
-Source: "..\..\Repository\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
+Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
+Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
 
 ;; DbgHelp redistributables
 Source: "..\Redist\dbghelp.dll"; DestDir: "{app}";
