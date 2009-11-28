@@ -20,7 +20,7 @@
 #include <winver.h>
 
 VS_VERSION_INFO VERSIONINFO
-   FILEVERSION 1,4,4988,331
+   FILEVERSION 1,4,4988,333
    PRODUCTVERSION 1,4,0,0
    FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
 #if defined(_DEBUG)
@@ -38,12 +38,12 @@ VS_VERSION_INFO VERSIONINFO
          BEGIN
             VALUE "Comments", "none"
             VALUE "CompanyName", "Elijah Zarezky"
-            VALUE "FileDescription", "UpdateIt! Application Executable"
-            VALUE "FileVersion", "1.4.4988.331"
-            VALUE "InternalName", "UpdateIt"
+            VALUE "FileDescription", "UpdateIt! Pro Application Executable"
+            VALUE "FileVersion", "1.4.4988.333"
+            VALUE "InternalName", "UpdateItPro"
             VALUE "LegalCopyright", "Copyright © 2002–2009 by Elijah Zarezky"
             VALUE "LegalTrademarks", "Windows™ is a trademark of Microsoft Corporation"
-            VALUE "OriginalFilename", "UpdateIt.exe"
+            VALUE "OriginalFilename", "UpdateItPro.exe"
             VALUE "ProductName", "Power Gadgets"
             VALUE "ProductVersion", "1.4"
          END
