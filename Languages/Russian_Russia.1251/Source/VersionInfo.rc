@@ -20,7 +20,7 @@
 #include <winver.h>
 
 VS_VERSION_INFO VERSIONINFO
-   FILEVERSION 1,4,4988,319
+   FILEVERSION 1,4,4988,331
    PRODUCTVERSION 1,4,0,0
    FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
 #if defined(_DEBUG)
@@ -39,7 +39,7 @@ VS_VERSION_INFO VERSIONINFO
             VALUE "Comments", "none"
             VALUE "CompanyName", "Илья Зарецкий"
             VALUE "FileDescription", "Библиотечный модуль Russian_Russia.1251"
-            VALUE "FileVersion", "1.4.4988.319"
+            VALUE "FileVersion", "1.4.4988.331"
             VALUE "InternalName", "Russian_Russia.1251"
             VALUE "LegalCopyright", "Авторские права © 2007-2009 Илья Зарецкий"
             VALUE "LegalTrademarks", "Windows™ является зарегистрированной торговой маркой Корпорации Microsoft"

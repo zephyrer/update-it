@@ -173,7 +173,7 @@ begin
 		RegWriteStringValue(hRootHive, LangsKeyName, '', 'en;ru');
 		RegWriteStringValue(hRootHive, LangsKeyName, 'Current', ActiveLanguage());
 	end;
-	
+
 	Result := True;
 end;
 
@@ -228,7 +228,7 @@ Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
 Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
 
 ;; DbgHelp redistributables
-Source: "..\Redist\dbghelp.dll"; DestDir: "{app}";
+Source: "..\Redist\dbghelp.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
