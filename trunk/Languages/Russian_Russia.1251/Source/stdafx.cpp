@@ -1,5 +1,5 @@
 // Russian_Russia.1251 MFC extension DLL.
-// Copyright (c) 2007-2009 by Elijah Zarezky,
+// Copyright (c) 2007-2010 by Elijah Zarezky,
 // All rights reserved.
 
 // stdafx.cpp - source file that includes just the standard includes

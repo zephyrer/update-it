@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2009 by Elijah Zarezky,
+// Copyright (c) 2002-2010 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,6 +71,14 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 #pragma comment(lib, "libeay32.lib")
 
 #pragma comment(lib, "dbghelp.lib")
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Detours libraries
+
+#if defined(UPDATEIT_DETOURED)
+#pragma comment(lib, "detours.lib")
+#pragma comment(lib, "detoured.lib")
+#endif   // UPDATEIT_DETOURED
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // linker options

@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2009 by Elijah Zarezky,
+// Copyright (c) 2002-2010 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -178,6 +178,14 @@ using std::max;
 #endif   // _MFC_VER
 
 #include <FreeImagePlus.h>
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Detours headers
+
+#define UPDATEIT_DETOURED
+
+#include "../Detours/Include/detours.h"
+#include "../Detours/Include/detoured.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // PCH generation finish

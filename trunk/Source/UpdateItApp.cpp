@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2009 by Elijah Zarezky,
+// Copyright (c) 2002-2010 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -92,10 +92,32 @@ m_argsParser(NULL),
 m_hMutexAppInst(NULL)
 {
 	_tzset();
+
+#if defined(UPDATEIT_DETOURED)
+	RegQueryCatchpit();
+
+	Detoured();
+
+	(PVOID&)m_pfnLoadLibrary = ::DetourFindFunction("kernel32.dll", STRINGIZE(LoadLibrary));
+	(PVOID&)m_pfnLoadLibraryEx = ::DetourFindFunction("kernel32.dll", STRINGIZE(LoadLibraryEx));
+	
+	DetourTransactionBegin();
+	DetourUpdateThread(::GetCurrentThread());
+	DetourAttach(reinterpret_cast<PVOID*>(&m_pfnLoadLibrary), &CUpdateItApp::LoadLibrary);
+	DetourAttach(reinterpret_cast<PVOID*>(&m_pfnLoadLibraryEx), &CUpdateItApp::LoadLibraryEx);
+	DetourTransactionCommit();
+#endif   // UPDATEIT_DETOURED
 }
 
 CUpdateItApp::~CUpdateItApp(void)
 {
+#if defined(UPDATEIT_DETOURED)
+	DetourTransactionBegin();
+	DetourUpdateThread(::GetCurrentThread());
+	DetourDetach(reinterpret_cast<PVOID*>(&m_pfnLoadLibrary),  &CUpdateItApp::LoadLibrary);
+	DetourDetach(reinterpret_cast<PVOID*>(&m_pfnLoadLibraryEx),  &CUpdateItApp::LoadLibraryEx);
+	DetourTransactionCommit();
+#endif   // UPDATEIT_DETOURED
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -650,6 +672,86 @@ bool CUpdateItApp::ParseResponseFile(void)
 
 	return (fSuccess);
 }
+
+#if defined(UPDATEIT_DETOURED)
+
+CUpdateItApp::PFN_LOAD_LIBRARY CUpdateItApp::m_pfnLoadLibrary(NULL);
+CUpdateItApp::PFN_LOAD_LIBRARY_EX CUpdateItApp::m_pfnLoadLibraryEx(NULL);
+
+HMODULE WINAPI CUpdateItApp::LoadLibrary(LPCTSTR pszFileName)
+{
+	TRACE(_T("*** CUpdateItApp::LoadLibrary(%s)\n"), pszFileName);
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT(pApp != NULL);
+
+	CString strFileNameLower(::PathFindFileName(pszFileName));
+	strFileNameLower.MakeLower();
+
+	DWORD fCatch = FALSE;
+	if (pApp->m_mapCatchpit.Lookup(strFileNameLower, fCatch) && fCatch != 0)
+	{
+		::SetLastError(ERROR_FILE_NOT_FOUND);
+		return (NULL);
+	}
+	else {
+		return (m_pfnLoadLibrary(pszFileName));
+	}
+}
+
+HMODULE WINAPI CUpdateItApp::LoadLibraryEx(LPCTSTR pszFileName, HANDLE hFile, DWORD fdwFlags)
+{
+	TRACE(_T("*** CUpdateItApp::LoadLibraryEx(%s, 0x%08X, 0x%08X)\n"), pszFileName, hFile, fdwFlags);
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT(pApp != NULL);
+
+	CString strFileNameLower(::PathFindFileName(pszFileName));
+	strFileNameLower.MakeLower();
+
+	DWORD fCatch = FALSE;
+	if (pApp->m_mapCatchpit.Lookup(strFileNameLower, fCatch) && fCatch != 0)
+	{
+		::SetLastError(ERROR_FILE_NOT_FOUND);
+		return (NULL);
+	}
+	else {
+		return (m_pfnLoadLibraryEx(pszFileName, hFile, fdwFlags));
+	}
+}
+
+INT_PTR CUpdateItApp::RegQueryCatchpit(void)
+{
+	m_mapCatchpit.RemoveAll();
+
+	CRegKey regKey;
+	regKey.Create(HKEY_CURRENT_USER, _T("Software\\Elijah Zarezky\\UpdateIt!\\Catchpit"));
+	
+	DWORD cNumValues = 0;
+	if (::RegQueryInfoKey(regKey, 0, 0, 0, 0, 0, 0, &cNumValues, 0, 0, 0, 0) == ERROR_SUCCESS)
+	{
+		for (DWORD i = 0; i < cNumValues; ++i)
+		{
+			TCHAR szValueName[_MAX_PATH] = { 0 };
+			DWORD cchNameLen = _countof(szValueName);
+			DWORD fdwValueType = REG_NONE;
+			if (::RegEnumValue(regKey, i, szValueName, &cchNameLen, 0, &fdwValueType, 0, 0) == ERROR_SUCCESS)
+			{
+				if (fdwValueType == REG_DWORD)
+				{
+					DWORD fCatch = FALSE;
+					regKey.QueryDWORDValue(szValueName, fCatch);
+					_tcslwr_s(szValueName, cchNameLen + 1);
+					m_mapCatchpit.SetAt(szValueName, fCatch);
+				}
+			}
+		}
+	}
+
+	return (m_mapCatchpit.GetCount());
+}
+
+#endif   // UPDATEIT_DETOURED
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // diagnostic services
