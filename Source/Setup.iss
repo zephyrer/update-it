@@ -1,5 +1,5 @@
 ;; UpdateIt! application.
-;; Copyright (c) 2002-2009 by Elijah Zarezky,
+;; Copyright (c) 2002-2010 by Elijah Zarezky,
 ;; All rights reserved.
 
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,22 +19,22 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.4988
+AppVerName=UpdateIt! 1.4.5161
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.4988
-AppCopyright=Copyright © 2002–2009 by Elijah Zarezky
+AppVersion=1.4.5161
+AppCopyright=Copyright © 2002–2010 by Elijah Zarezky
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
 AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.4988-setup
-VersionInfoVersion=1.4.4988.333
+OutputBaseFilename=UpdateIt-1.4.5161-setup
+VersionInfoVersion=1.4.5161.334
 VersionInfoProductName=Power Gadgets
 VersionInfoProductVersion=1.4
 MinVersion=0,5.0.2195
@@ -197,6 +197,7 @@ Type: files; Name: "{app}\mfcm90.dll"
 ;; core application files
 Source: "..\Output.2008\x86\Release\Unicode\UpdateIt.exe"; DestDir: "{app}"
 Source: "..\CrashReporter\Output.2008\x86\Release\Unicode\CrashReporter.exe"; DestDir: "{app}"
+Source: "..\Detours\Bin\detoured.dll"; DestDir: "{app}"
 Source: "..\HTML\UpdateIt.0409.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\HTML\UpdateIt.0419.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\ApacheLicense.rtf"; DestDir: "{app}"; Flags: ignoreversion
@@ -266,6 +267,12 @@ Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; Flags: uninsdelete
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: string; ValueName: "charset"; ValueData: "windows-1252"; Flags: createvalueifdoesntexist; Languages: en
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: string; ValueName: "charset"; ValueData: "windows-1251"; Flags: createvalueifdoesntexist; Languages: ru
 Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\SMTP"; ValueType: dword; ValueName: "Enable"; ValueData: "1"; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Catchpit"; Flags: uninsdeletekey
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Catchpit"; ValueType: dword; ValueName: "TortoiseShell.dll"; ValueData: "1"; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Catchpit"; ValueType: dword; ValueName: "TortoiseOverlays.dll"; ValueData: "1"; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Catchpit"; ValueType: dword; ValueName: "TortoiseSVN.dll"; ValueData: "1"; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Catchpit"; ValueType: dword; ValueName: "TortoiseStub.dll"; ValueData: "1"; Flags: createvalueifdoesntexist
+Root: HKCU; Subkey: "Software\Elijah Zarezky\UpdateIt!\Catchpit"; ValueType: dword; ValueName: "PhoneBrowser.dll"; ValueData: "1"; Flags: createvalueifdoesntexist
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"; Flags: unchecked

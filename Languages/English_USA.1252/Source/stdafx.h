@@ -1,5 +1,5 @@
 // English_USA.1252 MFC extension DLL.
-// Copyright (c) 2007-2009 by Elijah Zarezky,
+// Copyright (c) 2007-2010 by Elijah Zarezky,
 // All rights reserved.
 
 // stdafx.h - include file for standard system include files

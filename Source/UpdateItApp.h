@@ -1,5 +1,5 @@
 // UpdateIt! application.
-// Copyright (c) 2002-2009 by Elijah Zarezky,
+// Copyright (c) 2002-2010 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -73,6 +73,20 @@ private:
 	bool SetCurrentLanguage(void);
 	bool SetCurrentAfxLanguage(void);
 	bool ParseResponseFile(void);
+
+#if defined(UPDATEIT_DETOURED)
+	// LoadLibrary[A/W] catcher
+	typedef HMODULE(WINAPI* PFN_LOAD_LIBRARY)(LPCTSTR);
+	static PFN_LOAD_LIBRARY m_pfnLoadLibrary;
+	static HMODULE WINAPI LoadLibrary(LPCTSTR pszFileName);
+	// LoadLibraryEx[A/W] catcher
+	typedef HMODULE(WINAPI* PFN_LOAD_LIBRARY_EX)(LPCTSTR, HANDLE, DWORD);
+	static PFN_LOAD_LIBRARY_EX m_pfnLoadLibraryEx;
+	static HMODULE WINAPI LoadLibraryEx(LPCTSTR pszFileName, HANDLE hFile, DWORD fdwFlags);
+	// catched DLLs
+	CMap<CString, LPCTSTR, DWORD, DWORD> m_mapCatchpit;
+	INT_PTR RegQueryCatchpit(void);
+#endif   // UPDATEIT_DETOURED
 
 // diagnostic services
 #if defined(_DEBUG)
