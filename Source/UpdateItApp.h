@@ -86,6 +86,7 @@ private:
 	// catched DLLs
 	CMap<CString, LPCTSTR, DWORD, DWORD> m_mapCatchpit;
 	INT_PTR RegQueryCatchpit(void);
+	bool IsCatchpitEmpty(void) const;
 #endif   // UPDATEIT_DETOURED
 
 // diagnostic services
@@ -103,6 +104,14 @@ template <typename _Return_t>
 _Return_t CUpdateItApp::GetProfileData(LPCTSTR pszSection, LPCTSTR pszEntry, _Return_t retDefault)
 {
 	return (static_cast<_Return_t>(GetProfileInt(pszSection, pszEntry, retDefault)));
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// inlines
+
+inline bool CUpdateItApp::IsCatchpitEmpty(void) const
+{
+	return (m_mapCatchpit.GetCount() == 0);
 }
 
 #endif   // __UpdateItApp_h

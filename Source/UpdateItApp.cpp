@@ -94,29 +94,33 @@ m_hMutexAppInst(NULL)
 	_tzset();
 
 #if defined(UPDATEIT_DETOURED)
-	RegQueryCatchpit();
+	if (RegQueryCatchpit() > 0)
+	{
+		Detoured();
 
-	Detoured();
-
-	(PVOID&)m_pfnLoadLibrary = ::DetourFindFunction("kernel32.dll", STRINGIZE(LoadLibrary));
-	(PVOID&)m_pfnLoadLibraryEx = ::DetourFindFunction("kernel32.dll", STRINGIZE(LoadLibraryEx));
-	
-	DetourTransactionBegin();
-	DetourUpdateThread(::GetCurrentThread());
-	DetourAttach(reinterpret_cast<PVOID*>(&m_pfnLoadLibrary), &CUpdateItApp::LoadLibrary);
-	DetourAttach(reinterpret_cast<PVOID*>(&m_pfnLoadLibraryEx), &CUpdateItApp::LoadLibraryEx);
-	DetourTransactionCommit();
+		(PVOID&)m_pfnLoadLibrary = ::DetourFindFunction("kernel32.dll", STRINGIZE(LoadLibrary));
+		(PVOID&)m_pfnLoadLibraryEx = ::DetourFindFunction("kernel32.dll", STRINGIZE(LoadLibraryEx));
+		
+		DetourTransactionBegin();
+		DetourUpdateThread(::GetCurrentThread());
+		DetourAttach(reinterpret_cast<PVOID*>(&m_pfnLoadLibrary), &CUpdateItApp::LoadLibrary);
+		DetourAttach(reinterpret_cast<PVOID*>(&m_pfnLoadLibraryEx), &CUpdateItApp::LoadLibraryEx);
+		DetourTransactionCommit();
+	}
 #endif   // UPDATEIT_DETOURED
 }
 
 CUpdateItApp::~CUpdateItApp(void)
 {
 #if defined(UPDATEIT_DETOURED)
-	DetourTransactionBegin();
-	DetourUpdateThread(::GetCurrentThread());
-	DetourDetach(reinterpret_cast<PVOID*>(&m_pfnLoadLibrary),  &CUpdateItApp::LoadLibrary);
-	DetourDetach(reinterpret_cast<PVOID*>(&m_pfnLoadLibraryEx),  &CUpdateItApp::LoadLibraryEx);
-	DetourTransactionCommit();
+	if (!IsCatchpitEmpty())
+	{
+		DetourTransactionBegin();
+		DetourUpdateThread(::GetCurrentThread());
+		DetourDetach(reinterpret_cast<PVOID*>(&m_pfnLoadLibrary),  &CUpdateItApp::LoadLibrary);
+		DetourDetach(reinterpret_cast<PVOID*>(&m_pfnLoadLibraryEx),  &CUpdateItApp::LoadLibraryEx);
+		DetourTransactionCommit();
+	}
 #endif   // UPDATEIT_DETOURED
 }
 
