@@ -65,7 +65,7 @@ END
 
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Шаг 4 из 4 — Обработка файлов"
+CAPTION "UpdateIt! — Шаг 4 из 4 — Обработка файлов"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
@@ -78,7 +78,7 @@ END
 
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Шаг 1 из 4 — Выбор опций"
+CAPTION "UpdateIt! — Шаг 1 из 4 — Выбор опций"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Исходная папка",IDC_STATIC,4,4,326,62,WS_GROUP
@@ -103,7 +103,7 @@ END
 
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Шаг 2 из 4 — Выбор файлов"
+CAPTION "UpdateIt! — Шаг 2 из 4 — Выбор файлов"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
@@ -113,7 +113,7 @@ END
 
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Шаг 3 из 4 — Выбор действия"
+CAPTION "UpdateIt! — Шаг 3 из 4 — Выбор действия"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Действие для выполнения",IDC_STATIC,4,4,164,42,WS_GROUP
@@ -156,7 +156,7 @@ END
 
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Шаг 0 из 4 — Добро пожаловать!"
+CAPTION "UpdateIt! — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
@@ -182,10 +182,10 @@ END
 
 IDD_PAGE_FIRST_LAUNCH DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "UpdateIt! Pro — Первый запуск"
+CAPTION "UpdateIt! — Первый запуск"
 FONT 8, "MS Shell Dlg", 400, 0, 0xCC
 BEGIN
-    LTEXT           """Волшебник"" UpdateIt! Pro запущен первый раз и вам может понадобиться настроить отчеты об ошибках. Если вы не уверенны какой сервер исходящей почты указать посмотрите настройки вашего почтового клиента по умолчанию.",IDC_STATIC,4,4,326,18
+    LTEXT           """Волшебник"" UpdateIt! запущен первый раз и вам может понадобиться настроить отчеты об ошибках. Если вы не уверенны какой сервер исходящей почты указать посмотрите настройки вашего почтового клиента по умолчанию.",IDC_STATIC,4,4,326,18
     GROUPBOX        "&Настройка отчетов об ошибках",IDC_STATIC,4,32,326,134,WS_GROUP
     RTEXT           "&Адрес электронной почты:",IDC_STATIC,10,44,78,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_CRASH_FROM,90,44,234,12,ES_AUTOHSCROLL | NOT WS_BORDER | WS_GROUP,WS_EX_CLIENTEDGE
@@ -238,7 +238,7 @@ END
 IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE WS_EX_APPWINDOW
-CAPTION """Волшебник"" UpdateIt! Pro"
+CAPTION """Волшебник"" UpdateIt!"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_BANNER,0,0,240,35
@@ -449,7 +449,7 @@ BEGIN
     IDS_MOVING_FILES        "Перемещение файлов в целевую папку..."
     IDS_ALL_DONE            "Готово. Кликните Закончить для завершения работы ""волшебника""."
     IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
-    IDS_VERSION_FORMAT      """Волшебник"" UpdateIt! Pro – версия %s\nЭто приложение является частью коллекции PowerGadgets"
+    IDS_VERSION_FORMAT      """Волшебник"" UpdateIt! – версия %s\nЭто приложение является частью коллекции PowerGadgets"
     IDS_ZIPPING_FOLDER      "Сжатие целевой папки..."
     IDS_SENDING_MAIL        "Отправка сжатой папки..."
     IDS_SEND_FAILED         "Не удалось отправить сообщение по электронной почте!"
@@ -528,7 +528,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "UpdateIt! Pro"
+    AFX_IDS_APP_TITLE       "UpdateIt!"
 END
 
 STRINGTABLE 
