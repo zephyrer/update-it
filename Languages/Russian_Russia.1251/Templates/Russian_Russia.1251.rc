@@ -176,7 +176,7 @@ BEGIN
     LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.84 (13 ноября 2009)",IDC_STATIC,16,182,314,16
     LTEXT           "Авторские права © 1998-2009 PJ Naughter",IDC_STATIC,16,200,148,10,SS_CENTERIMAGE
     RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,200,164,10,SS_CENTERIMAGE
-    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v0.9.8n (24 марта 2010)",IDC_STATIC,16,216,216,16
+    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v1.0.0 (29 марта 2010)",IDC_STATIC,16,216,216,16
     RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,236,222,94,10,SS_CENTERIMAGE
 END
 
