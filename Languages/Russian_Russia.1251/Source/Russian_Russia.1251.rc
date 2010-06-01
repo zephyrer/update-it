@@ -164,8 +164,8 @@ BEGIN
     LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
     LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.14.0 (из CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.3 (18 июля 2005)",IDC_STATIC,16,88,314,16
-    LTEXT           "Авторские права © 1995-2005 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,202,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.5 (19 апреля 2010)",IDC_STATIC,16,88,314,16
+    LTEXT           "Авторские права © 1995-2010 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,202,10,SS_CENTERIMAGE
     RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,220,106,110,10,SS_CENTERIMAGE
     LTEXT           "Библиотека ZipArchive,\nверсия 4.0.1 (20 апреля 2009)",IDC_STATIC,16,122,314,16
     LTEXT           "Авторские права © 2000-2009 Tadeusz Dracz",IDC_STATIC,16,140,156,10,SS_CENTERIMAGE
