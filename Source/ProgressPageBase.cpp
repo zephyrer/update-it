@@ -568,7 +568,7 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 		LPCTSTR pszUserName = fHasAuth ? dlgAuth.m_strUserName : LPCTSTR(NULL);
 		LPCTSTR pszPassword = fHasAuth ? dlgAuth.m_strPassword : LPCTSTR(NULL);
 		smtpConn.Connect(pActionPage->m_strHost, dlgAuth.m_eAuthMethod, pszUserName, pszPassword,
-			pActionPage->m_nSmtpPort, dlgAuth.m_fUseSSL);
+			pActionPage->m_nSmtpPort, dlgAuth.m_fUseSSL ? CSmtpConnection::SSL_TLS : CSmtpConnection::PlainText);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
 	}
