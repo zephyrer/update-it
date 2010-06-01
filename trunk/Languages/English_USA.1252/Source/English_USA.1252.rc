@@ -164,8 +164,8 @@ BEGIN
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
     LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.14.0 (from CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
-    LTEXT           "'zlib' general purpose compression library\nversion 1.2.3 (18 July 2005)",IDC_STATIC,16,88,314,16
-    LTEXT           "Copyright © 1995-2005 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,182,10,SS_CENTERIMAGE
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.5 (19 Apr 2010)",IDC_STATIC,16,88,314,16
+    LTEXT           "Copyright © 1995-2010 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,182,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,106,130,10,SS_CENTERIMAGE
     LTEXT           "ZipArchive library\nversion 4.0.1 (2009-04-20)",IDC_STATIC,16,122,314,16
     LTEXT           "Copyright © 2000-2009 by Tadeusz Dracz",IDC_STATIC,16,140,140,10,SS_CENTERIMAGE
