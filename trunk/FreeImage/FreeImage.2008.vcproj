@@ -437,6 +437,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Repository\FreeImage\Source\ConversionFloat.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Repository\FreeImage\Source\ConversionRGBF.cpp"
 					>
 				</File>
@@ -645,6 +649,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Repository\FreeImage\Source\PSDParser.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Repository\FreeImage\Source\TIFFLogLuv.cpp"
 					>
 				</File>
@@ -696,6 +704,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Repository\FreeImage\Include\PSDParser.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Repository\FreeImage\Include\Quantizers.h"
 				>
 			</File>
@@ -715,6 +727,10 @@
 		<Filter
 			Name="Toolkit Files"
 			>
+			<File
+				RelativePath="..\..\Repository\FreeImage\Toolkit\Background.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\..\Repository\FreeImage\Toolkit\BSplineRotate.cpp"
 				>
@@ -766,6 +782,47 @@
 			<File
 				RelativePath="..\..\Repository\FreeImage\Toolkit\Resize.h"
 				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Documentation"
+			Filter="pdf"
+			>
+			<File
+				RelativePath="..\..\Repository\FreeImage\Documentation\FreeImage.pdf"
+				>
+				<FileConfiguration
+					Name="MBCS Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MBCS Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Unicode Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<File

@@ -176,7 +176,7 @@ BEGIN
     LTEXT           "MFC classes to support the SMTP protocol\nversion 2.86 (23 May 2010)",IDC_STATIC,16,182,314,16
     LTEXT           "Copyright © 1998-2009 by PJ Naughter",IDC_STATIC,16,200,132,10,SS_CENTERIMAGE
     RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,200,180,10,SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.0 (29 Mar 2010)",IDC_STATIC,16,216,230,16
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.0a (1 Jun 2010)",IDC_STATIC,16,216,230,16
     RTEXT           "Web Page",IDC_LINK_OPEN_SSL,248,222,82,10,SS_CENTERIMAGE
 END
 
