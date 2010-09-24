@@ -545,7 +545,7 @@ bool CUpdateItApp::GetAfxLanguagePath(LPTSTR pszDest)
 		::GetModuleFileName(AfxGetInstanceHandle(), szExeDir, _countof(szExeDir));
 		::PathRemoveFileSpec(szExeDir);
 		CString strRedistPath(::PathFindFileName(szTempPath));
-		strRedistPath.Insert(0, _T("..\\..\\..\\..\\Redist\\Microsoft.VC90.MFCLOC"));
+		strRedistPath.Insert(0, _T("..\\..\\..\\..\\Redist\\Microsoft.VC90.MFCLOC\\"));
 		::PathCombine(pszDest, szExeDir, strRedistPath);
 #else
 		GetAbsolutePath(pszDest, szTempPath);

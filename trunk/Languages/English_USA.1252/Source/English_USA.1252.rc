@@ -66,7 +66,7 @@ END
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 4 of 4 — Processing files"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
     CONTROL         "Animate1",IDC_ANIMATE_BANNER,"SysAnimate32",ACS_CENTER | ACS_TRANSPARENT | NOT WS_VISIBLE | WS_TABSTOP,4,18,326,38
@@ -79,7 +79,7 @@ END
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 1 of 4 — Setting options"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "&Source folder",IDC_STATIC,4,4,326,62,WS_GROUP
     EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | ES_READONLY | WS_GROUP
@@ -103,7 +103,7 @@ END
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 2 of 4 — Selecting files"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
     CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | WS_BORDER | WS_TABSTOP,4,14,326,210,WS_EX_CLIENTEDGE
@@ -113,7 +113,7 @@ END
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 3 of 4 — Choosing an action"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
     CONTROL         "&Copy file(s) to the target folder",IDC_RADIO_COPY,
@@ -157,33 +157,33 @@ END
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Step 0 of 4 — Welcome!"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Copyright © 2002-2010 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.14.0 (from CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.14.2 (from CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "'zlib' general purpose compression library\nversion 1.2.5 (19 Apr 2010)",IDC_STATIC,16,88,314,16
-    LTEXT           "Copyright © 1995-2010 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,182,10,SS_CENTERIMAGE
-    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,200,106,130,10,SS_CENTERIMAGE
+    LTEXT           "Copyright © 1995-2010 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,260,10,SS_CENTERIMAGE
+    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,280,106,50,10,SS_CENTERIMAGE
     LTEXT           "ZipArchive library\nversion 4.0.1 (2009-04-20)",IDC_STATIC,16,122,314,16
-    LTEXT           "Copyright © 2000-2009 by Tadeusz Dracz",IDC_STATIC,16,140,140,10,SS_CENTERIMAGE
-    RTEXT           "Web Page",IDC_LINK_ARTPOL,158,140,172,10,SS_CENTERIMAGE
+    LTEXT           "Copyright © 2000-2009 by Tadeusz Dracz",IDC_STATIC,16,140,258,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_ARTPOL,280,140,50,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,156,314,10
-    LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,158,10,SS_CENTERIMAGE
-    RTEXT           "Web Page",IDC_LINK_RSA,176,166,154,10,SS_CENTERIMAGE
+    LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,260,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_RSA,280,166,50,10,SS_CENTERIMAGE
     LTEXT           "MFC classes to support the SMTP protocol\nversion 2.86 (23 May 2010)",IDC_STATIC,16,182,314,16
-    LTEXT           "Copyright © 1998-2009 by PJ Naughter",IDC_STATIC,16,200,132,10,SS_CENTERIMAGE
-    RTEXT           "Home Page",IDC_LINK_NAUGHTER,150,200,180,10,SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.0a (1 Jun 2010)",IDC_STATIC,16,216,230,16
-    RTEXT           "Web Page",IDC_LINK_OPEN_SSL,248,222,82,10,SS_CENTERIMAGE
+    LTEXT           "Copyright © 1998-2009 by PJ Naughter",IDC_STATIC,16,200,260,10,SS_CENTERIMAGE
+    RTEXT           "Home Page",IDC_LINK_NAUGHTER,280,200,50,10,SS_CENTERIMAGE
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.0a (1 Jun 2010)",IDC_STATIC,16,216,260,16
+    RTEXT           "Web Page",IDC_LINK_OPEN_SSL,280,222,50,10,SS_CENTERIMAGE
 END
 
 IDD_PAGE_FIRST_LAUNCH DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — First Launch"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "In case of the first UpdateIt! wizard launch you may need to configure crash reporting settings. If you are not sure which outgoing SMTP server to specify look at your default E-mail client settings.",IDC_STATIC,4,4,326,18
     GROUPBOX        "&Crash Reporting Settings",IDC_STATIC,4,32,326,134,WS_GROUP
@@ -201,7 +201,7 @@ END
 IDD_AUTHENTICATION DIALOGEX 0, 0, 168, 146
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Authentication and security"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Authentication",IDC_STATIC,8,6,152,68,WS_GROUP
     RTEXT           "&Method:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
@@ -219,7 +219,7 @@ END
 IDD_ZIP_OPTIONS DIALOGEX 0, 0, 168, 152
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "ZIPping Options"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Compression",IDC_STATIC,8,6,152,52,WS_GROUP
     RTEXT           "Method:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
@@ -239,7 +239,7 @@ IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "UpdateIt! Wizard"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_BANNER,0,0,240,35
     LTEXT           "",IDC_APP_ICON,240,0,50,35,SS_NOTIFY
@@ -260,7 +260,7 @@ END
 IDD_XCRASHREPORT_DETAILS DIALOGEX 0, 0, 350, 308
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Error Report Contents"
-FONT 8, "MS Shell Dlg", 0, 0, 0x0
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x0
 BEGIN
     LTEXT           "",IDC_STATIC_DETAILS_BANNER,0,0,351,16
     CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_TABSTOP,0,16,350,85,WS_EX_CLIENTEDGE
@@ -276,7 +276,7 @@ END
 IDD_XCRASHREPORT_ABOUT DIALOGEX 0, 0, 270, 138
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About XCrashReport"
-FONT 8, "MS Shell Dlg", 0, 0, 0x0
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x0
 BEGIN
     ICON            "",IDC_STATIC_ICON,8,12,20,20,SS_CENTERIMAGE
     LTEXT           "XCrashReport Version 1.0",IDC_STATIC,40,12,164,8,SS_NOPREFIX

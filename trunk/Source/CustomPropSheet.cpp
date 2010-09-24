@@ -194,20 +194,28 @@ bool CCustomPropSheet::m_fIsFirstChangeFont = true;
 
 void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 {
-	TEXTMETRIC tmOld, tmNew;
+	TEXTMETRIC tmCurrent = { 0 }, tmNew = { 0 };
 	CRect rectWindow;
 	CString strClassName;
 
-	// grab old and new text metrics
+	// grab current and new text metrics
 	CDC* pDC = pWnd->GetDC();
 	CFont* pPrevFont = pDC->SelectObject(pWnd->GetFont());
-	pDC->GetTextMetrics(&tmOld);
+	pDC->GetTextMetrics(&tmCurrent);
 	pDC->SelectObject(pFont);
 	pDC->GetTextMetrics(&tmNew);
 	pDC->SelectObject(pPrevFont);
 	pWnd->ReleaseDC(pDC);
 
-	long nOldHeight = tmOld.tmHeight + tmOld.tmExternalLeading;
+#if defined(_DEBUG)
+	LOGFONT lfCurrent = { 0 }, lfNew = { 0 };
+	pWnd->GetFont()->GetLogFont(&lfCurrent);
+	TRACE(_T("Current font: %s, %i\n"), lfCurrent.lfFaceName, lfCurrent.lfHeight);
+	pFont->GetLogFont(&lfNew);
+	TRACE(_T("New font: %s, %i\n"), lfNew.lfFaceName, lfNew.lfHeight);
+#endif   // _DEBUG
+
+	long nCurHeight = tmCurrent.tmHeight + tmCurrent.tmExternalLeading;
 	long nNewHeight = tmNew.tmHeight + tmNew.tmExternalLeading;
 
 	if (nFlag != CDF_NONE)
@@ -221,8 +229,8 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 		long dyHeight = rectWindow.Height() - rectClient.Height();
 
 		rectNewClient.left = rectNewClient.top = 0;
-		rectNewClient.right = rectClient.right * tmNew.tmAveCharWidth / tmOld.tmAveCharWidth;
-		rectNewClient.bottom = rectClient.bottom * nNewHeight / nOldHeight;
+		rectNewClient.right = rectClient.right * tmNew.tmAveCharWidth / tmCurrent.tmAveCharWidth;
+		rectNewClient.bottom = rectClient.bottom * nNewHeight / nCurHeight;
 
 		switch (nFlag)
 		{
@@ -274,25 +282,48 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 	CWnd* pChildWnd = pWnd->GetWindow(GW_CHILD);
 	while (pChildWnd != NULL)
 	{
-		pChildWnd->SetFont(pFont);
-		pChildWnd->GetWindowRect(rectWindow);
-
-		::GetClassName(*pChildWnd, strClassName.GetBufferSetLength(32), 31);
-		strClassName.MakeUpper();
-		if (strClassName == _T("COMBOBOX"))
+		if (!pChildWnd->IsKindOf(RUNTIME_CLASS(CPropertyPage)))
 		{
-			CRect rectDropped;
-			pChildWnd->SendMessage(CB_GETDROPPEDCONTROLRECT, 0, (LPARAM)&rectDropped);
-			rectWindow.right = rectDropped.right;
-			rectWindow.bottom = rectDropped.bottom;
-		}
+			bool fNoResize = false;
 
-		pWnd->ScreenToClient(rectWindow);
-		rectWindow.left = rectWindow.left * tmNew.tmAveCharWidth / tmOld.tmAveCharWidth;
-		rectWindow.top = rectWindow.top * nNewHeight / nOldHeight;
-		rectWindow.right = rectWindow.right * tmNew.tmAveCharWidth / tmOld.tmAveCharWidth;
-		rectWindow.bottom = rectWindow.bottom * nNewHeight / nOldHeight;
-		pChildWnd->MoveWindow(rectWindow);
+			pChildWnd->SetFont(pFont);
+			pChildWnd->GetWindowRect(rectWindow);
+
+			// window class specific cases
+			::GetClassName(*pChildWnd, strClassName.GetBuffer(_MAX_PATH), _MAX_PATH);
+			strClassName.ReleaseBuffer();
+			strClassName.MakeUpper();
+			if (strClassName == _T("COMBOBOX"))
+			{
+				CRect rectDropped;
+				pChildWnd->SendMessage(CB_GETDROPPEDCONTROLRECT, 0, (LPARAM)&rectDropped);
+				rectWindow.right = rectDropped.right;
+				rectWindow.bottom = rectDropped.bottom;
+			}
+			else if (strClassName == _T("STATIC"))
+			{
+				WORD wStaticType = LOWORD(pChildWnd->GetStyle() & SS_TYPEMASK);
+				fNoResize = wStaticType == SS_ICON || wStaticType == SS_BITMAP;
+			}
+
+			pWnd->ScreenToClient(rectWindow);
+			SIZE sizWindow = { rectWindow.Width(), rectWindow.Height() };
+			rectWindow.left = rectWindow.left * tmNew.tmAveCharWidth / tmCurrent.tmAveCharWidth;
+			rectWindow.top = rectWindow.top * nNewHeight / nCurHeight;
+			if (fNoResize)
+			{
+				// just move
+				rectWindow.right = rectWindow.left + sizWindow.cx;
+				rectWindow.bottom = rectWindow.top + sizWindow.cy;
+			}
+			else
+			{
+				// resize
+				rectWindow.right = rectWindow.right * tmNew.tmAveCharWidth / tmCurrent.tmAveCharWidth;
+				rectWindow.bottom = rectWindow.bottom * nNewHeight / nCurHeight;
+			}
+			pChildWnd->MoveWindow(rectWindow);
+		}
 
 		pChildWnd = pChildWnd->GetWindow(GW_HWNDNEXT);
 	}
@@ -314,7 +345,7 @@ void CCustomPropSheet::BuildPropPageArray(void)
 	// get the font information
 
 	// defaults
-	CString strFaceName(_T("Tahoma"));
+	CString strFaceName(_T("MS Shell Dlg 2"));
 	WORD wPointSize = 8;
 
 	if (!GetFontMetrics(strFaceName, wPointSize))
@@ -380,7 +411,7 @@ bool CCustomPropSheet::GetFontMetrics(CString& strFaceName, WORD& wPointSize)
 			wPointSize = LOWORD(uTemp);
 		}
 	}
-	
+
 	// examine our registry key
 	if (!fHasFont)
 	{

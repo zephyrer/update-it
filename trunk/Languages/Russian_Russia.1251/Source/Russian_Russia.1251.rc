@@ -66,7 +66,7 @@ END
 IDD_PAGE_PROGRESS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Шаг 4 из 4 — Обработка файлов"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_WORKING,4,4,326,10,SS_CENTERIMAGE
     CONTROL         "Animate1",IDC_ANIMATE_BANNER,"SysAnimate32",ACS_CENTER | ACS_TRANSPARENT | NOT WS_VISIBLE | WS_TABSTOP,4,18,326,38
@@ -79,7 +79,7 @@ END
 IDD_PAGE_OPTIONS DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Шаг 1 из 4 — Выбор опций"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Исходная папка",IDC_STATIC,4,4,326,62,WS_GROUP
     EDITTEXT        IDC_EDIT_SOURCE,10,16,298,12,ES_AUTOHSCROLL | ES_READONLY | WS_GROUP
@@ -104,7 +104,7 @@ END
 IDD_PAGE_FILES DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Шаг 2 из 4 — Выбор файлов"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_INFO,4,2,326,10,SS_CENTERIMAGE
     CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | WS_BORDER | WS_TABSTOP,4,14,326,210,WS_EX_CLIENTEDGE
@@ -114,7 +114,7 @@ END
 IDD_PAGE_ACTION DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Шаг 3 из 4 — Выбор действия"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Действие для выполнения",IDC_STATIC,4,4,164,42,WS_GROUP
     CONTROL         "Скопировать файл(ы) в целевую папку",IDC_RADIO_COPY,
@@ -157,33 +157,33 @@ END
 IDD_PAGE_ABOUT DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Шаг 0 из 4 — Добро пожаловать!"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Авторские права © 2002-2010 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.14.0 (из CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.14.2 (из CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.5 (19 апреля 2010)",IDC_STATIC,16,88,314,16
-    LTEXT           "Авторские права © 1995-2010 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,202,10,SS_CENTERIMAGE
-    RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,220,106,110,10,SS_CENTERIMAGE
+    LTEXT           "Авторские права © 1995-2010 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,238,10,SS_CENTERIMAGE
+    RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,260,106,70,10,SS_CENTERIMAGE
     LTEXT           "Библиотека ZipArchive,\nверсия 4.0.1 (20 апреля 2009)",IDC_STATIC,16,122,314,16
-    LTEXT           "Авторские права © 2000-2009 Tadeusz Dracz",IDC_STATIC,16,140,156,10,SS_CENTERIMAGE
-    RTEXT           "Веб-страница",IDC_LINK_ARTPOL,174,140,156,10,SS_CENTERIMAGE
+    LTEXT           "Авторские права © 2000-2009 Tadeusz Dracz",IDC_STATIC,16,140,238,10,SS_CENTERIMAGE
+    RTEXT           "Веб-страница",IDC_LINK_ARTPOL,260,140,70,10,SS_CENTERIMAGE
     LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,156,314,10
-    LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,184,10,SS_CENTERIMAGE
-    RTEXT           "Веб-страница",IDC_LINK_RSA,202,166,128,10,SS_CENTERIMAGE
+    LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,240,10,SS_CENTERIMAGE
+    RTEXT           "Веб-страница",IDC_LINK_RSA,260,166,70,10,SS_CENTERIMAGE
     LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.86 (23 мая 2010)",IDC_STATIC,16,182,314,16
-    LTEXT           "Авторские права © 1998-2009 PJ Naughter",IDC_STATIC,16,200,148,10,SS_CENTERIMAGE
-    RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,166,200,164,10,SS_CENTERIMAGE
-    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v1.0.0a (1 июня 2010)",IDC_STATIC,16,216,216,16
-    RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,236,222,94,10,SS_CENTERIMAGE
+    LTEXT           "Авторские права © 1998-2009 PJ Naughter",IDC_STATIC,16,200,238,10,SS_CENTERIMAGE
+    RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,260,200,70,10,SS_CENTERIMAGE
+    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v1.0.0a (1 июня 2010)",IDC_STATIC,16,216,238,16
+    RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,260,222,70,10,SS_CENTERIMAGE
 END
 
 IDD_PAGE_FIRST_LAUNCH DIALOGEX 0, 0, 334, 248
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "UpdateIt! — Первый запуск"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           """Волшебник"" UpdateIt! запущен первый раз и вам может понадобиться настроить отчеты об ошибках. Если вы не уверенны какой сервер исходящей почты указать посмотрите настройки вашего почтового клиента по умолчанию.",IDC_STATIC,4,4,326,18
     GROUPBOX        "&Настройка отчетов об ошибках",IDC_STATIC,4,32,326,134,WS_GROUP
@@ -201,7 +201,7 @@ END
 IDD_AUTHENTICATION DIALOGEX 0, 0, 168, 146
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Аутентификация и защита"
-FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     GROUPBOX        "Аутентификация",IDC_STATIC,8,6,152,68,WS_GROUP
     RTEXT           "Метод:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
@@ -219,7 +219,7 @@ END
 IDD_ZIP_OPTIONS DIALOGEX 0, 0, 168, 152
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Настройки сжатия"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Сжатие",IDC_STATIC,8,6,152,52,WS_GROUP
     RTEXT           "Метод:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
@@ -239,7 +239,7 @@ IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE WS_EX_APPWINDOW
 CAPTION """Волшебник"" UpdateIt!"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_BANNER,0,0,240,35
     LTEXT           "",IDC_APP_ICON,240,0,50,35,SS_NOTIFY
@@ -260,7 +260,7 @@ END
 IDD_XCRASHREPORT_DETAILS DIALOGEX 0, 0, 350, 308
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Содержание отчета об ошибке"
-FONT 8, "MS Shell Dlg", 0, 0, 0x0
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x0
 BEGIN
     LTEXT           "",IDC_STATIC_DETAILS_BANNER,0,0,351,16
     CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_TABSTOP,0,16,350,85,WS_EX_CLIENTEDGE
@@ -276,7 +276,7 @@ END
 IDD_XCRASHREPORT_ABOUT DIALOGEX 0, 0, 270, 138
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About XCrashReport"
-FONT 8, "MS Shell Dlg", 0, 0, 0x0
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x0
 BEGIN
     ICON            "",IDC_STATIC_ICON,8,12,20,20,SS_CENTERIMAGE
     LTEXT           "XCrashReport Version 1.0",IDC_STATIC,40,12,164,8,SS_NOPREFIX
@@ -286,6 +286,7 @@ BEGIN
     LTEXT           "Послать электронное письмо Hans Dietrich",IDC_ABOUT_EMAIL,40,120,90,8,SS_CENTERIMAGE
     DEFPUSHBUTTON   "ОК",IDOK,214,10,50,16,WS_GROUP
 END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
