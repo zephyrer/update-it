@@ -19,13 +19,13 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.4.5305
+AppVerName=UpdateIt! 1.4.5433
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.4.5305
+AppVersion=1.4.5433
 AppCopyright=Copyright © 2002–2010 by Elijah Zarezky
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
@@ -33,8 +33,8 @@ AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.4.5305-setup
-VersionInfoVersion=1.4.5305.341
+OutputBaseFilename=UpdateIt-1.4.5433-setup
+VersionInfoVersion=1.4.5433.349
 VersionInfoProductName=Power Gadgets
 VersionInfoProductVersion=1.4
 MinVersion=0,5.0.2195

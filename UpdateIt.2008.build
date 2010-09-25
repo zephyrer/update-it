@@ -155,14 +155,14 @@ UpdateIt.2008.build - NAnt script to build release
 			program="7z.exe"
 			workingdir="Setup">
 			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-			<arg value="update_it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
+			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
 			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup.exe"/>
 		</exec>
 		<exec
 			program="7z.exe"
 			workingdir="Setup">
 			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-			<arg value="update_it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
+			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
 			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.exe"/>
 		</exec>
 	</target>
@@ -198,7 +198,7 @@ UpdateIt.2008.build - NAnt script to build release
 				program="7z.exe"
 				workingdir="${ExportDir}">
 				<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-				<arg value="update_it.zip"/>
+				<arg value="update-it-src.zip"/>
 				<arg value="UpdateIt"/>
 			</exec>
 			<delete dir="${ExportDir}\UpdateIt"/>
