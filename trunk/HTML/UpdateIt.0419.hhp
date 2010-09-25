@@ -15,12 +15,13 @@ MainWindow="UpdateIt! Documentation",,,"update_it_rus.html","update_it_rus.html"
 [FILES]
 update_it_rus.html
 images\texture.jpg
-images\step_4.gif
-images\step_0.gif
-images\step_1.gif
-images\step_2.gif
-images\step_3.gif
-images\zip_options.gif
+images\step-4.gif
+images\step-0.gif
+images\step-1.gif
+images\step-2.gif
+images\step-3.gif
+images\zip-options.gif
+images\first-launch.gif
 
 [INFOTYPES]
 

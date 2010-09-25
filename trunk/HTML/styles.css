@@ -69,19 +69,19 @@ span.winText
 span.argName
 {
 	font-weight: bold;
-	color: #990000;
+	color: #008080;
 }
 
 span.argValue
 {
 	font-weight: bold;
-	color: #990099;
+	color: #800080;
 }
 
 img.updateItShot
 {
 	margin-left: 0pt;
-	margin-top: 2pt;
+	margin-top: 0pt;
 	margin-right: 8pt;
 }
 
