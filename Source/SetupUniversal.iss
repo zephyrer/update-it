@@ -316,7 +316,7 @@ Source: "..\..\Repository\AfxGadgets\Source\*"; Excludes: ".svn, *.aps"; DestDir
 
 ;; CodeProject library sources
 Source: "..\..\Repository\CodeProject\CodeProject.2008.vcproj"; DestDir: "{app}\Sources\Repository\CodeProject"; Components: sources; Flags: ignoreversion
-Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\CodeProject\Help\*"; Excludes: ".svn, *.log"; DestDir: "{app}\Sources\Repository\CodeProject\Help"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\CodeProject\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\CodeProject\Source"; Components: sources; Flags: ignoreversion
 
 ;; Naughter library sources
@@ -335,53 +335,57 @@ Source: "..\..\Repository\ZipArchive\Source\*"; Excludes: ".svn, *.aps"; DestDir
 
 ;; zlib library sources
 Source: "..\..\Repository\zlib\zlib.2008.vcproj"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\algorithm.txt"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\changelog.txt"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\faq.txt"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\zlib\readme.txt"; DestDir: "{app}\Sources\Repository\zlib"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\zlib\Source\*"; Excludes: ".svn, *.aps"; DestDir: "{app}\Sources\Repository\zlib\Source"; Components: sources; Flags: ignoreversion
 
 ;; libjpeg library sources
+Source: "..\..\Repository\Graphics\libjpeg\libjpeg.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\coderules.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\filelist.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\install.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\jconfig.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
-Source: "..\..\Repository\Graphics\libjpeg\libjpeg.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\libjpeg.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\structure.txt"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libjpeg\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libjpeg\Source"; Components: sources; Flags: ignoreversion
 
 ;; libmng library sources
-Source: "..\..\Repository\Graphics\libmng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\libmng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libmng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libmng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libmng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libmng\Source"; Components: sources; Flags: ignoreversion
 
 ;; libpng library sources
-Source: "..\..\Repository\Graphics\libpng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\libpng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libpng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\libpng.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libpng\Source"; Components: sources; Flags: ignoreversion
 
 ;; libtiff library sources
-Source: "..\..\Repository\Graphics\libtiff\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libtiff\libtiff.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libtiff\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libtiff\readme.txt"; DestDir: "{app}\Sources\Repository\Graphics\libtiff"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libtiff\HTML\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libtiff\HTML"; Components: sources; Flags: ignoreversion recursesubdirs
 Source: "..\..\Repository\Graphics\libtiff\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libtiff\Source"; Components: sources; Flags: ignoreversion
 
 ;; OpenEXR library sources
+Source: "..\..\Repository\Graphics\OpenEXR\OpenEXR.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\authors.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\copying.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
-Source: "..\..\Repository\Graphics\OpenEXR\OpenEXR.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenEXR\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\OpenEXR\Source"; Components: sources; Flags: ignoreversion recursesubdirs
 
 ;; OpenJPEG library sources
+Source: "..\..\Repository\Graphics\OpenJPEG\OpenJPEG.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenJPEG\changelog.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenJPEG\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
-Source: "..\..\Repository\Graphics\OpenJPEG\OpenJPEG.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\OpenJPEG\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\OpenJPEG\Source"; Components: sources; Flags: ignoreversion
 
 ;; FreeImage library sources
@@ -410,10 +414,17 @@ Source: "..\Redist\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\Redist
 Source: "..\UpdateIt.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2008.sln"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\UpdateIt.2008.build"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
-Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
-Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
-Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\CleanDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\CreateDoc.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\SaveSymbols.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\StampVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\VerifyVer.build.inc"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\NAntSettings.txt"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\gbuild.cmd"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\irbuild.cmd"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\rbuild.cmd"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\sbuild.cmd"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
+Source: "..\zipsrc.cmd"; DestDir: "{app}\Sources\UpdateIt"; Components: sources; Flags: ignoreversion
 Source: "..\FreeImage\FreeImage.2008.vcproj"; DestDir: "{app}\Sources\UpdateIt\FreeImage"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\*"; Excludes: ".svn, *.chm"; DestDir: "{app}\Sources\UpdateIt\HTML"; Components: sources; Flags: ignoreversion
 Source: "..\HTML\images\*"; Excludes: ".svn"; DestDir: "{app}\Sources\UpdateIt\HTML\images"; Components: sources; Flags: ignoreversion
