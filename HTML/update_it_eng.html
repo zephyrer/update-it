@@ -28,7 +28,7 @@
 </table>
 
 <p class="pageText">
-<img src="./images/step_0.gif" width=379 height=301 align="left" border=0
+<img src="./images/step-0.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>UpdateIt!</strong> is the application designed for the
 synchronization of the source folder's content  with the content of other (target) folder on
 a local computer or (and) a remote FTP server. This is wizard that I wrote to fast and
@@ -41,7 +41,18 @@ preservation of its structure) to the specified FTP server, to compress this fol
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_1.gif" width=379 height=301 align="left" border=0
+<img src="./images/first-launch.gif" width=370 height=302 align="left" border=0
+class="updateItShot">When you first run the application on your computer you will be asked to
+provide your e-mail and outgoing mail server to be used to send error reports (in case of their
+occurrence). If you are not sure which outgoing SMTP server to specify look at your default
+E-mail client settings. Notice that the specified address will only be stored locally and never
+will be published or sent anywhere else. But if you still worry about a spam feel free to use
+some fake address such as &#8222;anonymous@unknown.org&#8220; and provide a real one in the
+error description typed by yourself.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step-1.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>Step #1</strong> is the  selection of source and target folders.
 It is required to choose a name of the  folder for searching the updated files and a name of
 the  folder where these updated files will be copied or moved. Also, it is required to
@@ -60,7 +71,7 @@ do not differ from the existing copies in the target folder.
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_2.gif" width=379 height=301 align="left" border=0
+<img src="./images/step-2.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>Step #2</strong> is reviewing the list of the updated files. On
 this step you can see the list of the updated files found in the source folder. The Name, the
 extension, the relative path in the source folder, and also the date and time of the last
@@ -71,7 +82,7 @@ files leave only the list, but still stay in the source folder.
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_3.gif" width=379 height=301 align="left" border=0
+<img src="./images/step-3.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>Step #3</strong> is actions selection. On this step it is required
 to choose,  what exactly should be done with the found files. Copying or moving files to the
 target folder are obligatory actions that are chosen by means of the group
@@ -93,7 +104,7 @@ different from zero.
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_4.gif" width=379 height=301 align="left" border="0"
+<img src="./images/step-4.gif" width=370 height=302 align="left" border="0"
 class="updateItShot"/><strong>Step #4</strong> is processing the files. On this step it is
 possible to watch the progress of copying (or moving) the updated files from the source folder
 into the target folder, of uploading files from the target folder to the given FTP server,
@@ -123,7 +134,7 @@ addresses.</li>
 <h1 class="subTopic">UpdateIt! Pro</h1>
 
 <table border="0" cellpadding="0" style="font-size: 10pt;"><tr>
-<td valign="top"><img src="./images/zip_options.gif" width=300 height=275 align="left"
+<td valign="top"><img src="./images/zip-options.gif" width=300 height=275 align="left"
 border="0" class="updateItShot"/></td>
 <td valign="top"><p class="pageText">
 This edition of the <strong>UpdateIt!</strong> has the following differences from the
@@ -378,7 +389,7 @@ class="argValue">&lt;0|1&gt;</span></dt>
 <dd>It is the method (algorithm) used for compression. <span class="argValue">0</span> means
 &#8222;Deflate&#8220; algorithm, and <span class="argValue">1</span> &mdash;
 &#8222;BZip2&#8220; algorithm. Any other value will be interpreted as
-<span class="argValue">0</span>. <font color="#FF0000">Attention: this key is recognized
+<span class="argValue">0</span>. <font color="#C00000">Attention: this key is recognized
 only by <strong>UpdateIt! Pro</strong> edition.</font></dd>
 
 <dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
@@ -395,7 +406,7 @@ class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
 encrypting, and <span class="argValue">1</span> &mdash; the standard encrypting supported by
 ZIP algorithm. The values of <span class="argValue">2</span>, <span class="argValue">3</span>
 and <span class="argValue">4</span> corresponds to AES-128, AES-192 and AES-256 encryption
-respectively. <font color="#FF0000">Attention: these three values will be recognized only by
+respectively. <font color="#C00000">Attention: these three values will be recognized only by
 <strong>UpdateIt! Pro</strong> edition.</font> Any other value will be interpreted as
 <span class="argValue">0</span>.</dd>
 
@@ -454,16 +465,32 @@ it has not been stipulated in a different way (as in case of the keys
 <p class="pageText">
 In any case, the keys of the command line have a priority over the corresponding options that
 are kept at the system registry. For example, if the command line contains the key
-<span class="argName">SourceDir-Recurce</span> that has the incorrect value of 4, and the
-corresponding parameter in the system registry has the correct value of 0, the final
-&#8222;result&#8220; will be 1 as the interpretation of key value from the command line.
+<span class="argName">SourceDir-Recurce</span> that has the incorrect value of
+<span class="argValue">4</span>, and the corresponding parameter in the system registry has the
+correct value of <span class="argValue">0</span>, the final &#8222;result&#8220; will be
+<span class="argValue">1</span> as the interpretation of key value from the command line.
 </p>
 
 <h1 class="subTopic">Version history</h1>
 
 <ul style="text-align: justify; margin-right: 2pt;">
 
-<li><strong>1.4.4324</strong> (04.07.2008)<br>
+<li><strong>1.5.5433</strong> (25.09.2010)<br>
+Improved installation/uninstallation issues handling. Greatly improved MUI installation
+mechanism. Improved E-mail charset handling. Added crash reporting via E-mail feature.
+Dropped Windows 98/Me operations systems support. Fixed several UI glitches. Updated end-user
+documentation. <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>
+library is updated to the version 4.0.1 from the 20th of April 2010.
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library is updated to
+the version 1.0.0a from the 1th of June 2010. The development of the project is converted under
+MS Visual C++ 2008 SP1; <font color="#C00000">with  this version the compatibility of the
+source code with Visual C++ 7.1 SP1 compiler is not guaranteed</font>. It is necessary to use
+<a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> project of revision
+511 or above to build  this version from sources (it is possible to download the so-called
+&#8222;universal installer&#8220; alternatively &mdash; it contains absolutely all sources
+which are necessary for independent building of the application and its installers).</li>
+
+<li style="margin-top: 4pt;"><strong>1.4.4324</strong> (04.07.2008)<br>
 Some errors are fixed. Added <strong>UpdateIt! Pro</strong> edition. Added end-user
 documentation in English.</li>
 
@@ -474,7 +501,7 @@ localization of installer is improved a bit.
 <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a> library is
 updated to the version 3.2.0 from the 15th of December 2007.
 <a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library is updated to
-the version 0.9.8g from the 19th of October 2007. <font color="#FF0000">Attention: it is
+the version 0.9.8g from the 19th of October 2007. <font color="#C00000">Attention: it is
 required to use <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a>
 project of revision 110 or above to build  this version from sourcess.</font></li>
 
@@ -497,11 +524,11 @@ The application is rebuilt with the version 3.0.2 of ZipArchive library.</li>
 The ability of authentication on the SMTP server that is used for sending the mail is added;
 methods SRAM-MD5, Login, Plain and NTLM are supported. The ability to use the SSL connection
 while working with SMTP is added. The development of the project is converted under MS Visual
-C++ 7.1 SP1; <font color="#FF0000">with  this version the compatibility of the source code
+C++ 7.1 SP1; <font color="#C00000">with  this version the compatibility of the source code
 with Visual C++ 7.0 SP1 compiler is not guaranteed</font>. It is necessary to use
 <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> project of revision
 81 or above to build  this version from sources (it is possible to download the so-called
-&#8222;universal installer&#8222; alternatively &mdash; it contains absolutely all sources
+&#8222;universal installer&#8220; alternatively &mdash; it contains absolutely all sources
 which are necessary for independent building of the application and its installers).</li>
 
 <li style="margin-top: 4pt;"><strong>1.0.3410</strong> (18.10.2006)<br>
@@ -509,7 +536,7 @@ The license agreement is added to the application and its source code &mdash; Ap
 Version 2.0. the "Universal" installer is added, it allows to choose one of possible types of
 installation (for example, with all sources necessary for the independent building of the
 application). Development of the project is converted under MS Visual C ++ 7.0 SP1;
-<font color="#FF0000">with  this version, the compatibility of the source code with Visual
+<font color="#C00000">with  this version, the compatibility of the source code with Visual
 C++ 6.0 SP6 compiler is not guaranteed</font>.</li>
 
 <li style="margin-top: 4pt;"><strong>1.0.3346</strong> (18.08.2006)<br>
@@ -519,7 +546,7 @@ The ability of interaction with FTP-servers in so-called &#8222;passive mode&#82
 issue). Authors improved the realization of compression of files in
 <a href="http://www.artpol-software.com/index_zip.html">ZIP</a> format and message sending
 using <a href="http://www.naughter.com/smtp.html">SMTP</a> protocol.
-<font color="#FF0000">Attention: it is necessary to use Repository project of revision 71 or
+<font color="#C00000">Attention: it is necessary to use Repository project of revision 71 or
 above to build  this version from sources.</font></li>
 
 <li style="margin-top: 4pt;"><strong>1.0.2800</strong> (16.07.2005)<br>
@@ -540,7 +567,7 @@ The ability of export/import of options of the application is added (works only 
 errors in the code that realizes the support of SMTP protocol.</li>
 
 <li style="margin-top: 4pt;"><strong>1.0.2461</strong> (29.12.2004)<br>
-The end-user documentation in HTML Help format is added. <font color=#ff0000>It is insistently
+The end-user documentation in HTML Help format is added. <font color="#C00000">It is insistently
 recommended to un-install the previous version  in a regular way before the installation of
 the given version.</font></li>
 

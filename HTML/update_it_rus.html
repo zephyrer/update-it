@@ -28,7 +28,7 @@
 </table>
 
 <p class="pageText">
-<img src="./images/step_0.gif" width=379 height=301 align="left" border=0
+<img src="./images/step-0.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>UpdateIt!</strong> &mdash; это приложение, предназначенное
 для синхронизации содержимого исходной папки с другой (целевой) папкой, находящейся на
 локальном компьютере или (и) FTP-сервере. Выполнено в виде &#8222;колдуна&#8220;, который
@@ -40,7 +40,20 @@ class="updateItShot"><strong>UpdateIt!</strong> &mdash; это приложение, предназн
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_1.gif" width=379 height=301 align="left" border=0
+<img src="./images/first-launch.gif" width=370 height=302 align="left" border=0
+class="updateItShot">При первом запуске приложения на
+данном компьютере вам будет предложено указать свой адрес электронной почты и сервер
+исходящей почты, которые необходимо использовать для отправки отчетов об ошибках в
+работе (в случае их возникновения). Если вы не уверенны, какой сервер исходящей почты
+указать, скопируйте его настройки из вашего почтового клиента по умолчанию. Указанный
+адрес будет сохранен только локально и никогда не будет никуда отправлен или опубликован
+где-либо. Но если вы все еще опасаетесь спама, воспользуйтесь адресом-фальшивкой типа
+&#8222;anonymous@unknown.org&#8220; и указывайте свой настоящий электронный адрес в 
+тексте набираемого вами описания возникшей ошибки.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step-1.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>Шаг 1:</strong> выбор исходной и целевой папок. На этом
 шаге необходимо задать имя папки, в которой будет производиться поиск обновленных
 файлов и имя папки, в которую они будут скопированы или перемещены. Кроме того,
@@ -60,7 +73,7 @@ older files</span> позволяет исключить из результатов поиска те файлы, содержимо
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_2.gif" width=379 height=301 align="left" border=0
+<img src="./images/step-2.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>Шаг 2:</strong> просмотр списка обновленных файлов. На этом
 шаге можно просмотреть список обновленных файлов, которые были найдены в исходной папке.
 Для каждого файла выводится его имя, расширение, путь относительно исходной папки,
@@ -72,7 +85,7 @@ class="updateItShot"><strong>Шаг 2:</strong> просмотр списка обновленных файлов.
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_3.gif" width=379 height=301 align="left" border=0
+<img src="./images/step-3.gif" width=370 height=302 align="left" border=0
 class="updateItShot"><strong>Шаг 3:</strong> определение действий. На этом шаге
 необходимо определить, что именно должно быть сделано с найденными файлами.
 &#8222;Обязательным&#8220; действием, выбираемым переключателями группы
@@ -95,7 +108,7 @@ folder with the copied/moved file(s)</span>, можно можно сжать целевую папку в
 <br clear="left"></p>
 
 <p class="pageText">
-<img src="./images/step_4.gif" width=379 height=301 align="left" border="0"
+<img src="./images/step-4.gif" width=370 height=302 align="left" border="0"
 class="updateItShot"/><strong>Шаг 4:</strong> обработка файлов. На этом шаге можно наблюдать
 за ходом копирования (или перемещения) обновленных файлов из исходной папки в целевую,
 закачкой файлов из целевой папки на заданный FTP-сервер, сжатием целевой папки и отправкой
@@ -123,7 +136,7 @@ class="updateItShot"/><strong>Шаг 4:</strong> обработка файлов. На этом шаге мож
 <h1 class="subTopic">UpdateIt! Pro</h1>
 
 <table border="0" cellpadding="0" style="font-size: 10pt;"><tr>
-<td valign="top"><img src="./images/zip_options.gif" width=300 height=275 align="left"
+<td valign="top"><img src="./images/zip-options.gif" width=300 height=275 align="left"
 border="0" class="updateItShot"/></td>
 <td valign="top"><p class="pageText">
 Этот &#8222;выпуск&#8220; (edition) <strong>UpdateIt!</strong> имеет следующие отличия от
@@ -375,7 +388,7 @@ class="argValue">&lt;0|1&gt;</span></dt>
 <dd>Метод (алгоритм) сжатия архива. <span class="argValue">0</span> означает алоритм
 &#8222;Deflate&#8220;, а <span class="argValue">1</span> &mdash; алгоритм
 &#8222;BZip2&#8220;. Любое другое значение будет интерпретировано как
-<span class="argValue">0</span>. <font color="#FF0000">Внимание: этот ключ распознается
+<span class="argValue">0</span>. <font color="#C00000">Внимание: этот ключ распознается
 только выпуском <strong>UpdateIt! Pro</strong>.</font></dd>
 
 <dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
@@ -393,7 +406,7 @@ class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
 предусмотренное алгоритмом ZIP, а <span class="argValue">2</span>,
 <span class="argValue">3</span> и <span class="argValue">4</span> &mdash; шифрованием
 методами AES-128, AES-192 и AES-256 соответственно. Любое другое значение будет
-интерпретировано как <span class="argValue">0</span>. <font color="#FF0000">Внимание:
+интерпретировано как <span class="argValue">0</span>. <font color="#C00000">Внимание:
 значения 2, 3 и 4 распознаются только выпуском <strong>UpdateIt! Pro</strong>.</font></dd>
 
 <dt><span class="argName">ZIP-Password</span><strong>:</strong><span
@@ -461,7 +474,24 @@ class="argValue">&lt;имя_файла&gt;</span></dt>
 
 <ul style="text-align: justify; margin-right: 2pt;">
 
-<li><strong>1.4.4324</strong> (04.07.2008)<br>
+<li><strong>1.5.5433</strong> (25.09.2010)<br>
+Улучшена обработка нештатных ситуаций при установке/удалении приложения. Значительно
+усовершенствован механизм установки многоязыкового интерфейса. Улучшена обработка
+кодировок отправляемых писем. Добавлена возможность отправки отчетов о сбоях посредством
+электронной почты. Прекращена поддержка операционных систем Windows 98/Me. Исправлено
+несколько ошибок в пользовательском интерфейсе. Обновлена документация для конечных
+пользователей. Библиотека
+<a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>
+обновлена до версии 4.0.1 от 20 апреля 2010 года. Библиотека
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> обновлена
+до версии 1.0.0a от 1 июня 2010 года. Разработка проекта &#8222;переведена&#8220; под
+MS Visual C++ 2008 SP1; <font color="#C00000">начиная с этой версии, совместимость
+исходного кода с компилятором Visual C++ 7.1 SP1 не гарантируется</font>. Для сборки
+этой версии из исходных текстов необходимо использовать проект
+<a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> ревизии 511 или
+выше.</li>
+
+<li style="margin-top: 4pt;"><strong>1.4.4324</strong> (04.07.2008)<br>
 Исправлено несколько ошибок. Добавлен &#8222;выпуск&#8220; (edition) <strong>UpdateIt!
 Pro</strong>. Добавлена англоязычная пользовательская документация.</li>
 
@@ -472,7 +502,7 @@ Pro</strong>. Добавлена англоязычная пользовательская документация.</li>
 <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>
 обновлена до версии 3.2.0 от 15 декабря 2007 года. Библиотека
 <a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> обновлена
-до версии 0.9.8g от 19 октября 2007 года. <font color="#FF0000">Внимание:
+до версии 0.9.8g от 19 октября 2007 года. <font color="#C00000">Внимание:
 для сборки этой версии из исходных текстов необходимо использовать проект
 <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> ревизии 110
 или выше.</font>
@@ -496,11 +526,13 @@ Pro</strong>. Добавлена англоязычная пользовательская документация.</li>
 Добавлена возможность аутенификации на SMTP-сервере, используемом для отправки письма;
 поддерживаются методы SRAM-MD5, Login, Plain и NTLM. Добавлена возможность использования
 SSL-соединения при работе с SMTP. Разработка проекта &#8222;переведена&#8220; под
-MS Visual C++ 7.1 SP1; <font color="#FF0000">начиная с этой версии, совместимость
+MS Visual C++ 7.1 SP1; <font color="#C00000">начиная с этой версии, совместимость
 исходного кода с компилятором Visual C++ 7.0 SP1 не гарантируется</font>. Для сборки
 этой версии из исходных текстов необходимо использовать проект
 <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> ревизии 81 или
-выше.</li>
+выше (в качестве альтернативы можно скачать так называемый &#8222;универсальный
+вариант&#8220; дистрибутива &mdash; он содержит абсолютно все исходные тексты, которые
+необходимы для самостоятельной сборки приложения и его инсталлятора).</li>
 
 <li style="margin-top: 4pt;"><strong>1.0.3410</strong> (18.10.2006)<br>
 К приложению и его исходному коду добавлено лицензионное соглашение &mdash;
@@ -508,7 +540,7 @@ MS Visual C++ 7.1 SP1; <font color="#FF0000">начиная с этой версии, совместимост
 Добавлен &#8222;универсальный&#8220; инсталлятор, позволяющий выбрать один из
 возможных типов установки (например, со всеми исходными тестами, необходимыми для
 самостоятельной сборки приложения). Разработка проекта &#8222;переведена&#8220; под
-MS Visual C++ 7.0 SP1; <font color="#FF0000">начиная с этой версии, совместимость
+MS Visual C++ 7.0 SP1; <font color="#C00000">начиная с этой версии, совместимость
 исходного кода с компилятором Visual C++ 6.0 SP6 не гарантируется</font>.</li>
 
 <li style="margin-top: 4pt;"><strong>1.0.3346</strong> (18.08.2006)<br>
@@ -519,7 +551,7 @@ MS Visual C++ 7.0 SP1; <font color="#FF0000">начиная с этой версии, совместимост
 &#8222;наводку&#8220;). Авторами улучшена реализация сжатия файлов в формате
 <a href="http://www.artpol-software.com/index_zip.html">ZIP</a> и
 отправки сообщений по протоколу
-<a href="http://www.naughter.com/smtp.html">SMTP</a>. <font color="#FF0000">Внимание:
+<a href="http://www.naughter.com/smtp.html">SMTP</a>. <font color="#C00000">Внимание:
 для сборки этой версии из исходных текстов необходимо использовать проект
 <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> ревизии 71 или
 выше.</font></li>
@@ -544,7 +576,7 @@ Windows 2000/XP). Немного &#8222;улучшено&#8220; системное меню.
 реализующем поддержку протокола SMTP.</li>
 
 <li style="margin-top: 4pt;"><strong>1.0.2461</strong> (29.12.2004)<br>
-Добавлена документация пользователя в формате HTML Help. <font color=#ff0000>Перед
+Добавлена документация пользователя в формате HTML Help. <font color="#C00000">Перед
 установкой данной версии настоятельно рекомендуется штатным образом деинсталлировать
 предыдущую.</font></li>
 
