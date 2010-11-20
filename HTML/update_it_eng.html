@@ -43,7 +43,7 @@ preservation of its structure) to the specified FTP server, to compress this fol
 <p class="pageText">
 <img src="./images/first-launch.gif" width=370 height=302 align="left" border=0
 class="updateItShot">When you first run the application on your computer you will be asked to
-provide your e-mail and outgoing mail server to be used to send error reports (in case of their
+provide your e-mail and outgoing mail server to be used to send crash reports (in case of their
 occurrence). If you are not sure which outgoing SMTP server to specify look at your default
 E-mail client settings. Notice that the specified address will only be stored locally and never
 will be published or sent anywhere else. But if you still worry about a spam feel free to use
@@ -170,14 +170,14 @@ Corresponding commands are in the system menu of the main window. Note that the 
 options is possible at any stage of work of the application, but the import of options is
 possible only on a &#8222;zero&#8220; step (on the <span class="winText">Welcome!</span> page).
 
-<h1 class="subTopic">Command-line keys</h1>
+<h1 class="subTopic">Command-line switches</h1>
 
 <p class="pageText">
 The first group of keys allows to set the name of a source folder and the  condition of files
 search in it, as well as the name of a target folder and parameters of work with it.
 </p>
 
-<dl>
+<dl class="switchesList">
 
 <dt><span class="argName">SourceDir-Name</span><strong>:</strong><span
 class="argValue">&lt;folder_name&gt;</span></dt>
@@ -240,7 +240,7 @@ The second group of keys determines the actions that need to be performed  with 
 files found in the source folder.
 </p>
 
-<dl>
+<dl class="switchesList">
 
 <dt><span class="argName">MoveFiles</span><strong>:</strong><span
 class="argValue">&lt;0|1&gt;</span></dt>
@@ -277,7 +277,7 @@ The third group of keys specifies the FTP server for updated files and parameter
 interaction with it.
 </p>
 
-<dl>
+<dl class="switchesList">
 
 <dt><span class="argName">FTP-Server</span><strong>:</strong><span
 class="argValue">&lt;server_name&gt;</span></dt>
@@ -315,7 +315,7 @@ The fourth group of keys sets parameters of the SMTP connection that is used for
 ZIP-archive with the target folder to the specified e-mail address.
 </p>
 
-<dl>
+<dl class="switchesList">
 
 <dt><span class="argName">SMTP-Enable</span></dt>
 <dd>To enable SMTP usage. Value of this key is ignored; therefore it is no use  to specify
@@ -382,7 +382,7 @@ The fifth group of keys sets the parameters of creation of ZIP-archive with a ta
 folder.
 </p>
 
-<dl>
+<dl class="switchesList">
 
 <dt><span class="argName">ZIP-Method</span><strong>:</strong><span
 class="argValue">&lt;0|1&gt;</span></dt>
@@ -420,7 +420,7 @@ class="argValue">&lt;password&gt;</span></dt>
 Sixth and last group of keys sets various general parameters.
 </p>
 
-<dl>
+<dl class="switchesList">
 
 <dt><span class="argName">Font-FaceName</span><strong>:</strong><span
 class="argValue">&lt;font_name&gt;</span></dt>

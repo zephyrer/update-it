@@ -66,6 +66,11 @@ span.winText
 	font-weight: bold;
 }
 
+dl.switchesList dd
+{
+	margin-bottom: 4pt;
+}
+
 span.argName
 {
 	font-weight: bold;

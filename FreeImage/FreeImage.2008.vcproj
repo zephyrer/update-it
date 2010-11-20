@@ -449,6 +449,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Repository\FreeImage\Source\ConversionUINT16.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Repository\FreeImage\Source\Halftoning.cpp"
 					>
 				</File>
