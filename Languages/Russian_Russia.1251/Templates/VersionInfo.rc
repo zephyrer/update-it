@@ -1,5 +1,5 @@
 // Russian_Russia.1251 MFC extension DLL.
-// Copyright (c) 2007-2010 by Elijah Zarezky,
+// Copyright (c) 2007-2011 by Elijah Zarezky,
 // All rights reserved.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@ VS_VERSION_INFO VERSIONINFO
             VALUE "FileDescription", "Библиотечный модуль Russian_Russia.1251"
             VALUE "FileVersion", "@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@.@SVN_REV@"
             VALUE "InternalName", "Russian_Russia.1251"
-            VALUE "LegalCopyright", "Авторские права © 2007–2010 Илья Зарецкий"
+            VALUE "LegalCopyright", "Авторские права © 2007–2011 Илья Зарецкий"
             VALUE "LegalTrademarks", "Windows™ является зарегистрированной торговой маркой Корпорации Microsoft"
             VALUE "OriginalFilename", "Russian_Russia.1251.dll"
             VALUE "ProductName", "Power Gadgets"

@@ -1,5 +1,5 @@
 ;; UpdateIt! application.
-;; Copyright (c) 2002-2010 by Elijah Zarezky,
+;; Copyright (c) 2002-2011 by Elijah Zarezky,
 ;; All rights reserved.
 
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
 AppVersion=@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@
-AppCopyright=Copyright © 2002–2010 by Elijah Zarezky
+AppCopyright=Copyright © 2002–2011 by Elijah Zarezky
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
 AllowNoIcons=true
