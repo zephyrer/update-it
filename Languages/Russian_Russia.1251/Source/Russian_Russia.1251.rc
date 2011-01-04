@@ -162,13 +162,13 @@ BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Авторские права © 2002-2011 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.14.2 (из CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.15.0 (из CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.5 (19 апреля 2010)",IDC_STATIC,16,88,314,16
     LTEXT           "Авторские права © 1995-2010 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,238,10,SS_CENTERIMAGE
     RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,260,106,70,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека ZipArchive,\nверсия 4.0.1 (20 апреля 2009)",IDC_STATIC,16,122,314,16
-    LTEXT           "Авторские права © 2000-2009 Tadeusz Dracz",IDC_STATIC,16,140,238,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека ZipArchive,\nверсия 4.1.0 (31 октября 2010)",IDC_STATIC,16,122,314,16
+    LTEXT           "Авторские права © 2000-2010 Tadeusz Dracz",IDC_STATIC,16,140,238,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_ARTPOL,260,140,70,10,SS_CENTERIMAGE
     LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,156,314,10
     LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,240,10,SS_CENTERIMAGE

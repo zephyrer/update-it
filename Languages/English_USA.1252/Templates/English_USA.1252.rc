@@ -162,13 +162,13 @@ BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
     LTEXT           "Copyright © 2002-2011 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.14.2 (from CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.15.0 (from CVS).",IDC_STATIC,4,52,214,18
     LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
     LTEXT           "'zlib' general purpose compression library\nversion 1.2.5 (19 Apr 2010)",IDC_STATIC,16,88,314,16
     LTEXT           "Copyright © 1995-2010 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,260,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,280,106,50,10,SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 4.0.1 (2009-04-20)",IDC_STATIC,16,122,314,16
-    LTEXT           "Copyright © 2000-2009 by Tadeusz Dracz",IDC_STATIC,16,140,258,10,SS_CENTERIMAGE
+    LTEXT           "ZipArchive library\nversion 4.1.0 (2010-10-31)",IDC_STATIC,16,122,314,16
+    LTEXT           "Copyright © 2000-2010 by Tadeusz Dracz",IDC_STATIC,16,140,258,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ARTPOL,280,140,50,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,156,314,10
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,260,10,SS_CENTERIMAGE
