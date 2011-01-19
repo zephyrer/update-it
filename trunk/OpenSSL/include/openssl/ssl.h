@@ -143,6 +143,22 @@
 #ifndef HEADER_SSL_H
 #define HEADER_SSL_H
 
+#ifdef OPENSSL_LIB_BUILD
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+__declspec(selectany) int _forceCRTManifest;
+__declspec(selectany) int _forceCRTManifestRTM;
+
+#ifdef __cplusplus
+}   /* extern "C" */
+#endif
+
+#endif   /* OPENSSL_LIB_BUILD */
+
 #include <openssl/e_os2.h>
 
 #ifndef OPENSSL_NO_COMP

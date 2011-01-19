@@ -106,6 +106,7 @@ __declspec(selectany) int _forceMFCManifestCUR;
 
 #include <atlbase.h>       // basic ATL classes
 #include <atlfile.h>       // CAtlFile implementation
+#include <atlsocket.h>     // ATL support for Windows Sockets
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // STL headers
