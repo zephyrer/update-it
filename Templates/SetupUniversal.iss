@@ -302,6 +302,7 @@ Source: "..\OpenSSL\redist\capi.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\chil.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\cswift.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\gmp.dll"; DestDir: "{app}"; Components: core
+Source: "..\OpenSSL\redist\gost.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\nuron.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\padlock.dll"; DestDir: "{app}"; Components: core
 Source: "..\OpenSSL\redist\sureware.dll"; DestDir: "{app}"; Components: core
