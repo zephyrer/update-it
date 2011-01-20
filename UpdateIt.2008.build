@@ -85,144 +85,6 @@ UpdateIt.2008.build - NAnt script to build release
 
 	<!-- TARGETS -->
 
-	<!-- 'verify-ver' target -->
-
-	<include buildfile="${UpdateItPath}\VerifyVer.build.inc"/>
-
-	<!-- 'stamp-ver' target -->
-
-	<include buildfile="${UpdateItPath}\StampVer.build.inc"/>
-
-	<!-- 'build-sln' target -->
-
-	<target
-		name="build-sln"
-		description="Build UpdateIt solution."
-		depends="stamp-ver">
-		<exec
-			program="vcbuild.exe"
-			commandline="UpdateIt.2008.sln &quot;${SolutionConfig}&quot;">
-		</exec>
-	</target>
-
-	<!-- 'rebuild-sln' target -->
-
-	<target
-		name="rebuild-sln"
-		description="Rebuild UpdateIt solution."
-		depends="clean-sln,build-sln">
-		<echo message="UpdateIt solution rebuilt."/>
-	</target>
-
-	<!-- 'create-doc' target -->
-
-	<include buildfile="${UpdateItPath}\CreateDoc.build.inc"/>
-
-	<!-- 'create-distr' target -->
-
-	<target
-		name="create-distr"
-		description="Create setup packages."
-		depends="build-sln,create-doc,clean-distr">
-		<mkdir
-			dir="Setup"
-			if="${not directory::exists('Setup')}"/>
-		<echo message="Creating standard installer."/>
-		<echo/>
-		<exec
-			program="iscc.exe"
-			commandline="Setup.iss"
-			workingdir="Source">
-		</exec>
-		<echo/>
-		<echo/>
-		<echo message="Creating universal installer."/>
-		<echo/>
-		<exec
-			program="iscc.exe"
-			commandline="SetupUniversal.iss"
-			workingdir="Source">
-		</exec>
-	</target>
-
-	<!-- 'zip-distr' target -->
-
-	<target
-		name="zip-distr"
-		description="Create ZIPped setup packages."
-		depends="create-distr,clean-zip">
-		<exec
-			program="7z.exe"
-			workingdir="Setup">
-			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
-			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup.exe"/>
-		</exec>
-		<exec
-			program="7z.exe"
-			workingdir="Setup">
-			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
-			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.exe"/>
-		</exec>
-	</target>
-
-	<!-- save-symbols farget  -->
-
-	<include buildfile="${UpdateItPath}\SaveSymbols.build.inc"/>
-
-	<!-- 'commit-src' target -->
-
-	<target
-		name="commit-src"
-		description="Commit sources to the SVN repository.">
-		<if test="${property::exists('CommitMsg')}">
-			<exec
-				program="svn.exe"
-				commandline="commit --message &quot;${CommitMsg}&quot;">
-			</exec>
-		</if>
-	</target>
-
-	<!-- 'export-src' target -->
-
-	<target
-		name="export-src"
-		description="Export sources from the working copy.">
-		<if test="${property::exists('ExportDir')}">
-			<exec
-				program="svn.exe"
-				commandline="export .\ &quot;${ExportDir}\UpdateIt&quot;">
-			</exec>
-			<exec
-				program="7z.exe"
-				workingdir="${ExportDir}">
-				<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-				<arg value="update-it-src.zip"/>
-				<arg value="UpdateIt"/>
-			</exec>
-			<delete dir="${ExportDir}\UpdateIt"/>
-		</if>
-	</target>
-
-	<!-- 'build-all' target -->
-
-	<target
-		name="build-all"
-		description="Build entire UpdateIt project."
-		depends="build-sln,create-doc,create-distr,zip-distr,save-symbols">
-		<echo message="UpdateIt! all built."/>
-	</target>
-
-	<!-- 'rebuild-all' target -->
-
-	<target
-		name="rebuild-all"
-		description="Rebuild entire UpdateIt project."
-		depends="rebuild-sln,create-doc,create-distr,zip-distr,save-symbols">
-		<echo message="UpdateIt! all rebuilt."/>
-	</target>
-
 	<!-- 'clean-sln' target -->
 
 	<target
@@ -255,7 +117,7 @@ UpdateIt.2008.build - NAnt script to build release
 
 	<target
 		name="clean-zip"
-		description="Delete ZIPped setup packages.">
+		description="Delete ZIPped setup packages and sources.">
 		<delete
 			if="${directory::exists('Setup')}">
 			<fileset>
@@ -270,6 +132,153 @@ UpdateIt.2008.build - NAnt script to build release
 		name="clean-all"
 		description="Delete all built files."
 		depends="clean-sln,clean-doc,clean-distr,clean-zip">
+	</target>
+
+	<!-- 'create-doc' target -->
+
+	<include buildfile="${UpdateItPath}\CreateDoc.build.inc"/>
+
+	<!-- 'verify-ver' target -->
+
+	<include buildfile="${UpdateItPath}\VerifyVer.build.inc"/>
+
+	<!-- 'stamp-ver' target -->
+
+	<include buildfile="${UpdateItPath}\StampVer.build.inc"/>
+
+	<!-- 'build-sln' target -->
+
+	<target
+		name="build-sln"
+		description="Build UpdateIt solution."
+		depends="stamp-ver">
+		<exec
+			program="vcbuild.exe"
+			commandline="UpdateIt.2008.sln &quot;${SolutionConfig}&quot;">
+		</exec>
+	</target>
+
+	<!-- 'rebuild-sln' target -->
+
+	<target
+		name="rebuild-sln"
+		description="Rebuild UpdateIt solution."
+		depends="clean-sln,build-sln">
+		<echo message="UpdateIt solution rebuilt."/>
+	</target>
+
+	<!-- 'create-distr' target -->
+
+	<target
+		name="create-distr"
+		description="Create setup packages."
+		depends="build-sln,create-doc,clean-distr">
+		<mkdir
+			dir="Setup"
+			if="${not directory::exists('Setup')}"/>
+		<echo message="Creating standard installer."/>
+		<echo/>
+		<exec
+			program="iscc.exe"
+			commandline="Setup.iss"
+			workingdir="Source">
+		</exec>
+		<echo/>
+		<echo/>
+		<echo message="Creating universal installer."/>
+		<echo/>
+		<exec
+			program="iscc.exe"
+			commandline="SetupUniversal.iss"
+			workingdir="Source">
+		</exec>
+	</target>
+
+	<!-- save-symbols farget  -->
+
+	<include buildfile="${UpdateItPath}\SaveSymbols.build.inc"/>
+
+	<!-- 'build-all' target -->
+
+	<target
+		name="build-all"
+		description="Build entire UpdateIt project."
+		depends="build-sln,create-doc,create-distr,save-symbols">
+		<echo message="UpdateIt! all built."/>
+	</target>
+
+	<!-- 'rebuild-all' target -->
+
+	<target
+		name="rebuild-all"
+		description="Rebuild entire UpdateIt project."
+		depends="rebuild-sln,create-doc,create-distr,save-symbols">
+		<echo message="UpdateIt! all rebuilt."/>
+	</target>
+
+	<!-- 'zip-distr' target -->
+
+	<target
+		name="zip-distr"
+		description="Create ZIPped setup packages."
+		depends="create-distr">
+		<exec
+			program="7z.exe"
+			workingdir="Setup">
+			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup.exe"/>
+		</exec>
+		<exec
+			program="7z.exe"
+			workingdir="Setup">
+			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.exe"/>
+		</exec>
+	</target>
+
+	<!-- 'zip-src' target -->
+
+	<target
+		name="zip-src"
+		description="Create ZIPped sources from the working copy.">
+		<if test="${property::exists('ExportDir')}">
+			<exec
+				program="svn.exe"
+				commandline="export .\ &quot;${ExportDir}\UpdateIt&quot;">
+			</exec>
+			<exec
+				program="7z.exe"
+				workingdir="${ExportDir}">
+				<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
+				<arg value="update-it-src.zip"/>
+				<arg value="UpdateIt"/>
+			</exec>
+			<delete dir="${ExportDir}\UpdateIt"/>
+		</if>
+	</target>
+
+	<!-- 'zip-all' target -->
+
+	<target
+		name="zip-all"
+		description="ZIP entire UpdateIt! project."
+		depends="clean-zip,zip-distr,zip-src">
+		<echo message="UpdateIt! all ZIPped."/>
+	</target>
+
+	<!-- 'commit-src' target -->
+
+	<target
+		name="commit-src"
+		description="Commit sources to the SVN repository.">
+		<if test="${property::exists('CommitMsg')}">
+			<exec
+				program="svn.exe"
+				commandline="commit --message &quot;${CommitMsg}&quot;">
+			</exec>
+		</if>
 	</target>
 
 </project>
