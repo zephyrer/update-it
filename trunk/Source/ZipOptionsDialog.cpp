@@ -38,6 +38,7 @@
 #include "OptionsPage.h"
 #include "FilesList.h"
 #include "FilesPage.h"
+#include "BrowseFtpDialog.h"
 #include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPageBase.h"

@@ -63,6 +63,7 @@
 #define IDD_XCRASHREPORT_MAIN           116
 #define IDD_XCRASHREPORT_DETAILS        117
 #define IDD_XCRASHREPORT_ABOUT          118
+#define IDD_BROWSE_FTP                  119
 #define IDC_EDIT_SOURCE                 1001
 #define IDC_BUTTON_SOURCE               1002
 #define IDC_EDIT_TARGET                 1003
@@ -113,7 +114,7 @@
 #define IDC_STATIC_USERNAME_PROMPT      1049
 #define IDC_EDIT_USERNAME               1050
 #define IDC_STATIC_PASSWORD_PROMPT      1051
-#define IDC_BUTTON_AUTH                 1054
+#define IDC_BUTTON_SMTP_AUTH            1054
 #define IDC_COMBO_ZIP_LEVEL             1055
 #define IDC_COMBO_ENCR_METHOD           1056
 #define IDC_TEXT_ZIP_PASSWORD           1057
@@ -141,6 +142,9 @@
 #define IDC_ICON_INFO                   1079
 #define IDC_TEXT_EMAIL_INFO             1080
 #define IDC_EDIT_PASSWORD               1081
+#define IDC_BUTTON_FTP_ROOT             1082
+#define IDC_TREE1                       1083
+#define IDC_TREE_FTP_FOLDERS            1083
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -148,9 +152,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        119
+#define _APS_NEXT_RESOURCE_VALUE        120
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1082
-#define _APS_NEXT_SYMED_VALUE           119
+#define _APS_NEXT_CONTROL_VALUE         1084
+#define _APS_NEXT_SYMED_VALUE           120
 #endif
 #endif

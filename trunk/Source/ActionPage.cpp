@@ -37,8 +37,9 @@
 #include "FilesList.h"
 #include "FilesPage.h"
 #include "CustomDialog.h"
-#include "AuthenticationDialog.h"
 #include "ZipOptionsDialog.h"
+#include "BrowseFtpDialog.h"
+#include "AuthenticationDialog.h"
 #include "ActionPage.h"
 #include "ProgressPageBase.h"
 #include "ProgressPage.h"
@@ -78,7 +79,8 @@ BEGIN_MESSAGE_MAP(CActionPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_ZIP, OnCheckZip)
 	ON_BN_CLICKED(IDC_CHECK_SEND, OnCheckSend)
 	ON_BN_CLICKED(IDC_BUTTON_ZIP_OPTIONS, OnButtonZipOptions)
-	ON_BN_CLICKED(IDC_BUTTON_AUTH, OnButtonAuthentication)
+	ON_BN_CLICKED(IDC_BUTTON_FTP_ROOT, OnButtonFtpRoot)
+	ON_BN_CLICKED(IDC_BUTTON_SMTP_AUTH, OnButtonAuthentication)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -382,6 +384,13 @@ void CActionPage::OnButtonZipOptions(void)
 	}
 }
 
+void CActionPage::OnButtonFtpRoot(void)
+{
+	if (m_dlgBrowseFtp.DoModal() == IDOK)
+	{
+	}
+}
+
 void CActionPage::OnButtonAuthentication(void)
 {
 	if (m_dlgAuth.DoModal() == IDOK)
@@ -548,8 +557,9 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_strSmtpHost = " << m_strSmtpHost;
 		dumpCtx << "\nm_nSmtpPort = " << m_nSmtpPort;
 		dumpCtx << "\nm_strMailBody = " << m_strMailBody;
-		dumpCtx << "\nm_dlgAuth = " << m_dlgAuth;
 		dumpCtx << "\nm_dlgZipOpts = " << m_dlgZipOpts;
+		dumpCtx << "\nm_dlgBrowseFtp = " << m_dlgBrowseFtp;
+		dumpCtx << "\nm_dlgAuth = " << m_dlgAuth;
 	}
 	catch (CFileException* pXcpt)
 	{

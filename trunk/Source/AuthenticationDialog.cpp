@@ -39,6 +39,7 @@
 #include "FilesList.h"
 #include "FilesPage.h"
 #include "ZipOptionsDialog.h"
+#include "BrowseFtpDialog.h"
 #include "ActionPage.h"
 #include "ProgressPageBase.h"
 #include "ProgressPage.h"
