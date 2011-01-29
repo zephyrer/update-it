@@ -84,12 +84,12 @@
 #define IDC_STATIC_VERSION              1020
 #define IDC_CHECK_ZIP                   1021
 #define IDC_CHECK_SEND                  1022
-#define IDC_EDIT_FROM                   1023
-#define IDC_EDIT_MAILTO                 1024
-#define IDC_EDIT_HOST                   1025
-#define IDC_EDIT_PORT                   1026
-#define IDC_EDIT_BODY                   1027
-#define IDC_EDIT_SUBJECT                1028
+#define IDC_EDIT_MAIL_FROM              1023
+#define IDC_EDIT_MAIL_TO                1024
+#define IDC_EDIT_SMTP_HOST              1025
+#define IDC_EDIT_SMTP_PORT              1026
+#define IDC_EDIT_MAIL_BODY              1027
+#define IDC_EDIT_MAIL_SUBJECT           1028
 #define IDC_LINK_NAUGHTER               1029
 #define IDC_CHECK_RECURSE               1030
 #define IDC_LINK_ARTPOL                 1031
@@ -98,11 +98,11 @@
 #define IDC_LINK_ZLIB                   1034
 #define IDC_CHECK_UPLOAD                1035
 #define IDC_GROUP_FTP                   1036
-#define IDC_EDIT_SERVER                 1037
+#define IDC_EDIT_FTP_SERVER             1037
 #define IDC_EDIT_FTP_PORT               1038
-#define IDC_EDIT_LOGIN                  1039
-#define IDC_EDIT_PASSWORD               1040
-#define IDC_EDIT_ROOT                   1041
+#define IDC_EDIT_FTP_LOGIN              1039
+#define IDC_EDIT_FTP_PASSWORD           1040
+#define IDC_EDIT_FTP_ROOT               1041
 #define IDC_GROUP_MAIL                  1042
 #define IDC_EDIT_EXCLUDE                1043
 #define IDC_CHECK_COMPARE               1044
@@ -140,6 +140,7 @@
 #define IDC_TEXT_EMAIL_GUARANTEE        1078
 #define IDC_ICON_INFO                   1079
 #define IDC_TEXT_EMAIL_INFO             1080
+#define IDC_EDIT_PASSWORD               1081
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -149,7 +150,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        119
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1081
+#define _APS_NEXT_CONTROL_VALUE         1082
 #define _APS_NEXT_SYMED_VALUE           119
 #endif
 #endif

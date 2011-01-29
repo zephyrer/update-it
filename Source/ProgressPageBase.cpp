@@ -546,11 +546,11 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 	try
 	{
 		smtpMsg.m_sXMailer = _T("UpdateIt/1.0");
-		smtpMsg.m_From = CSmtpAddress(pActionPage->m_strFrom);
-		smtpMsg.ParseMultipleRecipients(pActionPage->m_strTo, smtpMsg.m_To);
-		smtpMsg.m_sSubject = pActionPage->m_strSubject;
+		smtpMsg.m_From = CSmtpAddress(pActionPage->m_strMailFrom);
+		smtpMsg.ParseMultipleRecipients(pActionPage->m_strMailTo, smtpMsg.m_To);
+		smtpMsg.m_sSubject = pActionPage->m_strMailSubject;
 		smtpZipPart.SetFilename(strZipPath);
-		smtpTextPart.SetText(pActionPage->m_strBody);
+		smtpTextPart.SetText(pActionPage->m_strMailBody);
 #if defined(UNICODE) || defined(_UNICODE)
 		smtpTextPart.SetCharset(_T("UTF-8"));
 #else
@@ -567,7 +567,7 @@ void CProgressPageBase::SendZippedFolder(const CString& strZipPath)
 		bool fHasAuth = dlgAuth.m_eAuthMethod != CSmtpConnection::AUTH_NONE;
 		LPCTSTR pszUserName = fHasAuth ? dlgAuth.m_strUserName : LPCTSTR(NULL);
 		LPCTSTR pszPassword = fHasAuth ? dlgAuth.m_strPassword : LPCTSTR(NULL);
-		smtpConn.Connect(pActionPage->m_strHost, dlgAuth.m_eAuthMethod, pszUserName, pszPassword,
+		smtpConn.Connect(pActionPage->m_strSmtpHost, dlgAuth.m_eAuthMethod, pszUserName, pszPassword,
 			pActionPage->m_nSmtpPort, dlgAuth.m_fUseSSL ? CSmtpConnection::SSL_TLS : CSmtpConnection::PlainText);
 		smtpConn.SendMessage(smtpMsg);
 		smtpConn.Disconnect();
@@ -717,8 +717,8 @@ void CProgressPageBase::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFile
 		CInternetSession ftpSession(_T("UpdateIt/1.0"));
 		strWorking.LoadString(IDS_CONNECTING_FTP);
 		m_textWorking.SetWindowText(strWorking);
-		CFtpConnection* pFtpConn = ftpSession.GetFtpConnection(pActionPage->m_strServer,
-			pActionPage->m_strLogin, pActionPage->m_strPassword, pActionPage->m_nFtpPort,
+		CFtpConnection* pFtpConn = ftpSession.GetFtpConnection(pActionPage->m_strFtpServer,
+			pActionPage->m_strFtpLogin, pActionPage->m_strFtpPassword, pActionPage->m_nFtpPort,
 			pActionPage->m_fPassive);
 		ASSERT(pFtpConn != NULL);
 		pFtpConn->SetCurrentDirectory(_T("/"));
@@ -747,7 +747,7 @@ void CProgressPageBase::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFile
 			strSrcPath += strNameExt;
 
 			// construct fully qualified target filename
-			CString strFtpPath(pActionPage->m_strRoot);
+			CString strFtpPath(pActionPage->m_strFtpRoot);
 			if (!strFolder.IsEmpty())
 			{
 				strFolder.Replace(_T('\\'), _T('/'));

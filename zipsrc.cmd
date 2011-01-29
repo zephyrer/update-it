@@ -18,4 +18,4 @@ REM limitations under the License.
 
 REM zipsrc.cmd - NT command script to export and compress sources
 
-nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:ExportDir=.\Setup export-src
+nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:ExportDir=.\Setup zip-src
