@@ -47,6 +47,7 @@ protected:
 	afx_msg void OnCheckZip(void);
 	afx_msg void OnCheckSend(void);
 	afx_msg void OnButtonZipOptions(void);
+	afx_msg void OnButtonFtpRoot(void);
 	afx_msg void OnButtonAuthentication(void);
 
 // attributes
@@ -91,8 +92,9 @@ public:
 	INTERNET_PORT m_nSmtpPort;
 	CString m_strMailBody;
 	// helper dialogs
-	CAuthenticationDialog m_dlgAuth;
 	CZipOptionsDialog m_dlgZipOpts;
+	CBrowseFtpDialog m_dlgBrowseFtp;
+	CAuthenticationDialog m_dlgAuth;
 
 // implementation helpers
 private:

@@ -428,6 +428,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\BrowseFtpDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\CustomDialog.cpp"
 				>
 			</File>
@@ -543,6 +547,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\BetterPropPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BrowseFtpDialog.h"
 				>
 			</File>
 			<File
