@@ -44,6 +44,12 @@ protected:
 
 // attributes
 public:
+	CString m_strServer;
+	INTERNET_PORT m_nPort;
+	CString m_strLogin;
+	CString m_strPassword;
+	CString m_strRoot;
+	BOOL m_fPassive;
 
 // diagnostic services
 #if defined(_DEBUG)
