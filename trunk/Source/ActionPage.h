@@ -70,23 +70,27 @@ public:
 		MAX_SMTP_HOST_LENGTH = INTERNET_MAX_HOST_NAME_LENGTH
 	};
 
+	// action settings
 	int m_nAction;
 	int m_nUpload;
 	int m_nZip;
 	BOOL m_fCanSend;
 	int m_nSend;
-	CString m_strServer;
+	// FTP settings
+	CString m_strFtpServer;
 	INTERNET_PORT m_nFtpPort;
-	CString m_strLogin;
-	CString m_strPassword;
-	CString m_strRoot;
+	CString m_strFtpLogin;
+	CString m_strFtpPassword;
+	CString m_strFtpRoot;
 	BOOL m_fPassive;
-	CString m_strFrom;
-	CString m_strTo;
-	CString m_strSubject;
-	CString m_strHost;
+	// E-Mail settings
+	CString m_strMailFrom;
+	CString m_strMailTo;
+	CString m_strMailSubject;
+	CString m_strSmtpHost;
 	INTERNET_PORT m_nSmtpPort;
-	CString m_strBody;
+	CString m_strMailBody;
+	// helper dialogs
 	CAuthenticationDialog m_dlgAuth;
 	CZipOptionsDialog m_dlgZipOpts;
 

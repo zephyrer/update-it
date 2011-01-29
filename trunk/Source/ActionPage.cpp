@@ -136,18 +136,18 @@ BOOL CActionPage::OnInitDialog(void)
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_UPLOAD));
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_ZIP));
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_SEND));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_SERVER));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_SERVER));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_PORT));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_LOGIN));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_PASSWORD));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_ROOT));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_LOGIN));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_PASSWORD));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_ROOT));
 	tipWnd.AddTool(GetDlgItem(IDC_CHECK_PASSIVE));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FROM));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAILTO));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_SUBJECT));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_HOST));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_PORT));
-	tipWnd.AddTool(GetDlgItem(IDC_EDIT_BODY));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_FROM));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_TO));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_SUBJECT));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_SMTP_HOST));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_SMTP_PORT));
+	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_BODY));
 	tipWnd.Activate(TRUE);
 
 	// initialized
@@ -182,21 +182,21 @@ BOOL CActionPage::OnKillActive(void)
 	// adjust and validate FTP settings (if needed)
 	if (m_nUpload == BST_CHECKED)
 	{
-		if (m_strRoot.IsEmpty())
+		if (m_strFtpRoot.IsEmpty())
 		{
 			// assume root directory
-			m_strRoot += _T('/');
+			m_strFtpRoot += _T('/');
 		}
 		else {
-			m_strRoot.Replace(_T('\\'), _T('/'));
-			if (m_strRoot[0] != _T('/'))
+			m_strFtpRoot.Replace(_T('\\'), _T('/'));
+			if (m_strFtpRoot[0] != _T('/'))
 			{
-				m_strRoot.Insert(0, _T('/'));
+				m_strFtpRoot.Insert(0, _T('/'));
 			}
-			int cchRoot = m_strRoot.GetLength();
-			if (cchRoot > 1 && m_strRoot[cchRoot - 1] != _T('/'))
+			int cchRoot = m_strFtpRoot.GetLength();
+			if (cchRoot > 1 && m_strFtpRoot[cchRoot - 1] != _T('/'))
 			{
-				m_strRoot += _T('/');
+				m_strFtpRoot += _T('/');
 			}
 		}
 	}
@@ -216,11 +216,11 @@ BOOL CActionPage::OnKillActive(void)
 
 			if (m_nUpload == BST_CHECKED)
 			{
-				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_SERVER, m_strServer);
+				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_SERVER, m_strFtpServer);
 				pApp->WriteProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PORT, m_nFtpPort);
-				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_LOGIN, m_strLogin);
-				pApp->WriteProfilePassword(SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD, m_strPassword);
-				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_ROOT, m_strRoot);
+				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_LOGIN, m_strFtpLogin);
+				pApp->WriteProfilePassword(SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD, m_strFtpPassword);
+				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_ROOT, m_strFtpRoot);
 				pApp->WriteProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, m_fPassive);
 			}
 
@@ -231,15 +231,15 @@ BOOL CActionPage::OnKillActive(void)
 				pApp->WriteProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_SEND, m_nSend);
 				if (m_nSend == BST_CHECKED)
 				{
-					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM, m_strFrom);
-					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO, m_strTo);
-					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ, m_strSubject);
-					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST, m_strHost);
+					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_FROM, m_strMailFrom);
+					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO, m_strMailTo);
+					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ, m_strMailSubject);
+					pApp->WriteProfileString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST, m_strSmtpHost);
 					pApp->WriteProfileInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, m_nSmtpPort);
-					UINT cbBody = (m_strBody.GetLength() + 1) * sizeof(TCHAR);
-					BYTE* pbTemp = reinterpret_cast<BYTE*>(m_strBody.GetBuffer(0));
+					UINT cbBody = (m_strMailBody.GetLength() + 1) * sizeof(TCHAR);
+					BYTE* pbTemp = reinterpret_cast<BYTE*>(m_strMailBody.GetBuffer(0));
 					pApp->WriteProfileBinary(SZ_REGK_SMTP, SZ_REGV_SMTP_BODY, pbTemp, cbBody);
-					m_strBody.ReleaseBuffer();
+					m_strMailBody.ReleaseBuffer();
 				}
 			}
 		}
@@ -264,32 +264,32 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 	// FTP settings
 	if (m_nUpload == BST_CHECKED)
 	{
-		DDX_Text(pDX, IDC_EDIT_SERVER, m_strServer);
-		DDV_MinMaxChars(pDX, m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_FTP_SERVER, m_strFtpServer);
+		DDV_MinMaxChars(pDX, m_strFtpServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
 		DDXV_Word(pDX, IDC_EDIT_FTP_PORT, m_nFtpPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
-		DDX_Text(pDX, IDC_EDIT_LOGIN, m_strLogin);
-		DDV_MaxChars(pDX, m_strLogin, MAX_FTP_LOGIN_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_PASSWORD, m_strPassword);
-		DDV_MaxChars(pDX, m_strPassword, MAX_FTP_PASSWORD_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_ROOT, m_strRoot);
-		DDV_MaxChars(pDX, m_strRoot, _MAX_PATH);
+		DDX_Text(pDX, IDC_EDIT_FTP_LOGIN, m_strFtpLogin);
+		DDV_MaxChars(pDX, m_strFtpLogin, MAX_FTP_LOGIN_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_FTP_PASSWORD, m_strFtpPassword);
+		DDV_MaxChars(pDX, m_strFtpPassword, MAX_FTP_PASSWORD_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_FTP_ROOT, m_strFtpRoot);
+		DDV_MaxChars(pDX, m_strFtpRoot, _MAX_PATH);
 		DDX_Check(pDX, IDC_CHECK_PASSIVE, m_fPassive);
 	}
 
 	// SMTP settings
 	if (m_nSend == BST_CHECKED)
 	{
-		DDX_Text(pDX, IDC_EDIT_FROM, m_strFrom);
-		DDV_MinMaxChars(pDX, m_strFrom, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_MAILTO, m_strTo);
-		DDV_MinMaxChars(pDX, m_strTo, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_SUBJECT, m_strSubject);
-		DDV_MaxChars(pDX, m_strSubject, MAX_EMAIL_SUBJECT_LENGTH);
-		DDX_Text(pDX, IDC_EDIT_HOST, m_strHost);
-		DDV_MinMaxChars(pDX, m_strHost, MIN_SMTP_HOST_LENGTH, MAX_SMTP_HOST_LENGTH);
-		DDXV_Word(pDX, IDC_EDIT_PORT, m_nSmtpPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
-		DDX_Text(pDX, IDC_EDIT_BODY, m_strBody);
-		DDV_MaxChars(pDX, m_strBody, MAX_EMAIL_BODY_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_MAIL_FROM, m_strMailFrom);
+		DDV_MinMaxChars(pDX, m_strMailFrom, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_MAIL_TO, m_strMailTo);
+		DDV_MinMaxChars(pDX, m_strMailTo, MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_MAIL_SUBJECT, m_strMailSubject);
+		DDV_MaxChars(pDX, m_strMailSubject, MAX_EMAIL_SUBJECT_LENGTH);
+		DDX_Text(pDX, IDC_EDIT_SMTP_HOST, m_strSmtpHost);
+		DDV_MinMaxChars(pDX, m_strSmtpHost, MIN_SMTP_HOST_LENGTH, MAX_SMTP_HOST_LENGTH);
+		DDXV_Word(pDX, IDC_EDIT_SMTP_PORT, m_nSmtpPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
+		DDX_Text(pDX, IDC_EDIT_MAIL_BODY, m_strMailBody);
+		DDV_MaxChars(pDX, m_strMailBody, MAX_EMAIL_BODY_LENGTH);
 	}
 }
 
@@ -306,11 +306,11 @@ void CActionPage::OnCheckUpload(void)
 
 		// restore the most recently saved settings
 		InitFtpSettings(pApp);
-		SetDlgItemText(IDC_EDIT_SERVER, m_strServer);
+		SetDlgItemText(IDC_EDIT_FTP_SERVER, m_strFtpServer);
 		SetDlgItemInt(IDC_EDIT_FTP_PORT, m_nFtpPort);
-		SetDlgItemText(IDC_EDIT_LOGIN, m_strLogin);
-		SetDlgItemText(IDC_EDIT_PASSWORD, m_strPassword);
-		SetDlgItemText(IDC_EDIT_ROOT, m_strRoot);
+		SetDlgItemText(IDC_EDIT_FTP_LOGIN, m_strFtpLogin);
+		SetDlgItemText(IDC_EDIT_FTP_PASSWORD, m_strFtpPassword);
+		SetDlgItemText(IDC_EDIT_FTP_ROOT, m_strFtpRoot);
 		CheckDlgButton(IDC_CHECK_PASSIVE, m_fPassive);
 	}
 	EnableFtpControls(fEnable);
@@ -352,12 +352,12 @@ void CActionPage::OnCheckSend(void)
 
 		// restore the most recently saved settings
 		InitSmtpSettings(pApp);
-		SetDlgItemText(IDC_EDIT_FROM, m_strFrom);
-		SetDlgItemText(IDC_EDIT_MAILTO, m_strTo);
-		SetDlgItemText(IDC_EDIT_SUBJECT, m_strSubject);
-		SetDlgItemText(IDC_EDIT_HOST, m_strHost);
-		SetDlgItemInt(IDC_EDIT_PORT, m_nSmtpPort);
-		SetDlgItemText(IDC_EDIT_BODY, m_strBody);
+		SetDlgItemText(IDC_EDIT_MAIL_FROM, m_strMailFrom);
+		SetDlgItemText(IDC_EDIT_MAIL_TO, m_strMailTo);
+		SetDlgItemText(IDC_EDIT_MAIL_SUBJECT, m_strMailSubject);
+		SetDlgItemText(IDC_EDIT_SMTP_HOST, m_strSmtpHost);
+		SetDlgItemInt(IDC_EDIT_SMTP_PORT, m_nSmtpPort);
+		SetDlgItemText(IDC_EDIT_MAIL_BODY, m_strMailBody);
 	}
 	EnableMailControls(fEnable);
 }
@@ -428,7 +428,7 @@ void CActionPage::InitActionSettings(class CUpdateItApp* pApp)
 
 void CActionPage::InitFtpSettings(class CUpdateItApp* pApp)
 {
-	m_strServer = pApp->GetConfigString(SZ_ARG_FTP_SERVER, SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
+	m_strFtpServer = pApp->GetConfigString(SZ_ARG_FTP_SERVER, SZ_REGK_FTP, SZ_REGV_FTP_SERVER);
 
 	m_nFtpPort = LOWORD(pApp->GetConfigInt(SZ_ARG_FTP_PORT, SZ_REGK_FTP, SZ_REGV_FTP_PORT, INTERNET_DEFAULT_FTP_PORT));
 	if (m_nFtpPort == INTERNET_INVALID_PORT_NUMBER || m_nFtpPort > INTERNET_MAX_PORT_NUMBER_VALUE)
@@ -436,18 +436,18 @@ void CActionPage::InitFtpSettings(class CUpdateItApp* pApp)
 		m_nFtpPort = INTERNET_DEFAULT_FTP_PORT;
 	}
 
-	m_strLogin = pApp->GetConfigString(SZ_ARG_FTP_LOGIN, SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
-	m_strPassword = pApp->GetConfigPassword(SZ_ARG_FTP_PASSWORD, SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD);
-	m_strRoot = pApp->GetConfigString(SZ_ARG_FTP_ROOT, SZ_REGK_FTP, SZ_REGV_FTP_ROOT);
+	m_strFtpLogin = pApp->GetConfigString(SZ_ARG_FTP_LOGIN, SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
+	m_strFtpPassword = pApp->GetConfigPassword(SZ_ARG_FTP_PASSWORD, SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD);
+	m_strFtpRoot = pApp->GetConfigString(SZ_ARG_FTP_ROOT, SZ_REGK_FTP, SZ_REGV_FTP_ROOT);
 	m_fPassive = pApp->GetConfigCheck(SZ_ARG_FTP_PASSIVE, SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, BST_UNCHECKED);
 }
 
 void CActionPage::InitSmtpSettings(class CUpdateItApp* pApp)
 {
-	m_strFrom = pApp->GetConfigString(SZ_ARG_SMTP_FROM, SZ_REGK_SMTP, SZ_REGV_SMTP_FROM);
-	m_strTo = pApp->GetConfigString(SZ_ARG_SMTP_MAILTO, SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO);
-	m_strSubject = pApp->GetConfigString(SZ_ARG_SMTP_SUBJ, SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ);
-	m_strHost = pApp->GetConfigString(SZ_ARG_SMTP_HOST, SZ_REGK_SMTP, SZ_REGV_SMTP_HOST);
+	m_strMailFrom = pApp->GetConfigString(SZ_ARG_SMTP_FROM, SZ_REGK_SMTP, SZ_REGV_SMTP_FROM);
+	m_strMailTo = pApp->GetConfigString(SZ_ARG_SMTP_MAILTO, SZ_REGK_SMTP, SZ_REGV_SMTP_MAILTO);
+	m_strMailSubject = pApp->GetConfigString(SZ_ARG_SMTP_SUBJ, SZ_REGK_SMTP, SZ_REGV_SMTP_SUBJ);
+	m_strSmtpHost = pApp->GetConfigString(SZ_ARG_SMTP_HOST, SZ_REGK_SMTP, SZ_REGV_SMTP_HOST);
 
 	m_nSmtpPort = LOWORD(pApp->GetConfigInt(SZ_ARG_SMTP_PORT, SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, IPPORT_SMTP));
 	if (m_nSmtpPort == INTERNET_INVALID_PORT_NUMBER || m_nSmtpPort > INTERNET_MAX_PORT_NUMBER_VALUE)
@@ -460,8 +460,8 @@ void CActionPage::InitSmtpSettings(class CUpdateItApp* pApp)
 	pApp->GetProfileBinary(SZ_REGK_SMTP, SZ_REGV_SMTP_BODY, &pbTemp, &cbBody);
 	if (pbTemp != NULL && cbBody > 0)
 	{
-		memmove(m_strBody.GetBuffer(cbBody - 1), pbTemp, cbBody);
-		m_strBody.ReleaseBuffer();
+		memmove(m_strMailBody.GetBuffer(cbBody - 1), pbTemp, cbBody);
+		m_strMailBody.ReleaseBuffer();
 		delete[] pbTemp;
 	}
 }
@@ -536,19 +536,20 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_nZip = " << m_nZip;
 		dumpCtx << "\nm_fCanSend = " << m_fCanSend;
 		dumpCtx << "\nm_nSend = " << m_nSend;
-		dumpCtx << "\nm_strServer = " << m_strServer;
+		dumpCtx << "\nm_strFtpServer = " << m_strFtpServer;
 		dumpCtx << "\nm_nFtpPort = " << m_nFtpPort;
-		dumpCtx << "\nm_strLogin = " << m_strLogin;
-		dumpCtx << "\nm_strPassword = " << m_strPassword;
-		dumpCtx << "\nm_strRoot = " << m_strRoot;
+		dumpCtx << "\nm_strFtpLogin = " << m_strFtpLogin;
+		dumpCtx << "\nm_strFtpPassword = " << m_strFtpPassword;
+		dumpCtx << "\nm_strFtpRoot = " << m_strFtpRoot;
 		dumpCtx << "\nm_fPassive = " << m_fPassive;
-		dumpCtx << "\nm_strFrom = " << m_strFrom;
-		dumpCtx << "\nm_strTo = " << m_strTo;
-		dumpCtx << "\nm_strSubject = " << m_strSubject;
-		dumpCtx << "\nm_strHost = " << m_strHost;
+		dumpCtx << "\nm_strMailFrom = " << m_strMailFrom;
+		dumpCtx << "\nm_strMailTo = " << m_strMailTo;
+		dumpCtx << "\nm_strMailSubject = " << m_strMailSubject;
+		dumpCtx << "\nm_strSmtpHost = " << m_strSmtpHost;
 		dumpCtx << "\nm_nSmtpPort = " << m_nSmtpPort;
-		dumpCtx << "\nm_strBody = " << m_strBody;
+		dumpCtx << "\nm_strMailBody = " << m_strMailBody;
 		dumpCtx << "\nm_dlgAuth = " << m_dlgAuth;
+		dumpCtx << "\nm_dlgZipOpts = " << m_dlgZipOpts;
 	}
 	catch (CFileException* pXcpt)
 	{
