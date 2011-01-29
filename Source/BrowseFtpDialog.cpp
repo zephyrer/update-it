@@ -59,7 +59,9 @@ END_MESSAGE_MAP()
 // construction/destruction
 
 CBrowseFtpDialog::CBrowseFtpDialog(CWnd* pParentWnd):
-CCustomDialog(IDD_BROWSE_FTP, pParentWnd)
+CCustomDialog(IDD_BROWSE_FTP, pParentWnd),
+m_nPort(INTERNET_DEFAULT_FTP_PORT),
+m_fPassive(FALSE)
 {
 }
 
@@ -106,6 +108,12 @@ void CBrowseFtpDialog::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
+		dumpCtx << "m_strServer = " << m_strServer;
+		dumpCtx << "\nm_nPort = " << m_nPort;
+		dumpCtx << "\nm_strLogin = " << m_strLogin;
+		dumpCtx << "\nm_strPassword = " << m_strPassword;
+		dumpCtx << "\nm_strRoot = " << m_strRoot;
+		dumpCtx << "\nm_fPassive = " << m_fPassive;
 	}
 	catch (CFileException* pXcpt)
 	{
