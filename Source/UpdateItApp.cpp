@@ -162,7 +162,8 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 			winCrypto.DecryptString(arrEncrPwd, &bstrDecrPwd);
 			strResult = _W2T(bstrDecrPwd);
 		}
-		else {
+		else
+		{
 			// wasn't saved - use default value
 			strResult = pszDefault;
 		}
@@ -243,7 +244,8 @@ CString CUpdateItApp::GetConfigString(LPCTSTR pszArgName, LPCTSTR pszSection, LP
 	{
 		return (GetProfileString(pszSection, pszEntry, pszDefault));
 	}
-	else {
+	else
+	{
 		return (m_argsParser.GetStringValue(pszArgName));
 	}
 }
@@ -295,7 +297,8 @@ int CUpdateItApp::GetConfigCheck(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 	{
 		nCheck = GetProfileInt(pszSection, pszEntry, nDefault);
 	}
-	else {
+	else
+	{
 		nCheck = BST_CHECKED;
 	}
 	if (nCheck != BST_UNCHECKED && nCheck != BST_CHECKED)
@@ -317,7 +320,8 @@ CString CUpdateItApp::GetConfigPassword(LPCTSTR pszArgName, LPCTSTR pszSection, 
 	{
 		return (GetProfilePassword(pszSection, pszEntry, pszDefault));
 	}
-	else {
+	else
+	{
 		return (m_argsParser.GetStringValue(pszArgName));
 	}
 }
@@ -333,7 +337,8 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 	{
 		return (GetProfileInt(pszSection, pszEntry, fDefault));
 	}
-	else {
+	else
+	{
 		return (TRUE);
 	}
 }
@@ -440,7 +445,8 @@ void CUpdateItApp::GetAbsolutePath(LPTSTR pszDest, LPCTSTR pszRelativePath)
 		}
 		::PathCombine(pszDest, szOurDir, pszRelativePath);
 	}
-	else {
+	else
+	{
 		_tcscpy(pszDest, pszRelativePath);
 	}
 }
@@ -528,7 +534,8 @@ bool CUpdateItApp::GetLanguagePath(LPTSTR pszDest)
 #endif   // _DEBUG
 		return (true);
 	}
-	else {
+	else
+	{
 		return (false);
 	}
 }
@@ -553,7 +560,8 @@ bool CUpdateItApp::GetAfxLanguagePath(LPTSTR pszDest)
 #endif   // _DEBUG
 		return (true);
 	}
-	else {
+	else
+	{
 		return (false);
 	}
 }
@@ -585,7 +593,8 @@ bool CUpdateItApp::SetCurrentLanguage(void)
 			fSuccess = true;
 		}
 	}
-	else {
+	else
+	{
 		strLangPath.ReleaseBuffer();
 	}
 
@@ -669,7 +678,8 @@ bool CUpdateItApp::ParseResponseFile(void)
 					pErr->Delete();
 				}
 			}
-			else {
+			else
+			{
 				err.ReportError(MB_ICONSTOP | MB_OK);
 			}
 		}
@@ -699,7 +709,8 @@ HMODULE WINAPI CUpdateItApp::LoadLibrary(LPCTSTR pszFileName)
 		::SetLastError(ERROR_FILE_NOT_FOUND);
 		return (NULL);
 	}
-	else {
+	else
+	{
 		return (m_pfnLoadLibrary(pszFileName));
 	}
 }
@@ -720,7 +731,8 @@ HMODULE WINAPI CUpdateItApp::LoadLibraryEx(LPCTSTR pszFileName, HANDLE hFile, DW
 		::SetLastError(ERROR_FILE_NOT_FOUND);
 		return (NULL);
 	}
-	else {
+	else
+	{
 		return (m_pfnLoadLibraryEx(pszFileName, hFile, fdwFlags));
 	}
 }

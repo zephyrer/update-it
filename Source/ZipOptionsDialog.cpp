@@ -189,7 +189,8 @@ void CZipOptionsDialog::UpdateControls(void)
 		m_editPassword.EnableWindow(TRUE);
 		pButtonOK->EnableWindow(m_editPassword.GetWindowTextLength() > 0);
 	}
-	else {
+	else
+	{
 		m_textPassword.EnableWindow(FALSE);
 		m_editPassword.EnableWindow(FALSE);
 		pButtonOK->EnableWindow(TRUE);

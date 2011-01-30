@@ -118,7 +118,8 @@ m_fCompare(BST_UNCHECKED)
 	{
 		m_nRecycle = pApp->GetConfigCheck(SZ_ARG_OPTIONS_RECYCLE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_RECYCLE, BST_CHECKED);
 	}
-	else {
+	else
+	{
 		m_nRecycle = BST_UNCHECKED;
 	}
 
@@ -336,7 +337,8 @@ void COptionsPage::OnCheckCleanup(void)
 	{
 		pCheckRecycle->EnableWindow();
 	}
-	else {
+	else
+	{
 		CheckDlgButton(IDC_CHECK_RECYCLE, BST_UNCHECKED);
 		pCheckRecycle->EnableWindow(FALSE);
 	}

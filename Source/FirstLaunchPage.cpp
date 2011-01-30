@@ -161,8 +161,6 @@ BOOL CFirstLaunchPage::OnKillActive(void)
 		{
 			iniSettings.WriteString(SZ_REGK_SMTP, SZ_REGV_SMTP_HOST, m_strSmtpServer);
 		}
-		else {
-		}
 
 		iniSettings.WriteInt(SZ_REGK_SMTP, SZ_REGV_SMTP_PORT, m_nSmtpPort);
 	}

@@ -343,7 +343,8 @@ void CProgressPageBase::CreateSubFolder(LPCTSTR pszRoot, LPCTSTR pszFolder)
 			}
 			while ((pszSub = _tcstok(NULL, _T("\\"))) != NULL);
 		}
-		else {
+		else
+		{
 			strPath += pszFolder;
 			::CreateDirectory(strPath, NULL);
 		}
@@ -375,7 +376,8 @@ void CProgressPageBase::EraseFolder(LPCTSTR pszFolder, BOOL fCanUndo)
 				EraseFolder(strPath, fCanUndo);
 				::RemoveDirectory(strPath);
 			}
-			else {
+			else
+			{
 				DeleteFile(strPath, fCanUndo);
 			}
 			PumpWaitingMessages();
@@ -602,7 +604,8 @@ void CProgressPageBase::CreateFtpFolder(CFtpConnection* pFtpConn, LPCTSTR pszFol
 		{
 			break;
 		}
-		else {
+		else
+		{
 			ftpFinder.FindNextFile();
 			if (!ftpFinder.IsDirectory())
 			{

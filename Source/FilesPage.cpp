@@ -210,7 +210,8 @@ void CFilesPage::OnBecameActive(void)
 			m_buttonRemove.EnableWindow();
 			m_listFiles.SetFocus();
 		}
-		else {
+		else
+		{
 			pWiz->SetWizardButtons(PSWIZB_BACK);
 			strInfo.LoadString(IDS_NO_FILES);
 			m_listFiles.EnableWindow(FALSE);
@@ -286,7 +287,8 @@ void CFilesPage::OnButtonRemove(void)
 		}
 		dwFocusData = m_listFiles.GetItemData(iFocus);
 	}
-	else {
+	else
+	{
 		// due to avoid C4701 warning
 		dwFocusData = NULL;
 	}
@@ -316,7 +318,8 @@ void CFilesPage::OnButtonRemove(void)
 		m_listFiles.SetFocus();
 		strInfo.Format(IDS_SELECTED_FORMAT, cItems);
 	}
-	else {
+	else
+	{
 		// no more items
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
@@ -403,7 +406,8 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 							::DestroyIcon(shfi.hIcon);
 							m_mapIcons.SetAt(strExt, lvi.iImage);
 						}
-						else {
+						else
+						{
 							lvi.iImage = m_iDefIcon;
 						}
 					}
@@ -418,7 +422,8 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 						_tcscpy(pData->szName, strNameExt.Left(iLastDot));
 						_tcscpy(pData->szExt, strNameExt.Mid(iLastDot + 1));
 					}
-					else {
+					else
+					{
 						_tcscpy(pData->szName, strNameExt);
 						memset(pData->szExt, 0, sizeof(pData->szExt));
 					}
@@ -453,12 +458,14 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 						delete pData;
 						AfxMessageBox(IDS_TOTAL_SIZE_OVERFLOW, MB_ICONWARNING | MB_OK);
 					}
-					else {
+					else
+					{
 						m_cbFiles += pData->cbLength;
 						// insert an item
 						lvi.lParam = reinterpret_cast<LPARAM>(pData);
 						VERIFY(m_listFiles.InsertItem(&lvi) == lvi.iItem);
-						for (int i = CFilesList::I_EXTENSION; i < CFilesList::NUM_COLUMNS; ++i) {
+						for (int i = CFilesList::I_EXTENSION; i < CFilesList::NUM_COLUMNS; ++i)
+						{
 							m_listFiles.SetItemText(lvi.iItem, i, LPSTR_TEXTCALLBACK);
 						}
 						++lvi.iItem;
@@ -528,7 +535,8 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 					// don't need to really compare contents
 					fResult = FALSE;
 				}
-				else {
+				else
+				{
 					fResult = memcmp(pvPrevData, pvNewData, mmfPrev.GetLength()) == 0;
 				}
 				mmfNew.Close();
@@ -541,12 +549,14 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 				fResult = FALSE;
 			}
 		}
-		else {
+		else
+		{
 			// no previous verison
 			fResult = FALSE;
 		}
 	}
-	else {
+	else
+	{
 		// assume that files aren't equal
 		fResult = FALSE;
 	}

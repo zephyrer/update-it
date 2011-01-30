@@ -189,7 +189,8 @@ BOOL CActionPage::OnKillActive(void)
 			// assume root directory
 			m_strFtpRoot += _T('/');
 		}
-		else {
+		else
+		{
 			m_strFtpRoot.Replace(_T('\\'), _T('/'));
 			if (m_strFtpRoot[0] != _T('/'))
 			{
@@ -332,7 +333,8 @@ void CActionPage::OnCheckZip(void)
 			pCheckSend->EnableWindow();
 			pButtonZipOptions->EnableWindow();
 		}
-		else {
+		else
+		{
 			if (IsDlgButtonChecked(IDC_CHECK_SEND) != BST_UNCHECKED)
 			{
 				CheckDlgButton(IDC_CHECK_SEND, BST_UNCHECKED);
@@ -471,7 +473,8 @@ void CActionPage::InitActionSettings(class CUpdateItApp* pApp)
 	{
 		m_nSend = pApp->GetConfigCheck(SZ_ARG_ACTION_SEND, SZ_REGK_ACTION, SZ_REGV_ACTION_SEND, BST_UNCHECKED);
 	}
-	else {
+	else
+	{
 		m_nSend = BST_UNCHECKED;
 	}
 }

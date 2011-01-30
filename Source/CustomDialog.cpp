@@ -142,7 +142,8 @@ INT_PTR CCustomDialog::DoModal(void)
 
 		return (nResult);
 	}
-	else {
+	else
+	{
 		// no custom font is specified
 		return (__super::DoModal());
 	}
@@ -156,7 +157,8 @@ BOOL CCustomDialog::OnInitDialog(void)
 	{
 		bDlgInit = ExecuteDlgInit(m_lpDialogInit);
 	}
-	else {
+	else
+	{
 		bDlgInit = ExecuteDlgInit(m_lpszDlgInitName);
 	}
 

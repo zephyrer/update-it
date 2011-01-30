@@ -184,7 +184,8 @@ void CAuthenticationDialog::UpdateControls(void)
 		bool fHasPassword = m_editPassword.GetWindowTextLength() > 0;
 		GetDlgItem(IDOK)->EnableWindow(fHasUserName && fHasPassword);
 	}
-	else {
+	else
+	{
 		m_textUserNamePrompt.EnableWindow(FALSE);
 		m_editUserName.SetWindowText(NULL);
 		m_editUserName.EnableWindow(FALSE);

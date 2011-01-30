@@ -824,7 +824,8 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, LPCTSTR
 			// suppress the standard crash dialog
 			return (EXCEPTION_EXECUTE_HANDLER);
 		}
-		else {
+		else
+		{
 			// XCrashReport.exe was not started - let
 			// the standard crash dialog appear
 			return (EXCEPTION_CONTINUE_SEARCH);
