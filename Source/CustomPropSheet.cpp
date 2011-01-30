@@ -42,7 +42,7 @@
 #pragma warning(disable: 383)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -51,7 +51,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 #define _BUGFIX_
 
@@ -114,7 +114,7 @@ BOOL CCustomPropSheet::OnInitDialog(void)
 		ChangeDialogFont(pPage, &m_fontPage, CDF_CENTER);
 #else
 		ChangeDialogFont(pPage, &m_fontPage, CDF_TOPLEFT);
-#endif	// _BUGFIX_
+#endif   // _BUGFIX_
 	}
 
 	// set and save the size of the page
@@ -139,7 +139,7 @@ BOOL CCustomPropSheet::OnInitDialog(void)
 		pDivider->GetWindowRect(rectDivider);
 		ScreenToClient(rectDivider);
 		m_rcPage.bottom = rectDivider.top - 2;
-#endif	// _BUGFIX_
+#endif   // _BUGFIX_
 	}
 	else {
 		pTab->GetWindowRect(&m_rcPage);
@@ -273,7 +273,7 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 		else {
 			pWnd->MoveWindow(rectNewWindow);
 		}
-#endif	// _BUGFIX_
+#endif   // _BUGFIX_
 	}
 
 	pWnd->SetFont(pFont);
@@ -472,13 +472,13 @@ void CCustomPropSheet::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "m_rcPage = " << m_rcPage;
 		dumpCtx << "\nm_fontPage = " << m_fontPage;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

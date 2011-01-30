@@ -877,10 +877,10 @@ void CMainDialog::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_nFilesInZip = " << m_nFilesInZip;
 		dumpCtx << "\nm_bOverIcon = " << m_bOverIcon;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 

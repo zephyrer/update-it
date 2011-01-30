@@ -47,7 +47,7 @@
 #include "MainWizard.h"
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 #include "../Common/Registry.h"
 #include "Arguments.h"
 
@@ -65,7 +65,7 @@
 #pragma warning(disable: 797)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -74,7 +74,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // private helpers
@@ -83,11 +83,11 @@ static char THIS_FILE[] = __FILE__;
 
 #if defined(min)
 #undef min
-#endif	// min
+#endif   // min
 
 #if defined(max)
 #undef max
-#endif	// max
+#endif   // max
 
 inline DWORD LODWORD(ULONGLONG qwSrc)
 {
@@ -104,7 +104,7 @@ inline ULONGLONG MAKEQWORD(DWORD dwLow, DWORD dwHigh)
 	return ((static_cast<ULONGLONG>(dwHigh) << 32) | dwLow);
 }
 
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -197,7 +197,7 @@ void CProgressPageBase::OnBecameActive(void)
 #else
 	int nLower = std::min<long>(0L, INT_MAX - LODWORD(pFilesPage->m_cbFiles));
 	int nUpper = nLower + LODWORD(pFilesPage->m_cbFiles);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	m_progressTotal.SetRange32(nLower, nUpper);
 	m_progressTotal.SetPos(nLower);
 	CListCtrl& listFiles = pFilesPage->m_listFiles;
@@ -287,7 +287,7 @@ void CProgressPageBase::OnBecameActive(void)
 		pApp->WriteProfileTime(SZ_REGK_TIMES, pOptionsPage->m_strSource, timeNow.GetTime());
 		pApp->WriteProfileString(SZ_REGK_TARGETS, pOptionsPage->m_strSource, pOptionsPage->m_strTarget);
 	}
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 	// setup the buttons
 	pWiz->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
@@ -510,7 +510,7 @@ void CProgressPageBase::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CL
 #else
 		int nLower = std::min<long>(0L, INT_MAX - LODWORD(pData->cbLength));
 		int nUpper = nLower + LODWORD(pData->cbLength);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 		m_progressFile.SetRange32(nLower, nUpper);
 		m_progressFile.SetPos(nLower);
 
@@ -527,7 +527,7 @@ void CProgressPageBase::CopyFiles(LPCTSTR pszSource, LPCTSTR pszTarget, const CL
 #else
 		struct __utimbuf64 utmb = { CTime::GetCurrentTime().GetTime(), pData->timeWrite.GetTime() };
 		_tutime64(strTargPath, &utmb);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	}
 }
 
@@ -764,7 +764,7 @@ void CProgressPageBase::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFile
 #else
 			int nLower = std::min<long>(0L, INT_MAX - LODWORD(pData->cbLength));
 			int nUpper = nLower + LODWORD(pData->cbLength);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 			m_progressFile.SetRange32(nLower, nUpper);
 			m_progressFile.SetPos(nLower);
 
@@ -836,13 +836,13 @@ void CProgressPageBase::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_textTotal = " << m_textTotal;
 		dumpCtx << "\nm_progressTotal = " << m_progressTotal;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

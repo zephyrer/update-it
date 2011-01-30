@@ -42,7 +42,7 @@
 #pragma warning(disable: 279)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -51,7 +51,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -109,7 +109,7 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 {
 #if (_MFC_VER >= 0x0700)
 	__int64 nDelta;
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 	FILE_DATA* pDataLhs = reinterpret_cast<FILE_DATA*>(GetItemData(iItemLhs));
 	ASSERT(pDataLhs != NULL);
@@ -130,7 +130,7 @@ int CFilesList::CompareItems(int iItemLhs, int iItemRhs)
 #else
 		nDelta = pDataLhs->cbLength - pDataRhs->cbLength;
 		return (nDelta != 0 ? static_cast<int>(nDelta / _abs64(nDelta)) * m_nSortOrder : 0);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	case I_DATE:
 	case I_TIME:
 		if (pDataLhs->timeWrite < pDataRhs->timeWrite)
@@ -186,7 +186,7 @@ void CFilesList::OnGetDispInfo(NMHDR* pHdr, LRESULT* /*pnResult*/)
 			_ultot(pData->cbLength, strSize.GetBuffer(32), 10);
 #else
 			_ui64tot(pData->cbLength, strSize.GetBuffer(64), 10);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 			strSize.ReleaseBuffer();
 			SeparateThousands(strSize);
 			_tcsncpy(lvi.pszText, strSize, lvi.cchTextMax);
@@ -246,13 +246,13 @@ void CFilesList::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

@@ -54,7 +54,7 @@
 #if defined(__INTEL_COMPILER)
 // remark #171: invalid type conversion
 #pragma warning(disable: 171)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -63,7 +63,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -309,7 +309,7 @@ void CMainWizard::OnScExportSettings(void)
 	CFileDialogEx dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
 #else
 	CFileDialog dlgSaveAs(FALSE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	strTitle.LoadString(IDS_TITLE_EXPORT);
 	dlgSaveAs.m_ofn.lpstrTitle = strTitle;
 	if (dlgSaveAs.DoModal() == IDOK)
@@ -338,7 +338,7 @@ void CMainWizard::OnScImportSettings(void)
 	CFileDialogEx dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
 #else
 	CFileDialog dlgOpen(TRUE, _T("hive"), AfxGetAppName(), fdwFlags, strFilter);
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	strTitle.LoadString(IDS_TITLE_IMPORT);
 	dlgOpen.m_ofn.lpstrTitle = strTitle;
 	if (dlgOpen.DoModal() == IDOK)
@@ -472,13 +472,13 @@ void CMainWizard::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_pageAction = " << m_pageAction;
 		dumpCtx << "\nm_pageProgress = " << m_pageProgress;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

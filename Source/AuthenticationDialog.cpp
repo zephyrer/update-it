@@ -56,7 +56,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -235,13 +235,13 @@ void CAuthenticationDialog::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_strPassword = " << m_strPassword;
 		dumpCtx << "\nm_fUseSSL = " << m_fUseSSL;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

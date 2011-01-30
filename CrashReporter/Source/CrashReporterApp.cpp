@@ -389,10 +389,10 @@ void CCrashReporterApp::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_strUpdateItExe = " << m_strUpdateItExe;
 		dumpCtx << "\nm_strAppDataPath = " << m_strAppDataPath;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 

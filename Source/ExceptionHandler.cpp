@@ -148,7 +148,7 @@ static void DumpMiniDump(HANDLE hFile, PEXCEPTION_POINTERS excpInfo)
 	}
 }
 
-#endif	// XCRASHREPORT_WRITE_MINIDUMP
+#endif   // XCRASHREPORT_WRITE_MINIDUMP
 
 ///////////////////////////////////////////////////////////////////////////////
 // FormatTime
@@ -773,7 +773,7 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, LPCTSTR
 		CloseHandle(hMiniDumpFile);
 	}
 
-#endif	// XCRASHREPORT_WRITE_MINIDUMP
+#endif   // XCRASHREPORT_WRITE_MINIDUMP
 
 	if (IsDebuggerPresent())
 	{
