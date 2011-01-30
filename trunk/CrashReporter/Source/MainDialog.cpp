@@ -205,7 +205,8 @@ BOOL CMainDialog::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 		::SetCursor(m_hLinkCursor);
 		return TRUE;
 	}
-	else {
+	else
+	{
 		return __super::OnSetCursor(pWnd, nHitTest, message);
 	}
 }

@@ -192,7 +192,8 @@ void CCrashReporterApp::GetAbsolutePath(LPTSTR pszDest, LPCTSTR pszRelativePath)
 		}
 		::PathCombine(pszDest, szOurDir, pszRelativePath);
 	}
-	else {
+	else
+	{
 		_tcscpy(pszDest, pszRelativePath);
 	}
 }
@@ -276,7 +277,8 @@ bool CCrashReporterApp::GetLanguagePath(LPTSTR pszDest)
 #endif   // _DEBUG
 		return (true);
 	}
-	else {
+	else
+	{
 		return (false);
 	}
 }
@@ -301,7 +303,8 @@ bool CCrashReporterApp::GetAfxLanguagePath(LPTSTR pszDest)
 #endif   // _DEBUG
 		return (true);
 	}
-	else {
+	else
+	{
 		return (false);
 	}
 }
@@ -333,7 +336,8 @@ bool CCrashReporterApp::SetCurrentLanguage(void)
 			fSuccess = true;
 		}
 	}
-	else {
+	else
+	{
 		strLangPath.ReleaseBuffer();
 	}
 

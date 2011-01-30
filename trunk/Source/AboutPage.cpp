@@ -181,7 +181,8 @@ LRESULT CAboutPage::OnWizardNext(void)
 		regKeyApp.SetDWORDValue(SZ_REGV_FIRST_LAUNCH, FALSE);
 		return (__super::OnWizardNext());
 	}
-	else {
+	else
+	{
 		return (IDD_PAGE_OPTIONS);
 	}
 }

@@ -141,7 +141,8 @@ BOOL CCustomPropSheet::OnInitDialog(void)
 		m_rcPage.bottom = rectDivider.top - 2;
 #endif   // _BUGFIX_
 	}
-	else {
+	else
+	{
 		pTab->GetWindowRect(&m_rcPage);
 		ScreenToClient(&m_rcPage);
 		pTab->AdjustRect(FALSE, &m_rcPage);
@@ -270,7 +271,8 @@ void CCustomPropSheet::ChangeDialogFont(CWnd* pWnd, CFont* pFont, int nFlag)
 				m_fIsFirstChangeFont = false;
 			}
 		}
-		else {
+		else
+		{
 			pWnd->MoveWindow(rectNewWindow);
 		}
 #endif   // _BUGFIX_
@@ -388,7 +390,8 @@ bool CCustomPropSheet::GetFontSubstitute(LPCTSTR pszRegvName, CString& strDest)
 		strDest = szMsShellDlg;
 		return (true);
 	}
-	else {
+	else
+	{
 		return (false);
 	}
 }

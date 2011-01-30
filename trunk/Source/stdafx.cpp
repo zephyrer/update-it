@@ -56,7 +56,8 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 		strPrompt.Empty();
 		pDX->Fail();
 	}
-	else {
+	else
+	{
 		DDV_MaxChars(pDX, strValue, cMaxChars);
 	}
 }
