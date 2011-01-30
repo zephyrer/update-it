@@ -206,12 +206,14 @@ void CBrowseFtpDialog::SearchForFolders(CFtpConnection* pFtpConn, LPCTSTR pszRoo
 	while (fContinue)
 	{
 		fContinue = ftpFinder.FindNextFile();
-		if (ftpFinder.IsDirectory())
+		if (ftpFinder.IsDirectory() && !ftpFinder.IsDots())
 		{
-			TRACE(_T("FTP: %s"), static_cast<LPCTSTR>(ftpFinder.GetFilePath()));
+			TRACE(_T("FTP: %s\n"), static_cast<LPCTSTR>(ftpFinder.GetFilePath()));
 			SearchForFolders(pFtpConn, ftpFinder.GetFilePath());
 		}
 	}
+
+	ftpFinder.Close();
 }
 
 UINT AFX_CDECL CBrowseFtpDialog::FoldersFinder(void* pvParam)
@@ -230,9 +232,12 @@ UINT AFX_CDECL CBrowseFtpDialog::FoldersFinder(void* pvParam)
 		GetWindowProp(hThisDlg, SZ_PROP_PASSWORD, strPassword);
 		INTERNET_PORT nPort = LOWORD(GetWindowProp(hThisDlg, SZ_PROP_PORT));
 		BOOL fPassive = GetWindowProp(hThisDlg, SZ_PROP_PASSIVE);
-		
-		/*pFtpConn = ftpSession.GetFtpConnection(strServer, strLogin, strPassword, nPort, fPassive);*/
-		pFtpConn = ftpSession.GetFtpConnection(_T("ftp.freebsd.org"), NULL, NULL, nPort, fPassive);
+
+#if defined(_DEBUG)
+		pFtpConn = ftpSession.GetFtpConnection(_T("ftp.gnu.org"), NULL, NULL, nPort, fPassive);
+#else
+		pFtpConn = ftpSession.GetFtpConnection(strServer, strLogin, strPassword, nPort, fPassive);
+#endif   // _DEBUG
 		ASSERT(pFtpConn != NULL);
 		
 		SearchForFolders(pFtpConn, _T(""));
