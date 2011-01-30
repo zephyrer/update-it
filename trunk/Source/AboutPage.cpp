@@ -54,7 +54,7 @@
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant
 #pragma warning(disable: 279)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // misc defines
@@ -68,7 +68,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -299,13 +299,13 @@ void CAboutPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_linkNaughter = " << m_linkNaughter;
 		dumpCtx << "\nm_linkOpenSSL = " << m_linkOpenSSL;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

@@ -19,14 +19,14 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // linker options
 
 #if defined(_MSC_VER) && (_MSC_VER < 1300)
 #pragma comment(linker, "/ignore:4089")		// all references to DLL discarded by /opt:ref
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // manifest dependencies

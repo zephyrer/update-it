@@ -62,7 +62,7 @@
 #pragma warning(disable: 279)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -71,7 +71,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -168,11 +168,11 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 		}
 		EndWaitCursor();
 	}
-	catch (CWin32Error* pXcpt)
+	catch (CWin32Error* pErr)
 	{
 		EndWaitCursor();
-		pXcpt->ReportError(MB_ICONSTOP | MB_OK);
-		pXcpt->Delete();
+		pErr->ReportError(MB_ICONSTOP | MB_OK);
+		pErr->Delete();
 		strResult.Empty();
 	}
 	return (strResult);
@@ -199,11 +199,11 @@ BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LP
 		EndWaitCursor();
 		fSuccess = TRUE;
 	}
-	catch (CWin32Error* pXcpt)
+	catch (CWin32Error* pErr)
 	{
 		EndWaitCursor();
-		pXcpt->ReportError(MB_ICONSTOP | MB_OK);
-		pXcpt->Delete();
+		pErr->ReportError(MB_ICONSTOP | MB_OK);
+		pErr->Delete();
 		fSuccess = FALSE;
 	}
 	return (fSuccess);
@@ -230,7 +230,7 @@ BOOL CUpdateItApp::WriteProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time
 	return (WriteProfileBinary(pszSection, pszEntry, reinterpret_cast<BYTE*>(&timeValue), sizeof(timeValue)));
 }
 
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 CString CUpdateItApp::GetConfigString(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
 {
@@ -792,14 +792,14 @@ void CUpdateItApp::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_argsParser = " << m_argsParser;
 		dumpCtx << "\nm_hMutexAppInst = " << m_hMutexAppInst;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // the one and only application object

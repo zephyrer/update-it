@@ -47,7 +47,7 @@
 #include "MainWizard.h"
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 #include "../Common/Registry.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@
 #pragma warning(disable: 797)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -73,7 +73,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -209,13 +209,13 @@ void CProgressPage::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

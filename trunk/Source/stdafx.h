@@ -79,7 +79,7 @@ __declspec(selectany) int _forceMFCManifestCUR;
 
 #if (_MSC_VER >= 1300)
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 #include <afxwin.h>        // MFC core and standard components
 #include <afxdlgs.h>       // MFC standard dialogs
@@ -124,11 +124,11 @@ __declspec(selectany) int _forceMFCManifestCUR;
 
 #if !defined(min)
 using std::min;
-#endif	// min
+#endif   // min
 
 #if !defined(max)
 using std::max;
-#endif	// max
+#endif   // max
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // CRT headers

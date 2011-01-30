@@ -42,7 +42,7 @@ extern "C" __int64 __cdecl _abs64(__int64 num)
 	return (num < 0 ? -num : num);
 }
 
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars, int cMaxChars)
 {
@@ -88,14 +88,14 @@ void DDV_MinMaxChars(CDataExchange* pDX, CString const& strValue, int cMinChars,
 #pragma comment(linker, "/subsystem:windows,4.10")
 // all references to DLL discarded by /opt:ref
 #pragma comment(linker, "/ignore:4089")
-#endif	// _MSC_VER
+#endif   // _MSC_VER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // entry-point symbol for the Unicode builds
 
 #if defined(UNICODE) || defined(_UNICODE)
 #pragma comment(linker, "/entry:wWinMainCRTStartup")
-#endif	// UNICODE
+#endif   // UNICODE
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // manifest dependencies

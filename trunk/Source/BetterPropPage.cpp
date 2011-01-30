@@ -34,7 +34,7 @@
 #pragma warning(disable: 171)
 // remark #279: controlling expression is constant
 #pragma warning(disable: 279)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // misc defines
@@ -48,7 +48,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -90,7 +90,7 @@ BOOL CBetterPropPage::OnSetActive(void)
 	BOOL fSuccess = __super::OnSetActive();
 	if (fSuccess)
 	{
-		AfxBeginThread(ActivationWatcher, m_hWnd);
+		AfxBeginThread(&ActivationWatcher, GetSafeHwnd());
 	}
 	return (fSuccess);
 }
@@ -171,7 +171,7 @@ void CBetterPropPage::OnGetTipText(UINT /*uID*/, NMHDR* pHdr, LRESULT* pnResult)
 	*pnResult = 0;
 }
 
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 // accessibility
 
@@ -203,7 +203,7 @@ void CBetterPropPage::PumpWaitingMessages(void)
 		AfxGetThread()->PumpMessage();
 #else
 		AfxPumpMessage();
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	}
 }
 
@@ -241,13 +241,13 @@ void CBetterPropPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "m_tipWnd = " << m_tipWnd;
 		dumpCtx << "\nm_szTipText = " << m_szTipText;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

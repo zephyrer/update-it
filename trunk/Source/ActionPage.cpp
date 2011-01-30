@@ -55,7 +55,7 @@
 #if defined(__INTEL_COMPILER)
 // remark #279: controlling expression is constant
 #pragma warning(disable: 279)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -64,7 +64,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -410,18 +410,18 @@ void CActionPage::OnButtonFtpRoot(void)
 
 		bOK = TRUE;   // it worked
 	}
-	catch (CUserException* /*pXcpt*/)
+	catch (CUserException* /*pErr*/)
 	{
 		// validation failed - user already alerted, fall through
 		ASSERT(!bOK);
-		// Note: pXcpt->Delete() not required
+		// Note: pErr->Delete() not required
 	}
-	catch (CException* pXcpt)
+	catch (CException* pErr)
 	{
 		// validation failed due to OOM or other resource failure
-		pXcpt->ReportError(MB_ICONEXCLAMATION, AFX_IDP_INTERNAL_FAILURE);
+		pErr->ReportError(MB_ICONEXCLAMATION, AFX_IDP_INTERNAL_FAILURE);
 		ASSERT(!bOK);
-		pXcpt->Delete();
+		pErr->Delete();
 	}
 
 	pThreadState->m_hLockoutNotifyWindow = hWndOldLockout;
@@ -602,13 +602,13 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_dlgBrowseFtp = " << m_dlgBrowseFtp;
 		dumpCtx << "\nm_dlgAuth = " << m_dlgAuth;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

@@ -64,7 +64,7 @@
 #pragma warning(disable: 797)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -73,7 +73,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -463,7 +463,7 @@ void CFilesPage::SearchForFiles(LPCTSTR pszFolder, BOOL fRecurse, CTime timeMin,
 						}
 						++lvi.iItem;
 					}
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 				}
 			}
 		}
@@ -534,10 +534,10 @@ BOOL CFilesPage::CompareContents(LPCTSTR pszRelativeName)
 				mmfNew.Close();
 				mmfPrev.Close();
 			}
-			catch (CWin32Error* pXcpt)
+			catch (CWin32Error* pErr)
 			{
 				// unable to compare
-				delete pXcpt;
+				delete pErr;
 				fResult = FALSE;
 			}
 		}
@@ -597,13 +597,13 @@ void CFilesPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_mapIcons = " << m_mapIcons;
 		dumpCtx << "\nm_iDefIcon = " << m_iDefIcon;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file

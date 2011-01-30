@@ -41,6 +41,7 @@ protected:
 
 // message map functions
 protected:
+	afx_msg void OnDestroy(void);
 
 // attributes
 public:
@@ -50,6 +51,15 @@ public:
 	CString m_strPassword;
 	CString m_strRoot;
 	BOOL m_fPassive;
+
+	// implementation helpers
+private:
+	BOOL SetWindowProp(LPCTSTR pszPropName, LPCTSTR pszPropData);
+	void RemoveWindowProp(LPCTSTR pszPropName);
+	static BOOL GetWindowProp(HWND hWnd, LPCTSTR pszPropName, CString& strDest);
+	static DWORD GetWindowProp(HWND hWnd, LPCTSTR pszPropName);
+	static void SearchForFolders(CFtpConnection* pFtpConn, LPCTSTR pszRoot);
+	static UINT AFX_CDECL FoldersFinder(void* pvParam);
 
 // diagnostic services
 #if defined(_DEBUG)

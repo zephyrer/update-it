@@ -47,7 +47,7 @@
 #include "MainWizard.h"
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 #include "../Common/Registry.h"
 #include "Arguments.h"
 
@@ -61,7 +61,7 @@
 #pragma warning(disable: 279)
 // remark #981: operands are evaluated in unspecified order
 #pragma warning(disable: 981)
-#endif	// __INTEL_COMPILER
+#endif   // __INTEL_COMPILER
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -70,7 +70,7 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // object model
@@ -103,7 +103,7 @@ m_fCompare(BST_UNCHECKED)
 	CWinApp* pApp = AfxGetApp();
 #else
 	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 	ASSERT_VALID(pApp);
 
 	// initialize and validate initial input values
@@ -135,7 +135,7 @@ m_fCompare(BST_UNCHECKED)
 	{
 		m_timeWrite = m_strSource.IsEmpty() ? -1 : pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1);
 	}
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 
 	m_fCompare = pApp->GetConfigCheck(SZ_ARG_OPTIONS_COMPARE, SZ_REGK_OPTIONS, SZ_REGV_OPTIONS_COMPARE, BST_UNCHECKED);
 
@@ -306,7 +306,7 @@ void COptionsPage::OnButtonSource(void)
 		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 		ASSERT_VALID(pApp);
 		if ((m_timeWrite = pApp->GetProfileTime(SZ_REGK_TIMES, m_strSource, -1)) != -1)
-#endif	// _MFC_VER
+#endif   // _MFC_VER
 		{
 			m_dtpWrite.SetTime(&m_timeWrite);
 		}
@@ -382,13 +382,13 @@ void COptionsPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_dtpWrite = " << m_dtpWrite;
 		dumpCtx << "\nm_timeWrite = " << m_timeWrite;
 	}
-	catch (CFileException* pXcpt)
+	catch (CFileException* pErr)
 	{
-		pXcpt->ReportError();
-		pXcpt->Delete();
+		pErr->ReportError();
+		pErr->Delete();
 	}
 }
 
-#endif	// _DEBUG
+#endif   // _DEBUG
 
 // end of file
