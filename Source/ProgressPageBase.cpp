@@ -168,7 +168,7 @@ void CProgressPageBase::OnBecameActive(void)
 		strWorking.LoadString(IDS_DELETING_FILES);
 		m_textWorking.SetWindowText(strWorking);
 		BOOL fCanUndo = pOptionsPage->m_nRecycle == BST_CHECKED;
-		m_animateBanner.Open(fCanUndo ? IDR_FILETRASH : IDR_FILEDELETE);
+		m_animateBanner.Open(fCanUndo ? IDR_FILETRASH_2000 : IDR_FILEDELETE_2000);
 		m_animateBanner.ShowWindow(SW_SHOW);
 		m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
 		EraseFolder(pOptionsPage->m_strTarget, fCanUndo);
@@ -188,7 +188,7 @@ void CProgressPageBase::OnBecameActive(void)
 	BOOL fDeleteSrc = pActionPage->m_nAction == 1;
 	strWorking.LoadString(fDeleteSrc ? IDS_MOVING_FILES : IDS_COPYING_FILES);
 	m_textWorking.SetWindowText(strWorking);
-	m_animateBanner.Open(fDeleteSrc ? IDR_FILEMOVE : IDR_FILECOPY);
+	m_animateBanner.Open(fDeleteSrc ? IDR_FILEMOVE_2000 : IDR_FILECOPY_2000);
 	m_animateBanner.ShowWindow(SW_SHOW);
 	m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
 #if (_MFC_VER < 0x0700)
@@ -212,7 +212,7 @@ void CProgressPageBase::OnBecameActive(void)
 	{
 		strWorking.LoadString(IDS_PREPARING_UPLOAD);
 		m_textWorking.SetWindowText(strWorking);
-		m_animateBanner.Open(IDR_FILEUPLOAD);
+		m_animateBanner.Open(IDR_FILEUPLOAD_2000);
 		m_animateBanner.ShowWindow(SW_SHOW);
 		m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
 		m_textFile.SetWindowText(NULL);
@@ -236,7 +236,7 @@ void CProgressPageBase::OnBecameActive(void)
 	{
 		strWorking.LoadString(IDS_ZIPPING_FOLDER);
 		m_textWorking.SetWindowText(strWorking);
-		m_animateBanner.Open(IDR_FILEZIP);
+		m_animateBanner.Open(IDR_FILEZIP_2000);
 		m_animateBanner.ShowWindow(SW_SHOW);
 		m_progressTotal.SetPos(nLower);
 		m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
@@ -257,7 +257,7 @@ void CProgressPageBase::OnBecameActive(void)
 	{
 		strWorking.LoadString(IDS_SENDING_MAIL);
 		m_textWorking.SetWindowText(strWorking);
-		m_animateBanner.Open(IDR_FILESEND);
+		m_animateBanner.Open(IDR_FILESEND_2000);
 		m_animateBanner.ShowWindow(SW_SHOW);
 		m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
 		SendZippedFolder(strZipPath);

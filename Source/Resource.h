@@ -5,13 +5,13 @@
 #define IDI_APP_ICON                    1
 #define IDM_SC_EXPORT_SETTINGS          0x0010
 #define IDM_SC_IMPORT_SETTINGS          0x0020
-#define IDR_FILECOPY                    106
-#define IDR_FILEMOVE                    107
-#define IDR_FILEDELETE                  108
-#define IDR_FILETRASH                   109
-#define IDR_FILEZIP                     110
-#define IDR_FILEUPLOAD                  111
-#define IDR_FILESEND                    112
+#define IDR_FILECOPY_2000               106
+#define IDR_FILEMOVE_2000               107
+#define IDR_FILEDELETE_2000             108
+#define IDR_FILETRASH_2000              109
+#define IDR_FILEZIP_2000                110
+#define IDR_FILEUPLOAD_2000             111
+#define IDR_FILESEND_2000               112
 #define IDR_SOFTPEDIA_AWARD             113
 
 // Next default values for new objects
