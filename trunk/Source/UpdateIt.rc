@@ -80,13 +80,13 @@ IDR_FILECOPY            AVI                     "BinRes\\FileCopy.avi"
 IDR_FILEMOVE            AVI                     "BinRes\\FileMove.avi"
 IDR_FILEDELETE          AVI                     "BinRes\\FileDelete.avi"
 IDR_FILETRASH           AVI                     "BinRes\\FileTrash.avi"
-IDR_ZIPPING             AVI                     "BinRes\\ZIPPING.AVI"
-IDR_FILEUPLOAD          AVI                     "BinRes\\Move2.avi"
+IDR_FILEZIP             AVI                     "BinRes\\FileZip.avi"
+IDR_FILEUPLOAD          AVI                     "BinRes\\FileUpload.avi"
 IDR_FILESEND            AVI                     "BinRes\\FileSend.avi"
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// PNG_FILE
+// GIF_FILE
 //
 
 IDR_SOFTPEDIA_AWARD     GIF_FILE                "BinRes\\SoftpediaCleanAward.gif"

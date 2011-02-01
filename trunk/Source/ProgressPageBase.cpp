@@ -236,7 +236,7 @@ void CProgressPageBase::OnBecameActive(void)
 	{
 		strWorking.LoadString(IDS_ZIPPING_FOLDER);
 		m_textWorking.SetWindowText(strWorking);
-		m_animateBanner.Open(IDR_ZIPPING);
+		m_animateBanner.Open(IDR_FILEZIP);
 		m_animateBanner.ShowWindow(SW_SHOW);
 		m_progressTotal.SetPos(nLower);
 		m_animateBanner.Play(0, (UINT)-1, (UINT)-1);
