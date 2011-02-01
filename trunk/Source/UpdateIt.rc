@@ -76,13 +76,13 @@ IDI_APP_ICON            ICON                    "BinRes\\AppIcon.ico"
 // AVI
 //
 
-IDR_FILECOPY            AVI                     "BinRes\\FileCopy.avi"
-IDR_FILEMOVE            AVI                     "BinRes\\FileMove.avi"
-IDR_FILEDELETE          AVI                     "BinRes\\FileDelete.avi"
-IDR_FILETRASH           AVI                     "BinRes\\FileTrash.avi"
-IDR_FILEZIP             AVI                     "BinRes\\FileZip.avi"
-IDR_FILEUPLOAD          AVI                     "BinRes\\FileUpload.avi"
-IDR_FILESEND            AVI                     "BinRes\\FileSend.avi"
+IDR_FILECOPY_2000       AVI                     "BinRes\\FileCopy2000.avi"
+IDR_FILEMOVE_2000       AVI                     "BinRes\\FileMove2000.avi"
+IDR_FILEDELETE_2000     AVI                     "BinRes\\FileDelete2000.avi"
+IDR_FILETRASH_2000      AVI                     "BinRes\\FileTrash2000.avi"
+IDR_FILEZIP_2000        AVI                     "BinRes\\FileZip2000.avi"
+IDR_FILEUPLOAD_2000     AVI                     "BinRes\\FileUpload2000.avi"
+IDR_FILESEND_2000       AVI                     "BinRes\\FileSend2000.avi"
 
 /////////////////////////////////////////////////////////////////////////////
 //
