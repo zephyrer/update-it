@@ -9,7 +9,7 @@
 #define IDR_FILEMOVE                    107
 #define IDR_FILEDELETE                  108
 #define IDR_FILETRASH                   109
-#define IDR_ZIPPING                     110
+#define IDR_FILEZIP                     110
 #define IDR_FILEUPLOAD                  111
 #define IDR_FILESEND                    112
 #define IDR_SOFTPEDIA_AWARD             113
