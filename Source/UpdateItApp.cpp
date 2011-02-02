@@ -346,8 +346,87 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 //////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
 
+#include <ntverp.h>
+
+//-----------------------------------------------------------------------
+// SDK version             |  2003  |  v5.0  |  v6.0A |  v7.0  |  v7.1  |
+//-------------------------+--------+--------+--------+--------+--------+
+// VER_PRODUCTBUILD        |   3668 |   3790 |   6000 |   7600 |   7600 |
+// VER_PRODUCTBUILD_QFE    |      0 |   2075 |  16384 |  16385 |  16385 |
+// VER_PRODUCTMAJORVERSION |      5 |      5 |      6 |      6 |      6 |
+// VER_PRODUCTMINORVERSION |      2 |      2 |      0 |      1 |      1 |
+// VER_PRODUCTVERSION_W    | 0x0502 | 0x0502 | 0x0600 | 0x0601 | 0x0601 |
+//-----------------------------------------------------------------------
+
+#if !defined(VER_PRODUCTBUILD) || VER_PRODUCTBUILD < 7600
+#error Windows SDK version 7.0 or greater required to compile this code
+#endif   // VER_PRODUCTBUILD
+
+#include <sdkddkver.h>
+
+class CWinVer
+{
+public:
+	__declspec(noinline) CWinVer(void):
+	m_wWinNT(0),
+	m_dwNTDDI(0)
+	{
+		OSVERSIONINFO osVerInfo = { 0 };
+		osVerInfo.dwOSVersionInfoSize = sizeof(osVerInfo);
+		::GetVersionEx(&osVerInfo);
+		m_wWinNT = MAKEWORD(LOBYTE(LOWORD(osVerInfo.dwMinorVersion)), LOBYTE(LOWORD(osVerInfo.dwMajorVersion)));
+		m_dwNTDDI = MAKELONG(0, m_wWinNT);
+
+		ATL::CRegKey regKeyWindows;
+		LONG nError = regKeyWindows.Open(HKEY_LOCAL_MACHINE, _T("SYSTEM\\CurrentControlSet\\Control\\Windows"));
+		if (nError == ERROR_SUCCESS)
+		{
+			DWORD dwCSDVersion = 0;
+			nError = regKeyWindows.QueryDWORDValue(_T("CSDVersion"), dwCSDVersion);
+			if (nError == ERROR_SUCCESS)
+			{
+				m_dwNTDDI |= LOWORD(dwCSDVersion);
+			}
+			regKeyWindows.Close();
+		}
+	}
+
+	WORD WinNT(void) const
+	{
+		return (m_wWinNT);
+	}
+
+	DWORD NTDDI(void) const
+	{
+		return (m_dwNTDDI);
+	}
+
+public:
+	enum
+	{
+		NT4 = _WIN32_WINNT_NT4,
+		WIN2K = _WIN32_WINNT_WIN2K,
+		WINXP = _WIN32_WINNT_WINXP,
+		WS03 = _WIN32_WINNT_WS03,
+		WIN6 = _WIN32_WINNT_WIN6,
+		VISTA = _WIN32_WINNT_VISTA,
+		WS08 = _WIN32_WINNT_WS08,
+		LONGHORN = _WIN32_WINNT_LONGHORN,
+		WIN7 = _WIN32_WINNT_WIN7
+	};
+
+private:
+	WORD m_wWinNT;
+	DWORD m_dwNTDDI;
+};
+
 BOOL CUpdateItApp::InitInstance(void)
 {
+	if (CWinVer().WinNT() < CWinVer::VISTA)
+	{
+		::MessageBeep(MB_OK);
+	}
+
 	m_argsParser.Parse(m_lpCmdLine, true);
 
 	if (m_argsParser.HasKey(SZ_ARG_RESPONSE_FILE))
