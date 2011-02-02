@@ -349,7 +349,7 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 #include <ntverp.h>
 
 //-----------------------------------------------------------------------
-// SDK version             |  2003  |  v5.0  |  v6.0A |  v7.0  |  v7.1  |
+// Windows SDK version     |  2003  |  v5.0  |  v6.0A |  v7.0  |  v7.1  |
 //-------------------------+--------+--------+--------+--------+--------+
 // VER_PRODUCTBUILD        |   3668 |   3790 |   6000 |   7600 |   7600 |
 // VER_PRODUCTBUILD_QFE    |      0 |   2075 |  16384 |  16385 |  16385 |
@@ -358,11 +358,27 @@ BOOL CUpdateItApp::GetConfigBool(LPCTSTR pszArgName, LPCTSTR pszSection, LPCTSTR
 // VER_PRODUCTVERSION_W    | 0x0502 | 0x0502 | 0x0600 | 0x0601 | 0x0601 |
 //-----------------------------------------------------------------------
 
-#if !defined(VER_PRODUCTBUILD) || VER_PRODUCTBUILD < 7600
+#if !defined(VER_PRODUCTBUILD) || (VER_PRODUCTBUILD < 7600)
 #error Windows SDK version 7.0 or greater required to compile this code
 #endif   // VER_PRODUCTBUILD
 
 #include <sdkddkver.h>
+
+// Why are the generic version numbers called NTDDI?
+//
+// In my earlier discussion on the variety of symbols that describe the target Windows version, I pointed 
+// out that the NTDDI symbols attempt to cut through the mess and consolidate everything into a single symbol. 
+// But why the name NTDDI?
+// One of my colleagues contacted me privately with the story. When setting out to change the operating system
+// version number, my colleague was shocked to find so many different version number mechanisms were scattered
+// throughout the various Windows header files. It so happened that the DDK people were already in the process
+// of cleaning up the version number mess and were using NTDDI as their version number system. Seeing no reason
+// to invent a new different system for user mode, my colleague proposed using the DDK system in the SDK and 
+// asked if anybody had any better ideas.
+// Nobody came up with any better ideas, no compelling reason why we should have two different version number
+// systems, so the NTDDI name stuck. And it stands for NT Device Driver Interface.
+//
+// http://blogs.msdn.com/b/oldnewthing/archive/2008/12/05/9177689.aspx
 
 class CWinVer
 {
@@ -393,26 +409,92 @@ public:
 
 	WORD WinNT(void) const
 	{
+		// compare with _WIN32_WINNT version constants
 		return (m_wWinNT);
 	}
 
 	DWORD NTDDI(void) const
 	{
+		// compare with NTDDI version constants
 		return (m_dwNTDDI);
+	}
+
+	__declspec(noinline) DWORD TrueWinNT(void) const
+	{
+		OSVERSIONINFOEX osVerInfo = { 0 };
+		osVerInfo.dwOSVersionInfoSize = sizeof(osVerInfo);
+		::GetVersionEx(reinterpret_cast<OSVERSIONINFO*>(&osVerInfo));
+
+		DWORD fdwProductType = PRODUCT_UNDEFINED;
+		BOOL (WINAPI* pfnGetProductInfo)(DWORD, DWORD, DWORD, DWORD, DWORD*) = NULL;
+		HMODULE hKernel32 = ::GetModuleHandle(_T("kernel32.dll"));
+		(FARPROC&)pfnGetProductInfo = ::GetProcAddress(hKernel32, "GetProductInfo");
+		if (pfnGetProductInfo != NULL)
+		{
+			pfnGetProductInfo(osVerInfo.dwMajorVersion, osVerInfo.dwMinorVersion, 0, 0, &fdwProductType);
+		}
+
+		DWORD fdwTrueVer = MAKELONG(0, m_wWinNT);
+		
+		if (osVerInfo.wProductType != VER_NT_WORKSTATION)
+		{
+			fdwTrueVer |= EDITION_SERVER;
+		}
+		else if (fdwProductType == PRODUCT_STARTER)
+		{
+			fdwTrueVer |= EDITION_STARTER;
+		}
+		else if ((osVerInfo.wSuiteMask & VER_SUITE_PERSONAL) != 0)
+		{
+			fdwTrueVer |= EDITION_HOME;
+		}
+		else
+		{
+			fdwTrueVer |= EDITION_WORKSTATION;
+		}
+
+		// just in case of Windows Server 2003 R2
+		if (m_wWinNT == _WIN32_WINNT_WS03 && ::GetSystemMetrics(SM_SERVERR2) > 0)
+		{
+			fdwTrueVer |= 0x0100;
+		}
+
+		fdwTrueVer |= (LOBYTE(osVerInfo.wServicePackMajor));
+
+		return (fdwTrueVer);
 	}
 
 public:
 	enum
 	{
-		NT4 = _WIN32_WINNT_NT4,
-		WIN2K = _WIN32_WINNT_WIN2K,
-		WINXP = _WIN32_WINNT_WINXP,
-		WS03 = _WIN32_WINNT_WS03,
-		WIN6 = _WIN32_WINNT_WIN6,
-		VISTA = _WIN32_WINNT_VISTA,
-		WS08 = _WIN32_WINNT_WS08,
-		LONGHORN = _WIN32_WINNT_LONGHORN,
-		WIN7 = _WIN32_WINNT_WIN7
+		MASK_VERMAJOR = 0xFF000000,
+		MASK_VERMINOR = 0x00FF0000,
+		MASK_WIN32_WINNT = MASK_VERMAJOR | MASK_VERMINOR,
+		MASK_EDITION = 0x0000FF00,
+		MASK_OSVER = MASK_WIN32_WINNT | MASK_EDITION,
+		MASK_SPVER = 0x000000FF,
+
+		EDITION_STARTER = 0x1000,
+		EDITION_HOME = 0x2000,
+		EDITION_WORKSTATION = 0x4000,
+		EDITION_SERVER = 0x8000,
+
+		NT4_WORKSTATION = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_NT4),
+		NT4_SERVER = MAKELONG(EDITION_SERVER, _WIN32_WINNT_NT4),
+		WIN2K_PROFESSIONAL = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_WIN2K),
+		WIN2K_SERVER = MAKELONG(EDITION_SERVER, _WIN32_WINNT_WIN2K),
+		WINXP_HOME = MAKELONG(EDITION_HOME, _WIN32_WINNT_WINXP),
+		WINXP_PROFESSIONAL = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_WINXP),
+		WS03_SERVER = MAKELONG(EDITION_SERVER, _WIN32_WINNT_WS03),
+		WS03R2_SERVER = MAKELONG(EDITION_SERVER | 0x0100, _WIN32_WINNT_WS03),
+		VISTA_STARTER = MAKELONG(EDITION_STARTER, _WIN32_WINNT_VISTA),
+		VISTA_HOME = MAKELONG(EDITION_HOME, _WIN32_WINNT_VISTA),
+		VISTA_BUSINESS = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_VISTA),
+		WS08_SERVER = MAKELONG(EDITION_SERVER, _WIN32_WINNT_VISTA),
+		WIN7_STARTER = MAKELONG(EDITION_STARTER, _WIN32_WINNT_WIN7),
+		WIN7_HOME = MAKELONG(EDITION_HOME, _WIN32_WINNT_WIN7),
+		WIN7_PROFESSIONAL = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_WIN7),
+		WS08R2_SERVER = MAKELONG(EDITION_SERVER, _WIN32_WINNT_WIN7)
 	};
 
 private:
@@ -420,9 +502,21 @@ private:
 	DWORD m_dwNTDDI;
 };
 
+// Sample usage:
+//
+// if (CWinVer().WinNT() < _WIN32_WINNT_VISTA)
+// {
+//   ...
+// }
+//
+// if (CWinVer().NTDDI() == NTDDI_VISTASP2)
+// {
+//   ...
+// }
+
 BOOL CUpdateItApp::InitInstance(void)
 {
-	if (CWinVer().WinNT() < CWinVer::VISTA)
+	if (CWinVer().TrueWinNT() > CWinVer::WINXP_HOME)
 	{
 		::MessageBeep(MB_OK);
 	}
