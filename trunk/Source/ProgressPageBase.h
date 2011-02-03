@@ -23,6 +23,9 @@
 #if !defined(__ProgressPageBase_h)
 #define __ProgressPageBase_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// avoid unwanted ICL warnings
+
 #if defined(__INTEL_COMPILER)
 // remark #444: destructor for base class is not virtual
 #pragma warning(disable: 444)
@@ -32,6 +35,7 @@
 // dependent includes
 
 #include "BetterPropPage.h"
+#include "WindowsVersion.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // CProgressPageBase
@@ -57,6 +61,7 @@ protected:
 
 // attributes
 public:
+	CWindowsVersion m_winVer;
 	CStatic m_textWorking;
 	CAnimateCtrl m_animateBanner;
 	CStatic m_textFile;
@@ -76,6 +81,23 @@ private:
 	BOOL UploadFile(LPCTSTR pszSrcPath, LPCTSTR pszFtpPath, CFtpConnection* pFtpConn);
 	void UploadFiles(LPCTSTR pszSource, const CListCtrl& listFiles);
 
+// properties
+private:
+	UINT GetFileCopyAviID(void);
+	__declspec(property(get = GetFileCopyAviID)) UINT m_idrFileCopy;
+	UINT GetFileMoveAviID(void);
+	__declspec(property(get = GetFileMoveAviID)) UINT m_idrFileMove;
+	UINT GetFileDeleteAviID(void);
+	__declspec(property(get = GetFileDeleteAviID)) UINT m_idrFileDelete;
+	UINT GetFileTrashAviID(void);
+	__declspec(property(get = GetFileTrashAviID)) UINT m_idrFileTrash;
+	UINT GetFileZipAviID(void);
+	__declspec(property(get = GetFileZipAviID)) UINT m_idrFileZip;
+	UINT GetFileUploadAviID(void);
+	__declspec(property(get = GetFileUploadAviID)) UINT m_idrFileUpload;
+	UINT GetFileSendAviID(void);
+	__declspec(property(get = GetFileSendAviID)) UINT m_idrFileSend;
+
 // diagnostic services
 #if defined(_DEBUG)
 public:
@@ -83,6 +105,48 @@ public:
 	virtual void Dump(CDumpContext& dumpCtx) const;
 #endif
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// inlines
+
+inline UINT CProgressPageBase::GetFileCopyAviID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_WINXP ? IDR_FILECOPY_2000 : IDR_FILECOPY_XP);
+}
+
+inline UINT CProgressPageBase::GetFileMoveAviID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_WINXP ? IDR_FILEMOVE_2000 : IDR_FILEMOVE_XP);
+}
+
+inline UINT CProgressPageBase::GetFileDeleteAviID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_WINXP ? IDR_FILEDELETE_2000 : IDR_FILEDELETE_XP);
+}
+
+inline UINT CProgressPageBase::GetFileTrashAviID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_WINXP ? IDR_FILETRASH_2000 : IDR_FILETRASH_XP);
+}
+
+inline UINT CProgressPageBase::GetFileZipAviID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_WINXP ? IDR_FILEZIP_2000 : IDR_FILEZIP_XP);
+}
+
+inline UINT CProgressPageBase::GetFileUploadAviID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_WINXP ? IDR_FILEUPLOAD_2000 : IDR_FILEUPLOAD_XP);
+}
+
+inline UINT CProgressPageBase::GetFileSendAviID(void)
+{
+	// TODO: obtain XP-style animation
+	return (IDR_FILESEND_2000);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// restore unwanted ICL warnings
 
 #if defined(__INTEL_COMPILER)
 #pragma warning(default: 444)
