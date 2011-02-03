@@ -26,8 +26,9 @@
 // other includes
 
 #include "CustomPropSheet.h"
-#include "../Common/Registry.h"
+
 #include "UpdateItApp.h"
+#include "../Common/Registry.h"
 #include "Arguments.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////

@@ -23,6 +23,17 @@
 #if !defined(__ActionPage_h)
 #define __ActionPage_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// dependent includes
+
+#include "BetterPropPage.h"
+#include "ZipOptionsDialog.h"
+#include "BrowseFtpDialog.h"
+#include "AuthenticationDialog.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CActionPage
+
 //! Encapsulates the "Choosing an action" step of the UpdateIt! wizard.
 class CActionPage: public CBetterPropPage
 {

@@ -30,21 +30,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // other includes
 
-#include "CustomDialog.h"
 #include "ZipOptionsDialog.h"
-#include "BetterPropPage.h"
-#include "AboutPage.h"
-#include "FirstLaunchPage.h"
-#include "OptionsPage.h"
-#include "FilesList.h"
-#include "FilesPage.h"
-#include "BrowseFtpDialog.h"
-#include "AuthenticationDialog.h"
-#include "ActionPage.h"
-#include "ProgressPageBase.h"
-#include "ProgressPage.h"
-#include "CustomPropSheet.h"
-#include "MainWizard.h"
+
 #include "UpdateItApp.h"
 #include "../Common/Registry.h"
 #include "Arguments.h"

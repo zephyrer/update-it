@@ -23,6 +23,20 @@
 #if !defined(__MainWizard_h)
 #define __MainWizard_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// dependent includes
+
+#include "CustomPropSheet.h"
+#include "AboutPage.h"
+#include "FirstLaunchPage.h"
+#include "OptionsPage.h"
+#include "FilesPage.h"
+#include "ActionPage.h"
+#include "ProgressPage.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CMainWizard
+
 class CMainWizard: public CCustomPropSheet
 {
 	DECLARE_DYNAMIC(CMainWizard)
@@ -54,7 +68,7 @@ public:
 		I_FILES,
 		I_ACTION,
 		I_PROGRESS,
-		NUM_PAGES		// should be the LAST enumerator!
+		NUM_PAGES   // should be the LAST enumerator!
 	};
 
 	HICON m_hIcon;

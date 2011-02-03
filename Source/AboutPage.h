@@ -23,7 +23,15 @@
 #if !defined(__AboutPage_h)
 #define __AboutPage_h
 
-//! Encapsulates the "Weclome!" step of the UpdateIt! wizard.
+//////////////////////////////////////////////////////////////////////////////////////////////
+// dependent includes
+
+#include "BetterPropPage.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CAboutPage
+
+//! Encapsulates the "Welcome!" step of the UpdateIt! wizard.
 class CAboutPage: public CBetterPropPage
 {
 	DECLARE_DYNAMIC(CAboutPage)

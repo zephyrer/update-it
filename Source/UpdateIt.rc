@@ -83,6 +83,12 @@ IDR_FILETRASH_2000      AVI                     "BinRes\\FileTrash2000.avi"
 IDR_FILEZIP_2000        AVI                     "BinRes\\FileZip2000.avi"
 IDR_FILEUPLOAD_2000     AVI                     "BinRes\\FileUpload2000.avi"
 IDR_FILESEND_2000       AVI                     "BinRes\\FileSend2000.avi"
+IDR_FILECOPY_XP         AVI                     "BinRes\\FileCopyXP.avi"
+IDR_FILEMOVE_XP         AVI                     "BinRes\\FileMoveXP.avi"
+IDR_FILEDELETE_XP       AVI                     "BinRes\\FileDeleteXP.avi"
+IDR_FILETRASH_XP        AVI                     "BinRes\\FileTrashXP.avi"
+IDR_FILEZIP_XP          AVI                     "BinRes\\FileZipXP.avi"
+IDR_FILEUPLOAD_XP       AVI                     "BinRes\\FileUploadXP.avi"
 
 /////////////////////////////////////////////////////////////////////////////
 //

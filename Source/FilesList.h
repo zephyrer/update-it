@@ -23,6 +23,9 @@
 #if !defined(__FilesList_h)
 #define __FilesList_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CFilesList
+
 class CFilesList: public CSortingListCtrl
 {
 	DECLARE_DYNAMIC(CFilesList)

@@ -23,6 +23,9 @@
 #if !defined(__BetterPropPage_h)
 #define __BetterPropPage_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CBetterPropPage
+
 //! Encapsulates an extended property page with additional notification and tool tips support.
 class CBetterPropPage : public CPropertyPage
 {

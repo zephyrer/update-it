@@ -84,3 +84,5 @@
 BOOL GetWinVer(LPTSTR pszVersion, int *nVersion, LPTSTR pszMajorMinorBuild);
 
 #endif   // __GETWINVER_H
+
+// end of file
