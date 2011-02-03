@@ -636,23 +636,55 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\FileCopy.avi"
+				RelativePath=".\Source\BinRes\FileCopy2000.avi"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\FileDelete.avi"
+				RelativePath=".\Source\BinRes\FileCopyXP.avi"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\FileMove.avi"
+				RelativePath=".\Source\BinRes\FileDelete2000.avi"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\FileSend.avi"
+				RelativePath=".\Source\BinRes\FileDeleteXP.avi"
 				>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\FileTrash.avi"
+				RelativePath=".\Source\BinRes\FileMove2000.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileMoveXP.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileSend2000.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileTrash2000.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileTrashXP.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileUpload2000.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileUploadXP.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileZip2000.avi"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FileZipXP.avi"
 				>
 			</File>
 			<File
@@ -692,19 +724,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Source\BinRes\Move2.avi"
-				>
-			</File>
-			<File
 				RelativePath=".\Source\BinRes\SoftpediaCleanAward.gif"
 				>
 			</File>
 			<File
 				RelativePath=".\Source\UpdateIt.rc"
-				>
-			</File>
-			<File
-				RelativePath=".\Source\BinRes\ZIPPING.AVI"
 				>
 			</File>
 		</Filter>

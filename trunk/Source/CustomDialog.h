@@ -23,6 +23,9 @@
 #if !defined(__CustomDialog_h)
 #define __CustomDialog_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CCustomDialog
+
 class CCustomDialog: public CDialog
 {
 	DECLARE_DYNAMIC(CCustomDialog)

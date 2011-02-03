@@ -23,6 +23,9 @@
 #if !defined(__UpdateItApp_h)
 #define __UpdateItApp_h
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CUpdateItApp
+
 class CUpdateItApp: public CWinApp
 {
 	DECLARE_DYNAMIC(CUpdateItApp)

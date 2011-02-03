@@ -832,3 +832,5 @@ int __cdecl RecordExceptionInfo(struct _EXCEPTION_POINTERS* pExceptPtrs, LPCTSTR
 		}
 	}
 }
+
+// end of file

@@ -30,22 +30,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // other includes
 
-#include "BetterPropPage.h"
-#include "AboutPage.h"
-#include "FirstLaunchPage.h"
-#include "OptionsPage.h"
-#include "FilesList.h"
-#include "FilesPage.h"
-#include "CustomDialog.h"
-#include "ZipOptionsDialog.h"
-#include "BrowseFtpDialog.h"
-#include "AuthenticationDialog.h"
-#include "ActionPage.h"
-#include "ProgressPageBase.h"
-#include "ProgressPage.h"
-#include "CustomPropSheet.h"
-#include "MainWizard.h"
 #include "UpdateItApp.h"
+
+#include "MainWizard.h"
 #include "../Common/Registry.h"
 #include "Arguments.h"
 
@@ -479,6 +466,7 @@ public:
 		EDITION_WORKSTATION = 0x4000,
 		EDITION_SERVER = 0x8000,
 
+		// compare TrueWinNT() result with these constants
 		NT4_WORKSTATION = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_NT4),
 		NT4_SERVER = MAKELONG(EDITION_SERVER, _WIN32_WINNT_NT4),
 		WIN2K_PROFESSIONAL = MAKELONG(EDITION_WORKSTATION, _WIN32_WINNT_WIN2K),

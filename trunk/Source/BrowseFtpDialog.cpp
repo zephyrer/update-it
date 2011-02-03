@@ -30,8 +30,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // other includes
 
-#include "CustomDialog.h"
 #include "BrowseFtpDialog.h"
+
 #include "../Common/Registry.h"
 #include "Arguments.h"
 

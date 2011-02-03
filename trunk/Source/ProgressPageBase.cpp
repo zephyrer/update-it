@@ -30,20 +30,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 // other includes
 
-#include "BetterPropPage.h"
-#include "AboutPage.h"
-#include "FirstLaunchPage.h"
-#include "OptionsPage.h"
-#include "FilesList.h"
-#include "FilesPage.h"
-#include "CustomDialog.h"
-#include "ZipOptionsDialog.h"
-#include "BrowseFtpDialog.h"
-#include "AuthenticationDialog.h"
-#include "ActionPage.h"
 #include "ProgressPageBase.h"
-#include "ProgressPage.h"
-#include "CustomPropSheet.h"
+
 #include "MainWizard.h"
 #if (_MFC_VER >= 0x0700)
 #include "UpdateItApp.h"

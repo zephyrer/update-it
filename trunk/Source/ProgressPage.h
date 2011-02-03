@@ -28,6 +28,14 @@
 #pragma warning(disable: 444)
 #endif   // __INTEL_COMPILER
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// dependent includes
+
+#include "ProgressPageBase.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CProgressPage
+
 //! Encapsulates the "Processing files" step of the UpdateIt! wizard.
 class CProgressPage: public CProgressPageBase, public CZipActionCallback
 {

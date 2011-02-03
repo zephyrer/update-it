@@ -35,11 +35,17 @@
 // A paper by the original author can be found at:
 //     http://www.cygnus-software.com/papers/release_debugging.html
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// PCH includes
+
 #include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// other includes
 
 #include "ExceptionHandler.h"
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////
 // This is the initial entry point into an MFC app. Normally this is in the
 // MFC library:  mfc\src\winmain.cpp
 
@@ -107,3 +113,5 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	}
 	return 0;
 }
+
+// end of file
