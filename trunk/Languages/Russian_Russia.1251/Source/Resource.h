@@ -143,6 +143,7 @@
 #define IDC_TEXT_EMAIL_INFO             1080
 #define IDC_EDIT_PASSWORD               1081
 #define IDC_BUTTON_FTP_ROOT             1082
+#define IDC_TREE_FTP_FOLDERS            1083
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -152,7 +153,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        120
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1083
+#define _APS_NEXT_CONTROL_VALUE         1084
 #define _APS_NEXT_SYMED_VALUE           120
 #endif
 #endif
