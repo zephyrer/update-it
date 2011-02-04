@@ -143,7 +143,6 @@
 #define IDC_TEXT_EMAIL_INFO             1080
 #define IDC_EDIT_PASSWORD               1081
 #define IDC_BUTTON_FTP_ROOT             1082
-#define IDC_TREE1                       1083
 #define IDC_TREE_FTP_FOLDERS            1083
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
