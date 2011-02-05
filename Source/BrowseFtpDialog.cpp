@@ -101,7 +101,7 @@ BOOL CBrowseFtpDialog::OnInitDialog(void)
 	m_treeFtp.InsertRootItems(_T("ftp.gnu.org"));
 #else
 	m_treeFtp.Connect(m_strServer, m_strLogin, m_strPassword, m_nPort, m_fPassive);
-	m_treeFtp.InsertRootItems(m_strServer);
+	m_treeFtp.InsertRootItem(m_strServer);
 #endif   // _DEBUG
 	EndWaitCursor();
 

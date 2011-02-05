@@ -70,6 +70,12 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_APP_ICON            ICON                    "BinRes\\AppIcon.ico"
+IDI_FOLDER_XP           ICON                    "BinRes\\FolderXP.ico"
+IDI_FOLDER_VISTA        ICON                    "BinRes\\FolderVista.ico"
+IDI_FOLDER_OPEN_XP      ICON                    "BinRes\\FolderOpenXP.ico"
+IDI_FOLDER_OPEN_VISTA   ICON                    "BinRes\\FolderOpenVista.ico"
+IDI_FTP_ROOT_XP         ICON                    "BinRes\\FtpRootXP.ico"
+IDI_FTP_ROOT_VISTA      ICON                    "BinRes\\FtpRootVista.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -40,7 +40,7 @@ public:
 public:
 	BOOL Connect(LPCTSTR pszServer, LPCTSTR pszLogin, LPCTSTR pszPassword, INTERNET_PORT nPort, BOOL fPassive);
 	void Disconnect(void);
-	HTREEITEM InsertRootItems(LPCTSTR pszRootText = _T("/"));
+	HTREEITEM InsertRootItem(LPCTSTR pszRootText = _T("/"));
 
 // message map functions
 protected:
@@ -52,6 +52,10 @@ public:
 	CInternetSession m_ftpSession;
 	ATL::CAutoPtr<CFtpConnection> m_ptrFtpConn;
 	UINT m_idcStatusText;
+	CImageList m_imageList;
+	int m_iFolderImg;
+	int m_iFolderOpenImg;
+	int m_iFtpRootImg;
 
 // implementation helpers
 private:

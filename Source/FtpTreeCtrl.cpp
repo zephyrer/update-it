@@ -31,6 +31,7 @@
 // other includes
 
 #include "FtpTreeCtrl.h"
+#include "UpdateItApp.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -59,12 +60,31 @@ END_MESSAGE_MAP()
 
 CFtpTreeCtrl::CFtpTreeCtrl(UINT idcStatusText):
 m_ftpSession(_T("UpdateIt/1.0")),
-m_idcStatusText(idcStatusText)
+m_idcStatusText(idcStatusText),
+m_iFolderImg(-1),
+m_iFolderOpenImg(-1),
+m_iFtpRootImg(-1)
 {
+	HICON hFolderIcon = NULL;
+
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	int cxSmIcon = ::GetSystemMetrics(SM_CXSMICON);
+	int cySmIcon = ::GetSystemMetrics(SM_CYSMICON);
+	m_imageList.Create(cxSmIcon, cySmIcon, ILC_COLOR32 | ILC_MASK, 8, 8);
+
+	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FOLDER_XP));
+	m_iFolderImg = m_imageList.Add(hFolderIcon);
+	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FOLDER_OPEN_XP));
+	m_iFolderOpenImg = m_imageList.Add(hFolderIcon);
+	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FTP_ROOT_XP));
+	m_iFtpRootImg = m_imageList.Add(hFolderIcon);
 }
 
 CFtpTreeCtrl::~CFtpTreeCtrl(void)
 {
+	m_imageList.DeleteImageList();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,18 +119,13 @@ void CFtpTreeCtrl::Disconnect(void)
 	}
 }
 
-HTREEITEM CFtpTreeCtrl::InsertRootItems(LPCTSTR pszRootText)
+HTREEITEM CFtpTreeCtrl::InsertRootItem(LPCTSTR pszRootText)
 {
 	ASSERT(m_ptrFtpConn != NULL);
 
-	TVINSERTSTRUCT tvInsert = { 0 };
-	tvInsert.hParent = TVI_ROOT;
-	tvInsert.hInsertAfter = TVI_LAST;
-	tvInsert.item.mask = TVIF_TEXT;
-	tvInsert.item.pszText = const_cast<LPTSTR>(pszRootText);
+	SetImageList(&m_imageList, TVSIL_NORMAL);
 
-	HTREEITEM hRootItem = InsertItem(&tvInsert);
-
+	HTREEITEM hRootItem = InsertItem(pszRootText, m_iFtpRootImg, m_iFtpRootImg, TVI_ROOT, TVI_LAST);
 	if (hRootItem != NULL)
 	{
 		SearchForFolders(hRootItem);
@@ -189,7 +204,7 @@ void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 		fContinue = ftpFinder.FindNextFile();
 		if (ftpFinder.IsDirectory() && !ftpFinder.IsDots())
 		{
-			InsertItem(ftpFinder.GetFileName(), hParentItem, TVI_LAST);
+			InsertItem(ftpFinder.GetFileName(), m_iFolderImg, m_iFolderOpenImg, hParentItem, TVI_LAST);
 		}
 	}
 
@@ -242,6 +257,7 @@ void CFtpTreeCtrl::AssertValid(void) const
 
 	// ...and then verify our own state as well
 	ASSERT_VALID(&m_ftpSession);
+	ASSERT_VALID(&m_imageList);
 }
 
 void CFtpTreeCtrl::Dump(CDumpContext& dumpCtx) const
@@ -254,6 +270,10 @@ void CFtpTreeCtrl::Dump(CDumpContext& dumpCtx) const
 		// ...and then dump own unique members
 		dumpCtx << "m_ftpSession = " << m_ftpSession;
 		dumpCtx << "\nm_idcStatusText = " << m_idcStatusText;
+		dumpCtx << "\nm_imageList = " << m_imageList;
+		dumpCtx << "\nm_iFolderImg = " << m_iFolderImg;
+		dumpCtx << "\nm_iFolderOpenImg = " << m_iFolderOpenImg;
+		dumpCtx << "\nm_iFtpRootImg = " << m_iFtpRootImg;
 	}
 	catch (CFileException* pErr)
 	{
