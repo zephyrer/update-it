@@ -18,4 +18,4 @@ REM limitations under the License.
 
 REM irbuild.cmd - NT command script to perform incremental release build
 
-nant.exe -f:UpdateIt.2008.build @NAntSettings.txt build-all
+nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Release build" build-all

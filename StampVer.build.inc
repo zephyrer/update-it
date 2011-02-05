@@ -60,6 +60,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_COMMENTS" value="${VerComments}"/>
 					<token key="APP_NAME" value="${AppName}"/>
 					<token key="EXE_NAME" value="${ExeName}"/>
 				</replacetokens>
@@ -96,6 +97,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_COMMENTS" value="${VerComments}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -117,6 +119,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_COMMENTS" value="${VerComments}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -149,6 +152,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_COMMENTS" value="${VerComments}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -180,6 +184,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_COMMENTS" value="${VerComments}"/>
 				</replacetokens>
 			</filterchain>
 		</copy>
@@ -201,6 +206,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_SUFFIX" value="${VerSuffix}"/>
 					<token key="CHARACTER_SET" value="${CharacterSet}"/>
 					<token key="BUILD_TYPE" value="${BuildType}"/>
 				</replacetokens>
@@ -218,6 +224,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_SUFFIX" value="${VerSuffix}"/>
 					<token key="CHARACTER_SET" value="${CharacterSet}"/>
 					<token key="BUILD_TYPE" value="${BuildType}"/>
 				</replacetokens>
@@ -235,6 +242,7 @@ StampVer.build.inc - 'stamp-ver' target
 					<token key="VER_MINOR" value="${VerMinor}"/>
 					<token key="VER_BUILD" value="${VerBuild}"/>
 					<token key="SVN_REV" value="${SvnRev}"/>
+					<token key="VER_SUFFIX" value="${VerSuffix}"/>
 					<token key="CHARACTER_SET" value="${CharacterSet}"/>
 					<token key="BUILD_TYPE" value="${BuildType}"/>
 				</replacetokens>

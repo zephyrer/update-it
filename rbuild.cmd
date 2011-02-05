@@ -18,4 +18,4 @@ REM limitations under the License.
 
 REM rbuild.cmd - NT command script to perform full release build
 
-nant.exe -f:UpdateIt.2008.build @NAntSettings.txt rebuild-all
+nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Release build" rebuild-all

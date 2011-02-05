@@ -18,4 +18,4 @@ REM limitations under the License.
 
 REM sbuild.cmd - NT command script to create setup packages
 
-nant.exe -f:UpdateIt.2008.build @NAntSettings.txt create-distr
+nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Release build" create-distr

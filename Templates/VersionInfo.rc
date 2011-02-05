@@ -36,7 +36,7 @@ VS_VERSION_INFO VERSIONINFO
       BEGIN
          BLOCK "040904b0"
          BEGIN
-            VALUE "Comments", "none"
+            VALUE "Comments", "@VER_COMMENTS@"
             VALUE "CompanyName", "Elijah Zarezky"
             VALUE "FileDescription", "@APP_NAME@ Application Executable"
             VALUE "FileVersion", "@VER_MAJOR@.@VER_MINOR@.@VER_BUILD@.@SVN_REV@"

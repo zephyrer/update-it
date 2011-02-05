@@ -16,6 +16,6 @@ REM WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM See the License for the specific language governing permissions and
 REM limitations under the License.
 
-REM gbuild.cmd - NT command script to perform deveopment build for Google Code
+REM devbuild.cmd - NT command script to perform developemnt build
 
-nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Development build for Google Code" -D:VerSuffix=".dev" -D:CommitMsg="Development build for Google Code." rebuild-all commit-src
+nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Development build" -D:VerSuffix=".dev" zip-all
