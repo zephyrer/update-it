@@ -19,14 +19,20 @@
 #define IDR_FILETRASH_XP                117
 #define IDR_FILEZIP_XP                  118
 #define IDR_FILEUPLOAD_XP               119
+#define IDI_FOLDER_XP                   120
+#define IDI_FOLDER_VISTA                121
+#define IDI_FOLDER_OPEN_XP              122
+#define IDI_FOLDER_OPEN_VISTA           123
+#define IDI_FTP_ROOT_XP                 124
+#define IDI_FTP_ROOT_VISTA              125
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        120
+#define _APS_NEXT_RESOURCE_VALUE        126
 #define _APS_NEXT_COMMAND_VALUE         40033
 #define _APS_NEXT_CONTROL_VALUE         1055
-#define _APS_NEXT_SYMED_VALUE           120
+#define _APS_NEXT_SYMED_VALUE           126
 #endif
 #endif

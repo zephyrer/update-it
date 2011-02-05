@@ -700,6 +700,30 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\BinRes\FolderOpenVista.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FolderOpenXP.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FolderVista.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FolderXP.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FtpRootVista.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\BinRes\FtpRootXP.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\Manifest.2008.xml"
 				>
 				<FileConfiguration
