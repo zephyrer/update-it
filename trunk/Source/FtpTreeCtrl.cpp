@@ -148,6 +148,8 @@ void CFtpTreeCtrl::OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult)
 
 	if (reinterpret_cast<NMTREEVIEW*>(pHdr)->action == TVE_EXPAND)
 	{
+		GetParent()->GetDlgItem(IDOK)->EnableWindow(FALSE);
+		GetParent()->GetDlgItem(IDCANCEL)->EnableWindow(FALSE);
 		BeginWaitCursor();
 		
 		HTREEITEM hNextItem = GetChildItem(tviNew.hItem);
@@ -159,6 +161,8 @@ void CFtpTreeCtrl::OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult)
 		}
 
 		EndWaitCursor();
+		GetParent()->GetDlgItem(IDCANCEL)->EnableWindow(TRUE);
+		GetParent()->GetDlgItem(IDOK)->EnableWindow(TRUE);
 	}
 
 	SetStatusText(GetCurrentPath());
@@ -213,6 +217,7 @@ void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 		{
 			InsertItem(ftpFinder.GetFileName(), m_iFolderImg, m_iFolderOpenImg, hParentItem, TVI_LAST);
 		}
+		PumpWaitingMessages();
 	}
 
 	ftpFinder.Close();
@@ -249,6 +254,20 @@ void CFtpTreeCtrl::DeleteChildItems(HTREEITEM hParentItem)
 		HTREEITEM hNextItem = GetNextSiblingItem(hCurItem);
 		DeleteItem(hCurItem);
 		hCurItem = hNextItem;
+	}
+}
+
+void CFtpTreeCtrl::PumpWaitingMessages(void)
+{
+	MSG msg = { 0 };
+
+	while (::PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE))
+	{
+#if (_MFC_VER < 0x0700)
+		AfxGetThread()->PumpMessage();
+#else
+		AfxPumpMessage();
+#endif   // _MFC_VER
 	}
 }
 

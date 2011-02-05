@@ -70,6 +70,7 @@ private:
 	CString GetCurrentPath(void);
 	CString GetItemPath(HTREEITEM hItem);
 	void DeleteChildItems(HTREEITEM hParentItem);
+	void PumpWaitingMessages(void);
 
 // properties
 private:
