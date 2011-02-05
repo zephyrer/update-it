@@ -79,11 +79,11 @@ m_iFtpRootImg(-1)
 
 	m_imageList.Create(cxSmIcon, cySmIcon, nBitsPixel | ILC_MASK, 8, 8);
 
-	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FOLDER_XP));
+	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(m_idrFolder));
 	m_iFolderImg = m_imageList.Add(hFolderIcon);
-	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FOLDER_OPEN_XP));
+	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(m_idrFolderOpen));
 	m_iFolderOpenImg = m_imageList.Add(hFolderIcon);
-	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FTP_ROOT_XP));
+	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(m_idrFtpRoot));
 	m_iFtpRootImg = m_imageList.Add(hFolderIcon);
 }
 
