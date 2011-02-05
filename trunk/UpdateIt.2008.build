@@ -75,6 +75,14 @@ UpdateIt.2008.build - NAnt script to build release
 		value="0"
 		overwrite="false"/>
 	<property
+		name="VerComments"
+		value="none"
+		overwrite="false"/>
+	<property
+		name="VerSuffix"
+		value=""
+		overwrite="false"/>
+	<property
 		name="AppName"
 		value="UpdateIt!"
 		readonly="true"/>
@@ -226,15 +234,15 @@ UpdateIt.2008.build - NAnt script to build release
 			program="7z.exe"
 			workingdir="Setup">
 			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup.zip"/>
-			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup.exe"/>
+			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}${VerSuffix}-setup.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}${VerSuffix}-setup.exe"/>
 		</exec>
 		<exec
 			program="7z.exe"
 			workingdir="Setup">
 			<arg line="a -tzip -mm=Deflate -mx7 -bd"/>
-			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.zip"/>
-			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}-setup-universal.exe"/>
+			<arg value="update-it-${VerMajor}.${VerMinor}.${VerBuild}${VerSuffix}-setup-universal.zip"/>
+			<arg value="UpdateIt-${VerMajor}.${VerMinor}.${VerBuild}${VerSuffix}-setup-universal.exe"/>
 		</exec>
 	</target>
 
