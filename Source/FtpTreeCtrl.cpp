@@ -197,7 +197,9 @@ void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 		hItem = GetParentItem(hItem);
 	}
 
-	SetStatusText(strMask);
+	CString strStatusText;
+	strStatusText.Format(IDS_SEARCHING_FTP_FORMAT, static_cast<LPCTSTR>(strMask));
+	SetStatusText(strStatusText);
 
 	strMask += _T("/*");
 
