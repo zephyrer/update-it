@@ -36,6 +36,7 @@
 #include "UpdateItApp.h"
 #include "../Common/Registry.h"
 #include "Arguments.h"
+#include "BrowseFtpDialog.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // avoid unwanted ICL warnings
@@ -376,6 +377,8 @@ void CActionPage::OnButtonZipOptions(void)
 
 void CActionPage::OnButtonFtpRoot(void)
 {
+	CBrowseFtpDialog dlgBrowseFtp;
+
 	CDataExchange dx(this, TRUE);
 
 	// prevent control notifications from being dispatched during UpdateData
@@ -387,16 +390,16 @@ void CActionPage::OnButtonFtpRoot(void)
 	BOOL bOK = FALSE;   // assume failure
 	try
 	{
-		DDX_Text(&dx, IDC_EDIT_FTP_SERVER, m_dlgBrowseFtp.m_strServer);
-		DDV_MinMaxChars(&dx, m_dlgBrowseFtp.m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
-		DDXV_Word(&dx, IDC_EDIT_FTP_PORT, m_dlgBrowseFtp.m_nPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
-		DDX_Text(&dx, IDC_EDIT_FTP_LOGIN, m_dlgBrowseFtp.m_strLogin);
-		DDV_MaxChars(&dx, m_dlgBrowseFtp.m_strLogin, MAX_FTP_LOGIN_LENGTH);
-		DDX_Text(&dx, IDC_EDIT_FTP_PASSWORD, m_dlgBrowseFtp.m_strPassword);
-		DDV_MaxChars(&dx, m_dlgBrowseFtp.m_strPassword, MAX_FTP_PASSWORD_LENGTH);
-		DDX_Text(&dx, IDC_EDIT_FTP_ROOT, m_dlgBrowseFtp.m_strRoot);
-		DDV_MaxChars(&dx, m_dlgBrowseFtp.m_strRoot, _MAX_PATH);
-		DDX_Check(&dx, IDC_CHECK_PASSIVE, m_dlgBrowseFtp.m_fPassive);
+		DDX_Text(&dx, IDC_EDIT_FTP_SERVER, dlgBrowseFtp.m_strServer);
+		DDV_MinMaxChars(&dx, dlgBrowseFtp.m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
+		DDXV_Word(&dx, IDC_EDIT_FTP_PORT, dlgBrowseFtp.m_nPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
+		DDX_Text(&dx, IDC_EDIT_FTP_LOGIN, dlgBrowseFtp.m_strLogin);
+		DDV_MaxChars(&dx, dlgBrowseFtp.m_strLogin, MAX_FTP_LOGIN_LENGTH);
+		DDX_Text(&dx, IDC_EDIT_FTP_PASSWORD, dlgBrowseFtp.m_strPassword);
+		DDV_MaxChars(&dx, dlgBrowseFtp.m_strPassword, MAX_FTP_PASSWORD_LENGTH);
+		DDX_Text(&dx, IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
+		DDV_MaxChars(&dx, dlgBrowseFtp.m_strRoot, _MAX_PATH);
+		DDX_Check(&dx, IDC_CHECK_PASSIVE, dlgBrowseFtp.m_fPassive);
 
 		bOK = TRUE;   // it worked
 	}
@@ -416,9 +419,9 @@ void CActionPage::OnButtonFtpRoot(void)
 
 	pThreadState->m_hLockoutNotifyWindow = hWndOldLockout;
 	
-	if (bOK && m_dlgBrowseFtp.DoModal() == IDOK)
+	if (bOK && dlgBrowseFtp.DoModal() == IDOK)
 	{
-		SetDlgItemText(IDC_EDIT_FTP_ROOT, m_dlgBrowseFtp.m_strRoot);
+		SetDlgItemText(IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
 	}
 }
 
@@ -590,7 +593,6 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_nSmtpPort = " << m_nSmtpPort;
 		dumpCtx << "\nm_strMailBody = " << m_strMailBody;
 		dumpCtx << "\nm_dlgZipOpts = " << m_dlgZipOpts;
-		dumpCtx << "\nm_dlgBrowseFtp = " << m_dlgBrowseFtp;
 		dumpCtx << "\nm_dlgAuth = " << m_dlgAuth;
 	}
 	catch (CFileException* pErr)

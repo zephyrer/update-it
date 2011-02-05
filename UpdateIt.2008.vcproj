@@ -456,6 +456,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\FtpTreeCtrl.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\GetWinVer.cpp"
 				>
 			</File>
@@ -579,6 +583,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\FirstLaunchPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FtpTreeCtrl.h"
 				>
 			</File>
 			<File

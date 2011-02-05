@@ -94,7 +94,15 @@ BOOL CBrowseFtpDialog::OnInitDialog(void)
 	SetWindowProp(SZ_PROP_PORT, MAKEINTRESOURCE(m_nPort));
 	SetWindowProp(SZ_PROP_PASSIVE, MAKEINTRESOURCE(m_fPassive));
 
-	AfxBeginThread(&FoldersFinder, GetSafeHwnd());
+	BeginWaitCursor();
+#if defined(_DEBUG)
+	m_treeFtp.Connect(_T("ftp.gnu.org"), NULL, NULL, m_nPort, m_fPassive);
+	m_treeFtp.InsertRootItems(_T("ftp.gnu.org"));
+#else
+	m_treeFtp.Connect(m_strServer, m_strLogin, m_strPassword, m_nPort, m_fPassive);
+	m_treeFtp.InsertRootItems(m_strServer);
+#endif   // _DEBUG
+	EndWaitCursor();
 
 	return (TRUE);
 }
@@ -102,6 +110,8 @@ BOOL CBrowseFtpDialog::OnInitDialog(void)
 void CBrowseFtpDialog::DoDataExchange(CDataExchange* pDX)
 {
 	__super::DoDataExchange(pDX);
+
+	DDX_Control(pDX, IDC_TREE_FTP_FOLDERS, m_treeFtp);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +119,8 @@ void CBrowseFtpDialog::DoDataExchange(CDataExchange* pDX)
 
 void CBrowseFtpDialog::OnDestroy(void)
 {
+	m_treeFtp.Disconnect();
+
 	RemoveWindowProp(SZ_PROP_SERVER);
 	RemoveWindowProp(SZ_PROP_LOGIN);
 	RemoveWindowProp(SZ_PROP_PASSWORD);

@@ -27,6 +27,7 @@
 // dependent includes
 
 #include "CustomDialog.h"
+#include "FtpTreeCtrl.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // CBrowseFtpDialog
@@ -59,8 +60,10 @@ public:
 	CString m_strPassword;
 	CString m_strRoot;
 	BOOL m_fPassive;
+	// controls
+	CFtpTreeCtrl m_treeFtp;
 
-	// implementation helpers
+// implementation helpers
 private:
 	BOOL SetWindowProp(LPCTSTR pszPropName, LPCTSTR pszPropData);
 	void RemoveWindowProp(LPCTSTR pszPropName);
