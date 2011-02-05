@@ -113,6 +113,7 @@ void CBrowseFtpDialog::DoDataExchange(CDataExchange* pDX)
 	__super::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_TREE_FTP_FOLDERS, m_treeFtp);
+	DDX_Text(pDX, IDC_STATIC_STATUS, m_strRoot);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////

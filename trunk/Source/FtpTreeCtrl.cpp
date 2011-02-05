@@ -72,7 +72,12 @@ m_iFtpRootImg(-1)
 
 	int cxSmIcon = ::GetSystemMetrics(SM_CXSMICON);
 	int cySmIcon = ::GetSystemMetrics(SM_CYSMICON);
-	m_imageList.Create(cxSmIcon, cySmIcon, ILC_COLOR32 | ILC_MASK, 8, 8);
+
+	HDC hdcScreen = ::GetDC(NULL);
+	int nBitsPixel = ::GetDeviceCaps(hdcScreen, BITSPIXEL);
+	::ReleaseDC(NULL, hdcScreen);
+
+	m_imageList.Create(cxSmIcon, cySmIcon, nBitsPixel | ILC_MASK, 8, 8);
 
 	hFolderIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(IDI_FOLDER_XP));
 	m_iFolderImg = m_imageList.Add(hFolderIcon);
