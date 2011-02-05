@@ -28,7 +28,6 @@
 
 #include "BetterPropPage.h"
 #include "ZipOptionsDialog.h"
-#include "BrowseFtpDialog.h"
 #include "AuthenticationDialog.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +103,6 @@ public:
 	CString m_strMailBody;
 	// helper dialogs
 	CZipOptionsDialog m_dlgZipOpts;
-	CBrowseFtpDialog m_dlgBrowseFtp;
 	CAuthenticationDialog m_dlgAuth;
 
 // implementation helpers

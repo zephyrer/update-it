@@ -14,57 +14,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// FilesList.h - interface of the CFilesList class
+// FtpTreeCtrl.h - interface of the CFtpTreeCtrl class
 
 #if defined(_MSC_VER) && (_MSC_VER > 1000)
 #pragma once
 #endif   // _MSC_VER
 
-#if !defined(__FilesList_h)
-#define __FilesList_h
+#if !defined(__FtpTreeCtrl_h)
+#define __FtpTreeCtrl_h
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-// CFilesList
+// CFtpTreeCtrl
 
-class CFilesList: public CSortingListCtrl
+class CFtpTreeCtrl: public CTreeCtrl
 {
-	DECLARE_DYNAMIC(CFilesList)
+	DECLARE_DYNAMIC(CFtpTreeCtrl)
 	DECLARE_MESSAGE_MAP()
 
 // construction/destruction
 public:
-	CFilesList(void);
-	virtual ~CFilesList(void);
+	CFtpTreeCtrl(void);
+	virtual ~CFtpTreeCtrl(void);
 
 // operations
 public:
-	void InsertColumns(void);
-
-// overridables
-protected:
-	virtual int CompareItems(int iItemLhs, int iItemRhs);
+	BOOL Connect(LPCTSTR pszServer, LPCTSTR pszLogin, LPCTSTR pszPassword, INTERNET_PORT nPort, BOOL fPassive);
+	void Disconnect(void);
+	HTREEITEM InsertRootItems(LPCTSTR pszRootText = _T("/"));
 
 // message map functions
 protected:
-	afx_msg void OnGetDispInfo(NMHDR* pHdr, LRESULT* pnResult);
+	afx_msg void OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult);
 
 // attributes
 public:
-	enum
-	{
-		// column indices
-		I_NAME,
-		I_EXTENSION,
-		I_PATH,
-		I_DATE,
-		I_TIME,
-		I_SIZE,
-		NUM_COLUMNS		// should be the LAST enumerator!
-	};
+	CInternetSession m_ftpSession;
+	ATL::CAutoPtr<CFtpConnection> m_ptrFtpConn;
 
 // implementation helpers
 private:
-	void SeparateThousands(CString& strNumber);
+	void SearchForFolders(HTREEITEM hParentItem);
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -74,6 +63,6 @@ public:
 #endif
 };
 
-#endif   // __FilesList_h
+#endif   // __FtpTreeCtrl_h
 
 // end of file
