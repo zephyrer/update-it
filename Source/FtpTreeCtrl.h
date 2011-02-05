@@ -33,7 +33,7 @@ class CFtpTreeCtrl: public CTreeCtrl
 
 // construction/destruction
 public:
-	CFtpTreeCtrl(void);
+	CFtpTreeCtrl(UINT idcStatusText = 0);
 	virtual ~CFtpTreeCtrl(void);
 
 // operations
@@ -45,15 +45,21 @@ public:
 // message map functions
 protected:
 	afx_msg void OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult);
+	afx_msg void OnSelChanged(NMHDR* pHdr, LRESULT* pnResult);
 
 // attributes
 public:
 	CInternetSession m_ftpSession;
 	ATL::CAutoPtr<CFtpConnection> m_ptrFtpConn;
+	UINT m_idcStatusText;
 
 // implementation helpers
 private:
+	void SetStatusText(LPCTSTR pszText);
 	void SearchForFolders(HTREEITEM hParentItem);
+	CString GetCurrentPath(void);
+	CString GetItemPath(HTREEITEM hItem);
+	void DeleteChildItems(HTREEITEM hParentItem);
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -62,6 +68,14 @@ public:
 	virtual void Dump(CDumpContext& dumpCtx) const;
 #endif
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// inlines
+
+inline CString CFtpTreeCtrl::GetCurrentPath(void)
+{
+	return (GetItemPath(GetSelectedItem()));
+}
 
 #endif   // __FtpTreeCtrl_h
 

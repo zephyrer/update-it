@@ -51,13 +51,15 @@ IMPLEMENT_DYNAMIC(CFtpTreeCtrl, CTreeCtrl)
 
 BEGIN_MESSAGE_MAP(CFtpTreeCtrl, CTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemExpanding)
+	ON_NOTIFY_REFLECT(TVN_SELCHANGED, OnSelChanged)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
-CFtpTreeCtrl::CFtpTreeCtrl(void):
-m_ftpSession(_T("UpdateIt/1.0"))
+CFtpTreeCtrl::CFtpTreeCtrl(UINT idcStatusText):
+m_ftpSession(_T("UpdateIt/1.0")),
+m_idcStatusText(idcStatusText)
 {
 }
 
@@ -131,6 +133,7 @@ void CFtpTreeCtrl::OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult)
 		HTREEITEM hNextItem = GetChildItem(tviNew.hItem);
 		while (hNextItem != NULL)
 		{
+			DeleteChildItems(hNextItem);
 			SearchForFolders(hNextItem);
 			hNextItem = GetNextItem(hNextItem, TVGN_NEXT);
 		}
@@ -138,11 +141,29 @@ void CFtpTreeCtrl::OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult)
 		EndWaitCursor();
 	}
 
+	SetStatusText(GetCurrentPath());
+
 	pnResult = FALSE;   // TRUE prevents the list from expanding or collapsing
+}
+
+void CFtpTreeCtrl::OnSelChanged(NMHDR* pHdr, LRESULT* /*pnResult*/)
+{
+	SetStatusText(GetItemPath(reinterpret_cast<NMTREEVIEW*>(pHdr)->itemNew.hItem));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
+
+void CFtpTreeCtrl::SetStatusText(LPCTSTR pszText)
+{
+	ASSERT(AfxIsValidString(pszText));
+
+	CWnd* pStatusWnd = GetParent()->GetDlgItem(m_idcStatusText);
+	if (pStatusWnd != NULL)
+	{
+		pStatusWnd->SetWindowText(pszText);
+	}
+}
 
 void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 {
@@ -155,6 +176,8 @@ void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 		strMask.Insert(0, _T('/'));
 		hItem = GetParentItem(hItem);
 	}
+
+	SetStatusText(strMask);
 
 	strMask += _T("/*");
 
@@ -173,6 +196,38 @@ void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 	ftpFinder.Close();
 
 	SortChildren(hParentItem);
+}
+
+CString CFtpTreeCtrl::GetItemPath(HTREEITEM hItem)
+{
+	CString strItemPath;
+
+	if (hItem == GetRootItem())
+	{
+		strItemPath = _T("/");
+	}
+	else if (hItem != NULL)
+	{
+		while (hItem != GetRootItem())
+		{
+			strItemPath.Insert(0, GetItemText(hItem));
+			strItemPath.Insert(0, _T('/'));
+			hItem = GetParentItem(hItem);
+		}
+	}
+
+	return (strItemPath);
+}
+
+void CFtpTreeCtrl::DeleteChildItems(HTREEITEM hParentItem)
+{
+	HTREEITEM hCurItem = GetChildItem(hParentItem);
+	while (hCurItem != NULL)
+	{
+		HTREEITEM hNextItem = GetNextSiblingItem(hCurItem);
+		DeleteItem(hCurItem);
+		hCurItem = hNextItem;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -198,6 +253,7 @@ void CFtpTreeCtrl::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 		dumpCtx << "m_ftpSession = " << m_ftpSession;
+		dumpCtx << "\nm_idcStatusText = " << m_idcStatusText;
 	}
 	catch (CFileException* pErr)
 	{

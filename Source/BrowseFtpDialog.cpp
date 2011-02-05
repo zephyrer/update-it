@@ -73,7 +73,8 @@ CBrowseFtpDialog::CBrowseFtpDialog(CWnd* pParentWnd):
 CCustomDialog(IDD_BROWSE_FTP, pParentWnd),
 m_nPort(INTERNET_DEFAULT_FTP_PORT),
 m_strRoot(_T("/")),
-m_fPassive(FALSE)
+m_fPassive(FALSE),
+m_treeFtp(IDC_STATIC_STATUS)
 {
 }
 
