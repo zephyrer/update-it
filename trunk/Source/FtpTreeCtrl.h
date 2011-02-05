@@ -24,6 +24,11 @@
 #define __FtpTreeCtrl_h
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+// dependent includes
+
+#include "WindowsVersion.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 // CFtpTreeCtrl
 
 class CFtpTreeCtrl: public CTreeCtrl
@@ -56,6 +61,7 @@ public:
 	int m_iFolderImg;
 	int m_iFolderOpenImg;
 	int m_iFtpRootImg;
+	CWindowsVersion m_winVer;
 
 // implementation helpers
 private:
@@ -64,6 +70,15 @@ private:
 	CString GetCurrentPath(void);
 	CString GetItemPath(HTREEITEM hItem);
 	void DeleteChildItems(HTREEITEM hParentItem);
+
+// properties
+private:
+	UINT GetFolderIcoID(void);
+	__declspec(property(get = GetFolderIcoID)) UINT m_idrFolder;
+	UINT GetFolderOpenIcoID(void);
+	__declspec(property(get = GetFolderOpenIcoID)) UINT m_idrFolderOpen;
+	UINT GetFtpRootIcoID(void);
+	__declspec(property(get = GetFtpRootIcoID)) UINT m_idrFtpRoot;
 
 // diagnostic services
 #if defined(_DEBUG)
@@ -79,6 +94,21 @@ public:
 inline CString CFtpTreeCtrl::GetCurrentPath(void)
 {
 	return (GetItemPath(GetSelectedItem()));
+}
+
+inline UINT CFtpTreeCtrl::GetFolderIcoID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_VISTA ? IDI_FOLDER_XP : IDI_FOLDER_VISTA);
+}
+
+inline UINT CFtpTreeCtrl::GetFolderOpenIcoID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_VISTA ? IDI_FOLDER_OPEN_XP : IDI_FOLDER_OPEN_VISTA);
+}
+
+inline UINT CFtpTreeCtrl::GetFtpRootIcoID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_VISTA ? IDI_FTP_ROOT_XP : IDI_FTP_ROOT_VISTA);
 }
 
 #endif   // __FtpTreeCtrl_h
