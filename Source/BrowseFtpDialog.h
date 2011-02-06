@@ -69,8 +69,6 @@ private:
 	void RemoveWindowProp(LPCTSTR pszPropName);
 	static BOOL GetWindowProp(HWND hWnd, LPCTSTR pszPropName, CString& strDest);
 	static DWORD GetWindowProp(HWND hWnd, LPCTSTR pszPropName);
-	static void SearchForFolders(CFtpConnection* pFtpConn, LPCTSTR pszRoot);
-	static UINT AFX_CDECL FoldersFinder(void* pvParam);
 
 // diagnostic services
 #if defined(_DEBUG)

@@ -192,6 +192,10 @@ Type: filesandordirs; Name: "{app}\Microsoft.VC90.MFC"
 Type: files; Name: "{app}\Microsoft.VC90.MFC.manifest"
 Type: files; Name: "{app}\mfc90.dll"
 Type: files; Name: "{app}\mfcm90.dll"
+;; from pre-1.6 release
+Type: files; Name: "{group}\UpdateIt! on the Web.lnk"
+Type: files; Name: "{group}\UpdateIt! в Интернет.lnk"
+Type: files; Name: "{app}\UpdateIt.url"
 
 [Files]
 ;; core application files
@@ -210,19 +214,19 @@ Source: "..\Languages\Russian_Russia.1251\Output.2008\x86\@BUILD_TYPE@\@CHARACTE
 Source: "..\Redist\Microsoft.VC90.CRT\msvcr90.dll"; DestDir: "{app}"
 Source: "..\Redist\Microsoft.VC90.CRT\msvcp90.dll"; DestDir: "{app}"
 Source: "..\Redist\Microsoft.VC90.CRT\msvcm90.dll"; DestDir: "{app}"
-Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.PrivateCRT.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
-Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
+Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.PrivateCRT.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600; Flags: ignoreversion
+Source: "..\Redist\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600; Flags: ignoreversion
 
 ;; MFC library redistributables
 Source: "..\Redist\Microsoft.VC90.MFC\mfc90u.dll"; DestDir: "{app}"
-Source: "..\Redist\Microsoft.VC90.MFC\mfc90u.dll.1000.config"; DestDir: "{app}"; MinVersion: 0,5.01.2600; AfterInstall: AdjustAfxConfig
+Source: "..\Redist\Microsoft.VC90.MFC\mfc90u.dll.1000.config"; DestDir: "{app}"; MinVersion: 0,5.01.2600; AfterInstall: AdjustAfxConfig; Flags: ignoreversion
 Source: "..\Redist\Microsoft.VC90.MFC\mfcm90u.dll"; DestDir: "{app}"
-Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.PrivateMFC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
+Source: "..\Redist\Microsoft.VC90.MFC\Microsoft.VC90.PrivateMFC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600; Flags: ignoreversion
 
 ;; MFC library localizations
 Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90enu.dll"; DestDir: "{app}"
 Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"
-Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600
+Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600; Flags: ignoreversion
 
 ;; OpenSSL redistributables
 Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
@@ -251,15 +255,24 @@ Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; La
 Name: "{group}\Документация (на русском)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: ru
 Name: "{group}\License Agreement"; Filename: "{app}\ApacheLicense.rtf"; Languages: en
 Name: "{group}\Лицензионное соглашение"; Filename: "{app}\ApacheLicense.rtf"; Languages: ru
-Name: "{group}\UpdateIt! on the Web"; Filename: "{app}\UpdateIt.url"; Languages: en
-Name: "{group}\UpdateIt! в Интернет"; Filename: "{app}\UpdateIt.url"; Languages: ru
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"; Languages: en
 Name: "{group}\Удалить UpdateIt!"; Filename: "{uninstallexe}"; Languages: ru
 Name: "{userdesktop}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"; Tasks: quicklaunchicon
 
 [INI]
-Filename: "{app}\UpdateIt.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://zarezky.spb.ru/projects/update_it.html"
+Filename: "{group}\UpdateIt! on the Web.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://zarezky.spb.ru/projects/update-it.en.html"; Languages: en
+Filename: "{group}\UpdateIt! on the Web.url"; Section: "InternetShortcut"; Key: "IconFile"; String: ""; Languages: en
+Filename: "{group}\UpdateIt! on the Web.url"; Section: "InternetShortcut"; Key: "IconIndex"; String: "0"; Languages: en
+Filename: "{group}\UpdateIt! on the Web.url"; Section: "InternetShortcut"; Key: "Hotkey"; String: "0"; Languages: en
+Filename: "{group}\UpdateIt! on the Web.url"; Section: "InternetShortcut"; Key: "WorkingDirectory"; String: ""; Languages: en
+Filename: "{group}\UpdateIt! on the Web.url"; Section: "InternetShortcut"; Key: "ShowCommand"; String: "1"; Languages: en
+Filename: "{group}\UpdateIt! в Интернет.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://zarezky.spb.ru/projects/update-it.html"; Languages: ru
+Filename: "{group}\UpdateIt! в Интернет.url"; Section: "InternetShortcut"; Key: "IconFile"; String: ""; Languages: ru
+Filename: "{group}\UpdateIt! в Интернет.url"; Section: "InternetShortcut"; Key: "IconIndex"; String: "0"; Languages: ru
+Filename: "{group}\UpdateIt! в Интернет.url"; Section: "InternetShortcut"; Key: "Hotkey"; String: "0"; Languages: ru
+Filename: "{group}\UpdateIt! в Интернет.url"; Section: "InternetShortcut"; Key: "WorkingDirectory"; String: ""; Languages: ru
+Filename: "{group}\UpdateIt! в Интернет.url"; Section: "InternetShortcut"; Key: "ShowCommand"; String: "1"; Languages: ru
 Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "from"; String: "anonymous@unknown.org"; Flags: createkeyifdoesntexist
 Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "host"; String: "mail.unknown.org"; Flags: createkeyifdoesntexist
 Filename: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"; Section: "SMTP"; Key: "port"; String: "25"; Flags: createkeyifdoesntexist
@@ -294,7 +307,8 @@ Name: quicklaunchicon; Description: "Create a &Quick Launch icon"; GroupDescript
 Filename: "{app}\UpdateIt.exe"; Description: "Launch UpdateIt!"; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-Type: files; Name: "{app}\UpdateIt.url"
+Type: files; Name: "{group}\UpdateIt! on the Web.url"
+Type: files; Name: "{group}\UpdateIt! в Интернет.url"
 Type: files; Name: "{userappdata}\Elijah Zarezky\UpdateIt\CrashReporter.ini"
 
 ;; end of file

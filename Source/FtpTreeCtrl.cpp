@@ -150,7 +150,7 @@ void CFtpTreeCtrl::OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult)
 	{
 		GetParent()->GetDlgItem(IDOK)->EnableWindow(FALSE);
 		GetParent()->GetDlgItem(IDCANCEL)->EnableWindow(FALSE);
-		BeginWaitCursor();
+		CWaitCursor waitCursor;
 		
 		HTREEITEM hNextItem = GetChildItem(tviNew.hItem);
 		while (hNextItem != NULL)
@@ -160,7 +160,6 @@ void CFtpTreeCtrl::OnItemExpanding(NMHDR* pHdr, LRESULT* pnResult)
 			hNextItem = GetNextItem(hNextItem, TVGN_NEXT);
 		}
 
-		EndWaitCursor();
 		GetParent()->GetDlgItem(IDCANCEL)->EnableWindow(TRUE);
 		GetParent()->GetDlgItem(IDOK)->EnableWindow(TRUE);
 	}
@@ -207,20 +206,28 @@ void CFtpTreeCtrl::SearchForFolders(HTREEITEM hParentItem)
 
 	strMask += _T("/*");
 
-	CFtpFileFind ftpFinder(m_ptrFtpConn);
-	BOOL fContinue = ftpFinder.FindFile(strMask);
-
-	while (fContinue)
+	try
 	{
-		fContinue = ftpFinder.FindNextFile();
-		if (ftpFinder.IsDirectory() && !ftpFinder.IsDots())
-		{
-			InsertItem(ftpFinder.GetFileName(), m_iFolderImg, m_iFolderOpenImg, hParentItem, TVI_LAST);
-		}
-		PumpWaitingMessages();
-	}
+		CFtpFileFind ftpFinder(m_ptrFtpConn);
+		BOOL fContinue = ftpFinder.FindFile(strMask);
 
-	ftpFinder.Close();
+		while (fContinue)
+		{
+			fContinue = ftpFinder.FindNextFile();
+			if (ftpFinder.IsDirectory() && !ftpFinder.IsDots())
+			{
+				InsertItem(ftpFinder.GetFileName(), m_iFolderImg, m_iFolderOpenImg, hParentItem, TVI_LAST);
+			}
+			PumpWaitingMessages();
+		}
+
+		ftpFinder.Close();
+	}
+	catch (CInternetException* pErr)
+	{
+		pErr->ReportError(MB_ICONSTOP | MB_OK);
+		pErr->Delete();
+	}
 
 	SortChildren(hParentItem);
 }
