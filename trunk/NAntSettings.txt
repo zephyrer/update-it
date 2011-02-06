@@ -1,6 +1,6 @@
 -t:net-3.5
 -emacs
 -D:VerMajor=1
--D:VerMinor=5
--D:VerBuild=5433
--D:SvnRev=353
+-D:VerMinor=6
+-D:VerBuild=5702
+-D:SvnRev=383

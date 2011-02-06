@@ -20,8 +20,8 @@
 #include <winver.h>
 
 VS_VERSION_INFO VERSIONINFO
-   FILEVERSION 1,5,5433,353
-   PRODUCTVERSION 1,5,0,0
+   FILEVERSION 1,6,5702,383
+   PRODUCTVERSION 1,6,0,0
    FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
 #if defined(_DEBUG)
    FILEFLAGS VS_FF_DEBUG
@@ -36,16 +36,16 @@ VS_VERSION_INFO VERSIONINFO
       BEGIN
          BLOCK "041904b0"
          BEGIN
-            VALUE "Comments", "Development build"
+            VALUE "Comments", "Development build, beware of bugs"
             VALUE "CompanyName", "Илья Зарецкий"
             VALUE "FileDescription", "Библиотечный модуль Russian_Russia.1251"
-            VALUE "FileVersion", "1.5.5433.353"
+            VALUE "FileVersion", "1.6.5702.383"
             VALUE "InternalName", "Russian_Russia.1251"
             VALUE "LegalCopyright", "Авторские права © 2007–2011 Илья Зарецкий"
             VALUE "LegalTrademarks", "Windows™ является зарегистрированной торговой маркой Корпорации Microsoft"
             VALUE "OriginalFilename", "Russian_Russia.1251.dll"
             VALUE "ProductName", "Power Gadgets"
-            VALUE "ProductVersion", "1.5"
+            VALUE "ProductVersion", "1.6"
          END
       END
       BLOCK "VarFileInfo"

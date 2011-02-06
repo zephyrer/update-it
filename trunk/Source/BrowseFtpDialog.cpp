@@ -95,7 +95,7 @@ BOOL CBrowseFtpDialog::OnInitDialog(void)
 	SetWindowProp(SZ_PROP_PORT, MAKEINTRESOURCE(m_nPort));
 	SetWindowProp(SZ_PROP_PASSIVE, MAKEINTRESOURCE(m_fPassive));
 
-	BeginWaitCursor();
+	CWaitCursor waitCursor;
 #if defined(_DEBUG)
 	m_treeFtp.Connect(_T("ftp.gnu.org"), NULL, NULL, m_nPort, m_fPassive);
 	m_treeFtp.InsertRootItem(_T("ftp.gnu.org"));
@@ -103,7 +103,6 @@ BOOL CBrowseFtpDialog::OnInitDialog(void)
 	m_treeFtp.Connect(m_strServer, m_strLogin, m_strPassword, m_nPort, m_fPassive);
 	m_treeFtp.InsertRootItem(m_strServer);
 #endif   // _DEBUG
-	EndWaitCursor();
 
 	return (TRUE);
 }
@@ -205,70 +204,6 @@ DWORD CBrowseFtpDialog::GetWindowProp(HWND hWnd, LPCTSTR pszPropName)
 	ASSERT(AfxIsValidString(pszPropName));
 
 	return (reinterpret_cast<DWORD>(::GetProp(hWnd, pszPropName)));
-}
-
-void CBrowseFtpDialog::SearchForFolders(CFtpConnection* pFtpConn, LPCTSTR pszRoot)
-{
-	ASSERT(pFtpConn != NULL);
-	ASSERT(pszRoot != NULL);
-
-	CFtpFileFind ftpFinder(pFtpConn);
-	CString strMask(pszRoot);
-	strMask += _T("/*");
-	BOOL fContinue = ftpFinder.FindFile(strMask);
-	
-	while (fContinue)
-	{
-		fContinue = ftpFinder.FindNextFile();
-		if (ftpFinder.IsDirectory() && !ftpFinder.IsDots())
-		{
-			TRACE(_T("FTP: %s\n"), static_cast<LPCTSTR>(ftpFinder.GetFilePath()));
-			SearchForFolders(pFtpConn, ftpFinder.GetFilePath());
-		}
-	}
-
-	ftpFinder.Close();
-}
-
-UINT AFX_CDECL CBrowseFtpDialog::FoldersFinder(void* pvParam)
-{
-	HWND hThisDlg = reinterpret_cast<HWND>(pvParam);
-	ASSERT(::IsWindow(hThisDlg));
-
-	CInternetSession ftpSession(_T("UpdateIt/1.0"));
-	CFtpConnection* pFtpConn = NULL;
-
-	try
-	{
-		CString strServer, strLogin, strPassword;
-		GetWindowProp(hThisDlg, SZ_PROP_SERVER, strServer);
-		GetWindowProp(hThisDlg, SZ_PROP_LOGIN, strLogin);
-		GetWindowProp(hThisDlg, SZ_PROP_PASSWORD, strPassword);
-		INTERNET_PORT nPort = LOWORD(GetWindowProp(hThisDlg, SZ_PROP_PORT));
-		BOOL fPassive = GetWindowProp(hThisDlg, SZ_PROP_PASSIVE);
-
-#if defined(_DEBUG)
-		pFtpConn = ftpSession.GetFtpConnection(_T("ftp.gnu.org"), NULL, NULL, nPort, fPassive);
-#else
-		pFtpConn = ftpSession.GetFtpConnection(strServer, strLogin, strPassword, nPort, fPassive);
-#endif   // _DEBUG
-		ASSERT(pFtpConn != NULL);
-		
-		SearchForFolders(pFtpConn, _T(""));
-	}
-	catch (CInternetException* pErr)
-	{
-		pErr->ReportError(MB_ICONSTOP | MB_OK);
-		pErr->Delete();
-	}
-
-	if (pFtpConn != NULL)
-	{
-		pFtpConn->Close();
-		delete pFtpConn;
-	}
-
-	return (0);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////

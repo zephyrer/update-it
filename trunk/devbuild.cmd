@@ -18,4 +18,4 @@ REM limitations under the License.
 
 REM devbuild.cmd - NT command script to perform developemnt build
 
-nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Development build" -D:VerSuffix=".dev" zip-all
+nant.exe -f:UpdateIt.2008.build @NAntSettings.txt -D:VerComments="Development build, beware of bugs" -D:VerSuffix=".dev" zip-all
