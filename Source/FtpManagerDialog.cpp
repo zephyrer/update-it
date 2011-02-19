@@ -53,13 +53,16 @@ IMPLEMENT_DYNAMIC(CFtpManagerDialog, CCustomDialog)
 // message map
 
 BEGIN_MESSAGE_MAP(CFtpManagerDialog, CCustomDialog)
+	ON_BN_CLICKED(IDC_BUTTON_FTP_EDIT, OnButtonEdit)
+	ON_BN_CLICKED(IDC_BUTTON_FTP_REMOVE, OnButtonRemove)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
 CFtpManagerDialog::CFtpManagerDialog(CWnd* pParentWnd):
-CCustomDialog(IDD_FTP_MANAGER, pParentWnd)
+CCustomDialog(IDD_FTP_MANAGER, pParentWnd),
+m_iFtpRootImg(-1)
 {
 	RegQueryData();
 }
@@ -78,7 +81,23 @@ BOOL CFtpManagerDialog::OnInitDialog(void)
 
 	__super::OnInitDialog();
 
+	CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+	ASSERT_VALID(pApp);
+
+	int cxSmIcon = ::GetSystemMetrics(SM_CXSMICON);
+	int cySmIcon = ::GetSystemMetrics(SM_CYSMICON);
+
+	HDC hdcScreen = ::GetDC(NULL);
+	int nBitsPixel = ::GetDeviceCaps(hdcScreen, BITSPIXEL);
+	::ReleaseDC(NULL, hdcScreen);
+
+	m_imageList.Create(cxSmIcon, cySmIcon, nBitsPixel | ILC_MASK, 8, 8);
+
+	HICON hItemIcon = pApp->LoadSmIcon(MAKEINTRESOURCE(m_idrFtpRoot));
+	m_iFtpRootImg = m_imageList.Add(hItemIcon);
+
 	m_listSites.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
+	m_listSites.SetImageList(&m_imageList, LVSIL_SMALL);
 
 	int cxVScroll = ::GetSystemMetrics(SM_CXVSCROLL);
 	m_listSites.GetClientRect(rectList);
@@ -103,6 +122,38 @@ void CFtpManagerDialog::DoDataExchange(CDataExchange* pDX)
 	__super::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_LIST_FTP_SITES, m_listSites);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// message map functions
+
+void CFtpManagerDialog::OnButtonEdit(void)
+{
+	POSITION pos = m_listSites.GetFirstSelectedItemPosition();
+	if (pos != NULL)
+	{
+		int iItem = m_listSites.GetNextSelectedItem(pos);
+		ASSERT(iItem >= 0);
+		SITE_DATA& siteData = m_arrData[iItem];
+
+		CFtpPropertiesDialog dlgFtpProperties(IDS_EDIT_FTP_SITE);
+		dlgFtpProperties.m_strName = siteData.szName;
+		dlgFtpProperties.m_strComment = siteData.szComment;
+		dlgFtpProperties.m_strServer = siteData.szServer;
+		dlgFtpProperties.m_nPort = siteData.nPort;
+		dlgFtpProperties.m_strLogin = siteData.szLogin;
+		dlgFtpProperties.m_strPassword = siteData.szPassword;
+		dlgFtpProperties.m_strRoot = siteData.szRoot;
+		dlgFtpProperties.m_fPassive = siteData.fPassive;
+
+		if (dlgFtpProperties.DoModal() == IDOK)
+		{
+		}
+	}
+}
+
+void CFtpManagerDialog::OnButtonRemove(void)
+{
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,9 +237,10 @@ int CFtpManagerDialog::PutDataToList(void)
 
 	for (int i = 0, cCount = m_arrData.GetCount(); i < cCount; ++i)
 	{
-		int iItem = m_listSites.InsertItem(i, m_arrData[i].szName);
+		int iItem = m_listSites.InsertItem(i, m_arrData[i].szName, m_iFtpRootImg);
 		if (iItem >= 0)
 		{
+			ASSERT(iItem == i);
 			m_listSites.SetItemText(iItem, I_COMMENT, m_arrData[i].szComment);
 		}
 	}
@@ -229,6 +281,7 @@ void CFtpManagerDialog::AssertValid(void) const
 	__super::AssertValid();
 
 	// ...and then verify our own state as well
+	ASSERT_VALID(&m_imageList);
 	ASSERT_VALID(&m_listSites);
 }
 
@@ -241,6 +294,8 @@ void CFtpManagerDialog::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 		dumpCtx << "m_arrData = " << m_arrData;
+		dumpCtx << "\nm_imageList = " << m_imageList;
+		dumpCtx << "\nm_iFtpRootImg = " << m_iFtpRootImg;
 		dumpCtx << "\nm_listSites = " << m_listSites;
 	}
 	catch (CFileException* pErr)
