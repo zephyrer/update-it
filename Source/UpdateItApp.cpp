@@ -124,12 +124,13 @@ HICON CUpdateItApp::LoadSmIcon(LPCTSTR pszResName)
 	return (static_cast<HICON>(hSmIcon));
 }
 
-CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault)
+CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault, HKEY hRegKey)
 {
-	BYTE* pbTemp;
-	UINT cbPassword;
+	BOOL fHasData = FALSE;
+	BYTE* pbTemp = NULL;
+	UINT cbPassword = 0;
 	CArray<BYTE, BYTE> arrEncrPwd;
-	BSTR bstrDecrPwd;
+	BSTR bstrDecrPwd = NULL;
 	CString strResult;
 
 	// precondition
@@ -139,7 +140,28 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 	try
 	{
 		BeginWaitCursor();
-		if (GetProfileBinary(pszSection, pszEntry, &pbTemp, &cbPassword))
+
+		if (hRegKey != NULL)
+		{
+			LONG nError = ERROR_SUCCESS;
+
+			ATL::CRegKey regKey;
+			regKey.Attach(hRegKey);
+			nError = regKey.QueryBinaryValue(pszEntry, NULL, reinterpret_cast<ULONG*>(&cbPassword));
+			if (nError == ERROR_MORE_DATA)
+			{
+				pbTemp = new BYTE[cbPassword];
+				nError = regKey.QueryBinaryValue(pszEntry, pbTemp, reinterpret_cast<ULONG*>(&cbPassword));
+				nError == ERROR_SUCCESS ? fHasData = TRUE : delete[] pbTemp;
+			}
+			regKey.Detach();
+		}
+		else
+		{
+			fHasData = GetProfileBinary(pszSection, pszEntry, &pbTemp, &cbPassword);
+		}
+
+		if (fHasData)
 		{
 			// password was previously saved
 			arrEncrPwd.SetSize(cbPassword);
@@ -154,6 +176,7 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 			// wasn't saved - use default value
 			strResult = pszDefault;
 		}
+
 		EndWaitCursor();
 	}
 	catch (CWin32Error* pErr)
