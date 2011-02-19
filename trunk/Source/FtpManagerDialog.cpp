@@ -53,6 +53,7 @@ IMPLEMENT_DYNAMIC(CFtpManagerDialog, CCustomDialog)
 // message map
 
 BEGIN_MESSAGE_MAP(CFtpManagerDialog, CCustomDialog)
+	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_FTP_SITES, OnListItemChanged)
 	ON_BN_CLICKED(IDC_BUTTON_FTP_EDIT, OnButtonEdit)
 	ON_BN_CLICKED(IDC_BUTTON_FTP_REMOVE, OnButtonRemove)
 END_MESSAGE_MAP()
@@ -127,16 +128,21 @@ void CFtpManagerDialog::DoDataExchange(CDataExchange* pDX)
 //////////////////////////////////////////////////////////////////////////////////////////////
 // message map functions
 
+void CFtpManagerDialog::OnListItemChanged(NMHDR* /*pHdr*/, LRESULT* /*pnResult*/)
+{
+	UpdateControls();
+}
+
 void CFtpManagerDialog::OnButtonEdit(void)
 {
 	POSITION pos = m_listSites.GetFirstSelectedItemPosition();
 	if (pos != NULL)
 	{
 		int iItem = m_listSites.GetNextSelectedItem(pos);
-		ASSERT(iItem >= 0);
+		ASSERT(iItem >= 0 && iItem < m_arrData.GetCount());
 		SITE_DATA& siteData = m_arrData[iItem];
 
-		CFtpPropertiesDialog dlgFtpProperties(IDS_EDIT_FTP_SITE);
+		CFtpPropertiesDialog dlgFtpProperties(FALSE, IDS_EDIT_FTP_SITE);
 		dlgFtpProperties.m_strName = siteData.szName;
 		dlgFtpProperties.m_strComment = siteData.szComment;
 		dlgFtpProperties.m_strServer = siteData.szServer;
@@ -148,6 +154,43 @@ void CFtpManagerDialog::OnButtonEdit(void)
 
 		if (dlgFtpProperties.DoModal() == IDOK)
 		{
+			_tcscpy(siteData.szComment, dlgFtpProperties.m_strComment);
+			_tcscpy(siteData.szServer, dlgFtpProperties.m_strServer);
+			siteData.nPort = dlgFtpProperties.m_nPort;
+			_tcscpy(siteData.szLogin, dlgFtpProperties.m_strLogin);
+			_tcscpy(siteData.szPassword, dlgFtpProperties.m_strPassword);
+			_tcscpy(siteData.szRoot, dlgFtpProperties.m_strRoot);
+			siteData.fPassive = dlgFtpProperties.m_fPassive;
+
+			m_listSites.SetItemText(iItem, I_COMMENT, siteData.szComment);
+
+			CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+			ASSERT_VALID(pApp);
+
+			ATL::CRegKey regKeyFtp;
+			regKeyFtp.Attach(pApp->GetSectionKey(SZ_REGK_FTP));
+
+			int nError = ERROR_SUCCESS;
+
+			if (static_cast<HKEY>(regKeyFtp) != NULL)
+			{
+				ATL::CRegKey regKeySites;
+				nError = regKeySites.Create(regKeyFtp, SZ_REGK_SITES);
+
+				if (nError == ERROR_SUCCESS)
+				{
+					ATL::CRegKey regKeySite;
+					regKeySite.Create(regKeySites, siteData.szName);
+
+					regKeySite.SetStringValue(SZ_REGV_FTP_COMMENT, siteData.szComment);
+					regKeySite.SetStringValue(SZ_REGV_FTP_SERVER, siteData.szServer);
+					regKeySite.SetDWORDValue(SZ_REGV_FTP_PORT, siteData.nPort);
+					regKeySite.SetStringValue(SZ_REGV_FTP_LOGIN, siteData.szLogin);
+					pApp->WriteProfilePassword(_T(""), SZ_REGV_FTP_PASSWORD, siteData.szPassword, regKeySite);
+					regKeySite.SetStringValue(SZ_REGV_FTP_ROOT, siteData.szRoot);
+					regKeySite.SetDWORDValue(SZ_REGV_FTP_PASSIVE, siteData.fPassive);
+				}
+			}
 		}
 	}
 }

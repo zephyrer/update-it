@@ -51,6 +51,7 @@ protected:
 
 // message map functions
 protected:
+	afx_msg void OnListItemChanged(NMHDR* pHdr, LRESULT* pnResult);
 	afx_msg void OnButtonEdit(void);
 	afx_msg void OnButtonRemove(void);
 
