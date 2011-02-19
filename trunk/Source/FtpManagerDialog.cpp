@@ -163,6 +163,8 @@ void CFtpManagerDialog::OnButtonEdit(void)
 			siteData.fPassive = dlgFtpProperties.m_fPassive;
 
 			m_listSites.SetItemText(iItem, I_COMMENT, siteData.szComment);
+			m_listSites.SetFocus();
+			m_listSites.SetItemState(iItem, LVIS_FOCUSED | LVIS_SELECTED, 0xFFFFFFFF);
 
 			CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
 			ASSERT_VALID(pApp);
@@ -197,6 +199,44 @@ void CFtpManagerDialog::OnButtonEdit(void)
 
 void CFtpManagerDialog::OnButtonRemove(void)
 {
+	POSITION pos = m_listSites.GetFirstSelectedItemPosition();
+	if (pos != NULL)
+	{
+		int iItem = m_listSites.GetNextSelectedItem(pos);
+		ASSERT(iItem >= 0 && iItem < m_arrData.GetCount());
+		SITE_DATA& siteData = m_arrData[iItem];
+
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
+
+		ATL::CRegKey regKeyFtp;
+		regKeyFtp.Attach(pApp->GetSectionKey(SZ_REGK_FTP));
+
+		int nError = ERROR_SUCCESS;
+
+		if (static_cast<HKEY>(regKeyFtp) != NULL)
+		{
+			ATL::CRegKey regKeySites;
+			nError = regKeySites.Create(regKeyFtp, SZ_REGK_SITES);
+
+			if (nError == ERROR_SUCCESS)
+			{
+				regKeySites.DeleteSubKey(siteData.szName);
+				RegQueryData();
+
+				if (PutDataToList() > 0)
+				{
+					m_listSites.SetFocus();
+					m_listSites.SetItemState(0, LVIS_FOCUSED | LVIS_SELECTED, 0xFFFFFFFF);
+				}
+				else
+				{
+					GetDlgItem(IDCANCEL)->SetFocus();
+				}
+				UpdateControls();
+			}
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
