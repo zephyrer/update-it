@@ -53,7 +53,7 @@ public:
 	enum
 	{
 		// column indices
-		I_NAME,
+		I_NAME = 0,
 		I_COMMENT,
 		NUM_COLUMNS   // should be the LAST enumerator!
 	};
@@ -77,7 +77,8 @@ public:
 
 // implementation helpers
 private:
-	INT_PTR RegQuerySites(void);
+	INT_PTR RegQueryData(void);
+	int PutDataToList(void);
 
 // diagnostic services
 #if defined(_DEBUG)

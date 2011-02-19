@@ -595,6 +595,8 @@ BEGIN
     IDS_SAVE_FTP_SITE       "Save FTP Site"
     IDS_OVERWRITE_FTP_FORMAT 
                             "FTP site named '%s' already exists.\nDo you wish to overwrite it?"
+    IDS_FTP_NAME            "Name"
+    IDS_FTP_COMMENT         "Comment"
 END
 
 #endif    // Russian resources
