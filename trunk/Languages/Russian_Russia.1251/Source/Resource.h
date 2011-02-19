@@ -68,6 +68,7 @@
 #define IDD_XCRASHREPORT_ABOUT          118
 #define IDD_BROWSE_FTP                  119
 #define IDD_FTP_PROPERTIES              120
+#define IDD_FTP_MANAGER                 121
 #define IDC_EDIT_SOURCE                 1001
 #define IDC_BUTTON_SOURCE               1002
 #define IDC_EDIT_TARGET                 1003
@@ -153,6 +154,9 @@
 #define IDC_BUTTON_SAVE_FTP             1086
 #define IDC_EDIT_FTP_NAME               1087
 #define IDC_EDIT_FTP_COMMENT            1088
+#define IDC_LIST_FTP_SITES              1089
+#define IDC_BUTTON_FTP_EDIT             1090
+#define IDC_BUTTON_FTP_REMOVE           1091
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -160,9 +164,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        121
+#define _APS_NEXT_RESOURCE_VALUE        122
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1089
-#define _APS_NEXT_SYMED_VALUE           121
+#define _APS_NEXT_CONTROL_VALUE         1092
+#define _APS_NEXT_SYMED_VALUE           122
 #endif
 #endif

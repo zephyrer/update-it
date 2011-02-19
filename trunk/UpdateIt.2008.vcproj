@@ -456,6 +456,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Source\FtpManagerDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Source\FtpPropertiesDialog.cpp"
 				>
 			</File>
@@ -587,6 +591,10 @@
 			</File>
 			<File
 				RelativePath=".\Source\FirstLaunchPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\FtpManagerDialog.h"
 				>
 			</File>
 			<File
