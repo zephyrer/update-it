@@ -368,7 +368,7 @@ Source: "..\..\Repository\Graphics\libmng\Source\*"; Excludes: ".svn"; DestDir: 
 ;; libpng library sources
 Source: "..\..\Repository\Graphics\libpng\libpng.2008.vcproj"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\changes.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
-Source: "..\..\Repository\Graphics\libpng\libpng.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
+Source: "..\..\Repository\Graphics\libpng\libpng-manual.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\license.txt"; DestDir: "{app}\Sources\Repository\Graphics\libpng"; Components: sources; Flags: ignoreversion
 Source: "..\..\Repository\Graphics\libpng\Source\*"; Excludes: ".svn"; DestDir: "{app}\Sources\Repository\Graphics\libpng\Source"; Components: sources; Flags: ignoreversion
 
