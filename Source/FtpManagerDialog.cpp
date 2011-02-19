@@ -89,7 +89,11 @@ BOOL CFtpManagerDialog::OnInitDialog(void)
 	strHeading.LoadString(IDS_FTP_COMMENT);
 	m_listSites.InsertColumn(I_COMMENT, strHeading, LVCFMT_LEFT, cxWidth, I_COMMENT);
 
-	PutDataToList();
+	if (PutDataToList() > 0)
+	{
+		m_listSites.SetItemState(0, LVIS_FOCUSED | LVIS_SELECTED, 0xFFFFFFFF);
+	}
+	UpdateControls();
 
 	return (TRUE);
 }
@@ -201,6 +205,17 @@ int CFtpManagerDialog::PutDataToList(void)
 	m_listSites.SetColumnWidth(I_COMMENT, cxComment);
 
 	return (cNumItems);
+}
+
+void CFtpManagerDialog::UpdateControls(void)
+{
+	int cNumItems = m_listSites.GetItemCount();
+	POSITION pos = m_listSites.GetFirstSelectedItemPosition();
+
+	GetDlgItem(IDC_LIST_FTP_SITES)->EnableWindow(cNumItems > 0);
+	GetDlgItem(IDC_BUTTON_FTP_EDIT)->EnableWindow(cNumItems > 0 && pos != NULL);
+	GetDlgItem(IDC_BUTTON_FTP_REMOVE)->EnableWindow(cNumItems > 0 && pos != NULL);
+	GetDlgItem(IDOK)->EnableWindow(cNumItems > 0 && pos != NULL);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
