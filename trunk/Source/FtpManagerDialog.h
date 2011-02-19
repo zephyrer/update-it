@@ -79,6 +79,7 @@ public:
 private:
 	INT_PTR RegQueryData(void);
 	int PutDataToList(void);
+	void UpdateControls(void);
 
 // diagnostic services
 #if defined(_DEBUG)
