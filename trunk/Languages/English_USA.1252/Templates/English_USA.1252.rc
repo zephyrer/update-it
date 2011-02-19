@@ -139,7 +139,7 @@ BEGIN
     RTEXT           "&Root:",IDC_STATIC,186,82,36,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_FTP_ROOT,224,82,84,12,ES_AUTOHSCROLL | WS_GROUP
     PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,310,82,14,12,WS_GROUP
-    CONTROL         "Use passive mo&de",IDC_CHECK_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,186,102,72,10
+    CONTROL         "Use passive mo&de",IDC_CHECK_FTP_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,186,102,72,10
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDVERT,330,12,2,102
     PUSHBUTTON      "Site Manager...",IDC_BUTTON_FTP_MANAGER,336,16,62,16,WS_GROUP
     PUSHBUTTON      "Save Site...",IDC_BUTTON_SAVE_FTP,336,38,62,16
@@ -300,6 +300,33 @@ BEGIN
     LTEXT           "",IDC_STATIC_STATUS,10,122,148,12,SS_NOPREFIX | SS_CENTERIMAGE | SS_ENDELLIPSIS
     DEFPUSHBUTTON   "OK",IDOK,54,140,46,16,WS_GROUP
     PUSHBUTTON      "Cancel",IDCANCEL,114,140,46,16
+END
+
+IDD_FTP_PROPERTIES DIALOGEX 0, 0, 170, 220
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "FTP Site Properties"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Description",IDC_STATIC,8,6,154,52,WS_GROUP
+    RTEXT           "&Name:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_NAME,54,20,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Comment:",IDC_STATIC,14,38,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_COMMENTS,54,38,100,12,ES_AUTOHSCROLL
+    GROUPBOX        "Settings",IDC_STATIC,8,66,154,116,WS_GROUP
+    RTEXT           "&Server:",IDC_STATIC,14,82,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_SERVER,54,82,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Port:",IDC_STATIC,14,98,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PORT,54,98,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "&Login:",IDC_STATIC,14,114,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_LOGIN,54,114,100,12,ES_AUTOHSCROLL
+    RTEXT           "P&assword:",IDC_STATIC,14,130,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PASSWORD,54,130,100,12,ES_PASSWORD | ES_AUTOHSCROLL
+    RTEXT           "&Root:",IDC_STATIC,14,146,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_ROOT,54,146,84,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,140,146,14,12,WS_GROUP
+    CONTROL         "&Use passive mode",IDC_CHECK_FTP_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,166,72,10
+    DEFPUSHBUTTON   "OK",IDOK,56,196,46,16,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,116,196,46,16
 END
 
 
@@ -538,7 +565,7 @@ BEGIN
     IDC_EDIT_FTP_PASSWORD   "Provides the space to type the password assigned to you by the FTP server administrator. For security reasons, the actual characters don't appear in this space; instead each character is represented by an asterisk."
     IDC_EDIT_FTP_ROOT       "Specifies the initial subfolder to connect on the FTP server. If this field is left blank, the root folder will be used."
     IDC_EDIT_EXCLUDE        "Specifies a mask or several masks (delimited with commas) of files to exclude from search."
-    IDC_CHECK_PASSIVE       "If unchecked then the FTP server will establish inbound connection to Your computer. Otherwise the outbound connection to the FTP server will be established (use it when inbound connections are disabled by a firewall)."
+    IDC_CHECK_FTP_PASSIVE   "If unchecked then the FTP server will establish inbound connection to Your computer. Otherwise the outbound connection to the FTP server will be established (use it when inbound connections are disabled by a firewall)."
     IDC_CHECK_USE_SSL       "If checked then Secure Socket Layer connection with the SMTP server will be used."
 END
 

@@ -711,7 +711,7 @@ void CProgressPageBase::UploadFiles(LPCTSTR pszSource, const CListCtrl& listFile
 		m_textWorking.SetWindowText(strWorking);
 		CFtpConnection* pFtpConn = ftpSession.GetFtpConnection(pActionPage->m_strFtpServer,
 			pActionPage->m_strFtpLogin, pActionPage->m_strFtpPassword, pActionPage->m_nFtpPort,
-			pActionPage->m_fPassive);
+			pActionPage->m_fFtpPassive);
 		ASSERT(pFtpConn != NULL);
 		pFtpConn->SetCurrentDirectory(_T("/"));
 		strWorking.LoadString(IDS_UPLOADING_FILES);
