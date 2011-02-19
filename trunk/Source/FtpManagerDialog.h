@@ -48,6 +48,7 @@ public:
 	virtual BOOL OnInitDialog(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void OnOK(void);
 
 // message map functions
 protected:
@@ -78,6 +79,8 @@ public:
 	};
 
 	CArray<SITE_DATA, SITE_DATA&> m_arrData;
+	int m_iCurItem;
+	BOOL GetSiteData(SITE_DATA* pSiteData) const;
 
 	CImageList m_imageList;
 	int m_iFtpRootImg;
@@ -107,6 +110,19 @@ public:
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // inlines
+
+__forceinline BOOL CFtpManagerDialog::GetSiteData(SITE_DATA* pSiteData) const
+{
+	if (pSiteData != NULL && m_iCurItem >= 0 && m_iCurItem < m_arrData.GetCount())
+	{
+		*pSiteData = m_arrData[m_iCurItem];
+		return (TRUE);
+	}
+	else
+	{
+		return (FALSE);
+	}
+}
 
 inline UINT CFtpManagerDialog::GetFtpRootIcoID(void)
 {

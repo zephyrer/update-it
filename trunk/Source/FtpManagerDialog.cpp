@@ -63,6 +63,7 @@ END_MESSAGE_MAP()
 
 CFtpManagerDialog::CFtpManagerDialog(CWnd* pParentWnd):
 CCustomDialog(IDD_FTP_MANAGER, pParentWnd),
+m_iCurItem(-1),
 m_iFtpRootImg(-1)
 {
 	RegQueryData();
@@ -123,6 +124,18 @@ void CFtpManagerDialog::DoDataExchange(CDataExchange* pDX)
 	__super::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_LIST_FTP_SITES, m_listSites);
+}
+
+void CFtpManagerDialog::OnOK(void)
+{
+	POSITION pos = m_listSites.GetFirstSelectedItemPosition();
+	if (pos != NULL)
+	{
+		m_iCurItem = m_listSites.GetNextSelectedItem(pos);
+		ASSERT(m_iCurItem >= 0 && m_iCurItem < m_arrData.GetCount());
+	}
+
+	__super::OnOK();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -377,6 +390,7 @@ void CFtpManagerDialog::Dump(CDumpContext& dumpCtx) const
 
 		// ...and then dump own unique members
 		dumpCtx << "m_arrData = " << m_arrData;
+		dumpCtx << "\nm_iCurItem = " << m_iCurItem;
 		dumpCtx << "\nm_imageList = " << m_imageList;
 		dumpCtx << "\nm_iFtpRootImg = " << m_iFtpRootImg;
 		dumpCtx << "\nm_listSites = " << m_listSites;
