@@ -395,6 +395,16 @@ void CActionPage::OnButtonFtpSiteManager(void)
 
 	if (dlgFtpManager.DoModal() == IDOK)
 	{
+		CFtpManagerDialog::SITE_DATA siteData = { 0 };
+		if (dlgFtpManager.GetSiteData(&siteData))
+		{
+			SetDlgItemText(IDC_EDIT_FTP_SERVER, siteData.szServer);
+			SetDlgItemInt(IDC_EDIT_FTP_PORT, siteData.nPort, FALSE);
+			SetDlgItemText(IDC_EDIT_FTP_LOGIN, siteData.szLogin);
+			SetDlgItemText(IDC_EDIT_FTP_PASSWORD, siteData.szPassword);
+			SetDlgItemText(IDC_EDIT_FTP_ROOT, siteData.szRoot);
+			CheckDlgButton(IDC_CHECK_FTP_PASSIVE, siteData.fPassive);
+		}
 	}
 }
 
