@@ -146,6 +146,8 @@
 #define IDC_BUTTON_FTP_ROOT             1082
 #define IDC_TREE_FTP_FOLDERS            1083
 #define IDC_STATIC_STATUS               1084
+#define IDC_BUTTON_FTP_MANAGER          1085
+#define IDC_BUTTON_SAVE_FTP             1086
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
@@ -155,7 +157,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        120
 #define _APS_NEXT_COMMAND_VALUE         40033
-#define _APS_NEXT_CONTROL_VALUE         1085
+#define _APS_NEXT_CONTROL_VALUE         1087
 #define _APS_NEXT_SYMED_VALUE           120
 #endif
 #endif
