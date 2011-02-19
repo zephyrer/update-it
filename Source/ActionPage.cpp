@@ -37,6 +37,7 @@
 #include "../Common/Registry.h"
 #include "Arguments.h"
 #include "BrowseFtpDialog.h"
+#include "FtpPropertiesDialog.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // avoid unwanted ICL warnings
@@ -69,6 +70,7 @@ BEGIN_MESSAGE_MAP(CActionPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_SEND, OnCheckSend)
 	ON_BN_CLICKED(IDC_BUTTON_ZIP_OPTIONS, OnButtonZipOptions)
 	ON_BN_CLICKED(IDC_BUTTON_FTP_ROOT, OnButtonFtpRoot)
+	ON_BN_CLICKED(IDC_BUTTON_SAVE_FTP, OnButtonSaveFtpSite)
 	ON_BN_CLICKED(IDC_BUTTON_SMTP_AUTH, OnButtonAuthentication)
 END_MESSAGE_MAP()
 
@@ -82,7 +84,7 @@ m_nUpload(BST_UNCHECKED),
 m_nZip(BST_UNCHECKED),
 m_nSend(BST_UNCHECKED),
 m_nFtpPort(INTERNET_DEFAULT_FTP_PORT),
-m_fPassive(FALSE),
+m_fFtpPassive(FALSE),
 m_nSmtpPort(IPPORT_SMTP)
 {
 	m_psp.dwFlags |= PSP_PREMATURE;
@@ -132,7 +134,7 @@ BOOL CActionPage::OnInitDialog(void)
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_LOGIN));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_PASSWORD));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_FTP_ROOT));
-	tipWnd.AddTool(GetDlgItem(IDC_CHECK_PASSIVE));
+	tipWnd.AddTool(GetDlgItem(IDC_CHECK_FTP_PASSIVE));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_FROM));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_TO));
 	tipWnd.AddTool(GetDlgItem(IDC_EDIT_MAIL_SUBJECT));
@@ -213,7 +215,7 @@ BOOL CActionPage::OnKillActive(void)
 				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_LOGIN, m_strFtpLogin);
 				pApp->WriteProfilePassword(SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD, m_strFtpPassword);
 				pApp->WriteProfileString(SZ_REGK_FTP, SZ_REGV_FTP_ROOT, m_strFtpRoot);
-				pApp->WriteProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, m_fPassive);
+				pApp->WriteProfileInt(SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, m_fFtpPassive);
 			}
 
 			pApp->WriteProfileInt(SZ_REGK_ACTION, SZ_REGV_ACTION_ZIP, m_nZip);
@@ -265,7 +267,7 @@ void CActionPage::DoDataExchange(CDataExchange* pDX)
 		DDV_MaxChars(pDX, m_strFtpPassword, MAX_FTP_PASSWORD_LENGTH);
 		DDX_Text(pDX, IDC_EDIT_FTP_ROOT, m_strFtpRoot);
 		DDV_MaxChars(pDX, m_strFtpRoot, _MAX_PATH);
-		DDX_Check(pDX, IDC_CHECK_PASSIVE, m_fPassive);
+		DDX_Check(pDX, IDC_CHECK_FTP_PASSIVE, m_fFtpPassive);
 	}
 
 	// SMTP settings
@@ -303,7 +305,7 @@ void CActionPage::OnCheckUpload(void)
 		SetDlgItemText(IDC_EDIT_FTP_LOGIN, m_strFtpLogin);
 		SetDlgItemText(IDC_EDIT_FTP_PASSWORD, m_strFtpPassword);
 		SetDlgItemText(IDC_EDIT_FTP_ROOT, m_strFtpRoot);
-		CheckDlgButton(IDC_CHECK_PASSIVE, m_fPassive);
+		CheckDlgButton(IDC_CHECK_FTP_PASSIVE, m_fFtpPassive);
 	}
 	EnableFtpControls(fEnable);
 }
@@ -399,7 +401,7 @@ void CActionPage::OnButtonFtpRoot(void)
 		DDV_MaxChars(&dx, dlgBrowseFtp.m_strPassword, MAX_FTP_PASSWORD_LENGTH);
 		DDX_Text(&dx, IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
 		DDV_MaxChars(&dx, dlgBrowseFtp.m_strRoot, _MAX_PATH);
-		DDX_Check(&dx, IDC_CHECK_PASSIVE, dlgBrowseFtp.m_fPassive);
+		DDX_Check(&dx, IDC_CHECK_FTP_PASSIVE, dlgBrowseFtp.m_fPassive);
 
 		bOK = TRUE;   // it worked
 	}
@@ -422,6 +424,14 @@ void CActionPage::OnButtonFtpRoot(void)
 	if (bOK && dlgBrowseFtp.DoModal() == IDOK)
 	{
 		SetDlgItemText(IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
+	}
+}
+
+void CActionPage::OnButtonSaveFtpSite(void)
+{
+	CFtpPropertiesDialog dlgFtpProperties;
+	if (dlgFtpProperties.DoModal() == IDOK)
+	{
 	}
 }
 
@@ -483,7 +493,7 @@ void CActionPage::InitFtpSettings(class CUpdateItApp* pApp)
 	m_strFtpLogin = pApp->GetConfigString(SZ_ARG_FTP_LOGIN, SZ_REGK_FTP, SZ_REGV_FTP_LOGIN);
 	m_strFtpPassword = pApp->GetConfigPassword(SZ_ARG_FTP_PASSWORD, SZ_REGK_FTP, SZ_REGV_FTP_PASSWORD);
 	m_strFtpRoot = pApp->GetConfigString(SZ_ARG_FTP_ROOT, SZ_REGK_FTP, SZ_REGV_FTP_ROOT);
-	m_fPassive = pApp->GetConfigCheck(SZ_ARG_FTP_PASSIVE, SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, BST_UNCHECKED);
+	m_fFtpPassive = pApp->GetConfigCheck(SZ_ARG_FTP_PASSIVE, SZ_REGK_FTP, SZ_REGV_FTP_PASSIVE, BST_UNCHECKED);
 }
 
 void CActionPage::InitSmtpSettings(class CUpdateItApp* pApp)
@@ -585,7 +595,7 @@ void CActionPage::Dump(CDumpContext& dumpCtx) const
 		dumpCtx << "\nm_strFtpLogin = " << m_strFtpLogin;
 		dumpCtx << "\nm_strFtpPassword = " << m_strFtpPassword;
 		dumpCtx << "\nm_strFtpRoot = " << m_strFtpRoot;
-		dumpCtx << "\nm_fPassive = " << m_fPassive;
+		dumpCtx << "\nm_fFtpPassive = " << m_fFtpPassive;
 		dumpCtx << "\nm_strMailFrom = " << m_strMailFrom;
 		dumpCtx << "\nm_strMailTo = " << m_strMailTo;
 		dumpCtx << "\nm_strMailSubject = " << m_strMailSubject;

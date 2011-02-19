@@ -58,6 +58,7 @@ protected:
 	afx_msg void OnCheckSend(void);
 	afx_msg void OnButtonZipOptions(void);
 	afx_msg void OnButtonFtpRoot(void);
+	afx_msg void OnButtonSaveFtpSite(void);
 	afx_msg void OnButtonAuthentication(void);
 
 // attributes
@@ -93,7 +94,7 @@ public:
 	CString m_strFtpLogin;
 	CString m_strFtpPassword;
 	CString m_strFtpRoot;
-	BOOL m_fPassive;
+	BOOL m_fFtpPassive;
 	// E-Mail settings
 	CString m_strMailFrom;
 	CString m_strMailTo;
