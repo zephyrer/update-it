@@ -597,6 +597,7 @@ BEGIN
                             "FTP site named '%s' already exists.\nDo you wish to overwrite it?"
     IDS_FTP_NAME            "Name"
     IDS_FTP_COMMENT         "Comment"
+    IDS_EDIT_FTP_SITE       "Edit FTP Site"
 END
 
 #endif    // Russian resources

@@ -28,6 +28,7 @@
 
 #include "CustomDialog.h"
 #include "FtpPropertiesDialog.h"
+#include "WindowsVersion.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // CFtpManagerDialog
@@ -47,6 +48,11 @@ public:
 	virtual BOOL OnInitDialog(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+
+// message map functions
+protected:
+	afx_msg void OnButtonEdit(void);
+	afx_msg void OnButtonRemove(void);
 
 // attributes
 public:
@@ -72,6 +78,10 @@ public:
 
 	CArray<SITE_DATA, SITE_DATA&> m_arrData;
 
+	CImageList m_imageList;
+	int m_iFtpRootImg;
+	CWindowsVersion m_winVer;
+
 	// controls
 	CListCtrl m_listSites;
 
@@ -81,6 +91,11 @@ private:
 	int PutDataToList(void);
 	void UpdateControls(void);
 
+// properties
+private:
+	UINT GetFtpRootIcoID(void);
+	__declspec(property(get = GetFtpRootIcoID)) UINT m_idrFtpRoot;
+
 // diagnostic services
 #if defined(_DEBUG)
 public:
@@ -88,6 +103,14 @@ public:
 	virtual void Dump(CDumpContext& dumpCtx) const;
 #endif
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// inlines
+
+inline UINT CFtpManagerDialog::GetFtpRootIcoID(void)
+{
+	return (m_winVer.WinNT() < _WIN32_WINNT_VISTA ? IDI_FTP_ROOT_XP : IDI_FTP_ROOT_VISTA);
+}
 
 #endif   // __FtpManagerDialog_h
 

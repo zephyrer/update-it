@@ -148,7 +148,7 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 			ATL::CRegKey regKey;
 			regKey.Attach(hRegKey);
 			nError = regKey.QueryBinaryValue(pszEntry, NULL, reinterpret_cast<ULONG*>(&cbPassword));
-			if (nError == ERROR_MORE_DATA)
+			if (nError == ERROR_SUCCESS)
 			{
 				pbTemp = new BYTE[cbPassword];
 				nError = regKey.QueryBinaryValue(pszEntry, pbTemp, reinterpret_cast<ULONG*>(&cbPassword));
