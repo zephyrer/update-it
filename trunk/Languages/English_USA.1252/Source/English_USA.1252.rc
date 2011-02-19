@@ -311,7 +311,7 @@ BEGIN
     RTEXT           "&Name:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_FTP_NAME,54,20,100,12,ES_AUTOHSCROLL
     RTEXT           "&Comment:",IDC_STATIC,14,38,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_COMMENTS,54,38,100,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FTP_COMMENT,54,38,100,12,ES_AUTOHSCROLL
     GROUPBOX        "Settings",IDC_STATIC,8,66,154,116,WS_GROUP
     RTEXT           "&Server:",IDC_STATIC,14,82,38,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_FTP_SERVER,54,82,100,12,ES_AUTOHSCROLL
@@ -581,6 +581,8 @@ BEGIN
     IDS_EMAIL_INFO          "This address is needed to fill ""From"" and ""Reply-To"" fields in the generated crash reporting E-mails. But if you still worry about a spam feel free to use some fake address such as ""anonymous@unknown.org"" and provide a real one in the error description typed by yourself."
     IDS_SEARCHING_FTP_FORMAT "Searching FTP: %s"
     IDS_SAVE_FTP_SITE       "Save FTP Site"
+    IDS_OVERWRITE_FTP_FORMAT 
+                            "FTP site named '%s' already exists.\nDo you wish to overwrite it?"
 END
 
 #endif    // English (U.S.) resources

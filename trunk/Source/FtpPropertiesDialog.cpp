@@ -91,8 +91,8 @@ void CFtpPropertiesDialog::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Text(pDX, IDC_EDIT_FTP_NAME, m_strName);
 	DDV_MinMaxChars(pDX, m_strName, MIN_FTP_NAME_LENGTH, MAX_FTP_NAME_LENGTH);
-	DDX_Text(pDX, IDC_EDIT_FTP_COMMENTS, m_strComments);
-	DDV_MaxChars(pDX, m_strComments, MAX_FTP_COMMENT_LENGTH);
+	DDX_Text(pDX, IDC_EDIT_FTP_COMMENT, m_strComment);
+	DDV_MaxChars(pDX, m_strComment, MAX_FTP_COMMENT_LENGTH);
 	DDX_Text(pDX, IDC_EDIT_FTP_SERVER, m_strServer);
 	DDV_MinMaxChars(pDX, m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
 	DDXV_Word(pDX, IDC_EDIT_FTP_PORT, m_nPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
@@ -128,7 +128,7 @@ void CFtpPropertiesDialog::Dump(CDumpContext& dumpCtx) const
 		// ...and then dump own unique members
 		dumpCtx << "m_idsCaption = " << m_idsCaption;
 		dumpCtx << "\nm_strName = " << m_strName;
-		dumpCtx << "\nm_strComments = " << m_strComments;
+		dumpCtx << "\nm_strComment = " << m_strComment;
 		dumpCtx << "\nm_strServer = " << m_strServer;
 		dumpCtx << "\nm_nPort = " << m_nPort;
 		dumpCtx << "\nm_strLogin = " << m_strLogin;

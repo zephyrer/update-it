@@ -311,7 +311,7 @@ BEGIN
     RTEXT           "&Name:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_FTP_NAME,54,20,100,12,ES_AUTOHSCROLL
     RTEXT           "&Comment:",IDC_STATIC,14,38,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_COMMENTS,54,38,100,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FTP_COMMENT,54,38,100,12,ES_AUTOHSCROLL
     GROUPBOX        "Settings",IDC_STATIC,8,66,154,116,WS_GROUP
     RTEXT           "&Server:",IDC_STATIC,14,82,38,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_FTP_SERVER,54,82,100,12,ES_AUTOHSCROLL
@@ -581,6 +581,8 @@ BEGIN
     IDS_EMAIL_INFO          "Ётот адрес нужен дл€ заполнени€ полей ""From"" и ""Reply-To"" в электронном письме, содержащем отчет об ошибке. Ќо если вы все еще опасаетесь спама, воспользуйтесь адресом-фальшивкой типа ""anonymous@unknown.org"" и указывайте насто€щий адрес в тексте набираемого вами описани€ ошибки."
     IDS_SEARCHING_FTP_FORMAT "ѕоиск на FTP: %s"
     IDS_SAVE_FTP_SITE       "Save FTP Site"
+    IDS_OVERWRITE_FTP_FORMAT 
+                            "FTP site named '%s' already exists.\nDo you wish to overwrite it?"
 END
 
 #endif    // Russian resources

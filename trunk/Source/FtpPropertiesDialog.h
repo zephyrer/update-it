@@ -66,7 +66,7 @@ public:
 
 	// user's input
 	CString m_strName;
-	CString m_strComments;
+	CString m_strComment;
 	CString m_strServer;
 	INTERNET_PORT m_nPort;
 	CString m_strLogin;

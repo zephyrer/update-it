@@ -53,6 +53,7 @@
 #define IDS_EMAIL_INFO                  49
 #define IDS_SEARCHING_FTP_FORMAT        50
 #define IDS_SAVE_FTP_SITE               51
+#define IDS_OVERWRITE_FTP_FORMAT        52
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
@@ -151,7 +152,7 @@
 #define IDC_BUTTON_FTP_MANAGER          1085
 #define IDC_BUTTON_SAVE_FTP             1086
 #define IDC_EDIT_FTP_NAME               1087
-#define IDC_EDIT_FTP_COMMENTS           1088
+#define IDC_EDIT_FTP_COMMENT            1088
 #define ID_LANGUAGE_ENGLISH             0x9C50
 #define ID_LANGUAGE_RUSSIAN             0x9C60
 
