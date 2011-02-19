@@ -114,6 +114,8 @@ private:
 	void EnableFtpControls(BOOL fEnable);
 	void EnableMailControls(BOOL fEnable);
 	void ShowMailControls(BOOL fShow);
+	template <typename TTargetDialog>
+	BOOL PushFtpSettings(TTargetDialog& dlgTarget);
 
 // diagnostic services
 #if defined(_DEBUG)
