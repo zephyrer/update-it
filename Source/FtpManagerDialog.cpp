@@ -61,6 +61,7 @@ END_MESSAGE_MAP()
 CFtpManagerDialog::CFtpManagerDialog(CWnd* pParentWnd):
 CCustomDialog(IDD_FTP_MANAGER, pParentWnd)
 {
+	RegQueryData();
 }
 
 CFtpManagerDialog::~CFtpManagerDialog(void)
@@ -72,7 +73,23 @@ CFtpManagerDialog::~CFtpManagerDialog(void)
 
 BOOL CFtpManagerDialog::OnInitDialog(void)
 {
+	CRect rectList;
+	CString strHeading;
+
 	__super::OnInitDialog();
+
+	m_listSites.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
+
+	int cxVScroll = ::GetSystemMetrics(SM_CXVSCROLL);
+	m_listSites.GetClientRect(rectList);
+	int cxWidth = ((rectList.Width() - cxVScroll) / NUM_COLUMNS);
+
+	strHeading.LoadString(IDS_FTP_NAME);
+	m_listSites.InsertColumn(I_NAME, strHeading, LVCFMT_LEFT, cxWidth, I_NAME);
+	strHeading.LoadString(IDS_FTP_COMMENT);
+	m_listSites.InsertColumn(I_COMMENT, strHeading, LVCFMT_LEFT, cxWidth, I_COMMENT);
+
+	PutDataToList();
 
 	return (TRUE);
 }
@@ -87,7 +104,7 @@ void CFtpManagerDialog::DoDataExchange(CDataExchange* pDX)
 //////////////////////////////////////////////////////////////////////////////////////////////
 // implementation helpers
 
-INT_PTR CFtpManagerDialog::RegQuerySites(void)
+INT_PTR CFtpManagerDialog::RegQueryData(void)
 {
 	m_arrData.RemoveAll();
 
@@ -124,10 +141,27 @@ INT_PTR CFtpManagerDialog::RegQuerySites(void)
 
 					if (nError == ERROR_SUCCESS)
 					{
+						// comment
 						uMaxChars = _countof(siteData.szComment);
 						regKeySite.QueryStringValue(SZ_REGV_FTP_COMMENT, siteData.szComment, &uMaxChars);
+						// server
 						uMaxChars = _countof(siteData.szServer);
 						regKeySite.QueryStringValue(SZ_REGV_FTP_SERVER, siteData.szServer, &uMaxChars);
+						// port
+						DWORD dwTemp = 0;
+						regKeySite.QueryDWORDValue(SZ_REGV_FTP_PORT, dwTemp);
+						siteData.nPort = LOWORD(dwTemp);
+						// login
+						uMaxChars = _countof(siteData.szLogin);
+						regKeySite.QueryStringValue(SZ_REGV_FTP_LOGIN, siteData.szLogin, &uMaxChars);
+						// password
+						CString strTemp = pApp->GetProfilePassword(_T(""), SZ_REGV_FTP_PASSWORD, NULL, regKeySite);
+						_tcsncpy(siteData.szPassword, strTemp, _countof(siteData.szPassword) - 1);
+						// root
+						uMaxChars = _countof(siteData.szRoot);
+						regKeySite.QueryStringValue(SZ_REGV_FTP_ROOT, siteData.szRoot, &uMaxChars);
+						// passive
+						regKeySite.QueryDWORDValue(SZ_REGV_FTP_PASSIVE, *reinterpret_cast<DWORD*>(&siteData.fPassive));
 
 						m_arrData.Add(siteData);
 					}
@@ -137,6 +171,36 @@ INT_PTR CFtpManagerDialog::RegQuerySites(void)
 	}
 
 	return (m_arrData.GetCount());
+}
+
+int CFtpManagerDialog::PutDataToList(void)
+{
+	// precondition
+	ASSERT(::IsWindow(m_listSites));
+
+	m_listSites.DeleteAllItems();
+
+	for (int i = 0, cCount = m_arrData.GetCount(); i < cCount; ++i)
+	{
+		int iItem = m_listSites.InsertItem(i, m_arrData[i].szName);
+		if (iItem >= 0)
+		{
+			m_listSites.SetItemText(iItem, I_COMMENT, m_arrData[i].szComment);
+		}
+	}
+
+	int cNumItems = m_listSites.GetItemCount();
+
+	m_listSites.SetColumnWidth(I_NAME, cNumItems > 0 ? LVSCW_AUTOSIZE : LVSCW_AUTOSIZE_USEHEADER);
+
+	CRect rectList;
+	m_listSites.GetClientRect(rectList);
+	int cxVScroll = ::GetSystemMetrics(SM_CXVSCROLL);
+	int cxName = m_listSites.GetColumnWidth(I_NAME);
+	int cxComment = rectList.Width() - cxVScroll - cxName;
+	m_listSites.SetColumnWidth(I_COMMENT, cxComment);
+
+	return (cNumItems);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
