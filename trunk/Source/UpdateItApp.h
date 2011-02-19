@@ -40,7 +40,7 @@ public:
 public:
 	HICON LoadSmIcon(LPCTSTR pszResName);
 
-	CString GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL);
+	CString GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszDefault = NULL, HKEY hRegKey = NULL);
 	BOOL WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue, HKEY hRegKey = NULL);
 #if (_MFC_VER >= 0x0700)
 	__time64_t GetProfileTime(LPCTSTR pszSection, LPCTSTR pszEntry, __time64_t timeDefault = -1);
