@@ -96,6 +96,10 @@
 #define SZ_REGV_FTP_ROOT _T("Root")
 #define SZ_REGV_FTP_PASSIVE _T("Passive")
 
+#define SZ_REGK_SITES _T("Sites")
+
+#define SZ_REGV_FTP_COMMENT _T("Comment")
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 // HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\SMTP
 

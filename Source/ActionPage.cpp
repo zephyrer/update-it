@@ -393,6 +393,61 @@ void CActionPage::OnButtonSaveFtpSite(void)
 
 	if (PushFtpSettings(dlgFtpProperties) && dlgFtpProperties.DoModal() == IDOK)
 	{
+		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+		ASSERT_VALID(pApp);
+
+		ATL::CRegKey regKeyFtp;
+		regKeyFtp.Attach(pApp->GetSectionKey(SZ_REGK_FTP));
+
+		int nError = ERROR_SUCCESS;
+
+		if (static_cast<HKEY>(regKeyFtp) != NULL)
+		{
+			ATL::CRegKey regKeySites;
+			nError = regKeySites.Create(regKeyFtp, SZ_REGK_SITES);
+
+			if (nError == ERROR_SUCCESS)
+			{
+				DWORD cNumSubKeys = 0, cchMaxNameLen = 0;
+				::RegQueryInfoKey(regKeySites, 0, 0, 0, &cNumSubKeys, &cchMaxNameLen, 0, 0, 0, 0, 0, 0);
+				++cchMaxNameLen;   // for the terminating null character
+
+				LPTSTR pszSiteName = new TCHAR[cchMaxNameLen];
+
+				BOOL fCanSave = TRUE;
+				for (DWORD i = 0; i < cNumSubKeys && fCanSave; ++i)
+				{
+					DWORD cchNameLen = cchMaxNameLen;
+					regKeySites.EnumKey(i, pszSiteName, &cchNameLen);
+					fCanSave = dlgFtpProperties.m_strName.CompareNoCase(pszSiteName) != 0;
+				}
+
+				if (!fCanSave)
+				{
+					CString strPrompt;
+					strPrompt.Format(IDS_OVERWRITE_FTP_FORMAT, static_cast<LPCTSTR>(dlgFtpProperties.m_strName));
+					fCanSave = AfxMessageBox(strPrompt, MB_YESNO) == IDYES;
+				}
+
+				if (fCanSave)
+				{
+					ATL::CRegKey regKeySite;
+					regKeySite.Create(regKeySites, dlgFtpProperties.m_strName);
+
+					regKeySite.SetStringValue(SZ_REGV_FTP_COMMENT, dlgFtpProperties.m_strComment);
+					regKeySite.SetStringValue(SZ_REGV_FTP_SERVER, dlgFtpProperties.m_strServer);
+					regKeySite.SetDWORDValue(SZ_REGV_FTP_PORT, dlgFtpProperties.m_nPort);
+					regKeySite.SetStringValue(SZ_REGV_FTP_LOGIN, dlgFtpProperties.m_strLogin);
+					// TODO: dlgFtpProperties.m_strPassword
+					regKeySite.SetStringValue(SZ_REGV_FTP_ROOT, dlgFtpProperties.m_strRoot);
+					regKeySite.SetDWORDValue(SZ_REGV_FTP_PASSIVE, dlgFtpProperties.m_fPassive);
+				}
+
+				delete[] pszSiteName;
+			}
+			
+			::RegCloseKey(regKeyFtp.Detach());
+		}
 	}
 }
 

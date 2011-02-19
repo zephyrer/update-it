@@ -728,7 +728,7 @@ INT_PTR CUpdateItApp::RegQueryCatchpit(void)
 {
 	m_mapCatchpit.RemoveAll();
 
-	CRegKey regKey;
+	ATL::CRegKey regKey;
 	regKey.Create(HKEY_CURRENT_USER, _T("Software\\Elijah Zarezky\\UpdateIt!\\Catchpit"));
 	
 	DWORD cNumValues = 0;
