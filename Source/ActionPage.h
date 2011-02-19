@@ -58,6 +58,7 @@ protected:
 	afx_msg void OnCheckSend(void);
 	afx_msg void OnButtonZipOptions(void);
 	afx_msg void OnButtonFtpRoot(void);
+	afx_msg void OnButtonFtpSiteManager(void);
 	afx_msg void OnButtonSaveFtpSite(void);
 	afx_msg void OnButtonAuthentication(void);
 

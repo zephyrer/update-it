@@ -38,6 +38,7 @@
 #include "Arguments.h"
 #include "BrowseFtpDialog.h"
 #include "FtpPropertiesDialog.h"
+#include "FtpManagerDialog.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // avoid unwanted ICL warnings
@@ -70,6 +71,7 @@ BEGIN_MESSAGE_MAP(CActionPage, CBetterPropPage)
 	ON_BN_CLICKED(IDC_CHECK_SEND, OnCheckSend)
 	ON_BN_CLICKED(IDC_BUTTON_ZIP_OPTIONS, OnButtonZipOptions)
 	ON_BN_CLICKED(IDC_BUTTON_FTP_ROOT, OnButtonFtpRoot)
+	ON_BN_CLICKED(IDC_BUTTON_FTP_MANAGER, OnButtonFtpSiteManager)
 	ON_BN_CLICKED(IDC_BUTTON_SAVE_FTP, OnButtonSaveFtpSite)
 	ON_BN_CLICKED(IDC_BUTTON_SMTP_AUTH, OnButtonAuthentication)
 END_MESSAGE_MAP()
@@ -384,6 +386,15 @@ void CActionPage::OnButtonFtpRoot(void)
 	if (PushFtpSettings(dlgBrowseFtp) && dlgBrowseFtp.DoModal() == IDOK)
 	{
 		SetDlgItemText(IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
+	}
+}
+
+void CActionPage::OnButtonFtpSiteManager(void)
+{
+	CFtpManagerDialog dlgFtpManager;
+
+	if (dlgFtpManager.DoModal() == IDOK)
+	{
 	}
 }
 
