@@ -381,47 +381,7 @@ void CActionPage::OnButtonFtpRoot(void)
 {
 	CBrowseFtpDialog dlgBrowseFtp;
 
-	CDataExchange dx(this, TRUE);
-
-	// prevent control notifications from being dispatched during UpdateData
-	_AFX_THREAD_STATE* pThreadState = AfxGetThreadState();
-	HWND hWndOldLockout = pThreadState->m_hLockoutNotifyWindow;
-	ASSERT(hWndOldLockout != m_hWnd);   // must not recurse
-	pThreadState->m_hLockoutNotifyWindow = m_hWnd;
-
-	BOOL bOK = FALSE;   // assume failure
-	try
-	{
-		DDX_Text(&dx, IDC_EDIT_FTP_SERVER, dlgBrowseFtp.m_strServer);
-		DDV_MinMaxChars(&dx, dlgBrowseFtp.m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
-		DDXV_Word(&dx, IDC_EDIT_FTP_PORT, dlgBrowseFtp.m_nPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
-		DDX_Text(&dx, IDC_EDIT_FTP_LOGIN, dlgBrowseFtp.m_strLogin);
-		DDV_MaxChars(&dx, dlgBrowseFtp.m_strLogin, MAX_FTP_LOGIN_LENGTH);
-		DDX_Text(&dx, IDC_EDIT_FTP_PASSWORD, dlgBrowseFtp.m_strPassword);
-		DDV_MaxChars(&dx, dlgBrowseFtp.m_strPassword, MAX_FTP_PASSWORD_LENGTH);
-		DDX_Text(&dx, IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
-		DDV_MaxChars(&dx, dlgBrowseFtp.m_strRoot, _MAX_PATH);
-		DDX_Check(&dx, IDC_CHECK_FTP_PASSIVE, dlgBrowseFtp.m_fPassive);
-
-		bOK = TRUE;   // it worked
-	}
-	catch (CUserException* /*pErr*/)
-	{
-		// validation failed - user already alerted, fall through
-		ASSERT(!bOK);
-		// Note: pErr->Delete() not required
-	}
-	catch (CException* pErr)
-	{
-		// validation failed due to OOM or other resource failure
-		pErr->ReportError(MB_ICONEXCLAMATION, AFX_IDP_INTERNAL_FAILURE);
-		ASSERT(!bOK);
-		pErr->Delete();
-	}
-
-	pThreadState->m_hLockoutNotifyWindow = hWndOldLockout;
-	
-	if (bOK && dlgBrowseFtp.DoModal() == IDOK)
+	if (PushFtpSettings(dlgBrowseFtp) && dlgBrowseFtp.DoModal() == IDOK)
 	{
 		SetDlgItemText(IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
 	}
@@ -430,7 +390,8 @@ void CActionPage::OnButtonFtpRoot(void)
 void CActionPage::OnButtonSaveFtpSite(void)
 {
 	CFtpPropertiesDialog dlgFtpProperties;
-	if (dlgFtpProperties.DoModal() == IDOK)
+
+	if (PushFtpSettings(dlgFtpProperties) && dlgFtpProperties.DoModal() == IDOK)
 	{
 	}
 }
@@ -552,6 +513,52 @@ void CActionPage::ShowMailControls(BOOL fShow)
 		pWnd->ShowWindow(fShow ? SW_SHOW : SW_HIDE);
 	}
 	while ((pWnd = pWnd->GetWindow(GW_HWNDNEXT)) != NULL);
+}
+
+template <typename TTargetDialog>
+BOOL CActionPage::PushFtpSettings(TTargetDialog& dlgTarget)
+{
+	CDataExchange dx(this, TRUE);
+
+	// prevent control notifications from being dispatched during UpdateData
+	_AFX_THREAD_STATE* pThreadState = AfxGetThreadState();
+	HWND hWndOldLockout = pThreadState->m_hLockoutNotifyWindow;
+	ASSERT(hWndOldLockout != m_hWnd);   // must not recurse
+	pThreadState->m_hLockoutNotifyWindow = m_hWnd;
+
+	BOOL bOK = FALSE;   // assume failure
+	try
+	{
+		DDX_Text(&dx, IDC_EDIT_FTP_SERVER, dlgTarget.m_strServer);
+		DDV_MinMaxChars(&dx, dlgTarget.m_strServer, MIN_FTP_SERVER_LENGTH, MAX_FTP_SERVER_LENGTH);
+		DDXV_Word(&dx, IDC_EDIT_FTP_PORT, dlgTarget.m_nPort, 1, INTERNET_MAX_PORT_NUMBER_VALUE);
+		DDX_Text(&dx, IDC_EDIT_FTP_LOGIN, dlgTarget.m_strLogin);
+		DDV_MaxChars(&dx, dlgTarget.m_strLogin, MAX_FTP_LOGIN_LENGTH);
+		DDX_Text(&dx, IDC_EDIT_FTP_PASSWORD, dlgTarget.m_strPassword);
+		DDV_MaxChars(&dx, dlgTarget.m_strPassword, MAX_FTP_PASSWORD_LENGTH);
+		DDX_Text(&dx, IDC_EDIT_FTP_ROOT, dlgTarget.m_strRoot);
+		DDV_MaxChars(&dx, dlgTarget.m_strRoot, _MAX_PATH);
+		DDX_Check(&dx, IDC_CHECK_FTP_PASSIVE, dlgTarget.m_fPassive);
+
+		bOK = TRUE;   // it worked
+	}
+	catch (CUserException* /*pErr*/)
+	{
+		// validation failed - user already alerted, fall through
+		ASSERT(!bOK);
+		// Note: pErr->Delete() not required
+	}
+	catch (CException* pErr)
+	{
+		// validation failed due to OOM or other resource failure
+		pErr->ReportError(MB_ICONEXCLAMATION, AFX_IDP_INTERNAL_FAILURE);
+		ASSERT(!bOK);
+		pErr->Delete();
+	}
+
+	pThreadState->m_hLockoutNotifyWindow = hWndOldLockout;
+
+	return (bOK);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
