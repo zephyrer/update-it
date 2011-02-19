@@ -56,8 +56,9 @@ END_MESSAGE_MAP()
 //////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
-CFtpPropertiesDialog::CFtpPropertiesDialog(CWnd* pParentWnd):
+CFtpPropertiesDialog::CFtpPropertiesDialog(UINT idsCaption, CWnd* pParentWnd):
 CCustomDialog(IDD_FTP_PROPERTIES, pParentWnd),
+m_idsCaption(idsCaption),
 m_nPort(INTERNET_DEFAULT_FTP_PORT),
 m_strRoot(_T("/")),
 m_fPassive(FALSE)
@@ -70,6 +71,19 @@ CFtpPropertiesDialog::~CFtpPropertiesDialog(void)
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // overridables
+
+BOOL CFtpPropertiesDialog::OnInitDialog(void)
+{
+	__super::OnInitDialog();
+
+	if (m_idsCaption != 0)
+	{
+		CString strCaption(MAKEINTRESOURCE(m_idsCaption));
+		SetWindowText(strCaption);
+	}
+
+	return (TRUE);
+}
 
 void CFtpPropertiesDialog::DoDataExchange(CDataExchange* pDX)
 {
@@ -112,7 +126,8 @@ void CFtpPropertiesDialog::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
-		dumpCtx << "m_strName = " << m_strName;
+		dumpCtx << "m_idsCaption = " << m_idsCaption;
+		dumpCtx << "\nm_strName = " << m_strName;
 		dumpCtx << "\nm_strComments = " << m_strComments;
 		dumpCtx << "\nm_strServer = " << m_strServer;
 		dumpCtx << "\nm_nPort = " << m_nPort;

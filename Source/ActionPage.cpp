@@ -389,7 +389,7 @@ void CActionPage::OnButtonFtpRoot(void)
 
 void CActionPage::OnButtonSaveFtpSite(void)
 {
-	CFtpPropertiesDialog dlgFtpProperties;
+	CFtpPropertiesDialog dlgFtpProperties(IDS_SAVE_FTP_SITE);
 
 	if (PushFtpSettings(dlgFtpProperties) && dlgFtpProperties.DoModal() == IDOK)
 	{

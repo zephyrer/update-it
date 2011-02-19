@@ -52,6 +52,7 @@
 #define IDS_EMAIL_GUARANTEE_FORMAT      48
 #define IDS_EMAIL_INFO                  49
 #define IDS_SEARCHING_FTP_FORMAT        50
+#define IDS_SAVE_FTP_SITE               51
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103

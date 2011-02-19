@@ -39,10 +39,12 @@ class CFtpPropertiesDialog: public CCustomDialog
 
 // construction/destruction
 public:
-	CFtpPropertiesDialog(CWnd* pParentWnd = NULL);
+	CFtpPropertiesDialog(UINT idsCaption = 0, CWnd* pParentWnd = NULL);
 	virtual ~CFtpPropertiesDialog(void);
 
 // overridables
+public:
+	virtual BOOL OnInitDialog(void);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
@@ -59,6 +61,8 @@ public:
 		MAX_FTP_LOGIN_LENGTH = CActionPage::MAX_FTP_LOGIN_LENGTH,
 		MAX_FTP_PASSWORD_LENGTH = CActionPage::MAX_FTP_PASSWORD_LENGTH
 	};
+
+	UINT m_idsCaption;
 
 	// user's input
 	CString m_strName;
