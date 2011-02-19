@@ -166,7 +166,7 @@ CString CUpdateItApp::GetProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, L
 	return (strResult);
 }
 
-BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue)
+BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LPCTSTR pszValue, HKEY hRegKey)
 {
 	CArray<BYTE, BYTE> arrEncPwd;
 	BOOL fSuccess;
@@ -182,7 +182,17 @@ BOOL CUpdateItApp::WriteProfilePassword(LPCTSTR pszSection, LPCTSTR pszEntry, LP
 		CWinCrypto winCrypto(AfxGetAppName());
 		BSTR bstrTemp = ::SysAllocString(_T2W(pszValue));
 		winCrypto.EncryptString(bstrTemp, arrEncPwd);
-		WriteProfileBinary(pszSection, pszEntry, arrEncPwd.GetData(), arrEncPwd.GetSize());
+		if (hRegKey != NULL)
+		{
+			ATL::CRegKey regKey;
+			regKey.Attach(hRegKey);
+			regKey.SetBinaryValue(pszEntry, arrEncPwd.GetData(), arrEncPwd.GetSize());
+			regKey.Detach();
+		}
+		else
+		{
+			WriteProfileBinary(pszSection, pszEntry, arrEncPwd.GetData(), arrEncPwd.GetSize());
+		}
 		::SysFreeString(bstrTemp);
 		EndWaitCursor();
 		fSuccess = TRUE;
