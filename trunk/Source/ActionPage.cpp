@@ -438,7 +438,7 @@ void CActionPage::OnButtonSaveFtpSite(void)
 					regKeySite.SetStringValue(SZ_REGV_FTP_SERVER, dlgFtpProperties.m_strServer);
 					regKeySite.SetDWORDValue(SZ_REGV_FTP_PORT, dlgFtpProperties.m_nPort);
 					regKeySite.SetStringValue(SZ_REGV_FTP_LOGIN, dlgFtpProperties.m_strLogin);
-					// TODO: dlgFtpProperties.m_strPassword
+					pApp->WriteProfilePassword(_T(""), SZ_REGV_FTP_PASSWORD, dlgFtpProperties.m_strPassword, regKeySite);
 					regKeySite.SetStringValue(SZ_REGV_FTP_ROOT, dlgFtpProperties.m_strRoot);
 					regKeySite.SetDWORDValue(SZ_REGV_FTP_PASSIVE, dlgFtpProperties.m_fPassive);
 				}
