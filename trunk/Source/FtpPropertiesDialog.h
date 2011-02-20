@@ -48,6 +48,10 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 
+// message map functions
+protected:
+	afx_msg void OnButtonFtpRoot(void);
+
 // attributes
 public:
 	enum

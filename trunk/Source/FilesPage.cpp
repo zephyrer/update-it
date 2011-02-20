@@ -161,6 +161,7 @@ void CFilesPage::OnBecameActive(void)
 		CMainWizard* pWiz = DYNAMIC_DOWNCAST(CMainWizard, GetParent());
 		ASSERT(pWiz != NULL);
 		pWiz->SendMessage(DM_SETDEFID, IDCANCEL, 0);
+		pWiz->GetDlgItem(ID_WIZBACK)->EnableWindow(FALSE);
 		pWiz->GetDlgItem(ID_WIZNEXT)->EnableWindow(FALSE);
 		pWiz->GetDlgItem(IDCANCEL)->SetFocus();
 
