@@ -219,34 +219,40 @@ void CFtpManagerDialog::OnButtonRemove(void)
 		ASSERT(iItem >= 0 && iItem < m_arrData.GetCount());
 		SITE_DATA& siteData = m_arrData[iItem];
 
-		CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
-		ASSERT_VALID(pApp);
+		CString strPrompt;
+		strPrompt.Format(IDS_REMOVE_FTP_FORMAT, siteData.szName);
 
-		ATL::CRegKey regKeyFtp;
-		regKeyFtp.Attach(pApp->GetSectionKey(SZ_REGK_FTP));
-
-		int nError = ERROR_SUCCESS;
-
-		if (static_cast<HKEY>(regKeyFtp) != NULL)
+		if (AfxMessageBox(strPrompt, MB_YESNO) == IDYES)
 		{
-			ATL::CRegKey regKeySites;
-			nError = regKeySites.Create(regKeyFtp, SZ_REGK_SITES);
+			CUpdateItApp* pApp = DYNAMIC_DOWNCAST(CUpdateItApp, AfxGetApp());
+			ASSERT_VALID(pApp);
 
-			if (nError == ERROR_SUCCESS)
+			ATL::CRegKey regKeyFtp;
+			regKeyFtp.Attach(pApp->GetSectionKey(SZ_REGK_FTP));
+
+			int nError = ERROR_SUCCESS;
+
+			if (static_cast<HKEY>(regKeyFtp) != NULL)
 			{
-				regKeySites.DeleteSubKey(siteData.szName);
-				RegQueryData();
+				ATL::CRegKey regKeySites;
+				nError = regKeySites.Create(regKeyFtp, SZ_REGK_SITES);
 
-				if (PutDataToList() > 0)
+				if (nError == ERROR_SUCCESS)
 				{
-					m_listSites.SetFocus();
-					m_listSites.SetItemState(0, LVIS_FOCUSED | LVIS_SELECTED, 0xFFFFFFFF);
+					regKeySites.DeleteSubKey(siteData.szName);
+					RegQueryData();
+
+					if (PutDataToList() > 0)
+					{
+						m_listSites.SetFocus();
+						m_listSites.SetItemState(0, LVIS_FOCUSED | LVIS_SELECTED, 0xFFFFFFFF);
+					}
+					else
+					{
+						GetDlgItem(IDCANCEL)->SetFocus();
+					}
+					UpdateControls();
 				}
-				else
-				{
-					GetDlgItem(IDCANCEL)->SetFocus();
-				}
-				UpdateControls();
 			}
 		}
 	}
