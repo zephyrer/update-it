@@ -139,10 +139,11 @@ BEGIN
     RTEXT           "Папка:",IDC_STATIC,186,82,36,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_FTP_ROOT,224,82,84,12,ES_AUTOHSCROLL | WS_GROUP
     PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,310,82,14,12,WS_GROUP
-    CONTROL         "Использовать пассивный режим",IDC_CHECK_FTP_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,186,102,126,10
+    CONTROL         "Использовать пассивный режим",IDC_CHECK_FTP_PASSIVE,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,186,102,126,10
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDVERT,330,12,2,102
-    PUSHBUTTON      "Site Manager...",IDC_BUTTON_FTP_MANAGER,336,16,62,16,WS_GROUP
-    PUSHBUTTON      "Save Site...",IDC_BUTTON_SAVE_FTP,336,38,62,16
+    PUSHBUTTON      "Менеджер\nсайтов...",IDC_BUTTON_FTP_MANAGER,336,16,62,24,BS_MULTILINE | WS_GROUP
+    PUSHBUTTON      "Сохранить\nсайт...",IDC_BUTTON_SAVE_FTP,336,46,62,24,BS_MULTILINE
     GROUPBOX        "Настройки электронной почты",IDC_GROUP_MAIL,4,128,400,118,WS_GROUP
     RTEXT           "От:",IDC_STATIC,10,142,30,12,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_MAIL_FROM,42,142,100,12,ES_AUTOHSCROLL
@@ -180,7 +181,7 @@ BEGIN
     LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.86 (23 мая 2010)",IDC_STATIC,16,182,388,16
     LTEXT           "Авторские права © 1998-2010 PJ Naughter",IDC_STATIC,16,200,310,10,SS_CENTERIMAGE
     RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,332,200,70,10,SS_CENTERIMAGE
-    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young: Win32 OpenSSL v1.0.0c (2 декабря 2010)",IDC_STATIC,16,216,310,16
+    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young:\nWin32 OpenSSL v1.0.0c (2 декабря 2010)",IDC_STATIC,16,216,310,16
     RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,332,222,70,10,SS_CENTERIMAGE
 END
 
@@ -302,43 +303,44 @@ BEGIN
     PUSHBUTTON      "Отмена",IDCANCEL,114,140,46,16
 END
 
-IDD_FTP_PROPERTIES DIALOGEX 0, 0, 170, 220
+IDD_FTP_PROPERTIES DIALOGEX 0, 0, 180, 220
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "FTP Site Properties"
+CAPTION "Свойства FTP сайта"
 FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
 BEGIN
-    GROUPBOX        "Description",IDC_STATIC,8,6,154,52,WS_GROUP
-    RTEXT           "&Name:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_NAME,54,20,100,12,ES_AUTOHSCROLL
-    RTEXT           "&Comment:",IDC_STATIC,14,38,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_COMMENT,54,38,100,12,ES_AUTOHSCROLL
-    GROUPBOX        "Settings",IDC_STATIC,8,66,154,116,WS_GROUP
-    RTEXT           "&Server:",IDC_STATIC,14,82,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_SERVER,54,82,100,12,ES_AUTOHSCROLL
-    RTEXT           "&Port:",IDC_STATIC,14,98,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_PORT,54,98,100,12,ES_AUTOHSCROLL | ES_NUMBER
-    RTEXT           "&Login:",IDC_STATIC,14,114,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_LOGIN,54,114,100,12,ES_AUTOHSCROLL
-    RTEXT           "P&assword:",IDC_STATIC,14,130,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_PASSWORD,54,130,100,12,ES_PASSWORD | ES_AUTOHSCROLL
-    RTEXT           "&Root:",IDC_STATIC,14,146,38,12,SS_CENTERIMAGE
-    EDITTEXT        IDC_EDIT_FTP_ROOT,54,146,84,12,ES_AUTOHSCROLL | WS_GROUP
-    PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,140,146,14,12,WS_GROUP
-    CONTROL         "&Use passive mode",IDC_CHECK_FTP_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,166,72,10
-    DEFPUSHBUTTON   "OK",IDOK,56,196,46,16,WS_GROUP
-    PUSHBUTTON      "Cancel",IDCANCEL,116,196,46,16
+    GROUPBOX        "Описание",IDC_STATIC,8,6,164,52,WS_GROUP
+    RTEXT           "Название:",IDC_STATIC,14,20,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_NAME,64,20,100,12,ES_AUTOHSCROLL
+    RTEXT           "Комментарий:",IDC_STATIC,14,38,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_COMMENT,64,38,100,12,ES_AUTOHSCROLL
+    GROUPBOX        "Настройки",IDC_STATIC,8,66,164,116,WS_GROUP
+    RTEXT           "Сервер:",IDC_STATIC,14,82,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_SERVER,64,82,100,12,ES_AUTOHSCROLL
+    RTEXT           "Порт:",IDC_STATIC,14,98,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PORT,64,98,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Логин:",IDC_STATIC,14,114,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_LOGIN,64,114,100,12,ES_AUTOHSCROLL
+    RTEXT           "Пароль:",IDC_STATIC,14,130,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PASSWORD,64,130,100,12,ES_PASSWORD | ES_AUTOHSCROLL
+    RTEXT           "Папка:",IDC_STATIC,14,146,48,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_ROOT,64,146,84,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,150,146,14,12,WS_GROUP
+    CONTROL         "Использовать пассивный режим",IDC_CHECK_FTP_PASSIVE,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,166,118,10
+    DEFPUSHBUTTON   "ОК",IDOK,66,196,46,16,WS_GROUP
+    PUSHBUTTON      "Отмена",IDCANCEL,126,196,46,16
 END
 
 IDD_FTP_MANAGER DIALOGEX 0, 0, 250, 170
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "FTP Site Manager"
+CAPTION "Менеджер FTP сайтов"
 FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_LIST_FTP_SITES,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_NOSORTHEADER | WS_GROUP | WS_TABSTOP,8,10,234,128,WS_EX_CLIENTEDGE
-    PUSHBUTTON      "Edit...",IDC_BUTTON_FTP_EDIT,8,146,46,16,WS_GROUP
-    PUSHBUTTON      "Remove",IDC_BUTTON_FTP_REMOVE,62,146,46,16
-    DEFPUSHBUTTON   "OK",IDOK,142,146,46,16,WS_GROUP
-    PUSHBUTTON      "Close",IDCANCEL,196,146,46,16
+    PUSHBUTTON      "Правка...",IDC_BUTTON_FTP_EDIT,8,146,46,16,WS_GROUP
+    PUSHBUTTON      "Удалить",IDC_BUTTON_FTP_REMOVE,62,146,46,16
+    DEFPUSHBUTTON   "ОК",IDOK,142,146,46,16,WS_GROUP
+    PUSHBUTTON      "Закрыть",IDCANCEL,196,146,46,16
 END
 
 
@@ -592,12 +594,13 @@ BEGIN
                             "Указанный адрес будет сохранен только локально в файле %s и никогда не будет никуда отправлен или опубликован где-либо."
     IDS_EMAIL_INFO          "Этот адрес нужен для заполнения полей ""From"" и ""Reply-To"" в электронном письме, содержащем отчет об ошибке. Но если вы все еще опасаетесь спама, воспользуйтесь адресом-фальшивкой типа ""anonymous@unknown.org"" и указывайте настоящий адрес в тексте набираемого вами описания ошибки."
     IDS_SEARCHING_FTP_FORMAT "Поиск на FTP: %s"
-    IDS_SAVE_FTP_SITE       "Save FTP Site"
+    IDS_SAVE_FTP_SITE       "Сохранить FTP сайт"
     IDS_OVERWRITE_FTP_FORMAT 
-                            "FTP site named '%s' already exists.\nDo you wish to overwrite it?"
-    IDS_FTP_NAME            "Name"
-    IDS_FTP_COMMENT         "Comment"
-    IDS_EDIT_FTP_SITE       "Edit FTP Site"
+                            "FTP сайт с именем '%s' уже существует.\nВы хоитите перезаписать его?"
+    IDS_FTP_NAME            "Название"
+    IDS_FTP_COMMENT         "Комментарий"
+    IDS_EDIT_FTP_SITE       "Правка FTP сайта"
+    IDS_REMOVE_FTP_FORMAT   "Вы уверенны, что хотите удалить\nFTP сайт с именем '%s'?"
 END
 
 #endif    // Russian resources

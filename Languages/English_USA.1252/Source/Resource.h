@@ -57,6 +57,7 @@
 #define IDS_FTP_NAME                    53
 #define IDS_FTP_COMMENT                 54
 #define IDS_EDIT_FTP_SITE               55
+#define IDS_REMOVE_FTP_FORMAT           56
 #define IDD_PAGE_OPTIONS                101
 #define IDD_PAGE_FILES                  102
 #define IDD_PAGE_ACTION                 103
