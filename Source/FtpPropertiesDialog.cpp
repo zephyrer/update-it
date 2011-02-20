@@ -31,6 +31,7 @@
 // other includes
 
 #include "FtpPropertiesDialog.h"
+#include "BrowseFtpDialog.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // debugging support
@@ -50,7 +51,7 @@ IMPLEMENT_DYNAMIC(CFtpPropertiesDialog, CCustomDialog)
 // message map
 
 BEGIN_MESSAGE_MAP(CFtpPropertiesDialog, CCustomDialog)
-	ON_WM_DESTROY()
+	ON_BN_CLICKED(IDC_BUTTON_FTP_ROOT, OnButtonFtpRoot)
 END_MESSAGE_MAP()
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +110,28 @@ void CFtpPropertiesDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_FTP_ROOT, m_strRoot);
 	DDV_MaxChars(pDX, m_strRoot, _MAX_PATH);
 	DDX_Check(pDX, IDC_CHECK_FTP_PASSIVE, m_fPassive);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// message map functions
+
+void CFtpPropertiesDialog::OnButtonFtpRoot(void)
+{
+	if (UpdateData(TRUE))
+	{
+		CBrowseFtpDialog dlgBrowseFtp;
+		dlgBrowseFtp.m_strServer = m_strServer;
+		dlgBrowseFtp.m_nPort = m_nPort;
+		dlgBrowseFtp.m_strLogin = m_strLogin;
+		dlgBrowseFtp.m_strPassword = m_strPassword;
+		dlgBrowseFtp.m_strRoot = m_strRoot;
+		dlgBrowseFtp.m_fPassive = m_fPassive;
+
+		if (dlgBrowseFtp.DoModal() == IDOK)
+		{
+			SetDlgItemText(IDC_EDIT_FTP_ROOT, dlgBrowseFtp.m_strRoot);
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
