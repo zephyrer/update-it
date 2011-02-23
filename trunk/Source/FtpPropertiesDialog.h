@@ -39,7 +39,7 @@ class CFtpPropertiesDialog: public CCustomDialog
 
 // construction/destruction
 public:
-	CFtpPropertiesDialog(BOOL fChangeName, UINT idsCaption = 0, CWnd* pParentWnd = NULL);
+	CFtpPropertiesDialog(BOOL fCanChangeName, UINT idsCaption = 0, CWnd* pParentWnd = NULL);
 	virtual ~CFtpPropertiesDialog(void);
 
 // overridables
@@ -66,7 +66,7 @@ public:
 		MAX_FTP_PASSWORD_LENGTH = CActionPage::MAX_FTP_PASSWORD_LENGTH
 	};
 
-	BOOL m_fChangeName;
+	BOOL m_fCanChangeName;
 	UINT m_idsCaption;
 
 	// user's input
