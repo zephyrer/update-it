@@ -57,9 +57,9 @@ END_MESSAGE_MAP()
 //////////////////////////////////////////////////////////////////////////////////////////////
 // construction/destruction
 
-CFtpPropertiesDialog::CFtpPropertiesDialog(BOOL fChangeName, UINT idsCaption, CWnd* pParentWnd):
+CFtpPropertiesDialog::CFtpPropertiesDialog(BOOL fCanChangeName, UINT idsCaption, CWnd* pParentWnd):
 CCustomDialog(IDD_FTP_PROPERTIES, pParentWnd),
-m_fChangeName(fChangeName),
+m_fCanChangeName(fCanChangeName),
 m_idsCaption(idsCaption),
 m_nPort(INTERNET_DEFAULT_FTP_PORT),
 m_strRoot(_T("/")),
@@ -78,7 +78,7 @@ BOOL CFtpPropertiesDialog::OnInitDialog(void)
 {
 	__super::OnInitDialog();
 
-	if (!m_fChangeName)
+	if (!m_fCanChangeName)
 	{
 		GetDlgItem(IDC_EDIT_FTP_NAME)->EnableWindow(FALSE);
 	}
@@ -155,7 +155,7 @@ void CFtpPropertiesDialog::Dump(CDumpContext& dumpCtx) const
 		__super::Dump(dumpCtx);
 
 		// ...and then dump own unique members
-		dumpCtx << "m_fChangeName = " << m_fChangeName;
+		dumpCtx << "m_fCanChangeName = " << m_fCanChangeName;
 		dumpCtx << "\nm_idsCaption = " << m_idsCaption;
 		dumpCtx << "\nm_strName = " << m_strName;
 		dumpCtx << "\nm_strComment = " << m_strComment;

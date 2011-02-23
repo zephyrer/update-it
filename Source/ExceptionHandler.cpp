@@ -54,14 +54,14 @@
 #define _countof(array) (sizeof(array)/sizeof(array[0]))
 #endif
 
-const int NumCodeBytes = 16;	// Number of code bytes to record.
-const int MaxStackDump = 3072;	// Maximum number of DWORDS in stack dumps.
-const int StackColumns = 4;		// Number of columns in stack dump.
+const int NumCodeBytes = 16;    // Number of code bytes to record.
+const int MaxStackDump = 3072;  // Maximum number of DWORDS in stack dumps.
+const int StackColumns = 4;     // Number of columns in stack dump.
 
-#define	ONEK			1024
-#define	SIXTYFOURK		(64*ONEK)
-#define	ONEM			(ONEK*ONEK)
-#define	ONEG			(ONEK*ONEK*ONEK)
+#define ONEK            1024
+#define SIXTYFOURK      (64*ONEK)
+#define ONEM            (ONEK*ONEK)
+#define ONEG            (ONEK*ONEK*ONEK)
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,8 +76,8 @@ const int StackColumns = 4;		// Number of columns in stack dump.
 // confusing delays when programs crash. Therefore I implemented
 // a simple buffering scheme for hprintf
 
-#define HPRINTF_BUFFER_SIZE (8*1024)				// must be at least 2048
-static TCHAR hprintf_buffer[HPRINTF_BUFFER_SIZE];	// wvsprintf never prints more than one K.
+#define HPRINTF_BUFFER_SIZE (8*1024)                // must be at least 2048
+static TCHAR hprintf_buffer[HPRINTF_BUFFER_SIZE];   // wvsprintf never prints more than one K.
 static int  hprintf_index = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
