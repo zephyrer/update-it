@@ -1,0 +1,629 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "Resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "Resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "// English (U.S.) resources\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "\r\n"
+    "#if defined(_WIN32)\r\n"
+    "LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "#include ""VersionInfo.rc""\r\n"
+    "\r\n"
+    "#endif    // English (U.S.) resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PAGE_PROGRESS DIALOGEX 0, 0, 408, 250
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "@APP_NAME@ — Step 4 of 4 — Processing files"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    LTEXT           "",IDC_STATIC_WORKING,4,4,400,10,SS_CENTERIMAGE
+    CONTROL         "Animate1",IDC_ANIMATE_BANNER,"SysAnimate32",ACS_CENTER | ACS_TRANSPARENT | NOT WS_VISIBLE | WS_TABSTOP,4,18,400,38
+    LTEXT           "",IDC_STATIC_FILE,4,64,400,10,SS_CENTERIMAGE | NOT WS_VISIBLE
+    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",PBS_SMOOTH | NOT WS_VISIBLE,4,74,400,12
+    LTEXT           "Total progress:",IDC_STATIC_TOTAL,4,96,400,10,SS_CENTERIMAGE | NOT WS_VISIBLE
+    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",PBS_SMOOTH | NOT WS_VISIBLE,4,106,400,12
+END
+
+IDD_PAGE_OPTIONS DIALOGEX 0, 0, 408, 250
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "@APP_NAME@ — Step 1 of 4 — Setting options"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    GROUPBOX        "&Source folder",IDC_STATIC,4,4,400,62,WS_GROUP
+    EDITTEXT        IDC_EDIT_SOURCE,10,16,372,12,ES_AUTOHSCROLL | ES_READONLY | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_SOURCE,384,16,14,12,WS_GROUP
+    CONTROL         "Include s&ubfolders",IDC_CHECK_RECURSE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,32,76,10
+    LTEXT           "E&xclude mask(s):",IDC_STATIC,10,48,56,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_EXCLUDE,68,48,330,12,ES_AUTOHSCROLL
+    GROUPBOX        "&Target folder",IDC_STATIC,4,74,400,58,WS_GROUP
+    EDITTEXT        IDC_EDIT_TARGET,10,86,372,12,ES_AUTOHSCROLL | ES_READONLY | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_TARGET,384,86,14,12,WS_GROUP
+    CONTROL         "&Cleanup this folder first",IDC_CHECK_CLEANUP,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,103,90,10
+    CONTROL         "Delete files to &Recycle Bin if possible",IDC_CHECK_RECYCLE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,116,132,10
+    GROUPBOX        "&Date and time",IDC_STATIC,4,140,106,30,WS_GROUP
+    CONTROL         "DateTimePicker1",IDC_DTP_WRITE,"SysDateTimePick32",WS_GROUP | WS_TABSTOP,10,152,94,12
+    GROUPBOX        "Advanced",IDC_STATIC,122,140,282,30,WS_GROUP
+    CONTROL         "Compare contents of the newer and existing older files",IDC_CHECK_COMPARE,
+                    "Button",BS_AUTOCHECKBOX | BS_TOP | WS_GROUP | WS_TABSTOP,128,154,190,10
+END
+
+IDD_PAGE_FILES DIALOGEX 0, 0, 408, 250
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "@APP_NAME@ — Step 2 of 4 — Selecting files"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    LTEXT           "",IDC_STATIC_INFO,4,2,400,10,SS_CENTERIMAGE | SS_PATHELLIPSIS
+    CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | WS_BORDER | WS_TABSTOP,4,14,400,210,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "&Remove from list",IDC_BUTTON_REMOVE,334,228,70,16
+END
+
+IDD_PAGE_ACTION DIALOGEX 0, 0, 408, 250
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "@APP_NAME@ — Step 3 of 4 — Choosing an action"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    GROUPBOX        "Action to perform",IDC_STATIC,4,4,164,42,WS_GROUP
+    CONTROL         "&Copy file(s) to the target folder",IDC_RADIO_COPY,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,10,18,118,10
+    CONTROL         "&Move file(s) to the target folder",IDC_RADIO_MOVE,
+                    "Button",BS_AUTORADIOBUTTON,10,32,118,10
+    CONTROL         "Also uplo&ad file(s) to the FTP server",IDC_CHECK_UPLOAD,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,4,54,130,10
+    CONTROL         "Also &ZIP folder with the copied/moved file(s)",IDC_CHECK_ZIP,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,4,70,158,10
+    CONTROL         "Also &send ZIPped folder via E-mail",IDC_CHECK_SEND,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,4,86,124,10
+    PUSHBUTTON      "ZIPping Options...",IDC_BUTTON_ZIP_OPTIONS,4,102,72,16,WS_GROUP
+    GROUPBOX        "FTP Settings",IDC_GROUP_FTP,180,4,224,114,WS_GROUP
+    RTEXT           "S&erver:",IDC_STATIC,186,18,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_SERVER,224,18,100,12,ES_AUTOHSCROLL
+    RTEXT           "P&ort:",IDC_STATIC,186,34,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PORT,224,34,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "&Login:",IDC_STATIC,186,50,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_LOGIN,224,50,100,12,ES_AUTOHSCROLL
+    RTEXT           "Pass&word:",IDC_STATIC,186,66,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PASSWORD,224,66,100,12,ES_PASSWORD | ES_AUTOHSCROLL
+    RTEXT           "&Root:",IDC_STATIC,186,82,36,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_ROOT,224,82,84,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,310,82,14,12,WS_GROUP
+    CONTROL         "Use passive mo&de",IDC_CHECK_FTP_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,186,102,72,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDVERT,330,12,2,102
+    PUSHBUTTON      "S&ite Manager...",IDC_BUTTON_FTP_MANAGER,336,16,62,16,WS_GROUP
+    PUSHBUTTON      "Sa&ve Site...",IDC_BUTTON_SAVE_FTP,336,38,62,16
+    GROUPBOX        "E-mail settings",IDC_GROUP_MAIL,4,128,400,118,WS_GROUP
+    RTEXT           "&From:",IDC_STATIC,10,142,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_MAIL_FROM,42,142,100,12,ES_AUTOHSCROLL
+    RTEXT           "&To:",IDC_STATIC,10,158,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_MAIL_TO,42,158,100,12,ES_AUTOHSCROLL
+    RTEXT           "S&ubject:",IDC_STATIC,10,174,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_MAIL_SUBJECT,42,174,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Host:",IDC_STATIC,10,190,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_SMTP_HOST,42,190,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Port:",IDC_STATIC,10,206,30,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_SMTP_PORT,42,206,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Authentication and security...",IDC_BUTTON_SMTP_AUTH,10,224,132,16,WS_GROUP
+    EDITTEXT        IDC_EDIT_MAIL_BODY,146,142,252,98,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL | WS_GROUP
+END
+
+IDD_PAGE_ABOUT DIALOGEX 0, 0, 408, 250
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "@APP_NAME@ — Step 0 of 4 — Welcome!"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
+    LTEXT           "Copyright © 2002-2011 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
+    LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
+    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.15.1 (from CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.5 (19 Apr 2010)",IDC_STATIC,16,88,388,16
+    LTEXT           "Copyright © 1995-2010 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,330,10,SS_CENTERIMAGE
+    RTEXT           "zlib Home Site",IDC_LINK_ZLIB,352,106,50,10,SS_CENTERIMAGE
+    LTEXT           "ZipArchive library\nversion 4.1.0 (2010-10-31)",IDC_STATIC,16,122,388,16
+    LTEXT           "Copyright © 2000-2010 by Tadeusz Dracz",IDC_STATIC,16,140,330,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_ARTPOL,352,140,50,10,SS_CENTERIMAGE
+    LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,156,388,10
+    LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,330,10,SS_CENTERIMAGE
+    RTEXT           "Web Page",IDC_LINK_RSA,352,166,50,10,SS_CENTERIMAGE
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.92 (13 February 2011)",IDC_STATIC,16,182,388,16
+    LTEXT           "Copyright © 1998-2010 by PJ Naughter",IDC_STATIC,16,200,330,10,SS_CENTERIMAGE
+    RTEXT           "Home Page",IDC_LINK_NAUGHTER,352,200,50,10,SS_CENTERIMAGE
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.0c (2 Dec 2010)",IDC_STATIC,16,216,330,16
+    RTEXT           "Web Page",IDC_LINK_OPEN_SSL,352,222,50,10,SS_CENTERIMAGE
+END
+
+IDD_PAGE_FIRST_LAUNCH DIALOGEX 0, 0, 408, 250
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "@APP_NAME@ — First Launch"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    LTEXT           "In case of the first @APP_NAME@ wizard launch you may need to configure crash reporting settings. If you are not sure which outgoing SMTP server to specify look at your default E-mail client settings.",IDC_STATIC,4,4,400,18
+    GROUPBOX        "&Crash Reporting Settings",IDC_STATIC,4,32,400,134,WS_GROUP
+    RTEXT           "Your E-mail &Address:",IDC_STATIC,10,44,78,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_CRASH_FROM,90,44,306,12,ES_AUTOHSCROLL | NOT WS_BORDER | WS_GROUP,WS_EX_CLIENTEDGE
+    ICON            "",IDC_ICON_INFO,20,64,20,20
+    LTEXT           "",IDC_TEXT_EMAIL_GUARANTEE,50,62,344,34
+    LTEXT           "",IDC_TEXT_EMAIL_INFO,50,102,344,34
+    RTEXT           "Outgoing SMTP &Server:",IDC_STATIC,10,147,78,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_CRASH_SMTP,90,147,252,12,ES_AUTOHSCROLL | NOT WS_BORDER | WS_GROUP,WS_EX_CLIENTEDGE
+    RTEXT           "&Port:",IDC_STATIC,346,147,20,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_CRASH_PORT,368,147,28,12,ES_AUTOHSCROLL | ES_NUMBER | NOT WS_BORDER | WS_GROUP,WS_EX_CLIENTEDGE
+END
+
+IDD_AUTHENTICATION DIALOGEX 0, 0, 168, 146
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Authentication and security"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    GROUPBOX        "Authentication",IDC_STATIC,8,6,152,68,WS_GROUP
+    RTEXT           "&Method:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_AUTH_METHOD,54,20,100,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    RTEXT           "&Username:",IDC_STATIC_USERNAME_PROMPT,14,38,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_USERNAME,54,38,100,12,ES_AUTOHSCROLL | WS_GROUP
+    RTEXT           "&Password:",IDC_STATIC_PASSWORD_PROMPT,14,56,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_PASSWORD,54,56,100,12,ES_PASSWORD | ES_AUTOHSCROLL | WS_GROUP
+    GROUPBOX        "Security",IDC_STATIC,8,82,152,28,WS_GROUP
+    CONTROL         "Use &SSL connection",IDC_CHECK_USE_SSL,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,96,78,10
+    DEFPUSHBUTTON   "OK",IDOK,54,122,46,16,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,114,122,46,16
+END
+
+IDD_ZIP_OPTIONS DIALOGEX 0, 0, 168, 152
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ZIPping Options"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Compression",IDC_STATIC,8,6,152,52,WS_GROUP
+    RTEXT           "Method:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_ZIP_METHOD,54,20,100,32,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Level:",IDC_STATIC,14,38,38,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_ZIP_LEVEL,54,38,100,56,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Encryption",IDC_STATIC,8,66,152,50,WS_GROUP
+    RTEXT           "Method:",IDC_STATIC,14,80,38,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_ENCR_METHOD,54,80,100,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Password:",IDC_TEXT_ZIP_PASSWORD,14,98,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_ZIP_PASSWORD,54,98,100,12,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,54,128,46,16,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,114,128,46,16
+END
+
+IDD_XCRASHREPORT_MAIN DIALOGEX 0, 0, 290, 268
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "@APP_NAME@ Wizard"
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_BANNER,0,0,240,35
+    LTEXT           "",IDC_APP_ICON,240,0,50,35,SS_NOTIFY
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,35,295,1
+    LTEXT           "If you were in the middle of something, the information you were working on might be lost.",IDC_STATIC,8,42,274,18
+    LTEXT           "Please tell us about this problem.",IDC_PLEASE_TELL_US,8,64,274,10
+    LTEXT           "We have created an error report that you can send to us. We will treat this report as confidential and anonymous.",IDC_STATIC,8,76,274,18
+    LTEXT           "To help us diagnose the cause of this error and improve this software, please describe what you were doing when this error occurred, and send this report to us.",IDC_STATIC,8,98,274,18
+    LTEXT           "Describe what you were doing when the error occurred (optional):",IDC_STATIC,8,120,274,10
+    EDITTEXT        IDC_WHAT,8,130,274,86,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    LTEXT           "Click here",IDC_CLICK_HERE,8,222,34,10
+    LTEXT           "to see what this report contains.",IDC_STATIC,44,222,108,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,0,236,294,1
+    DEFPUSHBUTTON   "Don't Send",IDC_DO_NOT_SEND_ERROR,232,244,50,16
+    PUSHBUTTON      "Send Error Report",IDC_SEND_ERROR,148,244,70,16
+END
+
+IDD_XCRASHREPORT_DETAILS DIALOGEX 0, 0, 350, 308
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Error Report Contents"
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x0
+BEGIN
+    LTEXT           "",IDC_STATIC_DETAILS_BANNER,0,0,351,16
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_TABSTOP,0,16,350,85,WS_EX_CLIENTEDGE
+    LTEXT           "Double-click a file to view its contents.",IDC_STATIC,2,102,130,8
+    RTEXT           "Name:",IDC_STATIC,4,116,24,8
+    LTEXT           "",IDC_STATIC_NAME,30,116,103,8
+    RTEXT           "Description:",IDC_STATIC,138,116,40,8
+    LTEXT           "",IDC_STATIC_DESC,182,116,166,8
+    EDITTEXT        IDC_CONTENTS,0,128,350,152,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL,WS_EX_CLIENTEDGE
+    DEFPUSHBUTTON   "Close",IDOK,296,288,50,16
+END
+
+IDD_XCRASHREPORT_ABOUT DIALOGEX 0, 0, 270, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About XCrashReport"
+FONT 8, "MS Shell Dlg 2", 0, 0, 0x0
+BEGIN
+    ICON            "",IDC_STATIC_ICON,8,12,20,20,SS_CENTERIMAGE
+    LTEXT           "XCrashReport Version 1.0",IDC_STATIC,40,12,164,8,SS_NOPREFIX
+    LTEXT           "Copyright © 2003 Hans Dietrich",IDC_STATIC,40,26,164,8
+    LTEXT           "This software is released into the public domain.  You are free to use it in any way you like, except that you may not sell this source code.",IDC_STATIC,40,42,164,24
+    LTEXT           "This software is provided ""as is"" with no expressed or implied warranty.  I accept no liability for any damage or loss of business that this software may cause. ",IDC_STATIC,40,74,164,34
+    LTEXT           "Send email to Hans Dietrich",IDC_ABOUT_EMAIL,40,120,90,10,SS_CENTERIMAGE
+    DEFPUSHBUTTON   "OK",IDOK,214,10,50,16,WS_GROUP
+END
+
+IDD_BROWSE_FTP DIALOGEX 0, 0, 168, 164
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Browse for FTP Folder"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
+BEGIN
+    CONTROL         "",IDC_TREE_FTP_FOLDERS,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | WS_HSCROLL | WS_GROUP | WS_TABSTOP,8,8,152,110,WS_EX_CLIENTEDGE
+    LTEXT           "",IDC_STATIC_STATUS,10,122,148,12,SS_NOPREFIX | SS_CENTERIMAGE | SS_ENDELLIPSIS
+    DEFPUSHBUTTON   "OK",IDOK,54,140,46,16,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,114,140,46,16
+END
+
+IDD_FTP_PROPERTIES DIALOGEX 0, 0, 170, 220
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "FTP Site Properties"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Description",IDC_STATIC,8,6,154,52,WS_GROUP
+    RTEXT           "&Name:",IDC_STATIC,14,20,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_NAME,54,20,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Comment:",IDC_STATIC,14,38,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_COMMENT,54,38,100,12,ES_AUTOHSCROLL
+    GROUPBOX        "Settings",IDC_STATIC,8,66,154,116,WS_GROUP
+    RTEXT           "&Server:",IDC_STATIC,14,82,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_SERVER,54,82,100,12,ES_AUTOHSCROLL
+    RTEXT           "&Port:",IDC_STATIC,14,98,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PORT,54,98,100,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "&Login:",IDC_STATIC,14,114,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_LOGIN,54,114,100,12,ES_AUTOHSCROLL
+    RTEXT           "Pass&word:",IDC_STATIC,14,130,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_PASSWORD,54,130,100,12,ES_PASSWORD | ES_AUTOHSCROLL
+    RTEXT           "&Root:",IDC_STATIC,14,146,38,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FTP_ROOT,54,146,84,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "...",IDC_BUTTON_FTP_ROOT,140,146,14,12,WS_GROUP
+    CONTROL         "&Use passive mode",IDC_CHECK_FTP_PASSIVE,"Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,14,166,72,10
+    DEFPUSHBUTTON   "OK",IDOK,56,196,46,16,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,116,196,46,16
+END
+
+IDD_FTP_MANAGER DIALOGEX 0, 0, 250, 170
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "FTP Site Manager"
+FONT 8, "MS Shell Dlg 2", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_FTP_SITES,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_NOSORTHEADER | WS_GROUP | WS_TABSTOP,8,10,234,128,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Edit...",IDC_BUTTON_FTP_EDIT,8,146,46,16,WS_GROUP
+    PUSHBUTTON      "Remove",IDC_BUTTON_FTP_REMOVE,62,146,46,16
+    DEFPUSHBUTTON   "OK",IDOK,142,146,46,16,WS_GROUP
+    PUSHBUTTON      "Close",IDCANCEL,196,146,46,16
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_AUTHENTICATION DLGINIT
+BEGIN
+    IDC_COMBO_AUTH_METHOD, 0x403, 5, 0
+0x6f4e, 0x656e, "\000" 
+    IDC_COMBO_AUTH_METHOD, 0x403, 9, 0
+0x5243, 0x4d41, 0x4d2d, 0x3544, "\000" 
+    IDC_COMBO_AUTH_METHOD, 0x403, 6, 0
+0x6f4c, 0x6967, 0x006e, 
+    IDC_COMBO_AUTH_METHOD, 0x403, 6, 0
+0x6c50, 0x6961, 0x006e, 
+    IDC_COMBO_AUTH_METHOD, 0x403, 5, 0
+0x544e, 0x4d4c, "\000" 
+    0
+END
+
+IDD_ZIP_OPTIONS DLGINIT
+BEGIN
+    IDC_COMBO_ZIP_METHOD, 0x403, 8, 0
+0x6544, 0x6c66, 0x7461, 0x0065, 
+    IDC_COMBO_ZIP_METHOD, 0x403, 6, 0
+0x5a42, 0x7069, 0x0032, 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 6, 0
+0x7453, 0x726f, 0x0065, 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 8, 0
+0x6146, 0x7473, 0x7365, 0x0074, 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 8, 0
+0x6544, 0x6166, 0x6c75, 0x0074, 
+    IDC_COMBO_ZIP_LEVEL, 0x403, 5, 0
+0x6542, 0x7473, "\000" 
+    IDC_COMBO_ENCR_METHOD, 0x403, 5, 0
+0x6f4e, 0x656e, "\000" 
+    IDC_COMBO_ENCR_METHOD, 0x403, 9, 0
+0x7453, 0x6e61, 0x6164, 0x6472, "\000" 
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
+0x4541, 0x2053, 0x3231, 0x2d38, 0x6962, 0x0074, 
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
+0x4541, 0x2053, 0x3931, 0x2d32, 0x6962, 0x0074, 
+    IDC_COMBO_ENCR_METHOD, 0x403, 12, 0
+0x4541, 0x2053, 0x3532, 0x2d36, 0x6962, 0x0074, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PAGE_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 241
+    END
+
+    IDD_PAGE_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 241
+    END
+
+    IDD_PAGE_FILES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 241
+    END
+
+    IDD_PAGE_ACTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 403
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 241
+    END
+
+    IDD_PAGE_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 327
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 241
+    END
+
+    IDD_AUTHENTICATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 161
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_ZIP_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 161
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 146
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_LANGS MENU 
+BEGIN
+    POPUP "Language"
+    BEGIN
+        MENUITEM "English",                     ID_LANGUAGE_ENGLISH
+        MENUITEM "Russian",                     ID_LANGUAGE_RUSSIAN
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_REGKEY              "Elijah Zarezky"
+    IDS_NO_SOURCE           "No source folder specified!"
+    IDS_NO_TARGET           "No target folder specified!"
+    IDS_CHOOSE_SOURCE       "Choose the source folder:"
+    IDS_CHOOSE_TARGET       "Choose the target folder:"
+    IDS_NAME                "Name"
+    IDS_EXTENSION           "Extension"
+    IDS_PATH                "Path"
+    IDS_DATE                "Date"
+    IDS_TIME                "Time"
+    IDS_DATE_FORMAT         "dd.MM.yyyy"
+    IDS_TIME_FORMAT         "HH:mm:ss"
+    IDS_FOUND_FORMAT        "&Found %i file(s):"
+    IDS_FOLDER_FORMAT       "Searching folder: %s"
+    IDS_NO_FILES            "No files found."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DISCARDING_SEARCH   "Discarding search results..."
+    IDS_DELETING_FILES      "Deleting file(s) from the target folder..."
+    IDS_COPYING_FILES       "Copying file(s) to the target folder..."
+    IDS_MOVING_FILES        "Moving file(s) to the target folder..."
+    IDS_ALL_DONE            "All done. Click Finish to exit the wizard."
+    IDS_FILE_VERSION        "\\StringFileInfo\\040904b0\\FileVersion"
+    IDS_VERSION_FORMAT      "@APP_NAME@ Wizard – Version %s\nThis application is a part of the PowerGadgets collection"
+    IDS_ZIPPING_FOLDER      "Zipping target folder..."
+    IDS_SENDING_MAIL        "Sending zipped folder..."
+    IDS_SEND_FAILED         "Failed to send e-mail message!"
+    IDS_UPLOADING_FILES     "Uploading file(s) to the FTP server..."
+    IDS_STARTING_FTP        "Starting FTP session..."
+    IDS_CONNECTING_FTP      "Connecting to the FTP server..."
+    IDS_DISCONNECTING_FTP   "Disconnecting from the FTP server..."
+    IDS_FINISHING_FTP       "Finishing FTP session..."
+    IDS_PREPARING_UPLOAD    "Preparing for upload..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CHARSET_FORMAT      "windows-%u"
+    IDS_SELECTED_FORMAT     "&Selected %i file(s):"
+    IDS_NO_SELECTED         "No files selected."
+    IDS_SIZE                "Size"
+    IDS_SC_MINIMIZE         "Mi&nimize"
+    IDS_SC_EXPORT_SETTINGS  "Export Settings..."
+    IDS_SC_IMPORT_SETTINGS  "Import Settings..."
+    IDS_SETTINGS_FILTER     "Registry Hive Files (*.hive)|*.hive|All Files (*.*)|*.*||"
+    IDS_SC_RESTORE          "&Restore"
+    IDS_TITLE_EXPORT        "Export Settings to File"
+    IDS_TITLE_IMPORT        "Import Settings from File"
+    IDS_TOTAL_SIZE_OVERFLOW "Total size of already found files exceeds the maximum\nsupported value and the search will now be stopped. After\nthese files will be processed You can repeat the search."
+    IDS_PARSE_MIN_STRING_SIZE "Please enter more than %1 characters."
+    IDS_OTHER_APP_INSTANCE  "One or more instances of this application is already running.\nTheir simultaneous execution may produce conflicts.\nAre you sure you want to proceed?"
+    IDS_APP_INIT_FAILED     "Failed to initialize application.\nPlease contact to the developer."
+    IDS_NO_ZIP_AND_MESSAGE  "Please select a file to send or enter\na message describing the problem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDIT_SOURCE         "Shows the location to start the search for the updated files. You can change this location by clicking the [...] button on right. The most recently used source folder will be restored at the next run."
+    IDC_BUTTON_SOURCE       "Click here to browse for the source folder."
+    IDC_EDIT_TARGET         "Shows the location which the updated files will be copied/moved to. You can change this location by clicking the [...] button on right. The most recently used target folder will be restored at the next run."
+    IDC_BUTTON_TARGET       "Click here to browse for the target folder."
+    IDC_DTP_WRITE           "Specifies the modification date/time starting with which files will be treat as updated."
+    IDC_CHECK_CLEANUP       "If checked then the target folder will be completely erased before updated files will be copied/moved into."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDIT_MAIL_TO        "Specifies the mailing address of the desired message recipient."
+    IDC_EDIT_SMTP_HOST      "Specifies the name of the SMTP server through the wich your message should be sent. You can get this information from your Internet Service Provider or LAN administrator."
+    IDC_EDIT_SMTP_PORT      "Specifies the port number you connect to on your outgouing E-mail (SMTP) server. This port number is usually 25."
+    IDC_EDIT_MAIL_BODY      "Provides the space to type your message text. You can completely describe here the updated files you sent."
+    IDC_EDIT_MAIL_SUBJECT   "Specifies the subject of your E-mail message. You can briefly describe here the updated files you sent."
+    IDC_CHECK_RECURSE       "If checked then all the folders within your source folder will be searched as well."
+    IDC_CHECK_UPLOAD        "If checked then all the updated file(s) will be uploaded onto the specified FTP server. Don't forget to specify the FTP settings properly."
+    IDC_EDIT_FTP_SERVER     "Specifies the name of the FTP server onto the updated files should be uploaded."
+    IDC_EDIT_FTP_PORT       "Specifies the port number you connect to on your FTP server. This port number is usually 21."
+    IDC_EDIT_FTP_LOGIN      "Specifies the account name assigned to you by the FTP server administrator."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_LIST_FILES          "Shows the updated file(s) that was found in the source folder. If you don't want to process some of them just select all unneeded files and remove it from this list by clicking [Remove from list] button below."
+    IDC_BUTTON_REMOVE       "Click here to remove selected file(s) from the list and thus exclude it from the future processing."
+    IDC_RADIO_COPY          "If selected then the updated files will be exactly duplicated in the target folder."
+    IDC_RADIO_MOVE          "If selected then the updated files will be copied into the target folder and then deleted from the source folder."
+    IDC_CHECK_RECYCLE       "If checked then the any files deleted from the target folder will not be actually removed from your hard disk until you empty the Recycle Bin. Note that this setting has no effect when the Recycle Bin is turned off."
+    IDC_CHECK_ZIP           "If checked then all the updated files will be packed into the single archive using ZIP compression. This archive then can be send via e-mail."
+    IDC_CHECK_SEND          "If checked then the archive containing the target folder will be sent via e-mail to the specified recipient. Don't forget to specify the mail settings properly."
+    IDC_EDIT_MAIL_FROM      "Specifies the mailing address of the message sender."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDIT_FTP_PASSWORD   "Provides the space to type the password assigned to you by the FTP server administrator. For security reasons, the actual characters don't appear in this space; instead each character is represented by an asterisk."
+    IDC_EDIT_FTP_ROOT       "Specifies the initial subfolder to connect on the FTP server. If this field is left blank, the root folder will be used."
+    IDC_EDIT_EXCLUDE        "Specifies a mask or several masks (delimited with commas) of files to exclude from search."
+    IDC_CHECK_FTP_PASSIVE   "If unchecked then the FTP server will establish inbound connection to Your computer. Otherwise the outbound connection to the FTP server will be established (use it when inbound connections are disabled by a firewall)."
+    IDC_CHECK_USE_SSL       "If checked then Secure Socket Layer connection with the SMTP server will be used."
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "@APP_NAME@"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EMAIL_GUARANTEE_FORMAT 
+                            "Notice that the specified address will only be stored locally in the %s file and never will be published or sent anywhere else."
+    IDS_EMAIL_INFO          "This address is needed to fill ""From"" and ""Reply-To"" fields in the generated crash reporting E-mails. But if you still worry about a spam feel free to use some fake address such as ""anonymous@unknown.org"" and provide a real one in the error description typed by yourself."
+    IDS_SEARCHING_FTP_FORMAT "Searching FTP: %s"
+    IDS_SAVE_FTP_SITE       "Save FTP Site"
+    IDS_OVERWRITE_FTP_FORMAT 
+                            "The FTP site named '%s' already exists.\nDo you wish to overwrite it?"
+    IDS_FTP_NAME            "Name"
+    IDS_FTP_COMMENT         "Comment"
+    IDS_EDIT_FTP_SITE       "Edit FTP Site"
+    IDS_REMOVE_FTP_FORMAT   "Are you sure you want to remove\nthe FTP site named '%s'?"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+
+#if defined(_WIN32)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif
+
+#include "VersionInfo.rc"
+
+#endif    // English (U.S.) resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

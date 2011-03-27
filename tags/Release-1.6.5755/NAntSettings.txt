@@ -1,0 +1,6 @@
+-t:net-3.5
+-emacs
+-D:VerMajor=1
+-D:VerMinor=6
+-D:VerBuild=5755
+-D:SvnRev=403
