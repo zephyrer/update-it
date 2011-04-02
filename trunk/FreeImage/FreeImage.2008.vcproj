@@ -441,6 +441,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Repository\FreeImage\Source\ConversionRGB16.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Repository\FreeImage\Source\ConversionRGBF.cpp"
 					>
 				</File>
