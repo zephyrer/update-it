@@ -1,0 +1,145 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "Resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "Resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "#include ""../../Repository/Naughter/Source/Smtp.rc""\r\n"
+    "\r\n"
+    "// English (U.S.) resources\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "\r\n"
+    "#if defined(_WIN32)\r\n"
+    "LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "// version information\r\n"
+    "\r\n"
+    "#include ""VersionInfo.rc""\r\n"
+    "\r\n"
+    "#endif    // English (U.S.) resources\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APP_ICON            ICON                    "BinRes\\AppIcon.ico"
+IDI_FOLDER_XP           ICON                    "BinRes\\FolderXP.ico"
+IDI_FOLDER_VISTA        ICON                    "BinRes\\FolderVista.ico"
+IDI_FOLDER_OPEN_XP      ICON                    "BinRes\\FolderOpenXP.ico"
+IDI_FOLDER_OPEN_VISTA   ICON                    "BinRes\\FolderOpenVista.ico"
+IDI_FTP_ROOT_XP         ICON                    "BinRes\\FtpRootXP.ico"
+IDI_FTP_ROOT_VISTA      ICON                    "BinRes\\FtpRootVista.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AVI
+//
+
+IDR_FILECOPY_2000       AVI                     "BinRes\\FileCopy2000.avi"
+IDR_FILEMOVE_2000       AVI                     "BinRes\\FileMove2000.avi"
+IDR_FILEDELETE_2000     AVI                     "BinRes\\FileDelete2000.avi"
+IDR_FILETRASH_2000      AVI                     "BinRes\\FileTrash2000.avi"
+IDR_FILEZIP_2000        AVI                     "BinRes\\FileZip2000.avi"
+IDR_FILEUPLOAD_2000     AVI                     "BinRes\\FileUpload2000.avi"
+IDR_FILESEND_2000       AVI                     "BinRes\\FileSend2000.avi"
+IDR_FILECOPY_XP         AVI                     "BinRes\\FileCopyXP.avi"
+IDR_FILEMOVE_XP         AVI                     "BinRes\\FileMoveXP.avi"
+IDR_FILEDELETE_XP       AVI                     "BinRes\\FileDeleteXP.avi"
+IDR_FILETRASH_XP        AVI                     "BinRes\\FileTrashXP.avi"
+IDR_FILEZIP_XP          AVI                     "BinRes\\FileZipXP.avi"
+IDR_FILEUPLOAD_XP       AVI                     "BinRes\\FileUploadXP.avi"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// GIF_FILE
+//
+
+IDR_SOFTPEDIA_AWARD     GIF_FILE                "BinRes\\SoftpediaCleanAward.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "UpdateIt!"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#include "../../Repository/Naughter/Source/Smtp.rc"
+
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+
+#if defined(_WIN32)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif
+
+// version information
+
+#include "VersionInfo.rc"
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
