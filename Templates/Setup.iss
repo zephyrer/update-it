@@ -229,20 +229,20 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"
 Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; MinVersion: 0,5.01.2600; Flags: ignoreversion
 
 ;; OpenSSL redistributables
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\4758cca.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\aep.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\atalla.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\capi.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\chil.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\cswift.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\gmp.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\gost.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\nuron.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\padlock.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\sureware.dll"; DestDir: "{app}"
-Source: "..\OpenSSL\redist\ubsec.dll"; DestDir: "{app}"
+Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\4758cca.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\aep.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\atalla.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\capi.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\chil.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\cswift.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\gmp.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\gost.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\nuron.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\padlock.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\sureware.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenSSL\redist\ubsec.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ;; DbgHelp redistributables
 Source: "..\Redist\dbghelp.dll"; DestDir: "{app}"
