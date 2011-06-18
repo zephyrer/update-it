@@ -19,13 +19,13 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.6.5799
+AppVerName=UpdateIt! 1.6.5842
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.6.5799
+AppVersion=1.6.5842
 AppCopyright=Copyright © 2002–2011 by Elijah Zarezky
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
@@ -33,8 +33,8 @@ AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.6.5799-setup-universal
-VersionInfoVersion=1.6.5799.406
+OutputBaseFilename=UpdateIt-1.6.5842-setup-universal
+VersionInfoVersion=1.6.5842.414
 VersionInfoProductName=Power Gadgets
 VersionInfoProductVersion=1.6
 MinVersion=0,5.0.2195
@@ -297,20 +297,20 @@ Source: "..\Redist\Microsoft.VC90.MFCLOC\mfc90rus.dll"; DestDir: "{app}"; Compon
 Source: "..\Redist\Microsoft.VC90.MFCLOC\Microsoft.VC90.MFCLOC.manifest"; DestDir: "{app}"; Components: core; MinVersion: 0,5.01.2600; Flags: ignoreversion
 
 ;; OpenSSL redistributables
-Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\4758cca.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\aep.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\atalla.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\capi.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\chil.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\cswift.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\gmp.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\gost.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\nuron.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\padlock.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\sureware.dll"; DestDir: "{app}"; Components: core
-Source: "..\OpenSSL\redist\ubsec.dll"; DestDir: "{app}"; Components: core
+Source: "..\OpenSSL\redist\ssleay32.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\libeay32.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\4758cca.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\aep.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\atalla.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\capi.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\chil.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\cswift.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\gmp.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\gost.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\nuron.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\padlock.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\sureware.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
+Source: "..\OpenSSL\redist\ubsec.dll"; DestDir: "{app}"; Components: core; Flags: ignoreversion
 
 ;; DbgHelp redistributables
 Source: "..\Redist\dbghelp.dll"; DestDir: "{app}"
