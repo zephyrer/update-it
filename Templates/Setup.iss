@@ -249,10 +249,10 @@ Source: "..\Redist\dbghelp.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
-Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: en
-Name: "{group}\Документация (на английском)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: ru
-Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: en
-Name: "{group}\Документация (на русском)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: ru
+Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Flags: runmaximized; Languages: en
+Name: "{group}\Документация (на английском)"; Filename: "{app}\UpdateIt.0409.chm"; Flags: runmaximized; Languages: ru
+Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; Flags: runmaximized; Languages: en
+Name: "{group}\Документация (на русском)"; Filename: "{app}\UpdateIt.0419.chm"; Flags: runmaximized; Languages: ru
 Name: "{group}\License Agreement"; Filename: "{app}\ApacheLicense.rtf"; Languages: en
 Name: "{group}\Лицензионное соглашение"; Filename: "{app}\ApacheLicense.rtf"; Languages: ru
 Name: "{group}\Uninstall UpdateIt!"; Filename: "{uninstallexe}"; Languages: en

@@ -73,8 +73,8 @@
 
 #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
 #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
-#define ENGINESDIR "P:/OpenSSL/1.0.0c/lib/engines"
-#define OPENSSLDIR "P:/OpenSSL/1.0.0c/ssl"
+#define ENGINESDIR "P:/Purgatory/OpenSSL/1.0.0e/lib/engines"
+#define OPENSSLDIR "P:/Purgatory/OpenSSL/1.0.0e/ssl"
 #endif
 #endif
 
@@ -188,7 +188,7 @@ YOU SHOULD NOT HAVE BOTH DES_RISC1 AND DES_RISC2 DEFINED!!!!!
    even newer MIPS CPU's, but at the moment one size fits all for
    optimization options.  Older Sparc's work better with only UNROLL, but
    there's no way to tell at compile time what it is you're running on */
-
+ 
 #if defined( sun )		/* Newer Sparc's */
 #  define DES_PTR
 #  define DES_RISC1

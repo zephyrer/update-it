@@ -19,13 +19,13 @@
 
 [Setup]
 AppName=UpdateIt!
-AppVerName=UpdateIt! 1.6.5842
+AppVerName=UpdateIt! 1.6.5961
 AppID={{78461E4F-C4AD-4488-97F7-773CCA325839}
 AppPublisher=Elijah Zarezky
 AppPublisherURL=http://zarezky.spb.ru/
 AppSupportURL=http://zarezky.spb.ru/projects/update_it.html
 AppUpdatesURL=http://zarezky.spb.ru/projects/update_it.html
-AppVersion=1.6.5842
+AppVersion=1.6.5961
 AppCopyright=Copyright © 2002–2011 by Elijah Zarezky
 DefaultDirName={pf}\Elijah Zarezky\UpdateIt
 DefaultGroupName=Elijah Zarezky\UpdateIt
@@ -33,8 +33,8 @@ AllowNoIcons=true
 Compression=lzma
 SolidCompression=true
 OutputDir=..\Setup
-OutputBaseFilename=UpdateIt-1.6.5842-setup-universal
-VersionInfoVersion=1.6.5842.414
+OutputBaseFilename=UpdateIt-1.6.5961-setup-universal
+VersionInfoVersion=1.6.5961.415
 VersionInfoProductName=Power Gadgets
 VersionInfoProductVersion=1.6
 MinVersion=0,5.0.2195
@@ -457,10 +457,10 @@ Source: "..\Lib\dbghelp.lib"; DestDir: "{app}\Sources\UpdateIt\Lib"; Components:
 
 [Icons]
 Name: "{group}\UpdateIt!"; Filename: "{app}\UpdateIt.exe"; WorkingDir: "{app}"
-Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: en
-Name: "{group}\Документация (на английском)"; Filename: "{app}\UpdateIt.0409.chm"; Languages: ru
-Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: en
-Name: "{group}\Документация (на русском)"; Filename: "{app}\UpdateIt.0419.chm"; Languages: ru
+Name: "{group}\Documentation (English)"; Filename: "{app}\UpdateIt.0409.chm"; Flags: runmaximized; Languages: en
+Name: "{group}\Документация (на английском)"; Filename: "{app}\UpdateIt.0409.chm"; Flags: runmaximized; Languages: ru
+Name: "{group}\Documentation (Russian)"; Filename: "{app}\UpdateIt.0419.chm"; Flags: runmaximized; Languages: en
+Name: "{group}\Документация (на русском)"; Filename: "{app}\UpdateIt.0419.chm"; Flags: runmaximized; Languages: ru
 Name: "{group}\License Agreement"; Filename: "{app}\ApacheLicense.rtf"; Languages: en
 Name: "{group}\Лицензионное соглашение"; Filename: "{app}\ApacheLicense.rtf"; Languages: ru
 Name: "{group}\Build UpdateIt!"; FileName: "{app}\Sources\UpdateIt\UpdateIt.2008.sln"; Components: sources; Languages: en
