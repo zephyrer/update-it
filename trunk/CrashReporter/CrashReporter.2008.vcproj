@@ -25,6 +25,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="echo Copying myOpenSSL include files into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\inc32\openssl\*.* ..\OpenSSL\include\openssl&#x0D;&#x0A;echo Copying myOpenSSL import libraries into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;echo Copying myOpenSSL redistributable DLLs into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.dll ..\OpenSSL\redist&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.dll ..\OpenSSL\redist&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -120,6 +121,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="echo Copying myOpenSSL include files into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\inc32\openssl\*.* ..\OpenSSL\include\openssl&#x0D;&#x0A;echo Copying myOpenSSL import libraries into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;echo Copying myOpenSSL redistributable DLLs into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.dll ..\OpenSSL\redist&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.dll ..\OpenSSL\redist&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -213,6 +215,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="echo Copying myOpenSSL include files into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\inc32\openssl\*.* ..\OpenSSL\include\openssl&#x0D;&#x0A;echo Copying myOpenSSL import libraries into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;echo Copying myOpenSSL redistributable DLLs into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.dll ..\OpenSSL\redist&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.dll ..\OpenSSL\redist&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -308,6 +311,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="echo Copying myOpenSSL include files into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\inc32\openssl\*.* ..\OpenSSL\include\openssl&#x0D;&#x0A;echo Copying myOpenSSL import libraries into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.lib ..\OpenSSL\lib\VC&#x0D;&#x0A;echo Copying myOpenSSL redistributable DLLs into the project&apos;s OpenSSL directory...&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\engines\*.dll ..\OpenSSL\redist&#x0D;&#x0A;xcopy /Y ..\..\Repository\myOpenSSL\out32dll\x86\lib\*.dll ..\OpenSSL\redist&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
