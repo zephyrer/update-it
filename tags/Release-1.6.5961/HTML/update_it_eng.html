@@ -1,0 +1,695 @@
+<!doctype html public "-//w3c//dtd html 4.01 transitional//en">
+
+<html>
+
+<!-- page header -->
+
+<head>
+
+<meta name="autor" content="Elijah Zarezky">
+<meta name="description" content="UpdateIt! project">
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1252">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<link rel="StyleSheet" type="text/css" href="./styles.css">
+
+<title>UpdateIt!</title>
+
+</head>
+
+<!-- page body -->
+
+<body>
+
+<table width=100% border=1 cellspacing=0 class="pageCaption">
+<tr><td height=37 class="pageCaption">UpdateIt!</td></tr>
+</table>
+
+<p class="pageText">
+<img src="./images/step-0.gif" width=370 height=302 align="left" border=0
+class="updateItShot"><strong>UpdateIt!</strong> is the application designed for the
+synchronization of the source folder's content  with the content of other (target) folder on
+a local computer or (and) a remote FTP server. This is wizard that I wrote to fast and
+comfortable update of my own personal website. It searches (at request &mdash; recursively)
+all files in the source folder that are modified after specified date/time. It can copy found
+files (everyone or selected) to the target folder with preservation of an initial structure
+of the subfolders. This application allows to upload all files from the updated folder (with
+preservation of its structure) to the specified FTP server, to compress this folder in the same
+ named zip-archive, to send one to the given E-mail.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/first-launch.gif" width=370 height=302 align="left" border=0
+class="updateItShot">When you first run the application on your computer you will be asked to
+provide your e-mail and outgoing mail server to be used to send crash reports (in case of their
+occurrence). If you are not sure which outgoing SMTP server to specify look at your default
+E-mail client settings. Notice that the specified address will only be stored locally and never
+will be published or sent anywhere else. But if you still worry about a spam feel free to use
+some fake address such as &#8222;anonymous@unknown.org&#8220; and provide a real one in the
+error description typed by yourself.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step-1.gif" width=370 height=302 align="left" border=0
+class="updateItShot"><strong>Step #1</strong> is the  selection of source and target folders.
+It is required to choose a name of the  folder for searching the updated files and a name of
+the  folder where these updated files will be copied or moved. Also, it is required to
+specify the date and time  since which  files in the source folder are considered updated.
+If <span class="winText">Include subfolders</span> option is  set , the files searching will
+be carried out recursively &mdash; in the source folder and in all folders inside  it. In the
+field <span class="winText">Exclude mask(s)</span> there is possibility to type one or
+several masks of files (separated from each other by commas) which should be excluded from
+search. To delete the content of the target folder as a preliminary one it is possible to set
+<span class="winText">Cleanup this folder first</span> option (if <span class="winText">Delete
+files to Recycle Bin if possible</span> option is set files will be removed to the
+<span class="winText">Recycle Bin</span> on conditions that its usage is enabled by system
+options). Setting <span class="winText">Compare contents of the newer and existing older
+files</span> option allows to exclude from results of search those files which binary contents
+do not differ from the existing copies in the target folder.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step-2.gif" width=370 height=302 align="left" border=0
+class="updateItShot"><strong>Step #2</strong> is reviewing the list of the updated files. On
+this step you can see the list of the updated files found in the source folder. The Name, the
+extension, the relative path in the source folder, and also the date and time of the last
+modification are shown for each file. In order to remove file(s) from this list (and thereby
+to exclude them from the further processing) it is required to mark corresponding line(s) and
+to click the <span class="winText">Remove from list</span> button. Note that in this case
+files leave only the list, but still stay in the source folder.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step-3.gif" width=370 height=302 align="left" border=0
+class="updateItShot"><strong>Step #3</strong> is actions selection. On this step it is required
+to choose,  what exactly should be done with the found files. Copying or moving files to the
+target folder are obligatory actions that are chosen by means of the group
+<span class="winText">Action to perform</span> switches. Besides this, it is possible to upload
+the target folder contents (with full structure preservation) to the specified folder on a
+FTP server. For this purpose set <span class="winText">Also upload file(s) to the
+FTP server</span> option and fill the fields of <span class="winText">FTP Settings</span>
+group, having specified the address and the port of a server, as well as the login and the
+password for the access. To compress a target folder in the same named zip-archive, set
+<span class="winText">Also ZIP folder with the copied/moved file(s)</span> option. This archive
+file can be sent as an attachment to the given E-mail address. For this, set
+<span class="winText">Also send ZIPped folder via e-mail</span> option and fill fields of
+<span class="winText">Mail Settings</span> group, having specified addresses of the sender and
+the recipient, and also the SMTP-server which will be used for sending the mail. Note that this
+feature is accessible only in the case when the key
+<span class="winText">HKEY_CURRENT_USER\Software\Elijah Zarezky\UpdateIt!\SMTP</span> in the
+system registry contains DWORD named <span class="winText">Enable</span> and its value is
+different from zero.
+<br clear="left"></p>
+
+<p class="pageText">
+<img src="./images/step-4.gif" width=370 height=302 align="left" border="0"
+class="updateItShot"/><strong>Step #4</strong> is processing the files. On this step it is
+possible to watch the progress of copying (or moving) the updated files from the source folder
+into the target folder, of uploading files from the target folder to the given FTP server,
+compression of the target folder and sending  the  given archive to the E-mail address that was
+specified earlier.
+<br clear="left"/></p>
+
+<p class="pageText">
+<strong>System requirements:</strong>
+</p>
+
+<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<li>Windows 2000/XP/2003/Vista/7;</li>
+<li>some free memory.</li>
+</ul>
+
+<p class="pageText">
+<strong>Plans for the future:</strong>
+</p>
+
+<ul style="text-align: justify; margin-top: 4pt; margin-right: 2pt;">
+<li>preservation of source and target folders' &#8222;history&#8220;</li>
+<li>preservation of &#8222;history&#8220; of the sender's and the recipient 's of the mail
+addresses.</li>
+</ul>
+
+<h1 class="subTopic">UpdateIt! Pro</h1>
+
+<table border="0" cellpadding="0" style="font-size: 10pt;"><tr>
+<td valign="top"><img src="./images/zip-options.gif" width=300 height=275 align="left"
+border="0" class="updateItShot"/></td>
+<td valign="top"><p class="pageText">
+This edition of the <strong>UpdateIt!</strong> has the following differences from the
+standard.
+</p><ul style="text-align: justify;">
+<li>Beyond standard Deflate, BZip2 compression method is supported. It compresses files more
+efficiently than the Deflate algorithm, but is slower. It is supported by
+<a href="http://www.7-zip.com/">7-Zip</a> since version 4.5x, by
+<a href="http://www.pkware.com/software-pkzip/intro">PKZIP</a> since version 4.6 and by
+<a href="http://www.winzip.com/">WinZip</a> since version 10.0. Earlier versions of these
+programs will not decompress archives that use the BZip2 algorithm.</li>
+<li style="margin-top: 1%;">AES encryption with key sizes 128-bit, 192-bit and 256-bit is
+supported for the produced archive files. The format of AES encrypted data conforms to the
+<a href="http://www.winzip.com/aes_info.htm">WinZip AES Encryption Specification</a>. It is
+the preferred way to ensure that your data is secure. <strong>UpdateIt!&nbsp;Pro</strong>
+encrypts files the way the WinZip 11.0 does.</li>
+<li style="margin-top: 1%;">If the number of the files to compress exceeds 65&nbsp;535 or
+size of an archive should be greater than 4 gigabytes then Zip64 format will be automatically
+used. The Zip64 format is an extension to the standard Zip format that practically removes
+limits in sizes and item numbers within a zip archive.</li>
+<li style="margin-top: 1%;">This application is distributed as a freeware but closed source
+due to the <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>
+Library Commercial License Agreement.</li>
+</ul></td>
+</tr></table>
+
+<h1 class="subTopic">Export/import of options</h1>
+
+<p class="pageText">
+Since version 1.0.2598, in the application there is a feature of options export/import (only
+under Windows 2000/XP/2003) which can be useful at re-installation of the operating system.
+Corresponding commands are in the system menu of the main window. Note that the export of
+options is possible at any stage of work of the application, but the import of options is
+possible only on a &#8222;zero&#8220; step (on the <span class="winText">Welcome!</span> page).
+
+<h1 class="subTopic">Command-line switches</h1>
+
+<p class="pageText">
+The first group of keys allows to set the name of a source folder and the  condition of files
+search in it, as well as the name of a target folder and parameters of work with it.
+</p>
+
+<dl class="switchesList">
+
+<dt><span class="argName">SourceDir-Name</span><strong>:</strong><span
+class="argValue">&lt;folder_name&gt;</span></dt>
+<dd>Full name of the source folder in which search of the updated files should be  done. If
+this name contains spaces it should be quoted; otherwise quotes' usage is acceptable, but
+isn’t obligatory.</dd>
+
+<dt><span class="argName">SourceDir-Recurce</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, the search of files
+is carried out recursively (in the source folder and all folders inside  it), and if the value
+is equal to <span class="argValue">0</span>, search is carried out only in the source folder.
+Any other value will be interpreted as <span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">SourceDir-Exclude</span><strong>:</strong><span
+class="argValue">&lt;masks_list&gt;</span></dt>
+<dd>One or  several masks of files (separated from each other by commas)  which should be
+excluded from search
+.</dd>
+
+<dt><span class="argName">TargetDir-Name</span><strong>:</strong><span
+class="argValue">&lt;folder_name&gt;</span></dt>
+<dd>Full name of the target folder  where the updated files should be  copied or moved. If
+this name contains spaces it should be quoted; otherwise quotes' usage is acceptable, but
+isn’t obligatory.</dd>
+
+<dt><span class="argName">TargetDir-CleanupFirst</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, target folder will
+be completely cleared before the  files begin being copied or moved to it, and will not if
+the value is equal to <span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">UseRecycleBin</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, files from the
+target folder will be removed to the <span class="winText">Recycle Bin</span> (if its usage
+is enabled by system options), and if the value is equal to <span class="argValue">0</span>
+files will be removed permanently. Any other value will be interpreted as
+<span class="argValue">1</span>.</dd>
+
+<dt><span class="argName">SourceDir-WriteTime</span><strong>:</strong><span
+class="argValue">&lt;date_time&gt;</span></dt>
+<dd>This is the date and time of files' modification in the source folder after which they
+are considered updated.</dd>
+
+<dt><span class="argName">CompareContents</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span> and if the copy of
+the updated file from the source folder is available in the target folder, copying or moving
+will be carried out only in the case when binary contents of these files are different. It
+allows to carry out smart incremental updating of the target folder. The value of
+<span class="argValue">0</span> results in &#8222;unconditional&#8220; execution of file
+operations. Any other value will be interpreted as <span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+The second group of keys determines the actions that need to be performed  with the updated
+files found in the source folder.
+</p>
+
+<dl class="switchesList">
+
+<dt><span class="argName">MoveFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, updated files will
+be moved from the source folder to the target folder, and if the value is equal to
+<span class="argValue">0</span>, these files will be copied. Any other value will be
+interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">UploadFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, updated files will
+be uploaded to the specified FTP server and will not if the value is equal to
+<span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">ZipFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>The archive file in ZIP format will be created from a target folder if the value of this
+key equals to <span class="argValue">1</span>, and such file will be not created if the value
+equals to <span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SendFiles</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>Archive file with the target folder will be sent to the specified e-mail address if the
+value of this key is equal to <span class="argValue">1</span>, and will be not if the value
+is equal to <span class="argValue">0</span>. Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+The third group of keys specifies the FTP server for updated files and parameters of
+interaction with it.
+</p>
+
+<dl class="switchesList">
+
+<dt><span class="argName">FTP-Server</span><strong>:</strong><span
+class="argValue">&lt;server_name&gt;</span></dt>
+<dd>FTP server name. The prefix &#8222;ftp://&#8220; is not necessary to specify.</dd>
+
+<dt><span class="argName">FTP-Port</span><strong>:</strong><span
+class="argValue">&lt;port_number&gt;</span></dt>
+<dd>The port  through which connection is established. Standard value is
+<span class="argValue">21</span>.</dd>
+
+<dt><span class="argName">FTP-Login</span><strong>:</strong><span
+class="argValue">&lt;login&gt;</span></dt>
+<dd>Login (user’s name on this server).</dd>
+
+<dt><span class="argName">FTP-Password</span><strong>:</strong><span
+class="argValue">&lt;password&gt;</span></dt>
+<dd>The user’s password.</dd>
+
+<dt><span class="argName">FTP-Root</span><strong>:</strong><span
+class="argValue">&lt;folder_name&gt;</span></dt>
+<dd>Root folder on a server into which it is necessary to upload files from a target folder
+on a local computer (with preservation of its structure).</dd>
+
+<dt><span class="argName">FTP-UsePassiveMode</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, the so-called
+&#8222;passive operating mode&#8220; with a server will be used, and if the value of this key
+is equal to <span class="argValue">0</span> &mdash; the usual one. Any other value will be
+interpreted as <span class="argValue">0</span>.</dd>
+
+</dl>
+
+<p class="pageText">
+The fourth group of keys sets parameters of the SMTP connection that is used for sending
+ZIP-archive with the target folder to the specified e-mail address.
+</p>
+
+<dl class="switchesList">
+
+<dt><span class="argName">SMTP-Enable</span></dt>
+<dd>To enable SMTP usage. Value of this key is ignored; therefore it is no use  to specify
+it.</dd>
+
+<dt><span class="argName">SMTP-From</span><strong>:</strong><span
+class="argValue">&lt;sender’s_address&gt;</span></dt>
+<dd>It is an E-mail address of the mail sender.</dd>
+
+<dt><span class="argName">SMTP-MailTo</span><strong>:</strong><span
+class="argValue">&lt;recipient’s_address&gt;</span></dt>
+<dd>It is an E-mail address of the recipient of the mail.</dd>
+
+<dt><span class="argName">SMTP-Subject</span><strong>:</strong><span
+class="argValue">&lt;letter_subject&gt;</span></dt>
+<dd>It is à subject of the mail. If the subject contains blanks, it is necessary to put in
+quotes the value of this key; otherwise, quotes' usage is acceptable, but not obligatory.</dd>
+
+<dt><span class="argName">SMTP-Host</span><strong>:</strong><span
+class="argValue">&lt;server_name&gt;</span></dt>
+<dd>It is the name of the SMTP server which  should be used for sending the mail.</dd>
+
+<dt><span class="argName">SMTP-Port</span><strong>:</strong><span
+class="argValue">&lt;port_number&gt;</span></dt>
+<dd>It is the port through which the connection is established. Standard value is
+<span class="argValue">25</span>.</dd>
+
+<dt><span class="argName">SMTP-Authentication</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
+<dd>The Value of the this key defines the method of the authentication, that is used at the
+access to a server. <span class="argValue">0</span> corresponds to the absence of the
+authentication; <span class="argValue">1</span> &mdash; to CRAM-MD5 method;
+<span class="argValue">2</span> &mdash; to Login method; <span class="argValue">3</span>
+&mdash; to Plain method; <span class="argValue">4</span> &mdash; to NTLM method. Any other
+value will be interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SMTP-UserName</span><strong>:</strong><span
+class="argValue">&lt;user_name&gt;</span></dt>
+<dd>It is the user name (at the usage of the authentication).</dd>
+
+<dt><span class="argName">SMTP-Password</span><strong>:</strong><span
+class="argValue">&lt;password&gt;</span></dt>
+<dd>It is the user password (at the usage of the authentication).</dd>
+
+<dt><span class="argName">SMTP-UseSSL</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>If the value of this key is equal to <span class="argValue">1</span>, the so-called
+&#8222;Secure Sockets Layer&#8220; protocol will be used for the connection with the server.
+This protocol guarantees safe data transmission on the network by means of combining
+cryptographic system with the open key and block encrypting of data. If the value is equal
+to <span class="argValue">0</span>, the usual SMTP protocol will be used. Any other value
+will be interpreted as <span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">SMTP-CharSet</span><strong>:</strong><span
+class="argValue">&lt;character_set&gt;</span></dt>
+<dd>It is the encoding of the mail body (for example,
+<span class="argValue">&quot;windows-1251&quot;</span>) which will be specified in
+corresponding SMTP header.</dd>
+
+</dl>
+
+<p class="pageText">
+The fifth group of keys sets the parameters of creation of ZIP-archive with a target
+folder.
+</p>
+
+<dl class="switchesList">
+
+<dt><span class="argName">ZIP-Method</span><strong>:</strong><span
+class="argValue">&lt;0|1&gt;</span></dt>
+<dd>It is the method (algorithm) used for compression. <span class="argValue">0</span> means
+&#8222;Deflate&#8220; algorithm, and <span class="argValue">1</span> &mdash;
+&#8222;BZip2&#8220; algorithm. Any other value will be interpreted as
+<span class="argValue">0</span>. <font color="#C00000">Attention: this key is recognized
+only by <strong>UpdateIt! Pro</strong> edition.</font></dd>
+
+<dt><span class="argName">ZIP-Compression</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3&gt;</span></dt>
+<dd>It is the compression level of archive. <span class="argValue">0</span> means absence of
+compression; <span class="argValue">1</span> &mdash; the fastest compression;
+<span class="argValue">2</span> &mdash; default compression (optimal on a ratio of speed and
+size); <span class="argValue">3</span> &mdash; the maximum compression. Any other value will
+be interpreted as <span class="argValue">2</span>.</dd>
+
+<dt><span class="argName">ZIP-Encryption</span><strong>:</strong><span
+class="argValue">&lt;0|1|2|3|4&gt;</span></dt>
+<dd>It is the method of archive encrypting. <span class="argValue">0</span> means absence of
+encrypting, and <span class="argValue">1</span> &mdash; the standard encrypting supported by
+ZIP algorithm. The values of <span class="argValue">2</span>, <span class="argValue">3</span>
+and <span class="argValue">4</span> corresponds to AES-128, AES-192 and AES-256 encryption
+respectively. <font color="#C00000">Attention: these three values will be recognized only by
+<strong>UpdateIt! Pro</strong> edition.</font> Any other value will be interpreted as
+<span class="argValue">0</span>.</dd>
+
+<dt><span class="argName">ZIP-Password</span><strong>:</strong><span
+class="argValue">&lt;password&gt;</span></dt>
+<dd>It is the password on the encrypted archive.</dd>
+
+</dl>
+
+<p class="pageText">
+Sixth and last group of keys sets various general parameters.
+</p>
+
+<dl class="switchesList">
+
+<dt><span class="argName">Font-FaceName</span><strong>:</strong><span
+class="argValue">&lt;font_name&gt;</span></dt>
+<dd>It is the name of a font which will be used by windows of the application. The value of
+this key is used only if the key <span class="argName">Font-PointSize</span> is specified
+and this key has a correct numeric value.</dd>
+
+<dt><span class="argName">Font-PointSize</span><strong>:</strong><span
+class="argValue">&lt;font_size&gt;</span></dt>
+<dd>It is the size (in points) of a font which will be used by windows of the application.
+The value of this key is used only if the key <span class="argName">Font-FaceName</span>
+is specified.</dd>
+
+<dt><span class="argName">ResponseFile</span><strong>:</strong><span
+class="argValue">&lt;file_name&gt;</span></dt>
+<dd>It is the name of the text file that contains other keys of the command line for the
+application. If the path to a file is not specified at all it will be considered to be in
+the current folder; if the relative path is specified it will be considered to be specified
+regarding the current folder. Each line of such file can contain one or several keys. The
+Usage of such files allows to create unlimited number of the shortcuts that give fast access
+to the typical scripts of the application use. If this key is specified in the command line
+all other keys will be ignored.
+</dd>
+
+<dt><span class="argName">DontSaveInput</span></dt>
+<dd>Not to remember the user input (either transmitted by means of the command line or set
+by means of the graphic interface). The value of this key is ignored, therefore its
+indication is not important.
+</dd>
+
+</dl>
+
+<p class="pageText">
+At present the use of keys of the command line does not automate the work of the application
+completely, it only substitutes the specified parameters into corresponding controls. It
+allows to accelerate user’s work as much as possible if typical scripts of search and
+processing of the updated files are present. Each of the keys can be used independently if
+it has not been stipulated in a different way (as in case of the keys 
+<span class="argName">Font-FaceName</span> and <span class="argName">Font-PointSize</span>).
+</p>
+
+<p class="pageText">
+In any case, the keys of the command line have a priority over the corresponding options that
+are kept at the system registry. For example, if the command line contains the key
+<span class="argName">SourceDir-Recurce</span> that has the incorrect value of
+<span class="argValue">4</span>, and the corresponding parameter in the system registry has the
+correct value of <span class="argValue">0</span>, the final &#8222;result&#8220; will be
+<span class="argValue">1</span> as the interpretation of key value from the command line.
+</p>
+
+<h1 class="subTopic">Version history</h1>
+
+<ul style="text-align: justify; margin-right: 2pt;">
+
+<li><strong>1.6.5961</strong> (09.10.2011)<br>
+Updated <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>
+library to the version 4.1.1 from the 27th of June 2011. Updated
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library to the
+version 1.0.0e (6 Sep 2011).</li>
+
+<li style="margin-top: 4pt;"><strong>1.6.5842</strong> (18.06.2011)<br>
+Updated CRT and MFC redistributable DLLs to version 9.0.30729.6161; for more information
+please visit <a href="http://support.microsoft.com/kb/2538241" target="_blank">Microsoft
+security bulletin MS11-025: Description of the security update for Visual Studio 2008 SP1:
+June 14, 2011</a>.</li>
+
+<li style="margin-top: 4pt;"><strong>1.6.5799</strong> (08.05.2011)<br>
+Updated CRT and MFC redistributable DLLs to version 9.0.30729.5570; for more information
+please visit <a href="http://support.microsoft.com/kb/2467174" target="_blank">Microsoft
+security bulletin MS11-025: Description of the security update for Visual C++ 2008 SP1
+Redistributable Package</a>. Updated
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library to the
+version 1.0.0d (8 Feb 2011).</li>
+
+<li style="margin-top: 4pt;"><strong>1.6.5755</strong> (27.03.2011)<br>
+Added the ability to visually select the target folder on the FTP-server. Added ability to
+save the settings of any number of FTP-servers. Added &ldquo;FTP Site Manager&rdquo;. Component
+to send messages using the <a href="http://www.naughter.com/smtp.html">SMTP</a> protocol has
+been updated to version 2.92, dated 13 February 2011.
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library is updated to
+the version 1.0.0c from the 2th of December 2010.</li>
+
+<li style="margin-top: 4pt;"><strong>1.5.5433</strong> (25.09.2010)<br>
+Improved installation/uninstallation issues handling. Greatly improved MUI installation
+mechanism. Improved E-mail charset handling. Added crash reporting via E-mail feature.
+Dropped Windows 98/Me operations systems support. Fixed several UI glitches. Updated end-user
+documentation. <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a>
+library is updated to the version 4.0.1 from the 20th of April 2010.
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library is updated to
+the version 1.0.0a from the 1th of June 2010. The development of the project is converted under
+MS Visual C++ 2008 SP1; <font color="#C00000">with  this version the compatibility of the
+source code with Visual C++ 7.1 SP1 compiler is not guaranteed</font>. It is necessary to use
+<a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> project of revision
+511 or above to build  this version from sources (it is possible to download the so-called
+&#8222;universal installer&#8220; alternatively &mdash; it contains absolutely all sources
+which are necessary for independent building of the application and its installers).</li>
+
+<li style="margin-top: 4pt;"><strong>1.4.4324</strong> (04.07.2008)<br>
+Some errors are fixed. Added <strong>UpdateIt! Pro</strong> edition. Added end-user
+documentation in English.</li>
+
+<li style="margin-top: 4pt;"><strong>1.3.4134</strong> (06.01.2008)<br>
+The ability to use the keys of the command line is added. the Verification of the correctness
+of the user input is improved. Some noncritical errors are fixed. Russian-language
+localization of installer is improved a bit.
+<a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a> library is
+updated to the version 3.2.0 from the 15th of December 2007.
+<a href="http://www.slproweb.com/products/Win32OpenSSL.html">OpenSSL</a> library is updated to
+the version 0.9.8g from the 19th of October 2007. <font color="#C00000">Attention: it is
+required to use <a href="http://zarezky.spb.ru/projects/repository.html">Repository</a>
+project of revision 110 or above to build  this version from sourcess.</font></li>
+
+<li style="margin-top: 4pt;"><strong>1.2.3920</strong> (16.10.2007)<br>
+The ability to set parameters of archiving of the updated files is added: the level of
+compression and the method of encrypting. The application is rebuilt with the version 3.1.1
+of <a href="http://www.artpol-software.com/ZipArchive/Default.aspx">ZipArchive</a> library.
+</li>
+
+<li style="margin-top: 4pt;"><strong>1.1.3870</strong> (30.08.2007)<br>
+The support of the multilingual interface was added into the application and into its
+installer (at present English and Russian languages are supported). Initially the language
+is selected during the installation, but it can be changed at any moment by means of the
+command <span class="winText">Language</span> in the system menu.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3841</strong> (01.08.2007)<br>
+The application is rebuilt with the version 3.0.2 of ZipArchive library.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3696</strong> (16.03.2007)<br>
+The ability of authentication on the SMTP server that is used for sending the mail is added;
+methods SRAM-MD5, Login, Plain and NTLM are supported. The ability to use the SSL connection
+while working with SMTP is added. The development of the project is converted under MS Visual
+C++ 7.1 SP1; <font color="#C00000">with  this version the compatibility of the source code
+with Visual C++ 7.0 SP1 compiler is not guaranteed</font>. It is necessary to use
+<a href="http://zarezky.spb.ru/projects/repository.html">Repository</a> project of revision
+81 or above to build  this version from sources (it is possible to download the so-called
+&#8222;universal installer&#8220; alternatively &mdash; it contains absolutely all sources
+which are necessary for independent building of the application and its installers).</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3410</strong> (18.10.2006)<br>
+The license agreement is added to the application and its source code &mdash; Apache License,
+Version 2.0. the "Universal" installer is added, it allows to choose one of possible types of
+installation (for example, with all sources necessary for the independent building of the
+application). Development of the project is converted under MS Visual C ++ 7.0 SP1;
+<font color="#C00000">with  this version, the compatibility of the source code with Visual
+C++ 6.0 SP6 compiler is not guaranteed</font>.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.3346</strong> (18.08.2006)<br>
+The ability of interaction with FTP-servers in so-called &#8222;passive mode&#8220; is added
+&mdash; via Use passive mode option on the step Choosing an action (my gratitude to
+<a href="http://rsdn.ru/Users/Profile.aspx?uid=1879">Pavel Pimenov</a> for reporting this
+issue). Authors improved the realization of compression of files in
+<a href="http://www.artpol-software.com/index_zip.html">ZIP</a> format and message sending
+using <a href="http://www.naughter.com/smtp.html">SMTP</a> protocol.
+<font color="#C00000">Attention: it is necessary to use Repository project of revision 71 or
+above to build  this version from sources.</font></li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2800</strong> (16.07.2005)<br>
+Support for visual styles on Windows XP/2003 is added. Authors improved the realization of
+compression of files in <a href="http://www.artpol-software.com/index_zip.html">ZIP</a>
+format and message sending using using <a href="http://www.naughter.com/smtp.html">SMTP</a>
+protocol.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2711</strong> (23.04.2005)<br>
+Authors improved the realization of
+compression of files in <a href="http://www.artpol-software.com/index_zip.html">ZIP</a>
+format and message sending using using <a href="http://www.naughter.com/smtp.html">SMTP</a>
+protocol.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2598</strong> (06.01.2005)<br>
+The ability of export/import of options of the application is added (works only under Windows
+2000/XP/2003). The system menu is &#8222;improved&#8220; a bit. The author corrected some
+errors in the code that realizes the support of SMTP protocol.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2461</strong> (29.12.2004)<br>
+The end-user documentation in HTML Help format is added. <font color="#C00000">It is insistently
+recommended to un-install the previous version  in a regular way before the installation of
+the given version.</font></li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2297</strong> (25.07.2004)<br>
+The executable file of the application is compiled with the optimization of the size.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2283</strong> (11.07.2004)<br>
+The ability to compare the contents of the updated files with their existing old copies in
+a target folder is added.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2260</strong> (20.06.2004)<br>
+Some spelling mistakes on page <span class="winText">Welcome!</span> are corrected.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2259</strong> (19.06.2004)<br>
+<a href="http://www.naughter.com/">The author</a> corrected some errors in the code that
+realizes the support of SMTP protocol (this code is used at sending the archive of the
+updated files to the specified e-mail address).</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2172</strong> (28.03.2004)<br>
+Very stupid error is corrected: this error was the reason for non-responsiveness of the
+application to system inquiries while performing file operations. The error which led to the
+incorrect restoration of the password for the access to FTP server is corrected. The ability
+of minimization of the application window is added.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2171</strong> (27.03.2004)<br>
+The column <span class="winText">Size</span> is added to the list of the updated files on
+page <span class="winText">Selecting files</span>. This column displays file sizes in bytes.
+Now in the column <span class="winText">Name</span> of this list not only file names are
+shown but also the system icons which correspond their types. The ability to sort the list
+both in ascending and descending order is added. Now the setup writes into the system
+registry default the value for file masks which should be excluded from search.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2169</strong> (25.03.2004)<br>
+The ability to set one or several masks for files which should be excluded from search is
+added. Now in the tree the node corresponding to the folder, whose name is specified in the
+input field, is automatically marked out at the opening of the dialog box of folder
+choice.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.2159</strong> (15.03.2004)<br>
+The Encrypting of the password for access to a FTP-server is implemented at its preservation
+in the system registry.</li>
+
+<li style="margin-top: 4pt;"><strong>1.0.xxxx</strong> (??.??.????)<br>
+The history was not kept. Most likely, the first stable version that was suitable for
+practical use was 1.0.1646&#8230;</li>
+
+</ul>
+
+<h1 class="subTopic">UpdateIt! On Google Code</h1>
+
+<p class="pageText">
+Since December, 2007, the UpdateIt! project, is placed on
+<a href="http://code.google.com/">Google Code</a> as well. Its main page is accessible at
+<a href="http://update-it.googlecode.com/">http://update-it.googlecode.com</a>. It is
+possible to find the latest development builds as well as the mirror of
+<a href="http://subversion.tigris.org/">Subversion</a> repository with all revisions of
+project sources there. For anonymous access to reading this mirror and receiving local copies
+of all files that are required for independent building, It is necessary to perform the
+following steps.
+</p>
+
+<ol style="text-align: justify; margin-top: 0pt; margin-right: 2pt;">
+<li style="margin-top: 6pt;">Create somewhere in file system a new folder with the name
+<span class="winText">GoogleCode</span> for example.</li>
+<li style="margin-top: 4pt;">Launch Command Prompt, go to this folder and sequentially
+execute these commands:
+<pre style="margin-left: 0pt; margin-right: 0pt;
+margin-top: 4pt;">svn checkout http://repositorium.googlecode.com/svn/trunk/ Repository
+svn checkout http://update-it.googlecode.com/svn/trunk/ UpdateIt</pre>
+</li>
+</ol>
+
+<p class="pageText">
+After that, to build the project, it is enough to open the file
+<span class="winText">UpdateIt.2008.sln</span> from the folder
+<span class="winText">GoogleCode\UpdateIt</span> in Microsoft Visual Studio 2008
+environment, to set UpdateIt as the startup project and then to execute
+<span class="winText">Build Solution</span> command. Completely automated building of the
+project and its distribution kits can be executed by means of utility
+<span class="winText">NAnt</span> after its assignment on an input file
+<span class="winText">UpdateIt.2008.build</span> &mdash; it is necessary to go to the
+<span class="winText">GoogleCode\UpdateIt</span> folder and then to execute a corresponding
+command from Visual Studio 2008 Command Prompt.
+</p>
+
+<hr width=100% size=1 noshade>
+
+<p class="copyrightNotice">
+Copyright&nbsp;&copy;&nbsp;2002&mdash;2011&nbsp;<a href="mailto:elijah.zarezky@gmail.com">Elijah
+Zarezky</a>, english translation by <a href="mailto:Dmitrieva@altec.ru">Alla Dmitrieva</a>
+</p>
+
+</body>
+
+</html>
+
+<!-- end of page -->
