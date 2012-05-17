@@ -164,23 +164,23 @@ CAPTION "@APP_NAME@ — Step 0 of 4 — Welcome!"
 FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
-    LTEXT           "Copyright © 2002-2011 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
+    LTEXT           "Copyright © 2002-2012 by Elijah Zarezky",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Home page",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.15.2 (from CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Softpedia's ""100% Clean"" award is displayed using the FreeImage library version 3.15.3 (March 17th, 2012).",IDC_STATIC,4,52,214,18
     LTEXT           "Other credits:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
-    LTEXT           "'zlib' general purpose compression library\nversion 1.2.5 (19 Apr 2010)",IDC_STATIC,16,88,388,16
-    LTEXT           "Copyright © 1995-2010 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,330,10,SS_CENTERIMAGE
+    LTEXT           "'zlib' general purpose compression library\nversion 1.2.7 (10 May 2012)",IDC_STATIC,16,88,388,16
+    LTEXT           "Copyright © 1995-2012 Jean-loup Gailly and Mark Adler",IDC_STATIC,16,106,330,10,SS_CENTERIMAGE
     RTEXT           "zlib Home Site",IDC_LINK_ZLIB,352,106,50,10,SS_CENTERIMAGE
-    LTEXT           "ZipArchive library\nversion 4.1.1 (2011-06-27)",IDC_STATIC,16,122,388,16
-    LTEXT           "Copyright © 2000-2010 by Tadeusz Dracz",IDC_STATIC,16,140,330,10,SS_CENTERIMAGE
+    LTEXT           "ZipArchive library\nversion 4.1.2 (2012-05-02)",IDC_STATIC,16,122,388,16
+    LTEXT           "Copyright © 2000-2012 by Tadeusz Dracz",IDC_STATIC,16,140,330,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_ARTPOL,352,140,50,10,SS_CENTERIMAGE
     LTEXT           "MD5 Message-Digest Algorithm",IDC_STATIC,16,156,388,10
     LTEXT           "Copyright © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,330,10,SS_CENTERIMAGE
     RTEXT           "Web Page",IDC_LINK_RSA,352,166,50,10,SS_CENTERIMAGE
-    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.93 (1 April 2011)",IDC_STATIC,16,182,388,16
-    LTEXT           "Copyright © 1998-2010 by PJ Naughter",IDC_STATIC,16,200,330,10,SS_CENTERIMAGE
+    LTEXT           "MFC classes to support the SMTP protocol\nversion 2.94 (4 December 2011)",IDC_STATIC,16,182,388,16
+    LTEXT           "Copyright © 1998-2011 by PJ Naughter",IDC_STATIC,16,200,330,10,SS_CENTERIMAGE
     RTEXT           "Home Page",IDC_LINK_NAUGHTER,352,200,50,10,SS_CENTERIMAGE
-    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.0e (6 Sep 2011)",IDC_STATIC,16,216,330,16
+    LTEXT           "This product includes cryptographic software written by Eric Young\nWin32 OpenSSL v1.0.1c (10 May 2012)",IDC_STATIC,16,216,330,16
     RTEXT           "Web Page",IDC_LINK_OPEN_SSL,352,222,50,10,SS_CENTERIMAGE
 END
 
