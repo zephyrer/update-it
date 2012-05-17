@@ -165,23 +165,23 @@ CAPTION "@APP_NAME@ — Шаг 0 из 4 — Добро пожаловать!"
 FONT 8, "MS Shell Dlg 2", 400, 0, 0xCC
 BEGIN
     LTEXT           "",IDC_STATIC_VERSION,4,4,214,16
-    LTEXT           "Авторские права © 2002-2011 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
+    LTEXT           "Авторские права © 2002-2012 Илья Зарецкий",IDC_STATIC,4,24,214,10,SS_CENTERIMAGE
     LTEXT           "Домашняя страница",IDC_LINK_ZAREZKY,4,34,214,10,SS_CENTERIMAGE
-    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.15.2 (из CVS).",IDC_STATIC,4,52,214,18
+    LTEXT           "Награда ""100% Clean"" от Softpedia отображена при помощи библиотеки FreeImage library версии 3.15.3 (17 марта 2012).",IDC_STATIC,4,52,214,18
     LTEXT           "Используемые библиотеки:",IDC_STATIC,4,74,214,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.5 (19 апреля 2010)",IDC_STATIC,16,88,388,16
-    LTEXT           "Авторские права © 1995-2010 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,310,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека сжатия общего назначения 'zlib',\nверсия 1.2.7 (10 мая 2012)",IDC_STATIC,16,88,388,16
+    LTEXT           "Авторские права © 1995-2012 Jean-loup Gailly и Mark Adler",IDC_STATIC,16,106,310,10,SS_CENTERIMAGE
     RTEXT           "Веб-сайт zlib",IDC_LINK_ZLIB,332,106,70,10,SS_CENTERIMAGE
-    LTEXT           "Библиотека ZipArchive,\nверсия 4.1.1 (27 июня 2010)",IDC_STATIC,16,122,388,16
-    LTEXT           "Авторские права © 2000-2010 Tadeusz Dracz",IDC_STATIC,16,140,310,10,SS_CENTERIMAGE
+    LTEXT           "Библиотека ZipArchive,\nверсия 4.1.2 (2 мая 2012)",IDC_STATIC,16,122,388,16
+    LTEXT           "Авторские права © 2000-2012 Tadeusz Dracz",IDC_STATIC,16,140,310,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_ARTPOL,332,140,70,10,SS_CENTERIMAGE
     LTEXT           "Алгоритм цифровой подписи MD5",IDC_STATIC,16,156,388,10
     LTEXT           "Авторские права © 1991-1992 RSA Data Security, Inc.",IDC_STATIC,16,166,310,10,SS_CENTERIMAGE
     RTEXT           "Веб-страница",IDC_LINK_RSA,332,166,70,10,SS_CENTERIMAGE
-    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.93 (1 апреля 2011)",IDC_STATIC,16,182,388,16
-    LTEXT           "Авторские права © 1998-2010 PJ Naughter",IDC_STATIC,16,200,310,10,SS_CENTERIMAGE
+    LTEXT           "MFC-классы для работы с протоколом SMTP,\nверсия 2.94 (4 декабря 2011)",IDC_STATIC,16,182,388,16
+    LTEXT           "Авторские права © 1998-2011 PJ Naughter",IDC_STATIC,16,200,310,10,SS_CENTERIMAGE
     RTEXT           "Домашняя страница",IDC_LINK_NAUGHTER,332,200,70,10,SS_CENTERIMAGE
-    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young:\nWin32 OpenSSL v1.0.0e (6 сентября 2011)",IDC_STATIC,16,216,310,16
+    LTEXT           "Этот продукт включает криптографическое ПО, написанное Eric Young:\nWin32 OpenSSL v1.0.1c (10 мая 2012)",IDC_STATIC,16,216,310,16
     RTEXT           "Веб-страница",IDC_LINK_OPEN_SSL,332,222,70,10,SS_CENTERIMAGE
 END
 
